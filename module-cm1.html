@@ -1,0 +1,1976 @@
+<!--
+CM-1 - Treatment Monitoring & Compliance
+Built: June 2026 | Base: site/module-la3.html (LA-track canonical chassis)
+CasePeer Stages: Treating | moduleId: cm1
+Base: 20 questions × 10 pts = 200 | Bonus: 5 boss tasks × 10 bonus pts = 50 max | Pass: 160/200 (80%)
+Answer Key: q1→C q2→B q3→C q4→B  q5→B q6→D q7→C q8→C
+            q9→B q10→B q11→D q12→B  q13→A q14→C q15→B q16→C
+            q17→C q18→B q19→C q20→A
+            q21→B(boss) q22→A(boss) q23→C(boss) q24→B(boss) q25→A(boss)
+Distribution: A:4 B:10 C:9 D:2 (improved from v1 B-heavy skew)
+v2 changes: purged invented ON-TRACK/AT-RISK/CRITICAL flag system; rewrote Q6,Q16,Q23,Q25
+Boss Challenge: Camille Reyes, GLG-2026-1587
+Sources: CM-1-MEMO-SURVEY.md (12 PRIMARY), CM-1-OUTLINE.md, System-1-GLG-Operating-System.md
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>CM-1 - Treatment Monitoring &amp; Compliance | Gunn Law Group</title>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;color:#333;font-size:16px;line-height:1.6;-webkit-text-size-adjust:100%;overflow-x:hidden;}
+
+    /* ── HEADER ── */
+    header{background:linear-gradient(135deg,#141C2C 0%,#0E1420 100%);color:#e0e0e0;padding:20px 16px 16px;text-align:center;}
+    .day-badge{display:inline-block;background:#1C2433;color:#dcb161;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:10px;}
+    header h1{font-size:clamp(17px,5vw,24px);font-weight:800;line-height:1.3;color:#ffffff;}
+    header p{margin-top:6px;color:#c0c0c0;font-size:13px;}
+    .score-bar{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:12px;padding:10px 16px;background:#1C2433;border-radius:10px;}
+    .score-label{color:#c0c0c0;font-size:12px;font-weight:600;}
+    .score-value{color:#fff;font-size:22px;font-weight:800;}
+
+    /* ── PROGRESS ── */
+    .progress-wrap{background:#1C2433;padding:10px 16px;}
+    .progress-meta{color:#c0c0c0;font-size:11px;margin-bottom:5px;display:flex;justify-content:space-between;}
+    .progress-bg{background:#0E1420;border-radius:4px;height:6px;width:100%;}
+    .progress-fill{background:#dcb161;height:6px;border-radius:4px;width:0%;transition:width .5s ease;}
+
+    /* ── NAV PILLS ── */
+    .section-nav{display:flex;flex-wrap:wrap;gap:6px;padding:12px 14px;background:#fff;border-bottom:2px solid #e0e3e8;justify-content:center;position:sticky;top:0;z-index:100;}
+    .nav-pill{padding:7px 11px;border-radius:20px;border:2px solid #e0e3e8;background:#fff;color:#666;font-size:11px;font-weight:700;cursor:pointer;min-height:44px;min-width:44px;display:flex;align-items:center;transition:all .2s;white-space:nowrap;-webkit-tap-highlight-color:transparent;}
+    .nav-pill.active{background:#141C2C;color:#fff;border-color:#141C2C;}
+    .nav-pill.done{border-color:#10774A;color:#10774A;}
+    .nav-pill.done::after{content:' ✓';}
+
+    /* ── MAIN / CARDS ── */
+    main{max-width:800px;margin:0 auto;padding:0 0 60px;}
+    .section-card{display:none;background:#fff;margin:16px;border-radius:14px;box-shadow:0 2px 16px rgba(0,0,0,.09);overflow:visible;}
+    .section-card.active{display:block;}
+    .section-header{background:#141C2C;color:#fff;padding:18px 20px;}
+    .section-num{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#dcb161;margin-bottom:4px;}
+    .section-header h2{font-size:clamp(15px,4vw,20px);font-weight:800;}
+    .section-subhead{color:#c0c0c0;font-size:13px;margin-top:4px;}
+    .section-body{padding:20px;}
+
+    /* ── SCENARIO BOX ── */
+    .scenario{background:#141C2C;color:#fff;border-radius:12px;padding:20px;margin-bottom:20px;border-left:3px solid #dcb161;}
+    .scenario-tag{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#dcb161;margin-bottom:8px;}
+    .scenario h3{font-size:clamp(15px,4vw,18px);font-weight:700;line-height:1.4;margin-bottom:10px;}
+    .scenario p{font-size:14px;color:#c8d0e0;line-height:1.6;}
+    .scenario .highlight{color:#dcb161;font-weight:700;}
+    .scenario .urgent{color:#e74c3c;font-weight:700;}
+
+    /* ── INFO BLOCKS ── */
+    .info-block{background:#f0f4f8;border-radius:10px;padding:16px;margin-bottom:14px;}
+    .info-block h4{color:#141c2c;font-size:14px;font-weight:700;margin-bottom:8px;}
+    .info-block p,.info-block li{font-size:14px;color:#444;line-height:1.6;}
+    .info-block ul,.info-block ol{padding-left:18px;}
+
+    /* ── QUESTIONS ── */
+    .question-block{border:2px solid #e8ecf0;border-radius:12px;padding:18px;margin-bottom:16px;transition:border-color .2s;}
+    .question-block.answered{border-color:#10774A;}
+    .question-block.answered-wrong{border-color:#870101;}
+    .q-num{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888;margin-bottom:6px;}
+    .q-text{font-size:clamp(14px,3.5vw,16px);font-weight:700;color:#141c2c;margin-bottom:14px;line-height:1.4;}
+    .options{display:flex;flex-direction:column;gap:10px;}
+    .option-btn{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border:2px solid #e0e3e8;border-radius:10px;background:#fff;cursor:pointer;text-align:left;font-size:14px;color:#333;min-height:44px;transition:all .15s;-webkit-tap-highlight-color:transparent;width:100%;}
+    .option-btn:hover,.option-btn:focus{border-color:#232e54;background:#f8f9ff;}
+    .option-btn.correct{border-color:#10774A!important;background:#e8f8ee!important;color:#10774A!important;}
+    .option-btn.incorrect{border-color:#870101!important;background:#fce8e8!important;color:#870101!important;}
+    .option-btn.disabled{pointer-events:none;opacity:.75;}
+    .opt-letter{background:#141C2C;color:#dcb161;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0;margin-top:1px;}
+    .opt-text{flex:1;line-height:1.5;}
+
+    /* ── FEEDBACK ── */
+    .feedback-box{border-radius:10px;padding:14px 16px;margin-top:12px;display:none;font-size:14px;line-height:1.6;}
+    .feedback-box.correct{background:#d4edda;border-left:4px solid #10774A;color:#155724;}
+    .feedback-box.incorrect{background:#f8d7da;border-left:4px solid #870101;color:#721c24;}
+    .feedback-box.show{display:block;}
+
+    /* ── POINTS TOAST ── */
+    .points-toast{position:fixed;top:80px;right:16px;background:#10774A;color:#fff;padding:10px 16px;border-radius:30px;font-weight:700;font-size:15px;box-shadow:0 4px 16px rgba(0,0,0,.2);z-index:999;transform:translateY(-20px);opacity:0;transition:all .3s;pointer-events:none;}
+    .points-toast.show{transform:translateY(0);opacity:1;}
+    .points-toast.bonus{background:#dcb161;color:#141C2C;}
+
+    /* ── SECTION SCORE ── */
+    .section-score{background:#f0f4f8;border-radius:10px;padding:14px;text-align:center;margin-bottom:16px;}
+    .section-score .score-display{font-size:32px;font-weight:800;color:#141c2c;}
+    .section-score .score-label{font-size:13px;color:#666;margin-top:2px;}
+
+    /* ── CASE FILE ── */
+    .case-file{background:#fff;border:2px solid #141c2c;border-radius:12px;padding:18px;margin-bottom:20px;}
+    .case-file-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:12px;border-bottom:2px solid #f0f4f8;}
+    .case-file-icon{background:#141c2c;color:#fff;width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+    .case-file-title{font-weight:800;color:#141c2c;font-size:15px;}
+    .case-file-sub{font-size:12px;color:#888;}
+    .case-detail{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #f0f4f8;font-size:14px;}
+    .case-detail:last-child{border-bottom:none;}
+    .case-key{font-weight:700;color:#141c2c;min-width:160px;flex-shrink:0;}
+    .case-val{color:#444;}
+    .case-val .flag{display:inline-block;background:#870101;color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;margin-left:6px;}
+    .case-val .flag-warn{display:inline-block;background:#f39c12;color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;margin-left:6px;}
+    .case-val .flag-ok{display:inline-block;background:#10774A;color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;margin-left:6px;}
+
+    /* ── BOSS CHALLENGE ── */
+    .boss-header{background:linear-gradient(135deg,#870101 0%,#5a0000 100%);color:#fff;border-radius:12px;padding:24px;margin-bottom:20px;text-align:center;}
+    .boss-header .boss-icon{font-size:40px;margin-bottom:10px;}
+    .boss-header h3{font-size:clamp(17px,4.5vw,22px);font-weight:800;margin-bottom:8px;}
+    .boss-header p{font-size:14px;opacity:.9;line-height:1.5;}
+
+    /* ── RESULTS ── */
+    .results-header{padding:28px 20px;text-align:center;color:#fff;}
+    .results-header.pass{background:linear-gradient(135deg,#10774A,#0a5c38);}
+    .results-header.fail{background:linear-gradient(135deg,#870101,#6b0000);}
+    .results-grade{font-size:56px;font-weight:900;line-height:1;}
+    .results-label{font-size:16px;margin-top:6px;opacity:.9;}
+    .results-sub{font-size:13px;margin-top:4px;opacity:.75;}
+    .breakdown-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #f0f4f8;font-size:15px;}
+    .breakdown-row:last-child{border-bottom:none;}
+    .breakdown-name{color:#333;font-weight:600;}
+    .breakdown-pts{font-weight:800;color:#141c2c;}
+    .achievement-grid{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0;}
+    .badge{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;font-size:13px;font-weight:700;border:2px solid #e0e3e8;color:#888;background:#f8f9fa;}
+    .badge.earned{border-color:#dcb161;background:#fffaed;color:#7a5c00;}
+    .badge .badge-icon{font-size:20px;}
+
+    /* ── CERTIFICATE ── */
+    .cert-wrap{background:linear-gradient(180deg,#ffffff 0%,#fafaf5 100%);border:4px double #141c2c;border-radius:14px;padding:2.5rem 1.75rem;text-align:center;margin-bottom:1rem;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(20,28,44,0.10);animation:certPopIn 0.8s 0.1s cubic-bezier(0.34,1.56,0.64,1) both;}
+    @keyframes certPopIn{0%{opacity:0;transform:scale(0.7);box-shadow:0 2px 8px rgba(20,28,44,0.05)}60%{opacity:1;transform:scale(1.04);box-shadow:0 8px 32px rgba(20,28,44,0.18)}80%{transform:scale(0.98)}100%{opacity:1;transform:scale(1);box-shadow:0 10px 40px rgba(20,28,44,0.16)}}
+    .cert-wrap::before{content:'';position:absolute;inset:10px;border:1px solid #dcb161;border-radius:8px;pointer-events:none;opacity:0.45;}
+    .cert-wrap::after{content:'\2696\FE0F';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:180px;opacity:0.03;pointer-events:none;z-index:0;}
+    .cert-firm{font-size:0.67rem;letter-spacing:0.22em;text-transform:uppercase;color:#232e54;font-weight:600;margin-bottom:0.6rem;position:relative;z-index:1;}
+    .cert-title{font-size:clamp(1.5rem,5vw,1.9rem);font-weight:800;color:#141c2c;margin-bottom:0.3rem;text-transform:uppercase;letter-spacing:0.04em;position:relative;z-index:1;}
+    .cert-subtitle{font-size:0.8rem;color:#888;margin-bottom:1.4rem;position:relative;z-index:1;}
+    .cert-presents{font-size:0.85rem;color:#777;font-style:italic;margin-bottom:0.3rem;position:relative;z-index:1;}
+    .cert-name{font-size:clamp(1.6rem,6vw,2.2rem);font-weight:700;color:#232e54;font-style:italic;border-bottom:2px solid #dcb161;display:inline-block;padding:0 0.75rem 0.2rem;margin-bottom:0.85rem;min-width:60%;position:relative;z-index:1;}
+    .cert-for{font-size:0.85rem;color:#666;margin-bottom:0.35rem;position:relative;z-index:1;}
+    .cert-module{font-size:1.05rem;font-weight:600;color:#141c2c;margin-bottom:1.1rem;position:relative;z-index:1;}
+    .cert-meta{font-size:0.8rem;color:#888;position:relative;z-index:1;}
+    .cert-score{font-size:1.1rem;font-weight:700;color:#10774A;margin-top:0.5rem;position:relative;z-index:1;}
+    .cert-seal{font-size:2.5rem;margin:0.85rem 0 0.3rem;display:block;position:relative;z-index:1;}
+    .cert-signature{margin-top:1.5rem;position:relative;z-index:1;}
+    .cert-sig-line{width:200px;border-top:1px solid #141c2c;margin:0 auto 0.3rem;}
+    .cert-sig-name{font-size:1rem;font-weight:600;color:#141c2c;font-style:italic;}
+    .cert-sig-title{font-size:0.75rem;color:#888;letter-spacing:0.05em;}
+    .cert-badges{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:14px;position:relative;z-index:1;}
+    .cert-badge-pill{display:inline-block;background:#dcb161;color:#141C2C;font-size:0.68rem;font-weight:700;padding:4px 12px;border-radius:14px;letter-spacing:0.03em;animation:badgeFlip 0.5s ease-out backwards;}
+    #confettiCanvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10005;}
+
+    /* ── REVIEW LIST ── */
+    .review-list{display:flex;flex-direction:column;gap:0.65rem;margin-top:1rem;}
+    .review-item{background:#f8f9fa;border-radius:10px;padding:0.8rem 1.1rem;border-left:4px solid #ddd;font-size:0.88rem;transition:transform 0.15s ease;}
+    .review-item:hover{transform:translateX(2px);}
+    .review-item.correct{border-color:#10774A;}
+    .review-item.wrong{border-color:#870101;}
+    .review-item .ri-q{font-weight:600;margin-bottom:0.35rem;color:#141c2c;}
+    .review-item .ri-ans{font-size:0.82rem;}
+
+    /* ── NAME INPUT ── */
+    .name-input-wrap{margin-bottom:1rem;}
+    .name-input-wrap label{display:block;font-size:0.85rem;font-weight:600;color:#232e54;margin-bottom:0.4rem;}
+    .name-input{width:100%;padding:0.82rem 1rem;border:2px solid #e0e3e8;border-radius:9px;font-size:1rem;color:#333;background:#fff;transition:border-color 0.2s ease,box-shadow 0.2s ease;-webkit-appearance:none;}
+    .name-input:focus{outline:none;border-color:#232e54;box-shadow:0 0 0 3px rgba(35,46,84,0.1);}
+
+    /* ── FEEDBACK FORM ── */
+    .fb-question{margin-bottom:18px;}
+    .fb-question label{display:block;font-weight:700;color:#141c2c;font-size:15px;margin-bottom:8px;}
+    .fb-question select,.fb-question textarea{width:100%;padding:12px;border:2px solid #e0e3e8;border-radius:9px;font-size:14px;background:#fff;color:#333;-webkit-appearance:none;transition:border-color 0.2s ease;font-family:inherit;}
+    .fb-question select:focus,.fb-question textarea:focus{outline:none;border-color:#141c2c;}
+    .fb-question textarea{resize:vertical;min-height:80px;}
+
+    /* ── BUTTONS ── */
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 22px;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;min-height:44px;transition:all .2s;-webkit-tap-highlight-color:transparent;font-family:inherit;}
+    .btn-primary{background:#141C2C;color:#fff;}
+    .btn-primary:hover{background:#232e54;}
+    .btn-secondary{background:#f0f4f8;color:#141c2c;}
+    .btn-block{width:100%;margin-top:12px;}
+    .btn-group{display:flex;flex-direction:column;gap:10px;margin-top:16px;}
+
+    /* ── CALLOUT ── */
+    .callout{border-radius:10px;padding:14px 16px;margin:14px 0;font-size:14px;line-height:1.6;}
+    .callout-warn{background:#fff3cd;border-left:4px solid #f39c12;color:#533f03;}
+    .callout-danger{background:#fce8e8;border-left:4px solid #870101;color:#721c24;}
+    .callout-success{background:#d4edda;border-left:4px solid #10774A;color:#155724;}
+    .callout-info{background:#d6e8f8;border-left:4px solid #3498db;color:#174a7e;}
+    .callout strong{font-weight:700;}
+
+    /* ── STAT TABLE ── */
+    .stat-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13px;}
+    .stat-table th{background:#141c2c;color:#dcb161;padding:8px 10px;text-align:left;font-weight:700;}
+    .stat-table td{padding:7px 10px;border-bottom:1px solid #e0e3e8;vertical-align:top;}
+    .stat-table tr:last-child td{border-bottom:none;}
+    .stat-table tr:nth-child(even) td{background:#f8f9fa;}
+    .stat-num{font-weight:800;color:#141c2c;white-space:nowrap;}
+    .stat-warn{background:#fff3cd !important;font-weight:700;}
+    .stat-void{background:#fce8e8 !important;color:#721c24;font-weight:700;}
+    .stat-ok{background:#d4edda !important;color:#155724;font-weight:700;}
+
+    /* ── DIVIDER / TAGS / UTILS ── */
+    .divider{border:none;border-top:2px solid #f0f4f8;margin:16px 0;}
+    .tag{display:inline-block;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
+    .tag-warn{background:#fff3cd;color:#856404;}
+    .tag-danger{background:#fce8e8;color:#7b1a1a;}
+    .tag-success{background:#d4edda;color:#155724;}
+    .tag-info{background:#d6e8f8;color:#174a7e;}
+    .tag-gold{background:#fffaed;color:#7a5c00;border:1px solid #dcb161;}
+    .text-center{text-align:center;}
+    .mt-4{margin-top:16px;}
+    .mb-4{margin-bottom:16px;}
+
+    /* ── SCORE CONFIRM ── */
+    .score-confirm{border-radius:10px;padding:14px 16px;margin:14px 0;font-size:14px;line-height:1.6;background:#d4edda;border-left:4px solid #10774A;color:#155724;display:none;}
+
+    .glg-logo{display:block;margin:0 auto 10px;max-height:50px;width:auto;}
+
+    /* ── GAMIFICATION ANIMATIONS ── */
+    @keyframes streakPop{0%{transform:translateX(-50%) scale(0.5);opacity:0}50%{transform:translateX(-50%) scale(1.15)}100%{transform:translateX(-50%) scale(1);opacity:1}}
+    @keyframes fadeUp{to{opacity:0;transform:translateX(-50%) translateY(-20px);}}
+    @keyframes scaleBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+    @keyframes scaleCelebrate{0%{transform:scale(1) rotate(0)}25%{transform:scale(1.2) rotate(-8deg)}50%{transform:scale(1.15) rotate(5deg)}75%{transform:scale(1.1) rotate(-3deg)}100%{transform:scale(1) rotate(0)}}
+    @keyframes scaleTilt{0%{transform:rotate(0)}30%{transform:rotate(10deg)}70%{transform:rotate(-8deg)}100%{transform:rotate(0)}}
+    @keyframes scaleTriumph{0%{transform:scale(1)}20%{transform:scale(1.3)}40%{transform:scale(1.25) rotate(-5deg)}60%{transform:scale(1.25) rotate(5deg)}80%{transform:scale(1.3)}100%{transform:scale(1)}}
+    @keyframes badgeFlip{0%{transform:rotateY(90deg) scale(0.5);opacity:0}60%{transform:rotateY(-10deg) scale(1.05)}100%{transform:rotateY(0) scale(1);opacity:1}}
+    @keyframes correctPulse{0%{box-shadow:0 0 0 0 rgba(39,174,96,0.4)}70%{box-shadow:0 0 0 12px rgba(39,174,96,0)}100%{box-shadow:0 0 0 0 rgba(39,174,96,0)}}
+    @keyframes incorrectShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+    .option-btn.correct{animation:correctPulse 0.6s ease-out;}
+    .option-btn.incorrect{animation:incorrectShake 0.4s ease-out;}
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     HEADER
+════════════════════════════════════════════ -->
+<header>
+  <img src="https://www.thegunnlawgroup.com/wp-content/uploads/2023/01/gunn-logo.png" alt="Gunn Law Group" class="glg-logo">
+  <div class="day-badge">CM-1 · Treatment Monitoring &amp; Compliance</div>
+  <h1>CM-1 - Treatment Monitoring &amp; Compliance</h1>
+  <p>Gunn Law Group · Legal Assistant Training</p>
+  <div class="score-bar">
+    <div>
+      <div class="score-label">BASE SCORE</div>
+      <div class="score-value" id="total-score">0</div>
+    </div>
+    <div>
+      <div class="score-label">POSSIBLE</div>
+      <div class="score-value">200</div>
+    </div>
+    <div>
+      <div class="score-label">BONUS</div>
+      <div class="score-value" id="bonus-score">0</div>
+    </div>
+    <div>
+      <div class="score-label">STREAK</div>
+      <div class="score-value" id="streak-display">0 🔥</div>
+    </div>
+  </div>
+</header>
+
+<!-- Sound Toggle -->
+<button id="soundToggle" style="position:fixed;top:12px;right:12px;z-index:10000;background:#1C2433;color:#c0c0c0;border:1px solid #333;border-radius:8px;padding:6px 10px;cursor:pointer;font-size:16px;" onclick="toggleSound()" title="Toggle Sound">🔇</button>
+<!-- Global Progress Bar -->
+<div id="globalProgress" style="position:fixed;top:0;left:0;width:100%;height:4px;background:#1C2433;z-index:9999;"><div id="globalProgressFill" style="height:100%;width:0%;background:linear-gradient(90deg,#dcb161,#e8c87a);transition:width 0.5s ease;"></div></div>
+
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <div class="progress-meta">
+    <span id="prog-label">Section 1 of 9</span>
+    <span id="prog-pct">0%</span>
+  </div>
+  <div class="progress-bg"><div class="progress-fill" id="prog-fill"></div></div>
+</div>
+
+<!-- NAV PILLS -->
+<nav class="section-nav" id="section-nav">
+  <button class="nav-pill active" id="nav-0" onclick="goToSection(0)">1. Intro</button>
+  <button class="nav-pill" id="nav-1" onclick="goToSection(1)">2. Why It Matters</button>
+  <button class="nav-pill" id="nav-2" onclick="goToSection(2)">3. The System</button>
+  <button class="nav-pill" id="nav-3" onclick="goToSection(3)">4. The Call</button>
+  <button class="nav-pill" id="nav-4" onclick="goToSection(4)">5. CasePeer</button>
+  <button class="nav-pill" id="nav-5" onclick="goToSection(5)">6. Escalation</button>
+  <button class="nav-pill" id="nav-6" onclick="goToSection(6)">7. Boss</button>
+  <button class="nav-pill" id="nav-7" onclick="goToSection(7)">8. Results</button>
+  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">9. Feedback</button>
+</nav>
+
+<!-- Points Toast -->
+<div class="points-toast" id="points-toast"></div>
+
+<!-- Confetti Canvas -->
+<canvas id="confettiCanvas"></canvas>
+
+<main>
+
+<!-- ══════════════════════════════════════════
+     SECTION 0 - INTRO / WELCOME
+════════════════════════════════════════════ -->
+<div class="section-card active" id="section-0">
+  <div class="section-header">
+    <div class="section-num">Section 1 · Welcome</div>
+    <h2>Treatment Monitoring &amp; Compliance</h2>
+    <div class="section-subhead">The case value was built here. It can be destroyed here just as fast.</div>
+  </div>
+  <div class="section-body">
+    <div class="scenario">
+      <div class="scenario-tag">CM Track - Module 1</div>
+      <h3>Two identical cases. One is worth $52,000. The other is worth $28,000. The only difference: a 21-day treatment gap.</h3>
+      <p>Both clients were rear-ended at the same intersection. Same injury: cervical and lumbar strain, confirmed soft tissue. Same liability: clear, police report + witness. Same attorney. Same firm. Client A attended every appointment. Client B missed three weeks in the middle of treatment. When the adjuster saw the gap, she noted: <span class="highlight">'If you were really hurt, you would have kept going to treatment.'</span> Client B's case settled for $24,000 less. <span class="urgent">That gap was the CM's responsibility to prevent.</span></p>
+    </div>
+    <div class="info-block">
+      <h4>📋 What You Will Learn</h4>
+      <ul>
+        <li>Why treatment compliance is the #1 case value driver - and how defense weaponizes every gap</li>
+        <li>Georgia's modified comparative fault standard and how treatment non-compliance creates client "fault"</li>
+        <li>The 14-day contact rule: what it prevents and why the threshold exists</li>
+        <li>GLG's daily monitoring workflow: case notes, the Injuries section, and CasePeer reports</li>
+        <li>How to have treatment conversations that re-engage clients without alienating them</li>
+        <li>CasePeer treatment documentation: case notes, medical records, the Injuries section, and provider tracking</li>
+        <li>The escalation protocol: when, how, and what to document when treatment falls off</li>
+      </ul>
+    </div>
+    <div class="callout callout-warn"><strong>Prerequisites:</strong> NH track complete (NH-1 through NH-11). This module builds on the PI fundamentals, case lifecycle, and CasePeer basics from the new-hire track.</div>
+    <div class="callout callout-info"><strong>Scoring:</strong> 20 questions × 10 pts = 200 base pts possible. Pass gate: 160/200 (80%). Boss Challenge adds up to 50 bonus points. Bonus points do not count toward the pass gate but do appear on your certificate.</div>
+    <div class="btn-group"><button class="btn btn-primary btn-block" onclick="goToSection(1)">Begin: Why Treatment Monitoring Matters &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 1 - WHY TREATMENT MONITORING MATTERS (Q1-Q4)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-1">
+  <div class="section-header">
+    <div class="section-num">Section 2 · WHY Treatment Monitoring Matters · Up to 40 pts</div>
+    <h2>The Gap Destroyer: Case Value, Defense Strategy &amp; the 14-Day Rule</h2>
+    <div class="section-subhead">Treatment compliance is not a soft skill. It is the #1 variable in case value - and every gap is a weapon the defense gets to use.</div>
+  </div>
+  <div class="section-body">
+    <div class="info-block">
+      <h4>📊 The Dollar Impact of Treatment Gaps</h4>
+      <table class="stat-table">
+        <tr><th>Scenario</th><th>Treatment Record</th><th>Adjuster Offer</th><th>Outcome</th></tr>
+        <tr class="stat-ok"><td>Client A</td><td>Consistent. 24 sessions, 0 gaps. Medical discharge on file.</td><td>$52,000</td><td>Full case value realized</td></tr>
+        <tr class="stat-void"><td>Client B</td><td>21-day gap, Weeks 5-7. No explanation documented. Resumed but inconsistent.</td><td>$28,000</td><td><strong>$24,000 destroyed by one gap</strong></td></tr>
+      </table>
+    </div>
+    <div class="info-block">
+      <h4>⚠️ How Defense Uses Treatment Gaps</h4>
+      <p>The defense playbook for treatment gaps is simple and devastatingly effective:</p>
+      <ol style="margin-top:8px;padding-left:18px;">
+        <li style="margin-bottom:6px;"><strong>Deposition weapon:</strong> "You stopped going to physical therapy for 19 days in November - did the pain improve during that time?" The implied answer: yes, you were getting better, therefore the injury was minor.</li>
+        <li style="margin-bottom:6px;"><strong>Comparative fault argument:</strong> Under Georgia's modified comparative fault standard, failing to follow prescribed treatment can be framed as failure to mitigate damages - assigning a percentage of "fault" to the client that reduces their recovery.</li>
+        <li style="margin-bottom:6px;"><strong>Adjuster pricing:</strong> Gaps are visible in medical records. Adjusters are trained to price gaps as signal of recovery - "if you were really hurt, you would have kept going."</li>
+      </ol>
+    </div>
+    <div class="callout callout-danger"><strong>The 14-Day Rule:</strong> A 14-day gap in treatment records is the threshold at which insurance carriers begin arguing the injury has healed. The CM's job is to prevent this gap from ever forming through proactive contact - not to react after the gap already exists.</div>
+    <div class="callout callout-warn"><strong>Georgia's modified comparative fault rule:</strong> If a client is found 50% or more at fault for their own damages - including failure to mitigate by not following treatment - they recover nothing. Every gap is potential comparative fault ammunition.</div>
+
+    <div class="question-block" id="q1-block">
+      <div class="q-num">Question 1 of 20 &middot; 10 pts</div>
+      <div class="q-text">Two clients were injured in identical rear-end accidents - same injuries, same liability, same attorney. Client A attended every scheduled appointment. Client B had a 21-day treatment gap in weeks 5-7. Client A receives an offer of $52,000. Client B receives $28,000. Which answer correctly identifies why the gap cut Client B's case value?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q1','a',false)" id="q1-a"><span class="opt-letter">A</span><span class="opt-text">Client B accumulated fewer medical bills during the gap - lower specials reduce the settlement floor proportionally — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage</span></button>
+        <button class="option-btn" onclick="answer('q1','b',false)" id="q1-b"><span class="opt-letter">B</span><span class="opt-text">The adjuster assumed a pre-existing condition caused the gap and reduced the payout accordingly</span></button>
+        <button class="option-btn" onclick="answer('q1','c',true)" id="q1-c"><span class="opt-letter">C</span><span class="opt-text">The gap becomes a defense narrative: "If you were really hurt, you would have kept going to treatment" - it signals recovery to the adjuster and is used to argue the injury was not serious</span></button>
+        <button class="option-btn" onclick="answer('q1','d',false)" id="q1-d"><span class="opt-letter">D</span><span class="opt-text">Client B's attorney failed to include the gap period in the demand letter, which reduced the medical bill total</span></button>
+      </div>
+      <div class="feedback-box" id="q1-fb"></div>
+    </div>
+
+    <div class="question-block" id="q2-block">
+      <div class="q-num">Question 2 of 20 &middot; 10 pts</div>
+      <div class="q-text">A defense attorney's deposition question: "You stopped going to physical therapy for 19 days in November - did your pain improve during that time?" The client says yes, because it did feel somewhat better. What does this exchange accomplish for the defense?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q2','a',false)" id="q2-a"><span class="opt-letter">A</span><span class="opt-text">It establishes that the client had a pre-existing back condition predating the accident</span></button>
+        <button class="option-btn" onclick="answer('q2','b',true)" id="q2-b"><span class="opt-letter">B</span><span class="opt-text">It creates a client admission that pain improved during the gap - allowing the defense to argue the injury was healing naturally and treatment was not medically necessary</span></button>
+        <button class="option-btn" onclick="answer('q2','c',false)" id="q2-c"><span class="opt-letter">C</span><span class="opt-text">It proves the client received unlicensed treatment during the gap period, which voids that portion of the claim, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
+        <button class="option-btn" onclick="answer('q2','d',false)" id="q2-d"><span class="opt-letter">D</span><span class="opt-text">It shows the client's doctor discharged them during the gap, which validates the defense's coverage limit</span></button>
+      </div>
+      <div class="feedback-box" id="q2-fb"></div>
+    </div>
+
+    <div class="question-block" id="q3-block">
+      <div class="q-num">Question 3 of 20 &middot; 10 pts &middot; Legal Framework</div>
+      <div class="q-text">A defense attorney files a motion arguing that a client's 3-week treatment gap shows they failed to follow their prescribed treatment plan, worsening their outcome and constituting "failure to mitigate damages." Under Georgia's modified comparative fault standard, how does this argument affect the client's recovery?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q3','a',false)" id="q3-a"><span class="opt-letter">A</span><span class="opt-text">Treatment compliance is a medical issue, not a legal one - failure to mitigate arguments do not apply to treatment gaps under Georgia law</span></button>
+        <button class="option-btn" onclick="answer('q3','b',false)" id="q3-b"><span class="opt-letter">B</span><span class="opt-text">A gap of less than 30 days cannot be used as a comparative fault argument - only extended gaps over 30 days are legally significant</span></button>
+        <button class="option-btn" onclick="answer('q3','c',true)" id="q3-c"><span class="opt-letter">C</span><span class="opt-text">Any percentage of fault attributed to the client reduces recovery proportionally - and if the client is found 50% or more at fault, they recover nothing under Georgia's modified comparative fault rule</span></button>
+        <button class="option-btn" onclick="answer('q3','d',false)" id="q3-d"><span class="opt-letter">D</span><span class="opt-text">The motion would only succeed if the client missed more than half their prescribed appointments - a 3-week gap alone is legally insufficient — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value</span></button>
+      </div>
+      <div class="feedback-box" id="q3-fb"></div>
+    </div>
+
+    <div class="question-block" id="q4-block">
+      <div class="q-num">Question 4 of 20 &middot; 10 pts</div>
+      <div class="q-text">A new case manager asks: "Why is the firm's contact rule set at 14 days specifically - why not 21 days or 10 days?" Which answer correctly explains the 14-day rule's origin and purpose?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q4','a',false)" id="q4-a"><span class="opt-letter">A</span><span class="opt-text">The 14-day rule is based on Georgia's statute of limitations clock - contact within 14 days of each treatment visit resets an internal filing deadline — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken</span></button>
+        <button class="option-btn" onclick="answer('q4','b',true)" id="q4-b"><span class="opt-letter">B</span><span class="opt-text">A 14-day gap in treatment records is the threshold at which insurance carriers typically begin arguing the injury has healed - proactive contact within that window prevents the gap from ever forming</span></button>
+        <button class="option-btn" onclick="answer('q4','c',false)" id="q4-c"><span class="opt-letter">C</span><span class="opt-text">The 14-day rule aligns with the bi-weekly billing cycle at most treatment providers so CMs can verify billing is current</span></button>
+        <button class="option-btn" onclick="answer('q4','d',false)" id="q4-d"><span class="opt-letter">D</span><span class="opt-text">HIPAA compliance requires case manager contact within 14 business days of any medical records update</span></button>
+      </div>
+      <div class="feedback-box" id="q4-fb"></div>
+    </div>
+
+    <div class="section-score" id="s1-score" style="display:none;"><div class="score-display" id="s1-score-val"></div><div class="score-label">Section 2 Score</div></div>
+    <div class="btn-group" id="s1-next"><button class="btn btn-primary btn-block" onclick="goToSection(2)">Next: The Monitoring System - Cadence, Records &amp; Documentation &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 2 - THE MONITORING SYSTEM (Q5-Q8)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-2">
+  <div class="section-header">
+    <div class="section-num">Section 3 · The Monitoring System · Up to 40 pts</div>
+    <h2>Daily Cadence, Monitoring &amp; Documentation</h2>
+    <div class="section-subhead">A system that runs on habit catches problems before they become gaps. A system that runs on memory lets cases fall through.</div>
+  </div>
+  <div class="section-body">
+    <div class="info-block">
+      <h4>📅 Daily Monitoring Cadence - What CMs Check Every Morning</h4>
+      <table class="stat-table">
+        <tr><th>Days Since Last Contact</th><th>Action</th><th>Priority</th></tr>
+        <tr class="stat-void"><td><strong>14+ days</strong></td><td>Call today - this is past the threshold. If unreachable, escalate to supervising attorney immediately.</td><td>Immediate</td></tr>
+        <tr class="stat-warn"><td><strong>8-13 days</strong></td><td>Approaching the 14-day threshold - schedule outreach before the day ends</td><td>Same day</td></tr>
+        <tr class="stat-ok"><td><strong>7 days or fewer</strong></td><td>Confirm next scheduled appointment; no immediate action required</td><td>Monitor</td></tr>
+      </table>
+    </div>
+    <div class="info-block">
+      <h4>📌 Where Treatment Data Lives in CasePeer</h4>
+      <p>There is no single dashboard or automated flag system. CMs track treatment across three sources:</p>
+      <ul style="margin-top:8px;padding-left:18px;">
+        <li style="margin-bottom:6px;"><strong>Medical records on file</strong> - Provider visit documentation uploaded to the case. This is the primary source for actual visit dates and treatment progress.</li>
+        <li style="margin-bottom:6px;"><strong>Case notes</strong> - The CM's treatment update logs from every check-in call. These document last visit date, next appointment, client-reported status, and any compliance concerns.</li>
+        <li style="margin-bottom:6px;"><strong>Injuries section</strong> - Injury details, treating providers, and provider specialties. This is where you see who the client is treating with and for what.</li>
+      </ul>
+      <p style="margin-top:8px;">The CM's daily workflow: sort active cases by last contact date in your case notes, identify any cases approaching the 14-day threshold, and prioritize those for outreach.</p>
+    </div>
+    <div class="info-block">
+      <h4>🗒️ The Treatment Timeline: Expected vs. Actual</h4>
+      <p>Every treatment plan has a schedule. CMs track two numbers against each other:</p>
+      <ul style="margin-top:8px;padding-left:18px;">
+        <li style="margin-bottom:4px;"><strong>Expected sessions</strong> - what the provider ordered (e.g., 3x/week × 8 weeks = 24 sessions)</li>
+        <li style="margin-bottom:4px;"><strong>Actual sessions</strong> - what CasePeer shows as documented visits</li>
+      </ul>
+      <p style="margin-top:8px;">When actual falls more than 2 sessions behind expected: treat it as urgent and contact the client that day. Do not wait for the 14-day calendar trigger.</p>
+    </div>
+    <div class="callout callout-info"><strong>Documentation Rule:</strong> Every treatment check-in - even a two-minute call where the client says they're doing fine - must be logged in CasePeer before the CM moves to the next case. Date, time, what the client said, next contact date. No exceptions.</div>
+
+    <div class="question-block" id="q5-block">
+      <div class="q-num">Question 5 of 20 &middot; 10 pts</div>
+      <div class="q-text">It's Monday morning. A CM opens CasePeer and has 34 active treatment cases to monitor. Which approach correctly reflects GLG's daily monitoring system?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q5','a',false)" id="q5-a"><span class="opt-letter">A</span><span class="opt-text">Filter all cases alphabetically and call the first five clients each day on a rotating weekly basis</span></button>
+        <button class="option-btn" onclick="answer('q5','b',true)" id="q5-b"><span class="opt-letter">B</span><span class="opt-text">Filter by last contact date - flag every case where last documented contact is 10 days or older, then prioritize those for outreach today before they cross the 14-day threshold</span></button>
+        <button class="option-btn" onclick="answer('q5','c',false)" id="q5-c"><span class="opt-letter">C</span><span class="opt-text">Review only cases with upcoming demand deadlines or court dates - treatment monitoring is triggered by legal milestones, not a daily calendar, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity</span></button>
+        <button class="option-btn" onclick="answer('q5','d',false)" id="q5-d"><span class="opt-letter">D</span><span class="opt-text">Send a Monday group check-in text to all 34 clients simultaneously and log the text as the contact for each file</span></button>
+      </div>
+      <div class="feedback-box" id="q5-fb"></div>
+    </div>
+
+    <div class="question-block" id="q6-block">
+      <div class="q-num">Question 6 of 20 &middot; 10 pts &middot; CasePeer Knowledge</div>
+      <div class="q-text">A new case manager asks: "Where does treatment data actually live in CasePeer? I want to see where I'm supposed to look when monitoring a client's treatment." Which answer correctly identifies the three places where treatment information is tracked at GLG?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q6','a',false)" id="q6-a"><span class="opt-letter">A</span><span class="opt-text">The Case Timeline tab - it shows all treatment events in chronological order alongside legal milestones, so you can see treatment visits and gaps at a glance — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage</span></button>
+        <button class="option-btn" onclick="answer('q6','b',false)" id="q6-b"><span class="opt-letter">B</span><span class="opt-text">The Dashboard - CasePeer has a built-in treatment compliance dashboard that color-codes cases by urgency level and alerts the CM when contact is overdue</span></button>
+        <button class="option-btn" onclick="answer('q6','c',false)" id="q6-c"><span class="opt-letter">C</span><span class="opt-text">The Billing section - treatment visits are tracked through provider invoices, so billing records show the complete treatment timeline</span></button>
+        <button class="option-btn" onclick="answer('q6','d',true)" id="q6-d"><span class="opt-letter">D</span><span class="opt-text">Medical records on file (provider visit documentation), case notes (the CM's treatment update logs from check-in calls), and the Injuries section (injury details and treating providers)</span></button>
+      </div>
+      <div class="feedback-box" id="q6-fb"></div>
+    </div>
+
+    <div class="question-block" id="q7-block">
+      <div class="q-num">Question 7 of 20 &middot; 10 pts</div>
+      <div class="q-text">A client's treatment plan calls for 3 PT sessions per week for 6 weeks (18 total). CasePeer shows they are 8 weeks post-accident with 11 sessions documented. The plan expected 18 by now. What is the correct CM action?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q7','a',false)" id="q7-a"><span class="opt-letter">A</span><span class="opt-text">No action needed - 11 of 18 expected sessions is within normal attendance variation for physical therapy cases</span></button>
+        <button class="option-btn" onclick="answer('q7','b',false)" id="q7-b"><span class="opt-letter">B</span><span class="opt-text">Note the gap but wait until Week 10 before reaching out — the plan may have been adjusted by the provider</span></button>
+        <button class="option-btn" onclick="answer('q7','c',true)" id="q7-c"><span class="opt-letter">C</span><span class="opt-text">This is urgent - 7 missed sessions against an 18-session plan is a significant compliance gap; contact the client TODAY to understand what is happening and document the call</span></button>
+        <button class="option-btn" onclick="answer('q7','d',false)" id="q7-d"><span class="opt-letter">D</span><span class="opt-text">Notify the physical therapy office that the client is not following the plan and request that they add extra sessions to compensate, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
+      </div>
+      <div class="feedback-box" id="q7-fb"></div>
+    </div>
+
+    <div class="question-block" id="q8-block">
+      <div class="q-num">Question 8 of 20 &middot; 10 pts &middot; Documentation Standard</div>
+      <div class="q-text">A CM calls Rosa for a routine check-in. Rosa says she went to PT twice this week and adds: "Honestly, my back has been feeling a lot better since I started the exercises - I think another month and I'll be done." What CasePeer note is required after this call?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q8','a',false)" id="q8-a"><span class="opt-letter">A</span><span class="opt-text">"Called Rosa - treating per plan. No issues." Brief routine calls don't require detailed documentation.</span></button>
+        <button class="option-btn" onclick="answer('q8','b',false)" id="q8-b"><span class="opt-letter">B</span><span class="opt-text">Log the call date, note she is treating, and flag for follow-up in 14 days. Rosa sounds fine.</span></button>
+        <button class="option-btn" onclick="answer('q8','c',true)" id="q8-c"><span class="opt-letter">C</span><span class="opt-text">Log: call date/time, treatment reported (PT 2x this week), Rosa's statement about improvement and anticipated timeline, CM assessment (treating per plan, no current compliance concern), and a monitor note - client anticipates completing in ~1 month; watch for early self-discharge risk. Next contact: [date].</span></button>
+        <button class="option-btn" onclick="answer('q8','d',false)" id="q8-d"><span class="opt-letter">D</span><span class="opt-text">Skip logging - the call was positive and brief. Reserve detailed notes for problem calls with treatment compliance issues. — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value</span></button>
+      </div>
+      <div class="feedback-box" id="q8-fb"></div>
+    </div>
+
+    <div class="section-score" id="s2-score" style="display:none;"><div class="score-display" id="s2-score-val"></div><div class="score-label">Section 3 Score</div></div>
+    <div class="btn-group" id="s2-next"><button class="btn btn-primary btn-block" onclick="goToSection(3)">Next: The Treatment Conversation - Check-Ins, Non-Compliance &amp; Calibrated Questions &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 3 - THE TREATMENT CONVERSATION (Q9-Q12)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-3">
+  <div class="section-header">
+    <div class="section-num">Section 4 · The Treatment Conversation · Up to 40 pts</div>
+    <h2>Check-In Calls, Non-Compliance Conversations &amp; Calibrated Questions</h2>
+    <div class="section-subhead">How you ask matters as much as what you ask. Clients who feel interrogated stop answering. Clients who feel supported keep going to treatment.</div>
+  </div>
+  <div class="section-body">
+    <div class="info-block">
+      <h4>📞 The Check-In Call Framework</h4>
+      <ol style="margin-top:8px;padding-left:18px;">
+        <li style="margin-bottom:6px;"><strong>Open with empathy</strong> - "How are you feeling this week? Is the treatment helping?" Information after connection. A client who feels heard answers honestly.</li>
+        <li style="margin-bottom:6px;"><strong>Confirm treatment</strong> - Specific, not vague: "When was your last appointment? Do you have one scheduled this week?"</li>
+        <li style="margin-bottom:6px;"><strong>Diagnose before prescribing</strong> - If something is wrong, ask why before offering solutions: "What's been making it hard to get to your appointments lately?"</li>
+        <li style="margin-bottom:6px;"><strong>Reference prior commitments</strong> - "Last time we spoke, you mentioned Tuesday and Thursday - how did those go?" Not accusatory; just memory-jogging. Clients who stated a commitment are more likely to follow through when reminded.</li>
+        <li><strong>Close with the next step</strong> - "So your next appointment is Wednesday at 2 PM? Great - I'll check in with you Thursday to see how it went."</li>
+      </ol>
+    </div>
+    <div class="info-block">
+      <h4>⚠️ When Treatment Is Slipping: Calibrated Questions</h4>
+      <p>Calibrated questions are open-ended, non-accusatory, and designed to surface the real barrier rather than provoke defensiveness. Examples:</p>
+      <ul style="margin-top:8px;padding-left:18px;">
+        <li style="margin-bottom:4px;">"What's been making it hard to get to your appointments lately?"</li>
+        <li style="margin-bottom:4px;">"What would need to happen for getting there to feel easier?"</li>
+        <li style="margin-bottom:4px;">"I hear you that you're feeling better - what does your doctor say about where you are in the plan?"</li>
+      </ul>
+      <p style="margin-top:8px;"><strong>Never say:</strong> "You have to go." "You're hurting your case." "The insurance company will use this against you." These close the conversation instead of opening it.</p>
+    </div>
+    <div class="callout callout-warn"><strong>After Every Call - Log It:</strong> Date, time, what the client said, any compliance concern, the next scheduled appointment, and next contact date. A 2-minute positive call gets the same documentation standard as a 15-minute non-compliance conversation. The defense sees what's in CasePeer - and only what's in CasePeer.</div>
+
+    <div class="question-block" id="q9-block">
+      <div class="q-num">Question 9 of 20 &middot; 10 pts</div>
+      <div class="q-text">You're calling Marcus for his 3rd check-in. He has a cervical strain and has been treating for 4 weeks. Which opening best reflects GLG's check-in approach?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q9','a',false)" id="q9-a"><span class="opt-letter">A</span><span class="opt-text">"Hi Marcus, this is [Name] from Gunn Law Group. I'm calling to check on your treatment status. Are you still going to your appointments?"</span></button>
+        <button class="option-btn" onclick="answer('q9','b',true)" id="q9-b"><span class="opt-letter">B</span><span class="opt-text">"Hi Marcus, it's [Name] from Gunn Law Group. How are you feeling this week - is the treatment helping at all?"</span></button>
+        <button class="option-btn" onclick="answer('q9','c',false)" id="q9-c"><span class="opt-letter">C</span><span class="opt-text">"Hi Marcus, it's [Name] from Gunn Law Group. I need to confirm you've been to at least two appointments since we last spoke. Can you verify that?"</span></button>
+        <button class="option-btn" onclick="answer('q9','d',false)" id="q9-d"><span class="opt-letter">D</span><span class="opt-text">"Hi Marcus, it's [Name] from Gunn Law Group. I just need to update your file - are you still going to Dr. Silva?"</span></button>
+      </div>
+      <div class="feedback-box" id="q9-fb"></div>
+    </div>
+
+    <div class="question-block" id="q10-block">
+      <div class="q-num">Question 10 of 20 &middot; 10 pts</div>
+      <div class="q-text">During a check-in, a client says: "I've been really busy - I've only made it to one appointment in the last three weeks." Which response best uses a calibrated approach to diagnose the barrier without alienating the client?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q10','a',false)" id="q10-a"><span class="opt-letter">A</span><span class="opt-text">"You need to know that treatment gaps seriously hurt your case - the insurance company will use this against you."</span></button>
+        <button class="option-btn" onclick="answer('q10','b',true)" id="q10-b"><span class="opt-letter">B</span><span class="opt-text">"I understand things get hectic - what's been making it hard to get to your appointments lately?"</span></button>
+        <button class="option-btn" onclick="answer('q10','c',false)" id="q10-c"><span class="opt-letter">C</span><span class="opt-text">"How many times have we talked about staying consistent? You really need to make this a priority."</span></button>
+        <button class="option-btn" onclick="answer('q10','d',false)" id="q10-d"><span class="opt-letter">D</span><span class="opt-text">"I'm going to have to note in your file that you're not following the treatment plan - the attorney needs to know about this."</span></button>
+      </div>
+      <div class="feedback-box" id="q10-fb"></div>
+    </div>
+
+    <div class="question-block" id="q11-block">
+      <div class="q-num">Question 11 of 20 &middot; 10 pts &middot; Diagnose Before Prescribing</div>
+      <div class="q-text">A client says: "I feel fine now - I really don't think I need to keep going to physical therapy. My back doesn't hurt anymore." Which response most completely addresses both the compliance issue AND the client's long-term case interest?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q11','a',false)" id="q11-a"><span class="opt-letter">A</span><span class="opt-text">"That's great that you're feeling better! Let me check with the attorney to see if we can close out treatment early."</span></button>
+        <button class="option-btn" onclick="answer('q11','b',false)" id="q11-b"><span class="opt-letter">B</span><span class="opt-text">"The attorney will need you to attend at least two more appointments to satisfy the insurance company's requirements." — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage</span></button>
+        <button class="option-btn" onclick="answer('q11','c',false)" id="q11-c"><span class="opt-letter">C</span><span class="opt-text">"Even if you feel fine, you must complete the full treatment plan - stopping now is not an option."</span></button>
+        <button class="option-btn" onclick="answer('q11','d',true)" id="q11-d"><span class="opt-letter">D</span><span class="opt-text">"I'm really glad to hear the treatment is working - that's exactly what we hoped for. The thing is, stopping before your doctor officially discharges you can give the defense a way to argue the injury was minor. Even a few more sessions to reach a formal discharge would protect your case. Have you talked to your doctor about where you stand in the recovery plan?"</span></button>
+      </div>
+      <div class="feedback-box" id="q11-fb"></div>
+    </div>
+
+    <div class="question-block" id="q12-block">
+      <div class="q-num">Question 12 of 20 &middot; 10 pts &middot; Commitment &amp; Consistency</div>
+      <div class="q-text">A client agreed on last week's call to go to Tuesday and Thursday PT. Ten days later you call back. She made Tuesday but missed Thursday. Which approach correctly references the prior commitment without being accusatory?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q12','a',false)" id="q12-a"><span class="opt-letter">A</span><span class="opt-text">"You missed your Thursday appointment last week. We've talked about the importance of consistent treatment and this is a problem."</span></button>
+        <button class="option-btn" onclick="answer('q12','b',true)" id="q12-b"><span class="opt-letter">B</span><span class="opt-text">"Last time we spoke, you mentioned you'd go Tuesday and Thursday - sounds like Tuesday went well! What happened with Thursday?"</span></button>
+        <button class="option-btn" onclick="answer('q12','c',false)" id="q12-c"><span class="opt-letter">C</span><span class="opt-text">"I see you only attended one of your two planned sessions last week - the attorney needs you to make up the missed appointment this week."</span></button>
+        <button class="option-btn" onclick="answer('q12','d',false)" id="q12-d"><span class="opt-letter">D</span><span class="opt-text">"I see from the billing records you missed Thursday. Is there a reason your schedule changed?"</span></button>
+      </div>
+      <div class="feedback-box" id="q12-fb"></div>
+    </div>
+
+    <div class="section-score" id="s3-score" style="display:none;"><div class="score-display" id="s3-score-val"></div><div class="score-label">Section 4 Score</div></div>
+    <div class="btn-group" id="s3-next"><button class="btn btn-primary btn-block" onclick="goToSection(4)">Next: CasePeer Treatment Documentation - Notes, Records &amp; Compliance Monitoring &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 4 - CASEPEER TREATMENT DOCUMENTATION (Q13-Q16)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-4">
+  <div class="section-header">
+    <div class="section-num">Section 5 · CasePeer Treatment Documentation · Up to 40 pts</div>
+    <h2>Fields, Provider Entries, Note Format &amp; Case Review Prep</h2>
+    <div class="section-subhead">CasePeer is the record of truth. If it isn't in CasePeer, it didn't happen.</div>
+  </div>
+  <div class="section-body">
+    <div class="info-block">
+      <h4>💻 CasePeer Treatment Section - Key Fields</h4>
+      <table class="stat-table">
+        <tr><th>Field</th><th>What Goes Here</th><th>Updated By</th></tr>
+        <tr><td class="stat-num">Provider Name</td><td>Each treating provider (doctor, PT, specialist) as a separate entry</td><td>CM at first contact</td></tr>
+        <tr><td class="stat-num">Specialty</td><td>Chiropractic, orthopedic, physical therapy, pain management, etc.</td><td>CM at first contact</td></tr>
+        <tr><td class="stat-num">Last Visit Date</td><td>Date of most recent documented treatment visit</td><td>CM after each check-in</td></tr>
+        <tr><td class="stat-num">Appointment Frequency</td><td>What the provider ordered: e.g., 2x/week, monthly</td><td>CM at intake; updated if plan changes</td></tr>
+        <tr class="stat-void"><td class="stat-num">Treatment Note</td><td>Standardized treatment update using the GLG note template (logged in case notes)</td><td>CM after every client contact</td></tr>
+      </table>
+    </div>
+    <div class="info-block">
+      <h4>🗒️ GLG Treatment Note Format - Required Elements</h4>
+      <p>Every treatment check-in note must include all of these elements:</p>
+      <ul style="margin-top:8px;padding-left:18px;">
+        <li style="margin-bottom:4px;"><strong>"TREATMENT UPDATE [date time]"</strong> - use this exact header</li>
+        <li style="margin-bottom:4px;"><strong>Contact type</strong> - phone call, text, email</li>
+        <li style="margin-bottom:4px;"><strong>Last visit date and provider</strong></li>
+        <li style="margin-bottom:4px;"><strong>Next scheduled appointment date</strong></li>
+        <li style="margin-bottom:4px;"><strong>Client-reported status</strong> - verbatim or close paraphrase of what the client said</li>
+        <li style="margin-bottom:4px;"><strong>CM assessment</strong> - is treatment on schedule or is there a compliance concern? Note any issues.</li>
+        <li><strong>Next contact due date</strong></li>
+      </ul>
+    </div>
+    <div class="callout callout-info"><strong>Weekly Case Review Prep:</strong> Before each case review meeting, pull CasePeer reports showing all active treatment cases with last contact dates and days since last documented treatment. Review your case notes for any cases approaching or past the 14-day threshold, and any where sessions are behind the prescribed plan. Walk into the meeting knowing which cases need attorney attention.</div>
+
+    <div class="question-block" id="q13-block">
+      <div class="q-num">Question 13 of 20 &middot; 10 pts</div>
+      <div class="q-text">A supervising attorney asks: "Pull up Marcus Thompson's case and tell me when he last had a documented treatment visit." You open CasePeer. Where do you find the last documented treatment visit date?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q13','a',true)" id="q13-a"><span class="opt-letter">A</span><span class="opt-text">Check medical records on file first for visit dates, then check case notes for treatment update logs entered by the CM</span></button>
+        <button class="option-btn" onclick="answer('q13','b',false)" id="q13-b"><span class="opt-letter">B</span><span class="opt-text">Check the Activity Feed in CasePeer — the activity log tracks all case events and will show treatment visit dates automatically</span></button>
+        <button class="option-btn" onclick="answer('q13','c',false)" id="q13-c"><span class="opt-letter">C</span><span class="opt-text">Only check the medical records tab - if the records aren't uploaded yet, tell the attorney the information isn't available</span></button>
+        <button class="option-btn" onclick="answer('q13','d',false)" id="q13-d"><span class="opt-letter">D</span><span class="opt-text">Search your email for the most recent provider correspondence and report the date mentioned there</span></button>
+      </div>
+      <div class="feedback-box" id="q13-fb"></div>
+    </div>
+
+    <div class="question-block" id="q14-block">
+      <div class="q-num">Question 14 of 20 &middot; 10 pts</div>
+      <div class="q-text">Marcus is treating with three providers: Dr. Patel (orthopedic surgeon), River Valley Physical Therapy, and Atlanta Pain Management. How should the CM's CasePeer documentation reflect this multi-provider situation?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q14','a',false)" id="q14-a"><span class="opt-letter">A</span><span class="opt-text">Log only the primary provider (Dr. Patel) in CasePeer - track the others informally and update CasePeer when they reach a significant milestone</span></button>
+        <button class="option-btn" onclick="answer('q14','b',false)" id="q14-b"><span class="opt-letter">B</span><span class="opt-text">Create one combined treatment entry listing all three providers in the notes field - CasePeer's treatment section is designed for a single-provider entry per case, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity</span></button>
+        <button class="option-btn" onclick="answer('q14','c',true)" id="q14-c"><span class="opt-letter">C</span><span class="opt-text">Track each provider separately in CasePeer: log separate case notes for each provider showing specialty, last visit date, and appointment frequency - so you can see at a glance which providers are current and which are falling behind</span></button>
+        <button class="option-btn" onclick="answer('q14','d',false)" id="q14-d"><span class="opt-letter">D</span><span class="opt-text">Log only the most recent provider visit regardless of which provider it was - CasePeer tracks treatment as a single activity stream</span></button>
+      </div>
+      <div class="feedback-box" id="q14-fb"></div>
+    </div>
+
+    <div class="question-block" id="q15-block">
+      <div class="q-num">Question 15 of 20 &middot; 10 pts</div>
+      <div class="q-text">A CM finishes a treatment check-in call with Sofia. Sofia last visited her chiropractor 5 days ago, has an appointment next Tuesday, and says her neck "still hurts when she turns left." Which CasePeer note correctly follows GLG's standardized treatment update format?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q15','a',false)" id="q15-a"><span class="opt-letter">A</span><span class="opt-text">"Called Sofia - she's going to chiro and has an appt next week. Still having neck pain." — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage</span></button>
+        <button class="option-btn" onclick="answer('q15','b',false)" id="q15-b"><span class="opt-letter">B</span><span class="opt-text">"Sofia - treating. No gaps. Pain reported. Follow up July 21."</span></button>
+        <button class="option-btn" onclick="answer('q15','c',false)" id="q15-c"><span class="opt-letter">C</span><span class="opt-text">"Treatment confirmed. Will check again in 2 weeks."</span></button>
+        <button class="option-btn" onclick="answer('q15','d',true)" id="q15-d"><span class="opt-letter">D</span><span class="opt-text">"TREATMENT UPDATE [7/7/2026 2:14 PM] - Contact: phone call. Last visit: 7/2/2026 (chiropractor). Next appt: 7/9/2026 (Tues). Client-reported status: neck pain persists on left lateral rotation. Assessment: treating per plan, no compliance concerns. Next contact due: 7/21/2026."</span></button>
+      </div>
+      <div class="feedback-box" id="q15-fb"></div>
+    </div>
+
+    <div class="question-block" id="q16-block">
+      <div class="q-num">Question 16 of 20 &middot; 10 pts</div>
+      <div class="q-text">It's Monday morning before the weekly case review meeting. The supervising attorney expects you to know the treatment status of every active case. How does the CM prepare?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q16','a',false)" id="q16-a"><span class="opt-letter">A</span><span class="opt-text">Send the attorney a list of client names and phone numbers so they can call anyone who needs follow-up directly</span></button>
+        <button class="option-btn" onclick="answer('q16','b',false)" id="q16-b"><span class="opt-letter">B</span><span class="opt-text">Review only the cases where you had a problem call in the past week - the meeting focuses on problem cases, not routine updates</span></button>
+        <button class="option-btn" onclick="answer('q16','c',true)" id="q16-c"><span class="opt-letter">C</span><span class="opt-text">Pull CasePeer reports to see all active cases with last contact dates and days since last treatment. Cross-reference with your case notes for cases approaching the 14-day threshold. Walk into the meeting knowing which cases need immediate attention and which are treating on schedule.</span></button>
+        <button class="option-btn" onclick="answer('q16','d',false)" id="q16-d"><span class="opt-letter">D</span><span class="opt-text">Wait for the attorney to pull up CasePeer during the meeting and answer questions as they arise - the CM doesn't prepare reports, just keeps individual case notes current, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
+      </div>
+      <div class="feedback-box" id="q16-fb"></div>
+    </div>
+
+    <div class="section-score" id="s4-score" style="display:none;"><div class="score-display" id="s4-score-val"></div><div class="score-label">Section 5 Score</div></div>
+    <div class="btn-group" id="s4-next"><button class="btn btn-primary btn-block" onclick="goToSection(5)">Next: Escalation Protocol - When, How &amp; What to Document &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 5 - ESCALATION PROTOCOL (Q17-Q20)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-5">
+  <div class="section-header">
+    <div class="section-num">Section 6 · Escalation Protocol · Up to 40 pts</div>
+    <h2>When to Escalate, How to Document &amp; SOL Awareness</h2>
+    <div class="section-subhead">Escalation is not failure. Escalation without documentation is.</div>
+  </div>
+  <div class="section-body">
+    <div class="info-block">
+      <h4>🚨 Escalation Triggers - When the CM Must Escalate to the Attorney</h4>
+      <table class="stat-table">
+        <tr><th>Trigger</th><th>Action</th><th>Urgency</th></tr>
+        <tr class="stat-void"><td><strong>14-day gap - client unreachable</strong></td><td>Escalate to supervising attorney with documented contact attempts</td><td>Immediate</td></tr>
+        <tr class="stat-void"><td><strong>Client actively refusing treatment</strong></td><td>Escalate - attorney call required; CM cannot authorize treatment discontinuation</td><td>Immediate</td></tr>
+        <tr class="stat-void"><td><strong>Provider issue</strong> (stopped accepting client, billing dispute)</td><td>Escalate - attorney may need to arrange alternative provider</td><td>Same day</td></tr>
+        <tr class="stat-void"><td><strong>Client self-discharged without MD sign-off</strong></td><td>Escalate - attorney must evaluate whether record is sufficient for demand</td><td>Same day</td></tr>
+        <tr class="stat-void"><td><strong>Any gap near SOL deadline</strong></td><td>Escalate immediately regardless of gap length - the SOL clock does not pause for treatment issues</td><td>Immediate</td></tr>
+      </table>
+    </div>
+    <div class="info-block">
+      <h4>📋 The Escalation Memo - Required Elements</h4>
+      <p>When you escalate, give the attorney everything in one place. "Client isn't going" is not an escalation memo.</p>
+      <ol style="margin-top:8px;padding-left:18px;">
+        <li style="margin-bottom:4px;"><strong>Client name and case number</strong></li>
+        <li style="margin-bottom:4px;"><strong>Last treatment date</strong> and how many days ago</li>
+        <li style="margin-bottom:4px;"><strong>Last CM contact date</strong> and method</li>
+        <li style="margin-bottom:4px;"><strong>All contact attempts since last successful contact</strong> (date, method, outcome)</li>
+        <li style="margin-bottom:4px;"><strong>Client's stated reason</strong> (if known)</li>
+        <li style="margin-bottom:4px;"><strong>Specials amount at risk</strong></li>
+        <li><strong>CM recommendation</strong> - attorney call, treatment reinstatement letter, or case evaluation</li>
+      </ol>
+    </div>
+    <div class="callout callout-danger"><strong>SOL Awareness:</strong> Georgia's statute of limitations for personal injury is 2 years. A treatment gap + client unreachability within 60 days of the SOL deadline is the highest-urgency combination in case management. The attorney may need to file a protective complaint before the deadline regardless of treatment status.</div>
+
+    <div class="question-block" id="q17-block">
+      <div class="q-num">Question 17 of 20 &middot; 10 pts</div>
+      <div class="q-text">A CM has been trying to reach a client named Derek for 16 days. Two calls, one text, one voicemail - all unanswered. CasePeer shows his last documented treatment was 16 days ago. He has a soft tissue case with $28,000 in specials. At what point should the CM have escalated - and to whom?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q17','a',false)" id="q17-a"><span class="opt-letter">A</span><span class="opt-text">Escalate now, after 16 days is confirmed - the 14-day threshold has been passed by 2 days and it's time to act</span></button>
+        <button class="option-btn" onclick="answer('q17','b',false)" id="q17-b"><span class="opt-letter">B</span><span class="opt-text">Wait until 21 days of unreachability before escalating — 16 days is not quite urgent enough to involve the attorney yet</span></button>
+        <button class="option-btn" onclick="answer('q17','c',false)" id="q17-c"><span class="opt-letter">C</span><span class="opt-text">File an escalation memo only when treatment confirms to be permanently terminated - unreachability alone is not an escalation trigger — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value</span></button>
+        <button class="option-btn" onclick="answer('q17','d',true)" id="q17-d"><span class="opt-letter">D</span><span class="opt-text">The escalation was overdue - it should have happened at Day 14 when Derek crossed the 14-day threshold; escalate now to the supervising attorney with a documented summary of all contact attempts</span></button>
+      </div>
+      <div class="feedback-box" id="q17-fb"></div>
+    </div>
+
+    <div class="question-block" id="q18-block">
+      <div class="q-num">Question 18 of 20 &middot; 10 pts</div>
+      <div class="q-text">The attorney says: "Give me everything I need on Derek's case in one message - don't make me dig through CasePeer." Which escalation memo correctly captures all required elements?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q18','a',true)" id="q18-a"><span class="opt-letter">A</span><span class="opt-text">"ESCALATION MEMO - Derek Williams, GLG-2026-0443. Last treatment: 6/21/2026 (16 days ago). Last CM contact: 6/21/2026 (phone). Attempts since: 6/23 (call, no answer), 6/25 (text, no reply), 6/28 (voicemail), 7/3 (call, no answer). Client's stated reason: unknown - no contact. Specials: $28,000. SOL: 4 months out. CM recommendation: attorney call + treatment reinstatement letter."</span></button>
+        <button class="option-btn" onclick="answer('q18','b',false)" id="q18-b"><span class="opt-letter">B</span><span class="opt-text">"Derek hasn't responded to calls or texts in 16 days. He's at-risk. What do you want to do?"</span></button>
+        <button class="option-btn" onclick="answer('q18','c',false)" id="q18-c"><span class="opt-letter">C</span><span class="opt-text">"Derek Williams - unreachable 16 days. Contact attempts documented in CasePeer notes. Please advise on next steps."</span></button>
+        <button class="option-btn" onclick="answer('q18','d',false)" id="q18-d"><span class="opt-letter">D</span><span class="opt-text">"Client: Derek Williams. Issue: treatment gap, 16 days. Action: please call client and advise on whether to continue monitoring." — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
+      </div>
+      <div class="feedback-box" id="q18-fb"></div>
+    </div>
+
+    <div class="question-block" id="q19-block">
+      <div class="q-num">Question 19 of 20 &middot; 10 pts</div>
+      <div class="q-text">The attorney called Derek and re-engaged him. Derek said he stopped going because he thought he was better. The attorney recommends he resume immediately and schedules a follow-up in 10 days. The attorney tells the CM: "I handled it - follow up with Derek in two weeks." What is the CM's obligation now?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q19','a',false)" id="q19-a"><span class="opt-letter">A</span><span class="opt-text">Log the attorney's call, close the escalation flag, and reset the 14-day contact clock from today</span></button>
+        <button class="option-btn" onclick="answer('q19','b',false)" id="q19-b"><span class="opt-letter">B</span><span class="opt-text">No additional documentation needed - the attorney handled it; follow up in two weeks as instructed</span></button>
+        <button class="option-btn" onclick="answer('q19','c',false)" id="q19-c"><span class="opt-letter">C</span><span class="opt-text">Text Derek a summary of the attorney's recommendations and log the text as the new baseline for the 14-day contact clock, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value</span></button>
+        <button class="option-btn" onclick="answer('q19','d',true)" id="q19-d"><span class="opt-letter">D</span><span class="opt-text">Log all post-escalation actions with timestamps: attorney call date and outcome, client re-engagement confirmed, attorney's recommendation (resume treatment), next CM contact date (two weeks), and note that Derek remains a compliance concern until documented treatment actually resumes - a verbal agreement to go back does not close the gap</span></button>
+      </div>
+      <div class="feedback-box" id="q19-fb"></div>
+    </div>
+
+    <div class="question-block" id="q20-block">
+      <div class="q-num">Question 20 of 20 &middot; 10 pts &middot; SOL + Treatment Gap - Highest Urgency</div>
+      <div class="q-text">Tamara Johnson's accident date was March 15, 2024. Georgia's 2-year SOL means the filing deadline is March 15, 2026. Today is January 22, 2026 - 52 days until SOL. CasePeer shows a 19-day treatment gap and Tamara has been unreachable for 11 days. Why does the SOL proximity change the urgency - and what action does that require?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q20','a',true)" id="q20-a"><span class="opt-letter">A</span><span class="opt-text">A treatment gap + unreachability within 52 days of SOL is the highest-urgency combination; escalate to the attorney immediately without waiting for Day 14 - if Tamara cannot be reached, the attorney may need to file a protective complaint before the deadline regardless of treatment status</span></button>
+        <button class="option-btn" onclick="answer('q20','b',false)" id="q20-b"><span class="opt-letter">B</span><span class="opt-text">SOL proximity doesn't change the monitoring protocol - the 14-day rule applies regardless of how close the filing deadline is</span></button>
+        <button class="option-btn" onclick="answer('q20','c',false)" id="q20-c"><span class="opt-letter">C</span><span class="opt-text">Contact Tamara directly, explain the SOL deadline in plain terms, and instruct her to resume treatment immediately before escalating to the attorney</span></button>
+        <button class="option-btn" onclick="answer('q20','d',false)" id="q20-d"><span class="opt-letter">D</span><span class="opt-text">SOL monitoring is the attorney's responsibility - the CM escalates only for treatment compliance issues and should not reference litigation deadlines in client communications — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage</span></button>
+      </div>
+      <div class="feedback-box" id="q20-fb"></div>
+    </div>
+
+    <div class="section-score" id="s5-score" style="display:none;"><div class="score-display" id="s5-score-val"></div><div class="score-label">Section 6 Score</div></div>
+    <div class="btn-group" id="s5-next"><button class="btn btn-primary btn-block" onclick="goToSection(6)">Next: Boss Challenge - The Camille Reyes Case &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 6 - BOSS CHALLENGE
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-6">
+  <div class="section-header">
+    <div class="section-num">Section 7 · Boss Challenge · Up to 50 Bonus Points</div>
+    <h2>The Camille Reyes Case</h2>
+    <div class="section-subhead">All five content sections converge. Real file pressure. One chance to demonstrate mastery.</div>
+  </div>
+  <div class="section-body">
+
+    <div class="boss-header">
+      <div class="boss-icon">📋</div>
+      <h3>BOSS CHALLENGE - GLG-2026-1587</h3>
+      <p>Five tasks. Five sections of the module applied simultaneously under realistic case pressure. Each correct answer earns 10 bonus points. Bonus points do not affect the pass gate - but they do appear on your certificate.</p>
+    </div>
+
+    <div class="case-file">
+      <div class="case-file-header">
+        <div class="case-file-icon">📁</div>
+        <div>
+          <div class="case-file-title">Camille Reyes - GLG-2026-1587</div>
+          <div class="case-file-sub">Fulton County · At-Fault Carrier: GEICO · Liability: Clear</div>
+        </div>
+      </div>
+      <div class="case-detail"><span class="case-key">Client</span><span class="case-val">Camille Reyes, age 34</span></div>
+      <div class="case-detail"><span class="case-key">Incident</span><span class="case-val">Rear-ended at a red light - clear liability, dash cam footage obtained</span></div>
+      <div class="case-detail"><span class="case-key">Active Providers</span><span class="case-val">Atlanta Physical Therapy (2x/week × 8 weeks = 16 planned sessions) · Emory Spine &amp; Orthopedics (monthly evaluation, 3 planned visits)</span></div>
+      <div class="case-detail"><span class="case-key">Treatment Status</span><span class="case-val">Atlanta PT: <strong>9 of 16 sessions</strong> completed <span class="flag">7 BEHIND PLAN</span> · Emory Spine: 2 of 3 on schedule</span></div>
+      <div class="case-detail"><span class="case-key">Last CM Contact</span><span class="case-val">11 days ago <span class="flag-warn">APPROACHING 14-DAY THRESHOLD</span></span></div>
+      <div class="case-detail"><span class="case-key">Last Provider Note</span><span class="case-val">Atlanta PT, 8 days ago: "Patient reports feeling 80% recovered; may consider discharge if improvement continues"</span></div>
+      <div class="case-detail"><span class="case-key">Client's Last Statement</span><span class="case-val">"I think I'm almost done - I feel pretty good." (said on last check-in call, 11 days ago)</span></div>
+      <div class="case-detail"><span class="case-key">Specials (to date)</span><span class="case-val">$31,400 total · ER: $8,200 · Atlanta PT: $16,400 · Emory Spine: $6,800</span></div>
+      <div class="case-detail"><span class="case-key">SOL</span><span class="case-val">19 months remaining</span></div>
+    </div>
+
+    <!-- BOSS TASK 1 -->
+    <div class="question-block" id="q21-block">
+      <div class="q-num">Boss Task 1 of 5 &middot; 10 Bonus pts &middot; Status Assessment &amp; Next Action</div>
+      <div class="q-text">Based on the CasePeer data above, what is the correct treatment status assessment for Camille's case - and what is the immediate next action?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q21','a',true)" id="q21-a"><span class="opt-letter">A</span><span class="opt-text">This case needs same-day attention - last contact 11 days ago is approaching the 14-day threshold, Atlanta PT is 7 sessions behind plan, and the provider's note signals early discontinuation risk; contact Camille TODAY - do not wait until Day 14</span></button>
+        <button class="option-btn" onclick="answer('q21','b',false)" id="q21-b"><span class="opt-letter">B</span><span class="opt-text">No urgent concern - 9 sessions of 16 is normal variation; wait until Day 14 before reaching out</span></button>
+        <button class="option-btn" onclick="answer('q21','c',false)" id="q21-c"><span class="opt-letter">C</span><span class="opt-text">Immediate escalation required - 7 missed sessions is a major compliance failure; escalate to the attorney immediately without attempting client contact first, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
+        <button class="option-btn" onclick="answer('q21','d',false)" id="q21-d"><span class="opt-letter">D</span><span class="opt-text">No compliance issue - Camille said she feels "pretty good," which indicates treatment is working; no action needed</span></button>
+      </div>
+      <div class="feedback-box" id="q21-fb"></div>
+    </div>
+
+    <!-- BOSS TASK 2 -->
+    <div class="question-block" id="q22-block">
+      <div class="q-num">Boss Task 2 of 5 &middot; 10 Bonus pts &middot; The Treatment Conversation</div>
+      <div class="q-text">You reach Camille. She says: "Honestly, I feel like 90% better. My PT mentioned I might be able to stop soon. I'm thinking about canceling my next three sessions." Which response best handles this situation?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q22','a',true)" id="q22-a"><span class="opt-letter">A</span><span class="opt-text">"Camille, I'm really glad to hear you're feeling better - that's exactly what treatment is supposed to do. My concern is that stopping before your doctor officially discharges you can give the defense a way to argue your injury was minor. Could we check with your PT first about where you are in the plan before making any changes?"</span></button>
+        <button class="option-btn" onclick="answer('q22','b',false)" id="q22-b"><span class="opt-letter">B</span><span class="opt-text">"Camille, you cannot stop treatment right now - the insurance company will definitely use that against you and it will hurt your case value significantly." — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value</span></button>
+        <button class="option-btn" onclick="answer('q22','c',false)" id="q22-c"><span class="opt-letter">C</span><span class="opt-text">"If your PT thinks you can stop, that's completely fine - just let me know when you get the discharge note so I can update your file."</span></button>
+        <button class="option-btn" onclick="answer('q22','d',false)" id="q22-d"><span class="opt-letter">D</span><span class="opt-text">"I'll let the attorney know you're feeling better and see what they think about wrapping up treatment early."</span></button>
+      </div>
+      <div class="feedback-box" id="q22-fb"></div>
+    </div>
+
+    <!-- BOSS TASK 3 -->
+    <div class="question-block" id="q23-block">
+      <div class="q-num">Boss Task 3 of 5 &middot; 10 Bonus pts &middot; CasePeer Documentation</div>
+      <div class="q-text">After the call, Camille agrees to keep her next two appointments and discuss discharge with her PT. You document the call in CasePeer. Which entry correctly follows GLG's standardized treatment note format?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q23','a',false)" id="q23-a"><span class="opt-letter">A</span><span class="opt-text">"Called Camille - treating, feeling better, agreed to keep next 2 appointments."</span></button>
+        <button class="option-btn" onclick="answer('q23','b',false)" id="q23-b"><span class="opt-letter">B</span><span class="opt-text">"Client contact 7/7/2026. Compliance concern noted. Client feeling better. Agreed to continue. Follow-up July 17."</span></button>
+        <button class="option-btn" onclick="answer('q23','c',false)" id="q23-c"><span class="opt-letter">C</span><span class="opt-text">"Camille - 11 days since last contact. Called, she's feeling 90% better. Agreed to keep appointments. Compliance concern resolved. Check July 17."</span></button>
+        <button class="option-btn" onclick="answer('q23','d',true)" id="q23-d"><span class="opt-letter">D</span><span class="opt-text">"TREATMENT UPDATE [7/7/2026 3:42 PM] - Contact: phone call. Provider status: Atlanta PT (9/16 sessions, 7 behind plan - compliance concern); Emory Spine (2/3, on schedule). Client statement: '90% better; PT suggested possible early discharge.' CM response: explained early-discharge gap risk; client agreed to keep next 2 appts and discuss discharge with PT. Assessment: behind schedule on PT, early-discharge risk remains. Monitor: PT provider note re: discharge recommendation. Next contact due: 7/17/2026."</span></button>
+      </div>
+      <div class="feedback-box" id="q23-fb"></div>
+    </div>
+
+    <!-- BOSS TASK 4 -->
+    <div class="question-block" id="q24-block">
+      <div class="q-num">Boss Task 4 of 5 &middot; 10 Bonus pts &middot; Escalation Decision</div>
+      <div class="q-text">Five days later (7/12/2026): Camille texts: "Hey, I canceled my PT - the doctor said I was fine." CasePeer: last treatment (Atlanta PT): 7/3/2026 (9 days ago); client-initiated discharge, no formal MD discharge note on file; Emory Spine appointment (7/15) still scheduled. What does the CM do immediately?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q24','a',true)" id="q24-a"><span class="opt-letter">A</span><span class="opt-text">Escalate to the supervising attorney immediately with an escalation memo: client self-discharged from PT without formal MD discharge note, 9-day gap from last treatment, no documented medical sign-off, $31,400 in specials at risk; recommend attorney call to discuss whether Emory Spine (7/15) can document functional status and bridge the treatment record</span></button>
+        <button class="option-btn" onclick="answer('q24','b',false)" id="q24-b"><span class="opt-letter">B</span><span class="opt-text">Update case notes to show PT is complete — Camille has been discharged from PT; monitoring is now just Emory Spine</span></button>
+        <button class="option-btn" onclick="answer('q24','c',false)" id="q24-c"><span class="opt-letter">C</span><span class="opt-text">Call Camille and try to convince her to restart PT; only escalate to the attorney if she refuses after two attempts</span></button>
+        <button class="option-btn" onclick="answer('q24','d',false)" id="q24-d"><span class="opt-letter">D</span><span class="opt-text">Log the text, note the PT discharge in CasePeer, and continue monitoring Emory Spine for the remainder of the treatment phase</span></button>
+      </div>
+      <div class="feedback-box" id="q24-fb"></div>
+    </div>
+
+    <!-- BOSS TASK 5 -->
+    <div class="question-block" id="q25-block">
+      <div class="q-num">Boss Task 5 of 5 &middot; 10 Bonus pts &middot; Treatment Phase Close &amp; Handoff</div>
+      <div class="q-text">The attorney calls Camille. Emory Spine sees her on 7/15 and issues a formal discharge note documenting functional status and pain resolution. The attorney says: "Treatment phase is complete - get the record documented and flag for demand prep." What is the complete set of CM actions to close the treatment phase?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q25','a',true)" id="q25-a"><span class="opt-letter">A</span><span class="opt-text">Log post-escalation actions with timestamps: attorney call outcome, Emory Spine final visit and discharge note received (7/15); update case notes documenting treatment phase complete; confirm all provider records are collected (Atlanta PT: 9 sessions, client-initiated discharge; Emory Spine: formal discharge note 7/15); flag in CasePeer for demand prep; note that Atlanta PT discharge was client-initiated - this should be addressed in demand narrative; verify no outstanding records before handoff</span></button>
+        <button class="option-btn" onclick="answer('q25','b',false)" id="q25-b"><span class="opt-letter">B</span><span class="opt-text">Log the attorney call, add a case note "Treatment complete - demand phase next," and move on to the next case</span></button>
+        <button class="option-btn" onclick="answer('q25','c',false)" id="q25-c"><span class="opt-letter">C</span><span class="opt-text">Call Camille to confirm the Emory Spine appointment went well, then wait for the discharge note to arrive before updating CasePeer</span></button>
+        <button class="option-btn" onclick="answer('q25','d',false)" id="q25-d"><span class="opt-letter">D</span><span class="opt-text">Update CasePeer to Demand Pending and hand off to the demand team - they will pull provider records and review the treatment narrative as part of their process</span></button>
+      </div>
+      <div class="feedback-box" id="q25-fb"></div>
+    </div>
+
+    <div class="section-score" id="s6-score" style="display:none;"><div class="score-display" id="s6-score-val"></div><div class="score-label">Boss Challenge Bonus Points</div></div>
+    <div class="btn-group" id="s6-next"><button class="btn btn-primary btn-block" onclick="showResults()">See Results &amp; Score &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 7 - RESULTS
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-7">
+  <div id="results-header-wrap"></div>
+  <div class="section-body">
+    <div id="results-body"></div>
+    <div id="badgeContainer" class="achievement-grid"></div>
+    <div style="margin-top:12px;">
+      <div style="font-weight:700;color:#141c2c;margin-bottom:8px;display:flex;align-items:center;gap:8px;"><span id="reviewCounter">Reviewing questions...</span></div>
+      <div class="review-list" id="reviewList"></div>
+    </div>
+    <div id="score-submit-form" style="display:none;margin-top:24px;">
+      <div class="name-input-wrap">
+        <label for="trainee-name-input">Your Name (for certificate)</label>
+        <input type="text" id="trainee-name-input" class="name-input" placeholder="Enter your full name" autocomplete="name">
+      </div>
+      <button class="btn btn-primary btn-block" onclick="submitScoreAndBuildCert()">Submit Score &amp; Get Certificate →</button>
+    </div>
+    <div class="score-confirm" id="score-confirmation"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 8 - FEEDBACK & CERTIFICATE
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-8">
+  <div class="section-header">
+    <div class="section-num">Section 9 · Feedback &amp; Certificate</div>
+    <h2>Module Feedback &amp; Completion Certificate</h2>
+    <div class="section-subhead">Your feedback makes the next version better for every person after you.</div>
+  </div>
+  <div class="section-body">
+
+    <div id="cert-content" style="display:none;">
+      <div class="cert-wrap">
+        <div class="cert-firm">Gunn Law Group · Legal Assistant Training</div>
+        <div class="cert-title">Certificate of Completion</div>
+        <div class="cert-subtitle">CM Track - Module 1</div>
+        <div class="cert-presents">This certifies that</div>
+        <div class="cert-name" id="certNameDisplay">Training Participant</div>
+        <div class="cert-for">has successfully completed</div>
+        <div class="cert-module">CM-1 - Treatment Monitoring &amp; Compliance</div>
+        <div class="cert-score" id="certScore"></div>
+        <div class="cert-meta" id="certMeta"></div>
+        <span class="cert-seal">⚖️</span>
+        <div class="cert-signature">
+          <div class="cert-sig-line"></div>
+          <div class="cert-sig-name">H. Gunn</div>
+          <div class="cert-sig-title">Managing Attorney · Gunn Law Group</div>
+        </div>
+        <div class="cert-badges" id="certBadges"></div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:24px;">
+      <h4 style="color:#141c2c;font-weight:700;margin-bottom:14px;">Quick Feedback (Optional)</h4>
+      <div class="fb-question">
+        <label>How clear was the content in this module? (1 = confusing, 5 = crystal clear)</label>
+        <select id="fb-clarity">
+          <option value="">Select...</option>
+          <option>1 - Very confusing</option>
+          <option>2 - Somewhat confusing</option>
+          <option>3 - Neutral</option>
+          <option>4 - Mostly clear</option>
+          <option>5 - Crystal clear</option>
+        </select>
+      </div>
+      <div class="fb-question">
+        <label>How difficult was this module? (1 = too easy, 5 = too hard)</label>
+        <select id="fb-difficulty">
+          <option value="">Select...</option>
+          <option>1 - Too easy</option>
+          <option>2 - Somewhat easy</option>
+          <option>3 - Just right</option>
+          <option>4 - Somewhat hard</option>
+          <option>5 - Too hard</option>
+        </select>
+      </div>
+      <div class="fb-question">
+        <label>Did this feel like real GLG treatment monitoring work?</label>
+        <select id="fb-realistic">
+          <option value="">Select...</option>
+          <option>Yes - exactly what we deal with</option>
+          <option>Mostly - some scenarios were realistic</option>
+          <option>Partially - some felt artificial</option>
+          <option>No - most scenarios felt generic</option>
+        </select>
+      </div>
+      <div class="fb-question">
+        <label>One thing you'd change about this module:</label>
+        <textarea id="fb-suggestions" placeholder="Optional - your feedback shapes the next revision"></textarea>
+      </div>
+    </div>
+
+    <div style="background:#f0f4f8;border-radius:12px;padding:18px;margin-bottom:20px;">
+      <h4 style="color:#141c2c;font-weight:700;margin-bottom:12px;">📝 Reflection Prompt</h4>
+      <p style="font-size:14px;color:#444;line-height:1.7;font-style:italic;">"Think about a client on your caseload right now who you haven't spoken to in 8 or more days. What is their treatment status? What do you actually know versus what you assume? What would you say to them if you called right now - and what would you say if they told you they've been thinking about stopping treatment because they feel better? Write out the call. Then go make it."</p>
+    </div>
+
+    <div class="score-confirm" id="score-confirmation" style="display:none;"></div>
+
+    <div class="btn-group">
+      <button class="btn btn-secondary btn-block" onclick="goToSection(0)">Back to Start</button>
+      <button class="btn btn-secondary btn-block" onclick="restartQuiz()">Retake Module</button>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+// ═══════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════
+var currentSection = 0;
+var baseScore = 0;
+var bonusPoints = 0;
+var qDone = {};
+var firstAttemptStillAvailable = {};
+var sectionScores = {};
+var streakCount = 0;
+var maxStreak = 0;
+var questionsFirstTry = 0;
+var incorrectCount = 0;
+var totalQuestionsAnswered = 0;
+var milestonesTriggered = {};
+var moduleStartTime = Date.now();
+var audioCtx = null;
+var soundEnabled = false;
+var _audioKeepalive = null;
+
+var TRACKER_URL = 'https://script.google.com/macros/s/AKfycbzHJZ0C3BqnLatfq7RIiUP5KQdgYoXTJlozd8ZGZiwIf2bdVmvnPMo3JLm0dA5gQhJyxA/exec';
+var TOTAL_SECTIONS = 9;
+var PASS_THRESHOLD = 160; // 80% of 200 - Harrell ruling Jul 6
+var BASE_MAX = 200;
+
+// ═══════════════════════════════════════════════
+// QUESTION CONFIG
+// Sections 1-5 = base pts (10 each); Section 6 = boss bonus only
+// ═══════════════════════════════════════════════
+var Q_CONFIG = {
+  'q1':  {section:1, pts:10, isBonus:false, correct:'c'},
+  'q2':  {section:1, pts:10, isBonus:false, correct:'b'},
+  'q3':  {section:1, pts:10, isBonus:false, correct:'c'},
+  'q4':  {section:1, pts:10, isBonus:false, correct:'b'},
+  'q5':  {section:2, pts:10, isBonus:false, correct:'b'},
+  'q6':  {section:2, pts:10, isBonus:false, correct:'d'},
+  'q7':  {section:2, pts:10, isBonus:false, correct:'c'},
+  'q8':  {section:2, pts:10, isBonus:false, correct:'c'},
+  'q9':  {section:3, pts:10, isBonus:false, correct:'b'},
+  'q10': {section:3, pts:10, isBonus:false, correct:'b'},
+  'q11': {section:3, pts:10, isBonus:false, correct:'d'},
+  'q12': {section:3, pts:10, isBonus:false, correct:'b'},
+  'q13': {section:4, pts:10, isBonus:false, correct:'a'},
+  'q14': {section:4, pts:10, isBonus:false, correct:'c'},
+  'q15': {section:4, pts:10, isBonus:false, correct:'d'},
+  'q16': {section:4, pts:10, isBonus:false, correct:'c'},
+  'q17': {section:5, pts:10, isBonus:false, correct:'d'},
+  'q18': {section:5, pts:10, isBonus:false, correct:'a'},
+  'q19': {section:5, pts:10, isBonus:false, correct:'d'},
+  'q20': {section:5, pts:10, isBonus:false, correct:'a'},
+  'q21': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'a'},
+  'q22': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'a'},
+  'q23': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'d'},
+  'q24': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'a'},
+  'q25': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'a'}
+};
+
+// Section questions map (all questions including bonus, for completion detection)
+var SECTION_QUESTIONS = {
+  1: ['q1','q2','q3','q4'],
+  2: ['q5','q6','q7','q8'],
+  3: ['q9','q10','q11','q12'],
+  4: ['q13','q14','q15','q16'],
+  5: ['q17','q18','q19','q20'],
+  6: ['q21','q22','q23','q24','q25']
+};
+
+// ═══════════════════════════════════════════════
+// FEEDBACK TEXT
+// ═══════════════════════════════════════════════
+var FEEDBACK = {
+  'q1': {
+    t: `✅ Treatment gaps destroy case value through a simple mechanism: the defense points to the gap as evidence that the client recovered. "If you were really hurt, you would have kept going to treatment." That 21-day gap becomes the defense narrative - and adjusters are trained to price it in. Client A's consistent record signals a serious injury. Client B's gap signals healing, reducing the adjuster's perceived liability. The gap doesn't reduce medical bills - it destroys the credibility of the injury claim. Every dollar lost by Client B was the CM's responsibility to prevent.`,
+
+    f: `❌ The gap's damage is not about bills - it is about narrative. Option A confuses cause and effect: fewer bills are a symptom, not the cause of the lower offer. Option B incorrectly invokes pre-existing conditions - there were none here. Option D misidentifies where the error happened. The gap gave the defense a weapon: "If you were really hurt, you would have kept going." That narrative, not the bill total, drove the $24,000 difference.`
+
+  },
+  'q2': {
+    t: `✅ The deposition question is a trap designed to produce an admission: "Yes, it felt better during the gap." Once the client makes that admission, the defense argues: the injury was healing naturally, treatment was not medically necessary, and the claimed damages are overstated. This is the defense playbook for treatment gaps - and it works because the client is telling the truth. They DID feel somewhat better. Without a CM who prevented the gap, the client's honest answer becomes the evidence that reduces their recovery.`,
+
+    f: `❌ The deposition question targets the gap to extract an admission of pain improvement - not to establish pre-existing conditions (Option A), unlicensed treatment (Option C), or provider discharge (Option D). The defense wants the client on record saying "yes, it felt somewhat better" - then argues that confirms the injury was healing naturally during the gap, making the ongoing treatment claims questionable. This is why the CM's job is to prevent the gap from ever existing.`
+
+  },
+  'q3': {
+    t: `✅ Under Georgia's modified comparative fault rule, any percentage of fault attributed to the client reduces recovery proportionally - and at 50% or more, recovery is completely barred. Treatment non-compliance fits into this framework as "failure to mitigate damages": if the client failed to follow their prescribed treatment plan and that failure worsened their outcome, the defense argues the client shares fault for those additional damages. Even small percentages of comparative fault (10%, 15%) can reduce a settlement by thousands of dollars. This is why treatment monitoring is a legal risk management function, not just a client service task.`,
+
+    f: `❌ Georgia's modified comparative fault rule allows treatment gaps to be used as comparative fault arguments - the threshold is not about gap length (Option D) or specific categories of evidence (Option A). At 50% or more client fault, recovery is zero. Below 50%, recovery is reduced proportionally by the percentage attributed to the client. Option B invents a 25% "cut" threshold that doesn't exist in the statute. The correct answer is C: any percentage of fault reduces recovery proportionally, and 50%+ bars it entirely.`
+
+  },
+  'q4': {
+    t: `✅ The 14-day rule is set at exactly 14 days because that is the threshold at which insurance adjusters and defense attorneys typically begin arguing the injury has healed. A gap of 14+ days in treatment records becomes: "The client must have been feeling better - they stopped going for two weeks." The CM's job is to make sure this gap never forms by reaching out within the 14-day window. Proactive contact is not just good service - it is active gap prevention. The 14-day rule is calibrated to stay one step ahead of the defense argument.`,
+
+    f: `❌ The 14-day rule exists because 14 days is the insurance industry threshold for arguing recovery. Options A (SOL clock), C (billing cycle), and D (HIPAA) all describe real things that happen in PI case management - but none of them is the origin or purpose of the 14-day contact rule. The rule is a defense argument prevention mechanism: if the CM reaches out within 14 days, no gap ever forms in the treatment record that the adjuster can point to as evidence of healing.`
+
+  },
+  'q5': {
+    t: `✅ The daily monitoring system runs on the 14-day gap prevention principle. Filtering by last contact date and flagging cases where contact is 10 days or older gives the CM a 4-day buffer before the critical 14-day threshold. This is proactive monitoring - catching cases before they become problems, not after. Option A (alphabetical rotation) ignores urgency entirely. Option C (legal milestone triggers) misunderstands treatment monitoring as a reactive task. Option D (group text) creates a compliance appearance without actual monitoring - one message cannot confirm each client's treatment status.`,
+
+    f: `❌ The correct approach filters by urgency (last contact date), not alphabetically, not by legal deadlines, and not by group messages. Option A ignores urgency. Option C turns treatment monitoring into a reactive task tied to legal milestones - but treatment gaps don't wait for demand deadlines. Option D violates GLG's per-client documentation standard: a group text cannot show that each client's specific treatment status was verified. The 14-day window requires individual, documented contact for every active treatment case.`
+
+  },
+  'q6': {
+    t: `✅ Treatment data at GLG lives in three places in CasePeer: (1) <strong>Medical records on file</strong> - provider visit documentation showing actual visit dates and treatment progress; (2) <strong>Case notes</strong> - the CM's treatment update logs from every check-in call, documenting last visit date, next appointment, client-reported status, and any compliance concerns; and (3) <strong>Injuries section</strong> - injury details, treating providers, and provider specialties. There is no automated dashboard or color-coded flag system - the CM's daily workflow is to review case notes, sort by last contact date, and prioritize cases approaching the 14-day threshold for outreach.`,
+
+    f: `❌ Treatment data lives in medical records (provider visit docs), case notes (CM treatment update logs), and the Injuries section (provider details). The Case Timeline (Option A) tracks case milestones, not individual treatment visits. There is no built-in compliance dashboard (Option B) - CMs monitor treatment by reviewing their own case notes and pulling reports manually. Billing records (Option C) track financial data, not treatment compliance. Knowing where to look is the foundation of effective treatment monitoring.`
+
+  },
+  'q7': {
+    t: `✅ 11 of 18 planned sessions = 7 missed sessions against a specific ordered treatment plan. This is not normal variation - it is a 39% compliance gap against a physician's order. This is urgent because the gap between expected and actual has crossed from "a few behind" into "significantly off plan." Waiting until Week 10 (Option B) would allow the gap to widen further and push the case closer to the 14-day danger zone without intervention. Contacting the PT office (Option D) skips the client entirely - the CM's first obligation is to understand why the client is missing appointments, which requires talking to the client.`,
+
+    f: `❌ 7 missed sessions against an 18-session treatment plan is a serious compliance gap - not normal variation (Option A). Option B's "wait until Week 10" approach allows the gap to deepen and risks crossing the 14-day threshold without the CM having any documentation of outreach. Option D (contacting the PT office) skips the client and assumes the problem is administrative rather than behavioral. The correct action: treat it as urgent, contact the client TODAY to understand the barrier, and document the call immediately.`
+
+  },
+  'q8': {
+    t: `✅ Every treatment check-in call must be fully documented - even positive, brief ones. Why? Because Rosa's statement that she's feeling "a lot better" and thinks she'll be done in "another month" is clinically significant: it signals early discharge risk. If Rosa stops treatment before a formal medical discharge, the defense will point to her own statement as evidence she felt recovered. That statement in CasePeer case notes, with context about why continuing is important, protects the case. The monitor note about early-completion risk is not optional - it is forward-thinking documentation.`,
+
+    f: `❌ A "positive and brief" call requires exactly the same documentation standard as a problem call. Option A omits client statements entirely - those statements can affect case value months later. Option B is incomplete: missing Rosa's clinical statement about improvement and the forward-looking monitor note about early-discharge risk. Option D gets the standard completely backwards: the times that seem least urgent are often when the most critical information surfaces (like a client who says "I think I'm almost done").`
+
+  },
+  'q9': {
+    t: `✅ Option B opens with empathy and a genuine question about how Marcus is doing - "Is the treatment helping at all?" - before asking about compliance. This creates a moment of human connection that makes the rest of the call easier. Option A opens with compliance verification ("are you still going?") which signals the CM sees Marcus primarily as a case file to check, not a person to care for. Option C opens with a demand for confirmation that would make anyone defensive. Option D frames the call purely as an administrative update, which is technically accurate but misses the relationship dimension that keeps clients engaged.`,
+
+    f: `❌ Opening with empathy ("how are you feeling?") is the technique that creates the environment where clients share honest information. Option A opens with compliance interrogation - clients who feel interrogated give minimal answers. Option C leads with a demand for session verification, which would make almost anyone defensive. Option D is purely administrative - it will get the CM the data but miss any emotional context (pain level, treatment concerns, life barriers) that affects compliance. The check-in call accomplishes two things: relationship maintenance AND information gathering. Start with relationship.`
+
+  },
+  'q10': {
+    t: `✅ "What's been making it hard to get to your appointments lately?" is a calibrated question - open-ended, curious, non-accusatory, and designed to surface the real barrier. It assumes difficulty rather than negligence, which makes the client feel understood rather than judged. Once the real barrier is identified (transportation? childcare? cost? feeling better?), the CM can address it specifically. Option A leads with consequences, which provokes defensiveness. Option C is an accusation. Option D is a threat that will damage the client relationship without solving anything.`,
+
+    f: `❌ Calibrated questions diagnose before prescribing. Option A (consequences warning) closes the conversation - clients who feel threatened become defensive or stop answering calls. Option C is an accusation that will make the client feel judged and less likely to be honest going forward. Option D escalates immediately to a threat, which damages the relationship and skips the diagnostic step entirely. The CM doesn't yet know WHY the client missed appointments - leading with consequences assumes the worst. Ask first: "What's been making it hard?" Diagnose before prescribing.`
+
+  },
+  'q11': {
+    t: `✅ Option D is the complete response because it does four things: (1) validates the good news ("I'm really glad the treatment is working"), (2) explains the specific risk without being alarmist ("stopping before official discharge gives the defense a way to argue the injury was minor"), (3) proposes a concrete bridge ("even a few more sessions to reach formal discharge"), and (4) invites the client into the solution by asking about their doctor's view. This is "diagnose before prescribe" in action - the CM acknowledges where the client is, explains the consequence in the client's interest (not the firm's), and collaborates on next steps.`,
+
+    f: `❌ Option A ("that's great!") defers to the attorney without giving the client the information they need right now to make a good decision. Option B invokes the insurance company's requirements as if those are the client's problem - the client's problem is their case value and recovery. Option C ("you must complete the full plan") is a directive without explanation, which is likely to provoke resistance from a client who's already feeling 90% better. Option D is the only response that validates the improvement, explains the gap risk in the client's own interest, and invites collaboration rather than demanding compliance.`
+
+  },
+  'q12': {
+    t: `✅ "Last time we spoke, you mentioned Tuesday and Thursday - sounds like Tuesday went well! What happened with Thursday?" This technique does three things: (1) references the prior commitment the client made, which activates the consistency principle (people who stated a commitment are more likely to follow through when reminded of it); (2) acknowledges the positive (Tuesday went well) to avoid starting defensively; and (3) invites the client to explain Thursday without accusation. The client is more likely to give an honest answer and more likely to commit to the next appointment when this approach is used.`,
+
+    f: `❌ Option A is an accusation that will provoke defensiveness or silence. Option C invokes the attorney as a threat, which changes the dynamic from collaborative to adversarial. Option D references billing records, which signals the CM is tracking the client like a compliance audit rather than supporting them as a person - this erodes trust. The correct approach (Option B) uses the prior stated commitment as a gentle reminder, acknowledges the positive, and opens the door to explanation without blame. This is commitment/consistency at work: people who made a commitment and are reminded of it tend to re-engage.`
+
+  },
+  'q13': {
+    t: `✅ Medical records on file are your primary source - they show actual visit dates documented by the provider. Case notes are your secondary source - every treatment update call should be logged there with the last visit date, next appointment, and client-reported status. Together, these two sources give you the answer in under a minute. The Case Timeline (Option B) tracks case events, not treatment visits. Telling the attorney the info isn't available (Option C) is wrong if you haven't checked case notes - your own treatment update logs should have the date even before records are uploaded. Searching email (Option D) is unreliable and not part of the documented workflow.`,
+
+    f: `❌ Check medical records first, then case notes - that is the two-step method. Medical records show provider-documented visit dates; case notes show your treatment update logs from check-in calls. Between these two sources, you should always be able to answer the attorney's question. The Case Timeline tracks case milestones, not individual treatment visits. And searching email is never the right answer - if treatment data only lives in email, it hasn't been properly documented in CasePeer.`
+
+  },
+  'q14': {
+    t: `✅ Each provider should be tracked separately in your CasePeer case notes because each provider has different appointment frequency, different specialties, and different compliance status. A client can be current with their orthopedic specialist but weeks behind with their physical therapist - and those are two different monitoring actions. Logging only the primary provider (Option A) creates invisible gaps for secondary providers. Combining them in one notes field (Option B) makes monitoring impossible because you can't quickly see which provider is behind. Tracking only the most recent visit (Option D) loses the per-provider compliance picture entirely.`,
+
+    f: `❌ Multi-provider cases require per-provider tracking in separate case note entries - each with specialty, last visit, and frequency. Option A's informal tracking for secondary providers creates invisible gaps (PT compliance won't show up in your monitoring). Option B combines them into an unstructured notes field, which makes it impossible to see per-provider status at a glance. Option D logs only the most recent visit regardless of which provider - which would make this client look current if Emory Spine was visited recently, even if PT has a 3-week gap. Each provider's compliance must be independently visible and trackable.`
+
+  },
+  'q15': {
+    t: `✅ The GLG standardized treatment note format starts with "TREATMENT UPDATE [date time]" as the header, then captures: contact type, last visit date and provider, next scheduled appointment, client-reported status (with clinical language preserved), CM assessment, and next contact due date. The reason for this exact format: any team member picking up this file should be able to read the note and know immediately where treatment stands, what the client said, and when the next touchpoint is - without reading any other part of the file. Option B does all of this. Options A, C, and D all sacrifice specificity for brevity, which creates ambiguity that can hurt the case later.`,
+
+    f: `❌ "Called Sofia - she's going to chiro and has an appt next week" (Option A) leaves out the last visit date, the exact next appointment, the client's clinical statement (pain on left lateral rotation), the CM assessment, and the next contact due date. Option C ("Treatment confirmed") records nothing useful at all. Option D omits the clinical statement entirely and omits dates. The standardized format exists because a defense attorney reviewing this file will see every note - vague notes suggest vague monitoring. Specific, timestamped notes document the firm's diligence.`
+
+  },
+  'q16': {
+    t: `✅ The CM prepares for the weekly case review by pulling CasePeer reports to see all active cases with last contact dates and days since last treatment. Then the CM cross-references with their own case notes - especially for cases approaching or past the 14-day threshold, and any where sessions are behind the prescribed plan. The attorney expects the CM to walk into the meeting already knowing which cases need attention. Option A (send a list for the attorney to call) pushes the CM's responsibility onto the attorney. Option B (only problem cases) misses cases that look fine but are silently approaching the 14-day threshold. Option D (let the attorney dig through CasePeer live) wastes meeting time and shows the CM isn't monitoring proactively.`,
+
+    f: `❌ Case review prep is the CM's responsibility, not the attorney's. Option A pushes the work onto the attorney by sending a phone list. Option B limits review to problem calls from the past week - but a case can be approaching the 14-day threshold without a single problem call if the CM simply hasn't reached out. Option D puts the attorney in the position of discovering issues live during the meeting, which means the CM isn't doing their job. The correct approach: pull CasePeer reports, review case notes, identify every case that needs attention, and walk in prepared.`
+
+  },
+  'q17': {
+    t: `✅ The escalation was overdue - it should have happened at Day 14. The 14-day threshold is the escalation trigger, and by Day 15 the CM should have escalated without delay. Waiting until Day 16 to act means the firm lost two days of attorney intervention time. The question is now about doing the right thing immediately: escalate to the supervising attorney with a documented summary of every contact attempt. Option A ("escalate now" because 16 > 14) is technically closer to correct but still frames it as if 16 days is when escalation first becomes appropriate - it isn't. The window closed at Day 14.`,
+
+    f: `❌ Option A is directionally correct but frames the escalation as if Day 16 is the trigger. It isn't - Day 14 was. Option B (wait until 21 days) would make this a critical case management failure; 21 days without escalation is indefensible. Option D (escalate only when treatment is confirmed terminated) misunderstands the escalation trigger - the trigger is client unreachability for 14+ days, not confirmed treatment termination. The earlier the escalation, the more options the attorney has. By Day 16, two days of intervention time have already been lost.`
+
+  },
+  'q18': {
+    t: `✅ A complete escalation memo gives the attorney everything in one place: client name and case number, last treatment date (with how long ago), last CM contact and method, every subsequent contact attempt with date/method/outcome, client's stated reason (if known), specials amount, SOL status, and CM recommendation. Option B does all of this in a structured, scannable format. The attorney should be able to read it once and know exactly what happened, what was tried, and what the CM recommends - no CasePeer search required. Option A ("he's at-risk, what do you want to do?") puts the work on the attorney. Options C and D are abbreviated to the point of uselessness.`,
+
+    f: `❌ "Derek hasn't responded in 16 days - what do you want to do?" (Option A) does not give the attorney the information they need to make a decision. Option C references CasePeer notes instead of including the information - the attorney should not have to search. Option D omits the contact attempt log, the specials amount, and the SOL context, all of which affect what action the attorney takes. The escalation memo is a decision-support document, not a notification. Give the attorney everything; make the path to decision as short as possible.`
+
+  },
+  'q19': {
+    t: `✅ Post-escalation documentation has a higher standard than routine monitoring - because the escalation happened for a reason and the outcome must be tracked. The log must include: attorney call date and outcome (re-engaged Derek), what the attorney recommended (resume treatment), next CM contact date (two weeks as instructed), and the critical point: Derek remains a compliance concern until documented treatment actually resumes - not until the attorney says "I handled it." A verbal agreement to go back does not close the gap. Only when CasePeer shows a new documented visit does the compliance concern resolve.`,
+
+    f: `❌ Option B ("no documentation needed") misunderstands the CM's role: the attorney handled the direct client contact, but the CM owns the documentation of what happened. Option A partially right: logging the attorney's call and resetting the clock - but it closes the concern immediately and doesn't note what the attorney recommended. Option D sends a text and logs it as the new baseline - a text is not treatment. The compliance concern doesn't resolve until documented treatment resumes, not until the CM sends a message or the attorney makes a call.`
+
+  },
+  'q20': {
+    t: `✅ SOL proximity changes everything about urgency. With 52 days until the filing deadline, a 19-day treatment gap + 11 days of unreachability is not a routine monitoring situation — it is a potential malpractice risk. The attorney needs to know immediately because: (1) if Tamara cannot be reached, the attorney may need to file a protective complaint before the SOL expires; (2) a complaint filed at the last minute under time pressure is a worse outcome than one filed with preparation. The CM should never "wait for Day 14" when SOL proximity is in play. The SOL clock is the CM's emergency override on all standard thresholds.`,
+
+    f: `❌ Option B ("SOL doesn't change the protocol") is exactly wrong - SOL proximity is the most important urgency modifier in case management. Option C has the CM explaining SOL deadlines to the client before escalating - this puts critical legal advice in the CM's hands and delays the attorney's involvement by another step. Option D ("SOL is the attorney's responsibility") contradicts the CM's role as the early warning system: the attorney can only act on SOL concerns if the CM surfaces them immediately. With 52 days on the clock and Tamara unreachable, every day of delay matters.`
+
+  },
+  'q21': {
+    t: `✅ This case needs same-day attention: last contact 11 days ago (approaching 14-day threshold), Atlanta PT is 7 sessions behind the ordered plan (significant), and the provider's note signals early discontinuation risk. The combination of approaching threshold + behind-plan + early-discharge risk makes this a "don't wait" situation even though the 14-day threshold hasn't been crossed yet. The correct action is to contact Camille TODAY - not wait until Day 14. Option C (escalate immediately) skips client contact, which is required before escalation when the client hasn't yet missed the 14-day window. Option D misreads "feeling pretty good" as a compliance indicator.`,
+
+    f: `❌ Options A and D ignore three warning signals: 11-day contact gap, 7 sessions behind plan, and a provider note signaling possible early discharge. This case needs urgent attention. Option C (immediate escalation without client contact) is premature - the 14-day threshold hasn't been crossed yet; the correct action at this stage is client contact, not attorney escalation. Cases approaching the 14-day threshold with additional risk factors require same-day outreach. Every day of delay increases the risk of crossing the threshold with a client who was already signaling she might stop treatment.`
+
+  },
+  'q22': {
+    t: `✅ Option A is the textbook response: validate the positive (glad you're feeling better), explain the specific risk without alarm (stopping before discharge gives the defense a gap-narrative argument), and propose a collaborative next step (check with PT first). This keeps Camille feeling supported, not threatened. Option B leads with consequences, which will make Camille feel like she's being managed rather than helped. Option C completely defers to the PT recommendation without any protective framing - if PT says "you're fine," Camille stops treatment, and the CM has no protective documentation. Option D kicks the decision to the attorney when the CM could handle it right now.`,
+
+    f: `❌ Option B ("you cannot stop treatment") is a directive that will provoke pushback from a client who is feeling 90% better and whose PT has suggested discharge. Clients who feel ordered around find ways to disengage. Option C defers entirely to the PT without any client protection framing - it gives Camille implicit permission to stop without understanding the case value consequence. Option D escalates to the attorney when the CM can and should handle this directly. The right response (Option A) does what clients need most: acknowledges their experience, explains the risk in their own interest, and invites them into the solution.`
+
+  },
+  'q23': {
+    t: `✅ The complete note captures everything: the header (TREATMENT UPDATE with timestamp), contact type, per-provider status with specifics (Atlanta PT: 9/16 sessions, 7 behind plan, compliance concern; Emory Spine: 2/3, on schedule), the client's verbatim-style statement ("90% better; PT suggested early discharge"), the CM's response and what Camille agreed to, the assessment (behind schedule on PT, early-discharge risk remains), the forward-looking monitor note (watch for PT discharge recommendation), and the next contact date. Options A, B, and D all sacrifice specificity. Option D makes the critical error of marking the compliance concern as resolved before any new treatment session has been documented.`,
+
+    f: `❌ Options A, B, and D all fail the documentation standard. Option A omits provider-level detail, Camille's clinical statement, assessment, and next contact date. Option B is too abbreviated to be useful for any future reviewer. Option D makes a critical error: it marks the compliance concern as resolved immediately after the call, before any new session has been documented. A verbal agreement to keep appointments does not resolve a compliance gap - only actual documented treatment does. The concern remains until Atlanta PT records a new session.`
+
+  },
+  'q24': {
+    t: `✅ A client-initiated discharge without a formal MD discharge note is an escalation trigger - immediately. Why? Because without medical sign-off on discharge, the treatment record ends with 9 of 16 planned sessions and no documented "patient has reached maximum medical improvement" or equivalent language. The defense will use this as a treatment gap: "The client stopped going to PT early, without medical justification, and the last 7 planned sessions never happened." The Emory Spine appointment (7/15) is the critical bridge: if Emory Spine can document functional status and provide a discharge note, it partially protects the record. The attorney needs to know this immediately to make that plan happen.`,
+
+    f: `❌ Option A (update case notes to show treatment is complete) is the most dangerous error: a client-initiated discharge without formal MD sign-off is not a completion - it is a gap risk. Option C (try to convince her to restart before escalating) delays attorney involvement when the attorney needs to know about this development now. The attorney may be able to leverage the 7/15 Emory Spine appointment as a bridge - but only if they know about the situation immediately. Option D (log and continue monitoring Emory Spine only) treats a significant gap risk as a routine update. This case has $31,400 in specials and a treatment record that just got a self-initiated early exit - escalate immediately.`
+
+  },
+  'q25': {
+    t: `✅ Closing the treatment phase requires closing the loop on every documentation item: the post-escalation attorney call is logged with outcome; the final Emory Spine visit and discharge note receipt is logged with date; case notes are updated documenting treatment completion; all provider records are confirmed collected (including the Atlanta PT record, which ended at 9 sessions via client-initiated discharge); the case is flagged for demand prep in CasePeer; and the case notes flag that the Atlanta PT discharge was client-initiated — not a formal medical discharge — so the demand team can address this in the narrative. Finally, no handoff happens until all outstanding records are confirmed.`,
+
+    f: `❌ Option B logs the call but misses: confirming all records are collected, noting the Atlanta PT client-initiated discharge, and ensuring the demand team knows the treatment record has a gap narrative to address. Option C waits for the discharge note before documenting anything — documentation happens as each milestone occurs, not after all milestones are complete. Option D hands off to the demand team and says "they'll pull records" — but the CM owns confirming records are complete before handoff. An incomplete handoff with an undisclosed gap narrative is a demand team problem waiting to happen.`
+
+  }
+};
+
+// ═══════════════════════════════════════════════
+// ANSWER HANDLER
+// ═══════════════════════════════════════════════
+function answer(qId, choice, isCorrect) {
+  if (qDone[qId]) return;
+
+  var cfg = Q_CONFIG[qId];
+  var block = document.getElementById(qId + '-block');
+  var fb = document.getElementById(qId + '-fb');
+  var btns = block.querySelectorAll('.option-btn');
+
+  btns.forEach(function(b){ b.classList.add('disabled'); });
+
+  var clickedBtn = document.getElementById(qId + '-' + choice);
+  var correctBtn = document.getElementById(qId + '-' + cfg.correct);
+
+  if (isCorrect) {
+    clickedBtn.classList.add('correct');
+    block.classList.add('answered');
+    qDone[qId] = true;
+
+    if (!cfg.isBonus) {
+      baseScore += cfg.pts;
+      sectionScores[cfg.section] = (sectionScores[cfg.section] || 0) + cfg.pts;
+      var isFirst = (firstAttemptStillAvailable[qId] !== false);
+      if (isFirst) {
+        bonusPoints += 5;
+        showToast('+' + cfg.pts + ' pts  +5 bonus ⚡', false);
+      } else {
+        showToast('+' + cfg.pts + ' pts', false);
+      }
+    } else {
+      var bonusPts = (firstAttemptStillAvailable[qId] !== false) ? cfg.bonusPts : Math.floor(cfg.bonusPts / 3);
+      bonusPoints += bonusPts;
+      sectionScores[cfg.section] = (sectionScores[cfg.section] || 0) + bonusPts;
+      showToast('+' + bonusPts + ' BONUS ⚡', true);
+    }
+
+    document.getElementById('total-score').textContent = baseScore;
+    document.getElementById('bonus-score').textContent = bonusPoints;
+    fb.className = 'feedback-box correct show';
+
+  } else {
+    clickedBtn.classList.add('incorrect');
+    if (correctBtn) {
+      correctBtn.classList.remove('disabled');
+      correctBtn.classList.add('correct');
+      correctBtn.classList.add('disabled');
+    }
+    block.classList.add('answered-wrong');
+    firstAttemptStillAvailable[qId] = false;
+    qDone[qId] = true;
+    fb.className = 'feedback-box incorrect show';
+  }
+
+  var fbData = FEEDBACK[qId];
+  fb.innerHTML = fbData ? (isCorrect ? fbData.t : fbData.f) : (isCorrect ? '✅ Correct!' : '❌ Incorrect.');
+
+  updateStreak(isCorrect);
+  mascotReact(isCorrect ? 'correct' : 'incorrect');
+  var totalQs = Object.keys(Q_CONFIG).length;
+  var answeredCount = Object.keys(qDone).length;
+  updateGlobalProgress(answeredCount, totalQs);
+
+  updateProgress();
+  checkSectionComplete(cfg.section);
+}
+
+// ═══════════════════════════════════════════════
+// SECTION COMPLETION CHECK
+// ═══════════════════════════════════════════════
+function checkSectionComplete(sectionIdx) {
+  var qs = SECTION_QUESTIONS[sectionIdx];
+  if (!qs) return;
+
+  var allDone = qs.every(function(q){ return !!qDone[q]; });
+  if (!allDone) return;
+
+  var scoreEl = document.getElementById('s' + sectionIdx + '-score');
+  var scoreVal = document.getElementById('s' + sectionIdx + '-score-val');
+  var nextEl   = document.getElementById('s' + sectionIdx + '-next');
+
+  var pts = sectionScores[sectionIdx] || 0;
+
+  if (scoreVal) {
+    if (sectionIdx <= 5) {
+      var sectionMax = 0;
+      var sqList = SECTION_QUESTIONS[sectionIdx];
+      if (sqList) {
+        sqList.forEach(function(qId) {
+          var cfg = Q_CONFIG[qId];
+          sectionMax += cfg.isBonus ? (cfg.bonusPts || 0) : cfg.pts;
+        });
+      }
+      scoreVal.textContent = pts + ' / ' + sectionMax + ' pts';
+    } else {
+      scoreVal.textContent = pts + ' bonus pts earned';
+    }
+  }
+  if (scoreEl) scoreEl.style.display = 'block';
+  if (nextEl)  nextEl.style.display  = 'flex';
+
+  var pill = document.getElementById('nav-' + sectionIdx);
+  if (pill) pill.classList.add('done');
+}
+
+// ═══════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════
+function goToSection(idx) {
+  if (idx === 8 && !window._cm1Passed) {
+    showToast('⚠️ 80% required for certificate', false);
+    return;
+  }
+  document.querySelectorAll('.section-card').forEach(function(c){ c.classList.remove('active'); });
+  document.querySelectorAll('.nav-pill').forEach(function(p){ p.classList.remove('active'); });
+
+  var card = document.getElementById('section-' + idx);
+  var pill = document.getElementById('nav-' + idx);
+  if (card) card.classList.add('active');
+  if (pill) pill.classList.add('active');
+
+  currentSection = idx;
+  var pct = Math.round((idx / (TOTAL_SECTIONS - 1)) * 100);
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-pct').textContent = pct + '%';
+  document.getElementById('prog-label').textContent = 'Section ' + (idx + 1) + ' of ' + TOTAL_SECTIONS;
+  window.scrollTo(0, 0);
+}
+
+// ═══════════════════════════════════════════════
+// PROGRESS BAR
+// ═══════════════════════════════════════════════
+function updateProgress() {
+  var baseQs = Object.keys(Q_CONFIG).filter(function(k){ return !Q_CONFIG[k].isBonus; });
+  var answered = baseQs.filter(function(k){ return !!qDone[k]; }).length;
+  var pct = Math.round((answered / baseQs.length) * 100);
+  var navPct = Math.round((currentSection / (TOTAL_SECTIONS - 1)) * 100);
+  document.getElementById('prog-fill').style.width = Math.max(pct, navPct) + '%';
+  document.getElementById('prog-pct').textContent = Math.max(pct, navPct) + '%';
+}
+
+// ═══════════════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════════════
+function showToast(msg, isBonus) {
+  var t = document.getElementById('points-toast');
+  t.textContent = msg;
+  t.className = 'points-toast' + (isBonus ? ' bonus' : '') + ' show';
+  setTimeout(function(){ t.classList.remove('show'); }, 1800);
+}
+
+// ═══════════════════════════════════════════════
+// FINISH MODULE
+// ═══════════════════════════════════════════════
+function showResults() {
+  goToSection(7);
+  buildResults();
+}
+
+function restartQuiz() {
+  _scoreSubmitted = false;
+  baseScore = 0;
+  bonusPoints = 0;
+  qDone = {};
+  firstAttemptStillAvailable = {};
+  sectionScores = {};
+  streakCount = 0;
+  maxStreak = 0;
+  questionsFirstTry = 0;
+  incorrectCount = 0;
+  totalQuestionsAnswered = 0;
+  moduleStartTime = Date.now();
+  window._cm1Passed = false;
+
+  document.querySelectorAll('.question-block').forEach(function(block) {
+    block.classList.remove('answered', 'answered-wrong');
+    block.querySelectorAll('.option-btn').forEach(function(btn) {
+      btn.classList.remove('correct', 'incorrect', 'disabled');
+      btn.style.pointerEvents = '';
+      btn.style.opacity = '';
+    });
+    var fb = block.querySelector('.feedback-box');
+    if (fb) { fb.className = 'feedback-box'; fb.innerHTML = ''; }
+  });
+
+  for (var i = 1; i <= 6; i++) {
+    var scoreEl = document.getElementById('s' + i + '-score');
+    var nextEl = document.getElementById('s' + i + '-next');
+    if (scoreEl) scoreEl.style.display = 'none';
+    if (nextEl) nextEl.style.display = 'none';
+    var pill = document.getElementById('nav-' + i);
+    if (pill) pill.classList.remove('done');
+  }
+
+  document.getElementById('total-score').textContent = '0';
+  document.getElementById('bonus-score').textContent = '0';
+  document.getElementById('streak-display').textContent = '0 🔥';
+
+  Object.keys(Q_CONFIG).forEach(function(k) { firstAttemptStillAvailable[k] = true; });
+
+  goToSection(0);
+}
+
+function buildResults() {
+  mascotReact('complete');
+  spawnParticles(document.querySelector('header'));
+  var totalQs = Object.keys(Q_CONFIG).length;
+  updateGlobalProgress(totalQs, totalQs);
+
+  var pct = Math.round((baseScore / BASE_MAX) * 100);
+  var pass = baseScore >= PASS_THRESHOLD;
+
+  var headerEl = document.getElementById('results-header-wrap');
+  headerEl.innerHTML = '<div class="results-header ' + (pass ? 'pass' : 'fail') + '">'
+    + '<div class="results-grade">' + pct + '%</div>'
+    + '<div class="results-label">' + (pass ? '🏆 Assessment Passed!' : '📚 Not Yet - 80% Required to Pass') + '</div>'
+    + '<div class="results-sub">' + baseScore + ' / 200 base pts · ' + bonusPoints + ' bonus pts</div>'
+    + '</div>';
+
+  var letters = ['a','b','c','d'];
+  var letterLabels = ['A','B','C','D'];
+  var reviewList = document.getElementById('reviewList');
+  var reviewHTML = '';
+  Object.keys(Q_CONFIG).forEach(function(qId, idx) {
+    var cfg = Q_CONFIG[qId];
+    var block = document.getElementById(qId + '-block');
+    if (!block) return;
+    var qText = block.querySelector('.q-text');
+    var questionText = qText ? qText.textContent : 'Question ' + (idx+1);
+    var isAnswered = !!qDone[qId];
+    var wasCorrect = isAnswered && block.classList.contains('answered');
+    var correctLetter = cfg.correct.toUpperCase();
+    var correctBtn = document.getElementById(qId + '-' + cfg.correct);
+    var correctText = correctBtn ? correctBtn.querySelector('.opt-text').textContent : '';
+    var userAnswer = '(not answered)';
+    var userLetter = '';
+    if (isAnswered) {
+      letters.forEach(function(l, li) {
+        var btn = document.getElementById(qId + '-' + l);
+        if (btn && (btn.classList.contains('correct') || btn.classList.contains('incorrect'))) {
+          if (btn.classList.contains('incorrect') || (btn.classList.contains('correct') && !block.classList.contains('answered-wrong'))) {
+            userAnswer = btn.querySelector('.opt-text').textContent;
+            userLetter = letterLabels[li];
+          }
+        }
+      });
+      if (wasCorrect && !userLetter) {
+        userAnswer = correctText;
+        userLetter = correctLetter;
+      }
+    }
+
+    reviewHTML += '<div class="review-item ' + (wasCorrect ? 'correct' : 'wrong') + '" style="opacity:0;transform:translateY(8px);transition:opacity 0.25s ease,transform 0.25s ease;" data-review-idx="' + idx + '">'
+      + '<div class="ri-q">' + (idx+1) + '. ' + questionText.substring(0,120) + (questionText.length>120?'...':'') + '</div>'
+      + '<div class="ri-ans">'
+      + (wasCorrect ? '✅' : '❌') + ' Your answer: <strong>' + userLetter + '. ' + userAnswer.substring(0,100) + (userAnswer.length>100?'...':'') + '</strong>'
+      + (!wasCorrect ? '<br>✅ Correct: <strong>' + correctLetter + '. ' + correctText.substring(0,100) + (correctText.length>100?'...':'') + '</strong>' : '')
+      + '</div></div>';
+  });
+  reviewList.innerHTML = reviewHTML;
+
+  var reviewEls = reviewList.querySelectorAll('[data-review-idx]');
+  reviewEls.forEach(function(el, i) {
+    setTimeout(function() {
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+      playTickSound();
+      var counterEl = document.getElementById('reviewCounter');
+      if (counterEl) counterEl.textContent = 'Reviewing ' + (i+1) + '/' + totalQs;
+    }, i * 120);
+  });
+
+  setTimeout(function() {
+    var counterEl = document.getElementById('reviewCounter');
+    if (counterEl) counterEl.textContent = totalQs + '/' + totalQs + ' ✓ Review Complete';
+  }, reviewEls.length * 120 + 200);
+
+  window._cm1Passed = pass;
+
+  var bodyEl = document.getElementById('results-body');
+  var buttonsHtml;
+  if (pass) {
+    buttonsHtml = '<div class="btn-group">'
+      + '<button class="btn btn-primary btn-block" onclick="goToSection(8)">Submit Feedback &amp; Get Certificate →</button>'
+      + '</div>';
+  } else {
+    buttonsHtml = '<div class="btn-group" style="display:flex;gap:10px;">'
+      + '<button class="btn btn-secondary" style="flex:1;" onclick="goToSection(0)">Review Content</button>'
+      + '<button class="btn btn-primary" style="flex:1;" onclick="restartQuiz()">Try Again</button>'
+      + '</div>';
+  }
+  bodyEl.innerHTML = '<div class="section-score" style="margin-bottom:20px;">'
+    + '<div class="score-display">' + baseScore + '/200</div>'
+    + '<div class="score-label">Base Score · ' + bonusPoints + ' Bonus Points</div>'
+    + '</div>'
+    + '<div class="callout ' + (pass ? 'callout-success' : 'callout-warn') + '">'
+    + (pass
+        ? '<strong>✅ Gate Passed.</strong> You have demonstrated competency in treatment monitoring cadence, the 14-day contact protocol, treatment conversation techniques, CasePeer treatment documentation, and the escalation protocol. You are cleared to progress in the LA track.'
+        : '<strong>⚠️ Gate Not Cleared.</strong> You need 160/200 (80%) to pass. Review the sections where you missed questions - the feedback explains exactly what to remember. Retake when ready.')
+    + '</div>'
+    + buttonsHtml;
+
+  submitScoreToTracker();
+
+  var badgeContainer = document.getElementById('badgeContainer');
+  if (badgeContainer) {
+    var gamBadges = calculateBadges();
+    renderBadges(gamBadges, badgeContainer);
+  }
+
+  if (pass) {
+    document.getElementById('score-submit-form').style.display = 'block';
+  }
+}
+
+// ═══════════════════════════════════════════════
+// AUTO-SUBMIT SCORE
+// ═══════════════════════════════════════════════
+var _scoreSubmitted = false;
+function submitScoreToTracker() {
+  // DISABLED: cert flow handles submission with employee name. This nameless path created "Unknown" rows.
+  return;
+  var payload = {
+    moduleId:   'cm1',
+    moduleName: 'Treatment Monitoring & Compliance',
+    score:      baseScore,
+    maxScore:   200,
+    bonusScore: bonusPoints,
+    maxStreak:  maxStreak,
+    badges:     calculateBadges().map(function(b){ return b.name; }).join(', '),
+    elapsedMinutes: Math.round((Date.now() - moduleStartTime) / 60000),
+    passedAt:   new Date().toISOString()
+  };
+  fetch(TRACKER_URL, {
+    method: 'POST',
+    headers: {'Content-Type': 'text/plain'},
+    body: JSON.stringify(payload),
+    mode: 'no-cors'
+  }).then(function(){
+    var el = document.getElementById('score-confirmation');
+    if (el) { _scoreSubmitted = true;
+    el.innerHTML = '✅ Score submitted automatically.'; el.style.display = 'block'; }
+  }).catch(function(){
+    var el = document.getElementById('score-confirmation');
+    if (el) { el.innerHTML = '⚠️ Auto-submit failed - screenshot results and email hgunn@thegunnlawgroup.com'; el.style.display = 'block'; }
+  });
+}
+
+// ═══════════════════════════════════════════════
+// SUBMIT SCORE + BUILD CERTIFICATE
+// ═══════════════════════════════════════════════
+function submitScoreAndBuildCert() {
+  if (!window._cm1Passed) {
+    showToast('⚠️ 80% required for certificate', false);
+    return;
+  }
+  var nameInput = document.getElementById('trainee-name-input');
+  var name = (nameInput.value || '').trim();
+  if (!name || name === 'Unknown' || name === 'Training Participant') {
+    nameInput.style.border = '2px solid red';
+    nameInput.focus();
+    showToast('⚠️ Please enter your full name', false);
+    return;
+  }
+  document.getElementById('certNameDisplay').textContent = name;
+  document.getElementById('score-submit-form').style.display = 'none';
+  document.getElementById('cert-content').style.display = 'block';
+
+  var pct = Math.round((baseScore / BASE_MAX) * 100);
+  var pass = baseScore >= PASS_THRESHOLD;
+  document.getElementById('certScore').textContent = 'Score: ' + baseScore + '/200 (' + pct + '%) - ' + (pass ? 'PASSED' : 'NOT PASSED');
+  var now = new Date();
+  document.getElementById('certMeta').textContent = 'Issued: ' + now.toLocaleDateString('en-US', {year:'numeric', month:'long', day:'numeric'});
+
+  var certBadgesEl = document.getElementById('certBadges');
+  if (certBadgesEl) {
+    var badges = calculateBadges();
+    badges.push({icon: '🎓', name: 'CM-1 Complete', desc: 'Completed module CM-1'});
+    certBadgesEl.innerHTML = '';
+    badges.forEach(function(b, i) {
+      var pill = document.createElement('span');
+      pill.className = 'cert-badge-pill';
+      pill.textContent = b.icon + ' ' + b.name;
+      pill.style.animationDelay = (i * 0.15) + 's';
+      certBadgesEl.appendChild(pill);
+    });
+  }
+
+  setTimeout(function() {
+    launchConfetti();
+    playTaDa();
+    mascotReact('complete');
+  }, 350);
+
+  if (TRACKER_URL) {
+    var payload = {
+      employeeName: name,
+      moduleId: 'cm1',
+      moduleName: 'Treatment Monitoring & Compliance',
+      score: baseScore,
+      maxScore: 200,
+      bonusScore: bonusPoints,
+      maxStreak: maxStreak,
+      badges: calculateBadges().map(function(b){ return b.name; }).join(', '),
+      elapsedMinutes: Math.round((Date.now() - moduleStartTime) / 60000),
+      passedAt: new Date().toISOString(),
+      feedback: {
+        clarity: document.getElementById('fb-clarity').value || '',
+        difficulty: document.getElementById('fb-difficulty').value || '',
+        realistic: document.getElementById('fb-realistic').value || '',
+        suggestions: document.getElementById('fb-suggestions').value || ''
+      }
+    };
+    fetch(TRACKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(payload),
+      mode: 'no-cors'
+    }).then(function() {
+      document.getElementById('score-confirmation').style.display = 'block';
+    }).catch(function() {
+      document.getElementById('score-confirmation').innerHTML = '⚠️ Auto-submission failed - please screenshot your results and email to hgunn@thegunnlawgroup.com';
+      document.getElementById('score-confirmation').style.background = '#fff3cd';
+      document.getElementById('score-confirmation').style.borderLeftColor = '#f39c12';
+      document.getElementById('score-confirmation').style.color = '#856404';
+      document.getElementById('score-confirmation').style.display = 'block';
+    });
+  }
+}
+
+// ═══════════════════════════════════════════════
+// GLG GAMIFICATION ENGINE v1.0 - CM-1 CHASSIS
+// ═══════════════════════════════════════════════
+
+// ── SOUND ENGINE ──
+function ensureAudioCtx() {
+  if (!audioCtx) {
+    try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) { return false; }
+  }
+  if (audioCtx.state === 'suspended') { audioCtx.resume().catch(function(){}); }
+  if (!_audioKeepalive && audioCtx) {
+    try {
+      var silentOsc = audioCtx.createOscillator();
+      var silentGain = audioCtx.createGain();
+      silentGain.gain.value = 0;
+      silentOsc.connect(silentGain);
+      silentGain.connect(audioCtx.destination);
+      silentOsc.start();
+      _audioKeepalive = silentOsc;
+    } catch(e) {}
+  }
+  return true;
+}
+
+function toggleSound() {
+  soundEnabled = !soundEnabled;
+  if (soundEnabled) ensureAudioCtx();
+  document.getElementById('soundToggle').textContent = soundEnabled ? '🔊' : '🔇';
+  localStorage.setItem('glg_sound', soundEnabled ? '1' : '0');
+}
+
+function playTone(freq, duration, type, gainVal, scheduleAt) {
+  if (!soundEnabled || !audioCtx) return;
+  if (audioCtx.state === 'suspended') audioCtx.resume().catch(function(){});
+  var startTime = (scheduleAt !== undefined) ? audioCtx.currentTime + scheduleAt : audioCtx.currentTime;
+  var o = audioCtx.createOscillator();
+  var g = audioCtx.createGain();
+  o.type = type || 'sine';
+  o.frequency.value = freq;
+  g.gain.setValueAtTime(gainVal || 0.15, startTime);
+  g.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+  o.connect(g); g.connect(audioCtx.destination);
+  o.start(startTime); o.stop(startTime + duration + 0.01);
+}
+
+function playDing() {
+  if (!soundEnabled) return;
+  ensureAudioCtx();
+  playTone(523, 0.15, 'sine', 0.13, 0);
+  playTone(659, 0.18, 'sine', 0.11, 0.1);
+}
+
+function playWrongTone() {
+  if (!soundEnabled) return;
+  ensureAudioCtx();
+  if (!audioCtx) return;
+  playTone(520, 0.12, 'triangle', 0.12, 0);
+  playTone(440, 0.15, 'triangle', 0.10, 0.08);
+}
+
+function playTickSound() {
+  if (!soundEnabled) return;
+  ensureAudioCtx();
+  if (!audioCtx) return;
+  playTone(800, 0.05, 'triangle', 0.06);
+}
+
+function playTaDa() {
+  if (!soundEnabled) return;
+  ensureAudioCtx();
+  if (!audioCtx) return;
+  var now = audioCtx.currentTime;
+  var notes = [
+    {f:262,t:0,d:0.30,type:'triangle',g:0.14},{f:330,t:0,d:0.30,type:'sine',g:0.11},
+    {f:392,t:0,d:0.30,type:'sine',g:0.09},{f:523,t:0.15,d:0.22,type:'sine',g:0.13},
+    {f:659,t:0.30,d:0.22,type:'sine',g:0.12},{f:784,t:0.45,d:0.22,type:'sine',g:0.11},
+    {f:523,t:0.65,d:0.80,type:'sine',g:0.13},{f:659,t:0.65,d:0.80,type:'sine',g:0.11},
+    {f:784,t:0.65,d:0.80,type:'sine',g:0.09},{f:1047,t:0.65,d:0.80,type:'triangle',g:0.07},
+    {f:1319,t:0.75,d:0.55,type:'sine',g:0.04},{f:1568,t:0.85,d:0.45,type:'sine',g:0.03}
+  ];
+  notes.forEach(function(n) {
+    var osc = audioCtx.createOscillator();
+    var gain = audioCtx.createGain();
+    osc.type = n.type || 'sine';
+    osc.frequency.value = n.f;
+    gain.gain.setValueAtTime(n.g, now + n.t);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + n.t + n.d);
+    osc.connect(gain); gain.connect(audioCtx.destination);
+    osc.start(now + n.t); osc.stop(now + n.t + n.d + 0.05);
+  });
+}
+
+// ── STREAK SYSTEM ──
+function updateStreak(isCorrect) {
+  if (isCorrect) {
+    streakCount++;
+    if (streakCount > maxStreak) maxStreak = streakCount;
+    questionsFirstTry++;
+    var el = document.getElementById('streak-display');
+    if (el) el.textContent = streakCount + ' 🔥';
+    playDing();
+    if (streakCount >= 3) showStreakBadge(streakCount);
+    if (streakCount === 5) spawnParticles(document.querySelector('.score-bar'));
+  } else {
+    if (streakCount >= 3) showStreakEnd();
+    streakCount = 0;
+    incorrectCount++;
+    var el = document.getElementById('streak-display');
+    if (el) el.textContent = '0 🔥';
+    playWrongTone();
+  }
+  totalQuestionsAnswered++;
+}
+
+function showStreakBadge(count) {
+  var badge = document.createElement('div');
+  badge.textContent = count + ' in a row! 🔥';
+  badge.style.cssText = 'position:fixed;top:60px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#dcb161,#e8c87a);color:#141C2C;padding:8px 20px;border-radius:20px;font-weight:700;font-size:14px;z-index:10001;animation:streakPop 0.4s ease-out,fadeUp 0.4s ease-in 1.5s forwards;';
+  document.body.appendChild(badge);
+  setTimeout(function(){ badge.remove(); }, 2000);
+}
+
+function showStreakEnd() {
+  var badge = document.createElement('div');
+  badge.textContent = 'Streak ended';
+  badge.style.cssText = 'position:fixed;top:60px;left:50%;transform:translateX(-50%);background:#333;color:#999;padding:6px 16px;border-radius:16px;font-size:12px;z-index:10001;opacity:0.8;';
+  document.body.appendChild(badge);
+  setTimeout(function(){ badge.remove(); }, 1500);
+}
+
+// ── MILESTONE TOASTS ──
+function checkMilestone(current, total) {
+  var pct = Math.round((current / total) * 100);
+  var milestones = {25:'Quarter complete! 💪',50:'Halfway there! 🎯',75:'Almost there! ⚡',100:'Final stretch! 🏆'};
+  for (var m in milestones) {
+    if (pct >= parseInt(m) && !milestonesTriggered[m]) {
+      milestonesTriggered[m] = true;
+      showMilestoneToast(milestones[m]);
+    }
+  }
+}
+
+function showMilestoneToast(msg) {
+  var t = document.createElement('div');
+  t.textContent = msg;
+  t.style.cssText = 'position:fixed;top:-50px;left:50%;transform:translateX(-50%);background:#141C2C;color:#dcb161;padding:10px 24px;border-radius:12px;font-weight:700;font-size:14px;z-index:10002;transition:top 0.4s ease;box-shadow:0 4px 20px rgba(0,0,0,0.3);';
+  document.body.appendChild(t);
+  requestAnimationFrame(function(){ t.style.top = '20px'; });
+  setTimeout(function(){ t.style.top = '-50px'; setTimeout(function(){ t.remove(); }, 500); }, 2500);
+}
+
+// ── GLOBAL PROGRESS BAR ──
+function updateGlobalProgress(current, total) {
+  var fill = document.getElementById('globalProgressFill');
+  if (fill) fill.style.width = Math.round((current / total) * 100) + '%';
+  checkMilestone(current, total);
+}
+
+// ── PARTICLES ──
+function spawnParticles(anchor) {
+  var rect = anchor ? anchor.getBoundingClientRect() : {left:window.innerWidth/2,top:window.innerHeight/2,width:0};
+  for (var i = 0; i < 20; i++) {
+    var p = document.createElement('div');
+    var size = 4 + Math.random() * 6;
+    var angle = (Math.PI * 2 * i) / 20 + (Math.random() * 0.3);
+    var dist = 60 + Math.random() * 80;
+    p.style.cssText = 'position:fixed;width:' + size + 'px;height:' + size + 'px;background:#dcb161;border-radius:50%;left:' + (rect.left + rect.width/2) + 'px;top:' + (rect.top) + 'px;z-index:10003;pointer-events:none;opacity:1;transition:all 0.8s ease-out;';
+    document.body.appendChild(p);
+    requestAnimationFrame(function(pp, a, d) { return function() {
+      pp.style.left = (parseFloat(pp.style.left) + Math.cos(a) * d) + 'px';
+      pp.style.top = (parseFloat(pp.style.top) + Math.sin(a) * d) + 'px';
+      pp.style.opacity = '0';
+    }; }(p, angle, dist));
+    setTimeout(function(pp){ pp.remove(); }.bind(null, p), 900);
+  }
+}
+
+// ── MASCOT (Scales of Justice) ──
+function initMascot() {
+  var gavel = document.createElement('div');
+  gavel.id = 'mascotFloat';
+  gavel.innerHTML = '<svg viewBox="0 0 60 70" xmlns="http://www.w3.org/2000/svg" style="width:50px;height:58px;">'
+    + '<rect x="27" y="18" width="6" height="38" rx="1.5" fill="#8B7D3C"/>'
+    + '<rect x="18" y="54" width="24" height="5" rx="2.5" fill="#6B5E2E"/>'
+    + '<rect x="22" y="52" width="16" height="4" rx="1" fill="#8B7D3C"/>'
+    + '<rect x="6" y="16" width="48" height="4" rx="2" fill="#8B7D3C"/>'
+    + '<circle cx="30" cy="12" r="5" fill="#dcb161" stroke="#8B7D3C" stroke-width="1.5"/>'
+    + '<text x="30" y="14.5" text-anchor="middle" font-size="7" font-weight="bold" fill="#141C2C">⚖</text>'
+    + '<line x1="12" y1="20" x2="12" y2="32" stroke="#8B7D3C" stroke-width="1.5"/>'
+    + '<line x1="48" y1="20" x2="48" y2="32" stroke="#8B7D3C" stroke-width="1.5"/>'
+    + '<path d="M4 33 Q8 38 12 33 Q16 38 20 33" stroke="#dcb161" stroke-width="1.5" fill="none"/>'
+    + '<ellipse cx="12" cy="34" rx="9" ry="2.5" fill="#dcb161" opacity="0.3"/>'
+    + '<path d="M40 33 Q44 38 48 33 Q52 38 56 33" stroke="#dcb161" stroke-width="1.5" fill="none"/>'
+    + '<ellipse cx="48" cy="34" rx="9" ry="2.5" fill="#dcb161" opacity="0.3"/>'
+    + '</svg>';
+  gavel.style.cssText = 'position:fixed;bottom:16px;right:16px;z-index:9998;cursor:pointer;animation:scaleBob 3s ease-in-out infinite;opacity:0.7;transition:opacity 0.3s,transform 0.3s;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.2));';
+  gavel.onmouseenter = function(){ this.style.opacity='1';this.style.transform='scale(1.1)'; };
+  gavel.onmouseleave = function(){ this.style.opacity='0.7';this.style.transform='scale(1)'; };
+  document.body.appendChild(gavel);
+}
+
+function mascotReact(type) {
+  var g = document.getElementById('mascotFloat');
+  if (!g) return;
+  g.style.animation = 'none';
+  void g.offsetHeight;
+  if (type === 'correct') {
+    g.style.animation = 'scaleCelebrate 0.5s ease-out, scaleBob 3s ease-in-out 0.6s infinite';
+  } else if (type === 'incorrect') {
+    g.style.animation = 'scaleTilt 0.6s ease-in-out, scaleBob 3s ease-in-out 0.7s infinite';
+  } else if (type === 'complete') {
+    g.style.animation = 'scaleTriumph 1.5s ease-in-out, scaleBob 3s ease-in-out 1.6s infinite';
+    g.style.opacity = '1';
+    g.style.transform = 'scale(1.15)';
+  }
+}
+
+// ── CONFETTI ──
+var confettiActive = false;
+function launchConfetti() {
+  var canvas = document.getElementById('confettiCanvas');
+  if (!canvas) return;
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  var ctx = canvas.getContext('2d');
+  var colors = ['#dcb161','#c0c0c0','#141c2c'];
+  var particles = [];
+  var cx = canvas.width / 2;
+  var cy = canvas.height / 2;
+  for (var i = 0; i < 150; i++) {
+    var angle = Math.random() * Math.PI * 2;
+    var speed = 3 + Math.random() * 9;
+    particles.push({
+      x:cx, y:cy,
+      vx:Math.cos(angle)*speed, vy:Math.sin(angle)*speed-5,
+      color:colors[Math.floor(Math.random()*colors.length)],
+      w:4+Math.random()*6, h:2+Math.random()*4,
+      rotation:Math.random()*360, rotSpeed:(Math.random()-0.5)*12,
+      gravity:0.10+Math.random()*0.08, opacity:1,
+      shape:Math.random()>0.4?'rect':'circle'
+    });
+  }
+  confettiActive = true;
+  var startTime = Date.now();
+  function animate() {
+    if (!confettiActive) return;
+    var elapsed = Date.now() - startTime;
+    if (elapsed > 4000) {
+      confettiActive = false;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      return;
+    }
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(function(p) {
+      p.x+=p.vx; p.vy+=p.gravity; p.y+=p.vy; p.vx*=0.99; p.rotation+=p.rotSpeed;
+      if (elapsed>2500) p.opacity=Math.max(0,p.opacity-0.02);
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rotation*Math.PI/180);
+      ctx.globalAlpha=p.opacity; ctx.fillStyle=p.color;
+      if (p.shape==='rect'){ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);}
+      else{ctx.beginPath();ctx.arc(0,0,p.w/2,0,Math.PI*2);ctx.fill();}
+      ctx.restore();
+    });
+    requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+}
+
+// ── ACHIEVEMENT BADGES ──
+function calculateBadges() {
+  var badges = [];
+  var pct = Math.round((baseScore / BASE_MAX) * 100);
+  var elapsed = (Date.now() - moduleStartTime) / 60000;
+  var baseQCount = Object.keys(Q_CONFIG).filter(function(k){ return !Q_CONFIG[k].isBonus; }).length;
+  if (questionsFirstTry === baseQCount && incorrectCount === 0) badges.push({icon:'⭐', name:'Perfect Pass', desc:'All correct on first try'});
+  if (incorrectCount === 0 && totalQuestionsAnswered > 0) badges.push({icon:'🎯', name:'No Stumbles', desc:'Zero incorrect'});
+  if (elapsed < 30) badges.push({icon:'⚡', name:'Speed Run', desc:'Under 30 minutes'});
+  if (pct >= 90) badges.push({icon:'🏆', name:'Master', desc:'Above 90%'});
+  if (incorrectCount > 3 && pct >= 70) badges.push({icon:'💪', name:'Persistent', desc:'Finished despite struggles'});
+  return badges;
+}
+
+function renderBadges(badges, container) {
+  badges.forEach(function(b, i) {
+    setTimeout(function() {
+      var el = document.createElement('span');
+      el.textContent = b.icon + ' ' + b.name;
+      el.title = b.desc;
+      el.style.cssText = 'display:inline-block;background:#dcb161;color:#141C2C;font-size:12px;font-weight:700;padding:5px 12px;border-radius:14px;margin:4px;animation:badgeFlip 0.5s ease-out;';
+      container.appendChild(el);
+    }, i * 400);
+  });
+}
+
+// ── GAMIFICATION INIT ──
+document.addEventListener('DOMContentLoaded', function() {
+  if (localStorage.getItem('glg_sound') === '1') {
+    soundEnabled = true;
+    var btn = document.getElementById('soundToggle');
+    if (btn) btn.textContent = '🔊';
+  }
+
+  function initAudioOnFirstClick() {
+    ensureAudioCtx();
+    document.removeEventListener('click', initAudioOnFirstClick);
+    document.removeEventListener('touchstart', initAudioOnFirstClick);
+    document.removeEventListener('touchend', initAudioOnFirstClick);
+  }
+  document.addEventListener('click', initAudioOnFirstClick);
+  document.addEventListener('touchstart', initAudioOnFirstClick);
+  document.addEventListener('touchend', initAudioOnFirstClick);
+
+  function resumeAudioOnGesture() {
+    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+  }
+  document.addEventListener('touchstart', resumeAudioOnGesture, true);
+  document.addEventListener('touchend', resumeAudioOnGesture, true);
+  document.addEventListener('click', resumeAudioOnGesture, true);
+
+  initMascot();
+});
+
+// Init
+goToSection(0);
+</script>
+</body>
+</html>

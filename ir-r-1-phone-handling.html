@@ -1,0 +1,1873 @@
+<!--
+IR-R-1 - Phone Handling & First Impressions
+Built: July 19, 2026 | Base: site/module-cm1.html (CM-track canonical chassis)
+Track: IR-R (Intake/Reception — Receptionist)
+Learner: Jessica (Receptionist)
+moduleId: ir-r-1
+Base: 20 questions × 10 pts = 200 | Bonus: 5 boss tasks × 10 bonus pts = 50 max | Pass: 160/200 (80%)
+Answer Key: q1→C q2→B q3→D q4→A  q5→C q6→B q7→D q8→A
+            q9→B q10→C q11→A q12→D  q13→B q14→C q15→A q16→D
+            q17→B q18→C q19→A q20→D
+            q21→B(boss) q22→C(boss) q23→A(boss) q24→D(boss) q25→B(boss)
+Distribution: A:5 B:6 C:5 D:5 (base) | Boss: A:1 B:2 C:1 D:1
+Boss Challenge: Marcus Thompson, GLG-2026-3071
+Sources: IR-R-1-MEMO-SURVEY.md (10 PRIMARY, 8 SECONDARY), Reception_SOP.md §§1-4, Reception_Phone_Script.md
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>IR-R-1 - Phone Handling &amp; First Impressions | Gunn Law Group</title>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;color:#333;font-size:16px;line-height:1.6;-webkit-text-size-adjust:100%;overflow-x:hidden;}
+
+    /* ── HEADER ── */
+    header{background:linear-gradient(135deg,#141C2C 0%,#0E1420 100%);color:#e0e0e0;padding:20px 16px 16px;text-align:center;}
+    .day-badge{display:inline-block;background:#1C2433;color:#dcb161;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:10px;}
+    header h1{font-size:clamp(17px,5vw,24px);font-weight:800;line-height:1.3;color:#ffffff;}
+    header p{margin-top:6px;color:#c0c0c0;font-size:13px;}
+    .score-bar{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:12px;padding:10px 16px;background:#1C2433;border-radius:10px;}
+    .score-label{color:#c0c0c0;font-size:12px;font-weight:600;}
+    .score-value{color:#fff;font-size:22px;font-weight:800;}
+
+    /* ── PROGRESS ── */
+    .progress-wrap{background:#1C2433;padding:10px 16px;}
+    .progress-meta{color:#c0c0c0;font-size:11px;margin-bottom:5px;display:flex;justify-content:space-between;}
+    .progress-bg{background:#0E1420;border-radius:4px;height:6px;width:100%;}
+    .progress-fill{background:#dcb161;height:6px;border-radius:4px;width:0%;transition:width .5s ease;}
+
+    /* ── NAV PILLS ── */
+    .section-nav{display:flex;flex-wrap:wrap;gap:6px;padding:12px 14px;background:#fff;border-bottom:2px solid #e0e3e8;justify-content:center;position:sticky;top:0;z-index:100;}
+    .nav-pill{padding:7px 11px;border-radius:20px;border:2px solid #e0e3e8;background:#fff;color:#666;font-size:11px;font-weight:700;cursor:pointer;min-height:44px;min-width:44px;display:flex;align-items:center;transition:all .2s;white-space:nowrap;-webkit-tap-highlight-color:transparent;}
+    .nav-pill.active{background:#141C2C;color:#fff;border-color:#141C2C;}
+    .nav-pill.done{border-color:#10774A;color:#10774A;}
+    .nav-pill.done::after{content:' ✓';}
+
+    /* ── MAIN / CARDS ── */
+    main{max-width:800px;margin:0 auto;padding:0 0 60px;}
+    .section-card{display:none;background:#fff;margin:16px;border-radius:14px;box-shadow:0 2px 16px rgba(0,0,0,.09);overflow:visible;}
+    .section-card.active{display:block;}
+    .section-header{background:#141C2C;color:#fff;padding:18px 20px;}
+    .section-num{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#dcb161;margin-bottom:4px;}
+    .section-header h2{font-size:clamp(15px,4vw,20px);font-weight:800;}
+    .section-subhead{color:#c0c0c0;font-size:13px;margin-top:4px;}
+    .section-body{padding:20px;}
+
+    /* ── SCENARIO BOX ── */
+    .scenario{background:#141C2C;color:#fff;border-radius:12px;padding:20px;margin-bottom:20px;border-left:3px solid #dcb161;}
+    .scenario-tag{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#dcb161;margin-bottom:8px;}
+    .scenario h3{font-size:clamp(15px,4vw,18px);font-weight:700;line-height:1.4;margin-bottom:10px;}
+    .scenario p{font-size:14px;color:#c8d0e0;line-height:1.6;}
+    .scenario .highlight{color:#dcb161;font-weight:700;}
+    .scenario .urgent{color:#e74c3c;font-weight:700;}
+
+    /* ── INFO BLOCKS ── */
+    .info-block{background:#f0f4f8;border-radius:10px;padding:16px;margin-bottom:14px;}
+    .info-block h4{color:#141c2c;font-size:14px;font-weight:700;margin-bottom:8px;}
+    .info-block p,.info-block li{font-size:14px;color:#444;line-height:1.6;}
+    .info-block ul,.info-block ol{padding-left:18px;}
+
+    /* ── QUESTIONS ── */
+    .question-block{border:2px solid #e8ecf0;border-radius:12px;padding:18px;margin-bottom:16px;transition:border-color .2s;}
+    .question-block.answered{border-color:#10774A;}
+    .question-block.answered-wrong{border-color:#870101;}
+    .q-num{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888;margin-bottom:6px;}
+    .q-text{font-size:clamp(14px,3.5vw,16px);font-weight:700;color:#141c2c;margin-bottom:14px;line-height:1.4;}
+    .options{display:flex;flex-direction:column;gap:10px;}
+    .option-btn{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border:2px solid #e0e3e8;border-radius:10px;background:#fff;cursor:pointer;text-align:left;font-size:14px;color:#333;min-height:44px;transition:all .15s;-webkit-tap-highlight-color:transparent;width:100%;}
+    .option-btn:hover,.option-btn:focus{border-color:#232e54;background:#f8f9ff;}
+    .option-btn.correct{border-color:#10774A!important;background:#e8f8ee!important;color:#10774A!important;}
+    .option-btn.incorrect{border-color:#870101!important;background:#fce8e8!important;color:#870101!important;}
+    .option-btn.disabled{pointer-events:none;opacity:.75;}
+    .opt-letter{background:#141C2C;color:#dcb161;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0;margin-top:1px;}
+    .opt-text{flex:1;line-height:1.5;}
+
+    /* ── FEEDBACK ── */
+    .feedback-box{border-radius:10px;padding:14px 16px;margin-top:12px;display:none;font-size:14px;line-height:1.6;}
+    .feedback-box.correct{background:#d4edda;border-left:4px solid #10774A;color:#155724;}
+    .feedback-box.incorrect{background:#f8d7da;border-left:4px solid #870101;color:#721c24;}
+    .feedback-box.show{display:block;}
+
+    /* ── POINTS TOAST ── */
+    .points-toast{position:fixed;top:80px;right:16px;background:#10774A;color:#fff;padding:10px 16px;border-radius:30px;font-weight:700;font-size:15px;box-shadow:0 4px 16px rgba(0,0,0,.2);z-index:999;transform:translateY(-20px);opacity:0;transition:all .3s;pointer-events:none;}
+    .points-toast.show{transform:translateY(0);opacity:1;}
+    .points-toast.bonus{background:#dcb161;color:#141C2C;}
+
+    /* ── SECTION SCORE ── */
+    .section-score{background:#f0f4f8;border-radius:10px;padding:14px;text-align:center;margin-bottom:16px;}
+    .section-score .score-display{font-size:32px;font-weight:800;color:#141c2c;}
+    .section-score .score-label{font-size:13px;color:#666;margin-top:2px;}
+
+    /* ── CASE FILE ── */
+    .case-file{background:#fff;border:2px solid #141c2c;border-radius:12px;padding:18px;margin-bottom:20px;}
+    .case-file-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:12px;border-bottom:2px solid #f0f4f8;}
+    .case-file-icon{background:#141c2c;color:#fff;width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+    .case-file-title{font-weight:800;color:#141c2c;font-size:15px;}
+    .case-file-sub{font-size:12px;color:#888;}
+    .case-detail{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #f0f4f8;font-size:14px;}
+    .case-detail:last-child{border-bottom:none;}
+    .case-key{font-weight:700;color:#141c2c;min-width:160px;flex-shrink:0;}
+    .case-val{color:#444;}
+
+    /* ── BOSS CHALLENGE ── */
+    .boss-header{background:linear-gradient(135deg,#870101 0%,#5a0000 100%);color:#fff;border-radius:12px;padding:24px;margin-bottom:20px;text-align:center;}
+    .boss-header .boss-icon{font-size:40px;margin-bottom:10px;}
+    .boss-header h3{font-size:clamp(17px,4.5vw,22px);font-weight:800;margin-bottom:8px;}
+    .boss-header p{font-size:14px;opacity:.9;line-height:1.5;}
+
+    /* ── RESULTS ── */
+    .results-header{padding:28px 20px;text-align:center;color:#fff;}
+    .results-header.pass{background:linear-gradient(135deg,#10774A,#0a5c38);}
+    .results-header.fail{background:linear-gradient(135deg,#870101,#6b0000);}
+    .results-grade{font-size:56px;font-weight:900;line-height:1;}
+    .results-label{font-size:16px;margin-top:6px;opacity:.9;}
+    .results-sub{font-size:13px;margin-top:4px;opacity:.75;}
+    .breakdown-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #f0f4f8;font-size:15px;}
+    .breakdown-row:last-child{border-bottom:none;}
+    .breakdown-name{color:#333;font-weight:600;}
+    .breakdown-pts{font-weight:800;color:#141c2c;}
+    .achievement-grid{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0;}
+    .badge{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;font-size:13px;font-weight:700;border:2px solid #e0e3e8;color:#888;background:#f8f9fa;}
+    .badge.earned{border-color:#dcb161;background:#fffaed;color:#7a5c00;}
+    .badge .badge-icon{font-size:20px;}
+
+    /* ── CERTIFICATE ── */
+    .cert-wrap{background:linear-gradient(180deg,#ffffff 0%,#fafaf5 100%);border:4px double #141c2c;border-radius:14px;padding:2.5rem 1.75rem;text-align:center;margin-bottom:1rem;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(20,28,44,0.10);animation:certPopIn 0.8s 0.1s cubic-bezier(0.34,1.56,0.64,1) both;}
+    @keyframes certPopIn{0%{opacity:0;transform:scale(0.7);box-shadow:0 2px 8px rgba(20,28,44,0.05)}60%{opacity:1;transform:scale(1.04);box-shadow:0 8px 32px rgba(20,28,44,0.18)}80%{transform:scale(0.98)}100%{opacity:1;transform:scale(1);box-shadow:0 10px 40px rgba(20,28,44,0.16)}}
+    .cert-wrap::before{content:'';position:absolute;inset:10px;border:1px solid #dcb161;border-radius:8px;pointer-events:none;opacity:0.45;}
+    .cert-wrap::after{content:'\2696\FE0F';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:180px;opacity:0.03;pointer-events:none;z-index:0;}
+    .cert-firm{font-size:0.67rem;letter-spacing:0.22em;text-transform:uppercase;color:#232e54;font-weight:600;margin-bottom:0.6rem;position:relative;z-index:1;}
+    .cert-title{font-size:clamp(1.5rem,5vw,1.9rem);font-weight:800;color:#141c2c;margin-bottom:0.3rem;text-transform:uppercase;letter-spacing:0.04em;position:relative;z-index:1;}
+    .cert-subtitle{font-size:0.8rem;color:#888;margin-bottom:1.4rem;position:relative;z-index:1;}
+    .cert-presents{font-size:0.85rem;color:#777;font-style:italic;margin-bottom:0.3rem;position:relative;z-index:1;}
+    .cert-name{font-size:clamp(1.6rem,6vw,2.2rem);font-weight:700;color:#232e54;font-style:italic;border-bottom:2px solid #dcb161;display:inline-block;padding:0 0.75rem 0.2rem;margin-bottom:0.85rem;min-width:60%;position:relative;z-index:1;}
+    .cert-for{font-size:0.85rem;color:#666;margin-bottom:0.35rem;position:relative;z-index:1;}
+    .cert-module{font-size:1.05rem;font-weight:600;color:#141c2c;margin-bottom:1.1rem;position:relative;z-index:1;}
+    .cert-meta{font-size:0.8rem;color:#888;position:relative;z-index:1;}
+    .cert-score{font-size:1.1rem;font-weight:700;color:#10774A;margin-top:0.5rem;position:relative;z-index:1;}
+    .cert-seal{font-size:2.5rem;margin:0.85rem 0 0.3rem;display:block;position:relative;z-index:1;}
+    .cert-signature{margin-top:1.5rem;position:relative;z-index:1;}
+    .cert-sig-line{width:200px;border-top:1px solid #141c2c;margin:0 auto 0.3rem;}
+    .cert-sig-name{font-size:1rem;font-weight:600;color:#141c2c;font-style:italic;}
+    .cert-sig-title{font-size:0.75rem;color:#888;letter-spacing:0.05em;}
+    .cert-badges{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:14px;position:relative;z-index:1;}
+    .cert-badge-pill{display:inline-block;background:#dcb161;color:#141C2C;font-size:0.68rem;font-weight:700;padding:4px 12px;border-radius:14px;letter-spacing:0.03em;animation:badgeFlip 0.5s ease-out backwards;}
+    #confettiCanvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10005;}
+
+    /* ── REVIEW LIST ── */
+    .review-list{display:flex;flex-direction:column;gap:0.65rem;margin-top:1rem;}
+    .review-item{background:#f8f9fa;border-radius:10px;padding:0.8rem 1.1rem;border-left:4px solid #ddd;font-size:0.88rem;transition:transform 0.15s ease;}
+    .review-item:hover{transform:translateX(2px);}
+    .review-item.correct{border-color:#10774A;}
+    .review-item.wrong{border-color:#870101;}
+    .review-item .ri-q{font-weight:600;margin-bottom:0.35rem;color:#141c2c;}
+    .review-item .ri-ans{font-size:0.82rem;}
+
+    /* ── NAME INPUT ── */
+    .name-input-wrap{margin-bottom:1rem;}
+    .name-input-wrap label{display:block;font-size:0.85rem;font-weight:600;color:#232e54;margin-bottom:0.4rem;}
+    .name-input{width:100%;padding:0.82rem 1rem;border:2px solid #e0e3e8;border-radius:9px;font-size:1rem;color:#333;background:#fff;transition:border-color 0.2s ease,box-shadow 0.2s ease;-webkit-appearance:none;}
+    .name-input:focus{outline:none;border-color:#232e54;box-shadow:0 0 0 3px rgba(35,46,84,0.1);}
+
+    /* ── FEEDBACK FORM ── */
+    .fb-question{margin-bottom:18px;}
+    .fb-question label{display:block;font-weight:700;color:#141c2c;font-size:15px;margin-bottom:8px;}
+    .fb-question select,.fb-question textarea{width:100%;padding:12px;border:2px solid #e0e3e8;border-radius:9px;font-size:14px;background:#fff;color:#333;-webkit-appearance:none;transition:border-color 0.2s ease;font-family:inherit;}
+    .fb-question select:focus,.fb-question textarea:focus{outline:none;border-color:#141c2c;}
+    .fb-question textarea{resize:vertical;min-height:80px;}
+
+    /* ── BUTTONS ── */
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 22px;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;min-height:44px;transition:all .2s;-webkit-tap-highlight-color:transparent;font-family:inherit;}
+    .btn-primary{background:#141C2C;color:#fff;}
+    .btn-primary:hover{background:#232e54;}
+    .btn-secondary{background:#f0f4f8;color:#141c2c;}
+    .btn-block{width:100%;margin-top:12px;}
+    .btn-group{display:flex;flex-direction:column;gap:10px;margin-top:16px;}
+
+    /* ── CALLOUT ── */
+    .callout{border-radius:10px;padding:14px 16px;margin:14px 0;font-size:14px;line-height:1.6;}
+    .callout-warn{background:#fff3cd;border-left:4px solid #f39c12;color:#533f03;}
+    .callout-danger{background:#fce8e8;border-left:4px solid #870101;color:#721c24;}
+    .callout-success{background:#d4edda;border-left:4px solid #10774A;color:#155724;}
+    .callout-info{background:#d6e8f8;border-left:4px solid #3498db;color:#174a7e;}
+    .callout strong{font-weight:700;}
+
+    /* ── STAT TABLE ── */
+    .stat-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13px;}
+    .stat-table th{background:#141c2c;color:#dcb161;padding:8px 10px;text-align:left;font-weight:700;}
+    .stat-table td{padding:7px 10px;border-bottom:1px solid #e0e3e8;vertical-align:top;}
+    .stat-table tr:last-child td{border-bottom:none;}
+    .stat-table tr:nth-child(even) td{background:#f8f9fa;}
+
+    /* ── DIVIDER / TAGS / UTILS ── */
+    .divider{border:none;border-top:2px solid #f0f4f8;margin:16px 0;}
+    .tag{display:inline-block;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
+    .tag-warn{background:#fff3cd;color:#856404;}
+    .tag-danger{background:#fce8e8;color:#7b1a1a;}
+    .tag-success{background:#d4edda;color:#155724;}
+    .tag-info{background:#d6e8f8;color:#174a7e;}
+    .tag-gold{background:#fffaed;color:#7a5c00;border:1px solid #dcb161;}
+    .text-center{text-align:center;}
+    .mt-4{margin-top:16px;}
+    .mb-4{margin-bottom:16px;}
+
+    /* ── SCORE CONFIRM ── */
+    .score-confirm{border-radius:10px;padding:14px 16px;margin:14px 0;font-size:14px;line-height:1.6;background:#d4edda;border-left:4px solid #10774A;color:#155724;display:none;}
+
+    .glg-logo{display:block;margin:0 auto 10px;max-height:50px;width:auto;}
+
+    /* ── GAMIFICATION ANIMATIONS ── */
+    @keyframes streakPop{0%{transform:translateX(-50%) scale(0.5);opacity:0}50%{transform:translateX(-50%) scale(1.15)}100%{transform:translateX(-50%) scale(1);opacity:1}}
+    @keyframes fadeUp{to{opacity:0;transform:translateX(-50%) translateY(-20px);}}
+    @keyframes scaleBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+    @keyframes scaleCelebrate{0%{transform:scale(1) rotate(0)}25%{transform:scale(1.2) rotate(-8deg)}50%{transform:scale(1.15) rotate(5deg)}75%{transform:scale(1.1) rotate(-3deg)}100%{transform:scale(1) rotate(0)}}
+    @keyframes scaleTilt{0%{transform:rotate(0)}30%{transform:rotate(10deg)}70%{transform:rotate(-8deg)}100%{transform:rotate(0)}}
+    @keyframes scaleTriumph{0%{transform:scale(1)}20%{transform:scale(1.3)}40%{transform:scale(1.25) rotate(-5deg)}60%{transform:scale(1.25) rotate(5deg)}80%{transform:scale(1.3)}100%{transform:scale(1)}}
+    @keyframes badgeFlip{0%{transform:rotateY(90deg) scale(0.5);opacity:0}60%{transform:rotateY(-10deg) scale(1.05)}100%{transform:rotateY(0) scale(1);opacity:1}}
+    @keyframes correctPulse{0%{box-shadow:0 0 0 0 rgba(39,174,96,0.4)}70%{box-shadow:0 0 0 12px rgba(39,174,96,0)}100%{box-shadow:0 0 0 0 rgba(39,174,96,0)}}
+    @keyframes incorrectShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+    .option-btn.correct{animation:correctPulse 0.6s ease-out;}
+    .option-btn.incorrect{animation:incorrectShake 0.4s ease-out;}
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     HEADER
+════════════════════════════════════════════ -->
+<header>
+  <img src="https://www.thegunnlawgroup.com/wp-content/uploads/2023/01/gunn-logo.png" alt="Gunn Law Group" class="glg-logo">
+  <div class="day-badge">IR-R-1 · Phone Handling &amp; First Impressions</div>
+  <h1>IR-R-1 — Phone Handling &amp; First Impressions</h1>
+  <p>Gunn Law Group · Reception Training</p>
+  <div class="score-bar">
+    <div>
+      <div class="score-label">BASE SCORE</div>
+      <div class="score-value" id="total-score">0</div>
+    </div>
+    <div>
+      <div class="score-label">POSSIBLE</div>
+      <div class="score-value">200</div>
+    </div>
+    <div>
+      <div class="score-label">BONUS</div>
+      <div class="score-value" id="bonus-score">0</div>
+    </div>
+    <div>
+      <div class="score-label">STREAK</div>
+      <div class="score-value" id="streak-display">0 🔥</div>
+    </div>
+  </div>
+</header>
+
+<!-- Sound Toggle -->
+<button id="soundToggle" style="position:fixed;top:12px;right:12px;z-index:10000;background:#1C2433;color:#c0c0c0;border:1px solid #333;border-radius:8px;padding:6px 10px;cursor:pointer;font-size:16px;" onclick="toggleSound()" title="Toggle Sound">🔇</button>
+<!-- Global Progress Bar -->
+<div id="globalProgress" style="position:fixed;top:0;left:0;width:100%;height:4px;background:#1C2433;z-index:9999;"><div id="globalProgressFill" style="height:100%;width:0%;background:linear-gradient(90deg,#dcb161,#e8c87a);transition:width 0.5s ease;"></div></div>
+
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <div class="progress-meta">
+    <span id="prog-label">Section 1 of 9</span>
+    <span id="prog-pct">0%</span>
+  </div>
+  <div class="progress-bg"><div class="progress-fill" id="prog-fill"></div></div>
+</div>
+
+<!-- NAV PILLS -->
+<nav class="section-nav" id="section-nav">
+  <button class="nav-pill active" id="nav-0" onclick="goToSection(0)">1. Intro</button>
+  <button class="nav-pill" id="nav-1" onclick="goToSection(1)">2. The Greeting</button>
+  <button class="nav-pill" id="nav-2" onclick="goToSection(2)">3. Call Routing</button>
+  <button class="nav-pill" id="nav-3" onclick="goToSection(3)">4. Messages &amp; Follow-Up</button>
+  <button class="nav-pill" id="nav-4" onclick="goToSection(4)">5. Visitors &amp; Boundaries</button>
+  <button class="nav-pill" id="nav-5" onclick="goToSection(5)">6. Difficult Callers</button>
+  <button class="nav-pill" id="nav-6" onclick="goToSection(6)">7. Boss</button>
+  <button class="nav-pill" id="nav-7" onclick="goToSection(7)">8. Results</button>
+  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">9. Certificate</button>
+</nav>
+
+<!-- Points Toast -->
+<div class="points-toast" id="points-toast"></div>
+
+<!-- Confetti Canvas -->
+<canvas id="confettiCanvas"></canvas>
+
+<main>
+
+<!-- ══════════════════════════════════════════
+     SECTION 0 — INTRO / WELCOME
+════════════════════════════════════════════ -->
+<div class="section-card active" id="section-0">
+  <div class="section-header">
+    <div class="section-num">Section 1 · Welcome</div>
+    <h2>Phone Handling &amp; First Impressions</h2>
+    <div class="section-subhead">You are the first voice a client hears. You are the firm's brand in the first 30 seconds.</div>
+  </div>
+  <div class="section-body">
+    <div class="scenario">
+      <div class="scenario-tag">IR-R Track — Module 1</div>
+      <h3>A woman calls GLG after a car accident. She's scared, confused, and doesn't know if she even has a case. She dials the number from a Google search. The phone rings four times. Five times. Six. She hangs up and calls the next firm on the list.</h3>
+      <p>That call took 18 seconds. In those 18 seconds, GLG lost a potential client — possibly a $40,000 case — because no one answered within 3 rings. The woman called another firm. They answered on the second ring: <span class="highlight">"Thank you for calling [Firm], this is Sarah, how can I help you?"</span> She signed with them that afternoon. <span class="urgent">The phone is the most important tool at the front desk. Every unanswered ring is a client walking to the competition.</span></p>
+    </div>
+    <div class="info-block">
+      <h4>📋 What You Will Learn</h4>
+      <ul>
+        <li>The standard GLG greeting — the exact words, the exact tone, every single time</li>
+        <li>How to route calls by scenario: new clients, existing clients, attorneys, courts, adjusters</li>
+        <li>Message taking that actually works — what to collect, how fast to relay, and why "the team" is never a valid recipient</li>
+        <li>Visitor greeting protocol — the 30-second welcome window</li>
+        <li>What reception does NOT do — and why those boundaries protect both you and the firm</li>
+        <li>Handling upset callers — de-escalation, routing, and when to escalate immediately</li>
+      </ul>
+    </div>
+    <div class="callout callout-warn"><strong>The 30-Second Trust Window:</strong> Clients decide whether they trust a law firm within the first 30 seconds of contact. A warm, professional greeting doesn't just sound nice — it's the difference between signing a client and losing one. 32% of customers stop doing business with a brand after just one bad experience.</div>
+    <div class="callout callout-info"><strong>Scoring:</strong> 20 questions × 10 pts = 200 base pts possible. Pass gate: 160/200 (80%). Boss Challenge adds up to 50 bonus points. Bonus points do not count toward the pass gate but do appear on your certificate.</div>
+    <div class="btn-group"><button class="btn btn-primary btn-block" onclick="goToSection(1)">Begin: The GLG Greeting &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 1 — THE GREETING (Q1–Q4)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-1">
+  <div class="section-header">
+    <div class="section-num">Section 2 · The GLG Greeting · Up to 40 pts</div>
+    <h2>Standard Greeting, Tone &amp; the 3-Ring Rule</h2>
+    <div class="section-subhead">Every call starts the same way. No exceptions. No shortcuts.</div>
+  </div>
+  <div class="section-body">
+    <div class="info-block">
+      <h4>📞 The Standard Greeting (Verbatim)</h4>
+      <p style="font-size:16px;font-weight:700;color:#141c2c;padding:12px;background:#fffaed;border-radius:8px;border:1px solid #dcb161;margin:8px 0;">"Thank you for calling Gunn Law Group, this is [Your Name], how can I help you?"</p>
+      <p style="margin-top:10px;">This greeting is not a suggestion. It is the standard. Every call. Every time.</p>
+    </div>
+    <div class="info-block">
+      <h4>🎯 Why This Greeting Works</h4>
+      <ul>
+        <li><strong>"Thank you for calling"</strong> — opens with warmth and gratitude</li>
+        <li><strong>"Gunn Law Group"</strong> — anchors the caller's choice and establishes firm authority</li>
+        <li><strong>"This is [Your Name]"</strong> — personal connection builds immediate trust</li>
+        <li><strong>"How can I help you?"</strong> — invites engagement, puts the caller in control</li>
+      </ul>
+    </div>
+    <div class="callout callout-danger"><strong>The 3-Ring Rule:</strong> Answer all incoming calls within 3 rings. The target is 95%+ compliance. Every ring past three signals to the caller: "This firm might not have their act together."</div>
+    <div class="info-block">
+      <h4>🗣️ Tone Matters More Than Perfect Words</h4>
+      <ul>
+        <li><strong>Smile when you answer</strong> — people can hear it in your voice</li>
+        <li><strong>Speak at a measured pace</strong> — not rushed, not dragging</li>
+        <li><strong>Match the caller's energy appropriately</strong> — don't rush a scared caller, don't slow-walk an urgent one</li>
+        <li><strong>Never answer while eating, having side conversations, or distracted</strong></li>
+      </ul>
+    </div>
+
+    <!-- Q1 -->
+    <div class="question-block" id="q1-block">
+      <div class="q-num">Question 1 of 20 · 10 pts</div>
+      <div class="q-text">It's Monday morning, 9:05 AM. The phone rings. You pick up on the second ring. Which greeting meets GLG's standard?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q1','a',false)" id="q1-a"><span class="opt-letter">A</span><span class="opt-text">"Gunn Law Group, please hold." [places caller on hold immediately]</span></button>
+        <button class="option-btn" onclick="answer('q1','b',false)" id="q1-b"><span class="opt-letter">B</span><span class="opt-text">"Good morning, you've reached Gunn Law. How can I direct your call?"</span></button>
+        <button class="option-btn" onclick="answer('q1','c',true)" id="q1-c"><span class="opt-letter">C</span><span class="opt-text">"Thank you for calling Gunn Law Group, this is Jessica, how can I help you?"</span></button>
+        <button class="option-btn" onclick="answer('q1','d',false)" id="q1-d"><span class="opt-letter">D</span><span class="opt-text">"Hello, thanks for calling. What can I do for you today?"</span></button>
+      </div>
+      <div class="feedback-box" id="q1-fb"></div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="question-block" id="q2-block">
+      <div class="q-num">Question 2 of 20 · 10 pts</div>
+      <div class="q-text">A caller sounds panicked and is speaking very fast — they were rear-ended this morning and are calling from the emergency room parking lot. They say: "I need a lawyer NOW, can someone help me?" How do you handle the tone and pace of this interaction?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q2','a',false)" id="q2-a"><span class="opt-letter">A</span><span class="opt-text">Match their energy and speak quickly to show urgency: "Absolutely, let me get you right over to our intake team immediately!"</span></button>
+        <button class="option-btn" onclick="answer('q2','b',true)" id="q2-b"><span class="opt-letter">B</span><span class="opt-text">Slow your pace slightly, keep your voice warm and steady: "I'm sorry to hear about your accident. You've called the right place. Let me connect you with our intake team — they'll take great care of you."</span></button>
+        <button class="option-btn" onclick="answer('q2','c',false)" id="q2-c"><span class="opt-letter">C</span><span class="opt-text">Ask them to calm down first before proceeding: "Ma'am, I need you to slow down so I can help you. Can you take a breath and tell me what happened?"</span></button>
+        <button class="option-btn" onclick="answer('q2','d',false)" id="q2-d"><span class="opt-letter">D</span><span class="opt-text">Transfer them immediately without gathering any information — speed is the priority for injured callers</span></button>
+      </div>
+      <div class="feedback-box" id="q2-fb"></div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="question-block" id="q3-block">
+      <div class="q-num">Question 3 of 20 · 10 pts</div>
+      <div class="q-text">It's 2:15 PM. You're on a call with an existing client when a second line rings. The second line rings 3 times while you're still on the first call. What is the correct action per GLG standards?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q3','a',false)" id="q3-a"><span class="opt-letter">A</span><span class="opt-text">Let the second call go to voicemail — you can't put the current client on hold, it would be rude</span></button>
+        <button class="option-btn" onclick="answer('q3','b',false)" id="q3-b"><span class="opt-letter">B</span><span class="opt-text">Hang up on the first caller quickly and answer the second line before it goes to voicemail</span></button>
+        <button class="option-btn" onclick="answer('q3','c',false)" id="q3-c"><span class="opt-letter">C</span><span class="opt-text">Ignore the second call — the 3-ring rule only applies when you're not already on a call</span></button>
+        <button class="option-btn" onclick="answer('q3','d',true)" id="q3-d"><span class="opt-letter">D</span><span class="opt-text">Politely ask the first caller to hold briefly, answer the second line with the standard greeting, take their name and number if you can't address them immediately, then return to the first caller</span></button>
+      </div>
+      <div class="feedback-box" id="q3-fb"></div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="question-block" id="q4-block">
+      <div class="q-num">Question 4 of 20 · 10 pts · Confidence Check</div>
+      <div class="q-text">Before answering: rate your confidence in knowing GLG's greeting standard (1-5 in your head). Now answer: The GLG SOP states a specific consistency test for reception. Which statement captures that test?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q4','a',true)" id="q4-a"><span class="opt-letter">A</span><span class="opt-text">"If the receptionist were replaced today, would the client experience be identical tomorrow?" — every greeting, call, and routing decision must be systematized so the role delivers the same result regardless of who fills it</span></button>
+        <button class="option-btn" onclick="answer('q4','b',false)" id="q4-b"><span class="opt-letter">B</span><span class="opt-text">"Can the receptionist handle 95% of calls without transferring to anyone?" — the goal is self-sufficient call resolution at the front desk</span></button>
+        <button class="option-btn" onclick="answer('q4','c',false)" id="q4-c"><span class="opt-letter">C</span><span class="opt-text">"Does the receptionist answer every call within 2 rings?" — the 2-ring standard is the primary performance metric</span></button>
+        <button class="option-btn" onclick="answer('q4','d',false)" id="q4-d"><span class="opt-letter">D</span><span class="opt-text">"Has the receptionist memorized all client names and case numbers?" — personalized service is the core measure of reception quality</span></button>
+      </div>
+      <div class="feedback-box" id="q4-fb"></div>
+    </div>
+
+    <div class="section-score" id="s1-score" style="display:none;"><div class="score-display" id="s1-score-val"></div><div class="score-label">Section 2 Score</div></div>
+    <div class="btn-group" id="s1-next"><button class="btn btn-primary btn-block" onclick="goToSection(2)">Next: Call Routing by Scenario &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 2 — CALL ROUTING (Q5–Q8)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-2">
+  <div class="section-header">
+    <div class="section-num">Section 3 · Call Routing · Up to 40 pts</div>
+    <h2>Routing Every Call to the Right Person, Every Time</h2>
+    <div class="section-subhead">Route accurately. Route promptly. The wrong person getting a call wastes everyone's time — and can damage a case.</div>
+  </div>
+  <div class="section-body">
+    <div class="info-block">
+      <h4>📋 GLG Call Routing Table</h4>
+      <table class="stat-table">
+        <tr><th>Caller Type</th><th>Route To</th><th>Key Rule</th></tr>
+        <tr><td><strong>New potential client</strong></td><td>Intake (Victoria)</td><td>If unavailable: full message + notify intake immediately</td></tr>
+        <tr><td><strong>Existing client (pre-lit)</strong></td><td>Assigned pre-lit paralegal</td><td>Do NOT route to attorney without paralegal's direction</td></tr>
+        <tr><td><strong>Existing client (litigation)</strong></td><td>Assigned litigation paralegal</td><td>Do NOT route to attorney without paralegal's direction</td></tr>
+        <tr><td><strong>Adjuster — settlement offer</strong></td><td>Assigned pre-lit paralegal</td><td>Paralegal documents; consults Head Attorney (Adriauna) before accepting</td></tr>
+        <tr><td><strong>Adjuster/opposing counsel — general</strong></td><td>Relevant attorney ONLY</td><td>NEVER route opposing counsel to a paralegal</td></tr>
+        <tr><td><strong>Attorney or court staff</strong></td><td>Transfer immediately</td><td>No screening, no delays, no message-taking unless truly unavailable</td></tr>
+        <tr><td><strong>Upset or escalating caller</strong></td><td>Supervisor → Managing Attorney</td><td>Do not attempt to resolve — de-escalate and route</td></tr>
+      </table>
+    </div>
+    <div class="callout callout-danger"><strong>Priority Transfers — No Screening:</strong> Judges, court staff, other attorneys, and insurance adjusters asking for the attorney specifically get transferred immediately. Do not take a message unless the attorney is truly unavailable.</div>
+
+    <!-- Q5 -->
+    <div class="question-block" id="q5-block">
+      <div class="q-num">Question 5 of 20 · 10 pts</div>
+      <div class="q-text">A caller says: "Hi, I was hit by a delivery truck last week and my friend told me I should call you guys. I don't know if I have a case." This is their first time calling GLG. Where do you route this call?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q5','a',false)" id="q5-a"><span class="opt-letter">A</span><span class="opt-text">Transfer directly to the Managing Attorney — truck accident cases are high-value and need immediate attorney attention</span></button>
+        <button class="option-btn" onclick="answer('q5','b',false)" id="q5-b"><span class="opt-letter">B</span><span class="opt-text">Take a brief message and email it to the general office inbox for someone to follow up when they're available</span></button>
+        <button class="option-btn" onclick="answer('q5','c',true)" id="q5-c"><span class="opt-letter">C</span><span class="opt-text">Reassure them ("You've called the right place"), collect basic info (name, phone, email, brief description of accident, injuries, existing attorney), and transfer to Intake (Victoria) — or if she's unavailable, take a full message and notify intake immediately</span></button>
+        <button class="option-btn" onclick="answer('q5','d',false)" id="q5-d"><span class="opt-letter">D</span><span class="opt-text">Ask them detailed questions about the accident to determine if they have a valid case before deciding whether to transfer to intake</span></button>
+      </div>
+      <div class="feedback-box" id="q5-fb"></div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="question-block" id="q6-block">
+      <div class="q-num">Question 6 of 20 · 10 pts</div>
+      <div class="q-text">A caller identifies themselves: "This is Jennifer Martinez from the Fulton County Superior Court clerk's office. I need to speak with Attorney Gunn regarding a filing deadline." What do you do?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q6','a',false)" id="q6-a"><span class="opt-letter">A</span><span class="opt-text">Take a message with her callback number and reason for the call, then relay it to Attorney Gunn within 15 minutes</span></button>
+        <button class="option-btn" onclick="answer('q6','b',true)" id="q6-b"><span class="opt-letter">B</span><span class="opt-text">Transfer immediately: "Of course, let me transfer you right away. One moment please." — court staff calls get transferred without screening or delay</span></button>
+        <button class="option-btn" onclick="answer('q6','c',false)" id="q6-c"><span class="opt-letter">C</span><span class="opt-text">Ask her which case it's regarding so you can pull up the file and determine if a paralegal can handle it first</span></button>
+        <button class="option-btn" onclick="answer('q6','d',false)" id="q6-d"><span class="opt-letter">D</span><span class="opt-text">Ask her to email the details to the firm's general inbox so Attorney Gunn can review it when he's available</span></button>
+      </div>
+      <div class="feedback-box" id="q6-fb"></div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="question-block" id="q7-block">
+      <div class="q-num">Question 7 of 20 · 10 pts</div>
+      <div class="q-text">An insurance adjuster calls: "This is Mark Davis from State Farm. I have a settlement offer on the Johnson case and need to speak with the paralegal handling it." According to the GLG routing table, where does this call go?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q7','a',false)" id="q7-a"><span class="opt-letter">A</span><span class="opt-text">Transfer directly to Attorney Gunn — settlement offers are attorney-level decisions and should bypass the paralegal</span></button>
+        <button class="option-btn" onclick="answer('q7','b',false)" id="q7-b"><span class="opt-letter">B</span><span class="opt-text">Take the settlement amount from the adjuster and relay it to the paralegal via email to save time</span></button>
+        <button class="option-btn" onclick="answer('q7','c',false)" id="q7-c"><span class="opt-letter">C</span><span class="opt-text">Tell the adjuster you'll have someone call him back — adjusters don't get direct transfers</span></button>
+        <button class="option-btn" onclick="answer('q7','d',true)" id="q7-d"><span class="opt-letter">D</span><span class="opt-text">Route to the assigned pre-lit paralegal — the paralegal receives and documents the offer, then consults the Pre-Lit Head Attorney (Adriauna) before any acceptance</span></button>
+      </div>
+      <div class="feedback-box" id="q7-fb"></div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="question-block" id="q8-block">
+      <div class="q-num">Question 8 of 20 · 10 pts</div>
+      <div class="q-text">A caller says: "Hi, this is Attorney Rachel Kim from Wilson & Associates. I'm opposing counsel on the Davis matter and I need to speak with Mr. Gunn." You check — Attorney Gunn is in a meeting. What do you do?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q8','a',true)" id="q8-a"><span class="opt-letter">A</span><span class="opt-text">Because Attorney Gunn is truly unavailable, take a message: log her name, firm (Wilson & Associates), callback number, and the matter name — relay immediately. NEVER route opposing counsel to a paralegal.</span></button>
+        <button class="option-btn" onclick="answer('q8','b',false)" id="q8-b"><span class="opt-letter">B</span><span class="opt-text">Transfer her to the litigation paralegal on the Davis case — the paralegal can handle attorney-to-attorney matters when Attorney Gunn is unavailable</span></button>
+        <button class="option-btn" onclick="answer('q8','c',false)" id="q8-c"><span class="opt-letter">C</span><span class="opt-text">Tell her Attorney Gunn is in a meeting and ask her to call back in an hour when he might be available</span></button>
+        <button class="option-btn" onclick="answer('q8','d',false)" id="q8-d"><span class="opt-letter">D</span><span class="opt-text">Interrupt the meeting — opposing counsel calls always get put through regardless of what the attorney is doing</span></button>
+      </div>
+      <div class="feedback-box" id="q8-fb"></div>
+    </div>
+
+    <div class="section-score" id="s2-score" style="display:none;"><div class="score-display" id="s2-score-val"></div><div class="score-label">Section 3 Score</div></div>
+    <div class="btn-group" id="s2-next"><button class="btn btn-primary btn-block" onclick="goToSection(3)">Next: Messages &amp; Follow-Up &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 3 — MESSAGES & FOLLOW-UP (Q9–Q12)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-3">
+  <div class="section-header">
+    <div class="section-num">Section 4 · Messages &amp; Follow-Up · Up to 40 pts</div>
+    <h2>Message Taking, Voicemail &amp; the 15-Minute Relay Rule</h2>
+    <div class="section-subhead">A message addressed to "the team" is assigned to no one. Every message goes to a named person, within 15 minutes.</div>
+  </div>
+  <div class="section-body">
+    <div class="scenario">
+      <div class="scenario-tag">Real-World Consequence</div>
+      <h3>A client calls at 10:15 AM about an urgent question on their upcoming deposition. The receptionist takes a message and puts it in the "general inbox." By 3:00 PM, no one has seen it. The client calls back — angry, anxious, and questioning whether the firm cares about their case.</h3>
+      <p>The message sat for nearly 5 hours because it was sent to <span class="highlight">"the team"</span> instead of the assigned paralegal by name. <span class="urgent">A task addressed to a team is assigned to no one.</span> The client's trust dropped. Their cooperation in prep went sideways. All because a message wasn't relayed to a named person within 15 minutes.</p>
+    </div>
+    <div class="info-block">
+      <h4>📝 Complete Message Checklist</h4>
+      <ul>
+        <li><strong>Caller's full name</strong></li>
+        <li><strong>Phone number</strong> (repeat it back to confirm)</li>
+        <li><strong>Best callback time</strong></li>
+        <li><strong>Brief reason for the call</strong></li>
+        <li><strong>Is it urgent?</strong></li>
+      </ul>
+      <p style="margin-top:10px;font-weight:700;">Relay to the named recipient within 15 minutes. Use whatever gets seen fastest — CasePeer task, email, Teams, or text.</p>
+    </div>
+    <div class="callout callout-warn"><strong>Voicemail Protocol:</strong> Check the firm's main voicemail at the start of every business day AND after lunch. Route all voicemail messages to the appropriate staff member within 30 minutes of checking.</div>
+    <div class="callout callout-danger"><strong>Never promise a specific callback time</strong> unless the recipient has confirmed availability. If you promise a callback time, it MUST be honored. Broken promises destroy client trust faster than slow service.</div>
+
+    <!-- Q9 -->
+    <div class="question-block" id="q9-block">
+      <div class="q-num">Question 9 of 20 · 10 pts</div>
+      <div class="q-text">An existing client calls at 11:30 AM to speak with their case manager, who is at lunch. You take a message. Which of the following meets GLG's message standard?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q9','a',false)" id="q9-a"><span class="opt-letter">A</span><span class="opt-text">Write "Client called — wants callback" on a sticky note and place it on the case manager's desk</span></button>
+        <button class="option-btn" onclick="answer('q9','b',true)" id="q9-b"><span class="opt-letter">B</span><span class="opt-text">Collect caller's full name, phone number (repeated back), best callback time, brief reason, and urgency level — then relay via CasePeer task or text to the specific case manager within 15 minutes</span></button>
+        <button class="option-btn" onclick="answer('q9','c',false)" id="q9-c"><span class="opt-letter">C</span><span class="opt-text">Email the message to the firm's general office distribution list so the first available person can respond</span></button>
+        <button class="option-btn" onclick="answer('q9','d',false)" id="q9-d"><span class="opt-letter">D</span><span class="opt-text">Tell the client their case manager is at lunch and to call back in an hour when they'll be available</span></button>
+      </div>
+      <div class="feedback-box" id="q9-fb"></div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="question-block" id="q10-block">
+      <div class="q-num">Question 10 of 20 · 10 pts</div>
+      <div class="q-text">A client says: "I need to talk to my case manager TODAY. I'm going in for surgery tomorrow and I have questions. Can someone call me by 2:00 PM?" The case manager is in a client meeting until 1:30 PM. What do you say?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q10','a',false)" id="q10-a"><span class="opt-letter">A</span><span class="opt-text">"Absolutely, I'll make sure they call you by 2:00 PM." — the client needs certainty right now</span></button>
+        <button class="option-btn" onclick="answer('q10','b',false)" id="q10-b"><span class="opt-letter">B</span><span class="opt-text">"I can't promise anything — they're very busy today. Try calling back after lunch."</span></button>
+        <button class="option-btn" onclick="answer('q10','c',true)" id="q10-c"><span class="opt-letter">C</span><span class="opt-text">"I understand this is time-sensitive, especially with your surgery tomorrow. Your case manager is in a meeting right now but I'll mark this as urgent and get the message to them the moment they're available. I can't promise a specific time, but I'll make sure they know you need to hear back today."</span></button>
+        <button class="option-btn" onclick="answer('q10','d',false)" id="q10-d"><span class="opt-letter">D</span><span class="opt-text">Transfer them to Attorney Gunn since the case manager is unavailable and the client sounds anxious</span></button>
+      </div>
+      <div class="feedback-box" id="q10-fb"></div>
+    </div>
+
+    <!-- Q11 -->
+    <div class="question-block" id="q11-block">
+      <div class="q-num">Question 11 of 20 · 10 pts</div>
+      <div class="q-text">It's 9:00 AM Monday. You've just opened the office. The voicemail light is blinking — there are 4 messages from the weekend. Per GLG protocol, what is the correct procedure?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q11','a',true)" id="q11-a"><span class="opt-letter">A</span><span class="opt-text">Listen to all 4 messages, log each one, and route every message to the named recipient within 30 minutes of checking — flagging any legal correspondence or court-related messages to the Managing Attorney immediately</span></button>
+        <button class="option-btn" onclick="answer('q11','b',false)" id="q11-b"><span class="opt-letter">B</span><span class="opt-text">Check messages after you've finished your morning setup routine — voicemail can wait until the desk is organized and phones are tested</span></button>
+        <button class="option-btn" onclick="answer('q11','c',false)" id="q11-c"><span class="opt-letter">C</span><span class="opt-text">Forward all voicemails to the general office email and let each staff member sort through them during the day</span></button>
+        <button class="option-btn" onclick="answer('q11','d',false)" id="q11-d"><span class="opt-letter">D</span><span class="opt-text">Listen to the messages but wait to relay them until after the 9:30 staff meeting so you can inform everyone at once</span></button>
+      </div>
+      <div class="feedback-box" id="q11-fb"></div>
+    </div>
+
+    <!-- Q12 -->
+    <div class="question-block" id="q12-block">
+      <div class="q-num">Question 12 of 20 · 10 pts</div>
+      <div class="q-text">A client calls at 4:45 PM — 15 minutes before close. Their paralegal left for the day at 4:30. The client says: "I need her to call me back about my medical records request. She was supposed to call me today." What do you do?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q12','a',false)" id="q12-a"><span class="opt-letter">A</span><span class="opt-text">Tell the client their paralegal has left and to call back tomorrow morning — there's nothing you can do after hours</span></button>
+        <button class="option-btn" onclick="answer('q12','b',false)" id="q12-b"><span class="opt-letter">B</span><span class="opt-text">Try to look up the client's medical records information in CasePeer and give them an update yourself</span></button>
+        <button class="option-btn" onclick="answer('q12','c',false)" id="q12-c"><span class="opt-letter">C</span><span class="opt-text">Transfer them to the Managing Attorney since the paralegal is gone</span></button>
+        <button class="option-btn" onclick="answer('q12','d',true)" id="q12-d"><span class="opt-letter">D</span><span class="opt-text">Take a complete message (name, number, reason, urgency), send it to the paralegal immediately via text or email, and tell the client: "I'll get this message to her right away. If she can't reach you tonight, she'll call you first thing tomorrow." Flag it as unresolved before closing.</span></button>
+      </div>
+      <div class="feedback-box" id="q12-fb"></div>
+    </div>
+
+    <div class="section-score" id="s3-score" style="display:none;"><div class="score-display" id="s3-score-val"></div><div class="score-label">Section 4 Score</div></div>
+    <div class="btn-group" id="s3-next"><button class="btn btn-primary btn-block" onclick="goToSection(4)">Next: Visitors &amp; Role Boundaries &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 4 — VISITORS & BOUNDARIES (Q13–Q16)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-4">
+  <div class="section-header">
+    <div class="section-num">Section 5 · Visitors &amp; Role Boundaries · Up to 40 pts</div>
+    <h2>Greeting Visitors &amp; What Reception Does NOT Do</h2>
+    <div class="section-subhead">You greet every person within 30 seconds. You never cross the line into legal territory.</div>
+  </div>
+  <div class="section-body">
+    <div class="info-block">
+      <h4>👋 The GLG Welcome System</h4>
+      <ul>
+        <li>Greet every visitor <strong>immediately upon entry — within 30 seconds</strong></li>
+        <li>Standard greeting: <strong>"Good morning/afternoon, welcome to Gunn Law Group. How can I help you?"</strong></li>
+        <li>Ask for the visitor's name and purpose of their visit</li>
+        <li>Notify the appropriate staff member immediately with the visitor's name</li>
+        <li>Offer a seat and provide an estimated wait time if applicable</li>
+        <li><strong>Never leave a visitor unattended for more than a few minutes without an update</strong></li>
+      </ul>
+    </div>
+    <div class="info-block">
+      <h4>✨ First Impression Excellence</h4>
+      <ul>
+        <li><strong>Genuine smile</strong> — increases perceived competence and trustworthiness</li>
+        <li><strong>Eye contact</strong> — signals respect and attention</li>
+        <li><strong>Stand or lean forward</strong> — shows engagement</li>
+        <li><strong>Focus completely</strong> — no phone, no side conversations during the greeting</li>
+        <li><strong>Follow through</strong> — if you say "5 minutes," check back in 4</li>
+      </ul>
+    </div>
+    <div class="callout callout-danger">
+      <strong>🚫 What Reception Does NOT Do:</strong>
+      <ul style="margin-top:8px;padding-left:18px;">
+        <li>Does NOT provide legal advice, case updates, or settlement information of any kind</li>
+        <li>Does NOT discuss case strategy, liability, or case value</li>
+        <li>Does NOT access or relay information from CasePeer to callers</li>
+        <li>Does NOT make commitments on behalf of attorneys or paralegals</li>
+        <li>Does NOT attempt to resolve client complaints — escalate to supervisor</li>
+        <li>Does NOT route calls directly to Managing Attorney without trying the appropriate department first</li>
+      </ul>
+      <p style="margin-top:10px;"><strong>When in doubt, route — do not answer.</strong></p>
+    </div>
+
+    <!-- Q13 -->
+    <div class="question-block" id="q13-block">
+      <div class="q-num">Question 13 of 20 · 10 pts</div>
+      <div class="q-text">A man walks into the office at 10:00 AM. You're typing an email. He stands at the desk for 15 seconds before you look up. Which element of the GLG Welcome System did you violate, and what should have happened?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q13','a',false)" id="q13-a"><span class="opt-letter">A</span><span class="opt-text">No violation — 15 seconds is within the 30-second greeting window, and finishing the email shows professionalism</span></button>
+        <button class="option-btn" onclick="answer('q13','b',true)" id="q13-b"><span class="opt-letter">B</span><span class="opt-text">You should have stopped the email immediately upon noticing the visitor, stood, made eye contact, and greeted them within seconds of entry — "Good morning, welcome to Gunn Law Group. How can I help you?" The visitor should never have to wait while you finish a task</span></button>
+        <button class="option-btn" onclick="answer('q13','c',false)" id="q13-c"><span class="opt-letter">C</span><span class="opt-text">The violation was not standing up — the SOP requires reception to remain standing at all times during business hours</span></button>
+        <button class="option-btn" onclick="answer('q13','d',false)" id="q13-d"><span class="opt-letter">D</span><span class="opt-text">The violation was only a minor issue — you acknowledged him within 30 seconds, which meets the minimum standard</span></button>
+      </div>
+      <div class="feedback-box" id="q13-fb"></div>
+    </div>
+
+    <!-- Q14 -->
+    <div class="question-block" id="q14-block">
+      <div class="q-num">Question 14 of 20 · 10 pts</div>
+      <div class="q-text">An existing client walks in and says: "Hey, I was just in the area and wanted to check — has there been any update on my settlement? My friend got $50,000 for a similar accident and I'm hoping mine is at least that." How do you respond?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q14','a',false)" id="q14-a"><span class="opt-letter">A</span><span class="opt-text">"Every case is different, but $50,000 sounds about right for that kind of accident. Let me see if I can pull up your file real quick."</span></button>
+        <button class="option-btn" onclick="answer('q14','b',false)" id="q14-b"><span class="opt-letter">B</span><span class="opt-text">"I'm not sure about the amount, but I know your case is moving along. I think there's been some progress."</span></button>
+        <button class="option-btn" onclick="answer('q14','c',true)" id="q14-c"><span class="opt-letter">C</span><span class="opt-text">"Great to see you! I can't discuss case details or settlement information — that's something your case manager or attorney can give you the most accurate update on. Let me see if they're available right now, or I can have them reach out to you today."</span></button>
+        <button class="option-btn" onclick="answer('q14','d',false)" id="q14-d"><span class="opt-letter">D</span><span class="opt-text">"I don't have access to that information. You'll need to call and make an appointment."</span></button>
+      </div>
+      <div class="feedback-box" id="q14-fb"></div>
+    </div>
+
+    <!-- Q15 -->
+    <div class="question-block" id="q15-block">
+      <div class="q-num">Question 15 of 20 · 10 pts</div>
+      <div class="q-text">A visitor has been waiting in the lobby for 20 minutes. The paralegal they're here to see is still on a call. The visitor looks increasingly impatient. Per the SOP, what should you do?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q15','a',true)" id="q15-a"><span class="opt-letter">A</span><span class="opt-text">Proactively approach the visitor with an update: "I'm sorry for the wait — [paralegal name] is finishing up a call and should be with you shortly. Can I get you some water while you wait?" — then check back again if the wait extends further</span></button>
+        <button class="option-btn" onclick="answer('q15','b',false)" id="q15-b"><span class="opt-letter">B</span><span class="opt-text">Let them wait — the paralegal will come get them when the call is done. Interrupting would be worse.</span></button>
+        <button class="option-btn" onclick="answer('q15','c',false)" id="q15-c"><span class="opt-letter">C</span><span class="opt-text">Walk them back to the paralegal's office and have them wait there so they feel like they're making progress</span></button>
+        <button class="option-btn" onclick="answer('q15','d',false)" id="q15-d"><span class="opt-letter">D</span><span class="opt-text">Transfer them to another paralegal who might be able to help instead of making them wait</span></button>
+      </div>
+      <div class="feedback-box" id="q15-fb"></div>
+    </div>
+
+    <!-- Q16 -->
+    <div class="question-block" id="q16-block">
+      <div class="q-num">Question 16 of 20 · 10 pts</div>
+      <div class="q-text">A caller says: "I'm a client and I need to know — is my case in litigation or is it still in pre-litigation? I just want to know what stage we're at." You know the answer because you overheard the paralegal discussing it yesterday. What do you do?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q16','a',false)" id="q16-a"><span class="opt-letter">A</span><span class="opt-text">Tell them what you know — it's not legal advice, it's just the case stage, and they have a right to know</span></button>
+        <button class="option-btn" onclick="answer('q16','b',false)" id="q16-b"><span class="opt-letter">B</span><span class="opt-text">Look it up in CasePeer to confirm what you overheard, then tell them the stage</span></button>
+        <button class="option-btn" onclick="answer('q16','c',false)" id="q16-c"><span class="opt-letter">C</span><span class="opt-text">Say "I think it's in pre-lit but I'm not 100% sure — let me have your case manager confirm and call you back"</span></button>
+        <button class="option-btn" onclick="answer('q16','d',true)" id="q16-d"><span class="opt-letter">D</span><span class="opt-text">"I want to make sure you get the most accurate information — let me have your case manager call you back today. Can I confirm the best number to reach you?" Do NOT relay case information, even if you think you know the answer.</span></button>
+      </div>
+      <div class="feedback-box" id="q16-fb"></div>
+    </div>
+
+    <div class="section-score" id="s4-score" style="display:none;"><div class="score-display" id="s4-score-val"></div><div class="score-label">Section 5 Score</div></div>
+    <div class="btn-group" id="s4-next"><button class="btn btn-primary btn-block" onclick="goToSection(5)">Next: Handling Difficult Callers &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 5 — DIFFICULT CALLERS (Q17–Q20)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-5">
+  <div class="section-header">
+    <div class="section-num">Section 6 · Handling Difficult Callers · Up to 40 pts</div>
+    <h2>De-Escalation, Routing &amp; the Khalil Incident Rule</h2>
+    <div class="section-subhead">The upset caller is a client in crisis. De-escalate, route, document. Never try to be the hero.</div>
+  </div>
+  <div class="section-body">
+    <div class="scenario">
+      <div class="scenario-tag">The Khalil Incident</div>
+      <h3>A client called asking for a case update. The receptionist — trying to be helpful — told them: "I think your case settled for around $30,000." The actual settlement was $45,000. The client became furious, called back screaming at the attorney, and nearly fired the firm.</h3>
+      <p>The receptionist gave <span class="highlight">wrong case information</span> with good intentions. The client formed expectations based on incorrect data. When the real number came, instead of being happy about $45K, they were enraged about the "lie." <span class="urgent">This is why reception NEVER provides case-specific information. Not because you're unhelpful — because even a well-meaning mistake can destroy client trust and damage the case.</span></p>
+    </div>
+    <div class="info-block">
+      <h4>🧊 The De-Escalation Protocol (4 Steps)</h4>
+      <ol>
+        <li style="margin-bottom:8px;"><strong>Step 1 — Emotional Regulation:</strong> Stay calm. Lower your voice slightly. Breathe before speaking. Do NOT match their emotional tone.</li>
+        <li style="margin-bottom:8px;"><strong>Step 2 — Acknowledgment:</strong> "I understand you're frustrated. Let me get the right person on the line for you." Show empathy without admitting fault.</li>
+        <li style="margin-bottom:8px;"><strong>Step 3 — Professional Boundaries:</strong> Do not argue, explain case details, or attempt to resolve the complaint. Route to paralegal or supervisor immediately.</li>
+        <li style="margin-bottom:8px;"><strong>Step 4 — Documentation:</strong> Document the call in the message log with a note about the caller being upset and the escalation path taken.</li>
+      </ol>
+    </div>
+    <div class="callout callout-danger"><strong>If a caller becomes verbally abusive or threatening:</strong> "I want to help, but I'm going to need to transfer you to a supervisor." Transfer immediately to the Managing Attorney. Do not engage further.</div>
+
+    <!-- Q17 -->
+    <div class="question-block" id="q17-block">
+      <div class="q-num">Question 17 of 20 · 10 pts</div>
+      <div class="q-text">A client calls, clearly upset: "I've been waiting TWO WEEKS for a callback! Nobody at this firm cares about my case! I want to talk to the lawyer RIGHT NOW!" You can hear their voice shaking with frustration. What is your first response?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q17','a',false)" id="q17-a"><span class="opt-letter">A</span><span class="opt-text">"Sir, I need you to calm down before I can help you. I can't transfer you if you're yelling."</span></button>
+        <button class="option-btn" onclick="answer('q17','b',true)" id="q17-b"><span class="opt-letter">B</span><span class="opt-text">Lower your voice slightly and say: "I understand you're frustrated, and I want to help. Let me get the right person to address your concern. Can you tell me a little more about what's going on so I can connect you to the best person?"</span></button>
+        <button class="option-btn" onclick="answer('q17','c',false)" id="q17-c"><span class="opt-letter">C</span><span class="opt-text">"I apologize for the delay. Let me look up your case and see what happened with the callback."</span></button>
+        <button class="option-btn" onclick="answer('q17','d',false)" id="q17-d"><span class="opt-letter">D</span><span class="opt-text">Transfer them directly to Attorney Gunn without saying anything — they asked for the lawyer and they deserve to be heard</span></button>
+      </div>
+      <div class="feedback-box" id="q17-fb"></div>
+    </div>
+
+    <!-- Q18 -->
+    <div class="question-block" id="q18-block">
+      <div class="q-num">Question 18 of 20 · 10 pts</div>
+      <div class="q-text">The angry caller from Q17 has calmed down slightly after your acknowledgment. They say: "My case manager hasn't called me back. I want to know what's happening with my case — has the insurance company made an offer yet?" What do you say?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q18','a',false)" id="q18-a"><span class="opt-letter">A</span><span class="opt-text">"Let me check the system real quick to see if there's been an offer..." [opens CasePeer]</span></button>
+        <button class="option-btn" onclick="answer('q18','b',false)" id="q18-b"><span class="opt-letter">B</span><span class="opt-text">"I don't think there's been an offer yet, but I'm not the right person to confirm that. Let me transfer you."</span></button>
+        <button class="option-btn" onclick="answer('q18','c',true)" id="q18-c"><span class="opt-letter">C</span><span class="opt-text">"I can hear this is really important to you, and you deserve an accurate update. I'm going to get your case manager or their supervisor on the line so they can walk you through exactly where things stand. Can I confirm the best number for a callback?"</span></button>
+        <button class="option-btn" onclick="answer('q18','d',false)" id="q18-d"><span class="opt-letter">D</span><span class="opt-text">"Unfortunately I can't share case details over the phone for security reasons. You'll need to come into the office for an update."</span></button>
+      </div>
+      <div class="feedback-box" id="q18-fb"></div>
+    </div>
+
+    <!-- Q19 -->
+    <div class="question-block" id="q19-block">
+      <div class="q-num">Question 19 of 20 · 10 pts</div>
+      <div class="q-text">A caller has become verbally abusive. They've called you a name and said: "You people are scam artists. I'm going to report this firm to the bar. Get me your boss or I'll come down there myself." What is the correct escalation per GLG protocol?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q19','a',true)" id="q19-a"><span class="opt-letter">A</span><span class="opt-text">"I really do want to help you. Let me transfer you to a supervisor right now." — place them on hold and transfer to the Managing Attorney immediately. Document the call with a note that the caller was threatening and the escalation path taken.</span></button>
+        <button class="option-btn" onclick="answer('q19','b',false)" id="q19-b"><span class="opt-letter">B</span><span class="opt-text">Hang up — once someone threatens you personally, you have the right to end the call for your own safety</span></button>
+        <button class="option-btn" onclick="answer('q19','c',false)" id="q19-c"><span class="opt-letter">C</span><span class="opt-text">Tell them: "Threats won't help your situation. If you'd like to file a formal complaint, I can give you the Georgia Bar's phone number."</span></button>
+        <button class="option-btn" onclick="answer('q19','d',false)" id="q19-d"><span class="opt-letter">D</span><span class="opt-text">Keep them on the line and try to de-escalate further — they're angry but they need to feel heard before you route them</span></button>
+      </div>
+      <div class="feedback-box" id="q19-fb"></div>
+    </div>
+
+    <!-- Q20 -->
+    <div class="question-block" id="q20-block">
+      <div class="q-num">Question 20 of 20 · 10 pts · Synthesis</div>
+      <div class="q-text">An existing client calls and says: "Hi, I'm calling to check on my case. Can you just tell me — is my case settled or not? I just need a yes or no." You know this person is a client because you recognize their name. What is the COMPLETE correct response per GLG protocol?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q20','a',false)" id="q20-a"><span class="opt-letter">A</span><span class="opt-text">"Yes" or "No" — it's a simple factual question, not legal advice, and refusing to answer a yes/no question makes the firm look evasive</span></button>
+        <button class="option-btn" onclick="answer('q20','b',false)" id="q20-b"><span class="opt-letter">B</span><span class="opt-text">"I'm not allowed to tell you anything about your case. You'll need to call your paralegal."</span></button>
+        <button class="option-btn" onclick="answer('q20','c',false)" id="q20-c"><span class="opt-letter">C</span><span class="opt-text">"Let me look that up for you in CasePeer real quick..."</span></button>
+        <button class="option-btn" onclick="answer('q20','d',true)" id="q20-d"><span class="opt-letter">D</span><span class="opt-text">"Hi [Name], thank you for calling. I want to make sure you get the most accurate information from the person working your case directly. Let me get your case manager to call you back today. Can I confirm the best number to reach you?" — collect callback info, relay the message to the assigned case manager within 15 minutes</span></button>
+      </div>
+      <div class="feedback-box" id="q20-fb"></div>
+    </div>
+
+    <div class="section-score" id="s5-score" style="display:none;"><div class="score-display" id="s5-score-val"></div><div class="score-label">Section 6 Score</div></div>
+    <div class="btn-group" id="s5-next"><button class="btn btn-primary btn-block" onclick="goToSection(6)">Next: Boss Challenge — Full Scenario &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 6 — BOSS CHALLENGE (Q21–Q25, Bonus)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-6">
+  <div class="section-header">
+    <div class="section-num">Section 7 · Boss Challenge · Up to 50 Bonus pts</div>
+    <h2>⚡ Boss Challenge: A Full Morning at the Front Desk</h2>
+    <div class="section-subhead">Five connected scenarios. One morning. Everything you've learned — applied under pressure.</div>
+  </div>
+  <div class="section-body">
+    <div class="boss-header">
+      <div class="boss-icon">⚡</div>
+      <h3>Boss Challenge: The Marcus Thompson Morning</h3>
+      <p>It's 9:15 AM on a Tuesday. You've just finished opening — voicemail checked, desk organized, phones live. Then everything happens at once. Five real scenarios from a single morning. No base points at stake — but up to 50 bonus points for getting it all right.</p>
+    </div>
+
+    <div class="case-file">
+      <div class="case-file-header">
+        <div class="case-file-icon">📋</div>
+        <div>
+          <div class="case-file-title">Morning Context · GLG-2026-3071</div>
+          <div class="case-file-sub">Tuesday, 9:15 AM · You are at the front desk</div>
+        </div>
+      </div>
+      <div class="case-detail"><span class="case-key">Situation</span><span class="case-val">You've completed morning opening checklist. Voicemail had 2 messages — both relayed. Desk is clean. Phones are active.</span></div>
+      <div class="case-detail"><span class="case-key">Staff Status</span><span class="case-val">Victoria (Intake) — at her desk. Adriauna (Head Attorney) — in office. Attorney Gunn — arriving at 9:30. Paralegals — all in.</span></div>
+      <div class="case-detail"><span class="case-key">What Happens Next</span><span class="case-val">Five events in rapid succession. Handle each one correctly.</span></div>
+    </div>
+
+    <!-- BOSS Q21 -->
+    <div class="question-block" id="q21-block">
+      <div class="q-num">Boss Task 1 of 5 · 10 Bonus pts · The New Client Call</div>
+      <div class="q-text">9:17 AM — Phone rings (Line 1). Caller: "Um, hi... I was in an accident on I-285 yesterday. A friend gave me your number. I don't really know how this works... do I need a lawyer?" They sound nervous and uncertain. What do you do?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q21','a',false)" id="q21-a"><span class="opt-letter">A</span><span class="opt-text">"Yes, you probably need a lawyer, especially for a highway accident. Let me transfer you to our intake department." [transfers without collecting any information]</span></button>
+        <button class="option-btn" onclick="answer('q21','b',true)" id="q21-b"><span class="opt-letter">B</span><span class="opt-text">"I'm sorry to hear about your accident. You've called the right place — we handle exactly these kinds of cases." Collect: full name, phone, email, brief description (I-285, yesterday), injuries, whether they're treating, whether they have an attorney. "Let me transfer you to Victoria on our intake team. If we get disconnected, you can call back and ask for her directly. We'll take great care of you."</span></button>
+        <button class="option-btn" onclick="answer('q21','c',false)" id="q21-c"><span class="opt-letter">C</span><span class="opt-text">"You should definitely get a lawyer — highway accidents can be complicated. Can I schedule you for a consultation next week?" [schedules without routing to intake]</span></button>
+        <button class="option-btn" onclick="answer('q21','d',false)" id="q21-d"><span class="opt-letter">D</span><span class="opt-text">"Let me ask you some questions to figure out if you have a valid case first. How fast were you going? Was the other driver cited? Did you go to the hospital?"</span></button>
+      </div>
+      <div class="feedback-box" id="q21-fb"></div>
+    </div>
+
+    <!-- BOSS Q22 -->
+    <div class="question-block" id="q22-block">
+      <div class="q-num">Boss Task 2 of 5 · 10 Bonus pts · The Overlap</div>
+      <div class="q-text">9:22 AM — While you're wrapping up the intake transfer on Line 1, Line 2 rings. You pick up: "This is Judge Patterson's clerk from DeKalb County. I need Attorney Gunn immediately regarding a hearing this morning." Attorney Gunn hasn't arrived yet — he's expected at 9:30. What do you do?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q22','a',false)" id="q22-a"><span class="opt-letter">A</span><span class="opt-text">"He's not in yet. Can I take a message and have him call back when he arrives?"</span></button>
+        <button class="option-btn" onclick="answer('q22','b',false)" id="q22-b"><span class="opt-letter">B</span><span class="opt-text">"Let me transfer you to Adriauna — she can handle it as Head Attorney."</span></button>
+        <button class="option-btn" onclick="answer('q22','c',true)" id="q22-c"><span class="opt-letter">C</span><span class="opt-text">"One moment please — this is a priority." Court calls get immediate transfer. Attorney Gunn is truly unavailable (not in yet), so take a complete message: judge's name, clerk's name, callback number, case name, hearing details, urgency. Relay to Attorney Gunn immediately (text/call his cell) AND flag to Adriauna as backup since it's about a hearing this morning.</span></button>
+        <button class="option-btn" onclick="answer('q22','d',false)" id="q22-d"><span class="opt-letter">D</span><span class="opt-text">"He'll be here in 8 minutes — can the judge's clerk hold?" [places court staff on hold]</span></button>
+      </div>
+      <div class="feedback-box" id="q22-fb"></div>
+    </div>
+
+    <!-- BOSS Q23 -->
+    <div class="question-block" id="q23-block">
+      <div class="q-num">Boss Task 3 of 5 · 10 Bonus pts · The Walk-In + Boundary Test</div>
+      <div class="q-text">9:28 AM — A man walks in. You stand, make eye contact, greet him: "Good morning, welcome to Gunn Law Group. How can I help you?" He says: "Hi, I'm Marcus Thompson. I have a 9:30 appointment with my paralegal, Tanya. But while I'm waiting — can you just tell me, has the insurance company made an offer on my case yet? My wife keeps asking and I don't want to bother Tanya with a phone call." How do you handle this?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q23','a',true)" id="q23-a"><span class="opt-letter">A</span><span class="opt-text">"Good morning, Mr. Thompson! Let me let Tanya know you're here." [notifies Tanya immediately] "As for the offer question — I totally understand your wife wanting to know, and Tanya is the best person to give you the most accurate update on that. I'm sure she'll be able to cover it in your meeting. Can I get you some water while you wait?"</span></button>
+        <button class="option-btn" onclick="answer('q23','b',false)" id="q23-b"><span class="opt-letter">B</span><span class="opt-text">"Let me look that up for you real quick — I can see if there's an offer in the system." [opens CasePeer]</span></button>
+        <button class="option-btn" onclick="answer('q23','c',false)" id="q23-c"><span class="opt-letter">C</span><span class="opt-text">"I'm not allowed to discuss case information. You'll have to ask your paralegal." [turns back to desk]</span></button>
+        <button class="option-btn" onclick="answer('q23','d',false)" id="q23-d"><span class="opt-letter">D</span><span class="opt-text">"I don't think there's been an offer yet, but I could be wrong — Tanya would know for sure."</span></button>
+      </div>
+      <div class="feedback-box" id="q23-fb"></div>
+    </div>
+
+    <!-- BOSS Q24 -->
+    <div class="question-block" id="q24-block">
+      <div class="q-num">Boss Task 4 of 5 · 10 Bonus pts · The Angry Callback</div>
+      <div class="q-text">9:35 AM — Phone rings. Caller (loud, angry): "This is Denise Williams. I left a message YESTERDAY and nobody called me back. I'm done with this firm. I want to speak to the managing attorney RIGHT NOW or I'm finding another lawyer." You can hear she's close to tears. How do you handle this?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q24','a',false)" id="q24-a"><span class="opt-letter">A</span><span class="opt-text">"I'm sorry about that. Let me transfer you to Attorney Gunn right now." [transfers without de-escalation or documentation]</span></button>
+        <button class="option-btn" onclick="answer('q24','b',false)" id="q24-b"><span class="opt-letter">B</span><span class="opt-text">"Ms. Williams, I understand, but Attorney Gunn is very busy. Let me have your case manager call you instead."</span></button>
+        <button class="option-btn" onclick="answer('q24','c',false)" id="q24-c"><span class="opt-letter">C</span><span class="opt-text">"Let me look into what happened with your message yesterday — which case manager were you trying to reach?" [investigates the complaint yourself]</span></button>
+        <button class="option-btn" onclick="answer('q24','d',true)" id="q24-d"><span class="opt-letter">D</span><span class="opt-text">Lower your voice: "Ms. Williams, I understand this is frustrating, and I can hear how important this is to you. You deserve to have this addressed. Let me get Attorney Gunn on the line for you right now — he just arrived." [transfer to Managing Attorney] After the call, document: caller was upset about unreturned callback, escalated to Managing Attorney, note the original unreturned message.</span></button>
+      </div>
+      <div class="feedback-box" id="q24-fb"></div>
+    </div>
+
+    <!-- BOSS Q25 -->
+    <div class="question-block" id="q25-block">
+      <div class="q-num">Boss Task 5 of 5 · 10 Bonus pts · The End-of-Call Standard</div>
+      <div class="q-text">9:42 AM — You've handled the Denise Williams call and documented it. The phone rings again — a vendor calling about office supply delivery. After resolving the inquiry and routing them to the appropriate staff member, how do you end the call per GLG standards? And what do you do about Marcus Thompson, who is still waiting in the lobby?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q25','a',false)" id="q25-a"><span class="opt-letter">A</span><span class="opt-text">End call: "Thanks, bye!" Then check on Marcus — he's probably with Tanya by now.</span></button>
+        <button class="option-btn" onclick="answer('q25','b',true)" id="q25-b"><span class="opt-letter">B</span><span class="opt-text">End call: "Is there anything else I can help you with? Thank you for calling Gunn Law Group." Then immediately check on Marcus — it's been about 14 minutes since he arrived. If Tanya hasn't come to get him, walk over with an update: "Mr. Thompson, Tanya should be with you any moment. Sorry for the brief wait." If Tanya is running late, notify her again that her 9:30 is waiting.</span></button>
+        <button class="option-btn" onclick="answer('q25','c',false)" id="q25-c"><span class="opt-letter">C</span><span class="opt-text">End call: "Have a great day!" Marcus has been notified to Tanya — it's her responsibility to come get him now. Focus on the desk.</span></button>
+        <button class="option-btn" onclick="answer('q25','d',false)" id="q25-d"><span class="opt-letter">D</span><span class="opt-text">End call: "Is there anything else? OK, goodbye." Marcus is fine — 14 minutes isn't that long and he has an appointment, so he knows someone will come get him.</span></button>
+      </div>
+      <div class="feedback-box" id="q25-fb"></div>
+    </div>
+
+    <div class="section-score" id="s6-score" style="display:none;"><div class="score-display" id="s6-score-val"></div><div class="score-label">Boss Challenge Bonus Points</div></div>
+    <div class="btn-group" id="s6-next"><button class="btn btn-primary btn-block" onclick="showResults()">See Results &amp; Score &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 7 — RESULTS
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-7">
+  <div id="results-header-wrap"></div>
+  <div class="section-body">
+    <div id="results-body"></div>
+    <div id="badgeContainer" class="achievement-grid"></div>
+    <div style="margin-top:12px;">
+      <div style="font-weight:700;color:#141c2c;margin-bottom:8px;display:flex;align-items:center;gap:8px;"><span id="reviewCounter">Reviewing questions...</span></div>
+      <div class="review-list" id="reviewList"></div>
+    </div>
+    <div id="score-submit-form" style="display:none;margin-top:24px;">
+      <div class="name-input-wrap">
+        <label for="trainee-name-input">Your Name (for certificate)</label>
+        <input type="text" id="trainee-name-input" class="name-input" placeholder="Enter your full name" autocomplete="name">
+      </div>
+      <button class="btn btn-primary btn-block" onclick="submitScoreAndBuildCert()">Submit Score &amp; Get Certificate →</button>
+    </div>
+    <div class="score-confirm" id="score-confirmation"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 8 — FEEDBACK & CERTIFICATE
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-8">
+  <div class="section-header">
+    <div class="section-num">Section 9 · Feedback &amp; Certificate</div>
+    <h2>Module Feedback &amp; Completion Certificate</h2>
+    <div class="section-subhead">Your feedback makes the next version better for every person after you.</div>
+  </div>
+  <div class="section-body">
+
+    <div id="cert-content" style="display:none;">
+      <div class="cert-wrap">
+        <div class="cert-firm">Gunn Law Group · Reception Training</div>
+        <div class="cert-title">Certificate of Completion</div>
+        <div class="cert-subtitle">IR-R Track — Module 1</div>
+        <div class="cert-presents">This certifies that</div>
+        <div class="cert-name" id="certNameDisplay">Training Participant</div>
+        <div class="cert-for">has successfully completed</div>
+        <div class="cert-module">IR-R-1 — Phone Handling &amp; First Impressions</div>
+        <div class="cert-score" id="certScore"></div>
+        <div class="cert-meta" id="certMeta"></div>
+        <span class="cert-seal">⚖️</span>
+        <div class="cert-signature">
+          <div class="cert-sig-line"></div>
+          <div class="cert-sig-name">H. Gunn</div>
+          <div class="cert-sig-title">Managing Attorney · Gunn Law Group</div>
+        </div>
+        <div class="cert-badges" id="certBadges"></div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:24px;">
+      <h4 style="color:#141c2c;font-weight:700;margin-bottom:14px;">Quick Feedback (Optional)</h4>
+      <div class="fb-question">
+        <label>How clear was the content in this module? (1 = confusing, 5 = crystal clear)</label>
+        <select id="fb-clarity">
+          <option value="">Select...</option>
+          <option>1 - Very confusing</option>
+          <option>2 - Somewhat confusing</option>
+          <option>3 - Neutral</option>
+          <option>4 - Mostly clear</option>
+          <option>5 - Crystal clear</option>
+        </select>
+      </div>
+      <div class="fb-question">
+        <label>How difficult was this module? (1 = too easy, 5 = too hard)</label>
+        <select id="fb-difficulty">
+          <option value="">Select...</option>
+          <option>1 - Too easy</option>
+          <option>2 - Somewhat easy</option>
+          <option>3 - Just right</option>
+          <option>4 - Somewhat hard</option>
+          <option>5 - Too hard</option>
+        </select>
+      </div>
+      <div class="fb-question">
+        <label>Did this feel like real GLG reception work?</label>
+        <select id="fb-realistic">
+          <option value="">Select...</option>
+          <option>Yes - exactly what we deal with</option>
+          <option>Mostly - some scenarios were realistic</option>
+          <option>Partially - some felt artificial</option>
+          <option>No - most scenarios felt generic</option>
+        </select>
+      </div>
+      <div class="fb-question">
+        <label>One thing you'd change about this module:</label>
+        <textarea id="fb-suggestions" placeholder="Optional - your feedback shapes the next revision"></textarea>
+      </div>
+    </div>
+
+    <div style="background:#f0f4f8;border-radius:12px;padding:18px;margin-bottom:20px;">
+      <h4 style="color:#141c2c;font-weight:700;margin-bottom:12px;">📝 Reflection Prompt</h4>
+      <p style="font-size:14px;color:#444;line-height:1.7;font-style:italic;">"Think about the last call you answered at the front desk. Did you use the exact standard greeting? Did you smile when you picked up? If the caller was nervous, did you slow down and reassure them before routing? If they asked about their case, did you redirect to the case manager — or did you try to help with information you shouldn't have shared? Pick one thing from this module you want to do differently starting tomorrow. Write it on a sticky note and put it by your phone."</p>
+    </div>
+
+    <div class="score-confirm" id="score-confirmation-cert" style="display:none;"></div>
+
+    <div class="btn-group">
+      <button class="btn btn-secondary btn-block" onclick="goToSection(0)">Back to Start</button>
+      <button class="btn btn-secondary btn-block" onclick="restartQuiz()">Retake Module</button>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+// ═══════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════
+var currentSection = 0;
+var baseScore = 0;
+var bonusPoints = 0;
+var qDone = {};
+var firstAttemptStillAvailable = {};
+var sectionScores = {};
+var streakCount = 0;
+var maxStreak = 0;
+var questionsFirstTry = 0;
+var incorrectCount = 0;
+var totalQuestionsAnswered = 0;
+var milestonesTriggered = {};
+var moduleStartTime = Date.now();
+var audioCtx = null;
+var soundEnabled = false;
+var _audioKeepalive = null;
+
+var TRACKER_URL = 'https://script.google.com/macros/s/AKfycbzHJZ0C3BqnLatfq7RIiUP5KQdgYoXTJlozd8ZGZiwIf2bdVmvnPMo3JLm0dA5gQhJyxA/exec';
+var TOTAL_SECTIONS = 9;
+var PASS_THRESHOLD = 160; // 80% of 200
+var BASE_MAX = 200;
+
+// ═══════════════════════════════════════════════
+// QUESTION CONFIG
+// Sections 1-5 = base pts (10 each); Section 6 = boss bonus only
+// ═══════════════════════════════════════════════
+var Q_CONFIG = {
+  'q1':  {section:1, pts:10, isBonus:false, correct:'c'},
+  'q2':  {section:1, pts:10, isBonus:false, correct:'b'},
+  'q3':  {section:1, pts:10, isBonus:false, correct:'d'},
+  'q4':  {section:1, pts:10, isBonus:false, correct:'a'},
+  'q5':  {section:2, pts:10, isBonus:false, correct:'c'},
+  'q6':  {section:2, pts:10, isBonus:false, correct:'b'},
+  'q7':  {section:2, pts:10, isBonus:false, correct:'d'},
+  'q8':  {section:2, pts:10, isBonus:false, correct:'a'},
+  'q9':  {section:3, pts:10, isBonus:false, correct:'b'},
+  'q10': {section:3, pts:10, isBonus:false, correct:'c'},
+  'q11': {section:3, pts:10, isBonus:false, correct:'a'},
+  'q12': {section:3, pts:10, isBonus:false, correct:'d'},
+  'q13': {section:4, pts:10, isBonus:false, correct:'b'},
+  'q14': {section:4, pts:10, isBonus:false, correct:'c'},
+  'q15': {section:4, pts:10, isBonus:false, correct:'a'},
+  'q16': {section:4, pts:10, isBonus:false, correct:'d'},
+  'q17': {section:5, pts:10, isBonus:false, correct:'b'},
+  'q18': {section:5, pts:10, isBonus:false, correct:'c'},
+  'q19': {section:5, pts:10, isBonus:false, correct:'a'},
+  'q20': {section:5, pts:10, isBonus:false, correct:'d'},
+  'q21': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'b'},
+  'q22': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'c'},
+  'q23': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'a'},
+  'q24': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'d'},
+  'q25': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'b'}
+};
+
+var SECTION_QUESTIONS = {
+  1: ['q1','q2','q3','q4'],
+  2: ['q5','q6','q7','q8'],
+  3: ['q9','q10','q11','q12'],
+  4: ['q13','q14','q15','q16'],
+  5: ['q17','q18','q19','q20'],
+  6: ['q21','q22','q23','q24','q25']
+};
+
+// ═══════════════════════════════════════════════
+// FEEDBACK TEXT
+// ═══════════════════════════════════════════════
+var FEEDBACK = {
+  'q1': {
+    t: '✅ The standard GLG greeting is verbatim: "Thank you for calling Gunn Law Group, this is [Your Name], how can I help you?" Option A puts the caller on hold before they even say a word — that destroys the first impression. Option B drops your name and changes the wording — "Gunn Law" is not the firm name, and "direct your call" sounds like a switchboard, not a law firm that cares. Option D has no firm name and no personal name — the caller doesn\'t know who they\'re talking to or whether they reached the right place.',
+    f: '❌ The greeting is not flexible. "Thank you for calling Gunn Law Group, this is [Your Name], how can I help you?" is the standard — every word matters. "Gunn Law" (Option B) is not the firm name. Dropping your name (Option D) eliminates the personal connection. Immediate hold (Option A) tells the caller they don\'t matter. The greeting builds trust in seconds: firm name anchors the call, your name builds personal connection, and "how can I help you" invites engagement.'
+  },
+  'q2': {
+    t: '✅ When a caller is panicked, your job is to lower their anxiety — not match it. Slowing your pace slightly creates safety. "You\'ve called the right place" addresses their deepest fear (Am I doing the right thing?). Then you route them to intake with warmth and confidence. Option A matches their panic, which escalates rather than calms. Option C tells them to calm down, which never works and feels dismissive. Option D skips the human connection entirely — transferring a scared person without a word of reassurance sends the message "you\'re just a call to route."',
+    f: '❌ The anxious caller needs four things: Tribe ("You\'ve called the right place"), Expectation ("Let me connect you with our intake team"), appropriate Rank (no jargon, match their pace), and Autonomy (give them a callback number in case of disconnect). Matching their panic (A) escalates. Telling them to calm down (C) dismisses their fear. Silent transfer (D) makes them feel processed, not helped. Your voice and pace set the emotional tone of the interaction.'
+  },
+  'q3': {
+    t: '✅ Multiple lines ringing is a reality at the front desk. The 3-ring rule means every call matters. The correct approach: politely ask the current caller to hold briefly ("Can I place you on a brief hold for just one moment?"), answer the second line with the full standard greeting, handle it quickly or take their info, then return to the first caller. Option A lets a potential client go to voicemail. Option B is rude and unprofessional — you never hang up on someone to answer another call. Option C ignores the 3-ring standard entirely.',
+    f: '❌ The 3-ring rule applies to all incoming calls. Letting a call go to voicemail (A) may lose a client. Hanging up on the current caller (B) is a serious breach. The SOP standard is 95%+ of calls answered within 3 rings — there\'s no exception for being on another call. The solution is brief, professional holds: excuse yourself from Call 1, greet Call 2 properly, get their info if you can\'t handle them immediately, and return to Call 1.'
+  },
+  'q4': {
+    t: '✅ The consistency standard from the Reception SOP is: "If the receptionist were replaced today, would the client experience be identical tomorrow?" This is why every greeting, every routing decision, every message procedure is systematized. The role delivers the same result regardless of who fills it. This isn\'t about memorizing client names (D) or self-sufficient call resolution (B) — it\'s about systematic consistency. Every call, every time, the same professional experience.',
+    f: '❌ The consistency test is not about the number of rings (C — and it\'s 3, not 2), self-sufficiency (B — reception routes, it doesn\'t resolve), or memorization (D — personal service matters, but the test is about systematic consistency). The SOP asks: could someone step into this role tomorrow and deliver the identical experience? That requires systematized greeting, routing, message-taking, and boundaries — not individual heroics.'
+  },
+  'q5': {
+    t: '✅ A first-time caller describing an accident is a new potential client — they get routed to Intake (Victoria). But first: reassure them ("You\'ve called the right place"), collect the essential info (name, phone, email, brief description, injuries, existing attorney), then transfer. If Victoria is unavailable, take a complete message and notify intake immediately. Option A bypasses intake — the Managing Attorney doesn\'t handle intake calls. Option B sends it to a general inbox where it could sit for hours. Option D has you evaluating the case — that\'s intake\'s job, not reception\'s.',
+    f: '❌ New potential clients always go to Intake (Victoria). Not the Managing Attorney (A) — that skips the intake process. Not a general inbox (B) — messages addressed to "the team" are addressed to no one. Not your own case evaluation (D) — reception doesn\'t determine case viability. Your job: warmth, basic info collection, and a clean handoff to intake.'
+  },
+  'q6': {
+    t: '✅ Court staff calls — judges, clerks, court personnel — get transferred immediately. No screening. No delays. No "let me take a message first." The Phone Script is explicit: "Transfer IMMEDIATELY. Do not screen." Jennifer identified herself as court staff with an urgent filing deadline matter. The only correct action is an immediate transfer. Option A takes a message when the call should be transferred. Option C screens the call by asking for case details. Option D delays a time-sensitive court communication.',
+    f: '❌ The GLG Phone Script lists court staff as a priority transfer — immediate, no screening, no message-taking unless the attorney is truly unavailable. Jennifer identified her role (court clerk), her authority (Fulton County Superior Court), and the urgency (filing deadline). Asking for case details (C) is screening. Taking a message (A) creates delay on a time-sensitive matter. Email (D) is the wrong channel for an urgent court communication.'
+  },
+  'q7': {
+    t: '✅ An adjuster calling with a settlement offer gets routed to the assigned pre-lit paralegal — per the GLG routing table. The paralegal receives and documents the offer, then consults the Pre-Lit Head Attorney (Adriauna) before any acceptance decision. Option A bypasses the paralegal documentation step. Option B has you taking the settlement amount yourself — reception does NOT relay case-specific information. Option C delays a settlement communication unnecessarily.',
+    f: '❌ Settlement offer calls follow a specific chain: adjuster → assigned pre-lit paralegal → paralegal documents → consults Head Attorney (Adriauna) before acceptance. Reception doesn\'t take the offer amount (B) — that\'s case-specific information you never handle. The Managing Attorney (A) is bypassing the paralegal documentation step. And adjusters with offers definitely get direct routing (C), not callbacks.'
+  },
+  'q8': {
+    t: '✅ Opposing counsel always goes to the relevant attorney — NEVER to a paralegal. The routing table is explicit: "Never route to a paralegal for opposing counsel calls." Since Attorney Gunn is truly unavailable (in a meeting), you take a complete message: name, firm, callback number, matter name. Relay immediately. Option B violates the "never route opposing counsel to a paralegal" rule. Option C puts the burden back on the caller. Option D assumes every meeting should be interrupted — the SOP says transfer immediately only when the attorney is available.',
+    f: '❌ The key rule: opposing counsel goes to the attorney ONLY. Never to a paralegal (B) — this is a firm rule, not a suggestion. When the attorney is truly unavailable, you take a message and relay immediately. You don\'t tell opposing counsel to call back (C) — that\'s unprofessional and could affect the case. And you don\'t automatically interrupt meetings (D) — "truly unavailable" means take a message and relay urgently.'
+  },
+  'q9': {
+    t: '✅ A complete message per GLG standards includes: full name, phone number (repeated back to confirm), best callback time, brief reason for the call, and urgency level. Then relay to the specific, named recipient within 15 minutes via whatever channel gets seen fastest. Option A is incomplete — a sticky note can be missed or lost. Option C sends to a distribution list — a message addressed to "the team" is addressed to no one. Option D tells the client to call back, which makes them feel like an inconvenience.',
+    f: '❌ Sticky notes (A) get lost, lack detail, and don\'t create a verifiable delivery chain. General distribution lists (C) violate the "named person" rule — a task addressed to a team is assigned to no one. Telling clients to call back (D) puts the burden on them and signals the firm doesn\'t care enough to take a message. The standard: complete info, named recipient, 15 minutes.'
+  },
+  'q10': {
+    t: '✅ Never promise a specific callback time unless the recipient has confirmed availability — and if you promise it, it MUST be honored. Option A promises 2:00 PM without confirmation, which sets an expectation the firm may not meet. Broken promises destroy trust faster than slow service. Option C acknowledges urgency, shows empathy about the surgery, commits to immediate relay and same-day callback without promising a specific time. Option B is dismissive. Option D escalates unnecessarily.',
+    f: '❌ The SOP is explicit: "Do not promise a specific callback time unless the recipient has confirmed availability." Option A makes a promise you can\'t guarantee. If the case manager\'s meeting runs long and the callback doesn\'t happen by 2:00, you\'ve broken a promise to a client facing surgery tomorrow — that\'s a trust-destroying event. The correct approach acknowledges urgency, commits to fast relay, and avoids specific time promises you can\'t control.'
+  },
+  'q11': {
+    t: '✅ The Opening Checklist requires voicemail to be checked at the start of every business day. Once checked, all messages must be routed to the appropriate (named) staff member within 30 minutes. Legal correspondence and court documents get flagged to the Managing Attorney immediately — same day. Option B delays voicemail for desk setup, which inverts the priority order. Option C sends to a general email. Option D holds messages for a staff meeting instead of routing immediately.',
+    f: '❌ Voicemail is checked at the start of every business day and after lunch — minimum. Messages are routed within 30 minutes of checking. Legal/court messages get flagged to the Managing Attorney immediately. Delaying for desk setup (B) risks missing an urgent court communication from the weekend. General email (C) violates the named-person rule. Holding for a meeting (D) delays time-sensitive messages by at least 30 minutes unnecessarily.'
+  },
+  'q12': {
+    t: '✅ End-of-day doesn\'t mean end of responsibility. The client called before close and expects a response. Take a complete message, relay it to the named paralegal immediately via text or email (whatever gets seen fastest), and give the client a realistic expectation: tonight if possible, first thing tomorrow if not. Flag it as unresolved before you close per the Closing Checklist. Option A abandons the client. Option B violates the role boundaries. Option C escalates unnecessarily.',
+    f: '❌ Telling a client to call back tomorrow (A) when they called during business hours is abandonment — they did their part by calling on time. Looking up case info yourself (B) violates role boundaries — reception does not access or relay CasePeer information. Transferring to the Managing Attorney (C) bypasses the assigned paralegal. The correct protocol: complete message, immediate relay to the named paralegal, realistic timeline, flag as unresolved at close.'
+  },
+  'q13': {
+    t: '✅ The GLG Welcome System requires greeting visitors immediately upon entry — within 30 seconds. But "within 30 seconds" is the maximum, not the target. The moment a visitor appears, you stop what you\'re doing, stand, make eye contact, and greet them. Letting them stand at the desk while you finish an email — even for 15 seconds — sends the message that your task is more important than they are. First impressions are formed in the first few seconds of an interaction.',
+    f: '❌ "Within 30 seconds" is the outer boundary, not a comfortable target. Option A treats 15 seconds of ignoring a visitor as acceptable — it\'s not. Option C invents a standing-all-day requirement that doesn\'t exist. Option D downplays the impact — a visitor who has to wait while you finish typing feels unimportant, regardless of the clock. The standard: stop, stand, eye contact, greet. Immediately.'
+  },
+  'q14': {
+    t: '✅ The SOP is clear: reception does NOT provide case updates, settlement information, or case value estimates — ever. Even "I think" qualifies as case information. Option C handles it perfectly: warmth ("Great to see you!"), clear boundary ("I can\'t discuss case details"), redirect to the right person (case manager or attorney), and an offer to help connect them. Option A gives case value commentary and tries to access the file. Option B shares a vague update that could be wrong. Option D is technically correct but delivered coldly — it pushes the client away instead of redirecting warmly.',
+    f: '❌ Any case-specific information from reception is a violation — including estimates (A), vague status updates (B), or even "I think" statements (D). These boundaries exist to protect the client from misinformation and the firm from liability. The correct approach redirects warmly: acknowledge the question, explain who can give them the best answer, and offer to connect them. Cold refusals (D) create a negative experience — you can enforce boundaries while still being helpful and warm.'
+  },
+  'q15': {
+    t: '✅ The SOP states: "Do not leave visitors unattended at the front desk for more than a few minutes without an update." After 20 minutes, Marcus has been waiting far too long without communication. Proactively approach with an update, offer water, and check back again if the wait extends. Option B lets a visitor sit without acknowledgment — frustrated clients lose trust. Option C takes them to the paralegal\'s office without permission. Option D reroutes them without the paralegal\'s direction.',
+    f: '❌ Visitors who are kept waiting without acknowledgment become frustrated clients. The SOP requires proactive updates. Letting them sit (B) signals the firm doesn\'t care. Walking them to an office uninvited (C) oversteeps your role. Rerouting to another paralegal (D) bypasses the assigned person and could create confusion on the case. The fix is simple: walk over, apologize for the wait, give a status update, offer water, and check back again soon.'
+  },
+  'q16': {
+    t: '✅ Even if you KNOW the answer, you do not share case-specific information. "I want to make sure you get the most accurate information" is the standard deflection from the Phone Script. Option A shares case info you overheard — even if correct, it\'s not your role. Option B has you accessing CasePeer — reception does NOT access or relay CasePeer information to callers. Option C hedges with "I think" — which is still sharing case information and could be wrong.',
+    f: '❌ The Khalil Incident Rule exists because even well-meaning information sharing can go wrong. "I think it\'s in pre-lit" (C) is still case information — and if you\'re wrong, you\'ve just misinformed a client. Looking it up in CasePeer (B) violates the explicit rule: reception does not access or relay CasePeer information. Sharing what you overheard (A) is unreliable secondhand information. The correct response redirects to the case manager every single time, regardless of what you think you know.'
+  },
+  'q17': {
+    t: '✅ Step 1 of the De-Escalation Protocol: emotional regulation. Lower your voice slightly — this naturally de-escalates. Acknowledge the frustration without telling them to calm down (that never works). "I understand you\'re frustrated, and I want to help" validates their emotion. Then move to routing: "Let me get the right person to address your concern." Option A tells them to calm down — dismissive and counterproductive. Option C looks up their case — that\'s not your role. Option D transfers without any de-escalation — the caller hits the next person still at full boil.',
+    f: '❌ "Calm down" (A) is the single most counterproductive phrase in de-escalation. It dismisses the caller\'s emotion and escalates their frustration. Looking up the case (C) crosses role boundaries — reception does not investigate complaints. Silent transfer (D) passes an unmanaged crisis to the next person. The protocol is: regulate your own emotion first, acknowledge theirs, then route to the right person. In that order.'
+  },
+  'q18': {
+    t: '✅ The caller wants case information — has an offer been made? Per the Khalil Incident Rule and the SOP role boundaries, reception NEVER provides case-specific information. Not even "I don\'t think so." Option C validates their concern ("I can hear this is really important to you"), affirms their right to an answer ("you deserve an accurate update"), and routes to the case manager or supervisor. Option A opens CasePeer — explicit violation. Option B shares a hedge ("I don\'t think") — still case info. Option D invents a security policy that doesn\'t exist.',
+    f: '❌ Opening CasePeer (A) violates the explicit rule against accessing or relaying CasePeer information to callers. "I don\'t think there\'s been an offer" (B) is case information, even hedged — and if wrong, it creates the exact Khalil Incident scenario. The invented "security reasons" justification (D) isn\'t in the SOP and sounds like a runaround. The correct approach validates, acknowledges, and routes — without touching case content.'
+  },
+  'q19': {
+    t: '✅ When a caller becomes verbally abusive or threatening, the SOP is clear: "I want to help, but I\'m going to need to transfer you to a supervisor." Transfer to the Managing Attorney immediately. Then document: caller was upset/threatening, escalation path taken, timestamp. Option B (hanging up) is never the first response — the caller is a client in crisis, and hanging up could result in them leaving the firm. Option C escalates the confrontation by engaging with the bar threat. Option D keeps you in the line of fire too long — once they\'re threatening, route immediately.',
+    f: '❌ Hanging up (B) should never be the first response to a threatening caller — they\'re a client, and this could trigger them to fire the firm. Engaging with the bar complaint threat (C) is confrontational and outside your role — you don\'t defend the firm or redirect their complaint. Continuing to de-escalate after threats (D) keeps you in an unsafe interaction. The protocol is brief, professional, and immediate: state your intent to help, announce the transfer, execute, document.'
+  },
+  'q20': {
+    t: '✅ This is the synthesis question. The caller wants a simple yes/no — "is my case settled?" It feels harmless. But the answer is the same as every other case-specific question: route to the case manager. Option D uses the exact language from the Phone Script: "I want to make sure you get the most accurate information from the person working your case directly." Then it follows through: collect callback info, relay within 15 minutes. Option A treats "yes/no" as an exception to the rule — it\'s not. Option B is cold and unhelpful. Option C opens CasePeer — explicit violation.',
+    f: '❌ There is no exception for "simple" case questions. "Is my case settled?" sounds harmless, but: What if it settled for less than they expected? What if it hasn\'t settled but you say the wrong thing? What if it settled last week and no one told the client yet? Every scenario has a downside. That\'s why the rule is absolute: reception does not provide case-specific information. Period. The standard language from the Phone Script handles it warmly and redirects effectively.'
+  },
+  'q21': {
+    t: '✅ The Phone Script for new potential clients lays out the exact procedure: reassure ("You\'ve called the right place"), collect essential info (name, phone, email, accident description, injuries, treatment status, existing attorney), and transfer to Intake (Victoria) with a warm handoff. Giving them a callback number in case of disconnect shows the firm cares about follow-through. Option A transfers without any info collection. Option C schedules without routing to intake. Option D has you evaluating the case — that\'s intake\'s job.',
+    f: '❌ Transferring without info (A) means if the call drops, the firm has no way to follow up. Scheduling without intake (C) bypasses the intake process entirely. Evaluating the case yourself (D) exceeds reception\'s role — you don\'t determine case viability. The correct flow: warmth → info collection → clean handoff to intake with a safety net (callback number).'
+  },
+  'q22': {
+    t: '✅ Court calls are priority transfers — immediate, no screening. But Attorney Gunn is truly unavailable (hasn\'t arrived yet). When the attorney is truly unavailable, take a complete message with all details and relay immediately. For a hearing THIS MORNING, you also escalate: text/call Attorney Gunn\'s cell AND flag Adriauna as backup. Option A just takes a message without urgency escalation. Option B transfers to someone who may not be on the case. Option D puts court staff on hold — never hold court staff.',
+    f: '❌ Court calls get transferred immediately — but when the attorney is truly unavailable, "immediately" means immediate message relay through the fastest channel. A hearing this morning creates urgency that a simple message slip doesn\'t capture. You need multiple notification paths: the attorney\'s cell (primary) and Adriauna as backup. Taking a routine message (A) doesn\'t match the urgency. Transferring to the wrong attorney (B) creates confusion. Holding court staff (D) is unprofessional and delays a time-sensitive court matter.'
+  },
+  'q23': {
+    t: '✅ Marcus asks about a settlement offer — a case-specific question. Option A handles it perfectly: greet by name (he introduced himself), notify the paralegal immediately (she\'s his 9:30), redirect warmly ("Tanya is the best person to give you the most accurate update"), and offer hospitality (water). It enforces the boundary without making Marcus feel rejected. Option B opens CasePeer — explicit violation. Option C is technically correct but cold and dismissive. Option D hedges with "I don\'t think" — still case information.',
+    f: '❌ Opening CasePeer for a walk-in (B) violates role boundaries. Cold refusal (C — "I\'m not allowed") creates a negative client experience at the front desk. Hedging (D — "I don\'t think there\'s been an offer") is still sharing case information, and if wrong, creates a Khalil-type incident. The correct approach: warmth, immediate notification to paralegal, redirect to the right person, hospitality. The boundary is maintained without the client feeling dismissed.'
+  },
+  'q24': {
+    t: '✅ Denise is a client in crisis — she\'s been ignored (unreturned callback), she\'s threatening to leave, and she\'s close to tears. The de-escalation protocol applies: lower your voice, acknowledge frustration ("I understand this is frustrating"), validate her right to be heard ("you deserve to have this addressed"), and route to the Managing Attorney (she asked for him, he\'s available). After the call, document everything including the original unreturned message. Option A transfers without de-escalation. Option B tells an angry client the boss is too busy. Option C has you investigating a complaint — not your role.',
+    f: '❌ Transferring without de-escalation (A) sends Denise to the next person still at full boil. Telling her Attorney Gunn is "very busy" (B) confirms her worst fear — the firm doesn\'t care about her. Investigating the complaint yourself (C) exceeds your role and delays the resolution she needs. The protocol: de-escalate with empathy, validate, route to the person she requested (available), and document everything — including the original unreturned callback that caused this.'
+  },
+  'q25': {
+    t: '✅ Two things here. First, the call closing: the GLG standard is "Is there anything else I can help you with? Thank you for calling Gunn Law Group." Every call ends this way — vendors included. Second, Marcus: he\'s been waiting ~14 minutes. The SOP says don\'t leave visitors unattended without an update. Proactively check on him, apologize for the wait, and if Tanya hasn\'t come, notify her again. Option A uses a casual sign-off and assumes Marcus is handled. Option C ignores Marcus entirely. Option D dismisses 14 minutes of waiting.',
+    f: '❌ Casual sign-offs (A — "Thanks, bye!") don\'t meet the GLG standard. Every call ends with the standard closing, including vendor calls. And assuming Marcus is fine without checking (A, C, D) violates the visitor update requirement. 14 minutes is long enough to warrant a proactive check. If Tanya is running late, Marcus deserves to know — and you should re-notify Tanya. Following through on visitor commitments is as important as answering the phone.'
+  }
+};
+
+// ═══════════════════════════════════════════════
+// ANSWER HANDLER
+// ═══════════════════════════════════════════════
+function answer(qId, choice, isCorrect) {
+  if (qDone[qId]) return;
+  qDone[qId] = true;
+
+  var cfg = Q_CONFIG[qId];
+  var block = document.getElementById(qId + '-block');
+  var fb = document.getElementById(qId + '-fb');
+  var btns = block.querySelectorAll('.option-btn');
+
+  btns.forEach(function(b){ b.classList.add('disabled'); });
+
+  var clickedBtn = document.getElementById(qId + '-' + choice);
+  var correctBtn = document.getElementById(qId + '-' + cfg.correct);
+
+  if (choice === cfg.correct) {
+    clickedBtn.classList.add('correct');
+    block.classList.add('answered');
+    if (!cfg.isBonus) {
+      baseScore += cfg.pts;
+      showToast('+' + cfg.pts + ' pts', false);
+      var isFirst = (firstAttemptStillAvailable[qId] !== false);
+      if (isFirst) {
+        bonusPoints += 5;
+      }
+    } else {
+      var bonusPts = (firstAttemptStillAvailable[qId] !== false) ? cfg.bonusPts : Math.floor(cfg.bonusPts / 3);
+      bonusPoints += bonusPts;
+      showToast('+' + bonusPts + ' bonus', true);
+    }
+    document.getElementById('total-score').textContent = baseScore;
+    document.getElementById('bonus-score').textContent = bonusPoints;
+    updateStreak(true);
+    mascotReact('correct');
+    spawnParticles(clickedBtn);
+  } else {
+    clickedBtn.classList.add('incorrect');
+    correctBtn.classList.add('correct');
+    block.classList.add('answered-wrong');
+    firstAttemptStillAvailable[qId] = false;
+    updateStreak(false);
+    mascotReact('incorrect');
+  }
+
+  var fbData = FEEDBACK[qId];
+  if (fbData) {
+    fb.innerHTML = (choice === cfg.correct) ? fbData.t : fbData.f;
+    fb.className = 'feedback-box ' + (choice === cfg.correct ? 'correct' : 'incorrect') + ' show';
+  }
+
+  var totalQs = Object.keys(Q_CONFIG).length;
+  var answeredCount = Object.keys(qDone).length;
+  updateGlobalProgress(answeredCount, totalQs);
+  updateProgress();
+
+  // Check section completion
+  for (var si = 1; si <= 6; si++) {
+    var qs = SECTION_QUESTIONS[si];
+    if (!qs) continue;
+    var allDone = qs.every(function(q){ return !!qDone[q]; });
+    if (allDone) {
+      var scoreEl = document.getElementById('s' + si + '-score');
+      var nextEl = document.getElementById('s' + si + '-next');
+      if (scoreEl) {
+        var pts = 0;
+        var sectionMax = 0;
+        var sqList = SECTION_QUESTIONS[si];
+        sqList.forEach(function(qId2){
+          var c2 = Q_CONFIG[qId2];
+          sectionMax += c2.isBonus ? (c2.bonusPts || 0) : c2.pts;
+        });
+        sqList.forEach(function(qId2){
+          var c2 = Q_CONFIG[qId2];
+          var blk = document.getElementById(qId2 + '-block');
+          if (blk && blk.classList.contains('answered')) {
+            pts += c2.isBonus ? (c2.bonusPts || 0) : c2.pts;
+          }
+        });
+        var scoreVal = scoreEl.querySelector('.score-display');
+        if (scoreVal) scoreVal.textContent = pts + ' / ' + sectionMax + ' pts';
+        scoreEl.style.display = 'block';
+      }
+      if (nextEl) nextEl.style.display = 'block';
+      var pill = document.getElementById('nav-' + si);
+      if (pill) pill.classList.add('done');
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════
+function goToSection(idx) {
+  currentSection = idx;
+  document.querySelectorAll('.section-card').forEach(function(c){ c.classList.remove('active'); });
+  document.getElementById('section-' + idx).classList.add('active');
+  document.querySelectorAll('.nav-pill').forEach(function(p){ p.classList.remove('active'); });
+  document.getElementById('nav-' + idx).classList.add('active');
+  document.getElementById('prog-label').textContent = 'Section ' + (idx+1) + ' of ' + TOTAL_SECTIONS;
+  updateProgress();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// ═══════════════════════════════════════════════
+// PROGRESS BAR
+// ═══════════════════════════════════════════════
+function updateProgress() {
+  var baseQs = Object.keys(Q_CONFIG).filter(function(k){ return !Q_CONFIG[k].isBonus; });
+  var answered = baseQs.filter(function(k){ return !!qDone[k]; }).length;
+  var pct = Math.round((answered / baseQs.length) * 100);
+  var navPct = Math.round((currentSection / (TOTAL_SECTIONS - 1)) * 100);
+  document.getElementById('prog-fill').style.width = Math.max(pct, navPct) + '%';
+  document.getElementById('prog-pct').textContent = Math.max(pct, navPct) + '%';
+}
+
+// ═══════════════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════════════
+function showToast(msg, isBonus) {
+  var t = document.getElementById('points-toast');
+  t.textContent = msg;
+  t.className = 'points-toast' + (isBonus ? ' bonus' : '') + ' show';
+  setTimeout(function(){ t.classList.remove('show'); }, 1800);
+}
+
+// ═══════════════════════════════════════════════
+// FINISH MODULE
+// ═══════════════════════════════════════════════
+function showResults() {
+  goToSection(7);
+  buildResults();
+}
+
+function restartQuiz() {
+  _scoreSubmitted = false;
+  baseScore = 0;
+  bonusPoints = 0;
+  qDone = {};
+  firstAttemptStillAvailable = {};
+  sectionScores = {};
+  streakCount = 0;
+  maxStreak = 0;
+  questionsFirstTry = 0;
+  incorrectCount = 0;
+  totalQuestionsAnswered = 0;
+  moduleStartTime = Date.now();
+  window._irr1Passed = false;
+
+  document.querySelectorAll('.question-block').forEach(function(block) {
+    block.classList.remove('answered', 'answered-wrong');
+    block.querySelectorAll('.option-btn').forEach(function(btn) {
+      btn.classList.remove('correct', 'incorrect', 'disabled');
+      btn.style.pointerEvents = '';
+      btn.style.opacity = '';
+    });
+    var fb = block.querySelector('.feedback-box');
+    if (fb) { fb.className = 'feedback-box'; fb.innerHTML = ''; }
+  });
+
+  for (var i = 1; i <= 6; i++) {
+    var scoreEl = document.getElementById('s' + i + '-score');
+    var nextEl = document.getElementById('s' + i + '-next');
+    if (scoreEl) scoreEl.style.display = 'none';
+    if (nextEl) nextEl.style.display = 'none';
+    var pill = document.getElementById('nav-' + i);
+    if (pill) pill.classList.remove('done');
+  }
+
+  document.getElementById('total-score').textContent = '0';
+  document.getElementById('bonus-score').textContent = '0';
+  document.getElementById('streak-display').textContent = '0 🔥';
+
+  Object.keys(Q_CONFIG).forEach(function(k) { firstAttemptStillAvailable[k] = true; });
+
+  goToSection(0);
+}
+
+function buildResults() {
+  mascotReact('complete');
+  spawnParticles(document.querySelector('header'));
+  var totalQs = Object.keys(Q_CONFIG).length;
+  updateGlobalProgress(totalQs, totalQs);
+
+  var pct = Math.round((baseScore / BASE_MAX) * 100);
+  var pass = baseScore >= PASS_THRESHOLD;
+
+  var headerEl = document.getElementById('results-header-wrap');
+  headerEl.innerHTML = '<div class="results-header ' + (pass ? 'pass' : 'fail') + '">'
+    + '<div class="results-grade">' + pct + '%</div>'
+    + '<div class="results-label">' + (pass ? '🏆 Assessment Passed!' : '📚 Not Yet — 80% Required to Pass') + '</div>'
+    + '<div class="results-sub">' + baseScore + ' / 200 base pts · ' + bonusPoints + ' bonus pts</div>'
+    + '</div>';
+
+  var letters = ['a','b','c','d'];
+  var letterLabels = ['A','B','C','D'];
+  var reviewList = document.getElementById('reviewList');
+  var reviewHTML = '';
+  Object.keys(Q_CONFIG).forEach(function(qId, idx) {
+    var cfg = Q_CONFIG[qId];
+    var block = document.getElementById(qId + '-block');
+    if (!block) return;
+    var qText = block.querySelector('.q-text');
+    var questionText = qText ? qText.textContent : 'Question ' + (idx+1);
+    var isAnswered = !!qDone[qId];
+    var wasCorrect = isAnswered && block.classList.contains('answered');
+    var correctLetter = cfg.correct.toUpperCase();
+    var correctBtn = document.getElementById(qId + '-' + cfg.correct);
+    var correctText = correctBtn ? correctBtn.querySelector('.opt-text').textContent : '';
+    var userAnswer = '(not answered)';
+    var userLetter = '';
+    if (isAnswered) {
+      letters.forEach(function(l, li) {
+        var btn = document.getElementById(qId + '-' + l);
+        if (btn && (btn.classList.contains('correct') || btn.classList.contains('incorrect'))) {
+          if (btn.classList.contains('incorrect') || (btn.classList.contains('correct') && !block.classList.contains('answered-wrong'))) {
+            userAnswer = btn.querySelector('.opt-text').textContent;
+            userLetter = letterLabels[li];
+          }
+        }
+      });
+      if (wasCorrect && !userLetter) {
+        userAnswer = correctText;
+        userLetter = correctLetter;
+      }
+    }
+
+    reviewHTML += '<div class="review-item ' + (wasCorrect ? 'correct' : 'wrong') + '" style="opacity:0;transform:translateY(8px);transition:opacity 0.25s ease,transform 0.25s ease;" data-review-idx="' + idx + '">'
+      + '<div class="ri-q">' + (idx+1) + '. ' + questionText.substring(0,120) + (questionText.length>120?'...':'') + '</div>'
+      + '<div class="ri-ans">'
+      + (wasCorrect ? '✅' : '❌') + ' Your answer: <strong>' + userLetter + '. ' + userAnswer.substring(0,100) + (userAnswer.length>100?'...':'') + '</strong>'
+      + (!wasCorrect ? '<br>✅ Correct: <strong>' + correctLetter + '. ' + correctText.substring(0,100) + (correctText.length>100?'...':'') + '</strong>' : '')
+      + '</div></div>';
+  });
+  reviewList.innerHTML = reviewHTML;
+
+  var reviewEls = reviewList.querySelectorAll('[data-review-idx]');
+  reviewEls.forEach(function(el, i) {
+    setTimeout(function() {
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+      playTickSound();
+      var counterEl = document.getElementById('reviewCounter');
+      if (counterEl) counterEl.textContent = 'Reviewing ' + (i+1) + '/' + totalQs;
+    }, i * 120);
+  });
+
+  setTimeout(function() {
+    var counterEl = document.getElementById('reviewCounter');
+    if (counterEl) counterEl.textContent = totalQs + '/' + totalQs + ' ✓ Review Complete';
+  }, reviewEls.length * 120 + 200);
+
+  window._irr1Passed = pass;
+
+  var bodyEl = document.getElementById('results-body');
+  var buttonsHtml;
+  if (pass) {
+    buttonsHtml = '<div class="btn-group">'
+      + '<button class="btn btn-primary btn-block" onclick="goToSection(8)">Submit Feedback &amp; Get Certificate →</button>'
+      + '</div>';
+  } else {
+    buttonsHtml = '<div class="btn-group" style="display:flex;gap:10px;">'
+      + '<button class="btn btn-secondary" style="flex:1;" onclick="goToSection(0)">Review Content</button>'
+      + '<button class="btn btn-primary" style="flex:1;" onclick="restartQuiz()">Try Again</button>'
+      + '</div>';
+  }
+  bodyEl.innerHTML = '<div class="section-score" style="margin-bottom:20px;">'
+    + '<div class="score-display">' + baseScore + '/200</div>'
+    + '<div class="score-label">Base Score · ' + bonusPoints + ' Bonus Points</div>'
+    + '</div>'
+    + '<div class="callout ' + (pass ? 'callout-success' : 'callout-warn') + '">'
+    + (pass
+        ? '<strong>✅ Gate Passed.</strong> You have demonstrated competency in phone handling, the standard GLG greeting, call routing, message-taking, visitor protocol, role boundaries, and de-escalation. You are cleared to continue in the IR-R track.'
+        : '<strong>⚠️ Gate Not Cleared.</strong> You need 160/200 (80%) to pass. Review the sections where you missed questions — the feedback explains exactly what to remember. Retake when ready.')
+    + '</div>'
+    + buttonsHtml;
+
+  submitScoreToTracker();
+
+  var badgeContainer = document.getElementById('badgeContainer');
+  if (badgeContainer) {
+    var gamBadges = calculateBadges();
+    renderBadges(gamBadges, badgeContainer);
+  }
+
+  if (pass) {
+    document.getElementById('score-submit-form').style.display = 'block';
+  }
+}
+
+// ═══════════════════════════════════════════════
+// AUTO-SUBMIT SCORE
+// ═══════════════════════════════════════════════
+var _scoreSubmitted = false;
+function submitScoreToTracker() {
+  // DISABLED: cert flow handles submission with employee name
+  return;
+}
+
+// ═══════════════════════════════════════════════
+// SUBMIT SCORE + BUILD CERTIFICATE
+// ═══════════════════════════════════════════════
+function submitScoreAndBuildCert() {
+  if (!window._irr1Passed) {
+    showToast('⚠️ 80% required for certificate', false);
+    return;
+  }
+  var nameInput = document.getElementById('trainee-name-input');
+  var name = (nameInput.value || '').trim();
+  if (!name || name === 'Unknown' || name === 'Training Participant') {
+    nameInput.style.border = '2px solid red';
+    nameInput.focus();
+    showToast('⚠️ Please enter your full name', false);
+    return;
+  }
+  document.getElementById('certNameDisplay').textContent = name;
+  document.getElementById('score-submit-form').style.display = 'none';
+  document.getElementById('cert-content').style.display = 'block';
+
+  var pct = Math.round((baseScore / BASE_MAX) * 100);
+  document.getElementById('certScore').textContent = 'Score: ' + baseScore + '/200 (' + pct + '%) — PASSED';
+  var now = new Date();
+  document.getElementById('certMeta').textContent = 'Issued: ' + now.toLocaleDateString('en-US', {year:'numeric', month:'long', day:'numeric'});
+
+  var certBadgesEl = document.getElementById('certBadges');
+  if (certBadgesEl) {
+    var badges = calculateBadges();
+    badges.push({icon: '📞', name: 'IR-R-1 Complete', desc: 'Completed module IR-R-1'});
+    certBadgesEl.innerHTML = '';
+    badges.forEach(function(b, i) {
+      var pill = document.createElement('span');
+      pill.className = 'cert-badge-pill';
+      pill.textContent = b.icon + ' ' + b.name;
+      pill.style.animationDelay = (i * 0.15) + 's';
+      certBadgesEl.appendChild(pill);
+    });
+  }
+
+  setTimeout(function() {
+    launchConfetti();
+    playTaDa();
+    mascotReact('complete');
+  }, 350);
+
+  if (TRACKER_URL) {
+    var payload = {
+      employeeName: name,
+      moduleId: 'ir-r-1',
+      moduleName: 'Phone Handling & First Impressions',
+      score: baseScore,
+      maxScore: 200,
+      bonusScore: bonusPoints,
+      maxStreak: maxStreak,
+      badges: calculateBadges().map(function(b){ return b.name; }).join(', '),
+      elapsedMinutes: Math.round((Date.now() - moduleStartTime) / 60000),
+      passedAt: new Date().toISOString(),
+      feedback: {
+        clarity: document.getElementById('fb-clarity').value || '',
+        difficulty: document.getElementById('fb-difficulty').value || '',
+        realistic: document.getElementById('fb-realistic').value || '',
+        suggestions: document.getElementById('fb-suggestions').value || ''
+      }
+    };
+    fetch(TRACKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(payload),
+      mode: 'no-cors'
+    }).then(function() {
+      var el = document.getElementById('score-confirmation');
+      if (el) { el.innerHTML = '✅ Score submitted successfully.'; el.style.display = 'block'; }
+      var el2 = document.getElementById('score-confirmation-cert');
+      if (el2) { el2.innerHTML = '✅ Score submitted successfully.'; el2.style.display = 'block'; }
+    }).catch(function() {
+      var el = document.getElementById('score-confirmation');
+      if (el) {
+        el.innerHTML = '⚠️ Auto-submission failed — please screenshot your results and email to hgunn@thegunnlawgroup.com';
+        el.style.background = '#fff3cd';
+        el.style.borderLeftColor = '#f39c12';
+        el.style.color = '#856404';
+        el.style.display = 'block';
+      }
+    });
+  }
+}
+
+// ═══════════════════════════════════════════════
+// GLG GAMIFICATION ENGINE v1.0 — IR-R-1 CHASSIS
+// ═══════════════════════════════════════════════
+
+// ── SOUND ENGINE ──
+function ensureAudioCtx() {
+  if (!audioCtx) {
+    try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) { return false; }
+  }
+  if (audioCtx.state === 'suspended') { audioCtx.resume().catch(function(){}); }
+  if (!_audioKeepalive && audioCtx) {
+    try {
+      var silentOsc = audioCtx.createOscillator();
+      var silentGain = audioCtx.createGain();
+      silentGain.gain.value = 0;
+      silentOsc.connect(silentGain);
+      silentGain.connect(audioCtx.destination);
+      silentOsc.start();
+      _audioKeepalive = silentOsc;
+    } catch(e) {}
+  }
+  return true;
+}
+
+function toggleSound() {
+  soundEnabled = !soundEnabled;
+  if (soundEnabled) ensureAudioCtx();
+  document.getElementById('soundToggle').textContent = soundEnabled ? '🔊' : '🔇';
+  localStorage.setItem('glg_sound', soundEnabled ? '1' : '0');
+}
+
+function playTone(freq, duration, type, gainVal, scheduleAt) {
+  if (!soundEnabled || !audioCtx) return;
+  if (audioCtx.state === 'suspended') audioCtx.resume().catch(function(){});
+  var startTime = (scheduleAt !== undefined) ? audioCtx.currentTime + scheduleAt : audioCtx.currentTime;
+  var o = audioCtx.createOscillator();
+  var g = audioCtx.createGain();
+  o.type = type || 'sine';
+  o.frequency.value = freq;
+  g.gain.setValueAtTime(gainVal || 0.15, startTime);
+  g.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+  o.connect(g); g.connect(audioCtx.destination);
+  o.start(startTime); o.stop(startTime + duration + 0.01);
+}
+
+function playDing() {
+  if (!soundEnabled) return;
+  ensureAudioCtx();
+  playTone(523, 0.15, 'sine', 0.13, 0);
+  playTone(659, 0.18, 'sine', 0.11, 0.1);
+}
+
+function playWrongTone() {
+  if (!soundEnabled) return;
+  ensureAudioCtx();
+  if (!audioCtx) return;
+  playTone(520, 0.12, 'triangle', 0.12, 0);
+  playTone(440, 0.15, 'triangle', 0.10, 0.08);
+}
+
+function playTickSound() {
+  if (!soundEnabled) return;
+  ensureAudioCtx();
+  if (!audioCtx) return;
+  playTone(800, 0.05, 'triangle', 0.06);
+}
+
+function playTaDa() {
+  if (!soundEnabled) return;
+  ensureAudioCtx();
+  if (!audioCtx) return;
+  var now = audioCtx.currentTime;
+  var notes = [
+    {f:262,t:0,d:0.30,type:'triangle',g:0.14},{f:330,t:0,d:0.30,type:'sine',g:0.11},
+    {f:392,t:0,d:0.30,type:'sine',g:0.09},{f:523,t:0.15,d:0.22,type:'sine',g:0.13},
+    {f:659,t:0.30,d:0.22,type:'sine',g:0.12},{f:784,t:0.45,d:0.22,type:'sine',g:0.11},
+    {f:523,t:0.65,d:0.80,type:'sine',g:0.13},{f:659,t:0.65,d:0.80,type:'sine',g:0.11},
+    {f:784,t:0.65,d:0.80,type:'sine',g:0.09},{f:1047,t:0.65,d:0.80,type:'triangle',g:0.07},
+    {f:1319,t:0.75,d:0.55,type:'sine',g:0.04},{f:1568,t:0.85,d:0.45,type:'sine',g:0.03}
+  ];
+  notes.forEach(function(n) {
+    var osc = audioCtx.createOscillator();
+    var gain = audioCtx.createGain();
+    osc.type = n.type || 'sine';
+    osc.frequency.value = n.f;
+    gain.gain.setValueAtTime(n.g, now + n.t);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + n.t + n.d);
+    osc.connect(gain); gain.connect(audioCtx.destination);
+    osc.start(now + n.t); osc.stop(now + n.t + n.d + 0.05);
+  });
+}
+
+// ── STREAK SYSTEM ──
+function updateStreak(isCorrect) {
+  if (isCorrect) {
+    streakCount++;
+    if (streakCount > maxStreak) maxStreak = streakCount;
+    questionsFirstTry++;
+    var el = document.getElementById('streak-display');
+    if (el) el.textContent = streakCount + ' 🔥';
+    playDing();
+    if (streakCount >= 3) showStreakBadge(streakCount);
+    if (streakCount === 5) spawnParticles(document.querySelector('.score-bar'));
+  } else {
+    if (streakCount >= 3) showStreakEnd();
+    streakCount = 0;
+    incorrectCount++;
+    var el = document.getElementById('streak-display');
+    if (el) el.textContent = '0 🔥';
+    playWrongTone();
+  }
+  totalQuestionsAnswered++;
+}
+
+function showStreakBadge(count) {
+  var badge = document.createElement('div');
+  badge.textContent = count + ' in a row! 🔥';
+  badge.style.cssText = 'position:fixed;top:60px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#dcb161,#e8c87a);color:#141C2C;padding:8px 20px;border-radius:20px;font-weight:700;font-size:14px;z-index:10001;animation:streakPop 0.4s ease-out,fadeUp 0.4s ease-in 1.5s forwards;';
+  document.body.appendChild(badge);
+  setTimeout(function(){ badge.remove(); }, 2000);
+}
+
+function showStreakEnd() {
+  var badge = document.createElement('div');
+  badge.textContent = 'Streak ended';
+  badge.style.cssText = 'position:fixed;top:60px;left:50%;transform:translateX(-50%);background:#333;color:#999;padding:6px 16px;border-radius:16px;font-size:12px;z-index:10001;opacity:0.8;';
+  document.body.appendChild(badge);
+  setTimeout(function(){ badge.remove(); }, 1500);
+}
+
+// ── MILESTONE TOASTS ──
+function checkMilestone(current, total) {
+  var pct = Math.round((current / total) * 100);
+  var milestones = {25:'Quarter complete! 💪',50:'Halfway there! 🎯',75:'Almost there! ⚡',100:'Final stretch! 🏆'};
+  for (var m in milestones) {
+    if (pct >= parseInt(m) && !milestonesTriggered[m]) {
+      milestonesTriggered[m] = true;
+      showMilestoneToast(milestones[m]);
+    }
+  }
+}
+
+function showMilestoneToast(msg) {
+  var t = document.createElement('div');
+  t.textContent = msg;
+  t.style.cssText = 'position:fixed;top:-50px;left:50%;transform:translateX(-50%);background:#141C2C;color:#dcb161;padding:10px 24px;border-radius:12px;font-weight:700;font-size:14px;z-index:10002;transition:top 0.4s ease;box-shadow:0 4px 20px rgba(0,0,0,0.3);';
+  document.body.appendChild(t);
+  requestAnimationFrame(function(){ t.style.top = '20px'; });
+  setTimeout(function(){ t.style.top = '-50px'; setTimeout(function(){ t.remove(); }, 500); }, 2500);
+}
+
+// ── GLOBAL PROGRESS BAR ──
+function updateGlobalProgress(current, total) {
+  var fill = document.getElementById('globalProgressFill');
+  if (fill) fill.style.width = Math.round((current / total) * 100) + '%';
+  checkMilestone(current, total);
+}
+
+// ── PARTICLES ──
+function spawnParticles(anchor) {
+  var rect = anchor ? anchor.getBoundingClientRect() : {left:window.innerWidth/2,top:window.innerHeight/2,width:0};
+  for (var i = 0; i < 20; i++) {
+    var p = document.createElement('div');
+    var size = 4 + Math.random() * 6;
+    var angle = (Math.PI * 2 * i) / 20 + (Math.random() * 0.3);
+    var dist = 60 + Math.random() * 80;
+    p.style.cssText = 'position:fixed;width:' + size + 'px;height:' + size + 'px;background:#dcb161;border-radius:50%;left:' + (rect.left + rect.width/2) + 'px;top:' + (rect.top) + 'px;z-index:10003;pointer-events:none;opacity:1;transition:all 0.8s ease-out;';
+    document.body.appendChild(p);
+    requestAnimationFrame(function(pp, a, d) { return function() {
+      pp.style.left = (parseFloat(pp.style.left) + Math.cos(a) * d) + 'px';
+      pp.style.top = (parseFloat(pp.style.top) + Math.sin(a) * d) + 'px';
+      pp.style.opacity = '0';
+    }; }(p, angle, dist));
+    setTimeout(function(pp){ pp.remove(); }.bind(null, p), 900);
+  }
+}
+
+// ── MASCOT (Scales of Justice) ──
+function initMascot() {
+  var gavel = document.createElement('div');
+  gavel.id = 'mascotFloat';
+  gavel.innerHTML = '<svg viewBox="0 0 60 70" xmlns="http://www.w3.org/2000/svg" style="width:50px;height:58px;">'
+    + '<rect x="27" y="18" width="6" height="38" rx="1.5" fill="#8B7D3C"/>'
+    + '<rect x="18" y="54" width="24" height="5" rx="2.5" fill="#6B5E2E"/>'
+    + '<rect x="22" y="52" width="16" height="4" rx="1" fill="#8B7D3C"/>'
+    + '<rect x="6" y="16" width="48" height="4" rx="2" fill="#8B7D3C"/>'
+    + '<circle cx="30" cy="12" r="5" fill="#dcb161" stroke="#8B7D3C" stroke-width="1.5"/>'
+    + '<text x="30" y="14.5" text-anchor="middle" font-size="7" font-weight="bold" fill="#141C2C">⚖</text>'
+    + '<line x1="12" y1="20" x2="12" y2="32" stroke="#8B7D3C" stroke-width="1.5"/>'
+    + '<line x1="48" y1="20" x2="48" y2="32" stroke="#8B7D3C" stroke-width="1.5"/>'
+    + '<path d="M4 33 Q8 38 12 33 Q16 38 20 33" stroke="#dcb161" stroke-width="1.5" fill="none"/>'
+    + '<ellipse cx="12" cy="34" rx="9" ry="2.5" fill="#dcb161" opacity="0.3"/>'
+    + '<path d="M40 33 Q44 38 48 33 Q52 38 56 33" stroke="#dcb161" stroke-width="1.5" fill="none"/>'
+    + '<ellipse cx="48" cy="34" rx="9" ry="2.5" fill="#dcb161" opacity="0.3"/>'
+    + '</svg>';
+  gavel.style.cssText = 'position:fixed;bottom:16px;right:16px;z-index:9998;cursor:pointer;animation:scaleBob 3s ease-in-out infinite;opacity:0.7;transition:opacity 0.3s,transform 0.3s;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.2));';
+  gavel.onmouseenter = function(){ this.style.opacity='1';this.style.transform='scale(1.1)'; };
+  gavel.onmouseleave = function(){ this.style.opacity='0.7';this.style.transform='scale(1)'; };
+  document.body.appendChild(gavel);
+}
+
+function mascotReact(type) {
+  var g = document.getElementById('mascotFloat');
+  if (!g) return;
+  g.style.animation = 'none';
+  void g.offsetHeight;
+  if (type === 'correct') {
+    g.style.animation = 'scaleCelebrate 0.5s ease-out, scaleBob 3s ease-in-out 0.6s infinite';
+  } else if (type === 'incorrect') {
+    g.style.animation = 'scaleTilt 0.6s ease-in-out, scaleBob 3s ease-in-out 0.7s infinite';
+  } else if (type === 'complete') {
+    g.style.animation = 'scaleTriumph 1.5s ease-in-out, scaleBob 3s ease-in-out 1.6s infinite';
+    g.style.opacity = '1';
+    g.style.transform = 'scale(1.15)';
+  }
+}
+
+// ── CONFETTI ──
+var confettiActive = false;
+function launchConfetti() {
+  var canvas = document.getElementById('confettiCanvas');
+  if (!canvas) return;
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  var ctx = canvas.getContext('2d');
+  var colors = ['#dcb161','#c0c0c0','#141c2c'];
+  var particles = [];
+  var cx = canvas.width / 2;
+  var cy = canvas.height / 2;
+  for (var i = 0; i < 150; i++) {
+    var angle = Math.random() * Math.PI * 2;
+    var speed = 3 + Math.random() * 9;
+    particles.push({
+      x:cx, y:cy,
+      vx:Math.cos(angle)*speed, vy:Math.sin(angle)*speed-5,
+      color:colors[Math.floor(Math.random()*colors.length)],
+      w:4+Math.random()*6, h:2+Math.random()*4,
+      rotation:Math.random()*360, rotSpeed:(Math.random()-0.5)*12,
+      gravity:0.10+Math.random()*0.08, opacity:1,
+      shape:Math.random()>0.4?'rect':'circle'
+    });
+  }
+  confettiActive = true;
+  var startTime = Date.now();
+  function animate() {
+    if (!confettiActive) return;
+    var elapsed = Date.now() - startTime;
+    if (elapsed > 4000) {
+      confettiActive = false;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      return;
+    }
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(function(p) {
+      p.x+=p.vx; p.vy+=p.gravity; p.y+=p.vy; p.vx*=0.99; p.rotation+=p.rotSpeed;
+      if (elapsed>2500) p.opacity=Math.max(0,p.opacity-0.02);
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rotation*Math.PI/180);
+      ctx.globalAlpha=p.opacity; ctx.fillStyle=p.color;
+      if (p.shape==='rect'){ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);}
+      else{ctx.beginPath();ctx.arc(0,0,p.w/2,0,Math.PI*2);ctx.fill();}
+      ctx.restore();
+    });
+    requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+}
+
+// ── ACHIEVEMENT BADGES ──
+function calculateBadges() {
+  var badges = [];
+  var pct = Math.round((baseScore / BASE_MAX) * 100);
+  var elapsed = (Date.now() - moduleStartTime) / 60000;
+  var baseQCount = Object.keys(Q_CONFIG).filter(function(k){ return !Q_CONFIG[k].isBonus; }).length;
+  if (questionsFirstTry === baseQCount && incorrectCount === 0) badges.push({icon:'⭐', name:'Perfect Pass', desc:'All correct on first try'});
+  if (incorrectCount === 0 && totalQuestionsAnswered > 0) badges.push({icon:'🎯', name:'No Stumbles', desc:'Zero incorrect'});
+  if (elapsed < 20) badges.push({icon:'⚡', name:'Speed Run', desc:'Under 20 minutes'});
+  if (pct >= 90) badges.push({icon:'🏆', name:'Master', desc:'Above 90%'});
+  if (maxStreak >= 10) badges.push({icon:'🔥', name:'On Fire', desc:'10+ streak'});
+  if (incorrectCount > 3 && pct >= 70) badges.push({icon:'💪', name:'Persistent', desc:'Finished despite struggles'});
+  return badges;
+}
+
+function renderBadges(badges, container) {
+  badges.forEach(function(b, i) {
+    setTimeout(function() {
+      var el = document.createElement('span');
+      el.textContent = b.icon + ' ' + b.name;
+      el.title = b.desc;
+      el.style.cssText = 'display:inline-block;background:#dcb161;color:#141C2C;font-size:12px;font-weight:700;padding:5px 12px;border-radius:14px;margin:4px;animation:badgeFlip 0.5s ease-out;';
+      container.appendChild(el);
+    }, i * 400);
+  });
+}
+
+// ── GAMIFICATION INIT ──
+document.addEventListener('DOMContentLoaded', function() {
+  if (localStorage.getItem('glg_sound') === '1') {
+    soundEnabled = true;
+    var btn = document.getElementById('soundToggle');
+    if (btn) btn.textContent = '🔊';
+  }
+
+  function initAudioOnFirstClick() {
+    ensureAudioCtx();
+    document.removeEventListener('click', initAudioOnFirstClick);
+    document.removeEventListener('touchstart', initAudioOnFirstClick);
+    document.removeEventListener('touchend', initAudioOnFirstClick);
+  }
+  document.addEventListener('click', initAudioOnFirstClick);
+  document.addEventListener('touchstart', initAudioOnFirstClick);
+  document.addEventListener('touchend', initAudioOnFirstClick);
+
+  function resumeAudioOnGesture() {
+    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+  }
+  document.addEventListener('touchstart', resumeAudioOnGesture, true);
+  document.addEventListener('touchend', resumeAudioOnGesture, true);
+  document.addEventListener('click', resumeAudioOnGesture, true);
+
+  initMascot();
+});
+
+// Init
+goToSection(0);
+</script>
+</body>
+</html>

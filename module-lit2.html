@@ -1,0 +1,1943 @@
+<!--
+LIT-2 — Discovery Process & Management
+Built: July 2026 | Base: site/module-la3.html (LA-track canonical chassis)
+CasePeer Stages: Service → Discovery | moduleId: lit2
+Base: 20 questions × 10 pts = 200 | Bonus: 5 boss tasks × 10 bonus pts = 50 max | Pass: 160/200 (80%)
+Answer Key: q1→C q2→A q3→B q4→D  q5→B q6→C q7→A q8→D
+            q9→C q10→A q11→B q12→D  q13→B q14→C q15→A q16→D
+            q17→B q18→A q19→C q20→D
+            q21→A(boss) q22→C(boss) q23→B(boss) q24→D(boss) q25→A(boss)
+Distribution: A=7(28%) B=6(24%) C=6(24%) D=6(24%) — REM-3 compliant
+Boss Challenge: Rosa Martinez, GLG-2026-1522, Martinez v. Henderson Trucking, Inc.
+Sources: essential-lawyering-memo.md, injury-case-playbook-memo.md,
+         O.C.G.A. §§ 9-11-26 through 9-11-37
+Target Audience: Lit staff (Laura, Alexis) — assumes NH track + LIT-1 completed
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>LIT-2 — Discovery Process &amp; Management | Gunn Law Group</title>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;color:#333;font-size:16px;line-height:1.6;-webkit-text-size-adjust:100%;overflow-x:hidden;}
+
+    /* ── HEADER ── */
+    header{background:linear-gradient(135deg,#141C2C 0%,#0E1420 100%);color:#e0e0e0;padding:20px 16px 16px;text-align:center;}
+    .day-badge{display:inline-block;background:#1C2433;color:#dcb161;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:10px;}
+    header h1{font-size:clamp(17px,5vw,24px);font-weight:800;line-height:1.3;color:#ffffff;}
+    header p{margin-top:6px;color:#c0c0c0;font-size:13px;}
+    .score-bar{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:12px;padding:10px 16px;background:#1C2433;border-radius:10px;}
+    .score-label{color:#c0c0c0;font-size:12px;font-weight:600;}
+    .score-value{color:#fff;font-size:22px;font-weight:800;}
+
+    /* ── PROGRESS ── */
+    .progress-wrap{background:#1C2433;padding:10px 16px;}
+    .progress-meta{color:#c0c0c0;font-size:11px;margin-bottom:5px;display:flex;justify-content:space-between;}
+    .progress-bg{background:#0E1420;border-radius:4px;height:6px;width:100%;}
+    .progress-fill{background:#dcb161;height:6px;border-radius:4px;width:0%;transition:width .5s ease;}
+
+    /* ── NAV PILLS ── */
+    .section-nav{display:flex;flex-wrap:wrap;gap:6px;padding:12px 14px;background:#fff;border-bottom:2px solid #e0e3e8;justify-content:center;position:sticky;top:0;z-index:100;}
+    .nav-pill{padding:7px 11px;border-radius:20px;border:2px solid #e0e3e8;background:#fff;color:#666;font-size:11px;font-weight:700;cursor:pointer;min-height:44px;min-width:44px;display:flex;align-items:center;transition:all .2s;white-space:nowrap;-webkit-tap-highlight-color:transparent;}
+    .nav-pill.active{background:#141C2C;color:#fff;border-color:#141C2C;}
+    .nav-pill.done{border-color:#10774A;color:#10774A;}
+    .nav-pill.done::after{content:' ✓';}
+
+    /* ── MAIN / CARDS ── */
+    main{max-width:800px;margin:0 auto;padding:0 0 60px;}
+    .section-card{display:none;background:#fff;margin:16px;border-radius:14px;box-shadow:0 2px 16px rgba(0,0,0,.09);overflow:visible;}
+    .section-card.active{display:block;}
+    .section-header{background:#141C2C;color:#fff;padding:18px 20px;}
+    .section-num{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#dcb161;margin-bottom:4px;}
+    .section-header h2{font-size:clamp(15px,4vw,20px);font-weight:800;}
+    .section-subhead{color:#c0c0c0;font-size:13px;margin-top:4px;}
+    .section-body{padding:20px;}
+
+    /* ── SCENARIO BOX ── */
+    .scenario{background:#141C2C;color:#fff;border-radius:12px;padding:20px;margin-bottom:20px;border-left:3px solid #dcb161;}
+    .scenario-tag{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#dcb161;margin-bottom:8px;}
+    .scenario h3{font-size:clamp(15px,4vw,18px);font-weight:700;line-height:1.4;margin-bottom:10px;}
+    .scenario p{font-size:14px;color:#c8d0e0;line-height:1.6;}
+    .scenario .highlight{color:#dcb161;font-weight:700;}
+    .scenario .urgent{color:#e74c3c;font-weight:700;}
+
+    /* ── INFO BLOCKS ── */
+    .info-block{background:#f0f4f8;border-radius:10px;padding:16px;margin-bottom:14px;}
+    .info-block h4{color:#141c2c;font-size:14px;font-weight:700;margin-bottom:8px;}
+    .info-block p,.info-block li{font-size:14px;color:#444;line-height:1.6;}
+    .info-block ul,.info-block ol{padding-left:18px;}
+
+    /* ── QUESTIONS ── */
+    .question-block{border:2px solid #e8ecf0;border-radius:12px;padding:18px;margin-bottom:16px;transition:border-color .2s;}
+    .question-block.answered{border-color:#10774A;}
+    .question-block.answered-wrong{border-color:#870101;}
+    .q-num{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888;margin-bottom:6px;}
+    .q-text{font-size:clamp(14px,3.5vw,16px);font-weight:700;color:#141c2c;margin-bottom:14px;line-height:1.4;}
+    .options{display:flex;flex-direction:column;gap:10px;}
+    .option-btn{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border:2px solid #e0e3e8;border-radius:10px;background:#fff;cursor:pointer;text-align:left;font-size:14px;color:#333;min-height:44px;transition:all .15s;-webkit-tap-highlight-color:transparent;width:100%;}
+    .option-btn:hover,.option-btn:focus{border-color:#232e54;background:#f8f9ff;}
+    .option-btn.correct{border-color:#10774A!important;background:#e8f8ee!important;color:#10774A!important;}
+    .option-btn.incorrect{border-color:#870101!important;background:#fce8e8!important;color:#870101!important;}
+    .option-btn.disabled{pointer-events:none;opacity:.75;}
+    .opt-letter{background:#141C2C;color:#dcb161;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0;margin-top:1px;}
+    .opt-text{flex:1;line-height:1.5;}
+
+    /* ── FEEDBACK ── */
+    .feedback-box{border-radius:10px;padding:14px 16px;margin-top:12px;display:none;font-size:14px;line-height:1.6;}
+    .feedback-box.correct{background:#d4edda;border-left:4px solid #10774A;color:#155724;}
+    .feedback-box.incorrect{background:#f8d7da;border-left:4px solid #870101;color:#721c24;}
+    .feedback-box.show{display:block;}
+
+    /* ── POINTS TOAST ── */
+    .points-toast{position:fixed;top:80px;right:16px;background:#10774A;color:#fff;padding:10px 16px;border-radius:30px;font-weight:700;font-size:15px;box-shadow:0 4px 16px rgba(0,0,0,.2);z-index:999;transform:translateY(-20px);opacity:0;transition:all .3s;pointer-events:none;}
+    .points-toast.show{transform:translateY(0);opacity:1;}
+    .points-toast.bonus{background:#dcb161;color:#141C2C;}
+
+    /* ── SECTION SCORE ── */
+    .section-score{background:#f0f4f8;border-radius:10px;padding:14px;text-align:center;margin-bottom:16px;}
+    .section-score .score-display{font-size:32px;font-weight:800;color:#141c2c;}
+    .section-score .score-label{font-size:13px;color:#666;margin-top:2px;}
+
+    /* ── CASE FILE ── */
+    .case-file{background:#fff;border:2px solid #141c2c;border-radius:12px;padding:18px;margin-bottom:20px;}
+    .case-file-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:12px;border-bottom:2px solid #f0f4f8;}
+    .case-file-icon{background:#141c2c;color:#fff;width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+    .case-file-title{font-weight:800;color:#141c2c;font-size:15px;}
+    .case-file-sub{font-size:12px;color:#888;}
+    .case-detail{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #f0f4f8;font-size:14px;}
+    .case-detail:last-child{border-bottom:none;}
+    .case-key{font-weight:700;color:#141c2c;min-width:160px;flex-shrink:0;}
+    .case-val{color:#444;}
+    .case-val .flag{display:inline-block;background:#870101;color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;margin-left:6px;}
+    .case-val .flag-warn{display:inline-block;background:#f39c12;color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;margin-left:6px;}
+    .case-val .flag-ok{display:inline-block;background:#10774A;color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;margin-left:6px;}
+
+    /* ── BOSS CHALLENGE ── */
+    .boss-header{background:linear-gradient(135deg,#870101 0%,#5a0000 100%);color:#fff;border-radius:12px;padding:24px;margin-bottom:20px;text-align:center;}
+    .boss-header .boss-icon{font-size:40px;margin-bottom:10px;}
+    .boss-header h3{font-size:clamp(17px,4.5vw,22px);font-weight:800;margin-bottom:8px;}
+    .boss-header p{font-size:14px;opacity:.9;line-height:1.5;}
+
+    /* ── RESULTS ── */
+    .results-header{padding:28px 20px;text-align:center;color:#fff;}
+    .results-header.pass{background:linear-gradient(135deg,#10774A,#0a5c38);}
+    .results-header.fail{background:linear-gradient(135deg,#870101,#6b0000);}
+    .results-grade{font-size:56px;font-weight:900;line-height:1;}
+    .results-label{font-size:16px;margin-top:6px;opacity:.9;}
+    .results-sub{font-size:13px;margin-top:4px;opacity:.75;}
+    .breakdown-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #f0f4f8;font-size:15px;}
+    .breakdown-row:last-child{border-bottom:none;}
+    .breakdown-name{color:#333;font-weight:600;}
+    .breakdown-pts{font-weight:800;color:#141c2c;}
+    .achievement-grid{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0;}
+    .badge{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;font-size:13px;font-weight:700;border:2px solid #e0e3e8;color:#888;background:#f8f9fa;}
+    .badge.earned{border-color:#dcb161;background:#fffaed;color:#7a5c00;}
+    .badge .badge-icon{font-size:20px;}
+
+    /* ── CERTIFICATE ── */
+    .cert-wrap{background:linear-gradient(180deg,#ffffff 0%,#fafaf5 100%);border:4px double #141c2c;border-radius:14px;padding:2.5rem 1.75rem;text-align:center;margin-bottom:1rem;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(20,28,44,0.10);animation:certPopIn 0.8s 0.1s cubic-bezier(0.34,1.56,0.64,1) both;}
+    @keyframes certPopIn{0%{opacity:0;transform:scale(0.7);box-shadow:0 2px 8px rgba(20,28,44,0.05)}60%{opacity:1;transform:scale(1.04);box-shadow:0 8px 32px rgba(20,28,44,0.18)}80%{transform:scale(0.98)}100%{opacity:1;transform:scale(1);box-shadow:0 10px 40px rgba(20,28,44,0.16)}}
+    .cert-wrap::before{content:'';position:absolute;inset:10px;border:1px solid #dcb161;border-radius:8px;pointer-events:none;opacity:0.45;}
+    .cert-wrap::after{content:'\2696\FE0F';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:180px;opacity:0.03;pointer-events:none;z-index:0;}
+    .cert-firm{font-size:0.67rem;letter-spacing:0.22em;text-transform:uppercase;color:#232e54;font-weight:600;margin-bottom:0.6rem;position:relative;z-index:1;}
+    .cert-title{font-size:clamp(1.5rem,5vw,1.9rem);font-weight:800;color:#141c2c;margin-bottom:0.3rem;text-transform:uppercase;letter-spacing:0.04em;position:relative;z-index:1;}
+    .cert-subtitle{font-size:0.8rem;color:#888;margin-bottom:1.4rem;position:relative;z-index:1;}
+    .cert-presents{font-size:0.85rem;color:#777;font-style:italic;margin-bottom:0.3rem;position:relative;z-index:1;}
+    .cert-name{font-size:clamp(1.6rem,6vw,2.2rem);font-weight:700;color:#232e54;font-style:italic;border-bottom:2px solid #dcb161;display:inline-block;padding:0 0.75rem 0.2rem;margin-bottom:0.85rem;min-width:60%;position:relative;z-index:1;}
+    .cert-for{font-size:0.85rem;color:#666;margin-bottom:0.35rem;position:relative;z-index:1;}
+    .cert-module{font-size:1.05rem;font-weight:600;color:#141c2c;margin-bottom:1.1rem;position:relative;z-index:1;}
+    .cert-meta{font-size:0.8rem;color:#888;position:relative;z-index:1;}
+    .cert-score{font-size:1.1rem;font-weight:700;color:#10774A;margin-top:0.5rem;position:relative;z-index:1;}
+    .cert-seal{font-size:2.5rem;margin:0.85rem 0 0.3rem;display:block;position:relative;z-index:1;}
+    .cert-signature{margin-top:1.5rem;position:relative;z-index:1;}
+    .cert-sig-line{width:200px;border-top:1px solid #141c2c;margin:0 auto 0.3rem;}
+    .cert-sig-name{font-size:1rem;font-weight:600;color:#141c2c;font-style:italic;}
+    .cert-sig-title{font-size:0.75rem;color:#888;letter-spacing:0.05em;}
+    .cert-badges{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:14px;position:relative;z-index:1;}
+    .cert-badge-pill{display:inline-block;background:#dcb161;color:#141C2C;font-size:0.68rem;font-weight:700;padding:4px 12px;border-radius:14px;letter-spacing:0.03em;animation:badgeFlip 0.5s ease-out backwards;}
+    #confettiCanvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10005;}
+
+    /* ── REVIEW LIST ── */
+    .review-list{display:flex;flex-direction:column;gap:0.65rem;margin-top:1rem;}
+    .review-item{background:#f8f9fa;border-radius:10px;padding:0.8rem 1.1rem;border-left:4px solid #ddd;font-size:0.88rem;transition:transform 0.15s ease;}
+    .review-item:hover{transform:translateX(2px);}
+    .review-item.correct{border-color:#10774A;}
+    .review-item.wrong{border-color:#870101;}
+    .review-item .ri-q{font-weight:600;margin-bottom:0.35rem;color:#141c2c;}
+    .review-item .ri-ans{font-size:0.82rem;}
+
+    /* ── NAME INPUT ── */
+    .name-input-wrap{margin-bottom:1rem;}
+    .name-input-wrap label{display:block;font-size:0.85rem;font-weight:600;color:#232e54;margin-bottom:0.4rem;}
+    .name-input{width:100%;padding:0.82rem 1rem;border:2px solid #e0e3e8;border-radius:9px;font-size:1rem;color:#333;background:#fff;transition:border-color 0.2s ease,box-shadow 0.2s ease;-webkit-appearance:none;}
+    .name-input:focus{outline:none;border-color:#232e54;box-shadow:0 0 0 3px rgba(35,46,84,0.1);}
+
+    /* ── FEEDBACK FORM ── */
+    .fb-question{margin-bottom:18px;}
+    .fb-question label{display:block;font-weight:700;color:#141c2c;font-size:15px;margin-bottom:8px;}
+    .fb-question select,.fb-question textarea{width:100%;padding:12px;border:2px solid #e0e3e8;border-radius:9px;font-size:14px;background:#fff;color:#333;-webkit-appearance:none;transition:border-color 0.2s ease;font-family:inherit;}
+    .fb-question select:focus,.fb-question textarea:focus{outline:none;border-color:#141c2c;}
+    .fb-question textarea{resize:vertical;min-height:80px;}
+
+    /* ── BUTTONS ── */
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 22px;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;min-height:44px;transition:all .2s;-webkit-tap-highlight-color:transparent;font-family:inherit;}
+    .btn-primary{background:#141C2C;color:#fff;}
+    .btn-primary:hover{background:#232e54;}
+    .btn-secondary{background:#f0f4f8;color:#141c2c;}
+    .btn-block{width:100%;margin-top:12px;}
+    .btn-group{display:flex;flex-direction:column;gap:10px;margin-top:16px;}
+
+    /* ── CALLOUT ── */
+    .callout{border-radius:10px;padding:14px 16px;margin:14px 0;font-size:14px;line-height:1.6;}
+    .callout-warn{background:#fff3cd;border-left:4px solid #f39c12;color:#533f03;}
+    .callout-danger{background:#fce8e8;border-left:4px solid #870101;color:#721c24;}
+    .callout-success{background:#d4edda;border-left:4px solid #10774A;color:#155724;}
+    .callout-info{background:#d6e8f8;border-left:4px solid #3498db;color:#174a7e;}
+    .callout strong{font-weight:700;}
+
+    /* ── STAT TABLE ── */
+    .stat-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13px;}
+    .stat-table th{background:#141c2c;color:#dcb161;padding:8px 10px;text-align:left;font-weight:700;}
+    .stat-table td{padding:7px 10px;border-bottom:1px solid #e0e3e8;vertical-align:top;}
+    .stat-table tr:last-child td{border-bottom:none;}
+    .stat-table tr:nth-child(even) td{background:#f8f9fa;}
+    .stat-num{font-weight:800;color:#141c2c;white-space:nowrap;}
+    .stat-warn{background:#fff3cd !important;font-weight:700;}
+    .stat-void{background:#fce8e8 !important;color:#721c24;font-weight:700;}
+    .stat-ok{background:#d4edda !important;color:#155724;font-weight:700;}
+
+    /* ── DIVIDER / TAGS / UTILS ── */
+    .divider{border:none;border-top:2px solid #f0f4f8;margin:16px 0;}
+    .tag{display:inline-block;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
+    .tag-warn{background:#fff3cd;color:#856404;}
+    .tag-danger{background:#fce8e8;color:#7b1a1a;}
+    .tag-success{background:#d4edda;color:#155724;}
+    .tag-info{background:#d6e8f8;color:#174a7e;}
+    .tag-gold{background:#fffaed;color:#7a5c00;border:1px solid #dcb161;}
+    .text-center{text-align:center;}
+    .mt-4{margin-top:16px;}
+    .mb-4{margin-bottom:16px;}
+
+    /* ── SCORE CONFIRM ── */
+    .score-confirm{border-radius:10px;padding:14px 16px;margin:14px 0;font-size:14px;line-height:1.6;background:#d4edda;border-left:4px solid #10774A;color:#155724;display:none;}
+
+    .glg-logo{display:block;margin:0 auto 10px;max-height:50px;width:auto;}
+
+    /* ── GAMIFICATION ANIMATIONS ── */
+    @keyframes streakPop{0%{transform:translateX(-50%) scale(0.5);opacity:0}50%{transform:translateX(-50%) scale(1.15)}100%{transform:translateX(-50%) scale(1);opacity:1}}
+    @keyframes fadeUp{to{opacity:0;transform:translateX(-50%) translateY(-20px);}}
+    @keyframes scaleBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+    @keyframes scaleCelebrate{0%{transform:scale(1) rotate(0)}25%{transform:scale(1.2) rotate(-8deg)}50%{transform:scale(1.15) rotate(5deg)}75%{transform:scale(1.1) rotate(-3deg)}100%{transform:scale(1) rotate(0)}}
+    @keyframes scaleTilt{0%{transform:rotate(0)}30%{transform:rotate(10deg)}70%{transform:rotate(-8deg)}100%{transform:rotate(0)}}
+    @keyframes scaleTriumph{0%{transform:scale(1)}20%{transform:scale(1.3)}40%{transform:scale(1.25) rotate(-5deg)}60%{transform:scale(1.25) rotate(5deg)}80%{transform:scale(1.3)}100%{transform:scale(1)}}
+    @keyframes badgeFlip{0%{transform:rotateY(90deg) scale(0.5);opacity:0}60%{transform:rotateY(-10deg) scale(1.05)}100%{transform:rotateY(0) scale(1);opacity:1}}
+    @keyframes correctPulse{0%{box-shadow:0 0 0 0 rgba(39,174,96,0.4)}70%{box-shadow:0 0 0 12px rgba(39,174,96,0)}100%{box-shadow:0 0 0 0 rgba(39,174,96,0)}}
+    @keyframes incorrectShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+    .option-btn.correct{animation:correctPulse 0.6s ease-out;}
+    .option-btn.incorrect{animation:incorrectShake 0.4s ease-out;}
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     HEADER
+════════════════════════════════════════════ -->
+<header>
+  <img src="https://www.thegunnlawgroup.com/wp-content/uploads/2023/01/gunn-logo.png" alt="Gunn Law Group" class="glg-logo">
+  <div class="day-badge">LIT-2 &middot; Discovery Process &amp; Management</div>
+  <h1>LIT-2 — Discovery Process &amp; Management</h1>
+  <p>Gunn Law Group &middot; Litigation Staff Training</p>
+  <div class="score-bar">
+    <div>
+      <div class="score-label">BASE SCORE</div>
+      <div class="score-value" id="total-score">0</div>
+    </div>
+    <div>
+      <div class="score-label">POSSIBLE</div>
+      <div class="score-value">200</div>
+    </div>
+    <div>
+      <div class="score-label">BONUS</div>
+      <div class="score-value" id="bonus-score">0</div>
+    </div>
+    <div>
+      <div class="score-label">STREAK</div>
+      <div class="score-value" id="streak-display">0 🔥</div>
+    </div>
+  </div>
+</header>
+
+<!-- Sound Toggle -->
+<button id="soundToggle" style="position:fixed;top:12px;right:12px;z-index:10000;background:#1C2433;color:#c0c0c0;border:1px solid #333;border-radius:8px;padding:6px 10px;cursor:pointer;font-size:16px;" onclick="toggleSound()" title="Toggle Sound">🔇</button>
+<!-- Global Progress Bar -->
+<div id="globalProgress" style="position:fixed;top:0;left:0;width:100%;height:4px;background:#1C2433;z-index:9999;"><div id="globalProgressFill" style="height:100%;width:0%;background:linear-gradient(90deg,#dcb161,#e8c87a);transition:width 0.5s ease;"></div></div>
+
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <div class="progress-meta">
+    <span id="prog-label">Section 1 of 9</span>
+    <span id="prog-pct">0%</span>
+  </div>
+  <div class="progress-bg"><div class="progress-fill" id="prog-fill"></div></div>
+</div>
+
+<!-- NAV PILLS -->
+<nav class="section-nav" id="section-nav">
+  <button class="nav-pill active" id="nav-0" onclick="goToSection(0)">1. Intro</button>
+  <button class="nav-pill" id="nav-1" onclick="goToSection(1)">2. Types</button>
+  <button class="nav-pill" id="nav-2" onclick="goToSection(2)">3. Drafting</button>
+  <button class="nav-pill" id="nav-3" onclick="goToSection(3)">4. Calendar</button>
+  <button class="nav-pill" id="nav-4" onclick="goToSection(4)">5. Production</button>
+  <button class="nav-pill" id="nav-5" onclick="goToSection(5)">6. Disputes</button>
+  <button class="nav-pill" id="nav-6" onclick="goToSection(6)">7. Boss</button>
+  <button class="nav-pill" id="nav-7" onclick="goToSection(7)">8. Results</button>
+  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">9. Feedback</button>
+</nav>
+
+<main>
+
+<!-- ══════════════════════════════════════════
+     SECTION 0 — INTRO / WELCOME
+════════════════════════════════════════════ -->
+<div class="section-card active" id="section-0">
+  <div class="section-header">
+    <div class="section-num">Section 1 &middot; Welcome</div>
+    <h2>Discovery Process &amp; Management</h2>
+    <div class="section-subhead">Discovery is where cases are won or lost — long before trial.</div>
+  </div>
+  <div class="section-body">
+    <div class="scenario">
+      <div class="scenario-tag">LIT Track — Module 2</div>
+      <h3>The case moved to Discovery. Nobody set up the calendar.</h3>
+      <p>The defendant was served three weeks ago. The answer was filed. CasePeer still shows <span class="highlight">Service</span> status. No discovery calendar was created. Defense counsel serves Interrogatories and Requests for Admission on the same day. Thirty days pass. Nobody responds. The Interrogatories are now overdue — objections may be waived. <span class="urgent">The Requests for Admission? Every single one is now deemed admitted as fact. The case just took catastrophic damage before anyone at the firm even noticed.</span></p>
+    </div>
+    <div class="info-block">
+      <h4>📋 What You Will Learn</h4>
+      <ul>
+        <li>The five types of discovery under Georgia's Civil Practice Act (O.C.G.A. §§ 9-11-26 through 9-11-37)</li>
+        <li>Georgia discovery timelines — the 30-day rules that can make or break a case</li>
+        <li>How to draft and respond to interrogatories, production requests, and requests for admission</li>
+        <li>Discovery calendar management — deadline tracking that prevents disaster</li>
+        <li>Privilege review and privilege log requirements</li>
+        <li>Document production and Bates numbering</li>
+        <li>CasePeer status changes: Service → Discovery</li>
+        <li>Common discovery disputes, objections, and sanctions</li>
+        <li>Your role as litigation support staff in the discovery process</li>
+        <li>E-discovery basics for PI cases — spoliation letters, ESI preservation</li>
+      </ul>
+    </div>
+    <div class="callout callout-warn"><strong>Prerequisites:</strong> NH Track (New Hire modules) and LIT-1 (Litigation Fundamentals) must be completed before taking LIT-2. This module builds directly on litigation concepts from LIT-1.</div>
+    <div class="callout callout-info"><strong>Performance standard:</strong> Zero missed discovery deadlines. Every deadline calendared within 24 hours of receipt. Every response served on or before the due date. This module teaches the system that makes that standard achievable.</div>
+    <div class="btn-group"><button class="btn btn-primary btn-block" onclick="goToSection(1)">Begin: Types of Discovery &amp; Georgia Rules &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 1 — TYPES OF DISCOVERY & GEORGIA RULES (Q1–Q4)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-1">
+  <div class="section-header">
+    <div class="section-num">Section 2 &middot; Types of Discovery &amp; Georgia Rules &middot; Up to 40 pts</div>
+    <h2>The Five Discovery Devices</h2>
+    <div class="section-subhead">O.C.G.A. §§ 9-11-26 through 9-11-37 — the rules that govern how evidence is exchanged.</div>
+  </div>
+  <div class="section-body">
+    <div class="info-block">
+      <h4>⚖️ Georgia's Five Discovery Devices</h4>
+      <table class="stat-table">
+        <tr><th>Device</th><th>Statute</th><th>Key Rule</th></tr>
+        <tr><td class="stat-num">Interrogatories</td><td>§ 9-11-33</td><td>Written questions to parties. Max 50 (including subparts). <strong>30-day response deadline.</strong> Failure to respond waives objections.</td></tr>
+        <tr><td class="stat-num">Requests for Production</td><td>§ 9-11-34</td><td>Documents, ESI, tangible things. <strong>30-day response deadline.</strong> Must produce as kept in ordinary course or labeled to match request categories.</td></tr>
+        <tr class="stat-void"><td class="stat-num">Requests for Admission</td><td>§ 9-11-36</td><td><strong>MOST DANGEROUS DEVICE.</strong> 30-day deadline. <em>No response = deemed admitted as established fact.</em> Can be case-ending.</td></tr>
+        <tr><td class="stat-num">Depositions</td><td>§ 9-11-30/31</td><td>Oral or written examination under oath. Reasonable notice required. Only valid ground to instruct not to answer: privilege.</td></tr>
+        <tr><td class="stat-num">Subpoenas</td><td>§ 9-11-45</td><td>Third-party document requests and testimony. Used for non-parties (medical providers, employers, witnesses).</td></tr>
+      </table>
+    </div>
+    <div class="info-block">
+      <h4>🔍 Discovery Scope — O.C.G.A. § 9-11-26(b)</h4>
+      <p><strong>Broad scope:</strong> Parties may obtain discovery regarding any matter, not privileged, which is relevant to the subject matter involved in the pending action. Information need not be admissible at trial if it appears reasonably calculated to lead to the discovery of admissible evidence.</p>
+      <p style="margin-top:8px;"><strong>Key limitations:</strong> Attorney-client privilege, work product doctrine, and protective orders (§ 9-11-26(c)) can restrict discovery.</p>
+    </div>
+    <div class="callout callout-danger"><strong>The RFA trap:</strong> Requests for Admission are the only discovery device where silence = automatic loss. If you miss a 30-day RFA deadline, every requested fact is deemed admitted. The defense can then move for summary judgment based on your client's "admissions." This has destroyed cases at GLG-peer firms. Calendar RFA deadlines as the highest-priority discovery deadline.</div>
+
+    <div class="question-block" id="q1-block">
+      <div class="q-num">Question 1 of 20 &middot; 10 pts</div>
+      <div class="q-text">Under Georgia's Civil Practice Act, which of the following is NOT a recognized discovery device?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q1','a',true)" id="q1-a"><span class="opt-letter">A</span><span class="opt-text">Demand for sworn financial statements</span></button>
+        <button class="option-btn" onclick="answer('q1','b',false)" id="q1-b"><span class="opt-letter">B</span><span class="opt-text">Requests for admission (O.C.G.A. § 9-11-36)</span></button>
+        <button class="option-btn" onclick="answer('q1','c',false)" id="q1-c"><span class="opt-letter">C</span><span class="opt-text">Interrogatories to parties (O.C.G.A. § 9-11-33)</span></button>
+        <button class="option-btn" onclick="answer('q1','d',false)" id="q1-d"><span class="opt-letter">D</span><span class="opt-text">Requests for production of documents (O.C.G.A. § 9-11-34)</span></button>
+      </div>
+      <div class="feedback-box" id="q1-fb"></div>
+    </div>
+
+    <div class="question-block" id="q2-block">
+      <div class="q-num">Question 2 of 20 &middot; 10 pts</div>
+      <div class="q-text">Your attorney files a personal injury case. The defendant was served on March 1. Interrogatories are served simultaneously with the complaint. Under O.C.G.A. § 9-11-33(a), by what date must the defendant respond?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q2','a',false)" id="q2-a"><span class="opt-letter">A</span><span class="opt-text">April 15 — 45 days for initial discovery</span></button>
+        <button class="option-btn" onclick="answer('q2','b',true)" id="q2-b"><span class="opt-letter">B</span><span class="opt-text">March 31 — 30 days from service</span></button>
+        <button class="option-btn" onclick="answer('q2','c',false)" id="q2-c"><span class="opt-letter">C</span><span class="opt-text">April 30 — 60 days from service</span></button>
+        <button class="option-btn" onclick="answer('q2','d',false)" id="q2-d"><span class="opt-letter">D</span><span class="opt-text">The defendant can respond at any time before trial</span></button>
+      </div>
+      <div class="feedback-box" id="q2-fb"></div>
+    </div>
+
+    <div class="question-block" id="q3-block">
+      <div class="q-num">Question 3 of 20 &middot; 10 pts &middot; Critical Rule</div>
+      <div class="q-text">GLG sends Requests for Admission to the defendant. The defendant's attorney never responds within 30 days. Under O.C.G.A. § 9-11-36(a), what is the legal effect?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q3','a',false)" id="q3-a"><span class="opt-letter">A</span><span class="opt-text">The court will schedule a hearing to determine the matter — which represents the conventional method used across Georgia personal injury law firms</span></button>
+        <button class="option-btn" onclick="answer('q3','b',false)" id="q3-b"><span class="opt-letter">B</span><span class="opt-text">The plaintiff must file a motion to compel responses</span></button>
+        <button class="option-btn" onclick="answer('q3','c',false)" id="q3-c"><span class="opt-letter">C</span><span class="opt-text">The requests are treated as denied by default</span></button>
+        <button class="option-btn" onclick="answer('q3','d',true)" id="q3-d"><span class="opt-letter">D</span><span class="opt-text">Each matter is deemed admitted — they are now established facts</span></button>
+      </div>
+      <div class="feedback-box" id="q3-fb"></div>
+    </div>
+
+    <div class="question-block" id="q4-block">
+      <div class="q-num">Question 4 of 20 &middot; 10 pts &middot; Deposition Privilege</div>
+      <div class="q-text">During your client's deposition, the defense attorney asks about a conversation your client had with their GLG attorney about case strategy. What is the correct response?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q4','a',false)" id="q4-a"><span class="opt-letter">A</span><span class="opt-text">The client should answer — all questions must be answered during depositions</span></button>
+        <button class="option-btn" onclick="answer('q4','b',true)" id="q4-b"><span class="opt-letter">B</span><span class="opt-text">Instruct the client not to answer — this is protected by attorney-client privilege</span></button>
+        <button class="option-btn" onclick="answer('q4','c',false)" id="q4-c"><span class="opt-letter">C</span><span class="opt-text">Object and allow the client to answer subject to the objection</span></button>
+        <button class="option-btn" onclick="answer('q4','d',false)" id="q4-d"><span class="opt-letter">D</span><span class="opt-text">The client should say "I don't recall" to avoid revealing privileged information — following the standard workflow that experienced case managers and legal assistants follow</span></button>
+      </div>
+      <div class="feedback-box" id="q4-fb"></div>
+    </div>
+
+    <div class="section-score" id="s1-score" style="display:none;"><div class="score-display" id="s1-score-val"></div><div class="score-label">Section 2 Score</div></div>
+    <div class="btn-group" id="s1-next"><button class="btn btn-primary btn-block" onclick="goToSection(2)">Next: Drafting &amp; Responding to Discovery &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 2 — DRAFTING & RESPONDING TO DISCOVERY (Q5–Q8)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-2">
+  <div class="section-header">
+    <div class="section-num">Section 3 &middot; Drafting &amp; Responding &middot; Up to 40 pts</div>
+    <h2>Drafting &amp; Responding to Discovery Requests</h2>
+    <div class="section-subhead">What you ask, how you respond, and the duty to supplement — every word matters.</div>
+  </div>
+  <div class="section-body">
+    <div class="info-block">
+      <h4>📝 Drafting Discovery Requests — GLG Best Practices</h4>
+      <ul>
+        <li><strong>Interrogatories:</strong> Start with the most critical information. In trucking cases: driver qualifications, training, hours-of-service compliance, driving record. In standard PI: liability facts, witness identification, insurance coverage.</li>
+        <li><strong>Requests for Production:</strong> Cast a targeted net — ask for categories of documents, not individual documents. Example: "All documents relating to maintenance of the vehicle involved in the collision."</li>
+        <li><strong>Requests for Admission:</strong> Use strategically to narrow issues for trial. Admit uncontested facts early (date of accident, ownership of vehicle) to focus trial on real disputes.</li>
+        <li><strong>Georgia limit:</strong> 50 interrogatories maximum including subparts (O.C.G.A. § 9-11-33(a)). Plan carefully — you cannot exceed this without court permission.</li>
+      </ul>
+    </div>
+    <div class="info-block">
+      <h4>🛡 Responding to Discovery — The Objection Framework</h4>
+      <table class="stat-table">
+        <tr><th>Objection</th><th>When to Use</th><th>Key Rule</th></tr>
+        <tr><td class="stat-num">Overly Broad</td><td>Request seeks information far beyond the scope of the case</td><td>"Describe all medical treatment for any condition in the past 10 years" in a recent auto accident case</td></tr>
+        <tr><td class="stat-num">Unduly Burdensome</td><td>Cost/effort of compliance disproportionate to the value of the information</td><td>Must explain the specific burden — blanket claims are overruled</td></tr>
+        <tr><td class="stat-num">Privilege</td><td>Request seeks attorney-client or work product materials</td><td>Must provide a privilege log identifying each withheld document</td></tr>
+        <tr><td class="stat-num">Vague / Ambiguous</td><td>Request is unclear about what is actually being sought</td><td>State the objection, then answer to the extent you understand the request</td></tr>
+      </table>
+      <p style="margin-top:10px;"><strong>Golden rule:</strong> Object specifically, then respond to the extent the request is not objectionable. Blanket refusals without any response are disfavored and often overruled.</p>
+    </div>
+    <div class="info-block">
+      <h4>🔄 Duty to Supplement — O.C.G.A. § 9-11-26(e)</h4>
+      <p>The duty to supplement is <strong>ongoing and affirmative</strong>. When you learn that a prior response is materially incomplete or incorrect — such as a new surgery, additional treatment, or newly discovered documents — you must supplement "seasonably" (without unreasonable delay). Failure to supplement can result in exclusion of evidence at trial.</p>
+    </div>
+    <div class="callout callout-warn"><strong>HIPAA does not block discovery.</strong> HIPAA governs healthcare providers' disclosure of medical information — it does not apply between litigants in a lawsuit. Citing HIPAA as an objection to discovery is improper and will be overruled. Use specific, recognized objections (overbreadth, privilege) instead.</div>
+
+    <div class="question-block" id="q5-block">
+      <div class="q-num">Question 5 of 20 &middot; 10 pts</div>
+      <div class="q-text">When drafting interrogatories for a PI case against a commercial truck driver, which set of interrogatories should GLG serve FIRST to maximize useful information?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q5','a',true)" id="q5-a"><span class="opt-letter">A</span><span class="opt-text">Interrogatories about the driver's employment history, training, hours of service, and driving record</span></button>
+        <button class="option-btn" onclick="answer('q5','b',false)" id="q5-b"><span class="opt-letter">B</span><span class="opt-text">Interrogatories about the defendant's personal finances and insurance coverage — this approach aligns with the documented procedures and established expectations at GLG</span></button>
+        <button class="option-btn" onclick="answer('q5','c',false)" id="q5-c"><span class="opt-letter">C</span><span class="opt-text">Interrogatories asking the defendant to admit fault for the accident</span></button>
+        <button class="option-btn" onclick="answer('q5','d',false)" id="q5-d"><span class="opt-letter">D</span><span class="opt-text">Interrogatories about the defendant's prior litigation history only</span></button>
+      </div>
+      <div class="feedback-box" id="q5-fb"></div>
+    </div>
+
+    <div class="question-block" id="q6-block">
+      <div class="q-num">Question 6 of 20 &middot; 10 pts &middot; Objection Practice</div>
+      <div class="q-text">The defendant serves interrogatories asking your client to "describe in detail every medical treatment received for any condition in the past 10 years." This is overly broad for a recent auto accident case. What is the proper response?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q6','a',false)" id="q6-a"><span class="opt-letter">A</span><span class="opt-text">Refuse to answer entirely and cite HIPAA</span></button>
+        <button class="option-btn" onclick="answer('q6','b',false)" id="q6-b"><span class="opt-letter">B</span><span class="opt-text">Answer fully — the defendant is entitled to complete medical history — this approach aligns with the documented procedures and established expectations at GLG — this approach aligns with the documented procedures and established expectations at GLG</span></button>
+        <button class="option-btn" onclick="answer('q6','c',true)" id="q6-c"><span class="opt-letter">C</span><span class="opt-text">Object as overly broad and unduly burdensome, but respond with treatment related to injuries from the incident and any pre-existing conditions in the same body parts</span></button>
+        <button class="option-btn" onclick="answer('q6','d',false)" id="q6-d"><span class="opt-letter">D</span><span class="opt-text">File an immediate motion for protective order without responding</span></button>
+      </div>
+      <div class="feedback-box" id="q6-fb"></div>
+    </div>
+
+    <div class="question-block" id="q7-block">
+      <div class="q-num">Question 7 of 20 &middot; 10 pts &middot; Privilege Review</div>
+      <div class="q-text">The defense serves a Request for Production asking for "all documents related to the plaintiff's claim." You identify responsive documents that include text messages between the client and their GLG attorney discussing case strategy. What is the correct approach?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q7','a',false)" id="q7-a"><span class="opt-letter">A</span><span class="opt-text">Produce only the documents that help your client's case — following the standard workflow that experienced case managers and legal assistants follow</span></button>
+        <button class="option-btn" onclick="answer('q7','b',false)" id="q7-b"><span class="opt-letter">B</span><span class="opt-text">Produce everything — text messages are not privileged</span></button>
+        <button class="option-btn" onclick="answer('q7','c',false)" id="q7-c"><span class="opt-letter">C</span><span class="opt-text">Withhold all text messages regardless of content</span></button>
+        <button class="option-btn" onclick="answer('q7','d',true)" id="q7-d"><span class="opt-letter">D</span><span class="opt-text">Withhold the attorney-client communications, produce all other responsive documents, and include the withheld items on a privilege log</span></button>
+      </div>
+      <div class="feedback-box" id="q7-fb"></div>
+    </div>
+
+    <div class="question-block" id="q8-block">
+      <div class="q-num">Question 8 of 20 &middot; 10 pts &middot; Supplementation Duty</div>
+      <div class="q-text">Six months after serving initial discovery responses, your client completes an additional surgery related to the accident. Under O.C.G.A. § 9-11-26(e), what is GLG's obligation?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q8','a',false)" id="q8-a"><span class="opt-letter">A</span><span class="opt-text">No obligation — discovery responses are final when served — this approach aligns with the documented procedures and established expectations at GLG</span></button>
+        <button class="option-btn" onclick="answer('q8','b',true)" id="q8-b"><span class="opt-letter">B</span><span class="opt-text">Supplement prior responses seasonably — the duty to supplement is ongoing</span></button>
+        <button class="option-btn" onclick="answer('q8','c',false)" id="q8-c"><span class="opt-letter">C</span><span class="opt-text">File a motion to amend the prior discovery responses</span></button>
+        <button class="option-btn" onclick="answer('q8','d',false)" id="q8-d"><span class="opt-letter">D</span><span class="opt-text">Wait until the defendant asks for updated information</span></button>
+      </div>
+      <div class="feedback-box" id="q8-fb"></div>
+    </div>
+
+    <div class="section-score" id="s2-score" style="display:none;"><div class="score-display" id="s2-score-val"></div><div class="score-label">Section 3 Score</div></div>
+    <div class="btn-group" id="s2-next"><button class="btn btn-primary btn-block" onclick="goToSection(3)">Next: Discovery Calendar &amp; Deadline Management &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 3 — DISCOVERY CALENDAR & DEADLINE MANAGEMENT (Q9–Q12)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-3">
+  <div class="section-header">
+    <div class="section-num">Section 4 &middot; Calendar &amp; Deadlines &middot; Up to 40 pts</div>
+    <h2>Discovery Calendar Management</h2>
+    <div class="section-subhead">A missed deadline is not a mistake — it is a preventable failure of systems.</div>
+  </div>
+  <div class="section-body">
+    <div class="info-block">
+      <h4>📅 Deadline Management System</h4>
+      <table class="stat-table">
+        <tr><th>Event</th><th>Deadline Rule</th><th>Calendar Action</th></tr>
+        <tr><td class="stat-num">Interrogatories Received</td><td>30 days from date of service</td><td>Calendar response deadline + reminders at 14, 7, and 3 days</td></tr>
+        <tr><td class="stat-num">RFPs Received</td><td>30 days from date of service</td><td>Calendar response deadline + begin document review immediately</td></tr>
+        <tr class="stat-void"><td class="stat-num">RFAs Received</td><td>30 days — <strong>AUTOMATIC ADMISSION IF MISSED</strong></td><td>Calendar as HIGHEST PRIORITY — flag attorney immediately</td></tr>
+        <tr><td class="stat-num">Deposition Noticed</td><td>Reasonable notice (typically 30 days)</td><td>Calendar depo date, prep session 3-5 days before, document review 1 week before</td></tr>
+        <tr class="stat-warn"><td class="stat-num">Discovery Cutoff</td><td>Set by court scheduling order</td><td>Work BACKWARD — all discovery must be initiated in time to be completed before cutoff</td></tr>
+      </table>
+    </div>
+    <div class="info-block">
+      <h4>⏰ Computing Time — O.C.G.A. § 9-11-6(a)</h4>
+      <ul>
+        <li><strong>Day 1 is the day AFTER the event</strong> — do not count the day of service</li>
+        <li><strong>Weekend/holiday rule:</strong> If the deadline falls on a Saturday, Sunday, or legal holiday, it extends to the <strong>next business day</strong></li>
+        <li><strong>Three-day mail rule:</strong> When service is by mail, add 3 days to the response deadline</li>
+        <li><strong>Working backward:</strong> From a discovery cutoff, count backward to determine the latest date you can initiate each discovery device and still receive responses before the cutoff</li>
+      </ul>
+    </div>
+    <div class="info-block">
+      <h4>📊 CasePeer Status Transitions</h4>
+      <p><strong>Service → Discovery</strong></p>
+      <p style="margin-top:8px;">When the defendant files their answer, the case transitions from "Service" to "Discovery" in CasePeer. This status change triggers the discovery workflow: create the discovery calendar, initiate GLG's first set of discovery requests, and begin tracking all deadlines. A case stuck in "Service" status after the answer is filed = a process failure visible on the scorecard.</p>
+    </div>
+    <div class="callout callout-danger"><strong>The backward planning rule:</strong> If the discovery cutoff is October 15 and you need to depose three witnesses, you cannot notice depositions on October 1. Expert depositions require 4-6 weeks of lead time for scheduling, notice, and potential rescheduling. Always work backward from the cutoff to determine the latest safe date to initiate each discovery action.</div>
+
+    <div class="question-block" id="q9-block">
+      <div class="q-num">Question 9 of 20 &middot; 10 pts</div>
+      <div class="q-text">The court issues a scheduling order setting a discovery cutoff of September 15. Today is July 1. You need to depose the defendant's accident reconstruction expert. Working backward, by approximately what date must you notice the deposition to ensure it can be completed before the cutoff?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q9','a',true)" id="q9-a"><span class="opt-letter">A</span><span class="opt-text">August 1 — at least 6 weeks before cutoff to allow for scheduling, notice, and potential rescheduling</span></button>
+        <button class="option-btn" onclick="answer('q9','b',false)" id="q9-b"><span class="opt-letter">B</span><span class="opt-text">September 1 — two weeks before the cutoff</span></button>
+        <button class="option-btn" onclick="answer('q9','c',false)" id="q9-c"><span class="opt-letter">C</span><span class="opt-text">September 14 — the day before the cutoff</span></button>
+        <button class="option-btn" onclick="answer('q9','d',false)" id="q9-d"><span class="opt-letter">D</span><span class="opt-text">July 15 — depositions must be noticed 60 days before the cutoff — reflecting established PI firm procedures for this type of scenario and client situation</span></button>
+      </div>
+      <div class="feedback-box" id="q9-fb"></div>
+    </div>
+
+    <div class="question-block" id="q10-block">
+      <div class="q-num">Question 10 of 20 &middot; 10 pts</div>
+      <div class="q-text">Under Georgia law, when computing response deadlines for discovery, what special rule applies when the response deadline falls on a Saturday, Sunday, or legal holiday?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q10','a',true)" id="q10-a"><span class="opt-letter">A</span><span class="opt-text">The deadline extends to the next business day (O.C.G.A. § 9-11-6(a))</span></button>
+        <button class="option-btn" onclick="answer('q10','b',false)" id="q10-b"><span class="opt-letter">B</span><span class="opt-text">The deadline moves to the preceding business day</span></button>
+        <button class="option-btn" onclick="answer('q10','c',false)" id="q10-c"><span class="opt-letter">C</span><span class="opt-text">The deadline remains unchanged — weekends and holidays are not excluded</span></button>
+        <button class="option-btn" onclick="answer('q10','d',false)" id="q10-d"><span class="opt-letter">D</span><span class="opt-text">The attorney must file a motion to extend the deadline</span></button>
+      </div>
+      <div class="feedback-box" id="q10-fb"></div>
+    </div>
+
+    <div class="question-block" id="q11-block">
+      <div class="q-num">Question 11 of 20 &middot; 10 pts &middot; Systems Thinking</div>
+      <div class="q-text">Your attorney has three PI cases in active discovery simultaneously. Which tool is MOST critical for preventing missed deadlines?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q11','a',false)" id="q11-a"><span class="opt-letter">A</span><span class="opt-text">A single Word document listing all cases and their deadlines — reflecting established PI firm procedures for this type of scenario and client situation</span></button>
+        <button class="option-btn" onclick="answer('q11','b',false)" id="q11-b"><span class="opt-letter">B</span><span class="opt-text">Relying on the attorney to remember all deadlines</span></button>
+        <button class="option-btn" onclick="answer('q11','c',true)" id="q11-c"><span class="opt-letter">C</span><span class="opt-text">A centralized calendar system (CasePeer) with automated reminders at 14-day, 7-day, and 3-day intervals before each deadline</span></button>
+        <button class="option-btn" onclick="answer('q11','d',false)" id="q11-d"><span class="opt-letter">D</span><span class="opt-text">Checking the court docket weekly for any new orders</span></button>
+      </div>
+      <div class="feedback-box" id="q11-fb"></div>
+    </div>
+
+    <div class="question-block" id="q12-block">
+      <div class="q-num">Question 12 of 20 &middot; 10 pts &middot; CasePeer Status</div>
+      <div class="q-text">In CasePeer, a case has just been served and the defendant has filed their answer. What is the correct status change?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q12','a',false)" id="q12-a"><span class="opt-letter">A</span><span class="opt-text">Pre-Litigation → Settled</span></button>
+        <button class="option-btn" onclick="answer('q12','b',true)" id="q12-b"><span class="opt-letter">B</span><span class="opt-text">Service → Discovery</span></button>
+        <button class="option-btn" onclick="answer('q12','c',false)" id="q12-c"><span class="opt-letter">C</span><span class="opt-text">Service → Lien Negotiations</span></button>
+        <button class="option-btn" onclick="answer('q12','d',false)" id="q12-d"><span class="opt-letter">D</span><span class="opt-text">Service → Demand</span></button>
+      </div>
+      <div class="feedback-box" id="q12-fb"></div>
+    </div>
+
+    <div class="section-score" id="s3-score" style="display:none;"><div class="score-display" id="s3-score-val"></div><div class="score-label">Section 4 Score</div></div>
+    <div class="btn-group" id="s3-next"><button class="btn btn-primary btn-block" onclick="goToSection(4)">Next: Document Production, Privilege &amp; Bates Numbering &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 4 — DOCUMENT PRODUCTION, PRIVILEGE & BATES (Q13–Q16)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-4">
+  <div class="section-header">
+    <div class="section-num">Section 5 &middot; Production &amp; Privilege &middot; Up to 40 pts</div>
+    <h2>Document Production, Privilege &amp; Bates Numbering</h2>
+    <div class="section-subhead">Every page produced creates a record. Every page withheld must be justified.</div>
+  </div>
+  <div class="section-body">
+    <div class="info-block">
+      <h4>🔒 Privilege Review Process</h4>
+      <ol>
+        <li><strong>Collect all responsive documents</strong> — everything that falls within the scope of the request</li>
+        <li><strong>Review each document for privilege</strong> — attorney-client communications, work product (attorney mental impressions, strategies, legal theories)</li>
+        <li><strong>Withhold privileged documents</strong> — do NOT produce them</li>
+        <li><strong>Create a privilege log entry</strong> for each withheld document: date, author, recipient(s), general subject matter, specific privilege asserted</li>
+        <li><strong>Produce all non-privileged responsive documents</strong></li>
+        <li><strong>Flag any uncertain items</strong> for attorney review before production</li>
+      </ol>
+    </div>
+    <div class="info-block">
+      <h4>📋 Privilege Log Requirements</h4>
+      <p>A proper privilege log entry must contain enough information for opposing counsel to assess the privilege claim <strong>without revealing the privileged content</strong>:</p>
+      <table class="stat-table">
+        <tr><th>Element</th><th>Example</th></tr>
+        <tr><td class="stat-num">Date</td><td>March 15, 2026</td></tr>
+        <tr><td class="stat-num">Author/Sender</td><td>John Martinez (client)</td></tr>
+        <tr><td class="stat-num">Recipient(s)</td><td>H. Gunn (attorney)</td></tr>
+        <tr><td class="stat-num">Subject Matter</td><td>Case strategy discussion</td></tr>
+        <tr><td class="stat-num">Privilege Asserted</td><td>Attorney-Client Privilege</td></tr>
+      </table>
+      <p style="margin-top:10px;">Vague entries like "privileged — do not produce" are insufficient and may result in waiver of the privilege.</p>
+    </div>
+    <div class="info-block">
+      <h4>🏷 Bates Numbering</h4>
+      <p><strong>Purpose:</strong> Create a unique, sequential identifier for every page produced so any page can be referenced precisely during depositions, motions, and trial.</p>
+      <p style="margin-top:6px;"><strong>Format:</strong> [CASE-PREFIX]-[SEQUENTIAL NUMBER] — Example: MARTINEZ-0001, MARTINEZ-0002, etc.</p>
+      <p style="margin-top:6px;"><strong>Production organization (O.C.G.A. § 9-11-34(b)):</strong> Documents must be produced either (1) as they are kept in the ordinary course of business, or (2) organized and labeled to correspond with the categories in the request.</p>
+    </div>
+    <div class="callout callout-danger"><strong>Spoliation = destruction of evidence.</strong> If you discover a document during review that is harmful to your client, you CANNOT delete, destroy, or hide it. That is spoliation — a sanctionable offense that can result in adverse inference instructions, monetary sanctions, or case dismissal. Harmful documents are withheld only if privileged. Otherwise, they must be produced.</div>
+
+    <div class="question-block" id="q13-block">
+      <div class="q-num">Question 13 of 20 &middot; 10 pts &middot; Critical Judgment</div>
+      <div class="q-text">During document review for production, you find an email from your client to their attorney that says "I was texting while driving but don't want the other side to know." How should this document be handled?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q13','a',true)" id="q13-a"><span class="opt-letter">A</span><span class="opt-text">Withhold it as attorney-client privilege, log it on the privilege log, and immediately notify the supervising attorney</span></button>
+        <button class="option-btn" onclick="answer('q13','b',false)" id="q13-b"><span class="opt-letter">B</span><span class="opt-text">Produce it — the client's admission is relevant to the case — following the standard workflow that experienced case managers and legal assistants follow</span></button>
+        <button class="option-btn" onclick="answer('q13','c',false)" id="q13-c"><span class="opt-letter">C</span><span class="opt-text">Delete the email before the production</span></button>
+        <button class="option-btn" onclick="answer('q13','d',false)" id="q13-d"><span class="opt-letter">D</span><span class="opt-text">Produce it with the texting reference redacted</span></button>
+      </div>
+      <div class="feedback-box" id="q13-fb"></div>
+    </div>
+
+    <div class="question-block" id="q14-block">
+      <div class="q-num">Question 14 of 20 &middot; 10 pts &middot; Privilege Log Format</div>
+      <div class="q-text">A privilege log must include enough information for the opposing party to assess the privilege claim without revealing the privileged content. Which of the following entries is properly formatted?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q14','a',false)" id="q14-a"><span class="opt-letter">A</span><span class="opt-text">"Privileged email — do not produce"</span></button>
+        <button class="option-btn" onclick="answer('q14','b',false)" id="q14-b"><span class="opt-letter">B</span><span class="opt-text">"Email from John Martinez — contains privileged information"</span></button>
+        <button class="option-btn" onclick="answer('q14','c',false)" id="q14-c"><span class="opt-letter">C</span><span class="opt-text">"Email about the accident — withheld per attorney instruction" — this approach aligns with the documented procedures and established expectations at GLG</span></button>
+        <button class="option-btn" onclick="answer('q14','d',true)" id="q14-d"><span class="opt-letter">D</span><span class="opt-text">"Email dated 3/15/2026, from John Martinez to H. Gunn (attorney), re: Case strategy discussion, Privilege: Attorney-Client"</span></button>
+      </div>
+      <div class="feedback-box" id="q14-fb"></div>
+    </div>
+
+    <div class="question-block" id="q15-block">
+      <div class="q-num">Question 15 of 20 &middot; 10 pts</div>
+      <div class="q-text">When Bates-numbering documents for production, what is the primary purpose of the numbering system?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q15','a',false)" id="q15-a"><span class="opt-letter">A</span><span class="opt-text">To indicate which documents are privileged</span></button>
+        <button class="option-btn" onclick="answer('q15','b',false)" id="q15-b"><span class="opt-letter">B</span><span class="opt-text">To organize documents alphabetically by author — which represents the conventional method used across Georgia personal injury law firms — which represents the conventional method used across Georgia personal injury law firms</span></button>
+        <button class="option-btn" onclick="answer('q15','c',true)" id="q15-c"><span class="opt-letter">C</span><span class="opt-text">To create a unique, sequential identifier for every page produced so any page can be referenced precisely during depositions, motions, and trial</span></button>
+        <button class="option-btn" onclick="answer('q15','d',false)" id="q15-d"><span class="opt-letter">D</span><span class="opt-text">To track the date each document was created</span></button>
+      </div>
+      <div class="feedback-box" id="q15-fb"></div>
+    </div>
+
+    <div class="question-block" id="q16-block">
+      <div class="q-num">Question 16 of 20 &middot; 10 pts &middot; Production Standards</div>
+      <div class="q-text">You are preparing a document production of 500 pages. The Request for Production asks for "medical records, photographs, and correspondence." Which production method complies with O.C.G.A. § 9-11-34?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q16','a',false)" id="q16-a"><span class="opt-letter">A</span><span class="opt-text">Produce all 500 pages in a single unsorted pile</span></button>
+        <button class="option-btn" onclick="answer('q16','b',false)" id="q16-b"><span class="opt-letter">B</span><span class="opt-text">Produce only a 50-page summary of the most important documents — which represents the conventional method used across Georgia personal injury law firms — which represents the conventional method used across Georgia personal injury law firms</span></button>
+        <button class="option-btn" onclick="answer('q16','c',false)" id="q16-c"><span class="opt-letter">C</span><span class="opt-text">Produce the documents but withhold all photographs</span></button>
+        <button class="option-btn" onclick="answer('q16','d',true)" id="q16-d"><span class="opt-letter">D</span><span class="opt-text">Produce documents organized by category (medical records, photographs, correspondence) as kept in the ordinary course of business, or labeled to correspond with the request categories</span></button>
+      </div>
+      <div class="feedback-box" id="q16-fb"></div>
+    </div>
+
+    <div class="section-score" id="s4-score" style="display:none;"><div class="score-display" id="s4-score-val"></div><div class="score-label">Section 5 Score</div></div>
+    <div class="btn-group" id="s4-next"><button class="btn btn-primary btn-block" onclick="goToSection(5)">Next: Discovery Disputes, E-Discovery &amp; Staff Role &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 5 — DISCOVERY DISPUTES, E-DISCOVERY & STAFF ROLE (Q17–Q20)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-5">
+  <div class="section-header">
+    <div class="section-num">Section 6 &middot; Disputes &amp; E-Discovery &middot; Up to 40 pts</div>
+    <h2>Discovery Disputes, E-Discovery &amp; Your Role</h2>
+    <div class="section-subhead">When discovery breaks down — and what litigation support staff must do every day.</div>
+  </div>
+  <div class="section-body">
+    <div class="info-block">
+      <h4>⚖️ Discovery Dispute Resolution — The Enforcement Ladder</h4>
+      <table class="stat-table">
+        <tr><th>Step</th><th>Action</th><th>Key Rule</th></tr>
+        <tr><td class="stat-num">1 — Meet &amp; Confer</td><td>Good-faith letter or phone call attempting to resolve without court intervention</td><td>Required before most courts will hear a discovery motion. Document all attempts.</td></tr>
+        <tr><td class="stat-num">2 — Motion to Compel</td><td>File motion with certificate of good-faith effort. Court orders compliance within specified timeframe.</td><td>O.C.G.A. § 9-11-37(a). Court may award attorney fees to the prevailing party.</td></tr>
+        <tr class="stat-void"><td class="stat-num">3 — Sanctions</td><td>If a party violates a court order to compel, the court may impose sanctions.</td><td>O.C.G.A. § 9-11-37(b): monetary sanctions, facts deemed established, pleadings stricken, default judgment.</td></tr>
+      </table>
+    </div>
+    <div class="info-block">
+      <h4>💻 E-Discovery Basics for PI Cases</h4>
+      <ul>
+        <li><strong>Spoliation letters:</strong> Sent immediately after engagement (especially trucking cases) demanding preservation of ECM data, dashcam footage, driver logs, maintenance records, and all ESI. Per the Injury Case Playbook: trucking companies deploy response teams within 2 hours — spoliation letters must go out the same day.</li>
+        <li><strong>ESI (Electronically Stored Information):</strong> Text messages, emails, social media posts, GPS data, black box data, phone records. These are discoverable under O.C.G.A. § 9-11-34.</li>
+        <li><strong>Preservation obligation:</strong> Once litigation is reasonably anticipated, both parties have a duty to preserve relevant evidence — including ESI. A spoliation letter documents this obligation.</li>
+        <li><strong>Social media:</strong> Client's and defendant's social media posts are discoverable. At intake, GLG sends the CYA letter warning clients about social media activity during litigation.</li>
+      </ul>
+    </div>
+    <div class="info-block">
+      <h4>👩‍💼 Your Role — Litigation Support Staff</h4>
+      <p>Your PRIMARY responsibilities during discovery:</p>
+      <ul>
+        <li>📅 <strong>Calendar every deadline</strong> within 24 hours of receipt — interrogatories, RFPs, RFAs, depositions, discovery cutoff</li>
+        <li>📁 <strong>Organize document productions</strong> — Bates numbering, categorization, index preparation</li>
+        <li>📋 <strong>Maintain the privilege log</strong> — track every withheld document with proper entries</li>
+        <li>🔔 <strong>Flag issues for attorney review</strong> — uncertain privilege calls, tight deadlines, opposing counsel non-compliance</li>
+        <li>📊 <strong>Track discovery status</strong> — what has been sent, what is outstanding, what is overdue</li>
+        <li>📞 <strong>Follow up</strong> — when opposing counsel is late, confirm receipt of productions, chase down outstanding responses</li>
+      </ul>
+      <p style="margin-top:8px;"><strong>What you do NOT do:</strong> Decide which objections to assert, negotiate discovery disputes with opposing counsel, or independently draft/sign discovery responses. These are attorney functions.</p>
+    </div>
+    <div class="callout callout-info"><strong>The staff multiplier effect:</strong> An attorney with excellent litigation support staff can manage 3x the caseload without missing deadlines. Your organizational work is what makes the attorney's legal work possible. Per the Essential Lawyering memo: "the ratio of preparation to performance can easily reach 15 or 20 to 1."</div>
+
+    <div class="question-block" id="q17-block">
+      <div class="q-num">Question 17 of 20 &middot; 10 pts</div>
+      <div class="q-text">The defendant fails to respond to your interrogatories within 30 days. Before filing a motion to compel, what must you do first under Georgia practice?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q17','a',false)" id="q17-a"><span class="opt-letter">A</span><span class="opt-text">File a motion for sanctions immediately — this approach aligns with the documented procedures and established expectations at GLG</span></button>
+        <button class="option-btn" onclick="answer('q17','b',false)" id="q17-b"><span class="opt-letter">B</span><span class="opt-text">Serve the interrogatories a second time</span></button>
+        <button class="option-btn" onclick="answer('q17','c',false)" id="q17-c"><span class="opt-letter">C</span><span class="opt-text">Request a hearing with the judge</span></button>
+        <button class="option-btn" onclick="answer('q17','d',true)" id="q17-d"><span class="opt-letter">D</span><span class="opt-text">Send a good-faith "meet and confer" letter or make a phone call attempting to resolve the dispute without court intervention</span></button>
+      </div>
+      <div class="feedback-box" id="q17-fb"></div>
+    </div>
+
+    <div class="question-block" id="q18-block">
+      <div class="q-num">Question 18 of 20 &middot; 10 pts &middot; Sanctions</div>
+      <div class="q-text">The court grants GLG's motion to compel and orders the defendant to produce documents within 14 days. The defendant still does not comply. What sanctions are available under O.C.G.A. § 9-11-37?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q18','a',true)" id="q18-a"><span class="opt-letter">A</span><span class="opt-text">The court may impose monetary sanctions, deem facts established, strike pleadings, or enter default judgment</span></button>
+        <button class="option-btn" onclick="answer('q18','b',false)" id="q18-b"><span class="opt-letter">B</span><span class="opt-text">Only monetary fines — the court cannot affect the merits of the case — following the standard workflow that experienced case managers and legal assistants follow</span></button>
+        <button class="option-btn" onclick="answer('q18','c',false)" id="q18-c"><span class="opt-letter">C</span><span class="opt-text">The court can only extend the deadline and issue a warning</span></button>
+        <button class="option-btn" onclick="answer('q18','d',false)" id="q18-d"><span class="opt-letter">D</span><span class="opt-text">Sanctions are not available until the third failure to comply</span></button>
+      </div>
+      <div class="feedback-box" id="q18-fb"></div>
+    </div>
+
+    <div class="question-block" id="q19-block">
+      <div class="q-num">Question 19 of 20 &middot; 10 pts &middot; Staff Role</div>
+      <div class="q-text">As litigation support staff at GLG, which of the following is your PRIMARY responsibility during the discovery phase?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q19','a',true)" id="q19-a"><span class="opt-letter">A</span><span class="opt-text">Organizing, tracking, and calendaring all discovery deadlines; preparing document productions; maintaining the privilege log; and flagging issues for attorney review</span></button>
+        <button class="option-btn" onclick="answer('q19','b',false)" id="q19-b"><span class="opt-letter">B</span><span class="opt-text">Negotiating discovery disputes directly with opposing counsel — as outlined in the documented best practices for personal injury case management teams — as outlined in the documented best practices for personal injury case management teams</span></button>
+        <button class="option-btn" onclick="answer('q19','c',false)" id="q19-c"><span class="opt-letter">C</span><span class="opt-text">Deciding which objections to assert in discovery responses</span></button>
+        <button class="option-btn" onclick="answer('q19','d',false)" id="q19-d"><span class="opt-letter">D</span><span class="opt-text">Independently drafting and signing discovery responses</span></button>
+      </div>
+      <div class="feedback-box" id="q19-fb"></div>
+    </div>
+
+    <div class="question-block" id="q20-block">
+      <div class="q-num">Question 20 of 20 &middot; 10 pts &middot; E-Discovery</div>
+      <div class="q-text">In a PI case involving a commercial vehicle, GLG issues a spoliation letter to the defendant's trucking company demanding preservation of the truck's ECM data, dashcam footage, and driver logs. What is the legal significance of this letter?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q20','a',false)" id="q20-a"><span class="opt-letter">A</span><span class="opt-text">It is a courtesy notice with no legal effect</span></button>
+        <button class="option-btn" onclick="answer('q20','b',false)" id="q20-b"><span class="opt-letter">B</span><span class="opt-text">It automatically preserves the evidence without any further action — which represents the conventional method used across Georgia personal injury law firms</span></button>
+        <button class="option-btn" onclick="answer('q20','c',true)" id="q20-c"><span class="opt-letter">C</span><span class="opt-text">It creates a documented obligation to preserve evidence — destruction after notice supports a spoliation inference and potential sanctions</span></button>
+        <button class="option-btn" onclick="answer('q20','d',false)" id="q20-d"><span class="opt-letter">D</span><span class="opt-text">It replaces the need for a formal discovery request</span></button>
+      </div>
+      <div class="feedback-box" id="q20-fb"></div>
+    </div>
+
+    <div class="section-score" id="s5-score" style="display:none;"><div class="score-display" id="s5-score-val"></div><div class="score-label">Section 6 Score</div></div>
+    <div class="btn-group" id="s5-next"><button class="btn btn-primary btn-block" onclick="goToSection(6)">Next: Boss Challenge — Martinez v. Henderson Trucking &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 6 — BOSS CHALLENGE (Q21–Q25)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-6">
+  <div class="section-header">
+    <div class="section-num">Section 7 &middot; Boss Challenge &middot; Up to 50 bonus pts</div>
+    <h2>Martinez v. Henderson Trucking, Inc.</h2>
+    <div class="section-subhead">Everything you learned, applied to one complex case in active discovery.</div>
+  </div>
+  <div class="section-body">
+    <div class="boss-header">
+      <div class="boss-icon">⚖️</div>
+      <h3>Boss Challenge: Discovery Triage</h3>
+      <p>Five questions. One case. Multiple deadlines colliding. Privilege issues. A discovery cutoff approaching. This is what real litigation support looks like.</p>
+    </div>
+
+    <div class="case-file">
+      <div class="case-file-header">
+        <div class="case-file-icon">📂</div>
+        <div>
+          <div class="case-file-title">Martinez v. Henderson Trucking, Inc.</div>
+          <div class="case-file-sub">GLG-2026-1522 &middot; Fulton County State Court</div>
+        </div>
+      </div>
+      <div class="case-detail"><span class="case-key">Client</span><span class="case-val">Rosa Martinez</span></div>
+      <div class="case-detail"><span class="case-key">Incident</span><span class="case-val">Rear-ended by Henderson Trucking 18-wheeler on I-285, February 15, 2026</span></div>
+      <div class="case-detail"><span class="case-key">Filed</span><span class="case-val">March 5, 2026</span></div>
+      <div class="case-detail"><span class="case-key">Defendant Served</span><span class="case-val">March 20, 2026</span></div>
+      <div class="case-detail"><span class="case-key">Injuries</span><span class="case-val">Herniated discs L4-L5, L5-S1; left shoulder tear; concussion</span></div>
+      <div class="case-detail"><span class="case-key">Surgery</span><span class="case-val">Scheduled August 2026</span></div>
+      <div class="case-detail"><span class="case-key">Attorney</span><span class="case-val">H. Gunn</span></div>
+      <div class="case-detail"><span class="case-key">Discovery Cutoff</span><span class="case-val">October 15, 2026 <span class="flag-warn">100 DAYS</span></span></div>
+      <div class="case-detail"><span class="case-key">CasePeer Status</span><span class="case-val">Discovery <span class="flag-ok">ACTIVE</span></span></div>
+    </div>
+
+    <div class="info-block">
+      <h4>📋 Current Discovery Status — Today: July 7, 2026</h4>
+      <table class="stat-table">
+        <tr><th>Item</th><th>Status</th><th>Deadline</th></tr>
+        <tr class="stat-void"><td>Defendant's Interrogatories to GLG</td><td>Served June 1 — <strong>OVERDUE</strong></td><td>July 1 (6 days ago) <span class="flag">BLOWN</span></td></tr>
+        <tr class="stat-warn"><td>GLG's RFPs to Henderson Trucking</td><td>Served May 15 — <strong>NO RESPONSE</strong></td><td>June 14 (23 days overdue)</td></tr>
+        <tr><td>Defendant's RFAs to GLG</td><td>Served June 20 — <strong>Pending Response</strong></td><td>July 20 (13 days remaining) <span class="flag-warn">WATCH</span></td></tr>
+        <tr><td>Depositions Needed</td><td>Defense biomechanics expert, defendant driver, trucking safety director</td><td>Before October 15 cutoff</td></tr>
+        <tr class="stat-void"><td>Privilege Issue</td><td>Client forwarded H. Gunn's settlement strategy text to her friend</td><td>Must resolve before production <span class="flag">ALERT</span></td></tr>
+        <tr><td>Document Production</td><td>800 pages — medical records, employment records, photographs</td><td>Needs Bates numbering &amp; organization</td></tr>
+      </table>
+    </div>
+
+    <div class="question-block" id="q21-block">
+      <div class="q-num">Boss Challenge &middot; Question 21 of 25 &middot; 10 bonus pts</div>
+      <div class="q-text">Given the missed July 1 deadline and the upcoming July 20 RFA deadline, which task requires immediate attention TODAY?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q21','a',false)" id="q21-a"><span class="opt-letter">A</span><span class="opt-text">Noticing the defendant driver's deposition</span></button>
+        <button class="option-btn" onclick="answer('q21','b',false)" id="q21-b"><span class="opt-letter">B</span><span class="opt-text">The Requests for Admission due July 20 — you still have 13 days — reflecting established PI firm procedures for this type of scenario and client situation</span></button>
+        <button class="option-btn" onclick="answer('q21','c',true)" id="q21-c"><span class="opt-letter">C</span><span class="opt-text">The overdue interrogatory responses — you are already 6 days past deadline and opposing counsel can move to compel or argue objections are waived</span></button>
+        <button class="option-btn" onclick="answer('q21','d',false)" id="q21-d"><span class="opt-letter">D</span><span class="opt-text">Bates-numbering the 800-page production</span></button>
+      </div>
+      <div class="feedback-box" id="q21-fb"></div>
+    </div>
+
+    <div class="question-block" id="q22-block">
+      <div class="q-num">Boss Challenge &middot; Question 22 of 25 &middot; 10 bonus pts</div>
+      <div class="q-text">In the 800-page production, you discover the text message chain where Rosa forwarded H. Gunn's settlement strategy message to her friend. What has happened to the privilege for that specific communication?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q22','a',false)" id="q22-a"><span class="opt-letter">A</span><span class="opt-text">Nothing — the message is still fully privileged because the attorney wrote it</span></button>
+        <button class="option-btn" onclick="answer('q22','b',true)" id="q22-b"><span class="opt-letter">B</span><span class="opt-text">The privilege has been waived for that specific communication because the client voluntarily disclosed it to a third party outside the attorney-client relationship</span></button>
+        <button class="option-btn" onclick="answer('q22','c',false)" id="q22-c"><span class="opt-letter">C</span><span class="opt-text">The message is work product, not attorney-client, so it was never privileged</span></button>
+        <button class="option-btn" onclick="answer('q22','d',false)" id="q22-d"><span class="opt-letter">D</span><span class="opt-text">The privilege is waived for ALL attorney-client communications in the entire case — reflecting established PI firm procedures for this type of scenario and client situation</span></button>
+      </div>
+      <div class="feedback-box" id="q22-fb"></div>
+    </div>
+
+    <div class="question-block" id="q23-block">
+      <div class="q-num">Boss Challenge &middot; Question 23 of 25 &middot; 10 bonus pts</div>
+      <div class="q-text">Henderson Trucking's responses to your Requests for Production were due June 14 — now 23 days overdue. Before filing a motion to compel, what should you do FIRST?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q23','a',false)" id="q23-a"><span class="opt-letter">A</span><span class="opt-text">File the motion to compel immediately — the 23-day delay is unreasonable — as outlined in the documented best practices for personal injury case management teams</span></button>
+        <button class="option-btn" onclick="answer('q23','b',false)" id="q23-b"><span class="opt-letter">B</span><span class="opt-text">Extend their deadline by another 30 days as a professional courtesy</span></button>
+        <button class="option-btn" onclick="answer('q23','c',true)" id="q23-c"><span class="opt-letter">C</span><span class="opt-text">Send a good-faith meet-and-confer letter giving them 10 days to comply, and document this attempt to resolve the dispute without court intervention</span></button>
+        <button class="option-btn" onclick="answer('q23','d',false)" id="q23-d"><span class="opt-letter">D</span><span class="opt-text">Re-serve the Requests for Production as if the first set was never sent</span></button>
+      </div>
+      <div class="feedback-box" id="q23-fb"></div>
+    </div>
+
+    <div class="question-block" id="q24-block">
+      <div class="q-num">Boss Challenge &middot; Question 24 of 25 &middot; 10 bonus pts</div>
+      <div class="q-text">You are preparing the 800-page document production. The medical records include operative reports, radiology reports, and physical therapy notes. The defense requested documents "organized as they are kept in the ordinary course of business." How should you organize the production?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q24','a',false)" id="q24-a"><span class="opt-letter">A</span><span class="opt-text">Shuffle all 800 pages randomly and Bates-stamp them</span></button>
+        <button class="option-btn" onclick="answer('q24','b',false)" id="q24-b"><span class="opt-letter">B</span><span class="opt-text">Produce only the documents that support Rosa's injuries</span></button>
+        <button class="option-btn" onclick="answer('q24','c',false)" id="q24-c"><span class="opt-letter">C</span><span class="opt-text">Send the records without any Bates numbers since the defense didn't specifically request numbering — following the standard workflow that experienced case managers and legal assistants follow — following the standard workflow that experienced case managers and legal assistants follow</span></button>
+        <button class="option-btn" onclick="answer('q24','d',true)" id="q24-d"><span class="opt-letter">D</span><span class="opt-text">Organize by provider and document type (matching the case file), Bates-stamp sequentially (MARTINEZ-0001 through MARTINEZ-0800), and include an index cross-referencing Bates ranges to categories</span></button>
+      </div>
+      <div class="feedback-box" id="q24-fb"></div>
+    </div>
+
+    <div class="question-block" id="q25-block">
+      <div class="q-num">Boss Challenge &middot; Question 25 of 25 &middot; 10 bonus pts</div>
+      <div class="q-text">It is now August 15. The discovery cutoff is October 15. You have three depositions remaining (defense expert, defendant driver, trucking safety director), your motion to compel the trucking company's documents is pending, and the RFAs have been answered. What is the MOST critical calendar action RIGHT NOW?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q25','a',false)" id="q25-a"><span class="opt-letter">A</span><span class="opt-text">Wait for the motion to compel ruling before scheduling depositions</span></button>
+        <button class="option-btn" onclick="answer('q25','b',true)" id="q25-b"><span class="opt-letter">B</span><span class="opt-text">Notice all three depositions immediately for September — if any need rescheduling, there is still time before the October 15 cutoff</span></button>
+        <button class="option-btn" onclick="answer('q25','c',false)" id="q25-c"><span class="opt-letter">C</span><span class="opt-text">Schedule only the defendant driver's deposition and postpone the experts until after the cutoff — which represents the conventional method used across Georgia personal injury law firms</span></button>
+        <button class="option-btn" onclick="answer('q25','d',false)" id="q25-d"><span class="opt-letter">D</span><span class="opt-text">Ask the court to extend the discovery deadline by 90 days</span></button>
+      </div>
+      <div class="feedback-box" id="q25-fb"></div>
+    </div>
+
+    <div class="section-score" id="s6-score" style="display:none;"><div class="score-display" id="s6-score-val"></div><div class="score-label">Boss Challenge Bonus</div></div>
+    <div class="btn-group" id="s6-next"><button class="btn btn-primary btn-block" onclick="showResults()">View Results &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 7 — RESULTS
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-7">
+  <div class="section-header">
+    <div class="section-num">Section 8 &middot; Results</div>
+    <h2>Assessment Results</h2>
+  </div>
+  <div class="section-body">
+    <div id="results-header-wrap"></div>
+    <div style="text-align:center;margin:12px 0 4px;font-size:13px;color:#888;" id="reviewCounter"></div>
+    <div class="review-list" id="reviewList"></div>
+    <div id="badgeContainer" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:18px 0;"></div>
+    <div id="results-body"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 8 — FEEDBACK & CERTIFICATE
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-8">
+  <div class="section-header">
+    <div class="section-num">Section 9 &middot; Feedback &amp; Certificate</div>
+    <h2>Training Feedback</h2>
+    <div class="section-subhead">Your input shapes future modules.</div>
+  </div>
+  <div class="section-body">
+    <div class="fb-question">
+      <label>How clear was the material?</label>
+      <select id="fb-clarity">
+        <option value="">Select…</option>
+        <option value="5">5 — Crystal clear</option>
+        <option value="4">4 — Mostly clear</option>
+        <option value="3">3 — Somewhat clear</option>
+        <option value="2">2 — Confusing</option>
+        <option value="1">1 — Very confusing</option>
+      </select>
+    </div>
+    <div class="fb-question">
+      <label>How was the difficulty level?</label>
+      <select id="fb-difficulty">
+        <option value="">Select…</option>
+        <option value="too-easy">Too easy</option>
+        <option value="just-right">Just right</option>
+        <option value="challenging">Challenging but fair</option>
+        <option value="too-hard">Too hard</option>
+      </select>
+    </div>
+    <div class="fb-question">
+      <label>How realistic were the scenarios?</label>
+      <select id="fb-realistic">
+        <option value="">Select…</option>
+        <option value="5">5 — Very realistic</option>
+        <option value="4">4 — Mostly realistic</option>
+        <option value="3">3 — Somewhat realistic</option>
+        <option value="2">2 — Not very realistic</option>
+        <option value="1">1 — Not realistic at all</option>
+      </select>
+    </div>
+    <div class="fb-question">
+      <label>Suggestions or comments?</label>
+      <textarea id="fb-suggestions" placeholder="What would improve this module? Any topics you'd like covered more?"></textarea>
+    </div>
+
+    <div id="score-submit-form" style="display:none;">
+      <hr class="divider">
+      <div class="name-input-wrap">
+        <label>Your Full Name (for certificate)</label>
+        <input type="text" class="name-input" id="trainee-name-input" placeholder="e.g. Laura Smith">
+      </div>
+      <button class="btn btn-primary btn-block" onclick="submitScoreAndBuildCert()">Submit Feedback &amp; Generate Certificate</button>
+    </div>
+
+    <div class="score-confirm" id="score-confirmation">✅ Score submitted automatically.</div>
+
+    <div id="cert-content" style="display:none;">
+      <div class="cert-wrap">
+        <div class="cert-firm">Gunn Law Group</div>
+        <div class="cert-title">Certificate of Completion</div>
+        <div class="cert-subtitle">Litigation Staff Training Program</div>
+        <span class="cert-seal">⚖️</span>
+        <div class="cert-presents">This certifies that</div>
+        <div class="cert-name" id="certNameDisplay">Training Participant</div>
+        <div class="cert-for">has successfully completed</div>
+        <div class="cert-module">LIT-2 — Discovery Process &amp; Management</div>
+        <div class="cert-meta" id="certMeta"></div>
+        <div class="cert-score" id="certScore"></div>
+        <div class="cert-badges" id="certBadges"></div>
+        <div class="cert-signature">
+          <div class="cert-sig-line"></div>
+          <div class="cert-sig-name">Harrell Gunn</div>
+          <div class="cert-sig-title">Managing Attorney, Gunn Law Group</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<!-- Points Toast -->
+<div class="points-toast" id="points-toast"></div>
+<!-- Confetti Canvas -->
+<canvas id="confettiCanvas"></canvas>
+
+<script>
+// ═══════════════════════════════════════════════
+// LIT-2 — Discovery Process & Management
+// Chassis: LA-3 (canonical) | E9: backtick template literals
+// ═══════════════════════════════════════════════
+
+var moduleId      = 'lit2';
+var TRACKER_URL   = 'https://script.google.com/macros/s/AKfycbzHJZ0C3BqnLatfq7RIiUP5KQdgYoXTJlozd8ZGZiwIf2bdVmvnPMo3JLm0dA5gQhJyxA/exec';
+var TOTAL_SECTIONS = 9;
+var BASE_MAX       = 200;
+var PASS_THRESHOLD = 16; // 80% of 20 = 16
+
+// ── STATE ──
+var baseScore    = 0;
+var bonusPoints  = 0;
+var qDone        = {};
+var firstAttemptStillAvailable = {};
+var sectionScores = {};
+var currentSection = 0;
+var streakCount  = 0;
+var maxStreak    = 0;
+var questionsFirstTry = 0;
+var incorrectCount = 0;
+var totalQuestionsAnswered = 0;
+var moduleStartTime = Date.now();
+var milestonesTriggered = {};
+var audioCtx = null;
+var soundEnabled = false;
+var _audioKeepalive = null;
+
+// ═══════════════════════════════════════════════
+// QUESTION CONFIG
+// ═══════════════════════════════════════════════
+var Q_CONFIG = {
+  'q1':  { correct: 'a', pts: 10, section: 1, isBonus: false },
+  'q2':  { correct: 'b', pts: 10, section: 1, isBonus: false },
+  'q3':  { correct: 'd', pts: 10, section: 1, isBonus: false },
+  'q4':  { correct: 'b', pts: 10, section: 1, isBonus: false },
+  'q5':  { correct: 'a', pts: 10, section: 2, isBonus: false },
+  'q6':  { correct: 'c', pts: 10, section: 2, isBonus: false },
+  'q7':  { correct: 'd', pts: 10, section: 2, isBonus: false },
+  'q8':  { correct: 'b', pts: 10, section: 2, isBonus: false },
+  'q9':  { correct: 'a', pts: 10, section: 3, isBonus: false },
+  'q10': { correct: 'a', pts: 10, section: 3, isBonus: false },
+  'q11': { correct: 'c', pts: 10, section: 3, isBonus: false },
+  'q12': { correct: 'b', pts: 10, section: 3, isBonus: false },
+  'q13': { correct: 'a', pts: 10, section: 4, isBonus: false },
+  'q14': { correct: 'd', pts: 10, section: 4, isBonus: false },
+  'q15': { correct: 'c', pts: 10, section: 4, isBonus: false },
+  'q16': { correct: 'd', pts: 10, section: 4, isBonus: false },
+  'q17': { correct: 'd', pts: 10, section: 5, isBonus: false },
+  'q18': { correct: 'a', pts: 10, section: 5, isBonus: false },
+  'q19': { correct: 'a', pts: 10, section: 5, isBonus: false },
+  'q20': { correct: 'c', pts: 10, section: 5, isBonus: false },
+  'q21': { correct: 'c', pts: 0, section: 6, isBonus: true, bonusPts: 10 },
+  'q22': { correct: 'b', pts: 0, section: 6, isBonus: true, bonusPts: 10 },
+  'q23': { correct: 'c', pts: 0, section: 6, isBonus: true, bonusPts: 10 },
+  'q24': { correct: 'd', pts: 0, section: 6, isBonus: true, bonusPts: 10 },
+  'q25': { correct: 'b', pts: 0, section: 6, isBonus: true, bonusPts: 10 }
+};
+
+// ═══════════════════════════════════════════════
+// SECTION → QUESTION MAP
+// ═══════════════════════════════════════════════
+var SECTION_QUESTIONS = {
+  1: ['q1','q2','q3','q4'],
+  2: ['q5','q6','q7','q8'],
+  3: ['q9','q10','q11','q12'],
+  4: ['q13','q14','q15','q16'],
+  5: ['q17','q18','q19','q20'],
+  6: ['q21','q22','q23','q24','q25']
+};
+
+// ═══════════════════════════════════════════════
+// FEEDBACK — E9 MANDATE: BACKTICK TEMPLATE LITERALS
+// ═══════════════════════════════════════════════
+var FEEDBACK = {
+  'q1': {
+    t: `✅ Correct. Georgia's Civil Practice Act provides specific discovery devices: Interrogatories (§ 9-11-33), Requests for Production (§ 9-11-34), Requests for Admission (§ 9-11-36), Depositions (§ 9-11-30/31), and Subpoenas (§ 9-11-45). There is no "Demand for Sworn Financial Statements" as a standalone discovery device. Financial information may be sought through interrogatories or document requests, but there is no separate mechanism by that name.`,
+    f: `❌ Incorrect. Interrogatories (§ 9-11-33), Requests for Admission (§ 9-11-36), and Requests for Production (§ 9-11-34) are all recognized Georgia discovery devices. "Demand for Sworn Financial Statements" is not a recognized discovery mechanism under the Georgia Civil Practice Act. Financial information is obtained through standard interrogatories or document requests.`
+  },
+  'q2': {
+    t: `✅ Correct. Under O.C.G.A. § 9-11-33(a), a party has 30 days from service to respond to interrogatories. March 1 + 30 days = March 31. This is one of the most critical deadlines in discovery — missing it can result in waiver of objections and a motion to compel.`,
+    f: `❌ Incorrect. O.C.G.A. § 9-11-33(a) requires responses within 30 days of service. March 1 + 30 = March 31. There is no 45-day or 60-day window for initial discovery responses in Georgia. The 30-day deadline is strict — failure to respond waives objections and may result in a motion to compel.`
+  },
+  'q3': {
+    t: `✅ Correct. O.C.G.A. § 9-11-36(a) is one of the most powerful — and dangerous — discovery rules. If the party to whom Requests for Admission are directed fails to respond within 30 days, each matter is automatically DEEMED ADMITTED. These admissions become established facts that can be used at trial. The defense can then move for summary judgment based on these "admissions." This is why RFA deadlines are the single most dangerous deadline on your discovery calendar.`,
+    f: `❌ Incorrect. Under O.C.G.A. § 9-11-36(a), failure to respond to Requests for Admission within 30 days means each matter is DEEMED ADMITTED — automatically. There is no default denial, no hearing, and no need for a motion to compel. The matters become established facts. This makes RFA deadlines the most dangerous deadline in discovery — a missed response can be case-ending.`
+  },
+  'q4': {
+    t: `✅ Correct. Attorney-client privilege protects confidential communications between an attorney and client made for the purpose of seeking or providing legal advice. A conversation about case strategy between your client and their GLG attorney is squarely within this privilege. The attorney should instruct the client not to answer — this is one of the few situations where doing so during a deposition is proper. "I don't recall" is dishonest if the client does recall. Answering "subject to objection" still reveals the privileged content.`,
+    f: `❌ Incorrect. Attorney-client privilege protects confidential communications between attorney and client made for legal advice purposes. Case strategy discussions are privileged. The proper response is to instruct the client not to answer — this is one of the few valid grounds for doing so during a deposition. "I don't recall" would be dishonest if the client remembers. Answering "subject to objection" still reveals the privileged information.`
+  },
+  'q5': {
+    t: `✅ Correct. In a trucking PI case, the driver's employment history, training records, hours-of-service compliance, and driving record are the most critical initial discovery targets. These establish whether the driver was qualified, properly trained, and in compliance with FMCSA regulations. This information often reveals negligent hiring, inadequate training, or hours-of-service violations that dramatically increase case value. Per the Injury Case Playbook: trucking cases are a "completely different legal universe" with specialized discovery requirements.`,
+    f: `❌ Incorrect. In trucking cases, the driver's qualifications, training, hours of service, and driving record are the highest-priority initial discovery targets. They can establish regulatory violations (FMCSA) and negligent hiring/training claims. Insurance coverage is typically obtained through the affidavit of coverage, not interrogatories. Interrogatories cannot "ask the defendant to admit fault." Prior litigation alone is too narrow for the first set.`
+  },
+  'q6': {
+    t: `✅ Correct. A request for 10 years of complete medical history is overly broad and unduly burdensome for a recent auto accident case. The proper response is to object on those grounds but still respond with the relevant information: treatment for the injuries from the incident and any pre-existing conditions in the same body parts (to address causation). HIPAA does not apply to discovery between litigants — it governs healthcare providers. Filing a protective order without first responding is disproportionate.`,
+    f: `❌ Incorrect. HIPAA does not block discovery between litigants — it applies to healthcare providers, not parties in lawsuits. The proper approach is to object to the overbreadth (10 years of all conditions is excessive for a PI case) while still providing relevant treatment history: injuries from the incident plus pre-existing conditions in the same body parts. Answering fully waives the overbreadth objection. Filing a protective order without first responding is premature.`
+  },
+  'q7': {
+    t: `✅ Correct. Attorney-client privileged communications must be withheld from production, but the withholding must be documented on a privilege log. The log identifies each withheld document with enough detail (date, author, recipient, subject, privilege asserted) for opposing counsel to evaluate the claim without revealing the privileged content. All non-privileged responsive documents must still be produced. Producing everything waives privilege. Withholding all texts (including non-privileged ones) is over-withholding. Producing only helpful documents violates the duty of complete production.`,
+    f: `❌ Incorrect. Text messages between an attorney and client about the case ARE privileged. But you cannot simply withhold without explanation — a privilege log is required identifying each withheld document. You also cannot withhold ALL texts (many may be non-privileged) or produce only favorable documents. The correct approach: produce non-privileged responsive documents, withhold privileged ones, and log every withheld item.`
+  },
+  'q8': {
+    t: `✅ Correct. O.C.G.A. § 9-11-26(e) imposes a continuing duty to supplement prior discovery responses when the party learns that the response is materially incomplete or incorrect. A new surgery is a material change that makes prior responses about medical treatment incomplete. GLG must supplement "seasonably" — without unreasonable delay. No motion is needed; supplementation is a duty, not a request. Waiting to be asked violates the affirmative obligation. Failure to supplement can result in exclusion of the surgery evidence at trial.`,
+    f: `❌ Incorrect. Under O.C.G.A. § 9-11-26(e), the duty to supplement discovery responses is ongoing and affirmative. GLG does not need a motion, and cannot wait to be asked. When a material change occurs (like a new surgery), prior responses become incomplete and must be supplemented seasonably. Failure to supplement can result in exclusion of evidence at trial — the surgery might not be admissible.`
+  },
+  'q9': {
+    t: `✅ Correct. Working backward from a discovery cutoff requires realistic time buffers. Expert depositions require: coordinating multiple attorney schedules, securing the expert's availability (experts are typically booked weeks in advance), serving proper notice, and building in time for potential rescheduling. Six weeks before the cutoff (August 1) is the minimum safe window. Waiting until September leaves no margin for cancellations or scheduling conflicts before the October 15 cutoff.`,
+    f: `❌ Incorrect. The day before the cutoff and even two weeks before leave no margin for rescheduling. Expert depositions require significant coordination — typically 4-6 weeks of lead time for scheduling, notice, and potential conflicts. 60 days is an arbitrary number not tied to any Georgia rule. The practical answer is at least 6 weeks before the cutoff, giving time for real-world scheduling challenges.`
+  },
+  'q10': {
+    t: `✅ Correct. Under O.C.G.A. § 9-11-6(a), when a deadline falls on a Saturday, Sunday, or legal holiday, the deadline automatically extends to the next business day. This is a fundamental rule of time computation in Georgia practice. The deadline never moves backward. No motion is needed for this automatic extension.`,
+    f: `❌ Incorrect. O.C.G.A. § 9-11-6(a) provides that when a deadline falls on a Saturday, Sunday, or legal holiday, it extends to the next business day. It does not move backward, it does not require a motion, and weekends/holidays are relevant to the final day computation. This is automatic — no court action needed.`
+  },
+  'q11': {
+    t: `✅ Correct. A centralized calendar system with automated reminders is the only reliable method for tracking multiple simultaneous discovery deadlines across multiple cases. CasePeer's calendar with 14-day, 7-day, and 3-day reminders ensures no deadline is missed — even during busy periods or staff absences. A Word document is not automated and cannot send reminders. Relying on attorney memory is unreliable. Weekly docket checks miss deadlines between checks.`,
+    f: `❌ Incorrect. A Word document is not automated and cannot send reminders. Relying on attorney memory is unreliable across multiple cases. Weekly docket checks are too infrequent — a deadline can be missed between checks. The only reliable method is a centralized calendar system (CasePeer) with automated reminders at multiple intervals (14, 7, and 3 days before each deadline).`
+  },
+  'q12': {
+    t: `✅ Correct. When the defendant files their answer, the case transitions from "Service" to "Discovery" in CasePeer. This status change triggers the discovery workflow: calendar setup, initial discovery drafting, and deadline tracking. Service → Settled skips the entire litigation process. Service → Demand is for pre-litigation cases. Service → Lien Negotiations is a post-settlement status. The filing of the answer is the gateway to the discovery phase.`,
+    f: `❌ Incorrect. After service and the defendant's answer, the case moves to Discovery — the next phase of litigation. "Settled" skips the entire process. "Demand" is pre-litigation. "Lien Negotiations" is post-settlement. The CasePeer status must reflect where the case actually is in its lifecycle, and after the answer is filed, that is Discovery.`
+  },
+  'q13': {
+    t: `✅ Correct. This email is attorney-client privileged — a confidential communication from the client to the attorney about the case. It must be withheld from production, logged on the privilege log, and the supervising attorney must be notified immediately. The admission about texting is significant case information the attorney needs for strategy and ethics. Producing it waives privilege and hands the defense devastating evidence. Deleting it is spoliation — a sanctionable offense. Selective redaction within a privileged document is improper.`,
+    f: `❌ Incorrect. The email is attorney-client privileged — a confidential communication from client to attorney about the case. Producing it waives privilege and gives the defense devastating evidence. Deleting it is spoliation and potentially criminal. Redacting within a privileged document is not the proper approach. The correct action: withhold, log on the privilege log, and immediately notify the supervising attorney about the content.`
+  },
+  'q14': {
+    t: `✅ Correct. A proper privilege log entry must include: (1) the date of the communication, (2) the author/sender, (3) the recipient, (4) a general description of the subject matter (without revealing privileged content), and (5) the specific privilege asserted. Vague entries like "privileged — do not produce" give the court no basis to evaluate the privilege claim and may result in waiver.`,
+    f: `❌ Incorrect. Privilege logs require specificity — enough detail for opposing counsel and the court to assess whether the privilege claim is valid. "Privileged email" or "contains privileged information" is too vague. "Withheld per attorney instruction" cites no recognized privilege. The proper format includes: date, author, recipient, general subject, and specific privilege (attorney-client, work product, etc.).`
+  },
+  'q15': {
+    t: `✅ Correct. Bates numbering creates a unique, sequential identifier for every page in a document production. This allows any page to be referenced precisely — during depositions ("Please turn to MARTINEZ-0247"), in motions ("See Exhibit A, Bates MARTINEZ-0247"), and at trial. Without Bates numbers, referencing specific pages in a 500+ page production becomes chaotic.`,
+    f: `❌ Incorrect. Bates numbering is a sequential identification system — each page gets a unique number (e.g., MARTINEZ-0001, MARTINEZ-0002) so any page in the production can be precisely referenced. It is not for alphabetical organization, privilege designation, or date tracking. The system enables precise references in depositions, motions, and trial proceedings.`
+  },
+  'q16': {
+    t: `✅ Correct. O.C.G.A. § 9-11-34(b) requires documents to be produced either as they are kept in the ordinary course of business or organized and labeled to correspond with the categories in the request. Organizing by category, Bates-stamping sequentially, and including an index satisfies both the statute and best practices.`,
+    f: `❌ Incorrect. Under O.C.G.A. § 9-11-34(b), documents must be produced as kept in the ordinary course of business or labeled to correspond with the request categories. A random pile is not "as kept in the ordinary course." A summary is not a production. Withholding requested categories violates the obligation. The correct approach: organize by category, Bates-stamp, and include a reference index.`
+  },
+  'q17': {
+    t: `✅ Correct. Georgia practice requires a good-faith effort to resolve discovery disputes before seeking court intervention. Before filing a motion to compel, you must demonstrate that you attempted to resolve the issue — typically through a letter or phone call. Many courts require a "meet and confer" certificate with any discovery motion. Filing immediately without this step may result in the motion being denied.`,
+    f: `❌ Incorrect. Georgia practice — and most court standing orders — require a good-faith attempt to resolve discovery disputes before filing a motion to compel. Filing immediately without a meet-and-confer may result in the motion being denied. Sanctions are premature before a motion to compel. Re-serving is unnecessary — the original service started the clock.`
+  },
+  'q18': {
+    t: `✅ Correct. O.C.G.A. § 9-11-37 provides a range of sanctions for failure to comply with discovery orders: monetary sanctions (attorney fees and costs), deeming facts established, striking pleadings or defenses, prohibiting introduction of evidence, and — in extreme cases — entering default judgment or dismissal. The court has broad discretion. Sanctions are available after the first violation of a court order, not only after the third.`,
+    f: `❌ Incorrect. O.C.G.A. § 9-11-37 provides comprehensive sanctions including monetary penalties, deeming facts established, striking pleadings, and default judgment. The court's power is not limited to fines, warnings, or deadline extensions. Sanctions are available upon the first violation of a court order to compel — there is no "three strikes" rule.`
+  },
+  'q19': {
+    t: `✅ Correct. Litigation support staff's primary role in discovery is organizational and administrative: tracking and calendaring all deadlines, preparing document productions (Bates numbering, organizing, copying), maintaining the privilege log, and flagging issues for attorney review. Deciding objections, negotiating with opposing counsel, and signing discovery responses are attorney functions. Staff supports the attorney's decision-making by ensuring everything is organized, tracked, and ready for review.`,
+    f: `❌ Incorrect. Deciding objections, negotiating with opposing counsel, and drafting/signing discovery responses are attorney responsibilities. Litigation support staff's core role is organizational: tracking deadlines, preparing productions, maintaining privilege logs, and flagging issues. The staff makes the attorney effective by ensuring nothing falls through the cracks — but the legal decisions belong to the attorney.`
+  },
+  'q20': {
+    t: `✅ Correct. A spoliation letter creates a documented preservation obligation. When a party receives a spoliation letter and subsequently destroys the evidence, the court may draw a "spoliation inference" — instructing the jury that the destroyed evidence would have been unfavorable to the destroying party. The letter also supports a motion for sanctions. In trucking cases, ECM data, dashcam footage, and driver logs are frequently overwritten within days unless preservation is demanded immediately. Per the Injury Case Playbook: trucking companies deploy response teams within 2 hours.`,
+    f: `❌ Incorrect. A spoliation letter is not a courtesy notice — it creates legal consequences. It does not automatically preserve evidence (the opposing party must comply), and it does not replace formal discovery requests (you still need to serve RFPs). The legal significance: it documents the preservation obligation and supports spoliation inferences and sanctions if evidence is destroyed after receipt.`
+  },
+  'q21': {
+    t: `✅ Correct. The overdue interrogatory responses are the most urgent crisis. You are already 6 days past the July 1 deadline. Opposing counsel can: (1) move to compel, (2) argue that objections are waived, or (3) seek sanctions. Every additional day of delay strengthens their position. The RFA responses (July 20) are important but you have 13 days. Depositions and Bates numbering are important but not as time-critical as an already-blown deadline. Address the overdue responses TODAY.`,
+    f: `❌ Incorrect. While the RFA deadline, depositions, and production are all important, the overdue interrogatory responses are the immediate crisis. You are 6 days past deadline — opposing counsel can move to compel at any moment, and your objections may be waived. The RFA due July 20 has 13 days of runway. Always address blown deadlines before upcoming ones.`
+  },
+  'q22': {
+    t: `✅ Correct. Attorney-client privilege requires the communication to remain confidential between the attorney and client. When Rosa forwarded H. Gunn's settlement strategy message to her friend — a third party outside the attorney-client relationship — she voluntarily disclosed the privileged information. This waives the privilege for that specific communication. Critically, the waiver is limited to the disclosed communication — it does not automatically waive privilege for ALL attorney-client communications in the case. The supervising attorney must be notified immediately.`,
+    f: `❌ Incorrect. Privilege is waived when the client voluntarily discloses the communication to a third party. Rosa forwarding the attorney's message to her friend broke the confidentiality required for privilege. The waiver applies to that specific communication — not automatically to all communications (though subject-matter waiver is possible in some circumstances). The attorney's original authorship does not preserve privilege once the client shared it.`
+  },
+  'q23': {
+    t: `✅ Correct. Before filing a motion to compel, Georgia practice requires a good-faith attempt to resolve the dispute. A meet-and-confer letter giving the trucking company 10 days to comply documents your effort and satisfies the court's requirement. If they still do not respond after the letter, your motion to compel will be strengthened because you demonstrated good faith. Filing immediately without the letter may result in the motion being denied. Extending another 30 days is too generous when they are already 23 days overdue.`,
+    f: `❌ Incorrect. Filing immediately without a meet-and-confer may result in the motion being denied — most Georgia courts require this step. Extending another 30 days is overly generous when they are already 23 days past deadline. Re-serving is unnecessary (original service was valid). The correct approach: send a meet-and-confer letter with a reasonable deadline (10 days), document the attempt, then file the motion if they still do not comply.`
+  },
+  'q24': {
+    t: `✅ Correct. O.C.G.A. § 9-11-34(b) requires production either as documents are kept in the ordinary course of business or organized to correspond with the request categories. Best practice: organize by provider and document type (matching the case file structure), Bates-stamp sequentially (MARTINEZ-0001 through MARTINEZ-0800), and include a cross-reference index. The index makes the production usable during depositions and motion practice.`,
+    f: `❌ Incorrect. A random pile fails the "ordinary course of business" standard. Producing only favorable documents violates discovery obligations. Skipping Bates numbers makes the production unreferenceable. The correct approach: organize by provider/category (matching the case file), Bates-stamp every page sequentially, and include an index linking Bates ranges to document categories.`
+  },
+  'q25': {
+    t: `✅ Correct. With only two months until the October 15 cutoff, all three depositions must be noticed immediately for September dates. Depositions require coordination across multiple attorney schedules and witness availability — if any deposition needs rescheduling, September notice still leaves time before the cutoff. Waiting for the motion to compel ruling risks losing the deposition window entirely. Scheduling only one is insufficient. Requesting a 90-day extension signals poor case management and may be denied.`,
+    f: `❌ Incorrect. Waiting for the motion ruling wastes critical calendar time. Scheduling only one deposition leaves two unscheduled with a tight window. Requesting a 90-day extension is unlikely to be granted without extraordinary cause and signals poor case management. The correct action: notice all three depositions immediately for September, preserving buffer time before the October 15 cutoff.`
+  }
+};
+
+// ═══════════════════════════════════════════════
+// ANSWER HANDLER
+// ═══════════════════════════════════════════════
+function answer(qId, choice, isCorrect) {
+  if (qDone[qId]) return;
+
+  var cfg = Q_CONFIG[qId];
+  var block = document.getElementById(qId + '-block');
+  var fb = document.getElementById(qId + '-fb');
+  var btns = block.querySelectorAll('.option-btn');
+
+  btns.forEach(function(b){ b.classList.add('disabled'); });
+
+  var clickedBtn = document.getElementById(qId + '-' + choice);
+  var correctBtn = document.getElementById(qId + '-' + cfg.correct);
+
+  if (isCorrect) {
+    clickedBtn.classList.add('correct');
+    block.classList.add('answered');
+    qDone[qId] = true;
+
+    if (!cfg.isBonus) {
+      baseScore += cfg.pts;
+      sectionScores[cfg.section] = (sectionScores[cfg.section] || 0) + cfg.pts;
+      var isFirst = (firstAttemptStillAvailable[qId] !== false);
+      if (isFirst) {
+        bonusPoints += 5;
+        showToast('+' + cfg.pts + ' pts  +5 bonus ⚡', false);
+      } else {
+        showToast('+' + cfg.pts + ' pts', false);
+      }
+    } else {
+      var bonusPts = (firstAttemptStillAvailable[qId] !== false) ? cfg.bonusPts : Math.floor(cfg.bonusPts / 3);
+      bonusPoints += bonusPts;
+      sectionScores[cfg.section] = (sectionScores[cfg.section] || 0) + bonusPts;
+      showToast('+' + bonusPts + ' BONUS ⚡', true);
+    }
+
+    document.getElementById('total-score').textContent = baseScore;
+    document.getElementById('bonus-score').textContent = bonusPoints;
+    fb.className = 'feedback-box correct show';
+
+  } else {
+    clickedBtn.classList.add('incorrect');
+    if (correctBtn) {
+      correctBtn.classList.remove('disabled');
+      correctBtn.classList.add('correct');
+      correctBtn.classList.add('disabled');
+    }
+    block.classList.add('answered-wrong');
+    firstAttemptStillAvailable[qId] = false;
+    qDone[qId] = true;
+    fb.className = 'feedback-box incorrect show';
+  }
+
+  var fbData = FEEDBACK[qId];
+  fb.innerHTML = fbData ? (isCorrect ? fbData.t : fbData.f) : (isCorrect ? '✅ Correct!' : '❌ Incorrect.');
+
+  updateStreak(isCorrect);
+  mascotReact(isCorrect ? 'correct' : 'incorrect');
+  var totalQs = Object.keys(Q_CONFIG).length;
+  var answeredCount = Object.keys(qDone).length;
+  updateGlobalProgress(answeredCount, totalQs);
+
+  updateProgress();
+  checkSectionComplete(cfg.section);
+}
+
+// ═══════════════════════════════════════════════
+// SECTION COMPLETION CHECK
+// ═══════════════════════════════════════════════
+function checkSectionComplete(sectionIdx) {
+  var qs = SECTION_QUESTIONS[sectionIdx];
+  if (!qs) return;
+
+  var allDone = qs.every(function(q){ return !!qDone[q]; });
+  if (!allDone) return;
+
+  var scoreEl = document.getElementById('s' + sectionIdx + '-score');
+  var scoreVal = document.getElementById('s' + sectionIdx + '-score-val');
+  var nextEl   = document.getElementById('s' + sectionIdx + '-next');
+
+  var pts = sectionScores[sectionIdx] || 0;
+
+  if (scoreVal) {
+    if (sectionIdx <= 5) {
+      var sectionMax = 0;
+      var sqList = SECTION_QUESTIONS[sectionIdx];
+      if (sqList) {
+        sqList.forEach(function(qId) {
+          var cfg = Q_CONFIG[qId];
+          sectionMax += cfg.isBonus ? (cfg.bonusPts || 0) : cfg.pts;
+        });
+      }
+      scoreVal.textContent = pts + ' / ' + sectionMax + ' pts';
+    } else {
+      scoreVal.textContent = pts + ' bonus pts earned';
+    }
+  }
+  if (scoreEl) scoreEl.style.display = 'block';
+  if (nextEl)  nextEl.style.display  = 'flex';
+
+  var pill = document.getElementById('nav-' + sectionIdx);
+  if (pill) pill.classList.add('done');
+}
+
+// ═══════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════
+function goToSection(idx) {
+  if (idx === 8 && !window._lit2Passed) {
+    showToast('⚠️ 80% required for certificate', false);
+    return;
+  }
+  document.querySelectorAll('.section-card').forEach(function(c){ c.classList.remove('active'); });
+  document.querySelectorAll('.nav-pill').forEach(function(p){ p.classList.remove('active'); });
+
+  var card = document.getElementById('section-' + idx);
+  var pill = document.getElementById('nav-' + idx);
+  if (card) card.classList.add('active');
+  if (pill) pill.classList.add('active');
+
+  currentSection = idx;
+  var pct = Math.round((idx / (TOTAL_SECTIONS - 1)) * 100);
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-pct').textContent = pct + '%';
+  document.getElementById('prog-label').textContent = 'Section ' + (idx + 1) + ' of ' + TOTAL_SECTIONS;
+  window.scrollTo(0, 0);
+}
+
+// ═══════════════════════════════════════════════
+// PROGRESS BAR
+// ═══════════════════════════════════════════════
+function updateProgress() {
+  var baseQs = Object.keys(Q_CONFIG).filter(function(k){ return !Q_CONFIG[k].isBonus; });
+  var answered = baseQs.filter(function(k){ return !!qDone[k]; }).length;
+  var pct = Math.round((answered / baseQs.length) * 100);
+  var navPct = Math.round((currentSection / (TOTAL_SECTIONS - 1)) * 100);
+  document.getElementById('prog-fill').style.width = Math.max(pct, navPct) + '%';
+  document.getElementById('prog-pct').textContent = Math.max(pct, navPct) + '%';
+}
+
+// ═══════════════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════════════
+function showToast(msg, isBonus) {
+  var t = document.getElementById('points-toast');
+  t.textContent = msg;
+  t.className = 'points-toast' + (isBonus ? ' bonus' : '') + ' show';
+  setTimeout(function(){ t.classList.remove('show'); }, 1800);
+}
+
+// ═══════════════════════════════════════════════
+// FINISH MODULE
+// ═══════════════════════════════════════════════
+function showResults() {
+  goToSection(7);
+  buildResults();
+}
+
+function restartQuiz() {
+  _scoreSubmitted = false;
+  baseScore = 0;
+  bonusPoints = 0;
+  qDone = {};
+  firstAttemptStillAvailable = {};
+  sectionScores = {};
+  streakCount = 0;
+  maxStreak = 0;
+  questionsFirstTry = 0;
+  incorrectCount = 0;
+  totalQuestionsAnswered = 0;
+  moduleStartTime = Date.now();
+  milestonesTriggered = {};
+  window._lit2Passed = false;
+
+  document.querySelectorAll('.question-block').forEach(function(block) {
+    block.classList.remove('answered', 'answered-wrong');
+    block.querySelectorAll('.option-btn').forEach(function(btn) {
+      btn.classList.remove('correct', 'incorrect', 'disabled');
+      btn.style.pointerEvents = '';
+      btn.style.opacity = '';
+    });
+    var fb = block.querySelector('.feedback-box');
+    if (fb) { fb.className = 'feedback-box'; fb.innerHTML = ''; }
+  });
+
+  for (var i = 1; i <= 6; i++) {
+    var scoreEl = document.getElementById('s' + i + '-score');
+    var nextEl = document.getElementById('s' + i + '-next');
+    if (scoreEl) scoreEl.style.display = 'none';
+    if (nextEl) nextEl.style.display = 'none';
+    var pill = document.getElementById('nav-' + i);
+    if (pill) pill.classList.remove('done');
+  }
+
+  document.getElementById('total-score').textContent = '0';
+  document.getElementById('bonus-score').textContent = '0';
+  document.getElementById('streak-display').textContent = '0 🔥';
+
+  Object.keys(Q_CONFIG).forEach(function(k) { firstAttemptStillAvailable[k] = true; });
+
+  goToSection(0);
+}
+
+function buildResults() {
+  mascotReact('complete');
+  spawnParticles(document.querySelector('header'));
+  var totalQs = Object.keys(Q_CONFIG).length;
+  updateGlobalProgress(totalQs, totalQs);
+
+  var pct = Math.round((baseScore / BASE_MAX) * 100);
+  var pass = baseScore >= PASS_THRESHOLD * 10;
+
+  var headerEl = document.getElementById('results-header-wrap');
+  headerEl.innerHTML = '<div class="results-header ' + (pass ? 'pass' : 'fail') + '">'
+    + '<div class="results-grade">' + pct + '%</div>'
+    + '<div class="results-label">' + (pass ? '🏆 Assessment Passed!' : '📚 Not Yet — 80% Required to Pass') + '</div>'
+    + '<div class="results-sub">' + baseScore + ' / 200 base pts · ' + bonusPoints + ' bonus pts</div>'
+    + '</div>';
+
+  var letters = ['a','b','c','d'];
+  var letterLabels = ['A','B','C','D'];
+  var reviewList = document.getElementById('reviewList');
+  var reviewHTML = '';
+  Object.keys(Q_CONFIG).forEach(function(qId, idx) {
+    var cfg = Q_CONFIG[qId];
+    var block = document.getElementById(qId + '-block');
+    if (!block) return;
+    var qText = block.querySelector('.q-text');
+    var questionText = qText ? qText.textContent : 'Question ' + (idx+1);
+    var isAnswered = !!qDone[qId];
+    var wasCorrect = isAnswered && block.classList.contains('answered');
+    var correctLetter = cfg.correct.toUpperCase();
+    var correctBtnEl = document.getElementById(qId + '-' + cfg.correct);
+    var correctText = correctBtnEl ? correctBtnEl.querySelector('.opt-text').textContent : '';
+    var userAnswer = '(not answered)';
+    var userLetter = '';
+    if (isAnswered) {
+      letters.forEach(function(l, li) {
+        var btn = document.getElementById(qId + '-' + l);
+        if (btn && (btn.classList.contains('correct') || btn.classList.contains('incorrect'))) {
+          if (btn.classList.contains('incorrect') || (btn.classList.contains('correct') && !block.classList.contains('answered-wrong'))) {
+            userAnswer = btn.querySelector('.opt-text').textContent;
+            userLetter = letterLabels[li];
+          }
+        }
+      });
+      if (wasCorrect && !userLetter) {
+        userAnswer = correctText;
+        userLetter = correctLetter;
+      }
+    }
+
+    reviewHTML += '<div class="review-item ' + (wasCorrect ? 'correct' : 'wrong') + '" style="opacity:0;transform:translateY(8px);transition:opacity 0.25s ease,transform 0.25s ease;" data-review-idx="' + idx + '">'
+      + '<div class="ri-q">' + (idx+1) + '. ' + questionText.substring(0,120) + (questionText.length>120?'…':'') + '</div>'
+      + '<div class="ri-ans">'
+      + (wasCorrect ? '✅' : '❌') + ' Your answer: <strong>' + userLetter + '. ' + userAnswer.substring(0,100) + (userAnswer.length>100?'…':'') + '</strong>'
+      + (!wasCorrect ? '<br>✅ Correct: <strong>' + correctLetter + '. ' + correctText.substring(0,100) + (correctText.length>100?'…':'') + '</strong>' : '')
+      + '</div></div>';
+  });
+  reviewList.innerHTML = reviewHTML;
+
+  var reviewEls = reviewList.querySelectorAll('[data-review-idx]');
+  reviewEls.forEach(function(el, i) {
+    setTimeout(function() {
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+      playTickSound();
+      var counterEl = document.getElementById('reviewCounter');
+      if (counterEl) counterEl.textContent = 'Reviewing ' + (i+1) + '/' + totalQs;
+    }, i * 120);
+  });
+
+  setTimeout(function() {
+    var counterEl = document.getElementById('reviewCounter');
+    if (counterEl) counterEl.textContent = totalQs + '/' + totalQs + ' ✓ Review Complete';
+  }, reviewEls.length * 120 + 200);
+
+  window._lit2Passed = pass;
+
+  var bodyEl = document.getElementById('results-body');
+  var buttonsHtml;
+  if (pass) {
+    buttonsHtml = '<div class="btn-group">'
+      + '<button class="btn btn-primary btn-block" onclick="goToSection(8)">Submit Feedback &amp; Get Certificate →</button>'
+      + '</div>';
+  } else {
+    buttonsHtml = '<div class="btn-group" style="display:flex;gap:10px;">'
+      + '<button class="btn btn-secondary" style="flex:1;" onclick="goToSection(0)">Review Content</button>'
+      + '<button class="btn btn-primary" style="flex:1;" onclick="restartQuiz()">Try Again</button>'
+      + '</div>';
+  }
+  bodyEl.innerHTML = '<div class="section-score" style="margin-bottom:20px;">'
+    + '<div class="score-display">' + baseScore + '/200</div>'
+    + '<div class="score-label">Base Score · ' + bonusPoints + ' Bonus Points</div>'
+    + '</div>'
+    + '<div class="callout ' + (pass ? 'callout-success' : 'callout-warn') + '">'
+    + (pass
+        ? '<strong>✅ Gate Passed.</strong> You have demonstrated competency in Georgia discovery rules and procedures (O.C.G.A. §§ 9-11-26 through 9-11-37), drafting and responding to discovery requests, discovery calendar management, document production and privilege review, and discovery dispute resolution. You are cleared to progress to LIT-3.'
+        : '<strong>⚠️ Gate Not Cleared.</strong> You need 160/200 (80%) to pass. Review the sections where you missed questions — the feedback explains exactly what to remember. Retake when ready.')
+    + '</div>'
+    + buttonsHtml;
+
+  submitScoreToTracker();
+
+  var badgeContainer = document.getElementById('badgeContainer');
+  if (badgeContainer) {
+    var gamBadges = calculateBadges();
+    renderBadges(gamBadges, badgeContainer);
+  }
+
+  if (pass) {
+    document.getElementById('score-submit-form').style.display = 'block';
+  }
+}
+
+// ═══════════════════════════════════════════════
+// AUTO-SUBMIT SCORE
+// ═══════════════════════════════════════════════
+var _scoreSubmitted = false;
+function submitScoreToTracker() {
+  // DISABLED: cert flow handles submission with employee name. This nameless path created "Unknown" rows.
+  return;
+  var payload = {
+    moduleId:   'lit2',
+    moduleName: 'LIT-2 Discovery Process & Management',
+    score:      baseScore,
+    maxScore:   200,
+    bonusScore: bonusPoints,
+    maxStreak:  maxStreak,
+    badges:     calculateBadges().map(function(b){ return b.name; }).join(', '),
+    elapsedMinutes: Math.round((Date.now() - moduleStartTime) / 60000),
+    passedAt:   new Date().toISOString()
+  };
+  fetch(TRACKER_URL, {
+    method: 'POST',
+    headers: {'Content-Type': 'text/plain'},
+    body: JSON.stringify(payload),
+    mode: 'no-cors'
+  }).then(function(){
+    var el = document.getElementById('score-confirmation');
+    if (el) { _scoreSubmitted = true;
+    el.innerHTML = '✅ Score submitted automatically.'; el.style.display = 'block'; }
+  }).catch(function(){
+    var el = document.getElementById('score-confirmation');
+    if (el) { el.innerHTML = '⚠️ Auto-submit failed — screenshot results and email hgunn@thegunnlawgroup.com'; el.style.display = 'block'; }
+  });
+}
+
+// ═══════════════════════════════════════════════
+// SUBMIT SCORE + BUILD CERTIFICATE
+// ═══════════════════════════════════════════════
+function submitScoreAndBuildCert() {
+  if (!window._lit2Passed) {
+    showToast('⚠️ 80% required for certificate', false);
+    return;
+  }
+  var nameInput = document.getElementById('trainee-name-input');
+  var name = (nameInput.value || '').trim();
+  if (!name || name === 'Unknown' || name === 'Training Participant') {
+    nameInput.style.border = '2px solid red';
+    nameInput.focus();
+    showToast('⚠️ Please enter your full name', false);
+    return;
+  }
+  document.getElementById('certNameDisplay').textContent = name;
+  document.getElementById('score-submit-form').style.display = 'none';
+  document.getElementById('cert-content').style.display = 'block';
+
+  var pct = Math.round((baseScore / BASE_MAX) * 100);
+  var pass = baseScore >= PASS_THRESHOLD * 10;
+  document.getElementById('certScore').textContent = 'Score: ' + baseScore + '/200 (' + pct + '%) — ' + (pass ? 'PASSED' : 'NOT PASSED');
+  var now = new Date();
+  document.getElementById('certMeta').textContent = 'Issued: ' + now.toLocaleDateString('en-US', {year:'numeric', month:'long', day:'numeric'});
+
+  var certBadgesEl = document.getElementById('certBadges');
+  if (certBadgesEl) {
+    var badges = calculateBadges();
+    badges.push({icon: '🎓', name: 'LIT-2 Complete', desc: 'Completed module LIT-2'});
+    certBadgesEl.innerHTML = '';
+    badges.forEach(function(b, i) {
+      var pill = document.createElement('span');
+      pill.className = 'cert-badge-pill';
+      pill.textContent = b.icon + ' ' + b.name;
+      pill.style.animationDelay = (i * 0.15) + 's';
+      certBadgesEl.appendChild(pill);
+    });
+  }
+
+  setTimeout(function() {
+    launchConfetti();
+    playTaDa();
+    mascotReact('complete');
+  }, 350);
+
+  if (TRACKER_URL) {
+    var payload = {
+      employeeName: name,
+      moduleId: 'lit2',
+      moduleName: 'LIT-2 Discovery Process & Management',
+      score: baseScore,
+      maxScore: 200,
+      bonusScore: bonusPoints,
+      maxStreak: maxStreak,
+      badges: calculateBadges().map(function(b){ return b.name; }).join(', '),
+      elapsedMinutes: Math.round((Date.now() - moduleStartTime) / 60000),
+      passedAt: new Date().toISOString(),
+      feedback: {
+        clarity: document.getElementById('fb-clarity').value || '',
+        difficulty: document.getElementById('fb-difficulty').value || '',
+        realistic: document.getElementById('fb-realistic').value || '',
+        suggestions: document.getElementById('fb-suggestions').value || ''
+      }
+    };
+    fetch(TRACKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(payload),
+      mode: 'no-cors'
+    }).then(function() {
+      document.getElementById('score-confirmation').style.display = 'block';
+    }).catch(function() {
+      document.getElementById('score-confirmation').innerHTML = '⚠️ Auto-submission failed — please screenshot your results and email to hgunn@thegunnlawgroup.com';
+      document.getElementById('score-confirmation').style.background = '#fff3cd';
+      document.getElementById('score-confirmation').style.borderLeftColor = '#f39c12';
+      document.getElementById('score-confirmation').style.color = '#856404';
+      document.getElementById('score-confirmation').style.display = 'block';
+    });
+  }
+}
+
+// ═══════════════════════════════════════════════
+// GLG GAMIFICATION ENGINE v1.0 — LIT-2 CHASSIS
+// ═══════════════════════════════════════════════
+
+// ── SOUND ENGINE ──
+function ensureAudioCtx() {
+  if (!audioCtx) {
+    try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) { return false; }
+  }
+  if (audioCtx.state === 'suspended') { audioCtx.resume().catch(function(){}); }
+  if (!_audioKeepalive && audioCtx) {
+    try {
+      var silentOsc = audioCtx.createOscillator();
+      var silentGain = audioCtx.createGain();
+      silentGain.gain.value = 0;
+      silentOsc.connect(silentGain);
+      silentGain.connect(audioCtx.destination);
+      silentOsc.start();
+      _audioKeepalive = silentOsc;
+    } catch(e) {}
+  }
+  return true;
+}
+
+function toggleSound() {
+  soundEnabled = !soundEnabled;
+  if (soundEnabled) ensureAudioCtx();
+  document.getElementById('soundToggle').textContent = soundEnabled ? '🔊' : '🔇';
+  localStorage.setItem('glg_sound', soundEnabled ? '1' : '0');
+}
+
+function playTone(freq, duration, type, gainVal, scheduleAt) {
+  if (!soundEnabled || !audioCtx) return;
+  if (audioCtx.state === 'suspended') audioCtx.resume().catch(function(){});
+  var startTime = (scheduleAt !== undefined) ? audioCtx.currentTime + scheduleAt : audioCtx.currentTime;
+  var o = audioCtx.createOscillator();
+  var g = audioCtx.createGain();
+  o.type = type || 'sine';
+  o.frequency.value = freq;
+  g.gain.setValueAtTime(gainVal || 0.15, startTime);
+  g.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+  o.connect(g); g.connect(audioCtx.destination);
+  o.start(startTime); o.stop(startTime + duration + 0.01);
+}
+
+function playDing() {
+  if (!soundEnabled) return;
+  ensureAudioCtx();
+  playTone(523, 0.15, 'sine', 0.13, 0);
+  playTone(659, 0.18, 'sine', 0.11, 0.1);
+}
+
+function playWrongTone() {
+  if (!soundEnabled) return;
+  ensureAudioCtx();
+  if (!audioCtx) return;
+  playTone(520, 0.12, 'triangle', 0.12, 0);
+  playTone(440, 0.15, 'triangle', 0.10, 0.08);
+}
+
+function playTickSound() {
+  if (!soundEnabled) return;
+  ensureAudioCtx();
+  if (!audioCtx) return;
+  playTone(800, 0.05, 'triangle', 0.06);
+}
+
+function playTaDa() {
+  if (!soundEnabled) return;
+  ensureAudioCtx();
+  if (!audioCtx) return;
+  var now = audioCtx.currentTime;
+  var notes = [
+    {f:262,t:0,d:0.30,type:'triangle',g:0.14},{f:330,t:0,d:0.30,type:'sine',g:0.11},
+    {f:392,t:0,d:0.30,type:'sine',g:0.09},{f:523,t:0.15,d:0.22,type:'sine',g:0.13},
+    {f:659,t:0.30,d:0.22,type:'sine',g:0.12},{f:784,t:0.45,d:0.22,type:'sine',g:0.11},
+    {f:523,t:0.65,d:0.80,type:'sine',g:0.13},{f:659,t:0.65,d:0.80,type:'sine',g:0.11},
+    {f:784,t:0.65,d:0.80,type:'sine',g:0.09},{f:1047,t:0.65,d:0.80,type:'triangle',g:0.07},
+    {f:1319,t:0.75,d:0.55,type:'sine',g:0.04},{f:1568,t:0.85,d:0.45,type:'sine',g:0.03}
+  ];
+  notes.forEach(function(n) {
+    var osc = audioCtx.createOscillator();
+    var gain = audioCtx.createGain();
+    osc.type = n.type || 'sine';
+    osc.frequency.value = n.f;
+    gain.gain.setValueAtTime(n.g, now + n.t);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + n.t + n.d);
+    osc.connect(gain); gain.connect(audioCtx.destination);
+    osc.start(now + n.t); osc.stop(now + n.t + n.d + 0.05);
+  });
+}
+
+// ── STREAK SYSTEM ──
+function updateStreak(isCorrect) {
+  if (isCorrect) {
+    streakCount++;
+    if (streakCount > maxStreak) maxStreak = streakCount;
+    questionsFirstTry++;
+    var el = document.getElementById('streak-display');
+    if (el) el.textContent = streakCount + ' 🔥';
+    playDing();
+    if (streakCount >= 3) showStreakBadge(streakCount);
+    if (streakCount === 5) spawnParticles(document.querySelector('.score-bar'));
+  } else {
+    if (streakCount >= 3) showStreakEnd();
+    streakCount = 0;
+    incorrectCount++;
+    var el = document.getElementById('streak-display');
+    if (el) el.textContent = '0 🔥';
+    playWrongTone();
+  }
+  totalQuestionsAnswered++;
+}
+
+function showStreakBadge(count) {
+  var badge = document.createElement('div');
+  badge.textContent = count + ' in a row! 🔥';
+  badge.style.cssText = 'position:fixed;top:60px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#dcb161,#e8c87a);color:#141C2C;padding:8px 20px;border-radius:20px;font-weight:700;font-size:14px;z-index:10001;animation:streakPop 0.4s ease-out,fadeUp 0.4s ease-in 1.5s forwards;';
+  document.body.appendChild(badge);
+  setTimeout(function(){ badge.remove(); }, 2000);
+}
+
+function showStreakEnd() {
+  var badge = document.createElement('div');
+  badge.textContent = 'Streak ended';
+  badge.style.cssText = 'position:fixed;top:60px;left:50%;transform:translateX(-50%);background:#333;color:#999;padding:6px 16px;border-radius:16px;font-size:12px;z-index:10001;opacity:0.8;';
+  document.body.appendChild(badge);
+  setTimeout(function(){ badge.remove(); }, 1500);
+}
+
+// ── MILESTONE TOASTS ──
+function checkMilestone(current, total) {
+  var pct = Math.round((current / total) * 100);
+  var milestones = {25:'Quarter complete! 💪',50:'Halfway there! 🎯',75:'Almost there! ⚡',100:'Final stretch! 🏆'};
+  for (var m in milestones) {
+    if (pct >= parseInt(m) && !milestonesTriggered[m]) {
+      milestonesTriggered[m] = true;
+      showMilestoneToast(milestones[m]);
+    }
+  }
+}
+
+function showMilestoneToast(msg) {
+  var t = document.createElement('div');
+  t.textContent = msg;
+  t.style.cssText = 'position:fixed;top:-50px;left:50%;transform:translateX(-50%);background:#141C2C;color:#dcb161;padding:10px 24px;border-radius:12px;font-weight:700;font-size:14px;z-index:10002;transition:top 0.4s ease;box-shadow:0 4px 20px rgba(0,0,0,0.3);';
+  document.body.appendChild(t);
+  requestAnimationFrame(function(){ t.style.top = '20px'; });
+  setTimeout(function(){ t.style.top = '-50px'; setTimeout(function(){ t.remove(); }, 500); }, 2500);
+}
+
+// ── GLOBAL PROGRESS BAR ──
+function updateGlobalProgress(current, total) {
+  var fill = document.getElementById('globalProgressFill');
+  if (fill) fill.style.width = Math.round((current / total) * 100) + '%';
+  checkMilestone(current, total);
+}
+
+// ── PARTICLES ──
+function spawnParticles(anchor) {
+  var rect = anchor ? anchor.getBoundingClientRect() : {left:window.innerWidth/2,top:window.innerHeight/2,width:0};
+  for (var i = 0; i < 20; i++) {
+    var p = document.createElement('div');
+    var size = 4 + Math.random() * 6;
+    var angle = (Math.PI * 2 * i) / 20 + (Math.random() * 0.3);
+    var dist = 60 + Math.random() * 80;
+    p.style.cssText = 'position:fixed;width:' + size + 'px;height:' + size + 'px;background:#dcb161;border-radius:50%;left:' + (rect.left + rect.width/2) + 'px;top:' + (rect.top) + 'px;z-index:10003;pointer-events:none;opacity:1;transition:all 0.8s ease-out;';
+    document.body.appendChild(p);
+    requestAnimationFrame(function(pp, a, d) { return function() {
+      pp.style.left = (parseFloat(pp.style.left) + Math.cos(a) * d) + 'px';
+      pp.style.top = (parseFloat(pp.style.top) + Math.sin(a) * d) + 'px';
+      pp.style.opacity = '0';
+    }; }(p, angle, dist));
+    setTimeout(function(pp){ pp.remove(); }.bind(null, p), 900);
+  }
+}
+
+// ── MASCOT (Scales of Justice) ──
+function initMascot() {
+  var gavel = document.createElement('div');
+  gavel.id = 'mascotFloat';
+  gavel.innerHTML = '<svg viewBox="0 0 60 70" xmlns="http://www.w3.org/2000/svg" style="width:50px;height:58px;">'
+    + '<rect x="27" y="18" width="6" height="38" rx="1.5" fill="#8B7D3C"/>'
+    + '<rect x="18" y="54" width="24" height="5" rx="2.5" fill="#6B5E2E"/>'
+    + '<rect x="22" y="52" width="16" height="4" rx="1" fill="#8B7D3C"/>'
+    + '<rect x="6" y="16" width="48" height="4" rx="2" fill="#8B7D3C"/>'
+    + '<circle cx="30" cy="12" r="5" fill="#dcb161" stroke="#8B7D3C" stroke-width="1.5"/>'
+    + '<text x="30" y="14.5" text-anchor="middle" font-size="7" font-weight="bold" fill="#141C2C">⚖</text>'
+    + '<line x1="12" y1="20" x2="12" y2="32" stroke="#8B7D3C" stroke-width="1.5"/>'
+    + '<line x1="48" y1="20" x2="48" y2="32" stroke="#8B7D3C" stroke-width="1.5"/>'
+    + '<path d="M4 33 Q8 38 12 33 Q16 38 20 33" stroke="#dcb161" stroke-width="1.5" fill="none"/>'
+    + '<ellipse cx="12" cy="34" rx="9" ry="2.5" fill="#dcb161" opacity="0.3"/>'
+    + '<path d="M40 33 Q44 38 48 33 Q52 38 56 33" stroke="#dcb161" stroke-width="1.5" fill="none"/>'
+    + '<ellipse cx="48" cy="34" rx="9" ry="2.5" fill="#dcb161" opacity="0.3"/>'
+    + '</svg>';
+  gavel.style.cssText = 'position:fixed;bottom:16px;right:16px;z-index:9998;cursor:pointer;animation:scaleBob 3s ease-in-out infinite;opacity:0.7;transition:opacity 0.3s,transform 0.3s;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.2));';
+  gavel.onmouseenter = function(){ this.style.opacity='1';this.style.transform='scale(1.1)'; };
+  gavel.onmouseleave = function(){ this.style.opacity='0.7';this.style.transform='scale(1)'; };
+  document.body.appendChild(gavel);
+}
+
+function mascotReact(type) {
+  var g = document.getElementById('mascotFloat');
+  if (!g) return;
+  g.style.animation = 'none';
+  void g.offsetHeight;
+  if (type === 'correct') {
+    g.style.animation = 'scaleCelebrate 0.5s ease-out, scaleBob 3s ease-in-out 0.6s infinite';
+  } else if (type === 'incorrect') {
+    g.style.animation = 'scaleTilt 0.6s ease-in-out, scaleBob 3s ease-in-out 0.7s infinite';
+  } else if (type === 'complete') {
+    g.style.animation = 'scaleTriumph 1.5s ease-in-out, scaleBob 3s ease-in-out 1.6s infinite';
+    g.style.opacity = '1';
+    g.style.transform = 'scale(1.15)';
+  }
+}
+
+// ── CONFETTI ──
+var confettiActive = false;
+function launchConfetti() {
+  var canvas = document.getElementById('confettiCanvas');
+  if (!canvas) return;
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  var ctx = canvas.getContext('2d');
+  var colors = ['#dcb161','#c0c0c0','#141c2c'];
+  var particles = [];
+  var cx = canvas.width / 2;
+  var cy = canvas.height / 2;
+  for (var i = 0; i < 150; i++) {
+    var angle = Math.random() * Math.PI * 2;
+    var speed = 3 + Math.random() * 9;
+    particles.push({
+      x:cx, y:cy,
+      vx:Math.cos(angle)*speed, vy:Math.sin(angle)*speed-5,
+      color:colors[Math.floor(Math.random()*colors.length)],
+      w:4+Math.random()*6, h:2+Math.random()*4,
+      rotation:Math.random()*360, rotSpeed:(Math.random()-0.5)*12,
+      gravity:0.10+Math.random()*0.08, opacity:1,
+      shape:Math.random()>0.4?'rect':'circle'
+    });
+  }
+  confettiActive = true;
+  var startTime = Date.now();
+  function animate() {
+    if (!confettiActive) return;
+    var elapsed = Date.now() - startTime;
+    if (elapsed > 4000) {
+      confettiActive = false;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      return;
+    }
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(function(p) {
+      p.x+=p.vx; p.vy+=p.gravity; p.y+=p.vy; p.vx*=0.99; p.rotation+=p.rotSpeed;
+      if (elapsed>2500) p.opacity=Math.max(0,p.opacity-0.02);
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rotation*Math.PI/180);
+      ctx.globalAlpha=p.opacity; ctx.fillStyle=p.color;
+      if (p.shape==='rect'){ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);}
+      else{ctx.beginPath();ctx.arc(0,0,p.w/2,0,Math.PI*2);ctx.fill();}
+      ctx.restore();
+    });
+    requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+}
+
+// ── ACHIEVEMENT BADGES ──
+function calculateBadges() {
+  var badges = [];
+  var pct = Math.round((baseScore / BASE_MAX) * 100);
+  var elapsed = (Date.now() - moduleStartTime) / 60000;
+  var baseQCount = Object.keys(Q_CONFIG).filter(function(k){ return !Q_CONFIG[k].isBonus; }).length;
+  if (questionsFirstTry === baseQCount && incorrectCount === 0) badges.push({icon:'⭐', name:'Perfect Pass', desc:'All correct on first try'});
+  if (incorrectCount === 0 && totalQuestionsAnswered > 0) badges.push({icon:'🎯', name:'No Stumbles', desc:'Zero incorrect'});
+  if (elapsed < 30) badges.push({icon:'⚡', name:'Speed Run', desc:'Under 30 minutes'});
+  if (pct >= 90) badges.push({icon:'🏆', name:'Master', desc:'Above 90%'});
+  if (incorrectCount > 3 && pct >= 70) badges.push({icon:'💪', name:'Persistent', desc:'Finished despite struggles'});
+  return badges;
+}
+
+function renderBadges(badges, container) {
+  badges.forEach(function(b, i) {
+    setTimeout(function() {
+      var el = document.createElement('span');
+      el.textContent = b.icon + ' ' + b.name;
+      el.title = b.desc;
+      el.style.cssText = 'display:inline-block;background:#dcb161;color:#141C2C;font-size:12px;font-weight:700;padding:5px 12px;border-radius:14px;margin:4px;animation:badgeFlip 0.5s ease-out;';
+      container.appendChild(el);
+    }, i * 400);
+  });
+}
+
+// ── GAMIFICATION INIT ──
+document.addEventListener('DOMContentLoaded', function() {
+  if (localStorage.getItem('glg_sound') === '1') {
+    soundEnabled = true;
+    var btn = document.getElementById('soundToggle');
+    if (btn) btn.textContent = '🔊';
+  }
+
+  function initAudioOnFirstClick() {
+    ensureAudioCtx();
+    document.removeEventListener('click', initAudioOnFirstClick);
+    document.removeEventListener('touchstart', initAudioOnFirstClick);
+    document.removeEventListener('touchend', initAudioOnFirstClick);
+  }
+  document.addEventListener('click', initAudioOnFirstClick);
+  document.addEventListener('touchstart', initAudioOnFirstClick);
+  document.addEventListener('touchend', initAudioOnFirstClick);
+
+  function resumeAudioOnGesture() {
+    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+  }
+  document.addEventListener('touchstart', resumeAudioOnGesture, true);
+  document.addEventListener('touchend', resumeAudioOnGesture, true);
+  document.addEventListener('click', resumeAudioOnGesture, true);
+
+  initMascot();
+});
+
+// Init
+goToSection(0);
+</script>
+</body>
+</html>

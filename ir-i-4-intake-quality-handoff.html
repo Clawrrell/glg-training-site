@@ -1,0 +1,1684 @@
+<!--
+IR-I-4 - Intake Quality & Handoff
+Built: July 19, 2026 | Base: ir-r-1-phone-handling.html (IR-track canonical chassis)
+Track: IR-I (Intake — Intake Specialist)
+Learner: Victoria (Intake)
+moduleId: ir-i-4
+Base: 20 questions × 10 pts = 200 | Bonus: 5 boss tasks × 10 bonus pts = 50 max | Pass: 160/200 (80%)
+Answer Key: q1→B q2→C q3→D q4→A  q5→A q6→D q7→B q8→C
+            q9→D q10→A q11→C q12→B  q13→B q14→C q15→A q16→D
+            q17→C q18→A q19→D q20→B
+            q21→B(boss) q22→C(boss) q23→A(boss) q24→D(boss) q25→B(boss)
+Distribution: A:5 B:5 C:5 D:5 (base) | Boss: A:1 B:2 C:1 D:1
+Boss Challenge: Tamika Washington + Derek Palmer, GLG-2026-6134
+Sources: IR-I-4-MEMO-SURVEY.md (10 PRIMARY, 9 SECONDARY), Intake_SOP.md §§5-11,
+         CasePeer_Self_Monitoring_Quick_Reference.md, GLG_Case_Grading_System.md,
+         IR-I-REFERENCE-INTAKE-HANDOFF-EXAMPLE.md, Pre_Lit_Paralegal_SOP.md §1,
+         CM_Introduction_Call_Script.md (Before the Call), CasePeer_Basics_Training.md
+Carry-Forward: Q5 from IR-I-2 (dual-upload), Q8 from IR-I-1 (government entity/ante litem),
+               Q15 from IR-I-2/IR-I-3 (SOL same-day calendaring)
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>IR-I-4 - Intake Quality &amp; Handoff | Gunn Law Group</title>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;color:#333;font-size:16px;line-height:1.6;-webkit-text-size-adjust:100%;overflow-x:hidden;}
+
+    /* ── HEADER ── */
+    header{background:linear-gradient(135deg,#141C2C 0%,#0E1420 100%);color:#e0e0e0;padding:20px 16px 16px;text-align:center;}
+    .day-badge{display:inline-block;background:#1C2433;color:#dcb161;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:10px;}
+    header h1{font-size:clamp(17px,5vw,24px);font-weight:800;line-height:1.3;color:#ffffff;}
+    header p{margin-top:6px;color:#c0c0c0;font-size:13px;}
+    .score-bar{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:12px;padding:10px 16px;background:#1C2433;border-radius:10px;}
+    .score-label{color:#c0c0c0;font-size:12px;font-weight:600;}
+    .score-value{color:#fff;font-size:22px;font-weight:800;}
+
+    /* ── PROGRESS ── */
+    .progress-wrap{background:#1C2433;padding:10px 16px;}
+    .progress-meta{color:#c0c0c0;font-size:11px;margin-bottom:5px;display:flex;justify-content:space-between;}
+    .progress-bg{background:#0E1420;border-radius:4px;height:6px;width:100%;}
+    .progress-fill{background:#dcb161;height:6px;border-radius:4px;width:0%;transition:width .5s ease;}
+
+    /* ── NAV PILLS ── */
+    .section-nav{display:flex;flex-wrap:wrap;gap:6px;padding:12px 14px;background:#fff;border-bottom:2px solid #e0e3e8;justify-content:center;position:sticky;top:0;z-index:100;}
+    .nav-pill{padding:7px 11px;border-radius:20px;border:2px solid #e0e3e8;background:#fff;color:#666;font-size:11px;font-weight:700;cursor:pointer;min-height:44px;min-width:44px;display:flex;align-items:center;transition:all .2s;white-space:nowrap;-webkit-tap-highlight-color:transparent;}
+    .nav-pill.active{background:#141C2C;color:#fff;border-color:#141C2C;}
+    .nav-pill.done{border-color:#10774A;color:#10774A;}
+    .nav-pill.done::after{content:' ✓';}
+
+    /* ── MAIN / CARDS ── */
+    main{max-width:800px;margin:0 auto;padding:0 0 60px;}
+    .section-card{display:none;background:#fff;margin:16px;border-radius:14px;box-shadow:0 2px 16px rgba(0,0,0,.09);overflow:visible;}
+    .section-card.active{display:block;}
+    .section-header{background:#141C2C;color:#fff;padding:18px 20px;}
+    .section-num{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#dcb161;margin-bottom:4px;}
+    .section-header h2{font-size:clamp(15px,4vw,20px);font-weight:800;}
+    .section-subhead{color:#c0c0c0;font-size:13px;margin-top:4px;}
+    .section-body{padding:20px;}
+
+    /* ── SCENARIO BOX ── */
+    .scenario{background:#141C2C;color:#fff;border-radius:12px;padding:20px;margin-bottom:20px;border-left:3px solid #dcb161;}
+    .scenario-tag{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#dcb161;margin-bottom:8px;}
+    .scenario h3{font-size:clamp(15px,4vw,18px);font-weight:700;line-height:1.4;margin-bottom:10px;}
+    .scenario p{font-size:14px;color:#c8d0e0;line-height:1.6;}
+    .scenario .highlight{color:#dcb161;font-weight:700;}
+    .scenario .urgent{color:#e74c3c;font-weight:700;}
+
+    /* ── INFO BLOCKS ── */
+    .info-block{background:#f0f4f8;border-radius:10px;padding:16px;margin-bottom:14px;}
+    .info-block h4{color:#141c2c;font-size:14px;font-weight:700;margin-bottom:8px;}
+    .info-block p,.info-block li{font-size:14px;color:#444;line-height:1.6;}
+    .info-block ul,.info-block ol{padding-left:18px;}
+
+    /* ── CALLOUT ── */
+    .callout{border-radius:10px;padding:14px 16px;margin-bottom:14px;font-size:14px;line-height:1.6;}
+    .callout-warn{background:#fff3cd;border-left:4px solid #f39c12;color:#856404;}
+    .callout-danger{background:#fce8e8;border-left:4px solid #870101;color:#7b1a1a;}
+    .callout-info{background:#d6e8f8;border-left:4px solid #174a7e;color:#174a7e;}
+    .callout-success{background:#d4edda;border-left:4px solid #10774A;color:#155724;}
+
+    /* ── BUTTONS ── */
+    .btn-group{display:flex;gap:10px;margin-top:16px;}
+    .btn{padding:12px 20px;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;border:none;min-height:44px;transition:all .15s;-webkit-tap-highlight-color:transparent;}
+    .btn-primary{background:#141C2C;color:#dcb161;}
+    .btn-primary:hover{background:#232e54;}
+    .btn-secondary{background:#e0e3e8;color:#333;}
+    .btn-secondary:hover{background:#d0d3d8;}
+    .btn-block{width:100%;}
+
+    /* ── STAT TABLE ── */
+    .stat-table{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0;border-radius:8px;overflow:hidden;}
+    .stat-table th{background:#141c2c;color:#dcb161;padding:8px 10px;text-align:left;font-weight:700;}
+    .stat-table td{padding:7px 10px;border-bottom:1px solid #e0e3e8;vertical-align:top;}
+    .stat-table tr:last-child td{border-bottom:none;}
+    .stat-table tr:nth-child(even) td{background:#f8f9fa;}
+
+    /* ── DIVIDER / TAGS / UTILS ── */
+    .divider{border:none;border-top:2px solid #f0f4f8;margin:16px 0;}
+    .tag{display:inline-block;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
+    .tag-warn{background:#fff3cd;color:#856404;}
+    .tag-danger{background:#fce8e8;color:#7b1a1a;}
+    .tag-success{background:#d4edda;color:#155724;}
+    .tag-info{background:#d6e8f8;color:#174a7e;}
+    .tag-gold{background:#fffaed;color:#7a5c00;border:1px solid #dcb161;}
+    .text-center{text-align:center;}
+    .mt-4{margin-top:16px;}
+    .mb-4{margin-bottom:16px;}
+
+    /* ── QUESTIONS ── */
+    .question-block{border:2px solid #e8ecf0;border-radius:12px;padding:18px;margin-bottom:16px;transition:border-color .2s;}
+    .question-block.answered{border-color:#10774A;}
+    .question-block.answered-wrong{border-color:#870101;}
+    .q-num{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888;margin-bottom:6px;}
+    .q-text{font-size:clamp(14px,3.5vw,16px);font-weight:700;color:#141c2c;margin-bottom:14px;line-height:1.4;}
+    .options{display:flex;flex-direction:column;gap:10px;}
+    .option-btn{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border:2px solid #e0e3e8;border-radius:10px;background:#fff;cursor:pointer;text-align:left;font-size:14px;color:#333;min-height:44px;transition:all .15s;-webkit-tap-highlight-color:transparent;width:100%;}
+    .option-btn:hover,.option-btn:focus{border-color:#232e54;background:#f8f9ff;}
+    .option-btn.correct{border-color:#10774A!important;background:#e8f8ee!important;color:#10774A!important;}
+    .option-btn.incorrect{border-color:#870101!important;background:#fce8e8!important;color:#870101!important;}
+    .option-btn.disabled{pointer-events:none;opacity:.75;}
+    .opt-letter{background:#141C2C;color:#dcb161;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0;margin-top:1px;}
+    .opt-text{flex:1;line-height:1.5;}
+
+    /* ── FEEDBACK ── */
+    .feedback-box{border-radius:10px;padding:14px 16px;margin-top:12px;display:none;font-size:14px;line-height:1.6;}
+    .feedback-box.correct{background:#d4edda;border-left:4px solid #10774A;color:#155724;}
+    .feedback-box.incorrect{background:#f8d7da;border-left:4px solid #870101;color:#721c24;}
+    .feedback-box.show{display:block;}
+
+    /* ── POINTS TOAST ── */
+    .points-toast{position:fixed;top:80px;right:16px;background:#10774A;color:#fff;padding:10px 16px;border-radius:30px;font-weight:700;font-size:15px;box-shadow:0 4px 16px rgba(0,0,0,.2);z-index:999;transform:translateY(-20px);opacity:0;transition:all .3s;pointer-events:none;}
+    .points-toast.show{transform:translateY(0);opacity:1;}
+    .points-toast.bonus{background:#dcb161;color:#141C2C;}
+
+    /* ── SECTION SCORE ── */
+    .section-score{background:#f0f4f8;border-radius:10px;padding:14px;text-align:center;margin-bottom:16px;}
+    .section-score .score-display{font-size:32px;font-weight:800;color:#141c2c;}
+    .section-score .score-label{font-size:13px;color:#666;margin-top:2px;}
+
+    /* ── CASE FILE ── */
+    .case-file{background:#fff;border:2px solid #141c2c;border-radius:12px;padding:18px;margin-bottom:20px;}
+    .case-file-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:12px;border-bottom:2px solid #f0f4f8;}
+    .case-file-icon{background:#141c2c;color:#fff;width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+    .case-file-title{font-weight:800;color:#141c2c;font-size:15px;}
+    .case-file-sub{font-size:12px;color:#888;}
+    .case-detail{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #f0f4f8;font-size:14px;}
+    .case-detail:last-child{border-bottom:none;}
+    .case-key{font-weight:700;color:#141c2c;min-width:160px;flex-shrink:0;}
+    .case-val{color:#444;}
+
+    /* ── BOSS CHALLENGE ── */
+    .boss-header{background:linear-gradient(135deg,#870101 0%,#5a0000 100%);color:#fff;border-radius:12px;padding:24px;margin-bottom:20px;text-align:center;}
+    .boss-header .boss-icon{font-size:40px;margin-bottom:10px;}
+    .boss-header h3{font-size:clamp(17px,4.5vw,22px);font-weight:800;margin-bottom:8px;}
+    .boss-header p{font-size:14px;opacity:.9;line-height:1.5;}
+
+    /* ── RESULTS ── */
+    .results-header{padding:28px 20px;text-align:center;color:#fff;}
+    .results-header.pass{background:linear-gradient(135deg,#10774A,#0a5c38);}
+    .results-header.fail{background:linear-gradient(135deg,#870101,#6b0000);}
+    .results-grade{font-size:56px;font-weight:900;line-height:1;}
+    .results-label{font-size:16px;margin-top:6px;opacity:.9;}
+    .results-sub{font-size:13px;margin-top:4px;opacity:.75;}
+    .breakdown-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #f0f4f8;font-size:15px;}
+    .breakdown-row:last-child{border-bottom:none;}
+    .breakdown-name{color:#333;font-weight:600;}
+    .breakdown-pts{font-weight:800;color:#141c2c;}
+    .achievement-grid{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0;}
+    .badge{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;font-size:13px;font-weight:700;border:2px solid #e0e3e8;color:#888;background:#f8f9fa;}
+    .badge.earned{border-color:#dcb161;background:#fffaed;color:#7a5c00;}
+    .badge .badge-icon{font-size:20px;}
+
+    /* ── CERTIFICATE ── */
+    .cert-wrap{background:linear-gradient(180deg,#ffffff 0%,#fafaf5 100%);border:4px double #141c2c;border-radius:14px;padding:2.5rem 1.75rem;text-align:center;margin-bottom:1rem;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(20,28,44,0.10);animation:certPopIn 0.8s 0.1s cubic-bezier(0.34,1.56,0.64,1) both;}
+    @keyframes certPopIn{0%{opacity:0;transform:scale(0.7);box-shadow:0 2px 8px rgba(20,28,44,0.05)}60%{opacity:1;transform:scale(1.04);box-shadow:0 8px 32px rgba(20,28,44,0.18)}80%{transform:scale(0.98)}100%{opacity:1;transform:scale(1);box-shadow:0 10px 40px rgba(20,28,44,0.16)}}
+    .cert-wrap::before{content:'';position:absolute;inset:10px;border:1px solid #dcb161;border-radius:8px;pointer-events:none;opacity:0.45;}
+    .cert-wrap::after{content:'\2696\FE0F';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:180px;opacity:0.03;pointer-events:none;z-index:0;}
+    .cert-firm{font-size:0.67rem;letter-spacing:0.22em;text-transform:uppercase;color:#232e54;font-weight:600;margin-bottom:0.6rem;position:relative;z-index:1;}
+    .cert-title{font-size:clamp(1.5rem,5vw,1.9rem);font-weight:800;color:#141c2c;margin-bottom:0.3rem;text-transform:uppercase;letter-spacing:0.04em;position:relative;z-index:1;}
+    .cert-subtitle{font-size:0.8rem;color:#888;margin-bottom:1.4rem;position:relative;z-index:1;}
+    .cert-presents{font-size:0.85rem;color:#777;font-style:italic;margin-bottom:0.3rem;position:relative;z-index:1;}
+    .cert-name{font-size:clamp(1.6rem,6vw,2.2rem);font-weight:700;color:#232e54;font-style:italic;border-bottom:2px solid #dcb161;display:inline-block;padding:0 0.75rem 0.2rem;margin-bottom:0.85rem;min-width:60%;position:relative;z-index:1;}
+    .cert-for{font-size:0.85rem;color:#666;margin-bottom:0.35rem;position:relative;z-index:1;}
+    .cert-module{font-size:1.05rem;font-weight:600;color:#141c2c;margin-bottom:1.1rem;position:relative;z-index:1;}
+    .cert-meta{font-size:0.8rem;color:#888;position:relative;z-index:1;}
+    .cert-score{font-size:1.1rem;font-weight:700;color:#10774A;margin-top:0.5rem;position:relative;z-index:1;}
+    .cert-seal{font-size:2.5rem;margin:0.85rem 0 0.3rem;display:block;position:relative;z-index:1;}
+    .cert-signature{margin-top:1.5rem;position:relative;z-index:1;}
+    .cert-sig-line{width:200px;border-top:1px solid #141c2c;margin:0 auto 0.3rem;}
+    .cert-sig-name{font-size:1rem;font-weight:600;color:#141c2c;font-style:italic;}
+    .cert-sig-title{font-size:0.75rem;color:#888;letter-spacing:0.05em;}
+    .cert-badges{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:14px;position:relative;z-index:1;}
+    .cert-badge-pill{display:inline-block;background:#dcb161;color:#141C2C;font-size:0.68rem;font-weight:700;padding:4px 12px;border-radius:14px;letter-spacing:0.03em;animation:badgeFlip 0.5s ease-out backwards;}
+    #confettiCanvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10005;}
+
+    /* ── REVIEW LIST ── */
+    .review-list{display:flex;flex-direction:column;gap:0.65rem;margin-top:1rem;}
+    .review-item{background:#f8f9fa;border-radius:10px;padding:0.8rem 1.1rem;border-left:4px solid #ddd;font-size:0.88rem;transition:transform 0.15s ease;}
+    .review-item:hover{transform:translateX(2px);}
+    .review-item.correct{border-color:#10774A;}
+    .review-item.wrong{border-color:#870101;}
+    .review-item .ri-q{font-weight:600;margin-bottom:0.35rem;color:#141c2c;}
+    .review-item .ri-ans{font-size:0.82rem;}
+
+    /* ── NAME INPUT ── */
+    .name-input-wrap{margin-bottom:1rem;}
+    .name-input-wrap label{display:block;font-size:0.85rem;font-weight:600;color:#232e54;margin-bottom:0.4rem;}
+    .name-input{width:100%;padding:10px 14px;border:2px solid #e0e3e8;border-radius:10px;font-size:16px;font-family:inherit;min-height:44px;transition:border-color 0.2s;}
+    .name-input:focus{border-color:#141C2C;outline:none;}
+
+    /* ── FEEDBACK FORM ── */
+    .fb-question{margin-bottom:14px;}
+    .fb-question label{display:block;font-size:13px;font-weight:600;color:#333;margin-bottom:6px;}
+    .fb-question select,.fb-question textarea{width:100%;padding:10px 14px;border:2px solid #e0e3e8;border-radius:10px;font-size:14px;font-family:inherit;min-height:44px;}
+    .fb-question textarea{min-height:80px;resize:vertical;}
+
+    /* ── SCORE CONFIRM ── */
+    .score-confirm{border-radius:10px;padding:14px 16px;margin:14px 0;font-size:14px;line-height:1.6;background:#d4edda;border-left:4px solid #10774A;color:#155724;display:none;}
+
+    .glg-logo{display:block;margin:0 auto 10px;max-height:50px;width:auto;}
+
+    /* ── GAMIFICATION ANIMATIONS ── */
+    @keyframes streakPop{0%{transform:translateX(-50%) scale(0.5);opacity:0}50%{transform:translateX(-50%) scale(1.15)}100%{transform:translateX(-50%) scale(1);opacity:1}}
+    @keyframes fadeUp{to{opacity:0;transform:translateX(-50%) translateY(-20px);}}
+    @keyframes scaleBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+    @keyframes scaleCelebrate{0%{transform:scale(1) rotate(0)}25%{transform:scale(1.2) rotate(-8deg)}50%{transform:scale(1.15) rotate(5deg)}75%{transform:scale(1.1) rotate(-3deg)}100%{transform:scale(1) rotate(0)}}
+    @keyframes scaleTilt{0%{transform:rotate(0)}30%{transform:rotate(10deg)}70%{transform:rotate(-8deg)}100%{transform:rotate(0)}}
+    @keyframes scaleTriumph{0%{transform:scale(1)}20%{transform:scale(1.3)}40%{transform:scale(1.25) rotate(-5deg)}60%{transform:scale(1.25) rotate(5deg)}80%{transform:scale(1.3)}100%{transform:scale(1)}}
+    @keyframes badgeFlip{0%{transform:rotateY(90deg) scale(0.5);opacity:0}60%{transform:rotateY(-10deg) scale(1.05)}100%{transform:rotateY(0) scale(1);opacity:1}}
+    @keyframes correctPulse{0%{box-shadow:0 0 0 0 rgba(39,174,96,0.4)}70%{box-shadow:0 0 0 12px rgba(39,174,96,0)}100%{box-shadow:0 0 0 0 rgba(39,174,96,0)}}
+    @keyframes incorrectShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+    .option-btn.correct{animation:correctPulse 0.6s ease-out;}
+    .option-btn.incorrect{animation:incorrectShake 0.4s ease-out;}
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     HEADER
+════════════════════════════════════════════ -->
+<header>
+  <img src="https://www.thegunnlawgroup.com/wp-content/uploads/2023/01/gunn-logo.png" alt="Gunn Law Group" class="glg-logo">
+  <div class="day-badge">IR-I-4 · Intake Quality &amp; Handoff</div>
+  <h1>IR-I-4 — Intake Quality &amp; Handoff</h1>
+  <p>Gunn Law Group · Intake Training · Final Module</p>
+  <div class="score-bar">
+    <div>
+      <div class="score-label">BASE SCORE</div>
+      <div class="score-value" id="total-score">0</div>
+    </div>
+    <div>
+      <div class="score-label">POSSIBLE</div>
+      <div class="score-value">200</div>
+    </div>
+    <div>
+      <div class="score-label">BONUS</div>
+      <div class="score-value" id="bonus-score">0</div>
+    </div>
+    <div>
+      <div class="score-label">STREAK</div>
+      <div class="score-value" id="streak-display">0 🔥</div>
+    </div>
+  </div>
+</header>
+
+<!-- Sound Toggle -->
+<button id="soundToggle" style="position:fixed;top:12px;right:12px;z-index:10000;background:#1C2433;color:#c0c0c0;border:1px solid #333;border-radius:8px;padding:6px 10px;cursor:pointer;font-size:16px;" onclick="toggleSound()" title="Toggle Sound">🔇</button>
+<!-- Global Progress Bar -->
+<div id="globalProgress" style="position:fixed;top:0;left:0;width:100%;height:4px;background:#1C2433;z-index:9999;"><div id="globalProgressFill" style="height:100%;width:0%;background:linear-gradient(90deg,#dcb161,#e8c87a);transition:width 0.5s ease;"></div></div>
+
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <div class="progress-meta">
+    <span id="prog-label">Section 1 of 9</span>
+    <span id="prog-pct">0%</span>
+  </div>
+  <div class="progress-bg"><div class="progress-fill" id="prog-fill"></div></div>
+</div>
+
+<!-- NAV PILLS -->
+<nav class="section-nav" id="section-nav">
+  <button class="nav-pill active" id="nav-0" onclick="goToSection(0)">1. Intro</button>
+  <button class="nav-pill" id="nav-1" onclick="goToSection(1)">2. Self-Audit</button>
+  <button class="nav-pill" id="nav-2" onclick="goToSection(2)">3. Errors</button>
+  <button class="nav-pill" id="nav-3" onclick="goToSection(3)">4. Handoff</button>
+  <button class="nav-pill" id="nav-4" onclick="goToSection(4)">5. Follow-Up</button>
+  <button class="nav-pill" id="nav-5" onclick="goToSection(5)">6. Synthesis</button>
+  <button class="nav-pill" id="nav-6" onclick="goToSection(6)">7. Boss</button>
+  <button class="nav-pill" id="nav-7" onclick="goToSection(7)">8. Results</button>
+  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">9. Certificate</button>
+</nav>
+
+<!-- Points Toast -->
+<div class="points-toast" id="points-toast"></div>
+
+<!-- Confetti Canvas -->
+<canvas id="confettiCanvas"></canvas>
+
+<main>
+
+<!-- ══════════════════════════════════════════
+     SECTION 0 — INTRO / WELCOME
+════════════════════════════════════════════ -->
+<div class="section-card active" id="section-0">
+  <div class="section-header">
+    <div class="section-num">Section 1 · Welcome</div>
+    <h2>Intake Quality &amp; Handoff</h2>
+    <div class="section-subhead">The intake file is the blueprint for the entire case. If the blueprint is wrong, everything built on it is wrong.</div>
+  </div>
+  <div class="section-body">
+    <div class="scenario">
+      <div class="scenario-tag">IR-I Track — Module 4 · Final Module</div>
+      <h3>A new client signs their retainer. Victoria completes the intake, sends the handoff email, and moves on. Three weeks later, the assigned CM calls the client for a welcome check-in. The client is confused: "I already told the last person all of this. Why are you asking me again?" The CM didn't have the client's insurance information — it was blank in CasePeer. The referral source was missing. The property damage status was empty.</h3>
+      <p>The CM had to make <span class="highlight">four callbacks to Victoria</span> to get information that should have been in the file. The client repeated their story twice. Their trust dropped. Their first thought: <span class="urgent">"If this firm can't even keep track of my information, how are they going to handle my case?"</span> The intake was technically "done." But it wasn't done right. And every person downstream paid the price — the CM, the legal assistant, and most importantly, the client.</p>
+    </div>
+    <div class="info-block">
+      <h4>📋 What You Will Learn</h4>
+      <ul>
+        <li>The pre-handoff self-audit system — how to verify your own work before anyone else sees it</li>
+        <li>Common intake errors and how to detect them — the Missing Data report as your quality gate</li>
+        <li>The handoff protocol — exactly who gets notified, in what format, through which channels</li>
+        <li>Post-handoff ownership — your job doesn't end when you hit "send"</li>
+        <li>The "zero-callbacks" standard — a complete file means the CM never calls you for missing information</li>
+        <li>How intake quality drives case value downstream — the connection between your file and the client's outcome</li>
+      </ul>
+    </div>
+    <div class="callout callout-danger"><strong>The Downstream Impact Chain:</strong> Incomplete intake → CM makes welcome call without full context → client repeats their story → client trust drops → treatment compliance drops → treatment gaps appear → demand value is lower → case value loss. Every blank field in your file has a downstream cost.</div>
+    <div class="callout callout-info"><strong>Scoring:</strong> 20 questions × 10 pts = 200 base pts possible. Pass gate: 160/200 (80%). Boss Challenge adds up to 50 bonus points. Bonus points do not count toward the pass gate but do appear on your certificate. This module includes 3 carry-forward questions from IR-I-1, IR-I-2, and IR-I-3.</div>
+    <div class="callout callout-warn"><strong>Capstone Module:</strong> This is the final module in the IR-I track. Everything from case screening (IR-I-1), intake interviews (IR-I-2), and client onboarding (IR-I-3) comes together here. You've learned how to do the work — now you'll learn how to verify it and hand it off cleanly.</div>
+    <div class="btn-group"><button class="btn btn-primary btn-block" onclick="goToSection(1)">Begin: The Self-Audit System &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 1 — THE SELF-AUDIT SYSTEM (Q1–Q4)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-1">
+  <div class="section-header">
+    <div class="section-num">Section 2 · The Self-Audit System · Up to 40 pts</div>
+    <h2>Verify Your Own Work Before Anyone Else Sees It</h2>
+    <div class="section-subhead">The best quality control is the one you run yourself. Every time. Before every handoff.</div>
+  </div>
+  <div class="section-body">
+    <div class="info-block">
+      <h4>🔍 The Pre-Handoff Audit Checklist</h4>
+      <p style="margin-bottom:10px;">Before sending any handoff email, run through this checklist. If ANY item fails, fix it before proceeding.</p>
+      <table class="stat-table">
+        <tr><th>Audit Item</th><th>Standard</th></tr>
+        <tr><td><strong>CasePeer Missing Data Report</strong></td><td>Run filtered to this case — ZERO results required</td></tr>
+        <tr><td><strong>Client information</strong></td><td>Name, DOB, SSN (last 4), address, phone, email, employer, language preference, referral source — all populated</td></tr>
+        <tr><td><strong>Incident details</strong></td><td>Date, time, location, description, police report #</td></tr>
+        <tr><td><strong>Insurance — ALL fields</strong></td><td>At-fault carrier + policy #, UM/UIM status + limits, health insurance. No blank fields. "Unknown" with follow-up notation is acceptable; blank is not.</td></tr>
+        <tr><td><strong>Medical information</strong></td><td>Injuries, ER visit, treating providers, prior injuries to same body parts</td></tr>
+        <tr><td><strong>Documents — dual-upload</strong></td><td>Retainer, HIPAA, police report — in BOTH OneDrive AND CasePeer</td></tr>
+        <tr><td><strong>SOL calendared</strong></td><td>Same day as case acceptance, with named owner</td></tr>
+        <tr><td><strong>SB 68 (post-April 2025 MVAs)</strong></td><td>Seatbelt status documented verbatim</td></tr>
+        <tr><td><strong>Red flags noted</strong></td><td>Government entity, commercial vehicle, minor, prior representation — all flagged</td></tr>
+        <tr><td><strong>Case grading inputs prepared</strong></td><td>Injury severity, liability, policy limits, estimated value — ready for grade assignment</td></tr>
+        <tr><td><strong>CasePeer status</strong></td><td>Set to "Intake" (will change to "Intake Review" at handoff)</td></tr>
+      </table>
+    </div>
+    <div class="callout callout-danger"><strong>The Missing Data Report Is Your Gate:</strong> In CasePeer, go to Reports → Missing Data → filter to this case. If ANY results come back, your file is not ready for handoff. Fix the gaps first. This is the single most important habit you can build: after every intake, before every handoff, run the Missing Data report. Zero results = green light. Any results = stop and fix.</div>
+    <div class="info-block">
+      <h4>🔁 Build the Habit: After CasePeer Entry → Run Audit Checklist</h4>
+      <p>Make the self-audit automatic. Every time you finish entering a case in CasePeer, run the Missing Data report as your very next action. Not after lunch. Not before the handoff email. <strong>Immediately after entry.</strong> The audit is fastest when the case is still fresh in your mind.</p>
+    </div>
+
+    <!-- Q1 -->
+    <div class="question-block" id="q1-block">
+      <div class="q-num">Question 1 of 20 · 10 pts</div>
+      <div class="q-text">You've just finished entering a newly accepted MVA case in CasePeer. All fields appear filled in. What is your FIRST action before preparing the handoff email?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q1','a',false)" id="q1-a"><span class="opt-letter">A</span><span class="opt-text">Email Adriauna to confirm which CM should be assigned to this case</span></button>
+        <button class="option-btn" onclick="answer('q1','b',true)" id="q1-b"><span class="opt-letter">B</span><span class="opt-text">Run the CasePeer Missing Data report filtered to this case — any blank fields must be fixed before handoff. "All fields appear filled in" is not the same as "the Missing Data report returns zero results."</span></button>
+        <button class="option-btn" onclick="answer('q1','c',false)" id="q1-c"><span class="opt-letter">C</span><span class="opt-text">Call the client to confirm they've received the welcome text message</span></button>
+        <button class="option-btn" onclick="answer('q1','d',false)" id="q1-d"><span class="opt-letter">D</span><span class="opt-text">Check if the assigned CM is available to take the case today</span></button>
+      </div>
+      <div class="feedback-box" id="q1-fb"></div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="question-block" id="q2-block">
+      <div class="q-num">Question 2 of 20 · 10 pts</div>
+      <div class="q-text">You've completed an intake on a new MVA case. Looking at the CasePeer entry, all client information is filled in, incident details are documented, and the retainer is signed. But the insurance section shows: "At-fault carrier: State Farm" with no policy number, the UM/UIM field is blank, and the health insurance field is blank. Can you advance this case to "Intake Review"?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q2','a',false)" id="q2-a"><span class="opt-letter">A</span><span class="opt-text">Yes — you have the carrier name and the CM can obtain the policy number later during their initial case review</span></button>
+        <button class="option-btn" onclick="answer('q2','b',false)" id="q2-b"><span class="opt-letter">B</span><span class="opt-text">Yes — the CM will verify all insurance details during their welcome call within 72 hours of assignment</span></button>
+        <button class="option-btn" onclick="answer('q2','c',true)" id="q2-c"><span class="opt-letter">C</span><span class="opt-text">No — per CasePeer Documentation Standards, ALL insurance fields must be populated. "Blank" is never acceptable. Get what you can from the client and mark any truly unknown fields with explicit notes ("Client does not know policy number — client to provide by [date]") before advancing.</span></button>
+        <button class="option-btn" onclick="answer('q2','d',false)" id="q2-d"><span class="opt-letter">D</span><span class="opt-text">No — but only because UM/UIM is blank. The health insurance field is optional at intake since the CM handles medical billing.</span></button>
+      </div>
+      <div class="feedback-box" id="q2-fb"></div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="question-block" id="q3-block">
+      <div class="q-num">Question 3 of 20 · 10 pts</div>
+      <div class="q-text">The Intake SOP defines a specific "franchise standard" for all intake work. Which statement best captures this standard and why it matters for the self-audit?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q3','a',false)" id="q3-a"><span class="opt-letter">A</span><span class="opt-text">"Every intake call should follow the same screening criteria" — the audit verifies consistency in case selection decisions</span></button>
+        <button class="option-btn" onclick="answer('q3','b',false)" id="q3-b"><span class="opt-letter">B</span><span class="opt-text">"Every client should finish the intake call thinking they're in good hands" — the audit verifies the client experience quality</span></button>
+        <button class="option-btn" onclick="answer('q3','c',false)" id="q3-c"><span class="opt-letter">C</span><span class="opt-text">"Every case should receive the same level of attention regardless of grade" — the audit prevents grading bias from affecting file quality</span></button>
+        <button class="option-btn" onclick="answer('q3','d',true)" id="q3-d"><span class="opt-letter">D</span><span class="opt-text">"If Victoria were replaced tomorrow, would a newly-trained replacement produce identical intake quality?" — the self-audit ensures the process is systematized enough that outcomes don't depend on the individual. The audit IS the system's verification step.</span></button>
+      </div>
+      <div class="feedback-box" id="q3-fb"></div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="question-block" id="q4-block">
+      <div class="q-num">Question 4 of 20 · 10 pts · Confidence Check</div>
+      <div class="q-text">Before answering: rate your confidence in knowing the pre-handoff audit checklist (1-5 in your head). Now: which of the following is NOT a required audit item before advancing a case from "Intake" to "Intake Review"?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q4','a',true)" id="q4-a"><span class="opt-letter">A</span><span class="opt-text">Client's preferred CM assignment based on the client's personality or preferences — Intake does not determine CM assignments based on client preference; assignment is determined by firm capacity and caseload balancing</span></button>
+        <button class="option-btn" onclick="answer('q4','b',false)" id="q4-b"><span class="opt-letter">B</span><span class="opt-text">SOL calendared with a named owner on the same day the case is accepted</span></button>
+        <button class="option-btn" onclick="answer('q4','c',false)" id="q4-c"><span class="opt-letter">C</span><span class="opt-text">Referral source documented in CasePeer for marketing attribution</span></button>
+        <button class="option-btn" onclick="answer('q4','d',false)" id="q4-d"><span class="opt-letter">D</span><span class="opt-text">Signed retainer agreement uploaded to both OneDrive and CasePeer (dual-upload verified)</span></button>
+      </div>
+      <div class="feedback-box" id="q4-fb"></div>
+    </div>
+
+    <div class="section-score" id="s1-score" style="display:none;"><div class="score-display" id="s1-score-val"></div><div class="score-label">Section 2 Score</div></div>
+    <div class="btn-group" id="s1-next"><button class="btn btn-primary btn-block" onclick="goToSection(2)">Next: Common Intake Errors &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 2 — COMMON INTAKE ERRORS (Q5–Q8)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-2">
+  <div class="section-header">
+    <div class="section-num">Section 3 · Common Intake Errors · Up to 40 pts</div>
+    <h2>Detecting Errors Before They Become Problems</h2>
+    <div class="section-subhead">The audit catches what your memory missed. Every error type has a downstream cost.</div>
+  </div>
+  <div class="section-body">
+    <div class="info-block">
+      <h4>🚨 Error Taxonomy — What Goes Wrong and Why It Matters</h4>
+      <table class="stat-table">
+        <tr><th>Error Type</th><th>Example</th><th>Downstream Impact</th></tr>
+        <tr><td><strong>Blank field</strong></td><td>UM/UIM field empty</td><td>CM can't assess total coverage — delays LOR, stalls case</td></tr>
+        <tr><td><strong>Single-upload</strong></td><td>Retainer in OneDrive but not CasePeer</td><td>Document invisible in CasePeer reports — appears "missing"</td></tr>
+        <tr><td><strong>Uncalendared SOL</strong></td><td>Case accepted Friday, SOL not calendared until Monday</td><td>Malpractice risk — 2-year SOL window is absolute</td></tr>
+        <tr><td><strong>Missing referral source</strong></td><td>"How did you hear about us?" not captured</td><td>Marketing ROI distorted — firm can't track what works</td></tr>
+        <tr><td><strong>SB 68 gap</strong></td><td>Post-April 2025 MVA, no seatbelt documentation</td><td>Case strategy compromised at demand/trial stage</td></tr>
+        <tr><td><strong>Unflagged red flag</strong></td><td>Government entity defendant, no same-day escalation</td><td>Ante litem deadline missed → case barred entirely</td></tr>
+        <tr><td><strong>No prior injury note</strong></td><td>Client has prior treatment to same body part, undocumented</td><td>Defense discovers it — destroys credibility, reduces value</td></tr>
+      </table>
+    </div>
+    <div class="callout callout-warn"><strong>The Dual-Upload Rule (From IR-I-2):</strong> Every document must be uploaded to BOTH OneDrive AND CasePeer. OneDrive is the file storage system. CasePeer is the case management system. If a document is only in one location, it's incomplete. The CM needs both — OneDrive for the actual file, CasePeer for the data and tracking. Single-upload = compliance failure.</div>
+
+    <!-- Q5 — Carry-forward from IR-I-2 -->
+    <div class="question-block" id="q5-block">
+      <div class="q-num">Question 5 of 20 · 10 pts · Carry-Forward (IR-I-2)</div>
+      <div class="q-text">You completed intake on a new case yesterday. The signed retainer agreement is saved in the client's OneDrive folder, but you check CasePeer and notice the document section is empty — no files uploaded there. What is the correct assessment of this file?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q5','a',true)" id="q5-a"><span class="opt-letter">A</span><span class="opt-text">This file has a dual-upload violation — documents must be uploaded to BOTH OneDrive AND CasePeer. Fix this before handoff by uploading the retainer to CasePeer as well. A document that exists in only one system is incomplete.</span></button>
+        <button class="option-btn" onclick="answer('q5','b',false)" id="q5-b"><span class="opt-letter">B</span><span class="opt-text">This is acceptable — OneDrive is the primary document storage system and CasePeer is just for data entry, not file storage</span></button>
+        <button class="option-btn" onclick="answer('q5','c',false)" id="q5-c"><span class="opt-letter">C</span><span class="opt-text">This is a minor issue that the CM can fix during their initial 48-hour file review</span></button>
+        <button class="option-btn" onclick="answer('q5','d',false)" id="q5-d"><span class="opt-letter">D</span><span class="opt-text">This is only a problem if the document is a medical record — retainer agreements and HIPAA forms only need to be in OneDrive</span></button>
+      </div>
+      <div class="feedback-box" id="q5-fb"></div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="question-block" id="q6-block">
+      <div class="q-num">Question 6 of 20 · 10 pts</div>
+      <div class="q-text">You're auditing a completed intake file for a new MVA case. The accident occurred on June 10, 2026. Client information is complete, insurance is documented, the police report is uploaded to both OneDrive and CasePeer. But you notice there's no entry anywhere in CasePeer about seatbelt use. What is the significance of this gap?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q6','a',false)" id="q6-a"><span class="opt-letter">A</span><span class="opt-text">Seatbelt status is only relevant if the client wasn't wearing one — if the field is blank, assume they were wearing it and move on</span></button>
+        <button class="option-btn" onclick="answer('q6','b',false)" id="q6-b"><span class="opt-letter">B</span><span class="opt-text">Seatbelt documentation is important for case strategy but isn't required at the intake stage — the CM handles this during treatment monitoring</span></button>
+        <button class="option-btn" onclick="answer('q6','c',false)" id="q6-c"><span class="opt-letter">C</span><span class="opt-text">Seatbelt status is a nice-to-have data point but not a required CasePeer field per the documentation standards</span></button>
+        <button class="option-btn" onclick="answer('q6','d',true)" id="q6-d"><span class="opt-letter">D</span><span class="opt-text">For any MVA after April 28, 2025, SB 68 (Georgia's Tort Reform Act of 2025) allows defendants to introduce seatbelt non-use evidence to reduce the plaintiff's recovery. A blank seatbelt field on a post-April 2025 MVA is a critical intake quality gap — document the client's answer verbatim and fix this before handoff.</span></button>
+      </div>
+      <div class="feedback-box" id="q6-fb"></div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="question-block" id="q7-block">
+      <div class="q-num">Question 7 of 20 · 10 pts</div>
+      <div class="q-text">After running the Missing Data report, you notice one case has no referral source documented. You've already sent the handoff email and the CM has acknowledged receipt. What is the downstream impact of this error?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q7','a',false)" id="q7-a"><span class="opt-letter">A</span><span class="opt-text">Minimal — referral source is a marketing metric that doesn't affect case management or client outcomes</span></button>
+        <button class="option-btn" onclick="answer('q7','b',true)" id="q7-b"><span class="opt-letter">B</span><span class="opt-text">The firm loses marketing attribution data — it cannot determine which referral channel produced this case, which distorts marketing ROI calculations and may lead to underfunding the channel that actually works. Fix it now by contacting the client to ask how they found GLG, then update CasePeer.</span></button>
+        <button class="option-btn" onclick="answer('q7','c',false)" id="q7-c"><span class="opt-letter">C</span><span class="opt-text">The CM cannot make the welcome call without knowing how the client found the firm</span></button>
+        <button class="option-btn" onclick="answer('q7','d',false)" id="q7-d"><span class="opt-letter">D</span><span class="opt-text">The case will be flagged at the monthly audit but there's no practical consequence until then</span></button>
+      </div>
+      <div class="feedback-box" id="q7-fb"></div>
+    </div>
+
+    <!-- Q8 — Carry-forward from IR-I-1 -->
+    <div class="question-block" id="q8-block">
+      <div class="q-num">Question 8 of 20 · 10 pts · Carry-Forward (IR-I-1)</div>
+      <div class="q-text">You're auditing a completed intake file. The client was hit by a MARTA bus (a city transit authority vehicle). The file shows: case type is MVA, liability is clear, injuries are significant, SOL is calendared. But you don't see any flag or note about the government entity or ante litem notice. What's wrong?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q8','a',false)" id="q8-a"><span class="opt-letter">A</span><span class="opt-text">Nothing — MARTA is a transportation company, not a government entity, so ante litem notice requirements don't apply</span></button>
+        <button class="option-btn" onclick="answer('q8','b',false)" id="q8-b"><span class="opt-letter">B</span><span class="opt-text">The file should note MARTA is a government entity, but ante litem notice is the attorney's responsibility, not Intake's problem to flag</span></button>
+        <button class="option-btn" onclick="answer('q8','c',true)" id="q8-c"><span class="opt-letter">C</span><span class="opt-text">This file should have been flagged for SAME-DAY escalation to the Managing Attorney. MARTA is a government entity — a government defendant triggers mandatory ante litem notice deadlines (6 months for municipalities per O.C.G.A. § 36-33-5). Without a same-day flag, the firm could miss the notice deadline entirely, barring the case.</span></button>
+        <button class="option-btn" onclick="answer('q8','d',false)" id="q8-d"><span class="opt-letter">D</span><span class="opt-text">The file should note "government entity" but the case can still be handed off as-is — the CM will handle the escalation during their 48-hour file review</span></button>
+      </div>
+      <div class="feedback-box" id="q8-fb"></div>
+    </div>
+
+    <div class="section-score" id="s2-score" style="display:none;"><div class="score-display" id="s2-score-val"></div><div class="score-label">Section 3 Score</div></div>
+    <div class="btn-group" id="s2-next"><button class="btn btn-primary btn-block" onclick="goToSection(3)">Next: The Handoff Protocol &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 3 — THE HANDOFF PROTOCOL (Q9–Q12)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-3">
+  <div class="section-header">
+    <div class="section-num">Section 4 · The Handoff Protocol · Up to 40 pts</div>
+    <h2>The Handoff: Email, CasePeer, and Case Grading</h2>
+    <div class="section-subhead">A handoff has two layers: the human notification (email) and the system layer (CasePeer). Neither alone is sufficient.</div>
+  </div>
+  <div class="section-body">
+    <div class="info-block">
+      <h4>📧 The GLG Handoff Email Pattern</h4>
+      <table class="stat-table">
+        <tr><th>Field</th><th>Standard</th></tr>
+        <tr><td><strong>To:</strong></td><td>Managing Attorney (Harrell) + Head Pre-Lit Attorney (Adriauna) + Assigned CM</td></tr>
+        <tr><td><strong>CC:</strong></td><td>Lead/Senior CM (Ranysha) + Receptionist (Jessica) + Assigned LA</td></tr>
+        <tr><td><strong>Subject:</strong></td><td>"New Client: [Last Name], [First Name] - DOL [MM/DD/YYYY]"</td></tr>
+        <tr><td><strong>Body:</strong></td><td>Case summary with key details, flags for priority (Grade A, government entity, commercial vehicle, minor, borderline SOL)</td></tr>
+      </table>
+      <p style="margin-top:10px;font-size:13px;color:#666;">The email notifies the team. CasePeer records the transition. Both must happen.</p>
+    </div>
+    <div class="info-block">
+      <h4>📋 CM–LA Pairings at GLG</h4>
+      <p style="margin-bottom:8px;">Know which LA works with which CM so your handoff reaches the right team:</p>
+      <table class="stat-table">
+        <tr><th>Case Manager (CM)</th><th>Legal Assistant (LA)</th></tr>
+        <tr><td>Ranysha</td><td>Sydney</td></tr>
+        <tr><td>Skylar</td><td>Raine</td></tr>
+        <tr><td>John</td><td>Jesus</td></tr>
+        <tr><td>Steve</td><td>Eugene</td></tr>
+        <tr><td>Janeth</td><td>Sara</td></tr>
+      </table>
+    </div>
+    <div class="callout callout-danger"><strong>Two Channels, Both Required:</strong> A CasePeer status update without a handoff email = the CM may not check CasePeer promptly. A handoff email without a CasePeer status change = the case is invisible in reports and tracking. You must do BOTH: send the email AND change the CasePeer status from "Intake" to "Intake Review."</div>
+    <div class="info-block">
+      <h4>📊 Case Grading at Handoff</h4>
+      <p>Prepare the case grading inputs so the team can assign a grade within 48 hours of handoff:</p>
+      <table class="stat-table">
+        <tr><th>Grade</th><th>Injury</th><th>Liability</th><th>Policy Limits</th><th>Value Potential</th></tr>
+        <tr><td><strong>A — High</strong></td><td>Surgery, TBI, permanent</td><td>Strong, clear</td><td>$100K+ or multiple sources</td><td>$100K+</td></tr>
+        <tr><td><strong>B — Moderate</strong></td><td>Injections, extended treatment</td><td>Favorable</td><td>$50K–$100K</td><td>$25K–$100K</td></tr>
+        <tr><td><strong>C — Standard</strong></td><td>Conservative, soft tissue</td><td>Clear or disputed</td><td>$25K or minimum</td><td>Under $25K</td></tr>
+      </table>
+      <p style="margin-top:8px;font-weight:700;color:#870101;">⚠️ Grade A cases require SAME-DAY notification to Adriauna. Do not wait for the weekly huddle.</p>
+    </div>
+
+    <!-- Q9 -->
+    <div class="question-block" id="q9-block">
+      <div class="q-num">Question 9 of 20 · 10 pts</div>
+      <div class="q-text">You've completed a self-audit on a new case: all CasePeer fields populated, dual-upload verified, SOL calendared, case grading inputs prepared. Now you need to execute the handoff. Per GLG's established handoff pattern, who receives the handoff notification email?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q9','a',false)" id="q9-a"><span class="opt-letter">A</span><span class="opt-text">To: assigned CM only. CC: Adriauna (Head Pre-Lit Attorney). Everyone else can check CasePeer.</span></button>
+        <button class="option-btn" onclick="answer('q9','b',false)" id="q9-b"><span class="opt-letter">B</span><span class="opt-text">To: Adriauna + assigned CM. CC: Jessica (Receptionist). The Managing Attorney doesn't need to be on routine handoff emails.</span></button>
+        <button class="option-btn" onclick="answer('q9','c',false)" id="q9-c"><span class="opt-letter">C</span><span class="opt-text">To: Harrell (Managing Attorney) only — he reviews all new cases and assigns the CM himself</span></button>
+        <button class="option-btn" onclick="answer('q9','d',true)" id="q9-d"><span class="opt-letter">D</span><span class="opt-text">To: Harrell (Managing Attorney) + Adriauna (Head Pre-Lit Attorney) + assigned CM. CC: Ranysha (Lead/Senior CM) + Jessica (Receptionist) + assigned LA. Subject: "New Client: [Last], [First] - DOL [date]."</span></button>
+      </div>
+      <div class="feedback-box" id="q9-fb"></div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="question-block" id="q10-block">
+      <div class="q-num">Question 10 of 20 · 10 pts</div>
+      <div class="q-text">GLG uses a "zero-callbacks" standard for intake handoffs. What does this mean in practice?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q10','a',true)" id="q10-a"><span class="opt-letter">A</span><span class="opt-text">The receiving CM should be able to review the file, make the welcome call, and begin case management without ever needing to contact Intake for missing information. The file must be complete enough to stand on its own — if the CM calls you for missing data, the handoff failed.</span></button>
+        <button class="option-btn" onclick="answer('q10','b',false)" id="q10-b"><span class="opt-letter">B</span><span class="opt-text">The CM should never call the client back more than zero times before the initial meeting — all information should be gathered during the welcome call</span></button>
+        <button class="option-btn" onclick="answer('q10','c',false)" id="q10-c"><span class="opt-letter">C</span><span class="opt-text">Victoria should never make follow-up calls after a handoff — all follow-up responsibility transfers completely to the CM at handoff</span></button>
+        <button class="option-btn" onclick="answer('q10','d',false)" id="q10-d"><span class="opt-letter">D</span><span class="opt-text">Intake should only contact the client once during the entire intake process — no repeat calls or follow-up contacts</span></button>
+      </div>
+      <div class="feedback-box" id="q10-fb"></div>
+    </div>
+
+    <!-- Q11 -->
+    <div class="question-block" id="q11-block">
+      <div class="q-num">Question 11 of 20 · 10 pts</div>
+      <div class="q-text">You've accepted a new case with these characteristics: MVA, the client required ambulance transport and ER visit, CT scan revealed a herniated disc, client is currently seeing a specialist, at-fault party has $250K policy limits, multiple coverage sources identified. Based on the GLG Case Grading System, what grade should this case receive, and what additional step is required?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q11','a',false)" id="q11-a"><span class="opt-letter">A</span><span class="opt-text">Grade B (Moderate Value) — specialist treatment is moderate, not severe. Notify Adriauna at the next weekly huddle when Grade B cases are reviewed.</span></button>
+        <button class="option-btn" onclick="answer('q11','b',false)" id="q11-b"><span class="opt-letter">B</span><span class="opt-text">Grade A (High Value) — but only mark it in CasePeer. Adriauna will see it in the next Missing Data report or weekly huddle review.</span></button>
+        <button class="option-btn" onclick="answer('q11','c',true)" id="q11-c"><span class="opt-letter">C</span><span class="opt-text">Grade A (High Value) — surgery is likely (herniated disc), strong liability, $250K+ limits with multiple coverage sources. Grade A cases require SAME-DAY notification to Adriauna Gunn by end of business. Do not wait for the weekly huddle. Mark it in CasePeer AND notify Adriauna directly.</span></button>
+        <button class="option-btn" onclick="answer('q11','d',false)" id="q11-d"><span class="opt-letter">D</span><span class="opt-text">Grade A (High Value) — notify both Adriauna and Harrell immediately by phone before sending the handoff email, since all Grade A cases require verbal attorney approval before handoff</span></button>
+      </div>
+      <div class="feedback-box" id="q11-fb"></div>
+    </div>
+
+    <!-- Q12 -->
+    <div class="question-block" id="q12-block">
+      <div class="q-num">Question 12 of 20 · 10 pts</div>
+      <div class="q-text">After completing the intake and preparing the handoff, what CasePeer status change must accompany the handoff email, and what is the timing requirement?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q12','a',false)" id="q12-a"><span class="opt-letter">A</span><span class="opt-text">Change status from "Intake" to "Active Treatment" — the client is already treating with a provider</span></button>
+        <button class="option-btn" onclick="answer('q12','b',true)" id="q12-b"><span class="opt-letter">B</span><span class="opt-text">Change status from "Intake" to "Intake Review" — and this transition must happen within 3 business days of retainer signing per the Intake SOP's timeliness standards. The CM then takes ownership at Intake Review.</span></button>
+        <button class="option-btn" onclick="answer('q12','c',false)" id="q12-c"><span class="opt-letter">C</span><span class="opt-text">Change status from "Intake" to "Pre-Litigation" — the case is now in the CM's hands and skips Intake Review</span></button>
+        <button class="option-btn" onclick="answer('q12','d',false)" id="q12-d"><span class="opt-letter">D</span><span class="opt-text">No status change is needed at handoff — the CM changes the status when they review the file and make the welcome call</span></button>
+      </div>
+      <div class="feedback-box" id="q12-fb"></div>
+    </div>
+
+    <div class="section-score" id="s3-score" style="display:none;"><div class="score-display" id="s3-score-val"></div><div class="score-label">Section 4 Score</div></div>
+    <div class="btn-group" id="s3-next"><button class="btn btn-primary btn-block" onclick="goToSection(4)">Next: Post-Handoff Ownership &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 4 — POST-HANDOFF OWNERSHIP (Q13–Q16)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-4">
+  <div class="section-header">
+    <div class="section-num">Section 5 · Post-Handoff Ownership · Up to 40 pts</div>
+    <h2>Your Job Doesn't End When You Hit "Send"</h2>
+    <div class="section-subhead">The handoff email is the beginning of the transition — not the end of your responsibility.</div>
+  </div>
+  <div class="section-body">
+    <div class="scenario">
+      <div class="scenario-tag">Real-World Consequence</div>
+      <h3>A client signed their retainer on Monday. The handoff email went out Tuesday. Nobody followed up on the unsigned HIPAA authorization. Six weeks later, the CM is trying to request medical records — but there's no signed authorization on file. The CM asks Victoria: "Was the HIPAA ever signed?" Victoria checks: no, it wasn't. The client fell through the cracks. Six weeks of case progression lost.</h3>
+      <p>Victoria assumed the handoff transferred ALL responsibility. But per the Intake SOP, <span class="highlight">unsigned document follow-up remains Intake's responsibility</span> — not the CM's. The follow-up cadence is specific: <span class="urgent">48 hours → 5 business days → 10 business days (escalate).</span> Victoria owned this task until it was done. The case stalled because nobody was watching.</p>
+    </div>
+    <div class="info-block">
+      <h4>📋 Post-Handoff Tasks That Remain Yours</h4>
+      <ul>
+        <li><strong>CM acknowledgment follow-up:</strong> Verify the assigned CM acknowledges the case within <strong>24 hours</strong> of handoff. If no acknowledgment → escalate to Adriauna (Head Pre-Lit Attorney).</li>
+        <li><strong>Unsigned document cadence:</strong> 48 hours (first follow-up) → 5 business days (second follow-up) → 10 business days (escalate to Managing Attorney). This is YOUR cadence, not the CM's.</li>
+        <li><strong>Fix any post-handoff deficiencies:</strong> If the CM flags a missing field or document, fix it immediately. The error is yours, not theirs.</li>
+      </ul>
+    </div>
+    <div class="callout callout-danger"><strong>Ownership Doesn't Transfer at "Send":</strong> Sending the handoff email does not absolve you of open items. If a document is unsigned, YOU follow up. If the CM doesn't acknowledge, YOU escalate. If a field was blank that you missed, YOU fix it. The handoff is confirmed when the CM has a complete file AND acknowledges receipt — not when you press send.</div>
+
+    <!-- Q13 -->
+    <div class="question-block" id="q13-block">
+      <div class="q-num">Question 13 of 20 · 10 pts</div>
+      <div class="q-text">You sent the handoff email for a new case on Monday at 2:00 PM. It's now Tuesday at 3:00 PM — 25 hours later — and the assigned CM hasn't responded or acknowledged the assignment in CasePeer. What is the correct action?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q13','a',false)" id="q13-a"><span class="opt-letter">A</span><span class="opt-text">Wait until Wednesday — 24 hours is just a guideline, and CMs are often busy with their existing caseloads</span></button>
+        <button class="option-btn" onclick="answer('q13','b',true)" id="q13-b"><span class="opt-letter">B</span><span class="opt-text">The 24-hour CM acknowledgment deadline has passed. Escalate to Adriauna (Head Pre-Lit Attorney) now — not next week, not tomorrow. Also follow up directly with the assigned CM. This case has a client waiting for their first contact from the CM team.</span></button>
+        <button class="option-btn" onclick="answer('q13','c',false)" id="q13-c"><span class="opt-letter">C</span><span class="opt-text">Send the CM a friendly reminder email and give them another 24 hours — escalation should be a last resort</span></button>
+        <button class="option-btn" onclick="answer('q13','d',false)" id="q13-d"><span class="opt-letter">D</span><span class="opt-text">Reassign the case to a different CM who might be more responsive</span></button>
+      </div>
+      <div class="feedback-box" id="q13-fb"></div>
+    </div>
+
+    <!-- Q14 -->
+    <div class="question-block" id="q14-block">
+      <div class="q-num">Question 14 of 20 · 10 pts</div>
+      <div class="q-text">You handed off a case last Thursday. The client signed the retainer agreement but the HIPAA/medical authorization form came back unsigned. It's now Saturday — 48 hours after the handoff. Per the Intake SOP's unsigned document follow-up cadence, whose responsibility is this follow-up, and what is the action?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q14','a',false)" id="q14-a"><span class="opt-letter">A</span><span class="opt-text">The CM's responsibility — once the case is handed off, all document collection transfers to the CM</span></button>
+        <button class="option-btn" onclick="answer('q14','b',false)" id="q14-b"><span class="opt-letter">B</span><span class="opt-text">Adriauna's responsibility — unsigned documents after handoff should be escalated to the Head Attorney immediately</span></button>
+        <button class="option-btn" onclick="answer('q14','c',true)" id="q14-c"><span class="opt-letter">C</span><span class="opt-text">Victoria's (Intake's) responsibility — the FIRST follow-up at 48 hours. Contact the client about the unsigned HIPAA. If still unsigned at 5 business days, follow up again. If still unsigned at 10 business days, escalate to the Managing Attorney. This cadence belongs to Intake, not the CM.</span></button>
+        <button class="option-btn" onclick="answer('q14','d',false)" id="q14-d"><span class="opt-letter">D</span><span class="opt-text">The Legal Assistant's responsibility — LAs handle all document collection tasks after the case enters Intake Review</span></button>
+      </div>
+      <div class="feedback-box" id="q14-fb"></div>
+    </div>
+
+    <!-- Q15 — Carry-forward from IR-I-2/IR-I-3 -->
+    <div class="question-block" id="q15-block">
+      <div class="q-num">Question 15 of 20 · 10 pts · Carry-Forward (IR-I-2/IR-I-3)</div>
+      <div class="q-text">You accepted a new case at 3:30 PM on Friday. You enter the client's information in CasePeer, upload documents to OneDrive and CasePeer, and prepare the handoff email. You're about to log off for the weekend. Looking at your file one last time, you realize you forgot one critical step. What is it?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q15','a',true)" id="q15-a"><span class="opt-letter">A</span><span class="opt-text">The SOL must be calendared with a named owner the SAME DAY the case is accepted — per the Intake SOP, this cannot wait until Monday. Calendar it before you leave. A missed SOL is a malpractice event.</span></button>
+        <button class="option-btn" onclick="answer('q15','b',false)" id="q15-b"><span class="opt-letter">B</span><span class="opt-text">The welcome text message must be sent within 2 hours of retainer signing — but this is a Friday afternoon task that can wait until Monday</span></button>
+        <button class="option-btn" onclick="answer('q15','c',false)" id="q15-c"><span class="opt-letter">C</span><span class="opt-text">The handoff email must go out before you leave — the CM needs to see it before the weekend</span></button>
+        <button class="option-btn" onclick="answer('q15','d',false)" id="q15-d"><span class="opt-letter">D</span><span class="opt-text">The case grade must be assigned before the weekend so Adriauna can review it Monday morning</span></button>
+      </div>
+      <div class="feedback-box" id="q15-fb"></div>
+    </div>
+
+    <!-- Q16 -->
+    <div class="question-block" id="q16-block">
+      <div class="q-num">Question 16 of 20 · 10 pts</div>
+      <div class="q-text">Three weeks after handoff, a CM calls Victoria: "Hey, I'm looking at the Johnson file and I can't find the property damage status anywhere. Did the client tell you about property damage?" Victoria checks her notes and realizes she forgot to document the PD status. The CM says: "No worries, I'll just ask the client." What is the real takeaway from this situation?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q16','a',false)" id="q16-a"><span class="opt-letter">A</span><span class="opt-text">No harm done — the CM resolved it by calling the client directly, and these things happen occasionally</span></button>
+        <button class="option-btn" onclick="answer('q16','b',false)" id="q16-b"><span class="opt-letter">B</span><span class="opt-text">Victoria should apologize and update CasePeer, but this is a minor gap since the CM caught it and the client wasn't inconvenienced</span></button>
+        <button class="option-btn" onclick="answer('q16','c',false)" id="q16-c"><span class="opt-letter">C</span><span class="opt-text">The CM shouldn't have to call Victoria for this information — it should have been in the file. But at least the CM found a workaround quickly.</span></button>
+        <button class="option-btn" onclick="answer('q16','d',true)" id="q16-d"><span class="opt-letter">D</span><span class="opt-text">This is a handoff failure. The CM had to make an extra callback to the client for information Victoria should have documented at intake. The client is now repeating information they already provided — which damages trust and makes the firm look disorganized. This is exactly what the "zero-callbacks" standard exists to prevent. Victoria should fix CasePeer immediately and note this gap for future self-audits.</span></button>
+      </div>
+      <div class="feedback-box" id="q16-fb"></div>
+    </div>
+
+    <div class="section-score" id="s4-score" style="display:none;"><div class="score-display" id="s4-score-val"></div><div class="score-label">Section 5 Score</div></div>
+    <div class="btn-group" id="s4-next"><button class="btn btn-primary btn-block" onclick="goToSection(5)">Next: Synthesis &amp; Integration &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 5 — SYNTHESIS & INTEGRATION (Q17–Q20)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-5">
+  <div class="section-header">
+    <div class="section-num">Section 6 · Synthesis &amp; Integration · Up to 40 pts</div>
+    <h2>Putting It All Together</h2>
+    <div class="section-subhead">The complete picture: audit, handoff, follow-up, and downstream impact — connected.</div>
+  </div>
+  <div class="section-body">
+    <div class="info-block">
+      <h4>🔗 The Complete Intake Quality Cycle</h4>
+      <ol>
+        <li style="margin-bottom:8px;"><strong>Execute:</strong> Conduct intake per IR-I-1 (screening), IR-I-2 (interview/CasePeer), IR-I-3 (onboarding)</li>
+        <li style="margin-bottom:8px;"><strong>Audit:</strong> Run Missing Data report → verify dual-upload → confirm SOL → check SB 68 → validate all fields</li>
+        <li style="margin-bottom:8px;"><strong>Grade:</strong> Prepare grading inputs → assign grade → notify Adriauna same-day for Grade A</li>
+        <li style="margin-bottom:8px;"><strong>Hand Off:</strong> Send email (To/CC per pattern) → change CasePeer status to "Intake Review" → within 3 business days of retainer</li>
+        <li style="margin-bottom:8px;"><strong>Follow Up:</strong> Verify CM acknowledgment (24h) → unsigned doc cadence (48h/5d/10d) → fix any post-handoff deficiencies</li>
+        <li><strong>Confirm:</strong> Handoff is COMPLETE when CM has acknowledged, all documents are signed, and zero callbacks have occurred</li>
+      </ol>
+    </div>
+    <div class="callout callout-info"><strong>What the CM Needs From You:</strong> When a CM prepares for the welcome call, they review: client name and injuries, treatment status, last communication date, CasePeer notes, insurance coverage, and next steps. If ANY of these are missing from your file, the CM walks into the call unprepared — and the client notices.</div>
+
+    <!-- Q17 -->
+    <div class="question-block" id="q17-block">
+      <div class="q-num">Question 17 of 20 · 10 pts</div>
+      <div class="q-text">You're auditing a file before handoff. The case is a standard MVA with clear liability. Here's what you see in CasePeer: client info complete, DOL June 15, 2026, injuries documented (neck/back pain, ER visit), at-fault insurance is Allstate $100K limits, UM/UIM field says "unknown," health insurance is Blue Cross, police report uploaded to OneDrive (but NOT CasePeer), no referral source, SOL is not calendared, and case status is "Intake." How many distinct deficiencies must be fixed before this file can be handed off?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q17','a',false)" id="q17-a"><span class="opt-letter">A</span><span class="opt-text">2 — the UM/UIM "unknown" and missing referral source are the only real issues</span></button>
+        <button class="option-btn" onclick="answer('q17','b',false)" id="q17-b"><span class="opt-letter">B</span><span class="opt-text">3 — UM/UIM needs follow-up, referral source must be captured, and police report needs CasePeer upload</span></button>
+        <button class="option-btn" onclick="answer('q17','c',true)" id="q17-c"><span class="opt-letter">C</span><span class="opt-text">4 deficiencies: (1) UM/UIM "unknown" needs client follow-up or explicit notation with a follow-up date; (2) police report needs dual-upload to CasePeer; (3) referral source must be captured; (4) SOL must be calendared with named owner — this should have been done same-day. All four must be fixed before handoff.</span></button>
+        <button class="option-btn" onclick="answer('q17','d',false)" id="q17-d"><span class="opt-letter">D</span><span class="opt-text">5 — all four above plus the case status needs to change to "Intake Review" before sending the handoff email</span></button>
+      </div>
+      <div class="feedback-box" id="q17-fb"></div>
+    </div>
+
+    <!-- Q18 -->
+    <div class="question-block" id="q18-block">
+      <div class="q-num">Question 18 of 20 · 10 pts</div>
+      <div class="q-text">A new case has been accepted and you need to prepare it for handoff to a CM. The case is a premises liability (slip and fall) with moderate injuries. Which of the following is a valid CM–LA pairing at GLG?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q18','a',true)" id="q18-a"><span class="opt-letter">A</span><span class="opt-text">Ranysha (CM) and Sydney (LA) — this is one of GLG's established CM–LA teams</span></button>
+        <button class="option-btn" onclick="answer('q18','b',false)" id="q18-b"><span class="opt-letter">B</span><span class="opt-text">Jessica (CM) and Victoria (LA) — Jessica and Victoria work together on intake and client management</span></button>
+        <button class="option-btn" onclick="answer('q18','c',false)" id="q18-c"><span class="opt-letter">C</span><span class="opt-text">Adriauna (CM) and Harrell (LA) — the attorneys pair up as CM–LA teams on complex cases</span></button>
+        <button class="option-btn" onclick="answer('q18','d',false)" id="q18-d"><span class="opt-letter">D</span><span class="opt-text">Sydney (CM) and Ranysha (LA) — Sydney manages cases and Ranysha assists</span></button>
+      </div>
+      <div class="feedback-box" id="q18-fb"></div>
+    </div>
+
+    <!-- Q19 -->
+    <div class="question-block" id="q19-block">
+      <div class="q-num">Question 19 of 20 · 10 pts</div>
+      <div class="q-text">You've handed off a case. Two days later, the CM contacts you: "I tried to make the welcome call but the client's phone number is disconnected. I also notice there's no email address in the file. I have no way to reach this client." What went wrong, and what is the correct response?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q19','a',false)" id="q19-a"><span class="opt-letter">A</span><span class="opt-text">This is unavoidable — phone numbers change after intake. Send the case back to the CM with a note to try the mailing address.</span></button>
+        <button class="option-btn" onclick="answer('q19','b',false)" id="q19-b"><span class="opt-letter">B</span><span class="opt-text">The CM should try social media or other means to reach the client — this is now their responsibility since the case was handed off</span></button>
+        <button class="option-btn" onclick="answer('q19','c',false)" id="q19-c"><span class="opt-letter">C</span><span class="opt-text">Ask the CM to send a letter to the client's mailing address — postal mail is a valid contact method and the CM should attempt it first</span></button>
+        <button class="option-btn" onclick="answer('q19','d',true)" id="q19-d"><span class="opt-letter">D</span><span class="opt-text">This is a pre-handoff audit failure — an incomplete contact section (missing email) should have been caught before handoff. Victoria should immediately attempt to reach the client through alternate means, obtain updated contact information, update CasePeer, and notify the CM. Going forward, the self-audit must verify at least two contact methods are documented.</span></button>
+      </div>
+      <div class="feedback-box" id="q19-fb"></div>
+    </div>
+
+    <!-- Q20 -->
+    <div class="question-block" id="q20-block">
+      <div class="q-num">Question 20 of 20 · 10 pts · Synthesis</div>
+      <div class="q-text">What is the "downstream impact chain" that makes intake quality critical to case value?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q20','a',false)" id="q20-a"><span class="opt-letter">A</span><span class="opt-text">Incomplete intake → delayed case grading → missed Grade A notification → case gets standard treatment instead of prioritized resources → lower settlement offers</span></button>
+        <button class="option-btn" onclick="answer('q20','b',true)" id="q20-b"><span class="opt-letter">B</span><span class="opt-text">Incomplete intake → CM makes welcome call without full context → client has to repeat their story → client trust drops → treatment compliance drops → treatment gaps appear → demand value is lower → case value loss. The handoff quality directly affects every stage downstream, from first CM contact through final settlement.</span></button>
+        <button class="option-btn" onclick="answer('q20','c',false)" id="q20-c"><span class="opt-letter">C</span><span class="opt-text">Incomplete intake → SOL missed → malpractice claim filed → firm liability and potential bar complaint</span></button>
+        <button class="option-btn" onclick="answer('q20','d',false)" id="q20-d"><span class="opt-letter">D</span><span class="opt-text">Incomplete intake → CM requests missing information → Intake delays response → case sits idle for weeks → client gets frustrated and fires the firm</span></button>
+      </div>
+      <div class="feedback-box" id="q20-fb"></div>
+    </div>
+
+    <div class="section-score" id="s5-score" style="display:none;"><div class="score-display" id="s5-score-val"></div><div class="score-label">Section 6 Score</div></div>
+    <div class="btn-group" id="s5-next"><button class="btn btn-primary btn-block" onclick="goToSection(6)">Next: Boss Challenge — Dual Handoff &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 6 — BOSS CHALLENGE (Q21–Q25, Bonus)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-6">
+  <div class="section-header">
+    <div class="section-num">Section 7 · Boss Challenge · Up to 50 Bonus pts</div>
+    <h2>⚡ Boss Challenge: The 3:30 PM Dual Handoff</h2>
+    <div class="section-subhead">Two cases. One afternoon. Everything you've learned — applied under time pressure with real prioritization decisions.</div>
+  </div>
+  <div class="section-body">
+    <div class="boss-header">
+      <div class="boss-icon">⚡</div>
+      <h3>Boss Challenge: Washington &amp; Palmer</h3>
+      <p>It's 3:30 PM on a Wednesday. You've just completed intake on two cases and need to prepare handoffs for both before end of day. One is complex. One is routine. Both have clients waiting. How you handle the next 90 minutes defines whether the downstream teams can hit the ground running — or spend their first week chasing missing information.</p>
+    </div>
+
+    <div class="case-file">
+      <div class="case-file-header">
+        <div class="case-file-icon">📋</div>
+        <div>
+          <div class="case-file-title">Case 1 · Tamika Washington · GLG-2026-6134</div>
+          <div class="case-file-sub">HIGH COMPLEXITY — Multiple red flags</div>
+        </div>
+      </div>
+      <div class="case-detail"><span class="case-key">DOL</span><span class="case-val">July 12, 2026 — rear-end collision on I-75, client was a passenger</span></div>
+      <div class="case-detail"><span class="case-key">At-Fault Vehicle</span><span class="case-val">Commercial delivery truck (FedEx) — commercial vehicle</span></div>
+      <div class="case-detail"><span class="case-key">Injuries</span><span class="case-val">Neck pain, severe headaches, ambulance transport, CT scan at Grady showed possible TBI</span></div>
+      <div class="case-detail"><span class="case-key">Seatbelt</span><span class="case-val">Yes — documented verbatim</span></div>
+      <div class="case-detail"><span class="case-key">At-Fault Insurance</span><span class="case-val">Progressive, $1M commercial policy</span></div>
+      <div class="case-detail"><span class="case-key">Client's UM/UIM</span><span class="case-val">State Farm, limits unknown</span></div>
+      <div class="case-detail"><span class="case-key">Health Insurance</span><span class="case-val">Medicaid</span></div>
+      <div class="case-detail"><span class="case-key">Referral Source</span><span class="case-val">Friend who is an existing GLG client</span></div>
+      <div class="case-detail"><span class="case-key">Police Report</span><span class="case-val">Obtained and uploaded</span></div>
+      <div class="case-detail"><span class="case-key">Language</span><span class="case-val">Spanish (interview conducted through interpreter)</span></div>
+    </div>
+
+    <div class="case-file">
+      <div class="case-file-header">
+        <div class="case-file-icon">📋</div>
+        <div>
+          <div class="case-file-title">Case 2 · Derek Palmer · GLG-2026-6134</div>
+          <div class="case-file-sub">ROUTINE — Standard MVA</div>
+        </div>
+      </div>
+      <div class="case-detail"><span class="case-key">DOL</span><span class="case-val">July 8, 2026 — standard MVA, minor fender bender</span></div>
+      <div class="case-detail"><span class="case-key">Injuries</span><span class="case-val">Soft tissue (neck stiffness), urgent care visit, released same day</span></div>
+      <div class="case-detail"><span class="case-key">At-Fault Insurance</span><span class="case-val">GEICO, $25K limits</span></div>
+      <div class="case-detail"><span class="case-key">Client's Insurance</span><span class="case-val">State Farm, $25K BI / $50K UM</span></div>
+      <div class="case-detail"><span class="case-key">Police Report</span><span class="case-val">No police report (minor accident, no police called)</span></div>
+      <div class="case-detail"><span class="case-key">Referral Source</span><span class="case-val">Google search</span></div>
+      <div class="case-detail"><span class="case-key">Retainer</span><span class="case-val">Signed</span></div>
+    </div>
+
+    <!-- BOSS Q21 -->
+    <div class="question-block" id="q21-block">
+      <div class="q-num">Boss Task 1 of 5 · 10 Bonus pts · The First Step</div>
+      <div class="q-text">You're looking at both cases. Before preparing either handoff email, what is your FIRST action?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q21','a',false)" id="q21-a"><span class="opt-letter">A</span><span class="opt-text">Send the handoff emails immediately — it's 3:30 PM and you need to get these out before close of business at 5:00</span></button>
+        <button class="option-btn" onclick="answer('q21','b',true)" id="q21-b"><span class="opt-letter">B</span><span class="opt-text">Run the Missing Data report for both cases. Verify every required field is populated before sending either handoff email. A handoff sent with blank fields is worse than a handoff sent 30 minutes late — the CM will spend days chasing information you could have fixed in minutes.</span></button>
+        <button class="option-btn" onclick="answer('q21','c',false)" id="q21-c"><span class="opt-letter">C</span><span class="opt-text">Call Adriauna immediately to discuss the FedEx case — this is a high-value commercial vehicle case that needs attorney input before handoff</span></button>
+        <button class="option-btn" onclick="answer('q21','d',false)" id="q21-d"><span class="opt-letter">D</span><span class="opt-text">Assign both cases to the same CM to make the handoff process more efficient — fewer emails, fewer follow-ups</span></button>
+      </div>
+      <div class="feedback-box" id="q21-fb"></div>
+    </div>
+
+    <!-- BOSS Q22 -->
+    <div class="question-block" id="q22-block">
+      <div class="q-num">Boss Task 2 of 5 · 10 Bonus pts · The Complex Case</div>
+      <div class="q-text">You've audited Case 1 (Tamika Washington — FedEx commercial truck, possible TBI, Spanish-speaking, Medicaid). How many CRITICAL factors require special handling in the handoff?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q22','a',false)" id="q22-a"><span class="opt-letter">A</span><span class="opt-text">1 — the commercial vehicle is the only special factor that changes the handoff protocol</span></button>
+        <button class="option-btn" onclick="answer('q22','b',false)" id="q22-b"><span class="opt-letter">B</span><span class="opt-text">2 — commercial vehicle (spoliation risk) and possible TBI (Grade A injury)</span></button>
+        <button class="option-btn" onclick="answer('q22','c',true)" id="q22-c"><span class="opt-letter">C</span><span class="opt-text">At least 4: (1) Commercial vehicle — spoliation risk, escalate immediately to attorney for preservation letter; (2) Possible TBI — this is Grade A (surgery/TBI/permanent impairment + $1M policy); (3) Spanish-speaking client — language preference must be documented so the CM knows to use interpreter services; (4) Medicaid — creates lien complexity that must be flagged. Grade A same-day notification to Adriauna AND immediate spoliation alert required.</span></button>
+        <button class="option-btn" onclick="answer('q22','d',false)" id="q22-d"><span class="opt-letter">D</span><span class="opt-text">3 — commercial vehicle, possible TBI, and Spanish language preference. Medicaid is not a special factor for handoff.</span></button>
+      </div>
+      <div class="feedback-box" id="q22-fb"></div>
+    </div>
+
+    <!-- BOSS Q23 -->
+    <div class="question-block" id="q23-block">
+      <div class="q-num">Boss Task 3 of 5 · 10 Bonus pts · Building the Handoff Email</div>
+      <div class="q-text">You're preparing the handoff email for Case 1 (Tamika Washington, the FedEx/TBI case). The case has been assigned to Janeth (CM) with Sara (LA). What should the email look like?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q23','a',true)" id="q23-a"><span class="opt-letter">A</span><span class="opt-text">To: Harrell + Adriauna + Janeth. CC: Ranysha + Jessica + Sara. Subject: "New Client: Washington, Tamika - DOL 07/12/2026." Body includes case summary, Grade A flag, commercial vehicle spoliation alert requiring immediate attorney action, TBI flag, Spanish language preference, and Medicaid lien note. Separately, update CasePeer status to "Intake Review" and notify Adriauna about the Grade A case the same day.</span></button>
+        <button class="option-btn" onclick="answer('q23','b',false)" id="q23-b"><span class="opt-letter">B</span><span class="opt-text">To: Janeth + Sara. CC: Adriauna. Subject: "New Case - Washington." Body with basic case summary and a note that it might be Grade A.</span></button>
+        <button class="option-btn" onclick="answer('q23','c',false)" id="q23-c"><span class="opt-letter">C</span><span class="opt-text">To: Adriauna only. CC: Janeth + Sara. Subject: "URGENT: Grade A FedEx/TBI Case." Body with case details — Adriauna handles all Grade A handoffs personally.</span></button>
+        <button class="option-btn" onclick="answer('q23','d',false)" id="q23-d"><span class="opt-letter">D</span><span class="opt-text">To: Harrell + Adriauna + Janeth + Sara + Ranysha + Jessica. Subject: "New Client: Tamika W. - DOL July." Body with abbreviated details — everyone is in the To: field so they all see it equally.</span></button>
+      </div>
+      <div class="feedback-box" id="q23-fb"></div>
+    </div>
+
+    <!-- BOSS Q24 -->
+    <div class="question-block" id="q24-block">
+      <div class="q-num">Boss Task 4 of 5 · 10 Bonus pts · Post-Handoff Tasks</div>
+      <div class="q-text">It's now 4:15 PM. You've sent both handoff emails and updated CasePeer statuses. Case 2 (Derek Palmer — the minor fender bender) was assigned to Skylar (CM) with Raine (LA). What post-handoff tasks should you create for yourself?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q24','a',false)" id="q24-a"><span class="opt-letter">A</span><span class="opt-text">Just one task: follow up with both CMs in 48 hours to check if they've acknowledged the assignments</span></button>
+        <button class="option-btn" onclick="answer('q24','b',false)" id="q24-b"><span class="opt-letter">B</span><span class="opt-text">Two tasks: follow up with Janeth in 24 hours AND follow up with Skylar in 24 hours for CM acknowledgment</span></button>
+        <button class="option-btn" onclick="answer('q24','c',false)" id="q24-c"><span class="opt-letter">C</span><span class="opt-text">No tasks needed — the handoff email is the end of Intake's responsibility for these cases</span></button>
+        <button class="option-btn" onclick="answer('q24','d',true)" id="q24-d"><span class="opt-letter">D</span><span class="opt-text">At minimum four tasks: (1) Follow up with Janeth in 24 hours for CM acknowledgment; (2) Follow up with Skylar in 24 hours for CM acknowledgment; (3) Follow up with Tamika Washington on any unsigned documents at 48 hours; (4) Verify the police report and all documents are dual-uploaded (OneDrive AND CasePeer) for both cases. Post-handoff ownership means creating specific, dated follow-up tasks — not hoping someone else catches it.</span></button>
+      </div>
+      <div class="feedback-box" id="q24-fb"></div>
+    </div>
+
+    <!-- BOSS Q25 -->
+    <div class="question-block" id="q25-block">
+      <div class="q-num">Boss Task 5 of 5 · 10 Bonus pts · The Standard</div>
+      <div class="q-text">One week later, you're reviewing your metrics. Both handoffs went smoothly — CMs acknowledged within 24 hours, no callbacks for missing information. Adriauna thanked you for the Grade A alert on the Washington case — the firm was able to send a spoliation letter to FedEx within 48 hours. How does this outcome connect to the overall intake quality standard?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q25','a',false)" id="q25-a"><span class="opt-letter">A</span><span class="opt-text">It means Victoria did a great job this particular week — performance is naturally variable and some weeks are better than others</span></button>
+        <button class="option-btn" onclick="answer('q25','b',true)" id="q25-b"><span class="opt-letter">B</span><span class="opt-text">It demonstrates the system working as designed: thorough self-audit → complete handoff → zero callbacks → the CM can focus on case management from Day 1, not data cleanup. Adriauna's prompt spoliation action was only possible because the commercial vehicle flag was in the handoff. This is what repeatable, franchise-standard intake looks like — outcomes should be identical every time, regardless of who executes the process.</span></button>
+        <button class="option-btn" onclick="answer('q25','c',false)" id="q25-c"><span class="opt-letter">C</span><span class="opt-text">It shows that Grade A cases naturally get better treatment than routine cases — the system prioritizes high-value work</span></button>
+        <button class="option-btn" onclick="answer('q25','d',false)" id="q25-d"><span class="opt-letter">D</span><span class="opt-text">It proves the handoff email format works and should be made mandatory firm-wide for all departments, not just Intake</span></button>
+      </div>
+      <div class="feedback-box" id="q25-fb"></div>
+    </div>
+
+    <div class="section-score" id="s6-score" style="display:none;"><div class="score-display" id="s6-score-val"></div><div class="score-label">Boss Challenge Bonus Points</div></div>
+    <div class="btn-group" id="s6-next"><button class="btn btn-primary btn-block" onclick="showResults()">See Results &amp; Score &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 7 — RESULTS
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-7">
+  <div id="results-header-wrap"></div>
+  <div class="section-body">
+    <div id="results-body"></div>
+    <div id="badgeContainer" class="achievement-grid"></div>
+    <div style="margin-top:12px;">
+      <div style="font-weight:700;color:#141c2c;margin-bottom:8px;display:flex;align-items:center;gap:8px;"><span id="reviewCounter">Reviewing questions...</span></div>
+      <div class="review-list" id="reviewList"></div>
+    </div>
+    <div id="score-submit-form" style="display:none;margin-top:24px;">
+      <div class="name-input-wrap">
+        <label for="trainee-name-input">Your Name (for certificate)</label>
+        <input type="text" id="trainee-name-input" class="name-input" placeholder="Enter your full name" autocomplete="name">
+      </div>
+      <button class="btn btn-primary btn-block" onclick="submitScoreAndBuildCert()">Submit Score &amp; Get Certificate →</button>
+    </div>
+    <div class="score-confirm" id="score-confirmation"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 8 — FEEDBACK & CERTIFICATE
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-8">
+  <div class="section-header">
+    <div class="section-num">Section 9 · Feedback &amp; Certificate</div>
+    <h2>Module Feedback &amp; Completion Certificate</h2>
+    <div class="section-subhead">Your feedback makes the next version better for every person after you.</div>
+  </div>
+  <div class="section-body">
+
+    <div id="cert-content" style="display:none;">
+      <div class="cert-wrap">
+        <div class="cert-firm">Gunn Law Group · Intake Training</div>
+        <div class="cert-title">Certificate of Completion</div>
+        <div class="cert-subtitle">IR-I Track — Module 4 (Final)</div>
+        <div class="cert-presents">This certifies that</div>
+        <div class="cert-name" id="certNameDisplay">Training Participant</div>
+        <div class="cert-for">has successfully completed</div>
+        <div class="cert-module">IR-I-4 — Intake Quality &amp; Handoff</div>
+        <div class="cert-score" id="certScore"></div>
+        <div class="cert-meta" id="certMeta"></div>
+        <span class="cert-seal">⚖️</span>
+        <div class="cert-signature">
+          <div class="cert-sig-line"></div>
+          <div class="cert-sig-name">H. Gunn</div>
+          <div class="cert-sig-title">Managing Attorney · Gunn Law Group</div>
+        </div>
+        <div class="cert-badges" id="certBadges"></div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:24px;">
+      <h4 style="color:#141c2c;font-weight:700;margin-bottom:14px;">Quick Feedback (Optional)</h4>
+      <div class="fb-question">
+        <label>How clear was the content in this module? (1 = confusing, 5 = crystal clear)</label>
+        <select id="fb-clarity">
+          <option value="">Select...</option>
+          <option>1 - Very confusing</option>
+          <option>2 - Somewhat confusing</option>
+          <option>3 - Neutral</option>
+          <option>4 - Mostly clear</option>
+          <option>5 - Crystal clear</option>
+        </select>
+      </div>
+      <div class="fb-question">
+        <label>How difficult was this module? (1 = too easy, 5 = too hard)</label>
+        <select id="fb-difficulty">
+          <option value="">Select...</option>
+          <option>1 - Too easy</option>
+          <option>2 - Somewhat easy</option>
+          <option>3 - Just right</option>
+          <option>4 - Somewhat hard</option>
+          <option>5 - Too hard</option>
+        </select>
+      </div>
+      <div class="fb-question">
+        <label>Did this feel like real GLG intake work?</label>
+        <select id="fb-realistic">
+          <option value="">Select...</option>
+          <option>Yes - exactly what we deal with</option>
+          <option>Mostly - some scenarios were realistic</option>
+          <option>Partially - some felt artificial</option>
+          <option>No - most scenarios felt generic</option>
+        </select>
+      </div>
+      <div class="fb-question">
+        <label>One thing you'd change about this module:</label>
+        <textarea id="fb-suggestions" placeholder="Optional - your feedback shapes the next revision"></textarea>
+      </div>
+    </div>
+
+    <div style="background:#f0f4f8;border-radius:12px;padding:18px;margin-bottom:20px;">
+      <h4 style="color:#141c2c;font-weight:700;margin-bottom:12px;">📝 Reflection Prompt</h4>
+      <p style="font-size:14px;color:#444;line-height:1.7;font-style:italic;">"Think about the last case you handed off. Did you run the Missing Data report before sending the handoff email? Did the CM ever call you back asking for information that should have been in the file? If they did — that's the gap this module exists to close. Pick one habit from this module: the Missing Data report before every handoff, the 24-hour CM acknowledgment follow-up, or the unsigned document cadence. Write it on a sticky note and put it on your monitor. One habit, done consistently, changes everything."</p>
+    </div>
+
+    <div class="score-confirm" id="score-confirmation-cert" style="display:none;"></div>
+
+    <div class="btn-group">
+      <button class="btn btn-secondary btn-block" onclick="goToSection(0)">Back to Start</button>
+      <button class="btn btn-secondary btn-block" onclick="restartQuiz()">Retake Module</button>
+    </div>
+  </div>
+</div>
+
+</main>
+<script>
+// ═══════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════
+var currentSection = 0;
+var baseScore = 0;
+var bonusPoints = 0;
+var qDone = {};
+var firstAttemptStillAvailable = {};
+var sectionScores = {};
+var streakCount = 0;
+var maxStreak = 0;
+var questionsFirstTry = 0;
+var incorrectCount = 0;
+var totalQuestionsAnswered = 0;
+var milestonesTriggered = {};
+var moduleStartTime = Date.now();
+var audioCtx = null;
+var soundEnabled = false;
+var _audioKeepalive = null;
+
+var TRACKER_URL = 'https://script.google.com/macros/s/AKfycbzHJZ0C3BqnLatfq7RIiUP5KQdgYoXTJlozd8ZGZiwIf2bdVmvnPMo3JLm0dA5gQhJyxA/exec';
+var TOTAL_SECTIONS = 9;
+var PASS_THRESHOLD = 160;
+var BASE_MAX = 200;
+
+// ═══════════════════════════════════════════════
+// QUESTION CONFIG
+// ═══════════════════════════════════════════════
+var Q_CONFIG = {
+  'q1':  {section:1, pts:10, isBonus:false, correct:'b'},
+  'q2':  {section:1, pts:10, isBonus:false, correct:'c'},
+  'q3':  {section:1, pts:10, isBonus:false, correct:'d'},
+  'q4':  {section:1, pts:10, isBonus:false, correct:'a'},
+  'q5':  {section:2, pts:10, isBonus:false, correct:'a'},
+  'q6':  {section:2, pts:10, isBonus:false, correct:'d'},
+  'q7':  {section:2, pts:10, isBonus:false, correct:'b'},
+  'q8':  {section:2, pts:10, isBonus:false, correct:'c'},
+  'q9':  {section:3, pts:10, isBonus:false, correct:'d'},
+  'q10': {section:3, pts:10, isBonus:false, correct:'a'},
+  'q11': {section:3, pts:10, isBonus:false, correct:'c'},
+  'q12': {section:3, pts:10, isBonus:false, correct:'b'},
+  'q13': {section:4, pts:10, isBonus:false, correct:'b'},
+  'q14': {section:4, pts:10, isBonus:false, correct:'c'},
+  'q15': {section:4, pts:10, isBonus:false, correct:'a'},
+  'q16': {section:4, pts:10, isBonus:false, correct:'d'},
+  'q17': {section:5, pts:10, isBonus:false, correct:'c'},
+  'q18': {section:5, pts:10, isBonus:false, correct:'a'},
+  'q19': {section:5, pts:10, isBonus:false, correct:'d'},
+  'q20': {section:5, pts:10, isBonus:false, correct:'b'},
+  'q21': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'b'},
+  'q22': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'c'},
+  'q23': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'a'},
+  'q24': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'d'},
+  'q25': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'b'}
+};
+
+var SECTION_QUESTIONS = {
+  1: ['q1','q2','q3','q4'],
+  2: ['q5','q6','q7','q8'],
+  3: ['q9','q10','q11','q12'],
+  4: ['q13','q14','q15','q16'],
+  5: ['q17','q18','q19','q20'],
+  6: ['q21','q22','q23','q24','q25']
+};
+
+// ═══════════════════════════════════════════════
+// FEEDBACK TEXT
+// ═══════════════════════════════════════════════
+var FEEDBACK = {
+  'q1': {
+    t: '✅ The Missing Data report is your quality gate. "All fields appear filled in" is a visual check — it misses hidden gaps, improperly formatted entries, and fields that look populated but contain incomplete data. The Missing Data report catches what your eyes don\'t. Run it for EVERY case before EVERY handoff. Zero results = green light. Any results = stop and fix.',
+    f: '❌ Before any handoff, the first step is always the Missing Data report filtered to this specific case. Not emailing Adriauna (A — CM assignment comes after the audit), not calling the client (C — the welcome text is a separate workflow), not checking CM availability (D — the file must be complete regardless of who receives it). The audit comes first because a handoff with blank fields is worse than a handoff that\'s 30 minutes late.'
+  },
+  'q2': {
+    t: '✅ Per the CasePeer Documentation Standards, ALL fields must be populated — no blank insurance, no blank UM/UIM, no blank property damage. "Blank" is never acceptable. If the client doesn\'t know the information, document what they DO know and add explicit follow-up notes: "Client does not know policy number — set task to follow up by [date]." The CM should never open a file and see empty fields without context.',
+    f: '❌ The CasePeer Documentation Standards are explicit: no blank insurance, no blank UM/UIM, no blank property damage. Pushing insurance verification to the CM (A, B) violates the "zero-callbacks" standard — if the CM has to chase this data, the handoff failed. And Option D is wrong because ALL insurance fields are required at intake, not just UM/UIM. "Unknown" with a follow-up note is acceptable; blank is never acceptable.'
+  },
+  'q3': {
+    t: '✅ The franchise standard from the Intake SOP asks: "If Victoria were replaced tomorrow, would a newly-trained replacement produce identical intake quality?" This is the test for every process, every audit, every handoff. The self-audit IS the system\'s verification step — it ensures that outcomes don\'t depend on the individual. Follow the checklist on every single call. If outcomes vary by person, the system is broken.',
+    f: '❌ The franchise standard is not about screening consistency (A — that\'s IR-I-1 territory), client satisfaction (B — that\'s important but not the franchise test), or equal attention (C — grades do drive resource allocation by design). The franchise standard is about SYSTEM INDEPENDENCE: any trained person should produce identical quality. The self-audit ensures this by making quality verification a documented, repeatable process rather than relying on individual judgment.'
+  },
+  'q4': {
+    t: '✅ Client CM preferences are not part of the pre-handoff audit. Intake does not determine CM assignments based on client personality or preference — assignment is determined by firm capacity, caseload balancing, and team structure. Everything else listed IS required: SOL calendared same-day (B), referral source documented (C), and dual-upload verified (D). These are all mandatory audit items before advancing from Intake to Intake Review.',
+    f: '❌ SOL calendaring (B) is a same-day mandatory requirement — missing it is a malpractice risk. Referral source (C) feeds marketing attribution that drives firm growth decisions. Dual-upload (D) ensures documents exist in both OneDrive and CasePeer. All three are required. Client CM preference (A) is NOT an audit item — Intake does not match clients to CMs based on personality; assignment follows firm capacity and team structure.'
+  },
+  'q5': {
+    t: '✅ The dual-upload rule is absolute: every document must exist in BOTH OneDrive AND CasePeer. OneDrive stores the file. CasePeer tracks and surfaces it in reports. A retainer in OneDrive but not CasePeer means the document is invisible in CasePeer\'s document tracking — the CM may think it\'s missing, the Missing Data report may flag it, and file audits will show a gap. Fix it before handoff. This rule applies to ALL documents, not just medical records.',
+    f: '❌ OneDrive is not "primary" with CasePeer as "secondary" (B) — they serve different functions and BOTH are required. The CM should not have to fix Intake\'s compliance failure (C) — that violates the zero-callbacks standard. And the dual-upload rule applies to ALL documents (D), not just medical records — retainer agreements, HIPAA authorizations, police reports, photos, insurance declarations. Everything gets dual-uploaded.'
+  },
+  'q6': {
+    t: '✅ SB 68 (Georgia\'s Tort Reform Act of 2025, effective April 28, 2025) allows defendants to introduce evidence of seatbelt non-use to reduce the plaintiff\'s recovery. For ANY MVA after April 28, 2025, the client\'s seatbelt status must be documented. A blank field means nobody asked — or the answer wasn\'t recorded. Either way, it\'s a critical quality gap. The Intake SOP requires documenting the answer VERBATIM. Fix it before handoff.',
+    f: '❌ You cannot assume seatbelt use from a blank field (A) — that\'s an assumption, not documentation. The Intake SOP requires this be captured AT INTAKE (B), not deferred to the CM. And seatbelt documentation is absolutely a required field for post-April 2025 MVAs (C) — SB 68 made it case-critical. A blank seatbelt field on a post-April 2025 MVA is a quality gap that must be fixed before handoff.'
+  },
+  'q7': {
+    t: '✅ Referral source is a critical marketing metric. The firm invests heavily in marketing channels (Google Ads, referral networks, community presence) and needs to know which channels produce cases. A missing referral source means this case\'s acquisition cost cannot be attributed — the marketing ROI calculation is distorted. Over time, missing referral data leads to misallocated marketing spend. Fix it now — call the client and ask.',
+    f: '❌ "Minimal impact" (A) underestimates the business consequence. Referral tracking is how the firm decides where to invest marketing dollars. If 20% of referral sources are missing, the data is unreliable. But it\'s not about the CM\'s welcome call (C) — the CM doesn\'t need the referral source to do their job. And "no practical consequence until monthly audit" (D) is wrong — the consequence is immediate: every day the field is blank, the marketing data is incomplete.'
+  },
+  'q8': {
+    t: '✅ MARTA is a government transit authority. A government entity defendant triggers mandatory ante litem notice deadlines: 6 months for municipalities (O.C.G.A. § 36-33-5), 12 months for State entities (O.C.G.A. § 50-21-26). The Intake SOP requires SAME-DAY escalation to the Managing Attorney when a government entity is involved. Without this flag, the firm could miss the notice deadline — which would bar the case entirely. This cannot wait for the CM\'s file review.',
+    f: '❌ MARTA IS a government entity (A is wrong — it\'s a public transit authority). Ante litem notice is not just the attorney\'s problem (B) — Intake must FLAG it for same-day escalation so the attorney can act immediately. The 6-month deadline starts ticking from the date of the incident, not from the date someone eventually notices. And the case CANNOT be handed off "as-is" with this flag missing (D) — the CM\'s 48-hour review may be too late if the deadline is approaching.'
+  },
+  'q9': {
+    t: '✅ The established GLG handoff pattern (documented from Victoria\'s actual workflow) is: To: Managing Attorney (Harrell) + Head Pre-Lit Attorney (Adriauna) + assigned CM. CC: Lead/Senior CM (Ranysha) + Receptionist (Jessica) + assigned LA. Subject: "New Client: [Last], [First] - DOL [MM/DD/YYYY]." This ensures all relevant team members are notified in the appropriate priority tier — To for decision-makers and the assigned owner, CC for support team visibility.',
+    f: '❌ The handoff email follows a specific distribution pattern. Sending only to the CM (A) leaves leadership without visibility. Dropping the Managing Attorney (B) means Harrell doesn\'t see new case flow. Sending only to Harrell (C) bypasses both the CM and the Head Pre-Lit Attorney. The pattern exists for a reason: To includes decision-makers and the case owner, CC includes the support team. Both channels serve different notification purposes.'
+  },
+  'q10': {
+    t: '✅ "Zero-callbacks" means the file is so complete that the CM never needs to contact Intake for missing information. The CM should be able to open the file, review everything, and make the welcome call with full context. If the CM calls Victoria asking "Where\'s the insurance info?" or "Did you get the police report?" — the handoff failed. This is the ultimate quality test for the pre-handoff audit.',
+    f: '❌ Zero-callbacks is about Intake file completeness (A), not about CM-to-client call frequency (B), not about transferring all follow-up to the CM (C — Intake retains unsigned document follow-up), and not about limiting Intake\'s client contacts (D). The standard is simple: if the CM has to contact Intake for ANY missing information, the audit missed something. The file should stand on its own.'
+  },
+  'q11': {
+    t: '✅ This case meets Grade A criteria across all factors: herniated disc (surgery likely = serious injury), strong liability (clear), $250K limits with multiple coverage sources ($100K+), and $100K+ value potential. Grade A cases require SAME-DAY notification to Adriauna by end of business — not at the weekly huddle (A), not just in CasePeer (B). Both CasePeer AND direct notification are required. Option D invents a "verbal attorney approval before handoff" requirement that doesn\'t exist.',
+    f: '❌ This is clearly Grade A: surgery likely (herniated disc), strong liability, $250K+ limits with multiple sources. Grade A requires SAME-DAY notification to Adriauna — the weekly huddle (A) is too late, CasePeer alone (B) may not be checked promptly, and there\'s no requirement for verbal attorney approval before handoff (D). The protocol is: mark it in CasePeer, notify Adriauna directly the same day, and proceed with the handoff.'
+  },
+  'q12': {
+    t: '✅ The CasePeer status changes from "Intake" to "Intake Review" at handoff — this is the system-level transition. The Intake SOP timeliness standard requires this transition within 3 business days of retainer signing. Not "Active Treatment" (A — that\'s a CM-stage status), not "Pre-Litigation" (C — that skips the review stage), and the status change is definitely Intake\'s responsibility (D — it accompanies the handoff email).',
+    f: '❌ The CasePeer pipeline is: Intake → Intake Review → Treating → downstream stages. Skipping to "Active Treatment" (A) or "Pre-Litigation" (C) bypasses the Intake Review stage where the CM does their initial file review. And the status change IS Intake\'s responsibility (D) — it happens alongside the handoff email as part of the dual-channel handoff (email + CasePeer). The 3-business-day timeline per the Intake SOP creates urgency for completing the self-audit and handoff promptly.'
+  },
+  'q13': {
+    t: '✅ The 24-hour CM acknowledgment deadline is not a guideline — it\'s a standard. When it passes, escalate to Adriauna (Head Pre-Lit Attorney). This case has a client waiting for their first CM contact. Every hour without acknowledgment is an hour the client sits without a welcome call. The escalation isn\'t punitive — it ensures the case doesn\'t fall through the cracks. Also follow up directly with the CM — they may have missed the email.',
+    f: '❌ 24 hours is not "just a guideline" (A) — it\'s a documented standard in both the Intake SOP and the Pre-Lit Paralegal SOP. A "friendly reminder" (C) delays resolution by another 24 hours while the client waits. Reassigning the case (D) is not Intake\'s decision to make. The correct action is escalation to Adriauna AND direct CM follow-up — this is Intake\'s accountability item, and the escalation path is clearly defined.'
+  },
+  'q14': {
+    t: '✅ Unsigned document follow-up remains Intake\'s responsibility even after handoff. The cadence is specific: 48 hours (first follow-up), 5 business days (second follow-up), 10 business days (escalate to Managing Attorney). This is one of the most common confusion points — staff assume handoff = "not my problem anymore." It\'s not. You own the unsigned document cadence until everything is collected.',
+    f: '❌ This is the most commonly misunderstood ownership boundary. The CM does NOT own unsigned document follow-up (A) — that remains with Intake. Immediate escalation to Adriauna (B) is premature at the 48-hour mark — the cadence is 48h → 5d → 10d escalation. And the LA doesn\'t own intake document collection (D) — the LA handles post-handoff document tasks assigned by the CM. The 48-hour first follow-up is squarely Victoria\'s responsibility.'
+  },
+  'q15': {
+    t: '✅ SOL must be calendared with a named owner the SAME DAY the case is accepted — no exceptions, not even Friday afternoon. The Intake SOP and the Corrective Action Triggers are explicit: "SOL not calendared on the day a case is opened" is a performance issue requiring immediate attention. A missed SOL is not a process gap — it\'s a malpractice event. Calendar it before you log off, even if it\'s 4:59 PM on a Friday.',
+    f: '❌ SOL calendaring is a same-day requirement that cannot wait until Monday (A is correct, the others are not). The welcome text (B) has its own timeline but is not the "forgotten critical step" in this scenario. The handoff email (C) is important but can go out Monday if needed — SOL cannot wait. And case grading (D), while important, has a 48-hour window, not a same-day requirement. SOL = same day, no exceptions.'
+  },
+  'q16': {
+    t: '✅ This is a "zero-callbacks" failure. The CM had to call Victoria. The client had to repeat information they already provided at intake. The client now questions whether the firm is organized. The CM lost time chasing data instead of managing the case. All because a field was blank in the audit. "No worries, I\'ll just ask the client" sounds harmless — but from the client\'s perspective, they already told someone. The system should have captured it. Victoria should fix CasePeer immediately and flag this error type for future audits.',
+    f: '❌ "No harm done" (A) ignores the client experience — the client had to repeat information, which damages trust. "Minor issue" (B) minimizes a systemic problem — one missing field is a pattern indicator. "At least the CM found a workaround" (C) still means the handoff failed the zero-callbacks standard. The real lesson: the self-audit exists precisely to catch these gaps. Every blank field has a downstream cost, even the ones that seem minor.'
+  },
+  'q17': {
+    t: '✅ Four distinct deficiencies: (1) UM/UIM "unknown" — needs client follow-up or explicit notation with a follow-up date, not just the word "unknown"; (2) Police report — uploaded to OneDrive but NOT CasePeer, violating the dual-upload rule; (3) Referral source — completely missing, must be captured for marketing attribution; (4) SOL not calendared — this should have been done same-day and is the most critical gap. Note: the case status change to "Intake Review" (D) happens AT handoff, not before the audit. It\'s the handoff action, not a deficiency to fix first.',
+    f: '❌ Two items (A) misses the police report dual-upload gap and the SOL. Three items (B) catches those but misses either the UM/UIM follow-up notation or the SOL. Five items (D) incorrectly counts the status change as a deficiency — the status change from "Intake" to "Intake Review" happens AT handoff, not before it. The status is correctly at "Intake" until the handoff email is sent. Four deficiencies must be fixed; then the status changes as part of the handoff execution.'
+  },
+  'q18': {
+    t: '✅ Ranysha (CM) and Sydney (LA) is one of GLG\'s five established CM–LA pairings. The other valid pairings are: Skylar + Raine, John + Jesus, Steve + Eugene, Janeth + Sara. Knowing these pairings ensures the handoff email CCs the correct LA. Jessica is the receptionist, not a CM (B). Adriauna and Harrell are attorneys, not CM–LA pairs (C). And the roles are not reversible (D) — Ranysha is the CM, Sydney is the LA.',
+    f: '❌ The five GLG CM–LA pairings are: Ranysha + Sydney, Skylar + Raine, John + Jesus, Steve + Eugene, Janeth + Sara. Jessica is the receptionist (B), not a CM. Adriauna and Harrell are attorneys (C), not CM–LA teams. And the pairings have specific roles — Ranysha is the CM, Sydney is the LA (D has them reversed). Knowing these pairings ensures the handoff email reaches the complete team.'
+  },
+  'q19': {
+    t: '✅ This is a pre-handoff audit failure. A missing email address means the file had an incomplete contact section — the audit should have caught this before handoff. The disconnected phone number may be new information (phones change), but having NO email as a backup contact method is an Intake error. Victoria should immediately attempt to reach the client, obtain updated contact info, update CasePeer, and notify the CM. Going forward, the audit must verify at least two contact methods.',
+    f: '❌ "Unavoidable" (A) is partially true for the disconnected phone, but the missing email is absolutely an audit failure — the file should never have left Intake with only one contact method. Pushing responsibility to the CM (B) violates the "fix post-handoff deficiencies immediately" principle. And postal mail (C), while valid, is slow — the CM needs to make a welcome call within 72 hours. Victoria should fix this urgently.'
+  },
+  'q20': {
+    t: '✅ The downstream impact chain connects intake quality to case value through a clear sequence: incomplete file → CM is unprepared for the welcome call → client has to repeat their story → client trust drops → treatment compliance drops → treatment gaps appear in the medical record → demand value is lower → settlement is less. Every blank field, every missing document, every unflagged red flag has a cost that compounds at each stage. Quality at intake IS quality at settlement.',
+    f: '❌ Each wrong answer captures a REAL consequence but not the COMPLETE chain. Delayed grading (A) matters but only affects case resource allocation, not the full client-to-settlement chain. Missed SOL (C) is catastrophic but is a single-point failure, not a chain. CM-to-Intake callback loops (D) describe the friction but not the full downstream impact on the client and case value. The complete chain shows how quality at intake directly affects the client\'s outcome at every subsequent stage.'
+  },
+  'q21': {
+    t: '✅ Before any handoff, audit first. It\'s tempting to rush when it\'s 3:30 PM and you have two cases to hand off — but a handoff with blank fields creates more work downstream than the 20 minutes the audit takes. Run the Missing Data report for BOTH cases. Fix any gaps. Then prepare the handoff emails. The audit is especially critical for Case 1 (Washington) because the complexity means more fields to verify.',
+    f: '❌ Rushing to send immediately (A) risks incomplete handoffs — speed without quality creates more work downstream. Calling Adriauna first (C) may be needed for the Grade A notification, but the FIRST step is always the audit — you need to verify the file is complete before involving leadership. And assigning both to the same CM (D) ignores caseload balancing and team assignment protocols.'
+  },
+  'q22': {
+    t: '✅ At least four critical factors: (1) Commercial vehicle (FedEx) = spoliation risk — the firm must send a preservation letter to FedEx immediately before they destroy GPS, driver logs, and maintenance records; (2) Possible TBI = Grade A injury (surgery/TBI/permanent + $1M commercial policy = clearly Grade A); (3) Spanish-speaking client = language preference must be documented so the CM arranges interpreter services for the welcome call; (4) Medicaid = government health insurance creates lien complexity the CM must know about for settlement calculations. Grade A same-day notification AND spoliation alert are both required.',
+    f: '❌ One factor (A) misses the TBI, language, and Medicaid. Two factors (B) misses language and Medicaid — both affect how the CM manages the case. Three factors (D) dismisses Medicaid, but Medicaid liens are significant — they affect settlement negotiations, require specific reduction procedures, and the CM needs to know from Day 1. All four factors change how the downstream team handles this case, and each must be flagged in the handoff.'
+  },
+  'q23': {
+    t: '✅ The handoff email follows the established GLG pattern: To: Harrell + Adriauna + Janeth (the CM). CC: Ranysha + Jessica + Sara (the LA). Subject: "New Client: Washington, Tamika - DOL 07/12/2026." The body must include ALL critical flags: Grade A designation, commercial vehicle spoliation alert requiring immediate attorney action, TBI flag, Spanish language preference, and Medicaid lien note. Separately, update CasePeer status to "Intake Review" AND notify Adriauna about the Grade A case same-day.',
+    f: '❌ Option B sends only to Janeth and Sara, leaving Harrell and Ranysha without visibility and using a generic subject format. Option C sends only to Adriauna, incorrectly assuming she handles all Grade A handoffs personally — she needs to be notified, but the CM still receives the case. Option D puts everyone in the To: field (incorrect — CC exists for a reason) and uses an abbreviated subject format that drops the specific DOL date. The established pattern has specific To/CC designations for a reason.'
+  },
+  'q24': {
+    t: '✅ Post-handoff ownership means creating specific, dated follow-up tasks — not hoping someone else catches it. At minimum: (1) 24-hour CM acknowledgment follow-up for Janeth; (2) 24-hour CM acknowledgment follow-up for Skylar; (3) 48-hour unsigned document follow-up for any missing documents on the Washington case; (4) dual-upload verification for both cases. Each task has a specific deadline and a specific action. "I sent the email" is not the end — "the CM acknowledged and the file is complete" is the end.',
+    f: '❌ One combined task (A) misses the 24-hour per-CM acknowledgment requirement and uses 48 hours instead of 24. Two tasks (B) handles CM acknowledgment but misses the unsigned document cadence and dual-upload verification — both are Intake\'s responsibility. And "no tasks needed" (C) is the exact mindset this module is designed to correct — the handoff email is the START of the transition process, not the end of Intake\'s involvement.'
+  },
+  'q25': {
+    t: '✅ This is the franchise standard in action. The outcome wasn\'t a lucky week or a special effort — it was the SYSTEM working as designed. Self-audit → complete file → handoff with all flags → CM hits the ground running → zero callbacks → Adriauna gets the Grade A alert and can act on spoliation within 48 hours. This should happen identically every single time, regardless of who executes the process. That\'s the franchise test: "Would a replacement produce the same result?" If yes, the system works.',
+    f: '❌ "Great job this particular week" (A) attributes the outcome to individual performance rather than system execution — the franchise standard says outcomes shouldn\'t depend on the individual. "Grade A cases get better treatment" (C) is true but misses the point — EVERY case should get a complete handoff; Grade A cases just have additional notification requirements. "Should be mandatory firm-wide" (D) is a reasonable suggestion but doesn\'t answer what this outcome demonstrates about the CURRENT intake quality standard.'
+  }
+};
+
+// ═══════════════════════════════════════════════
+// ANSWER HANDLER
+// ═══════════════════════════════════════════════
+function answer(qId, choice, isCorrect) {
+  if (qDone[qId]) return;
+  qDone[qId] = true;
+
+  var cfg = Q_CONFIG[qId];
+  var block = document.getElementById(qId + '-block');
+  var fb = document.getElementById(qId + '-fb');
+  var btns = block.querySelectorAll('.option-btn');
+
+  btns.forEach(function(b){ b.classList.add('disabled'); });
+
+  var clickedBtn = document.getElementById(qId + '-' + choice);
+  var correctBtn = document.getElementById(qId + '-' + cfg.correct);
+
+  if (choice === cfg.correct) {
+    clickedBtn.classList.add('correct');
+    block.classList.add('answered');
+    if (!cfg.isBonus) {
+      baseScore += cfg.pts;
+      showToast('+' + cfg.pts + ' pts', false);
+    } else {
+      var bonusPts = (firstAttemptStillAvailable[qId] !== false) ? cfg.bonusPts : Math.floor(cfg.bonusPts / 3);
+      bonusPoints += bonusPts;
+      showToast('+' + bonusPts + ' bonus', true);
+    }
+    document.getElementById('total-score').textContent = baseScore;
+    document.getElementById('bonus-score').textContent = bonusPoints;
+    updateStreak(true);
+    mascotReact('correct');
+    spawnParticles(clickedBtn);
+  } else {
+    clickedBtn.classList.add('incorrect');
+    correctBtn.classList.add('correct');
+    block.classList.add('answered-wrong');
+    firstAttemptStillAvailable[qId] = false;
+    updateStreak(false);
+    mascotReact('incorrect');
+  }
+
+  var fbData = FEEDBACK[qId];
+  if (fbData) {
+    fb.innerHTML = (choice === cfg.correct) ? fbData.t : fbData.f;
+    fb.className = 'feedback-box ' + (choice === cfg.correct ? 'correct' : 'incorrect') + ' show';
+  }
+
+  var totalQs = Object.keys(Q_CONFIG).length;
+  var answeredCount = Object.keys(qDone).length;
+  updateGlobalProgress(answeredCount, totalQs);
+  updateProgress();
+
+  for (var si = 1; si <= 6; si++) {
+    var qs = SECTION_QUESTIONS[si];
+    if (!qs) continue;
+    var allDone = qs.every(function(q){ return !!qDone[q]; });
+    if (allDone) {
+      var scoreEl = document.getElementById('s' + si + '-score');
+      if (scoreEl) {
+        var pts = 0;
+        var sectionMax = 0;
+        qs.forEach(function(qId2){
+          var c2 = Q_CONFIG[qId2];
+          sectionMax += c2.isBonus ? (c2.bonusPts || 0) : c2.pts;
+        });
+        qs.forEach(function(qId2){
+          var c2 = Q_CONFIG[qId2];
+          var blk = document.getElementById(qId2 + '-block');
+          if (blk && blk.classList.contains('answered')) {
+            pts += c2.isBonus ? (c2.bonusPts || 0) : c2.pts;
+          }
+        });
+        var scoreVal = scoreEl.querySelector('.score-display');
+        if (scoreVal) scoreVal.textContent = pts + ' / ' + sectionMax + ' pts';
+        scoreEl.style.display = 'block';
+      }
+      var pill = document.getElementById('nav-' + si);
+      if (pill) pill.classList.add('done');
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════
+function goToSection(idx) {
+  currentSection = idx;
+  document.querySelectorAll('.section-card').forEach(function(c){ c.classList.remove('active'); });
+  document.getElementById('section-' + idx).classList.add('active');
+  document.querySelectorAll('.nav-pill').forEach(function(p){ p.classList.remove('active'); });
+  document.getElementById('nav-' + idx).classList.add('active');
+  document.getElementById('prog-label').textContent = 'Section ' + (idx+1) + ' of ' + TOTAL_SECTIONS;
+  updateProgress();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function updateProgress() {
+  var baseQs = Object.keys(Q_CONFIG).filter(function(k){ return !Q_CONFIG[k].isBonus; });
+  var answered = baseQs.filter(function(k){ return !!qDone[k]; }).length;
+  var pct = Math.round((answered / baseQs.length) * 100);
+  var navPct = Math.round((currentSection / (TOTAL_SECTIONS - 1)) * 100);
+  document.getElementById('prog-fill').style.width = Math.max(pct, navPct) + '%';
+  document.getElementById('prog-pct').textContent = Math.max(pct, navPct) + '%';
+}
+
+function showToast(msg, isBonus) {
+  var t = document.getElementById('points-toast');
+  t.textContent = msg;
+  t.className = 'points-toast' + (isBonus ? ' bonus' : '') + ' show';
+  setTimeout(function(){ t.classList.remove('show'); }, 1800);
+}
+
+// ═══════════════════════════════════════════════
+// RESULTS
+// ═══════════════════════════════════════════════
+function showResults() {
+  goToSection(7);
+  buildResults();
+}
+
+function restartQuiz() {
+  _scoreSubmitted = false;
+  baseScore = 0; bonusPoints = 0; qDone = {}; firstAttemptStillAvailable = {};
+  sectionScores = {}; streakCount = 0; maxStreak = 0; questionsFirstTry = 0;
+  incorrectCount = 0; totalQuestionsAnswered = 0; moduleStartTime = Date.now();
+  window._iri4Passed = false;
+  document.querySelectorAll('.question-block').forEach(function(block) {
+    block.classList.remove('answered', 'answered-wrong');
+    block.querySelectorAll('.option-btn').forEach(function(btn) {
+      btn.classList.remove('correct', 'incorrect', 'disabled');
+    });
+    var fb = block.querySelector('.feedback-box');
+    if (fb) { fb.className = 'feedback-box'; fb.innerHTML = ''; }
+  });
+  for (var i = 1; i <= 6; i++) {
+    var scoreEl = document.getElementById('s' + i + '-score');
+    if (scoreEl) scoreEl.style.display = 'none';
+    var pill = document.getElementById('nav-' + i);
+    if (pill) pill.classList.remove('done');
+  }
+  document.getElementById('total-score').textContent = '0';
+  document.getElementById('bonus-score').textContent = '0';
+  document.getElementById('streak-display').textContent = '0 🔥';
+  Object.keys(Q_CONFIG).forEach(function(k) { firstAttemptStillAvailable[k] = true; });
+  goToSection(0);
+}
+
+function buildResults() {
+  mascotReact('complete');
+  spawnParticles(document.querySelector('header'));
+  var totalQs = Object.keys(Q_CONFIG).length;
+  updateGlobalProgress(totalQs, totalQs);
+  var pct = Math.round((baseScore / BASE_MAX) * 100);
+  var pass = baseScore >= PASS_THRESHOLD;
+  var headerEl = document.getElementById('results-header-wrap');
+  headerEl.innerHTML = '<div class="results-header ' + (pass ? 'pass' : 'fail') + '">'
+    + '<div class="results-grade">' + pct + '%</div>'
+    + '<div class="results-label">' + (pass ? '🏆 Assessment Passed!' : '📚 Not Yet — 80% Required to Pass') + '</div>'
+    + '<div class="results-sub">' + baseScore + ' / 200 base pts · ' + bonusPoints + ' bonus pts</div>'
+    + '</div>';
+
+  var letters = ['a','b','c','d'];
+  var letterLabels = ['A','B','C','D'];
+  var reviewList = document.getElementById('reviewList');
+  var reviewHTML = '';
+  Object.keys(Q_CONFIG).forEach(function(qId, idx) {
+    var cfg = Q_CONFIG[qId];
+    var block = document.getElementById(qId + '-block');
+    if (!block) return;
+    var qText = block.querySelector('.q-text');
+    var questionText = qText ? qText.textContent : 'Question ' + (idx+1);
+    var isAnswered = !!qDone[qId];
+    var wasCorrect = isAnswered && block.classList.contains('answered');
+    var correctLetter = cfg.correct.toUpperCase();
+    var correctBtn = document.getElementById(qId + '-' + cfg.correct);
+    var correctText = correctBtn ? correctBtn.querySelector('.opt-text').textContent : '';
+    var userAnswer = '(not answered)';
+    var userLetter = '';
+    if (isAnswered) {
+      letters.forEach(function(l, li) {
+        var btn = document.getElementById(qId + '-' + l);
+        if (btn && (btn.classList.contains('correct') || btn.classList.contains('incorrect'))) {
+          if (btn.classList.contains('incorrect') || (btn.classList.contains('correct') && !block.classList.contains('answered-wrong'))) {
+            userAnswer = btn.querySelector('.opt-text').textContent;
+            userLetter = letterLabels[li];
+          }
+        }
+      });
+      if (wasCorrect && !userLetter) {
+        userAnswer = correctText;
+        userLetter = correctLetter;
+      }
+    }
+    reviewHTML += '<div class="review-item ' + (wasCorrect ? 'correct' : 'wrong') + '" style="opacity:0;transform:translateY(8px);transition:opacity 0.25s ease,transform 0.25s ease;" data-review-idx="' + idx + '">'
+      + '<div class="ri-q">' + (idx+1) + '. ' + questionText.substring(0,120) + (questionText.length>120?'...':'') + '</div>'
+      + '<div class="ri-ans">'
+      + (wasCorrect ? '✅' : '❌') + ' Your answer: <strong>' + userLetter + '. ' + userAnswer.substring(0,100) + (userAnswer.length>100?'...':'') + '</strong>'
+      + (!wasCorrect ? '<br>✅ Correct: <strong>' + correctLetter + '. ' + correctText.substring(0,100) + (correctText.length>100?'...':'') + '</strong>' : '')
+      + '</div></div>';
+  });
+  reviewList.innerHTML = reviewHTML;
+  var reviewEls = reviewList.querySelectorAll('[data-review-idx]');
+  reviewEls.forEach(function(el, i) {
+    setTimeout(function() {
+      el.style.opacity = '1'; el.style.transform = 'translateY(0)';
+      playTickSound();
+      var counterEl = document.getElementById('reviewCounter');
+      if (counterEl) counterEl.textContent = 'Reviewing ' + (i+1) + '/' + totalQs;
+    }, i * 120);
+  });
+  setTimeout(function() {
+    var counterEl = document.getElementById('reviewCounter');
+    if (counterEl) counterEl.textContent = totalQs + '/' + totalQs + ' ✓ Review Complete';
+  }, reviewEls.length * 120 + 200);
+
+  window._iri4Passed = pass;
+  var bodyEl = document.getElementById('results-body');
+  var buttonsHtml;
+  if (pass) {
+    buttonsHtml = '<div class="btn-group"><button class="btn btn-primary btn-block" onclick="goToSection(8)">Submit Feedback &amp; Get Certificate →</button></div>';
+  } else {
+    buttonsHtml = '<div class="btn-group" style="display:flex;gap:10px;"><button class="btn btn-secondary" style="flex:1;" onclick="goToSection(0)">Review Content</button><button class="btn btn-primary" style="flex:1;" onclick="restartQuiz()">Try Again</button></div>';
+  }
+  bodyEl.innerHTML = '<div class="section-score" style="margin-bottom:20px;"><div class="score-display">' + baseScore + '/200</div><div class="score-label">Base Score · ' + bonusPoints + ' Bonus Points</div></div>'
+    + '<div class="callout ' + (pass ? 'callout-success' : 'callout-warn') + '">'
+    + (pass
+        ? '<strong>✅ Gate Passed.</strong> You have demonstrated competency in intake quality auditing, the pre-handoff self-audit system, the GLG handoff protocol, post-handoff ownership, and the downstream impact of intake quality on case value. You have completed the IR-I track. 🎓'
+        : '<strong>⚠️ Gate Not Cleared.</strong> You need 160/200 (80%) to pass. Review the sections where you missed questions — the feedback explains exactly what to remember. Retake when ready.')
+    + '</div>' + buttonsHtml;
+
+  submitScoreToTracker();
+  var badgeContainer = document.getElementById('badgeContainer');
+  if (badgeContainer) { var gamBadges = calculateBadges(); renderBadges(gamBadges, badgeContainer); }
+  if (pass) { document.getElementById('score-submit-form').style.display = 'block'; }
+}
+
+var _scoreSubmitted = false;
+function submitScoreToTracker() { return; }
+
+function submitScoreAndBuildCert() {
+  if (!window._iri4Passed) { showToast('⚠️ 80% required for certificate', false); return; }
+  var nameInput = document.getElementById('trainee-name-input');
+  var name = (nameInput.value || '').trim();
+  if (!name || name === 'Unknown' || name === 'Training Participant') {
+    nameInput.style.border = '2px solid red'; nameInput.focus();
+    showToast('⚠️ Please enter your full name', false); return;
+  }
+  document.getElementById('certNameDisplay').textContent = name;
+  document.getElementById('score-submit-form').style.display = 'none';
+  document.getElementById('cert-content').style.display = 'block';
+  var pct = Math.round((baseScore / BASE_MAX) * 100);
+  document.getElementById('certScore').textContent = 'Score: ' + baseScore + '/200 (' + pct + '%) — PASSED';
+  var now = new Date();
+  document.getElementById('certMeta').textContent = 'Issued: ' + now.toLocaleDateString('en-US', {year:'numeric', month:'long', day:'numeric'});
+  var certBadgesEl = document.getElementById('certBadges');
+  if (certBadgesEl) {
+    var badges = calculateBadges();
+    badges.push({icon: '🎓', name: 'IR-I Track Complete', desc: 'Completed all 4 IR-I modules'});
+    certBadgesEl.innerHTML = '';
+    badges.forEach(function(b, i) {
+      var pill = document.createElement('span');
+      pill.className = 'cert-badge-pill';
+      pill.textContent = b.icon + ' ' + b.name;
+      pill.style.animationDelay = (i * 0.15) + 's';
+      certBadgesEl.appendChild(pill);
+    });
+  }
+  setTimeout(function() { launchConfetti(); playTaDa(); mascotReact('complete'); }, 350);
+  if (TRACKER_URL) {
+    var payload = {
+      employeeName: name, moduleId: 'ir-i-4',
+      moduleName: 'Intake Quality & Handoff',
+      score: baseScore, maxScore: 200, bonusScore: bonusPoints,
+      maxStreak: maxStreak,
+      badges: calculateBadges().map(function(b){ return b.name; }).join(', '),
+      elapsedMinutes: Math.round((Date.now() - moduleStartTime) / 60000),
+      passedAt: new Date().toISOString(),
+      feedback: {
+        clarity: document.getElementById('fb-clarity').value || '',
+        difficulty: document.getElementById('fb-difficulty').value || '',
+        realistic: document.getElementById('fb-realistic').value || '',
+        suggestions: document.getElementById('fb-suggestions').value || ''
+      }
+    };
+    fetch(TRACKER_URL, {
+      method: 'POST', headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(payload), mode: 'no-cors'
+    }).then(function() {
+      var el = document.getElementById('score-confirmation');
+      if (el) { el.innerHTML = '✅ Score submitted successfully.'; el.style.display = 'block'; }
+      var el2 = document.getElementById('score-confirmation-cert');
+      if (el2) { el2.innerHTML = '✅ Score submitted successfully.'; el2.style.display = 'block'; }
+    }).catch(function() {
+      var el = document.getElementById('score-confirmation');
+      if (el) {
+        el.innerHTML = '⚠️ Auto-submission failed — please screenshot your results and email to hgunn@thegunnlawgroup.com';
+        el.style.background = '#fff3cd'; el.style.borderLeftColor = '#f39c12'; el.style.color = '#856404'; el.style.display = 'block';
+      }
+    });
+  }
+}
+
+// ═══════════════════════════════════════════════
+// GAMIFICATION ENGINE
+// ═══════════════════════════════════════════════
+function ensureAudioCtx() {
+  if (!audioCtx) { try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) { return false; } }
+  if (audioCtx.state === 'suspended') { audioCtx.resume().catch(function(){}); }
+  if (!_audioKeepalive && audioCtx) {
+    try { var s = audioCtx.createOscillator(); var g = audioCtx.createGain(); g.gain.value = 0; s.connect(g); g.connect(audioCtx.destination); s.start(); _audioKeepalive = s; } catch(e) {}
+  }
+  return true;
+}
+
+function toggleSound() {
+  soundEnabled = !soundEnabled;
+  if (soundEnabled) ensureAudioCtx();
+  document.getElementById('soundToggle').textContent = soundEnabled ? '🔊' : '🔇';
+  localStorage.setItem('glg_sound', soundEnabled ? '1' : '0');
+}
+
+function playTone(freq, duration, type, gainVal, scheduleAt) {
+  if (!soundEnabled || !audioCtx) return;
+  if (audioCtx.state === 'suspended') audioCtx.resume().catch(function(){});
+  var startTime = (scheduleAt !== undefined) ? audioCtx.currentTime + scheduleAt : audioCtx.currentTime;
+  var o = audioCtx.createOscillator(); var g = audioCtx.createGain();
+  o.type = type || 'sine'; o.frequency.value = freq;
+  g.gain.setValueAtTime(gainVal || 0.15, startTime);
+  g.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+  o.connect(g); g.connect(audioCtx.destination);
+  o.start(startTime); o.stop(startTime + duration + 0.01);
+}
+
+function playDing() { if (!soundEnabled) return; ensureAudioCtx(); playTone(523,0.15,'sine',0.13,0); playTone(659,0.18,'sine',0.11,0.1); }
+function playWrongTone() { if (!soundEnabled) return; ensureAudioCtx(); if (!audioCtx) return; playTone(520,0.12,'triangle',0.12,0); playTone(440,0.15,'triangle',0.10,0.08); }
+function playTickSound() { if (!soundEnabled) return; ensureAudioCtx(); if (!audioCtx) return; playTone(800,0.05,'triangle',0.06); }
+function playTaDa() {
+  if (!soundEnabled) return; ensureAudioCtx(); if (!audioCtx) return;
+  var now = audioCtx.currentTime;
+  [{f:262,t:0,d:0.30,type:'triangle',g:0.14},{f:330,t:0,d:0.30,type:'sine',g:0.11},{f:392,t:0,d:0.30,type:'sine',g:0.09},{f:523,t:0.15,d:0.22,type:'sine',g:0.13},{f:659,t:0.30,d:0.22,type:'sine',g:0.12},{f:784,t:0.45,d:0.22,type:'sine',g:0.11},{f:523,t:0.65,d:0.80,type:'sine',g:0.13},{f:659,t:0.65,d:0.80,type:'sine',g:0.11},{f:784,t:0.65,d:0.80,type:'sine',g:0.09},{f:1047,t:0.65,d:0.80,type:'triangle',g:0.07},{f:1319,t:0.75,d:0.55,type:'sine',g:0.04},{f:1568,t:0.85,d:0.45,type:'sine',g:0.03}].forEach(function(n) {
+    var osc = audioCtx.createOscillator(); var gain = audioCtx.createGain();
+    osc.type = n.type || 'sine'; osc.frequency.value = n.f;
+    gain.gain.setValueAtTime(n.g, now + n.t); gain.gain.exponentialRampToValueAtTime(0.001, now + n.t + n.d);
+    osc.connect(gain); gain.connect(audioCtx.destination);
+    osc.start(now + n.t); osc.stop(now + n.t + n.d + 0.05);
+  });
+}
+
+function updateStreak(isCorrect) {
+  if (isCorrect) {
+    streakCount++; if (streakCount > maxStreak) maxStreak = streakCount; questionsFirstTry++;
+    document.getElementById('streak-display').textContent = streakCount + ' 🔥';
+    playDing(); if (streakCount >= 3) showStreakBadge(streakCount); if (streakCount === 5) spawnParticles(document.querySelector('.score-bar'));
+  } else {
+    if (streakCount >= 3) showStreakEnd(); streakCount = 0; incorrectCount++;
+    document.getElementById('streak-display').textContent = '0 🔥'; playWrongTone();
+  }
+  totalQuestionsAnswered++;
+}
+
+function showStreakBadge(count) {
+  var badge = document.createElement('div'); badge.textContent = count + ' in a row! 🔥';
+  badge.style.cssText = 'position:fixed;top:60px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#dcb161,#e8c87a);color:#141C2C;padding:8px 20px;border-radius:20px;font-weight:700;font-size:14px;z-index:10001;animation:streakPop 0.4s ease-out,fadeUp 0.4s ease-in 1.5s forwards;';
+  document.body.appendChild(badge); setTimeout(function(){ badge.remove(); }, 2000);
+}
+function showStreakEnd() {
+  var badge = document.createElement('div'); badge.textContent = 'Streak ended';
+  badge.style.cssText = 'position:fixed;top:60px;left:50%;transform:translateX(-50%);background:#333;color:#999;padding:6px 16px;border-radius:16px;font-size:12px;z-index:10001;opacity:0.8;';
+  document.body.appendChild(badge); setTimeout(function(){ badge.remove(); }, 1500);
+}
+
+function checkMilestone(current, total) {
+  var pct = Math.round((current / total) * 100);
+  var milestones = {25:'Quarter complete! 💪',50:'Halfway there! 🎯',75:'Almost there! ⚡',100:'Final stretch! 🏆'};
+  for (var m in milestones) {
+    if (pct >= parseInt(m) && !milestonesTriggered[m]) { milestonesTriggered[m] = true; showMilestoneToast(milestones[m]); }
+  }
+}
+function showMilestoneToast(msg) {
+  var t = document.createElement('div'); t.textContent = msg;
+  t.style.cssText = 'position:fixed;top:-50px;left:50%;transform:translateX(-50%);background:#141C2C;color:#dcb161;padding:10px 24px;border-radius:12px;font-weight:700;font-size:14px;z-index:10002;transition:top 0.4s ease;box-shadow:0 4px 20px rgba(0,0,0,0.3);';
+  document.body.appendChild(t);
+  requestAnimationFrame(function(){ t.style.top = '20px'; });
+  setTimeout(function(){ t.style.top = '-50px'; setTimeout(function(){ t.remove(); }, 500); }, 2500);
+}
+function updateGlobalProgress(current, total) {
+  var fill = document.getElementById('globalProgressFill');
+  if (fill) fill.style.width = Math.round((current / total) * 100) + '%';
+  checkMilestone(current, total);
+}
+
+function spawnParticles(anchor) {
+  var rect = anchor ? anchor.getBoundingClientRect() : {left:window.innerWidth/2,top:window.innerHeight/2,width:0};
+  for (var i = 0; i < 20; i++) {
+    var p = document.createElement('div'); var size = 4 + Math.random() * 6;
+    var angle = (Math.PI * 2 * i) / 20 + (Math.random() * 0.3); var dist = 60 + Math.random() * 80;
+    p.style.cssText = 'position:fixed;width:' + size + 'px;height:' + size + 'px;background:#dcb161;border-radius:50%;left:' + (rect.left + rect.width/2) + 'px;top:' + (rect.top) + 'px;z-index:10003;pointer-events:none;opacity:1;transition:all 0.8s ease-out;';
+    document.body.appendChild(p);
+    requestAnimationFrame(function(pp, a, d) { return function() {
+      pp.style.left = (parseFloat(pp.style.left) + Math.cos(a) * d) + 'px';
+      pp.style.top = (parseFloat(pp.style.top) + Math.sin(a) * d) + 'px'; pp.style.opacity = '0';
+    }; }(p, angle, dist));
+    setTimeout(function(pp){ pp.remove(); }.bind(null, p), 900);
+  }
+}
+
+function initMascot() {
+  var gavel = document.createElement('div'); gavel.id = 'mascotFloat';
+  gavel.innerHTML = '<svg viewBox="0 0 60 70" xmlns="http://www.w3.org/2000/svg" style="width:50px;height:58px;">'
+    + '<rect x="27" y="18" width="6" height="38" rx="1.5" fill="#8B7D3C"/>'
+    + '<rect x="18" y="54" width="24" height="5" rx="2.5" fill="#6B5E2E"/>'
+    + '<rect x="22" y="52" width="16" height="4" rx="1" fill="#8B7D3C"/>'
+    + '<rect x="6" y="16" width="48" height="4" rx="2" fill="#8B7D3C"/>'
+    + '<circle cx="30" cy="12" r="5" fill="#dcb161" stroke="#8B7D3C" stroke-width="1.5"/>'
+    + '<text x="30" y="14.5" text-anchor="middle" font-size="7" font-weight="bold" fill="#141C2C">⚖</text>'
+    + '<line x1="12" y1="20" x2="12" y2="32" stroke="#8B7D3C" stroke-width="1.5"/>'
+    + '<line x1="48" y1="20" x2="48" y2="32" stroke="#8B7D3C" stroke-width="1.5"/>'
+    + '<path d="M4 33 Q8 38 12 33 Q16 38 20 33" stroke="#dcb161" stroke-width="1.5" fill="none"/>'
+    + '<ellipse cx="12" cy="34" rx="9" ry="2.5" fill="#dcb161" opacity="0.3"/>'
+    + '<path d="M40 33 Q44 38 48 33 Q52 38 56 33" stroke="#dcb161" stroke-width="1.5" fill="none"/>'
+    + '<ellipse cx="48" cy="34" rx="9" ry="2.5" fill="#dcb161" opacity="0.3"/>'
+    + '</svg>';
+  gavel.style.cssText = 'position:fixed;bottom:16px;right:16px;z-index:9998;cursor:pointer;animation:scaleBob 3s ease-in-out infinite;opacity:0.7;transition:opacity 0.3s,transform 0.3s;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.2));';
+  gavel.onmouseenter = function(){ this.style.opacity='1';this.style.transform='scale(1.1)'; };
+  gavel.onmouseleave = function(){ this.style.opacity='0.7';this.style.transform='scale(1)'; };
+  document.body.appendChild(gavel);
+}
+function mascotReact(type) {
+  var g = document.getElementById('mascotFloat'); if (!g) return;
+  g.style.animation = 'none'; void g.offsetHeight;
+  if (type === 'correct') g.style.animation = 'scaleCelebrate 0.5s ease-out, scaleBob 3s ease-in-out 0.6s infinite';
+  else if (type === 'incorrect') g.style.animation = 'scaleTilt 0.6s ease-in-out, scaleBob 3s ease-in-out 0.7s infinite';
+  else if (type === 'complete') { g.style.animation = 'scaleTriumph 1.5s ease-in-out, scaleBob 3s ease-in-out 1.6s infinite'; g.style.opacity = '1'; g.style.transform = 'scale(1.15)'; }
+}
+
+var confettiActive = false;
+function launchConfetti() {
+  var canvas = document.getElementById('confettiCanvas'); if (!canvas) return;
+  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+  var ctx = canvas.getContext('2d'); var colors = ['#dcb161','#c0c0c0','#141c2c']; var particles = [];
+  var cx = canvas.width / 2; var cy = canvas.height / 2;
+  for (var i = 0; i < 150; i++) {
+    var angle = Math.random() * Math.PI * 2; var speed = 3 + Math.random() * 9;
+    particles.push({x:cx,y:cy,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed-5,color:colors[Math.floor(Math.random()*colors.length)],w:4+Math.random()*6,h:2+Math.random()*4,rotation:Math.random()*360,rotSpeed:(Math.random()-0.5)*12,gravity:0.10+Math.random()*0.08,opacity:1,shape:Math.random()>0.4?'rect':'circle'});
+  }
+  confettiActive = true; var startTime = Date.now();
+  function animate() {
+    if (!confettiActive) return; var elapsed = Date.now() - startTime;
+    if (elapsed > 4000) { confettiActive = false; ctx.clearRect(0,0,canvas.width,canvas.height); return; }
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(function(p) {
+      p.x+=p.vx; p.vy+=p.gravity; p.y+=p.vy; p.vx*=0.99; p.rotation+=p.rotSpeed;
+      if (elapsed>2500) p.opacity=Math.max(0,p.opacity-0.02);
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rotation*Math.PI/180);
+      ctx.globalAlpha=p.opacity; ctx.fillStyle=p.color;
+      if (p.shape==='rect'){ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);}
+      else{ctx.beginPath();ctx.arc(0,0,p.w/2,0,Math.PI*2);ctx.fill();}
+      ctx.restore();
+    });
+    requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+}
+
+function calculateBadges() {
+  var badges = [];
+  var pct = Math.round((baseScore / BASE_MAX) * 100);
+  var elapsed = (Date.now() - moduleStartTime) / 60000;
+  var baseQCount = Object.keys(Q_CONFIG).filter(function(k){ return !Q_CONFIG[k].isBonus; }).length;
+  if (questionsFirstTry === baseQCount && incorrectCount === 0) badges.push({icon:'⭐', name:'Perfect Pass', desc:'All correct on first try'});
+  if (incorrectCount === 0 && totalQuestionsAnswered > 0) badges.push({icon:'🎯', name:'No Stumbles', desc:'Zero incorrect'});
+  if (elapsed < 20) badges.push({icon:'⚡', name:'Speed Run', desc:'Under 20 minutes'});
+  if (pct >= 90) badges.push({icon:'🏆', name:'Master', desc:'Above 90%'});
+  if (maxStreak >= 10) badges.push({icon:'🔥', name:'On Fire', desc:'10+ streak'});
+  if (incorrectCount > 3 && pct >= 70) badges.push({icon:'💪', name:'Persistent', desc:'Finished despite struggles'});
+  return badges;
+}
+function renderBadges(badges, container) {
+  badges.forEach(function(b, i) {
+    setTimeout(function() {
+      var el = document.createElement('span');
+      el.textContent = b.icon + ' ' + b.name; el.title = b.desc;
+      el.style.cssText = 'display:inline-block;background:#dcb161;color:#141C2C;font-size:12px;font-weight:700;padding:5px 12px;border-radius:14px;margin:4px;animation:badgeFlip 0.5s ease-out;';
+      container.appendChild(el);
+    }, i * 400);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  if (localStorage.getItem('glg_sound') === '1') { soundEnabled = true; var btn = document.getElementById('soundToggle'); if (btn) btn.textContent = '🔊'; }
+  function initAudioOnFirstClick() { ensureAudioCtx(); document.removeEventListener('click', initAudioOnFirstClick); document.removeEventListener('touchstart', initAudioOnFirstClick); }
+  document.addEventListener('click', initAudioOnFirstClick);
+  document.addEventListener('touchstart', initAudioOnFirstClick);
+  function resumeAudioOnGesture() { if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume(); }
+  document.addEventListener('touchstart', resumeAudioOnGesture, true);
+  document.addEventListener('click', resumeAudioOnGesture, true);
+  initMascot();
+});
+
+goToSection(0);
+</script>
+</body>
+</html>

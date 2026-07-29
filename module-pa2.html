@@ -1,0 +1,1232 @@
+<!-- PA-2 PROVENANCE: Built July 2026 for Pre-Lit Attorney track.
+Demand Writing: Attorney Judgment — the strategic decisions that determine whether a demand anchors a negotiation favorably or leaves money on the table.
+Sources: Demand_Package_Preparation_Guide.md, Pre_Lit_Head_Attorney_SOP.md, Holt_Demand_Checklist.md, Adjuster_Negotiation_Framework.md,
+reptile-mist-memo.md, injury-case-playbook-memo.md, essential-lawyering-memo.md, ga-pi-law-reference-guide-memo.md,
+lawyer-negotiation-memo.md, never-split-the-difference-memo.md, pre-suasion-memo.md, influence-cialdini-memo.md -->
+<!--
+PA-2 — Demand Writing: Attorney Judgment
+Built: July 2026 | Base: PA-1 canonical chassis
+CasePeer Stages: Treating → Demand Sent | moduleId: pa2
+Base: 20 scored questions x 10 pts = 200 | Bonus: 5 boss tasks x 10 pts = 50 max | Pass: 170/200 (85%)
+Answer Key: q1→C q2→B q3→D q4→A q5→B q6→any(calibration) q7→C q8→A
+            q9→D q10→B q11→C q12→A q13→B q14→D q15→A q16→C
+            q17→B q18→D q19→A q20→C
+            q21→C(boss) q22→B(boss) q23→D(boss) q24→A(boss) q25→C(boss)
+Boss Challenge: Latonya Washington, GLG-2026-2301
+Sources: Demand_Package_Preparation_Guide.md, Pre_Lit_Head_Attorney_SOP.md, Holt_Demand_Checklist.md, Adjuster_Negotiation_Framework.md
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>PA-2 — Demand Writing: Attorney Judgment | Gunn Law Group</title>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;color:#333;font-size:16px;line-height:1.6;-webkit-text-size-adjust:100%;overflow-x:hidden;}
+
+    /* ── HEADER ── */
+    header{background:linear-gradient(135deg,#141C2C 0%,#0E1420 100%);color:#e0e0e0;padding:20px 16px 16px;text-align:center;}
+    .day-badge{display:inline-block;background:#1C2433;color:#dcb161;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:10px;}
+    header h1{font-size:clamp(17px,5vw,24px);font-weight:800;line-height:1.3;color:#ffffff;}
+    header p{margin-top:6px;color:#c0c0c0;font-size:13px;}
+    .score-bar{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:12px;padding:10px 16px;background:#1C2433;border-radius:10px;}
+    .score-label{color:#c0c0c0;font-size:12px;font-weight:600;}
+    .score-value{color:#fff;font-size:22px;font-weight:800;}
+
+    /* ── PROGRESS ── */
+    .progress-wrap{background:#1C2433;padding:10px 16px;}
+    .progress-meta{color:#c0c0c0;font-size:11px;margin-bottom:5px;display:flex;justify-content:space-between;}
+    .progress-bg{background:#0E1420;border-radius:4px;height:6px;width:100%;}
+    .progress-fill{background:#dcb161;height:6px;border-radius:4px;width:0%;transition:width .5s ease;}
+
+    /* ── NAV PILLS ── */
+    .section-nav{display:flex;flex-wrap:wrap;gap:6px;padding:12px 14px;background:#fff;border-bottom:2px solid #e0e3e8;justify-content:center;position:sticky;top:0;z-index:100;}
+    .nav-pill{padding:7px 11px;border-radius:20px;border:2px solid #e0e3e8;background:#fff;color:#666;font-size:11px;font-weight:700;cursor:pointer;min-height:44px;min-width:44px;display:flex;align-items:center;transition:all .2s;white-space:nowrap;-webkit-tap-highlight-color:transparent;}
+    .nav-pill.active{background:#141C2C;color:#fff;border-color:#141C2C;}
+    .nav-pill.done{border-color:#10774A;color:#10774A;}
+    .nav-pill.done::after{content:' \2713';}
+
+    /* ── MAIN / CARDS ── */
+    main{max-width:800px;margin:0 auto;padding:0 0 60px;}
+    .section-card{display:none;background:#fff;margin:16px;border-radius:14px;box-shadow:0 2px 16px rgba(0,0,0,.09);overflow:visible;}
+    .section-card.active{display:block;}
+    .section-header{background:#141C2C;color:#fff;padding:18px 20px;}
+    .section-num{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#dcb161;margin-bottom:4px;}
+    .section-header h2{font-size:clamp(15px,4vw,20px);font-weight:800;}
+    .section-subhead{color:#c0c0c0;font-size:13px;margin-top:4px;}
+    .section-body{padding:20px;}
+
+    /* ── SCENARIO BOX ── */
+    .scenario{background:#141C2C;color:#fff;border-radius:12px;padding:20px;margin-bottom:20px;border-left:3px solid #dcb161;}
+    .scenario-tag{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#dcb161;margin-bottom:8px;}
+    .scenario h3{font-size:clamp(15px,4vw,18px);font-weight:700;line-height:1.4;margin-bottom:10px;}
+    .scenario p{font-size:14px;color:#c8d0e0;line-height:1.6;}
+    .scenario .highlight{color:#dcb161;font-weight:700;}
+    .scenario .urgent{color:#e74c3c;font-weight:700;}
+
+    /* ── INFO BLOCKS ── */
+    .info-block{background:#f0f4f8;border-radius:10px;padding:16px;margin-bottom:14px;}
+    .info-block h4{color:#141c2c;font-size:14px;font-weight:700;margin-bottom:8px;}
+    .info-block p,.info-block li{font-size:14px;color:#444;line-height:1.6;}
+    .info-block ul,.info-block ol{padding-left:18px;}
+
+    /* ── QUESTIONS ── */
+    .question-block{border:2px solid #e8ecf0;border-radius:12px;padding:18px;margin-bottom:16px;transition:border-color .2s;}
+    .question-block.answered{border-color:#10774A;}
+    .question-block.answered-wrong{border-color:#870101;}
+    .q-num{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888;margin-bottom:6px;}
+    .q-text{font-size:clamp(14px,3.5vw,16px);font-weight:700;color:#141c2c;margin-bottom:14px;line-height:1.4;}
+    .options{display:flex;flex-direction:column;gap:10px;}
+    .option-btn{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border:2px solid #e0e3e8;border-radius:10px;background:#fff;cursor:pointer;text-align:left;font-size:14px;color:#333;min-height:44px;transition:all .15s;-webkit-tap-highlight-color:transparent;width:100%;}
+    .option-btn:hover,.option-btn:focus{border-color:#232e54;background:#f8f9ff;}
+    .option-btn.correct{border-color:#10774A!important;background:#e8f8ee!important;color:#10774A!important;}
+    .option-btn.incorrect{border-color:#870101!important;background:#fce8e8!important;color:#870101!important;}
+    .option-btn.disabled{pointer-events:none;opacity:.75;}
+    .opt-letter{background:#141C2C;color:#dcb161;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0;margin-top:1px;}
+    .opt-text{flex:1;line-height:1.5;}
+
+    /* ── FEEDBACK ── */
+    .feedback-box{border-radius:10px;padding:14px 16px;margin-top:12px;display:none;font-size:14px;line-height:1.6;}
+    .feedback-box.correct{background:#d4edda;border-left:4px solid #10774A;color:#155724;}
+    .feedback-box.incorrect{background:#f8d7da;border-left:4px solid #870101;color:#721c24;}
+    .feedback-box.show{display:block;}
+
+    /* ── POINTS TOAST ── */
+    .points-toast{position:fixed;top:80px;right:16px;background:#10774A;color:#fff;padding:10px 16px;border-radius:30px;font-weight:700;font-size:15px;box-shadow:0 4px 16px rgba(0,0,0,.2);z-index:999;transform:translateY(-20px);opacity:0;transition:all .3s;pointer-events:none;}
+    .points-toast.show{transform:translateY(0);opacity:1;}
+    .points-toast.bonus{background:#dcb161;color:#141C2C;}
+
+    /* ── SECTION SCORE ── */
+    .section-score{background:#f0f4f8;border-radius:10px;padding:14px;text-align:center;margin-bottom:16px;}
+    .section-score .score-display{font-size:32px;font-weight:800;color:#141c2c;}
+    .section-score .score-label{font-size:13px;color:#666;margin-top:2px;}
+
+    /* ── CASE FILE ── */
+    .case-file{background:#fff;border:2px solid #141c2c;border-radius:12px;padding:18px;margin-bottom:20px;}
+    .case-file-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:12px;border-bottom:2px solid #f0f4f8;}
+    .case-file-icon{background:#141c2c;color:#fff;width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+    .case-file-title{font-weight:800;color:#141c2c;font-size:15px;}
+    .case-file-sub{font-size:12px;color:#888;}
+    .case-detail{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #f0f4f8;font-size:14px;}
+    .case-detail:last-child{border-bottom:none;}
+    .case-key{font-weight:700;color:#141c2c;min-width:160px;flex-shrink:0;}
+    .case-val{color:#444;}
+    .case-val .flag{display:inline-block;background:#870101;color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;margin-left:6px;}
+    .case-val .flag-warn{display:inline-block;background:#f39c12;color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;margin-left:6px;}
+    .case-val .flag-ok{display:inline-block;background:#10774A;color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;margin-left:6px;}
+
+    /* ── BOSS CHALLENGE ── */
+    .boss-header{background:linear-gradient(135deg,#870101 0%,#5a0000 100%);color:#fff;border-radius:12px;padding:24px;margin-bottom:20px;text-align:center;}
+    .boss-header .boss-icon{font-size:40px;margin-bottom:10px;}
+    .boss-header h3{font-size:clamp(17px,4.5vw,22px);font-weight:800;margin-bottom:8px;}
+    .boss-header p{font-size:14px;opacity:.9;line-height:1.5;}
+
+    /* ── RESULTS ── */
+    .results-header{padding:28px 20px;text-align:center;color:#fff;}
+    .results-header.pass{background:linear-gradient(135deg,#10774A,#0a5c38);}
+    .results-header.fail{background:linear-gradient(135deg,#870101,#6b0000);}
+    .results-grade{font-size:56px;font-weight:900;line-height:1;}
+    .results-label{font-size:16px;margin-top:6px;opacity:.9;}
+    .results-sub{font-size:13px;margin-top:4px;opacity:.75;}
+    .breakdown-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #f0f4f8;font-size:15px;}
+    .breakdown-row:last-child{border-bottom:none;}
+    .breakdown-name{color:#333;font-weight:600;}
+    .breakdown-pts{font-weight:800;color:#141c2c;}
+    .achievement-grid{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0;}
+    .badge{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;font-size:13px;font-weight:700;border:2px solid #e0e3e8;color:#888;background:#f8f9fa;}
+    .badge.earned{border-color:#dcb161;background:#fffaed;color:#7a5c00;}
+    .badge .badge-icon{font-size:20px;}
+
+    /* ── CERTIFICATE ── */
+    .cert-wrap{background:linear-gradient(180deg,#ffffff 0%,#fafaf5 100%);border:4px double #141c2c;border-radius:14px;padding:2.5rem 1.75rem;text-align:center;margin-bottom:1rem;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(20,28,44,0.10);animation:certPopIn 0.8s 0.1s cubic-bezier(0.34,1.56,0.64,1) both;}
+    @keyframes certPopIn{0%{opacity:0;transform:scale(0.7);box-shadow:0 2px 8px rgba(20,28,44,0.05)}60%{opacity:1;transform:scale(1.04);box-shadow:0 8px 32px rgba(20,28,44,0.18)}80%{transform:scale(0.98)}100%{opacity:1;transform:scale(1);box-shadow:0 10px 40px rgba(20,28,44,0.16)}}
+    .cert-wrap::before{content:'';position:absolute;inset:10px;border:1px solid #dcb161;border-radius:8px;pointer-events:none;opacity:0.45;}
+    .cert-wrap::after{content:'\2696\FE0F';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:180px;opacity:0.03;pointer-events:none;z-index:0;}
+    .cert-firm{font-size:0.67rem;letter-spacing:0.22em;text-transform:uppercase;color:#232e54;font-weight:600;margin-bottom:0.6rem;position:relative;z-index:1;}
+    .cert-title{font-size:clamp(1.5rem,5vw,1.9rem);font-weight:800;color:#141c2c;margin-bottom:0.3rem;text-transform:uppercase;letter-spacing:0.04em;position:relative;z-index:1;}
+    .cert-subtitle{font-size:0.8rem;color:#888;margin-bottom:1.4rem;position:relative;z-index:1;}
+    .cert-presents{font-size:0.85rem;color:#777;font-style:italic;margin-bottom:0.3rem;position:relative;z-index:1;}
+    .cert-name{font-size:clamp(1.6rem,6vw,2.2rem);font-weight:700;color:#232e54;font-style:italic;border-bottom:2px solid #dcb161;display:inline-block;padding:0 0.75rem 0.2rem;margin-bottom:0.85rem;min-width:60%;position:relative;z-index:1;}
+    .cert-for{font-size:0.85rem;color:#666;margin-bottom:0.35rem;position:relative;z-index:1;}
+    .cert-module{font-size:1.05rem;font-weight:600;color:#141c2c;margin-bottom:1.1rem;position:relative;z-index:1;}
+    .cert-meta{font-size:0.8rem;color:#888;position:relative;z-index:1;}
+    .cert-score{font-size:1.1rem;font-weight:700;color:#10774A;margin-top:0.5rem;position:relative;z-index:1;}
+    .cert-seal{font-size:2.5rem;margin:0.85rem 0 0.3rem;display:block;position:relative;z-index:1;}
+    .cert-signature{margin-top:1.5rem;position:relative;z-index:1;}
+    .cert-sig-line{width:200px;border-top:1px solid #141c2c;margin:0 auto 0.3rem;}
+    .cert-sig-name{font-size:1rem;font-weight:600;color:#141c2c;font-style:italic;}
+    .cert-sig-title{font-size:0.75rem;color:#888;letter-spacing:0.05em;}
+    .cert-badges{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:14px;position:relative;z-index:1;}
+    .cert-badge-pill{display:inline-block;background:#dcb161;color:#141C2C;font-size:0.68rem;font-weight:700;padding:4px 12px;border-radius:14px;letter-spacing:0.03em;animation:badgeFlip 0.5s ease-out backwards;}
+    #confettiCanvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10005;}
+
+    /* ── REVIEW LIST ── */
+    .review-list{display:flex;flex-direction:column;gap:0.65rem;margin-top:1rem;}
+    .review-item{background:#f8f9fa;border-radius:10px;padding:0.8rem 1.1rem;border-left:4px solid #ddd;font-size:0.88rem;transition:transform 0.15s ease;}
+    .review-item:hover{transform:translateX(2px);}
+    .review-item.correct{border-color:#10774A;}
+    .review-item.wrong{border-color:#870101;}
+    .review-item .ri-q{font-weight:600;margin-bottom:0.35rem;color:#141c2c;}
+    .review-item .ri-ans{font-size:0.82rem;}
+
+    /* ── NAME INPUT ── */
+    .name-input-wrap{margin-bottom:1rem;}
+    .name-input-wrap label{display:block;font-size:0.85rem;font-weight:600;color:#232e54;margin-bottom:0.4rem;}
+    .name-input{width:100%;padding:0.82rem 1rem;border:2px solid #e0e3e8;border-radius:9px;font-size:1rem;color:#333;background:#fff;transition:border-color 0.2s ease,box-shadow 0.2s ease;-webkit-appearance:none;}
+    .name-input:focus{outline:none;border-color:#232e54;box-shadow:0 0 0 3px rgba(35,46,84,0.1);}
+
+    /* ── FEEDBACK FORM ── */
+    .fb-question{margin-bottom:18px;}
+    .fb-question label{display:block;font-weight:700;color:#141c2c;font-size:15px;margin-bottom:8px;}
+    .fb-question select,.fb-question textarea{width:100%;padding:12px;border:2px solid #e0e3e8;border-radius:9px;font-size:14px;background:#fff;color:#333;-webkit-appearance:none;transition:border-color 0.2s ease;font-family:inherit;}
+    .fb-question select:focus,.fb-question textarea:focus{outline:none;border-color:#141c2c;}
+    .fb-question textarea{resize:vertical;min-height:80px;}
+
+    /* ── BUTTONS ── */
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 22px;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;min-height:44px;transition:all .2s;-webkit-tap-highlight-color:transparent;font-family:inherit;}
+    .btn-primary{background:#141C2C;color:#fff;}
+    .btn-primary:hover{background:#232e54;}
+    .btn-secondary{background:#f0f4f8;color:#141c2c;}
+    .btn-block{width:100%;margin-top:12px;}
+    .btn-group{display:flex;flex-direction:column;gap:10px;margin-top:16px;}
+
+    /* ── CALLOUT ── */
+    .callout{border-radius:10px;padding:14px 16px;margin:14px 0;font-size:14px;line-height:1.6;}
+    .callout-warn{background:#fff3cd;border-left:4px solid #f39c12;color:#533f03;}
+    .callout-danger{background:#fce8e8;border-left:4px solid #870101;color:#721c24;}
+    .callout-success{background:#d4edda;border-left:4px solid #10774A;color:#155724;}
+    .callout-info{background:#d6e8f8;border-left:4px solid #3498db;color:#174a7e;}
+    .callout strong{font-weight:700;}
+
+    /* ── STAT TABLE ── */
+    .stat-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13px;}
+    .stat-table th{background:#141c2c;color:#dcb161;padding:8px 10px;text-align:left;font-weight:700;}
+    .stat-table td{padding:7px 10px;border-bottom:1px solid #e0e3e8;vertical-align:top;}
+    .stat-table tr:last-child td{border-bottom:none;}
+    .stat-table tr:nth-child(even) td{background:#f8f9fa;}
+    .stat-num{font-weight:800;color:#141c2c;white-space:nowrap;}
+    .stat-warn{background:#fff3cd !important;font-weight:700;}
+    .stat-void{background:#fce8e8 !important;color:#721c24;font-weight:700;}
+    .stat-ok{background:#d4edda !important;color:#155724;font-weight:700;}
+
+    /* ── CHECKLIST ── */
+    .checklist-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #f0f4f8;font-size:14px;color:#333;}
+    .checklist-item:last-child{border-bottom:none;}
+    .checklist-num{background:#141c2c;color:#dcb161;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0;}
+    .checklist-text{flex:1;line-height:1.5;}
+
+    /* ── DIVIDER / TAGS / UTILS ── */
+    .divider{border:none;border-top:2px solid #f0f4f8;margin:16px 0;}
+    .tag{display:inline-block;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
+    .tag-warn{background:#fff3cd;color:#856404;}
+    .tag-danger{background:#fce8e8;color:#7b1a1a;}
+    .tag-success{background:#d4edda;color:#155724;}
+    .tag-info{background:#d6e8f8;color:#174a7e;}
+    .tag-gold{background:#fffaed;color:#7a5c00;border:1px solid #dcb161;}
+    .text-center{text-align:center;}
+    .mt-4{margin-top:16px;}
+    .mb-4{margin-bottom:16px;}
+
+    /* ── SCORE CONFIRM ── */
+    .score-confirm{border-radius:10px;padding:14px 16px;margin:14px 0;font-size:14px;line-height:1.6;background:#d4edda;border-left:4px solid #10774A;color:#155724;display:none;}
+
+    .glg-logo{display:block;margin:0 auto 10px;max-height:50px;width:auto;}
+
+    /* ── GAMIFICATION ANIMATIONS ── */
+    @keyframes streakPop{0%{transform:translateX(-50%) scale(0.5);opacity:0}50%{transform:translateX(-50%) scale(1.15)}100%{transform:translateX(-50%) scale(1);opacity:1}}
+    @keyframes fadeUp{to{opacity:0;transform:translateX(-50%) translateY(-20px);}}
+    @keyframes scaleBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+    @keyframes scaleCelebrate{0%{transform:scale(1) rotate(0)}25%{transform:scale(1.2) rotate(-8deg)}50%{transform:scale(1.15) rotate(5deg)}75%{transform:scale(1.1) rotate(-3deg)}100%{transform:scale(1) rotate(0)}}
+    @keyframes scaleTilt{0%{transform:rotate(0)}30%{transform:rotate(10deg)}70%{transform:rotate(-8deg)}100%{transform:rotate(0)}}
+    @keyframes scaleTriumph{0%{transform:scale(1)}20%{transform:scale(1.3)}40%{transform:scale(1.25) rotate(-5deg)}60%{transform:scale(1.25) rotate(5deg)}80%{transform:scale(1.3)}100%{transform:scale(1)}}
+    @keyframes badgeFlip{0%{transform:rotateY(90deg) scale(0.5);opacity:0}60%{transform:rotateY(-10deg) scale(1.05)}100%{transform:rotateY(0) scale(1);opacity:1}}
+    @keyframes correctPulse{0%{box-shadow:0 0 0 0 rgba(39,174,96,0.4)}70%{box-shadow:0 0 0 12px rgba(39,174,96,0)}100%{box-shadow:0 0 0 0 rgba(39,174,96,0)}}
+    @keyframes incorrectShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+    .option-btn.correct{animation:correctPulse 0.6s ease-out;}
+    .option-btn.incorrect{animation:incorrectShake 0.4s ease-out;}
+
+    /* ── PRINT ── */
+    @media print{
+      .section-nav,.progress-wrap,#soundToggle,#globalProgress,#mascotFloat,.points-toast,#confettiCanvas,.btn-group{display:none!important;}
+      .section-card{display:block!important;break-inside:avoid;box-shadow:none;margin:8px 0;}
+      header{background:#141C2C!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     HEADER
+════════════════════════════════════════════ -->
+<header>
+  <img src="https://www.thegunnlawgroup.com/wp-content/uploads/2023/01/gunn-logo.png" alt="Gunn Law Group" class="glg-logo">
+  <div class="day-badge">PA-2 · Demand Writing: Attorney Judgment</div>
+  <h1>PA-2 — Demand Writing: Attorney Judgment</h1>
+  <p>Gunn Law Group · Pre-Lit Attorney Training</p>
+  <div class="score-bar">
+    <div>
+      <div class="score-label">BASE SCORE</div>
+      <div class="score-value" id="total-score">0</div>
+    </div>
+    <div>
+      <div class="score-label">POSSIBLE</div>
+      <div class="score-value">200</div>
+    </div>
+    <div>
+      <div class="score-label">BONUS</div>
+      <div class="score-value" id="bonus-score">0</div>
+    </div>
+    <div>
+      <div class="score-label">STREAK</div>
+      <div class="score-value" id="streak-display">0 &#128293;</div>
+    </div>
+  </div>
+</header>
+
+<!-- Sound Toggle -->
+<button id="soundToggle" style="position:fixed;top:12px;right:12px;z-index:10000;background:#1C2433;color:#c0c0c0;border:1px solid #333;border-radius:8px;padding:6px 10px;cursor:pointer;font-size:16px;" onclick="toggleSound()" title="Toggle Sound">&#128263;</button>
+<!-- Global Progress Bar -->
+<div id="globalProgress" style="position:fixed;top:0;left:0;width:100%;height:4px;background:#1C2433;z-index:9999;"><div id="globalProgressFill" style="height:100%;width:0%;background:linear-gradient(90deg,#dcb161,#e8c87a);transition:width 0.5s ease;"></div></div>
+
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <div class="progress-meta">
+    <span id="prog-label">Section 1 of 9</span>
+    <span id="prog-pct">0%</span>
+  </div>
+  <div class="progress-bg"><div class="progress-fill" id="prog-fill"></div></div>
+</div>
+
+<!-- NAV PILLS -->
+<nav class="section-nav" id="section-nav">
+  <button class="nav-pill active" id="nav-0" onclick="goToSection(0)">1. Intro</button>
+  <button class="nav-pill" id="nav-1" onclick="goToSection(1)">2. Valuation</button>
+  <button class="nav-pill" id="nav-2" onclick="goToSection(2)">3. Safety Rule</button>
+  <button class="nav-pill" id="nav-3" onclick="goToSection(3)">4. Narrative</button>
+  <button class="nav-pill" id="nav-4" onclick="goToSection(4)">5. Holt</button>
+  <button class="nav-pill" id="nav-5" onclick="goToSection(5)">6. Negotiation</button>
+  <button class="nav-pill" id="nav-6" onclick="goToSection(6)">7. Boss</button>
+  <button class="nav-pill" id="nav-7" onclick="goToSection(7)">8. Results</button>
+  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">9. Certificate</button>
+</nav>
+
+<!-- Points Toast -->
+<div class="points-toast" id="points-toast"></div>
+
+<!-- Confetti Canvas -->
+<canvas id="confettiCanvas"></canvas>
+
+<main>
+
+<!-- ══════════════════════════════════════════
+     SECTION 0 — INTRO / WELCOME
+════════════════════════════════════════════ -->
+<div class="section-card active" id="section-0">
+  <div class="section-header">
+    <div class="section-num">Section 1 · Welcome</div>
+    <h2>Demand Writing: Attorney Judgment</h2>
+    <div class="section-subhead">The demand letter is not a summary of damages. It is the single most important persuasion document in the case.</div>
+  </div>
+  <div class="section-body">
+    <div class="scenario">
+      <div class="scenario-tag">PA Track — Module 2</div>
+      <h3>Two identical cases. Two very different outcomes.</h3>
+      <p>Case A: $48,000 in specials, clear liability, $100K limits. The demand went out at $52,000 with a two-page letter listing medical bills. The adjuster countered at $28,000. After three rounds, the case settled for $36,000. The client netted $19,000 after fees and costs.</p>
+      <p style="margin-top:10px;">Case B: Same specials, same liability, same limits. The demand went out at $95,000 with a narrative that identified the specific safety rule the defendant violated, explained how the force of the collision traveled through the vehicle into the client\u2019s spine, established the client as a working mother and community volunteer, and presented comparable jury verdicts before stating the demand figure. The adjuster countered at $62,000. <span class="highlight">The case settled for $78,000. The client netted $47,000.</span></p>
+      <p style="margin-top:10px;"><span class="urgent">Same facts. Same injuries. Same coverage. $28,000 difference in client recovery. The only variable was the demand strategy.</span></p>
+    </div>
+    <div class="info-block">
+      <h4>What You Will Learn</h4>
+      <ul>
+        <li><strong>Demand valuation methodology</strong> &#8212; case value benchmarking tiers, when to demand aggressively versus conservatively, fee-to-cost ratio evaluation, and coverage maximization</li>
+        <li><strong>Safety rule framing</strong> &#8212; identifying the safety rule violation, separating mechanism of wreck from mechanism of harm, client credentialing, the random victim test, and community danger framing</li>
+        <li><strong>Narrative sequencing</strong> &#8212; how the order of information in a demand determines the adjuster\u2019s evaluation of the demand figure</li>
+        <li><strong>Holt demand compliance</strong> &#8212; O.C.G.A. &#167; 9-11-67.1 six-component requirements, when to use a Holt demand versus a standard demand, and the statutory consequences of non-compliance</li>
+        <li><strong>Post-demand negotiation posture</strong> &#8212; the seven-stage negotiation model, anchoring psychology, tactical empathy, calibrated questions, and the counter-offer strategy</li>
+        <li><strong>Georgia-specific considerations</strong> &#8212; modified comparative negligence impact on demand strategy, eggshell plaintiff doctrine for pre-existing conditions, and government entity demand requirements</li>
+      </ul>
+    </div>
+    <div class="callout callout-info"><strong>Prerequisite:</strong> PA-1 (Case Evaluation Strategy). This module assumes you can evaluate a case\u2019s viability, apply the Safety Checklist, and identify liability and damages issues. PA-2 builds on that foundation by teaching you how to translate evaluation into a persuasion document that maximizes client recovery.</div>
+    <div class="callout callout-info"><strong>Scoring:</strong> 20 scored questions &#215; 10 pts = 200 base pts possible (Q6 is an unscored calibration check). Pass gate: 170/200 (85%). Boss Challenge adds up to 50 bonus points. Bonus points do not count toward the pass gate but appear on your certificate.</div>
+    <div class="btn-group"><button class="btn btn-primary btn-block" onclick="goToSection(1)">Begin: Demand Strategy &amp; Valuation &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 1 — DEMAND STRATEGY & VALUATION (Q1–Q4)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-1">
+  <div class="section-header">
+    <div class="section-num">Section 2 · Demand Strategy &amp; Valuation · Up to 40 pts</div>
+    <h2>How to Value a Case and Set the Demand Number</h2>
+    <div class="section-subhead">The demand number is not a wish. It is a strategic anchor that frames the entire negotiation. Too low and you never recover. Too high without documentation and you lose credibility.</div>
+  </div>
+  <div class="section-body">
+    <div class="scenario">
+      <div class="scenario-tag">The Anchor Problem</div>
+      <h3>You can never negotiate UP from a low demand.</h3>
+      <p>When a demand goes out at $35,000 on a case worth $80,000, the negotiation is already lost. The adjuster\u2019s counter will be anchored to your number, not to the case value. Even aggressive negotiation from a low starting point cannot recover the ground lost by the initial anchor. <span class="highlight">The demand number is the single most consequential decision in pre-litigation.</span></p>
+    </div>
+    <div class="info-block">
+      <h4>&#128200; Case Value Benchmarking Tiers</h4>
+      <table class="stat-table">
+        <tr><th>Injury Category</th><th>Typical Range</th><th>Key Value Drivers</th></tr>
+        <tr><td>Soft tissue, non-surgical</td><td>1.5&#8211;2&#215; gross specials</td><td>Treatment compliance, gap-free records, objective findings</td></tr>
+        <tr><td>Disc herniation, chronic</td><td>Litigate if life-impacted</td><td>MRI confirmation, daily function impact, permanency</td></tr>
+        <tr><td>Spinal surgery</td><td>Potentially 7 figures</td><td>Coverage availability, surgical outcome, before/after comparison</td></tr>
+        <tr><td>Joint/ligament surgical</td><td>$75K &#8211; low 7 figures</td><td>Surgical complexity, rehabilitation timeline, future needs</td></tr>
+        <tr><td>Non-surgical fracture</td><td>Floor $30K&#8211;$50K</td><td>Location, healing complications, workplace impact</td></tr>
+        <tr><td>Surgical fracture</td><td>$100K &#8211; high 7 figures</td><td>Hardware, multiple surgeries, permanent restriction</td></tr>
+        <tr><td>Mild TBI</td><td>Hardest cases &#8212; must litigate</td><td>Neuropsych eval, cognitive testing, daily function evidence</td></tr>
+        <tr><td>Catastrophic / severe TBI</td><td>At least 7&#8211;8 figures</td><td>Life care plan, lifetime earnings, family impact</td></tr>
+        <tr><td>Wrongful death</td><td>$250K &#8211; $100M range</td><td>Decedent\u2019s earning capacity, dependents, circumstances</td></tr>
+      </table>
+    </div>
+    <div class="info-block">
+      <h4>&#128269; Coverage Maximization &#8212; The Evaluation Layer Most Attorneys Miss</h4>
+      <ul>
+        <li><strong>Demand affidavit:</strong> When a defendant has $250K+ in liability limits, demand a sworn affidavit confirming no additional coverage. Defendants with $250K+ limits frequently carry a $1M umbrella policy.</li>
+        <li><strong>UM/UIM stacking:</strong> Check for add-on vs. traditional UM coverage. Add-on stacks; traditional offsets. Some carriers stack every vehicle as a separate policy.</li>
+        <li><strong>Resident relative policies:</strong> Every household member\u2019s auto policy may provide additional UM/UIM coverage.</li>
+        <li><strong>Commercial policies:</strong> If the defendant was working, the employer\u2019s commercial policy applies &#8212; frequently the difference between a $25K case and a $1M case.</li>
+        <li><strong>MedPay:</strong> First-party medical payment coverage. Collect early to fund treatment and preserve health insurance subrogation leverage.</li>
+      </ul>
+    </div>
+    <div class="callout callout-warn"><strong>When to Demand Aggressively vs. Conservatively:</strong> Demand at or near policy limits when the Safety Checklist score is 8&#8211;10, liability is clear, injuries are significant, and specials approach or exceed limits. Demand conservatively when comparative negligence exposure exists, treatment gaps weaken causation, or coverage is limited. A conservative demand is not a weak demand &#8212; it is a realistic anchor that preserves credibility and accelerates resolution on cases where aggressive posture would backfire.</div>
+    <div class="callout callout-info"><strong>Fee-to-Cost Ratio:</strong> Before investing resources, evaluate whether the expected recovery justifies the firm\u2019s costs. The ideal ratio is 10:1 (legal fees to case disbursements). A case where the expected fee is $4,000 and projected costs are $2,000 (ratio 2:1) requires careful consideration &#8212; aggressive demand preparation may eat into already-thin margins. Quick resolution at a fair number may serve the client better than an extended negotiation.</div>
+
+    <div class="question-block" id="q1-block">
+      <div class="q-num">Question 1 of 20 · 10 pts</div>
+      <div class="q-text">Scenario: Client has $28,000 in medical specials from a rear-end collision. Clear liability &#8212; other driver cited. Treatment has been consistent with no gaps. Injuries are soft tissue, non-surgical. The defendant has $50K policy limits. How should you set the demand?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q1','a',false)" id="q1-a"><span class="opt-letter">A</span><span class="opt-text">Demand the full $50K policy limits regardless &#8212; always maximize available coverage on clear-liability cases</span></button>
+        <button class="option-btn" onclick="answer('q1','b',false)" id="q1-b"><span class="opt-letter">B</span><span class="opt-text">Apply a 3&#215; multiplier ($84K) and demand $84K even though it exceeds limits &#8212; high anchors always produce better results</span></button>
+        <button class="option-btn" onclick="answer('q1','c',true)" id="q1-c"><span class="opt-letter">C</span><span class="opt-text">Value at 1.5&#8211;2&#215; specials ($42K&#8211;$56K). The $50K policy ceiling limits actual recovery, but the calculated value guides strategy. Demand at or near limits, and investigate UM/UIM and resident relative policies to raise the ceiling before accepting the $50K cap as final.</span></button>
+        <button class="option-btn" onclick="answer('q1','d',false)" id="q1-d"><span class="opt-letter">D</span><span class="opt-text">Demand specials only ($28K) &#8212; conservative demands close faster and reduce litigation risk</span></button>
+      </div>
+      <div class="feedback-box" id="q1-fb"></div>
+    </div>
+
+    <div class="question-block" id="q2-block">
+      <div class="q-num">Question 2 of 20 · 10 pts</div>
+      <div class="q-text">Under what circumstances should you demand at or near policy limits?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q2','a',false)" id="q2-a"><span class="opt-letter">A</span><span class="opt-text">On every case &#8212; a high anchor always produces better outcomes regardless of case strength</span></button>
+        <button class="option-btn" onclick="answer('q2','b',true)" id="q2-b"><span class="opt-letter">B</span><span class="opt-text">When the Safety Checklist score is 8&#8211;10, liability is clear, injuries are significant, documented damages approach or exceed limits, and a coverage maximization audit confirms no additional policies. These cases justify aggressive anchoring because the documentation supports the number.</span></button>
+        <button class="option-btn" onclick="answer('q2','c',false)" id="q2-c"><span class="opt-letter">C</span><span class="opt-text">Only when the client has surgical injuries &#8212; non-surgical cases never warrant limits demands</span></button>
+        <button class="option-btn" onclick="answer('q2','d',false)" id="q2-d"><span class="opt-letter">D</span><span class="opt-text">When the adjuster has been unresponsive for 30+ days &#8212; a limits demand signals urgency and forces a response</span></button>
+      </div>
+      <div class="feedback-box" id="q2-fb"></div>
+    </div>
+
+    <div class="question-block" id="q3-block">
+      <div class="q-num">Question 3 of 20 · 10 pts</div>
+      <div class="q-text">Case profile: Herniated disc C5&#8211;C6, MRI-confirmed, failed conservative treatment, surgical consult recommended. $34,000 in pre-surgery specials. $100K limits. How does this case fit the benchmarking framework?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q3','a',false)" id="q3-a"><span class="opt-letter">A</span><span class="opt-text">Soft tissue non-surgical tier &#8212; value at 1.5&#8211;2&#215; specials ($51K&#8211;$68K) and demand $68K</span></button>
+        <button class="option-btn" onclick="answer('q3','b',false)" id="q3-b"><span class="opt-letter">B</span><span class="opt-text">Demand $100K policy limits immediately &#8212; any case heading toward surgery automatically warrants a limits demand</span></button>
+        <button class="option-btn" onclick="answer('q3','c',false)" id="q3-c"><span class="opt-letter">C</span><span class="opt-text">Mild TBI tier &#8212; disc herniations and TBI require identical evaluation approaches</span></button>
+        <button class="option-btn" onclick="answer('q3','d',true)" id="q3-d"><span class="opt-letter">D</span><span class="opt-text">Disc herniation with potential surgical intervention &#8212; litigate if life-impacted. Pre-surgery value is uncertain; if surgery proceeds, the case potentially reaches 7 figures. Demand strategy should account for the surgical trajectory, wait for the surgical consult outcome before finalizing the demand amount, and investigate additional coverage sources beyond the $100K limits.</span></button>
+      </div>
+      <div class="feedback-box" id="q3-fb"></div>
+    </div>
+
+    <div class="question-block" id="q4-block">
+      <div class="q-num">Question 4 of 20 · 10 pts</div>
+      <div class="q-text">Fee-to-cost ratio evaluation: A case has $8,000 in specials, $25K minimum limits, disputed liability, and an estimated settlement value of $12K&#8211;$15K. The firm\u2019s 33.3% fee on a $12K settlement = $4,000. Estimated case costs: $2,000. What does the fee-to-cost ratio tell you?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q4','a',true)" id="q4-a"><span class="opt-letter">A</span><span class="opt-text">The fee-to-cost ratio of 2:1 is far below the ideal 10:1. This case may not justify the firm\u2019s investment in aggressive demand preparation. Factor this into strategy: aim for a quick resolution at a fair number rather than an extended negotiation that eats into already-thin margins. If the client\u2019s net recovery is reasonable, a prompt settlement serves them better than a protracted fight.</span></button>
+        <button class="option-btn" onclick="answer('q4','b',false)" id="q4-b"><span class="opt-letter">B</span><span class="opt-text">Fee-to-cost ratio is irrelevant &#8212; the client deserves full advocacy regardless of firm economics</span></button>
+        <button class="option-btn" onclick="answer('q4','c',false)" id="q4-c"><span class="opt-letter">C</span><span class="opt-text">Decline the case &#8212; any ratio below 5:1 is an automatic decline under the evaluation SOP</span></button>
+        <button class="option-btn" onclick="answer('q4','d',false)" id="q4-d"><span class="opt-letter">D</span><span class="opt-text">Demand the full $25K limits to improve the ratio &#8212; a higher settlement automatically improves the economics</span></button>
+      </div>
+      <div class="feedback-box" id="q4-fb"></div>
+    </div>
+
+    <div class="section-score" id="s1-score" style="display:none;"><div class="score-display" id="s1-score-val"></div><div class="score-label">Section 2 Score</div></div>
+    <div class="btn-group" id="s1-next"><button class="btn btn-primary btn-block" onclick="goToSection(2)">Next: Safety Rule Framing &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 2 — SAFETY RULE FRAMING (Q5–Q8)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-2">
+  <div class="section-header">
+    <div class="section-num">Section 3 · Safety Rule Framing · Up to 40 pts</div>
+    <h2>Making the Adjuster Care About the Community, Not Just the Plaintiff</h2>
+    <div class="section-subhead">A demand that describes an accident is worth X. A demand that describes a safety rule violation that endangered the community is worth 3X. Same facts. Different frame.</div>
+  </div>
+  <div class="section-body">
+    <div class="scenario">
+      <div class="scenario-tag">The Framing Gap</div>
+      <h3>Two demand openings. Same case. Completely different adjuster reactions.</h3>
+      <p><strong>Demand A:</strong> "On March 15, 2025, the defendant rear-ended our client at a red light, causing injuries."</p>
+      <p style="margin-top:8px;"><strong>Demand B:</strong> "Every driver on Georgia roads is required to maintain awareness of the road ahead and stop when traffic requires it. This rule protects every driver, passenger, and pedestrian in the community. On March 15, 2025, the defendant violated this rule. Our client paid the price. <span class="highlight">The community has an interest in ensuring that safety violations carry real consequences.</span>"</p>
+      <p style="margin-top:8px;">Demand A describes an event. Demand B identifies a rule violation that endangered <em>everyone</em>. <span class="urgent">The adjuster who reads Demand B evaluates the case as a community enforcement issue, not just an individual claim.</span></p>
+    </div>
+    <div class="info-block">
+      <h4>&#9878;&#65039; The Five Elements of Safety Rule Framing</h4>
+      <div style="margin-top:12px;">
+        <div class="checklist-item"><span class="checklist-num">1</span><span class="checklist-text"><strong>Identify the specific safety rule.</strong> "A driver must maintain a safe following distance." "A property owner must fix known hazards." If you cannot state the rule in one sentence, the adjuster (and later, the jury) will not remember it.</span></div>
+        <div class="checklist-item"><span class="checklist-num">2</span><span class="checklist-text"><strong>Separate mechanism of wreck from mechanism of harm.</strong> The wreck is what happened to the vehicles. The harm is what happened inside the human body. In low-speed impacts, vehicle damage may be minimal while force transfer to the occupant is significant. A ton of metal at 6 mph delivers greater force than dropping that weight on a person from more than a foot high.</span></div>
+        <div class="checklist-item"><span class="checklist-num">3</span><span class="checklist-text"><strong>Credential the client.</strong> Before presenting damages, establish the plaintiff as a community member worth protecting. "Works, pays taxes, feeds their kids." Once the adjuster sees the plaintiff as worthy, the damages feel proportionate.</span></div>
+        <div class="checklist-item"><span class="checklist-num">4</span><span class="checklist-text"><strong>Apply the random victim test.</strong> "Who else could have been hurt?" If the defendant\u2019s conduct endangered anyone in the community, the case is not about one plaintiff &#8212; it is about community safety enforcement.</span></div>
+        <div class="checklist-item"><span class="checklist-num">5</span><span class="checklist-text"><strong>Polarize the defense position.</strong> Force the defense to commit: "Either the client is lying about their injuries, or the defendant\u2019s conduct caused real harm to a real person." Make the defense position look untenable. Do not let them occupy comfortable middle ground.</span></div>
+      </div>
+    </div>
+    <div class="callout callout-warn"><strong>Pre-Existing Conditions Are Multipliers, Not Defenses.</strong> Under the eggshell plaintiff doctrine, every driver must drive as if every other vehicle contains the most fragile possible person. A pre-existing condition does not reduce the defendant\u2019s liability &#8212; it increases it. The demand should frame pre-existing conditions aggressively: "The defendant\u2019s conduct was especially dangerous because it aggravated a condition that was previously manageable and asymptomatic."</span></div>
+    <div class="callout callout-danger"><strong>Safety Rule Demand Evaluation Checklist (Pre-Lit Head Attorney SOP &#167;1):</strong> Every demand you review must pass these five questions before submission: (1) Has the safety rule violation been clearly identified? (2) Does the demand explain the mechanism of harm? (3) Does the demand establish community interest? (4) Has the random victim framing been applied? (5) Is the demand value anchored high enough? If any demand fails these questions, return it for revision.</div>
+
+    <div class="question-block" id="q5-block">
+      <div class="q-num">Question 5 of 20 · 10 pts</div>
+      <div class="q-text">Client was rear-ended at a stoplight by a distracted driver. Which of the following is the strongest safety rule statement for the demand?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q5','a',false)" id="q5-a"><span class="opt-letter">A</span><span class="opt-text">"The defendant was negligent in the operation of their motor vehicle."</span></button>
+        <button class="option-btn" onclick="answer('q5','b',true)" id="q5-b"><span class="opt-letter">B</span><span class="opt-text">"Every driver must maintain awareness of the road ahead and stop when traffic requires it. This rule protects every driver, passenger, and pedestrian on the road &#8212; your family, your neighbors, everyone. The defendant violated this rule."</span></button>
+        <button class="option-btn" onclick="answer('q5','c',false)" id="q5-c"><span class="opt-letter">C</span><span class="opt-text">"The defendant violated O.C.G.A. &#167; 40-6-49 (following too closely) and is liable for all resulting damages under a negligence per se theory."</span></button>
+        <button class="option-btn" onclick="answer('q5','d',false)" id="q5-d"><span class="opt-letter">D</span><span class="opt-text">"The defendant caused injuries to our client by failing to drive safely on Georgia roads."</span></button>
+      </div>
+      <div class="feedback-box" id="q5-fb"></div>
+    </div>
+
+    <div class="question-block" id="q6-block">
+      <div class="q-num">Question 6 of 20 · Unscored Calibration</div>
+      <div class="q-text"><em>(This is a self-assessment &#8212; no points awarded or deducted. All answers reveal the same teaching content.)</em><br><br>You need to draft the "mechanism of wreck vs. mechanism of harm" analysis for a MIST (Minor Impact Soft Tissue) case where the adjuster will argue "minor impact = minor injury." On a scale of 1&#8211;5, how confident are you in your ability to draft this analysis?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q6','a',true)" id="q6-a"><span class="opt-letter">A</span><span class="opt-text">1&#8211;2 &#8212; Not confident. I know the distinction exists but I am not sure how to explain it persuasively.</span></button>
+        <button class="option-btn" onclick="answer('q6','b',true)" id="q6-b"><span class="opt-letter">B</span><span class="opt-text">3 &#8212; Somewhat confident. I can separate the concepts but struggle with the physics explanation.</span></button>
+        <button class="option-btn" onclick="answer('q6','c',true)" id="q6-c"><span class="opt-letter">C</span><span class="opt-text">4 &#8212; Fairly confident. I can draft the analysis and tie it to the treating physician\u2019s documentation.</span></button>
+        <button class="option-btn" onclick="answer('q6','d',true)" id="q6-d"><span class="opt-letter">D</span><span class="opt-text">5 &#8212; Fully confident. I can draft a compelling mechanism analysis for any MIST case and counter defense biomechanical arguments.</span></button>
+      </div>
+      <div class="feedback-box" id="q6-fb"></div>
+    </div>
+
+    <div class="question-block" id="q7-block">
+      <div class="q-num">Question 7 of 20 · 10 pts</div>
+      <div class="q-text">Client credentialing in the demand narrative. Which statement best demonstrates effective credentialing?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q7','a',false)" id="q7-a"><span class="opt-letter">A</span><span class="opt-text">"Our client is a loving mother of three who was injured by the defendant\u2019s negligence."</span></button>
+        <button class="option-btn" onclick="answer('q7','b',false)" id="q7-b"><span class="opt-letter">B</span><span class="opt-text">"Our client has no prior claims history and has never been involved in litigation."</span></button>
+        <button class="option-btn" onclick="answer('q7','c',true)" id="q7-c"><span class="opt-letter">C</span><span class="opt-text">"Before this accident, Ms. Ramirez was a registered nurse who worked double shifts at Grady Memorial, coached her son\u2019s baseball team on weekends, and volunteered at her church food bank every month. She was an active, contributing member of her community &#8212; the exact person this safety rule was designed to protect."</span></button>
+        <button class="option-btn" onclick="answer('q7','d',false)" id="q7-d"><span class="opt-letter">D</span><span class="opt-text">"Our client is the real victim here and deserves to be compensated for her suffering."</span></button>
+      </div>
+      <div class="feedback-box" id="q7-fb"></div>
+    </div>
+
+    <div class="question-block" id="q8-block">
+      <div class="q-num">Question 8 of 20 · 10 pts</div>
+      <div class="q-text">MIST case strategy: Client was rear-ended at low speed (estimated 6 mph). Minor vehicle damage. Client reports persistent neck and back pain with documented cervical strain on imaging. The adjuster will argue "minor impact = minor injury." How should the demand frame this?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q8','a',true)" id="q8-a"><span class="opt-letter">A</span><span class="opt-text">Separate the mechanism of wreck from the mechanism of harm. Vehicle damage measures the wreck. Bodily injury measures the harm. A ton of metal at 6 mph delivers greater force than dropping that weight on a person from more than a foot high. The treating physician documents exactly how that force traveled through the vehicle and caused the specific injury to the client\u2019s cervical spine. Minor vehicle damage does not equal minor human injury.</span></button>
+        <button class="option-btn" onclick="answer('q8','b',false)" id="q8-b"><span class="opt-letter">B</span><span class="opt-text">Concede that the impact was minor and focus the demand primarily on the client\u2019s subjective pain complaints and emotional suffering</span></button>
+        <button class="option-btn" onclick="answer('q8','c',false)" id="q8-c"><span class="opt-letter">C</span><span class="opt-text">Demand policy limits regardless of impact speed &#8212; the speed of the collision is completely irrelevant to injury valuation</span></button>
+        <button class="option-btn" onclick="answer('q8','d',false)" id="q8-d"><span class="opt-letter">D</span><span class="opt-text">Avoid MIST cases entirely &#8212; low-speed impact cases are not worth the demand preparation investment</span></button>
+      </div>
+      <div class="feedback-box" id="q8-fb"></div>
+    </div>
+
+    <div class="section-score" id="s2-score" style="display:none;"><div class="score-display" id="s2-score-val"></div><div class="score-label">Section 3 Score</div></div>
+    <div class="btn-group" id="s2-next"><button class="btn btn-primary btn-block" onclick="goToSection(3)">Next: Narrative Sequencing &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 3 — NARRATIVE SEQUENCING (Q9–Q12)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-3">
+  <div class="section-header">
+    <div class="section-num">Section 4 · Narrative Sequencing · Up to 40 pts</div>
+    <h2>Backward Mapping, Information Order &amp; Proactive Weakness Management</h2>
+    <div class="section-subhead">A demand figure presented without context is evaluated on its own. A figure presented after a fully-built narrative is evaluated relative to everything the adjuster has already absorbed.</div>
+  </div>
+  <div class="section-body">
+    <div class="scenario">
+      <div class="scenario-tag">The Contrast Phenomenon</div>
+      <h3>A spa company changed one thing about its sales pitch and sales increased 520%.</h3>
+      <p>They reversed the presentation order. Instead of showing the service price first and then describing the benefits, they described the benefits first &#8212; the experience, the results, the transformation &#8212; and THEN revealed the price. <span class="highlight">The price did not change. The context the buyer had absorbed before seeing the price changed everything.</span></p>
+      <p style="margin-top:8px;">The same principle governs demand writing. Present comparable jury verdicts in the same county &#8212; showing the adjuster what a jury awarded in a similar case &#8212; BEFORE stating your demand figure. <span class="urgent">The adjuster evaluates your number relative to the verdicts they just read, not in isolation.</span></p>
+    </div>
+    <div class="info-block">
+      <h4>&#128203; Recommended Demand Narrative Sequence</h4>
+      <div style="margin-top:12px;">
+        <div class="checklist-item"><span class="checklist-num">1</span><span class="checklist-text"><strong>Open with the human story.</strong> Client background &#8212; what their life looked like before the accident. Prime the reader\u2019s attention toward the person, not the claim number.</span></div>
+        <div class="checklist-item"><span class="checklist-num">2</span><span class="checklist-text"><strong>Establish liability clearly.</strong> Eliminate uncertainty about who is at fault before presenting damages. If the adjuster is still questioning liability when they reach the damages section, they will discount everything.</span></div>
+        <div class="checklist-item"><span class="checklist-num">3</span><span class="checklist-text"><strong>Build the severity contrast.</strong> Mechanism of injury, emergency treatment, pain severity. Build the emotional context that makes the damages figure feel proportionate, not inflated.</span></div>
+        <div class="checklist-item"><span class="checklist-num">4</span><span class="checklist-text"><strong>Present medical damages with authority.</strong> Treating physicians, diagnostic findings, bills organized chronologically. Include the specials summary with exact totals.</span></div>
+        <div class="checklist-item"><span class="checklist-num">5</span><span class="checklist-text"><strong>Then present the demand figure.</strong> After the reader has absorbed liability, injury severity, and medical treatment. At this point, the number has a frame &#8212; it is evaluated relative to everything above, not as a standalone ask.</span></div>
+      </div>
+    </div>
+    <div class="info-block">
+      <h4>&#127919; Backward Mapping from the Decisive Event</h4>
+      <p>Before drafting, identify the <strong>decisive event</strong> &#8212; the single moment most likely to produce a favorable resolution. In most pre-litigation cases, that moment is the adjuster receiving the demand and authorizing full settlement authority.</p>
+      <p style="margin-top:8px;">Backward map from that moment: What does the adjuster need to see to authorize payment? Documented liability, complete medical records, credible specials calculation, compelling narrative, and a demand anchored high enough to allow movement. Build every element of the demand package to make that moment successful.</p>
+    </div>
+    <div class="callout callout-info"><strong>Proactive Weakness Management:</strong> Every case has weaknesses &#8212; treatment gaps, pre-existing conditions, comparative fault arguments. Address them in the demand BEFORE the adjuster raises them. Explain the treatment gap as physician-directed conservative care. Frame pre-existing conditions as multipliers under the eggshell plaintiff doctrine. Anticipate and neutralize the defense arguments so the adjuster reads your explanation first, not theirs.</div>
+
+    <div class="question-block" id="q9-block">
+      <div class="q-num">Question 9 of 20 · 10 pts</div>
+      <div class="q-text">Information sequencing in a demand letter. Which order produces the strongest persuasive effect on the adjuster?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q9','a',false)" id="q9-a"><span class="opt-letter">A</span><span class="opt-text">Demand amount &#8594; medical damages &#8594; liability &#8594; client background (lead with the ask)</span></button>
+        <button class="option-btn" onclick="answer('q9','b',false)" id="q9-b"><span class="opt-letter">B</span><span class="opt-text">Medical damages &#8594; demand amount &#8594; liability &#8594; client background (lead with the specials)</span></button>
+        <button class="option-btn" onclick="answer('q9','c',false)" id="q9-c"><span class="opt-letter">C</span><span class="opt-text">Liability &#8594; medical damages &#8594; demand amount &#8594; client background (lead with the law)</span></button>
+        <button class="option-btn" onclick="answer('q9','d',true)" id="q9-d"><span class="opt-letter">D</span><span class="opt-text">Client background (the human story) &#8594; liability established &#8594; severity contrast and medical damages &#8594; comparable verdicts &#8594; demand figure. The reader absorbs the full frame before encountering the number, and evaluates the demand relative to everything above &#8212; not in isolation.</span></button>
+      </div>
+      <div class="feedback-box" id="q9-fb"></div>
+    </div>
+
+    <div class="question-block" id="q10-block">
+      <div class="q-num">Question 10 of 20 · 10 pts</div>
+      <div class="q-text">Backward mapping: Before drafting the demand, you identify the "decisive event." In a pre-litigation demand case, what is that decisive event?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q10','a',false)" id="q10-a"><span class="opt-letter">A</span><span class="opt-text">The client signing the fee agreement &#8212; the case formally begins at that moment</span></button>
+        <button class="option-btn" onclick="answer('q10','b',true)" id="q10-b"><span class="opt-letter">B</span><span class="opt-text">The adjuster receiving the demand package and authorizing full settlement authority. Every element of the demand should be organized to make that moment successful &#8212; documented liability, complete records, credible specials, compelling narrative, and an anchored demand figure.</span></button>
+        <button class="option-btn" onclick="answer('q10','c',false)" id="q10-c"><span class="opt-letter">C</span><span class="opt-text">The jury reaching a verdict at trial &#8212; every demand should be written as if it will be read to a jury</span></button>
+        <button class="option-btn" onclick="answer('q10','d',false)" id="q10-d"><span class="opt-letter">D</span><span class="opt-text">The case manager assembling the medical records &#8212; record completeness is the decisive factor</span></button>
+      </div>
+      <div class="feedback-box" id="q10-fb"></div>
+    </div>
+
+    <div class="question-block" id="q11-block">
+      <div class="q-num">Question 11 of 20 · 10 pts</div>
+      <div class="q-text">Before stating your demand figure, you want to establish a reference point for the adjuster. Which technique is most effective?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q11','a',false)" id="q11-a"><span class="opt-letter">A</span><span class="opt-text">State that your firm has won several large verdicts in the past to establish firm credibility</span></button>
+        <button class="option-btn" onclick="answer('q11','b',false)" id="q11-b"><span class="opt-letter">B</span><span class="opt-text">Tell the adjuster what other firms would demand on a case with similar facts and injuries</span></button>
+        <button class="option-btn" onclick="answer('q11','c',true)" id="q11-c"><span class="opt-letter">C</span><span class="opt-text">Present comparable jury verdicts in the same county for cases with similar injuries and liability BEFORE stating your demand figure. The adjuster evaluates your number relative to those verdicts, not in isolation. A $75K demand presented after $200K+ verdict examples feels reasonable; the same demand without context feels aggressive.</span></button>
+        <button class="option-btn" onclick="answer('q11','d',false)" id="q11-d"><span class="opt-letter">D</span><span class="opt-text">Remind the adjuster that their company has a bad claims-paying reputation and should improve it with this settlement</span></button>
+      </div>
+      <div class="feedback-box" id="q11-fb"></div>
+    </div>
+
+    <div class="question-block" id="q12-block">
+      <div class="q-num">Question 12 of 20 · 10 pts</div>
+      <div class="q-text">The client has a 3-week treatment gap and a pre-existing condition at the same spinal level. How should the demand address these weaknesses?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q12','a',true)" id="q12-a"><span class="opt-letter">A</span><span class="opt-text">Proactively address both weaknesses before the adjuster raises them. Explain the treatment gap as a physician-directed conservative care period documented in the medical records. Frame the pre-existing condition as a multiplier under the eggshell plaintiff doctrine &#8212; the defendant must take the victim as they find them. The condition was previously manageable and asymptomatic; the defendant\u2019s conduct aggravated it into a disabling condition.</span></button>
+        <button class="option-btn" onclick="answer('q12','b',false)" id="q12-b"><span class="opt-letter">B</span><span class="opt-text">Ignore both weaknesses &#8212; bringing them up in the demand highlights problems the adjuster might not notice on their own</span></button>
+        <button class="option-btn" onclick="answer('q12','c',false)" id="q12-c"><span class="opt-letter">C</span><span class="opt-text">Address only the treatment gap &#8212; pre-existing conditions are always fatal to case value and should not be mentioned</span></button>
+        <button class="option-btn" onclick="answer('q12','d',false)" id="q12-d"><span class="opt-letter">D</span><span class="opt-text">Wait for the adjuster to raise these issues during negotiation, then respond reactively with explanations</span></button>
+      </div>
+      <div class="feedback-box" id="q12-fb"></div>
+    </div>
+
+    <div class="section-score" id="s3-score" style="display:none;"><div class="score-display" id="s3-score-val"></div><div class="score-label">Section 4 Score</div></div>
+    <div class="btn-group" id="s3-next"><button class="btn btn-primary btn-block" onclick="goToSection(4)">Next: Holt Demand Compliance &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 4 — HOLT DEMAND COMPLIANCE (Q13–Q16)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-4">
+  <div class="section-header">
+    <div class="section-num">Section 5 · Holt Demand Compliance · Up to 40 pts</div>
+    <h2>O.C.G.A. &#167; 9-11-67.1 &#8212; The Statutory Weapon</h2>
+    <div class="section-subhead">A valid Holt demand that is rejected &#8212; and later exceeded at judgment &#8212; triggers mandatory attorney\u2019s fees and costs against the defendant. Missing ONE component forfeits the entire weapon.</div>
+  </div>
+  <div class="section-body">
+    <div class="scenario">
+      <div class="scenario-tag">The $47,000 Mistake</div>
+      <h3>A demand with five of six components is not a Holt demand. It is a standard settlement offer with no teeth.</h3>
+      <p>The firm sent a $200,000 demand to a trucking company\u2019s insurer. Strong liability. Documented injuries. The demand letter contained five of the six required Holt components &#8212; but stated "policy limits" instead of the specific dollar amount ($200,000.00). The insurer rejected. The case went to trial and the jury returned a $320,000 verdict. <span class="highlight">The firm sought $47,000 in attorney\u2019s fees and costs under &#167; 9-11-67.1.</span> The court denied the motion. <span class="urgent">The demand was not a valid Holt demand because it lacked Component 3 &#8212; a specific dollar amount.</span> "Policy limits" without a number does not satisfy the statute.</p>
+    </div>
+    <div class="info-block">
+      <h4>&#9878;&#65039; The Six Required Components of a Holt Demand</h4>
+      <table class="stat-table">
+        <tr><th>#</th><th>Component</th><th>Requirement</th><th>Common Mistake</th></tr>
+        <tr><td class="stat-num">1</td><td>Written Offer</td><td>Must be in writing &#8212; verbal demands do not qualify</td><td>Verbal demand without written follow-up</td></tr>
+        <tr><td class="stat-num">2</td><td>Time Period for Acceptance</td><td>Must specify acceptance period &#8212; minimum 30 days</td><td>No stated deadline, or deadline under 30 days</td></tr>
+        <tr><td class="stat-num">3</td><td>Amount of Monetary Damages</td><td>Must state a specific dollar amount &#8212; not a range</td><td>Demanding "policy limits" without the actual dollar figure</td></tr>
+        <tr><td class="stat-num">4</td><td>Parties to Be Released</td><td>Must identify each party to be released</td><td>Vague "all parties" language without names</td></tr>
+        <tr><td class="stat-num">5</td><td>Claims to Be Released</td><td>Must specify which claims are being released</td><td>Generic "all claims" without reference to the incident</td></tr>
+        <tr><td class="stat-num">6</td><td>Persons to Be Bound</td><td>Must identify who will be bound by the settlement</td><td>Failing to bind spouse (loss of consortium) or heirs</td></tr>
+      </table>
+    </div>
+    <div class="info-block">
+      <h4>Holt vs. Standard Demand &#8212; When to Use Each</h4>
+      <table class="stat-table">
+        <tr><th>Factor</th><th>Holt Demand (&#167; 9-11-67.1)</th><th>Standard Demand</th></tr>
+        <tr><td>Statutory penalties if rejected</td><td class="stat-ok">Yes &#8212; attorney fees + costs</td><td class="stat-void">No</td></tr>
+        <tr><td>Six-component requirement</td><td>Strict compliance required</td><td>Flexible format</td></tr>
+        <tr><td>Timing</td><td>Must be pre-suit</td><td>Any time</td></tr>
+        <tr><td>Acceptance period</td><td>Minimum 30 days</td><td>No minimum</td></tr>
+        <tr><td>Best used when</td><td>Strong liability, clear damages, litigation likely</td><td>Early negotiation, soft demand, relationship building</td></tr>
+      </table>
+    </div>
+    <div class="callout callout-danger"><strong>Pre-Send Verification (Holt Demand Checklist):</strong> Before any Holt demand leaves the office: (1) All six components present and expressly stated. (2) Specific dollar amount &#8212; not "policy limits" without a number. (3) All defendants and parties named. (4) All claimants bound including spouse/heirs. (5) 30-day acceptance period stated. (6) Sent via certified mail AND email with delivery confirmation. (7) Copy uploaded to CasePeer. (8) 30-day follow-up task set. Two sets of eyes &#8212; attorney reviews, CM verifies.</div>
+
+    <div class="question-block" id="q13-block">
+      <div class="q-num">Question 13 of 20 · 10 pts</div>
+      <div class="q-text">O.C.G.A. &#167; 9-11-67.1 requires a valid Holt demand to contain six components. Which of the following is one of the required components?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q13','a',false)" id="q13-a"><span class="opt-letter">A</span><span class="opt-text">A statement of the plaintiff\u2019s employment history and income documentation</span></button>
+        <button class="option-btn" onclick="answer('q13','b',true)" id="q13-b"><span class="opt-letter">B</span><span class="opt-text">A specific dollar amount being demanded &#8212; not a range, and not "policy limits" without stating the actual number. The statute requires a precise monetary figure.</span></button>
+        <button class="option-btn" onclick="answer('q13','c',false)" id="q13-c"><span class="opt-letter">C</span><span class="opt-text">A detailed medical narrative describing all injuries with treating physician statements</span></button>
+        <button class="option-btn" onclick="answer('q13','d',false)" id="q13-d"><span class="opt-letter">D</span><span class="opt-text">A statement of the defendant\u2019s prior driving record and claims history</span></button>
+      </div>
+      <div class="feedback-box" id="q13-fb"></div>
+    </div>
+
+    <div class="question-block" id="q14-block">
+      <div class="q-num">Question 14 of 20 · 10 pts</div>
+      <div class="q-text">A case manager drafts a Holt demand that includes five of the six required components but omits the minimum 30-day acceptance period. What is the legal consequence?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q14','a',false)" id="q14-a"><span class="opt-letter">A</span><span class="opt-text">The demand is still valid &#8212; the court will imply a reasonable acceptance period under general contract principles</span></button>
+        <button class="option-btn" onclick="answer('q14','b',false)" id="q14-b"><span class="opt-letter">B</span><span class="opt-text">The demand can be cured by sending a follow-up letter adding the missing 30-day acceptance period</span></button>
+        <button class="option-btn" onclick="answer('q14','c',false)" id="q14-c"><span class="opt-letter">C</span><span class="opt-text">The adjuster is legally required to notify the firm of the deficiency before the deadline expires</span></button>
+        <button class="option-btn" onclick="answer('q14','d',true)" id="q14-d"><span class="opt-letter">D</span><span class="opt-text">The demand is a standard settlement offer, not a statutory Holt demand. All six components are mandatory. Missing even one eliminates the right to attorney\u2019s fees and costs if the plaintiff later obtains a judgment exceeding the demand amount. The statutory weapon is completely forfeited.</span></button>
+      </div>
+      <div class="feedback-box" id="q14-fb"></div>
+    </div>
+
+    <div class="question-block" id="q15-block">
+      <div class="q-num">Question 15 of 20 · 10 pts</div>
+      <div class="q-text">Your client has $65K in specials, strong liability, and is treating with $100K policy limits. You are preparing the demand. When is a Holt demand more strategic than a standard demand?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q15','a',true)" id="q15-a"><span class="opt-letter">A</span><span class="opt-text">When liability is strong, damages are well-documented, and litigation is likely if the demand is rejected. The Holt demand creates statutory penalty pressure &#8212; if rejected and the plaintiff later obtains a judgment exceeding the offer, the defendant owes attorney\u2019s fees and costs. This incentivizes the adjuster to evaluate the offer seriously rather than reflexively rejecting.</span></button>
+        <button class="option-btn" onclick="answer('q15','b',false)" id="q15-b"><span class="opt-letter">B</span><span class="opt-text">Always &#8212; every demand should be a Holt demand because statutory penalties are always advantageous</span></button>
+        <button class="option-btn" onclick="answer('q15','c',false)" id="q15-c"><span class="opt-letter">C</span><span class="opt-text">Only when damages exceed $250,000 &#8212; Holt demands are reserved for high-value catastrophic cases</span></button>
+        <button class="option-btn" onclick="answer('q15','d',false)" id="q15-d"><span class="opt-letter">D</span><span class="opt-text">Never in pre-litigation &#8212; Holt demands can only be sent after a lawsuit has been filed</span></button>
+      </div>
+      <div class="feedback-box" id="q15-fb"></div>
+    </div>
+
+    <div class="question-block" id="q16-block">
+      <div class="q-num">Question 16 of 20 · 10 pts</div>
+      <div class="q-text">A Holt demand states: "Plaintiff demands the policy limits in full settlement of all claims." The policy is $100K. Is this a valid Holt demand?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q16','a',false)" id="q16-a"><span class="opt-letter">A</span><span class="opt-text">Yes &#8212; "policy limits" is a universally understood amount, and the adjuster knows the policy is $100K</span></button>
+        <button class="option-btn" onclick="answer('q16','b',false)" id="q16-b"><span class="opt-letter">B</span><span class="opt-text">Yes &#8212; the adjuster has actual knowledge of the policy amount, so the specificity requirement is functionally satisfied</span></button>
+        <button class="option-btn" onclick="answer('q16','c',true)" id="q16-c"><span class="opt-letter">C</span><span class="opt-text">No &#8212; Component 3 requires a specific dollar amount. "Policy limits" without stating the actual number ($100,000.00) fails to satisfy the specificity requirement. The demand must state the exact dollar figure to qualify as a statutory Holt demand. This is one of the most common compliance failures.</span></button>
+        <button class="option-btn" onclick="answer('q16','d',false)" id="q16-d"><span class="opt-letter">D</span><span class="opt-text">Yes, but only if the demand includes all other five components perfectly</span></button>
+      </div>
+      <div class="feedback-box" id="q16-fb"></div>
+    </div>
+
+    <div class="section-score" id="s4-score" style="display:none;"><div class="score-display" id="s4-score-val"></div><div class="score-label">Section 5 Score</div></div>
+    <div class="btn-group" id="s4-next"><button class="btn btn-primary btn-block" onclick="goToSection(5)">Next: Post-Demand Negotiation &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 5 — POST-DEMAND NEGOTIATION (Q17–Q20)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-5">
+  <div class="section-header">
+    <div class="section-num">Section 6 · Post-Demand Negotiation · Up to 40 pts</div>
+    <h2>The Seven-Stage Model, Anchoring &amp; Counter-Offer Strategy</h2>
+    <div class="section-subhead">Most failed negotiations fail at Stage 1 (insufficient preparation). The phone call determines how close to the ceiling the case lands.</div>
+  </div>
+  <div class="section-body">
+    <div class="scenario">
+      <div class="scenario-tag">The Preparation Principle</div>
+      <h3>The negotiation is decided before the phone rings.</h3>
+      <p>No first-offer call happens without the pre-negotiation worksheet completed. The worksheet captures: the adjuster\u2019s likely reserve, their authority level, case BATNA (both sides), the client\u2019s walk-away number, the true floor, the pseudo-floor, concession increments, and the walk-away trigger. <span class="highlight">A case manager negotiating without the worksheet is improvising with the client\u2019s money.</span> The attorney sets the worksheet; the CM executes it.</p>
+    </div>
+    <div class="info-block">
+      <h4>&#128202; The Seven-Stage Negotiation Model</h4>
+      <table class="stat-table">
+        <tr><th>Stage</th><th>What Happens</th><th>Key Principle</th></tr>
+        <tr><td class="stat-num">1 &#8212; Preparation</td><td>Know specials, limits, target range, true floor, pseudo-floor, concession increments, walk-away trigger</td><td>Pre-set discipline &#8212; the negotiation is decided before the phone rings</td></tr>
+        <tr><td class="stat-num">2 &#8212; Initial Interaction</td><td>Let the adjuster speak first. Their first number reveals their floor.</td><td>Respect read &#8212; assess whether they are negotiating or just processing</td></tr>
+        <tr><td class="stat-num">3 &#8212; Information Exchange</td><td>Ask open questions. Learn their objections. Use curiosity before persuasion.</td><td>Ask more than you tell &#8212; "What is your evaluation of the liability exposure?"</td></tr>
+        <tr><td class="stat-num">4 &#8212; Bargaining</td><td>Move in decreasing increments. Each concession smaller than the last.</td><td>Decreasing increments signal you are approaching your limit</td></tr>
+        <tr><td class="stat-num">5 &#8212; Moving to Closure</td><td>Watch for ripeness &#8212; the moment both sides believe settlement is in their interest</td><td>Push before ripeness wastes leverage</td></tr>
+        <tr><td class="stat-num">6 &#8212; Impasse or Agreement</td><td>If stuck, escalate to the attorney. Do not make final decisions without authority.</td><td>If they will not clear specials with a complete file, file the lawsuit</td></tr>
+        <tr><td class="stat-num">7 &#8212; Finalizing</td><td>Confirm all agreed terms in writing immediately. Verbal agreements disappear.</td><td>Written client acceptance &#8212; every single time, no exceptions</td></tr>
+      </table>
+    </div>
+    <div class="info-block">
+      <h4>&#129504; Psychological Principles in Every Negotiation</h4>
+      <ul>
+        <li><strong>Anchoring:</strong> The demand number frames the entire negotiation. A demand that anchors too low permanently limits recovery. High anchor plus documented justification equals better outcomes.</li>
+        <li><strong>Loss Aversion:</strong> Adjusters feel the pain of paying out more sharply than the relief of closing a file. Frame settlement as avoiding the risk of a much larger verdict &#8212; a loss prevented, not just money spent.</li>
+        <li><strong>Reactive Devaluation:</strong> Adjusters reflexively discount plaintiff demands. Counter by framing settlement as objective (documented medical damages plus multiplier plus comparable verdicts), not as an arbitrary ask.</li>
+        <li><strong>Tactical Empathy:</strong> Understand what drives the adjuster\u2019s evaluation without agreeing with it. Label their concerns: "It sounds like you feel this case has some liability issues." Disarms defensiveness and opens dialogue.</li>
+        <li><strong>Calibrated Questions:</strong> "How did you arrive at that number?" forces the adjuster to defend their position and often reveals their real ceiling. Never counter immediately &#8212; first understand their reasoning.</li>
+      </ul>
+    </div>
+    <div class="callout callout-warn"><strong>The Counter-Offer Rule:</strong> Never come down more than 50% of the gap between your last number and the adjuster\u2019s offer. Example: You demanded $75K. Adjuster offers $25K. Gap = $50K. Your counter must be at least $50K ($75K - $25K/2). This ensures you are not giving ground faster than they are. Move in decreasing increments and end on an odd, specific number ($47,350 rather than $47,500) &#8212; specific numbers signal you have done your math.</div>
+    <div class="callout callout-info"><strong>Escalation Triggers:</strong> Escalate to the attorney when: the adjuster\u2019s best offer does not clear specials, liability is being entirely denied, 3+ rounds with no meaningful movement, the adjuster is acting in bad faith, or the SOL is within 6 months.</div>
+
+    <div class="question-block" id="q17-block">
+      <div class="q-num">Question 17 of 20 · 10 pts</div>
+      <div class="q-text">The adjuster responds to your $75K demand with a $5,000 offer. What is the correct first response?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q17','a',false)" id="q17-a"><span class="opt-letter">A</span><span class="opt-text">Counter immediately with $60K to show willingness to negotiate and keep the conversation moving</span></button>
+        <button class="option-btn" onclick="answer('q17','b',true)" id="q17-b"><span class="opt-letter">B</span><span class="opt-text">Ask: "Can you walk me through how you arrived at $5,000?" This calibrated question forces the adjuster to justify their number. They often cannot &#8212; which weakens their position. It also reveals their specific objections (causation, liability, coverage) so you can address each one systematically before making a counter-offer.</span></button>
+        <button class="option-btn" onclick="answer('q17','c',false)" id="q17-c"><span class="opt-letter">C</span><span class="opt-text">Accept the $5K &#8212; the adjuster would not offer less than the case is worth based on their evaluation</span></button>
+        <button class="option-btn" onclick="answer('q17','d',false)" id="q17-d"><span class="opt-letter">D</span><span class="opt-text">Hang up immediately and file suit &#8212; a lowball offer of this magnitude constitutes bad faith per se</span></button>
+      </div>
+      <div class="feedback-box" id="q17-fb"></div>
+    </div>
+
+    <div class="question-block" id="q18-block">
+      <div class="q-num">Question 18 of 20 · 10 pts</div>
+      <div class="q-text">You are making your second counter-offer. The adjuster offered $35K on your original $75K demand. Your first counter was $60K. Under the decreasing-increment strategy, what is the correct approach?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q18','a',false)" id="q18-a"><span class="opt-letter">A</span><span class="opt-text">Counter at $50K &#8212; split the difference between your $60K and their $35K to find middle ground</span></button>
+        <button class="option-btn" onclick="answer('q18','b',false)" id="q18-b"><span class="opt-letter">B</span><span class="opt-text">Counter at $55K &#8212; match their increment ($10K movement) to show reciprocity and good faith</span></button>
+        <button class="option-btn" onclick="answer('q18','c',false)" id="q18-c"><span class="opt-letter">C</span><span class="opt-text">Counter at $37,500 &#8212; accept the adjuster\u2019s anchor and meet them close to their number</span></button>
+        <button class="option-btn" onclick="answer('q18','d',true)" id="q18-d"><span class="opt-letter">D</span><span class="opt-text">Counter at $52,500 or higher. Never come down more than 50% of the gap. Gap between your $60K and their $35K = $25K. 50% of gap = $12,500. Floor for this counter: $60K - $12,500 = $47,500. A counter of $52,500 moves deliberately while signaling you are approaching your limit. End on a specific number &#8212; it signals precision, not guessing.</span></button>
+      </div>
+      <div class="feedback-box" id="q18-fb"></div>
+    </div>
+
+    <div class="question-block" id="q19-block">
+      <div class="q-num">Question 19 of 20 · 10 pts</div>
+      <div class="q-text">Scenario: The adjuster says: "We really cannot go above $40,000 on this case." You believe the case is worth $65K. What negotiation technique is most effective?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q19','a',true)" id="q19-a"><span class="opt-letter">A</span><span class="opt-text">Mirror: repeat "$40,000?" with a slight upward inflection, then pause and count to ten silently. The adjuster will typically elaborate &#8212; often revealing whether the $40K is a hard ceiling from a supervisor, a reserve limit, or just a negotiating position. This reveals their constraints without you making a counter-offer or committing to a number.</span></button>
+        <button class="option-btn" onclick="answer('q19','b',false)" id="q19-b"><span class="opt-letter">B</span><span class="opt-text">Immediately counter at $55K and tell the adjuster your absolute bottom line is $50K</span></button>
+        <button class="option-btn" onclick="answer('q19','c',false)" id="q19-c"><span class="opt-letter">C</span><span class="opt-text">Accept $40K &#8212; the adjuster has clearly signaled their maximum authority and further negotiation is futile</span></button>
+        <button class="option-btn" onclick="answer('q19','d',false)" id="q19-d"><span class="opt-letter">D</span><span class="opt-text">Threaten litigation if they do not increase to $60K within 24 hours &#8212; urgency forces movement</span></button>
+      </div>
+      <div class="feedback-box" id="q19-fb"></div>
+    </div>
+
+    <div class="question-block" id="q20-block">
+      <div class="q-num">Question 20 of 20 · 10 pts</div>
+      <div class="q-text">Under what circumstance should you escalate the negotiation to the attorney?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q20','a',false)" id="q20-a"><span class="opt-letter">A</span><span class="opt-text">After every call with the adjuster &#8212; attorneys should be involved in all negotiation communications</span></button>
+        <button class="option-btn" onclick="answer('q20','b',false)" id="q20-b"><span class="opt-letter">B</span><span class="opt-text">Whenever the adjuster offers less than your demand &#8212; any gap between demand and offer requires attorney involvement</span></button>
+        <button class="option-btn" onclick="answer('q20','c',true)" id="q20-c"><span class="opt-letter">C</span><span class="opt-text">When the adjuster\u2019s best offer does not clear specials despite a complete file, when liability is being entirely denied, when there have been 3+ rounds with no meaningful movement, when the adjuster is acting in bad faith, or when the SOL is within 6 months. These are the specific triggers defined in the negotiation framework &#8212; each signals the negotiation has exceeded the CM\u2019s authority or the case needs litigation evaluation.</span></button>
+        <button class="option-btn" onclick="answer('q20','d',false)" id="q20-d"><span class="opt-letter">D</span><span class="opt-text">Only when the client specifically requests attorney involvement in the negotiation calls</span></button>
+      </div>
+      <div class="feedback-box" id="q20-fb"></div>
+    </div>
+
+    <div class="section-score" id="s5-score" style="display:none;"><div class="score-display" id="s5-score-val"></div><div class="score-label">Section 6 Score</div></div>
+    <div class="btn-group" id="s5-next"><button class="btn btn-primary btn-block" onclick="goToSection(6)">Next: Boss Challenge &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 6 — BOSS CHALLENGE (Q21–Q25)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-6">
+  <div class="section-header">
+    <div class="section-num">Section 7 · Boss Challenge · Up to 50 bonus pts</div>
+    <h2>Full Demand Strategy Under Realistic Constraints</h2>
+    <div class="section-subhead">Five complex scenarios. Each requires integrating valuation, framing, compliance, and negotiation strategy.</div>
+  </div>
+  <div class="section-body">
+    <div class="boss-header">
+      <div class="boss-icon">&#128293;</div>
+      <h3>Boss Challenge: Demand Strategy Integration</h3>
+      <p>Each scenario below requires you to apply everything from this module: valuation methodology, safety rule framing, Holt demand compliance, narrative sequencing, and negotiation posture. These are bonus points &#8212; 10 pts each, not counted toward the 160-point pass gate, but they appear on your certificate.</p>
+    </div>
+
+    <!-- BOSS CASE 1 -->
+    <div class="case-file">
+      <div class="case-file-header">
+        <div class="case-file-icon">&#128193;</div>
+        <div>
+          <div class="case-file-title">Case A &#8212; GLG-2026-2301</div>
+          <div class="case-file-sub">Demand Preparation Date: July 25, 2026</div>
+        </div>
+      </div>
+      <div class="case-detail"><span class="case-key">Client</span><span class="case-val">Latonya Washington, 38, elementary school teacher</span></div>
+      <div class="case-detail"><span class="case-key">Incident</span><span class="case-val">Rear-ended by Amazon delivery van on I-285. Driver on phone. Dashcam confirms.</span></div>
+      <div class="case-detail"><span class="case-key">Injuries</span><span class="case-val">Herniated disc L4-L5, surgical intervention (laminectomy). 5% permanent impairment rating.</span></div>
+      <div class="case-detail"><span class="case-key">Treatment</span><span class="case-val">ER same day, orthopedist Day 3, PT 3x/week for 4 months, MRI Day 14, surgery Month 5, post-op PT 3 months. <span class="flag-ok">No gaps</span></span></div>
+      <div class="case-detail"><span class="case-key">Specials</span><span class="case-val">$142,000 (medical) + $18,000 (lost wages) = $160,000 total</span></div>
+      <div class="case-detail"><span class="case-key">Liability</span><span class="case-val">Clear &#8212; dashcam, police citation for distracted driving, Amazon driver on the clock <span class="flag-ok">Strong</span></span></div>
+      <div class="case-detail"><span class="case-key">Safety Checklist</span><span class="case-val">Score: 9/10</span></div>
+      <div class="case-detail"><span class="case-key">Coverage</span><span class="case-val">Amazon commercial fleet policy: $1M+ <span class="flag-ok">Deep pocket</span></span></div>
+      <div class="case-detail"><span class="case-key">Holt Eligible</span><span class="case-val">Strong liability, clear damages, litigation likely if rejected <span class="flag-ok">Yes</span></span></div>
+    </div>
+    <div class="question-block" id="q21-block">
+      <div class="q-num">Boss Task 1 of 5 · 10 bonus pts</div>
+      <div class="q-text">Case A (Washington): Surgical case with $160K in specials against a commercial defendant. How should you set the demand strategy?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q21','a',false)" id="q21-a"><span class="opt-letter">A</span><span class="opt-text">Demand 2x specials ($320K) &#8212; the standard multiplier approach ensures a credible, defensible demand amount</span></button>
+        <button class="option-btn" onclick="answer('q21','b',false)" id="q21-b"><span class="opt-letter">B</span><span class="opt-text">Demand $160K (specials only) as a conservative anchor &#8212; Amazon will respond more favorably to a reasonable opening</span></button>
+        <button class="option-btn" onclick="answer('q21','c',true)" id="q21-c"><span class="opt-letter">C</span><span class="opt-text">This is a surgical case with permanent impairment against a deep-pocket commercial defendant. Safety Checklist 9/10. Benchmarking tier: spinal surgery = potentially 7 figures. Demand in the high six figures ($500K&#8211;$750K range), supported by: comparable jury verdicts in Fulton County for surgical disc cases, the safety rule violation (distracted driving endangering every driver on I-285), client credentialing (teacher, community member), and permanent impairment documentation. Structure as a Holt demand with all six components. Narrative opens with Latonya\u2019s life before the accident, not the accident itself.</span></button>
+        <button class="option-btn" onclick="answer('q21','d',false)" id="q21-d"><span class="opt-letter">D</span><span class="opt-text">Demand $1M (full policy limits) immediately &#8212; any surgical case against a commercial defendant warrants a limits demand</span></button>
+      </div>
+      <div class="feedback-box" id="q21-fb"></div>
+    </div>
+
+    <!-- BOSS CASE 2 -->
+    <div class="case-file">
+      <div class="case-file-header">
+        <div class="case-file-icon">&#128193;</div>
+        <div>
+          <div class="case-file-title">Case B &#8212; GLG-2026-2302</div>
+          <div class="case-file-sub">Demand Review Date: July 25, 2026</div>
+        </div>
+      </div>
+      <div class="case-detail"><span class="case-key">Client</span><span class="case-val">Marcus Odom, 52, warehouse supervisor</span></div>
+      <div class="case-detail"><span class="case-key">Incident</span><span class="case-val">T-bone collision. Defendant ran red light. Police citation issued.</span></div>
+      <div class="case-detail"><span class="case-key">Specials</span><span class="case-val">$78,000</span></div>
+      <div class="case-detail"><span class="case-key">Coverage</span><span class="case-val">Defendant: $100K limits</span></div>
+    </div>
+    <div class="info-block">
+      <h4>&#128221; Draft Holt Demand Excerpt (Your CM Submitted This for Review)</h4>
+      <p style="font-style:italic;color:#555;font-size:13px;line-height:1.7;">"This letter constitutes a written offer to settle the above-referenced claim pursuant to O.C.G.A. &#167; 9-11-67.1. In full settlement of all claims arising out of the June 3, 2026 collision, Plaintiff demands the sum of One Hundred Thousand Dollars ($100,000.00). Upon payment, Plaintiff agrees to release James Thornton, State Farm Insurance Company, and their agents from all claims for personal injury, property damage, medical expenses, lost wages, pain and suffering, and all other claims arising from the incident. This settlement shall be binding upon Marcus Odom and all persons claiming through or under Plaintiff."</p>
+    </div>
+    <div class="question-block" id="q22-block">
+      <div class="q-num">Boss Task 2 of 5 · 10 bonus pts</div>
+      <div class="q-text">Case B (Odom): You are reviewing this draft Holt demand before it goes out. It contains five of the six required components. Which component is MISSING?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q22','a',false)" id="q22-a"><span class="opt-letter">A</span><span class="opt-text">Component 1 (Written Offer) &#8212; the demand does not explicitly state it is a written offer</span></button>
+        <button class="option-btn" onclick="answer('q22','b',true)" id="q22-b"><span class="opt-letter">B</span><span class="opt-text">Component 2 (Time Period for Acceptance) &#8212; the demand does not specify the 30-day acceptance period. Without it, there is no deadline for the defendant to accept, and the demand fails to qualify as a statutory Holt demand. Add: "This offer shall remain open for thirty (30) days from the date of this letter."</span></button>
+        <button class="option-btn" onclick="answer('q22','c',false)" id="q22-c"><span class="opt-letter">C</span><span class="opt-text">Component 3 (Specific Dollar Amount) &#8212; the demand should state "$100,000.00" in numerals and words</span></button>
+        <button class="option-btn" onclick="answer('q22','d',false)" id="q22-d"><span class="opt-letter">D</span><span class="opt-text">Component 4 (Parties to Be Released) &#8212; "agents" is too vague and should list each party by name</span></button>
+      </div>
+      <div class="feedback-box" id="q22-fb"></div>
+    </div>
+
+    <!-- BOSS CASE 3 -->
+    <div class="case-file">
+      <div class="case-file-header">
+        <div class="case-file-icon">&#128193;</div>
+        <div>
+          <div class="case-file-title">Case C &#8212; GLG-2026-2303</div>
+          <div class="case-file-sub">Demand Preparation Date: July 25, 2026</div>
+        </div>
+      </div>
+      <div class="case-detail"><span class="case-key">Client</span><span class="case-val">Denise Hargrove, 44, dental hygienist</span></div>
+      <div class="case-detail"><span class="case-key">Incident</span><span class="case-val">Rear-ended at estimated 8 mph in parking lot. Minimal vehicle damage.</span></div>
+      <div class="case-detail"><span class="case-key">Injuries</span><span class="case-val">Cervical strain, lumbar sprain. Documented on MRI. <span class="flag-warn">MIST case</span></span></div>
+      <div class="case-detail"><span class="case-key">Pre-Existing</span><span class="case-val">Prior chiropractic treatment to cervical spine 2 years ago. Was asymptomatic for 18 months before accident. <span class="flag-warn">Pre-existing</span></span></div>
+      <div class="case-detail"><span class="case-key">Treatment Gap</span><span class="case-val">3-week gap between initial ER visit and first follow-up. Treating physician documented "conservative home care" instructions. <span class="flag-warn">Gap</span></span></div>
+      <div class="case-detail"><span class="case-key">Specials</span><span class="case-val">$19,500</span></div>
+      <div class="case-detail"><span class="case-key">Coverage</span><span class="case-val">$50K limits</span></div>
+      <div class="case-detail"><span class="case-key">Safety Checklist</span><span class="case-val">Score: 5/10</span></div>
+    </div>
+    <div class="question-block" id="q23-block">
+      <div class="q-num">Boss Task 3 of 5 · 10 bonus pts</div>
+      <div class="q-text">Case C (Hargrove): MIST case with pre-existing condition and treatment gap. How should the demand strategy handle these compounding challenges?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q23','a',false)" id="q23-a"><span class="opt-letter">A</span><span class="opt-text">Decline to send a demand &#8212; MIST cases with pre-existing conditions and treatment gaps are not viable</span></button>
+        <button class="option-btn" onclick="answer('q23','b',false)" id="q23-b"><span class="opt-letter">B</span><span class="opt-text">Send a low demand ($22K) and hope for a quick settlement &#8212; do not draw attention to the weaknesses</span></button>
+        <button class="option-btn" onclick="answer('q23','c',false)" id="q23-c"><span class="opt-letter">C</span><span class="opt-text">Demand $50K policy limits and ignore the pre-existing and treatment gap &#8212; aggressive anchoring overcomes all case weaknesses</span></button>
+        <button class="option-btn" onclick="answer('q23','d',true)" id="q23-d"><span class="opt-letter">D</span><span class="opt-text">Address all three challenges proactively in the demand narrative. (1) MIST framing: separate mechanism of wreck from mechanism of harm &#8212; 8 mph impact delivers significant force to a human spine regardless of minimal vehicle damage. (2) Pre-existing: frame as a multiplier under the eggshell plaintiff doctrine &#8212; Denise was asymptomatic for 18 months; the defendant\u2019s conduct reactivated and worsened a managed condition. (3) Treatment gap: cite the physician\u2019s documented "conservative home care" instructions &#8212; the gap was medically directed, not abandonment of treatment. Value at 1.5&#8211;2x specials ($29K&#8211;$39K), demand in the $35K&#8211;$40K range. Use a standard demand &#8212; not Holt &#8212; because the case profile favors negotiated resolution over litigation threat.</span></button>
+      </div>
+      <div class="feedback-box" id="q23-fb"></div>
+    </div>
+
+    <!-- BOSS CASE 4 -->
+    <div class="case-file">
+      <div class="case-file-header">
+        <div class="case-file-icon">&#128193;</div>
+        <div>
+          <div class="case-file-title">Case D &#8212; GLG-2026-2304</div>
+          <div class="case-file-sub">Demand Preparation Date: July 25, 2026</div>
+        </div>
+      </div>
+      <div class="case-detail"><span class="case-key">Client</span><span class="case-val">James Whitaker, 29, paramedic</span></div>
+      <div class="case-detail"><span class="case-key">Incident</span><span class="case-val">Struck by City of Atlanta sanitation truck while cycling in a designated bike lane. Driver failed to check mirrors before merging.</span></div>
+      <div class="case-detail"><span class="case-key">Injuries</span><span class="case-val">Bilateral tibial fractures (both legs), 3 surgeries, permanent hardware, 8% whole-body impairment</span></div>
+      <div class="case-detail"><span class="case-key">Specials</span><span class="case-val">$410,000 and rising. Life care plan projected at $1.2M.</span></div>
+      <div class="case-detail"><span class="case-key">Defendant</span><span class="case-val">City of Atlanta &#8212; government entity <span class="flag-warn">Gov\u2019t</span></span></div>
+      <div class="case-detail"><span class="case-key">Ante Litem</span><span class="case-val">Served within deadline. <span class="flag-ok">Compliant</span></span></div>
+      <div class="case-detail"><span class="case-key">Safety Checklist</span><span class="case-val">Score: 9/10</span></div>
+      <div class="case-detail"><span class="case-key">Complication</span><span class="case-val">Government entity &#8212; potential damage cap and sovereign immunity defense (discretionary function exception) <span class="flag-warn">Gov\u2019t caps</span></span></div>
+    </div>
+    <div class="question-block" id="q24-block">
+      <div class="q-num">Boss Task 4 of 5 · 10 bonus pts</div>
+      <div class="q-text">Case D (Whitaker): Catastrophic injuries against a government entity. Ante litem notice was timely served. How should you structure the demand strategy?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q24','a',true)" id="q24-a"><span class="opt-letter">A</span><span class="opt-text">This is a catastrophic case requiring managing attorney (Harrell) authority per the Pre-Lit Head Attorney SOP. Structure: (1) Government entity demand requires adjustment for potential damage caps &#8212; but capped recovery on $1.2M+ in projected damages can still be substantial. (2) Demand must address the discretionary function exception head-on: was bike lane maintenance ministerial (specific duty to maintain) or discretionary (resource allocation)? If ministerial, sovereign immunity does not apply. (3) Safety rule framing is powerful: "Every driver must check mirrors before merging into a designated bike lane. This rule protects every cyclist in the city." (4) Credential James as a paramedic &#8212; a first responder who serves the same community that employs the defendant. (5) Use standard demand format, not Holt, since Holt applies to private defendants. Present to Harrell with full valuation analysis.</span></button>
+        <button class="option-btn" onclick="answer('q24','b',false)" id="q24-b"><span class="opt-letter">B</span><span class="opt-text">Decline the case &#8212; government entity damage caps make catastrophic cases uneconomical against municipal defendants</span></button>
+        <button class="option-btn" onclick="answer('q24','c',false)" id="q24-c"><span class="opt-letter">C</span><span class="opt-text">Send a Holt demand for $1.2M &#8212; the statutory penalties will incentivize the City to settle quickly</span></button>
+        <button class="option-btn" onclick="answer('q24','d',false)" id="q24-d"><span class="opt-letter">D</span><span class="opt-text">Demand $410K (current specials only) as a conservative anchor &#8212; government entities respond better to modest, well-documented demands</span></button>
+      </div>
+      <div class="feedback-box" id="q24-fb"></div>
+    </div>
+
+    <!-- BOSS CASE 5 -->
+    <div class="case-file">
+      <div class="case-file-header">
+        <div class="case-file-icon">&#128193;</div>
+        <div>
+          <div class="case-file-title">Case E &#8212; GLG-2026-2305</div>
+          <div class="case-file-sub">Post-Demand Negotiation: July 25, 2026</div>
+        </div>
+      </div>
+      <div class="case-detail"><span class="case-key">Client</span><span class="case-val">Terrence Mitchell, 34, electrician</span></div>
+      <div class="case-detail"><span class="case-key">Incident</span><span class="case-val">Rear-ended by Sysco delivery truck on GA-400. Clear liability, police citation.</span></div>
+      <div class="case-detail"><span class="case-key">Injuries</span><span class="case-val">Herniated disc C5-C6, epidural injections, surgical consult pending</span></div>
+      <div class="case-detail"><span class="case-key">Specials</span><span class="case-val">$67,000</span></div>
+      <div class="case-detail"><span class="case-key">Demand Sent</span><span class="case-val">$225,000 (Holt demand, all six components verified)</span></div>
+      <div class="case-detail"><span class="case-key">Adjuster Response</span><span class="case-val">$18,000 initial offer. Adjuster says: "We question whether all treatment is accident-related. Your client had prior neck complaints. And the impact speed was under 15 mph." <span class="flag">Lowball + Causation + Pre-existing + MIST</span></span></div>
+    </div>
+    <div class="question-block" id="q25-block">
+      <div class="q-num">Boss Task 5 of 5 · 10 bonus pts</div>
+      <div class="q-text">Case E (Mitchell): The adjuster has combined four tactics in one response: lowball offer, causation denial, pre-existing condition argument, and MIST framing. What is the correct multi-step response strategy?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q25','a',false)" id="q25-a"><span class="opt-letter">A</span><span class="opt-text">Counter immediately at $180K and address each objection point-by-point in a written response</span></button>
+        <button class="option-btn" onclick="answer('q25','b',false)" id="q25-b"><span class="opt-letter">B</span><span class="opt-text">File suit immediately &#8212; the $18K offer on a $225K Holt demand constitutes bad faith as a matter of law</span></button>
+        <button class="option-btn" onclick="answer('q25','c',true)" id="q25-c"><span class="opt-letter">C</span><span class="opt-text">Use calibrated questions first: "How did you arrive at $18,000?" and "Which specific treatments do you believe are unrelated?" Then address each tactic systematically: (1) Causation: the treating physician\'s records directly link all treatment to the accident date, with no intervening events. (2) Pre-existing: eggshell plaintiff doctrine &#8212; Terrence was asymptomatic and working full-time before the collision; the defendant takes the victim as they find them. (3) MIST: separate mechanism of wreck from mechanism of harm &#8212; a Sysco truck at 15 mph delivers massive force to a human cervical spine regardless of vehicle damage. (4) The $18K offer does not clear specials ($67K) &#8212; escalate to the attorney if the adjuster cannot move meaningfully after you address each objection. The Holt demand\'s 30-day window creates legitimate urgency.</span></button>
+        <button class="option-btn" onclick="answer('q25','d',false)" id="q25-d"><span class="opt-letter">D</span><span class="opt-text">Accept the $18K &#8212; the pre-existing condition and MIST issues make this case too weak to negotiate further</span></button>
+      </div>
+      <div class="feedback-box" id="q25-fb"></div>
+    </div>
+
+    <div class="section-score" id="s6-score" style="display:none;"><div class="score-display" id="s6-score-val"></div><div class="score-label">Boss Challenge Bonus</div></div>
+    <div class="btn-group" id="s6-next"><button class="btn btn-primary btn-block" onclick="goToSection(7)">View Results &#8594;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 7 — RESULTS
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-7">
+  <div id="results-content">
+    <div class="section-body text-center">
+      <p style="color:#888;margin-top:40px;">Complete all sections to see your results.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 8 — FEEDBACK & CERTIFICATE
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-8">
+  <div class="section-header">
+    <div class="section-num">Feedback &amp; Certificate</div>
+    <h2>Module Feedback</h2>
+  </div>
+  <div class="section-body">
+    <div class="name-input-wrap">
+      <label for="employee-name">Your Full Name (for certificate):</label>
+      <input type="text" id="employee-name" class="name-input" placeholder="Enter your full name" value="Adriauna Gunn">
+    </div>
+    <div class="fb-question">
+      <label for="fb-clarity">How clear were the demand writing concepts?</label>
+      <select id="fb-clarity"><option value="">Select&#8230;</option><option>Very clear</option><option>Mostly clear</option><option>Somewhat unclear</option><option>Confusing</option></select>
+    </div>
+    <div class="fb-question">
+      <label for="fb-difficulty">How challenging were the scenarios?</label>
+      <select id="fb-difficulty"><option value="">Select&#8230;</option><option>Too easy</option><option>About right</option><option>Challenging but fair</option><option>Too difficult</option></select>
+    </div>
+    <div class="fb-question">
+      <label for="fb-realistic">How realistic were the demand strategy scenarios?</label>
+      <select id="fb-realistic"><option value="">Select&#8230;</option><option>Very realistic</option><option>Somewhat realistic</option><option>Needs improvement</option><option>Not realistic</option></select>
+    </div>
+    <div class="fb-question">
+      <label for="fb-suggestions">Any suggestions for improving this module?</label>
+      <textarea id="fb-suggestions" placeholder="Optional &#8212; your feedback helps us improve..."></textarea>
+    </div>
+    <button class="btn btn-primary btn-block" onclick="submitFeedbackAndShowCert()">Submit Feedback &amp; Generate Certificate</button>
+
+    <div id="cert-content" style="display:none;margin-top:24px;">
+      <div class="cert-wrap">
+        <div class="cert-firm">GUNN LAW GROUP</div>
+        <div class="cert-title">Certificate of Completion</div>
+        <div class="cert-subtitle">Pre-Lit Attorney Training Program</div>
+        <div class="cert-presents">This certifies that</div>
+        <div class="cert-name" id="certNameDisplay">Adriauna Gunn</div>
+        <div class="cert-for">has successfully completed</div>
+        <div class="cert-module">PA-2 &#8212; Demand Writing: Attorney Judgment</div>
+        <div class="cert-seal">&#9878;&#65039;</div>
+        <div class="cert-score" id="certScore"></div>
+        <div class="cert-meta" id="certMeta"></div>
+        <div class="cert-badges" id="certBadges"></div>
+        <div class="cert-signature">
+          <div class="cert-sig-line"></div>
+          <div class="cert-sig-name">Harrell Gunn</div>
+          <div class="cert-sig-title">Managing Attorney · Gunn Law Group</div>
+        </div>
+      </div>
+      <div class="score-confirm" id="score-confirm"></div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+var baseScore=0,bonusPoints=0,qDone={},firstAttemptStillAvailable={},sectionScores={},streakCount=0,maxStreak=0,questionsFirstTry=0,incorrectCount=0,totalQuestionsAnswered=0,milestonesTriggered={},moduleStartTime=Date.now(),audioCtx=null,soundEnabled=false,_audioKeepalive=null;
+var TRACKER_URL='https://script.google.com/macros/s/AKfycbzHJZ0C3BqnLatfq7RIiUP5KQdgYoXTJlozd8ZGZiwIf2bdVmvnPMo3JLm0dA5gQhJyxA/exec';
+var TOTAL_SECTIONS=9,PASS_THRESHOLD=170,BASE_MAX=200;
+
+var Q_CONFIG={
+  'q1':{section:1,pts:10,isBonus:false,correct:'c'},
+  'q2':{section:1,pts:10,isBonus:false,correct:'b'},
+  'q3':{section:1,pts:10,isBonus:false,correct:'d'},
+  'q4':{section:1,pts:10,isBonus:false,correct:'a'},
+  'q5':{section:2,pts:10,isBonus:false,correct:'b'},
+  'q6':{section:2,pts:0,isBonus:false,correct:'a'},
+  'q7':{section:2,pts:10,isBonus:false,correct:'c'},
+  'q8':{section:2,pts:10,isBonus:false,correct:'a'},
+  'q9':{section:3,pts:10,isBonus:false,correct:'d'},
+  'q10':{section:3,pts:10,isBonus:false,correct:'b'},
+  'q11':{section:3,pts:10,isBonus:false,correct:'c'},
+  'q12':{section:3,pts:10,isBonus:false,correct:'a'},
+  'q13':{section:4,pts:10,isBonus:false,correct:'b'},
+  'q14':{section:4,pts:10,isBonus:false,correct:'d'},
+  'q15':{section:4,pts:10,isBonus:false,correct:'a'},
+  'q16':{section:4,pts:10,isBonus:false,correct:'c'},
+  'q17':{section:5,pts:10,isBonus:false,correct:'b'},
+  'q18':{section:5,pts:10,isBonus:false,correct:'d'},
+  'q19':{section:5,pts:10,isBonus:false,correct:'a'},
+  'q20':{section:5,pts:10,isBonus:false,correct:'c'},
+  'q21':{section:6,pts:0,isBonus:true,bonusPts:10,correct:'c'},
+  'q22':{section:6,pts:0,isBonus:true,bonusPts:10,correct:'b'},
+  'q23':{section:6,pts:0,isBonus:true,bonusPts:10,correct:'d'},
+  'q24':{section:6,pts:0,isBonus:true,bonusPts:10,correct:'a'},
+  'q25':{section:6,pts:0,isBonus:true,bonusPts:10,correct:'c'}
+};
+
+var SECTION_QUESTIONS={1:['q1','q2','q3','q4'],2:['q5','q6','q7','q8'],3:['q9','q10','q11','q12'],4:['q13','q14','q15','q16'],5:['q17','q18','q19','q20'],6:['q21','q22','q23','q24','q25']};
+
+var FEEDBACK={
+  'q1':{t:'\u2705 Correct. Soft tissue non-surgical = 1.5\u20132\u00d7 specials = $42K\u2013$56K. But the $50K policy ceiling limits actual recovery. The key strategic step most attorneys miss: investigate UM/UIM, resident relative policies, and MedPay BEFORE accepting $50K as the ceiling. Coverage investigation can convert a $50K case into $100K+. The demand should be at or near the $50K limits, supported by the multiplier calculation.',f:'\u274c Case value requires BOTH damages calculation AND coverage ceiling analysis. Option A demands limits without valuation analysis. Option B ignores the policy ceiling entirely. Option D ($28K specials only) leaves money on the table by ignoring general damages. The benchmarking framework says 1.5\u20132\u00d7 specials for soft tissue, then compare against available coverage.'},
+  'q2':{t:'\u2705 Correct. Demand at or near limits when: Safety Checklist 8\u201310, clear liability, significant injuries, documented damages approach or exceed limits, and coverage audit confirms the full picture. These cases justify aggressive anchoring because the documentation supports the number. Demanding limits without these factors erodes credibility.',f:'\u274c Option A (always demand limits) destroys credibility on weaker cases. Option C (surgical only) ignores that non-surgical cases with strong Safety Checklist scores can warrant limits demands. Option D (unresponsive adjuster) conflates communication problems with case valuation \u2014 adjuster behavior does not change case value.'},
+  'q3':{t:'\u2705 Correct. A herniated disc with failed conservative treatment heading toward surgical consult falls between the chronic disc and spinal surgery tiers. If surgery proceeds, the case potentially reaches 7 figures. The strategic decision: wait for the surgical consult outcome before finalizing the demand amount. Premature demand risks anchoring too low if surgery occurs. Meanwhile, investigate coverage beyond $100K limits \u2014 surgical disc cases regularly exceed $100K.',f:'\u274c Option A applies the wrong tier \u2014 this is not soft tissue if surgery is indicated. Option B demands limits reflexively without waiting for the surgical trajectory. Option C confuses injury types \u2014 disc herniation and TBI are completely different diagnostic and valuation categories. The benchmarking framework requires matching the correct tier to the injury.'},
+  'q4':{t:'\u2705 Correct. The 2:1 fee-to-cost ratio signals thin economics. This does not mean decline \u2014 but it means the demand strategy should optimize for efficient resolution. A quick settlement at a fair number serves the client better than months of negotiation on a case where extended effort does not proportionally increase recovery. The client\u2019s net matters more than the gross.',f:'\u274c Option B (ratio is irrelevant) ignores reality \u2014 firm economics directly affect how many resources can be deployed. Option C (automatic decline) overstates the rule \u2014 no SOP creates an auto-decline based on fee ratio alone. Option D (demand $25K) assumes aggressive anchoring improves economics, but on a disputed-liability case with $25K limits, the limits are the ceiling regardless of demand amount.'},
+  'q5':{t:'\u2705 Correct. The strongest safety rule statement is simple, clear, community-scoped, and connects the specific violation to community protection. "Every driver must maintain awareness and stop when traffic requires it" identifies the specific rule. "This rule protects every driver, passenger, and pedestrian" expands it to community scope. The adjuster reads this as a community enforcement issue, not just an individual claim.',f:'\u274c Option A ("was negligent") is a legal conclusion, not a safety rule statement. Option C cites the statute correctly but reads like a legal brief, not a persuasion document \u2014 the adjuster is not a judge. Option D ("failing to drive safely") is vague and does not identify a specific rule. The safety rule must be simple, specific, and community-framed.'},
+  'q6':{t:'\ud83d\udccb <strong>Mechanism of Wreck vs. Mechanism of Harm \u2014 Complete Framework:</strong><br><br>1. <strong>Mechanism of wreck:</strong> What happened to the vehicles. Measured by vehicle damage, impact speed, repair costs. This is what the adjuster focuses on.<br>2. <strong>Mechanism of harm:</strong> What happened inside the human body. Measured by medical diagnosis, imaging, and treating physician documentation. This is what matters.<br>3. <strong>The physics:</strong> A 4,000-pound vehicle at 6 mph generates approximately 12,000 foot-pounds of force. Dropping 4,000 pounds from 1 foot generates 4,000 foot-pounds. The low-speed impact delivers THREE TIMES the force.<br>4. <strong>The treating physician connects the force to the injury:</strong> "The mechanism of injury (sudden deceleration force) is consistent with the documented cervical disc herniation."<br>5. <strong>In the demand:</strong> Present both mechanisms separately. Never concede that low vehicle damage = low human injury.',f:'\ud83d\udccb Same framework for all confidence levels. Five elements: separate the mechanisms, explain the physics, connect through treating physician documentation, and present both in the demand narrative.'},
+  'q7':{t:'\u2705 Correct. Effective credentialing establishes the plaintiff as a specific, identifiable community member before presenting damages. "Registered nurse who worked double shifts, coached her son\u2019s baseball team, volunteered at her church food bank" \u2014 the adjuster sees a person, not a claim number. "The exact person this safety rule was designed to protect" connects credentialing directly to the safety rule framework.',f:'\u274c Option A ("loving mother") is generic and sentimental \u2014 it does not establish community membership or specific activity. Option B ("no prior claims") is defensive, not credentialing \u2014 it responds to an objection the adjuster has not raised. Option D ("real victim") is advocacy language that sounds adversarial, not persuasive. Credentialing requires specific, verifiable details about the client\u2019s life before the accident.'},
+  'q8':{t:'\u2705 Correct. The mechanism of wreck (vehicle damage) and mechanism of harm (bodily injury) are two separate analyses. A ton of metal at 6 mph delivers force equivalent to dropping that weight from more than a foot high. Minor vehicle damage does not mean minor human injury \u2014 the treating physician documents how the force traveled through the vehicle and caused the specific cervical injury. This distinction is the difference between a dismissed MIST case and a fully valued one.',f:'\u274c Option B (concede minor impact) surrenders the framing \u2014 once you concede the impact was minor, the adjuster extrapolates to minor injuries. Option C (demand limits regardless) ignores that the demand must be proportionate and documented. Option D (avoid MIST cases) abandons a significant portion of the firm\u2019s caseload. MIST cases are viable when properly framed.'},
+  'q9':{t:'\u2705 Correct. The recommended sequence: human story \u2192 liability \u2192 severity contrast and damages \u2192 comparable verdicts \u2192 demand figure. A number presented without context is evaluated on its own. A number presented after a fully-built narrative is evaluated relative to everything that preceded it. The contrast phenomenon \u2014 presenting comparable verdicts before the demand figure \u2014 makes your number feel proportionate rather than aggressive.',f:'\u274c Options A and B lead with numbers before context is established \u2014 the adjuster evaluates the figure in isolation. Option C leads with liability (logical but cold) and saves the human story for last, where it has the least persuasive impact. The human story must come FIRST to prime the adjuster\u2019s attention toward the person.'},
+  'q10':{t:'\u2705 Correct. In pre-litigation, the decisive event is the adjuster receiving the demand and authorizing full settlement authority. Every element of the demand package should be organized to make that moment successful. Backward map: What does the adjuster need to authorize payment? Documented liability, complete records, credible specials, compelling narrative, and an anchored demand figure. Build every element to serve that single moment.',f:'\u274c Option A (fee agreement) is an internal firm event, not a case resolution event. Option C (jury verdict) is the decisive event in litigation, not pre-litigation. Option D (records assembly) is a preparation step, not the decisive event itself. Backward mapping starts from the outcome you want and builds every element to reach it.'},
+  'q11':{t:'\u2705 Correct. Present comparable jury verdicts in the same county BEFORE stating your demand figure. The adjuster evaluates your number relative to those verdicts. A $75K demand presented after $200K+ verdict examples feels reasonable; the same demand without context feels aggressive. This is the contrast phenomenon applied to demand writing \u2014 the reference point determines the evaluation.',f:'\u274c Option A (firm verdicts) is self-promotional, not case-specific. Option B (other firms\u2019 demands) is speculative and unverifiable. Option D (company reputation) is adversarial and irrelevant to case value. The reference point must be objective and documented \u2014 jury verdicts in the same jurisdiction with comparable facts.'},
+  'q12':{t:'\u2705 Correct. Address weaknesses proactively \u2014 before the adjuster raises them. The treatment gap: cite the physician\u2019s documented instructions for conservative home care. The pre-existing condition: frame as a multiplier under the eggshell plaintiff doctrine. The defendant must take the victim as they find them. A previously manageable, asymptomatic condition that the defendant\u2019s conduct aggravated into a disabling condition is MORE damaging, not less.',f:'\u274c Option B (ignore weaknesses) is the most common and most costly mistake. Adjusters ALWAYS notice gaps and pre-existing conditions \u2014 if you do not address them, the adjuster\u2019s narrative controls. Option C (pre-existing always fatal) misunderstands Georgia law \u2014 the eggshell plaintiff doctrine makes pre-existing conditions a multiplier. Option D (wait to respond) gives the adjuster\u2019s framing priority over yours.'},
+  'q13':{t:'\u2705 Correct. Component 3 of O.C.G.A. \u00a7 9-11-67.1 requires a specific dollar amount. Not a range, not "policy limits" without a number, not a formula. The statute demands precision. "Plaintiff demands the sum of One Hundred Thousand Dollars ($100,000.00)" satisfies the requirement. "Plaintiff demands policy limits" does not.',f:'\u274c Options A (employment history), C (medical narrative), and D (driving record) are not among the six required Holt demand components. The six components are: (1) written offer, (2) time period for acceptance (min 30 days), (3) specific dollar amount, (4) parties to be released, (5) claims to be released, (6) persons to be bound. Supporting documentation strengthens the demand but is not a statutory requirement.'},
+  'q14':{t:'\u2705 Correct. A Holt demand missing ANY of the six components is not a statutory demand \u2014 it is a standard settlement offer with no teeth. Missing the 30-day acceptance period eliminates the right to attorney\u2019s fees and costs even if the plaintiff later obtains a judgment exceeding the demand. The statutory weapon is completely forfeited. This is why the Pre-Send Verification checklist exists \u2014 two sets of eyes, every time.',f:'\u274c Option A (court implies period) is wrong \u2014 the statute requires express statement. Option B (cure by follow-up) is risky \u2014 the original demand was defective and cannot be retroactively cured. Option C (adjuster duty to notify) has no legal basis \u2014 the burden is on the plaintiff to comply with all six components.'},
+  'q15':{t:'\u2705 Correct. Holt demands are most strategic when: liability is strong, damages are well-documented, AND litigation is likely if the demand is rejected. The statutory penalty (attorney\u2019s fees and costs) creates real pressure \u2014 the adjuster knows that rejecting a valid Holt demand and losing at trial means paying fees on top of the judgment. This is not appropriate for every case \u2014 early negotiations or cases where relationship-building matters may be better served by a standard demand.',f:'\u274c Option B (always use Holt) wastes the tool \u2014 a Holt demand on a case where settlement is likely without statutory pressure adds compliance burden without benefit. Option C ($250K threshold) has no basis in the statute \u2014 \u00a7 9-11-67.1 has no minimum amount. Option D is backwards \u2014 Holt demands are specifically PRE-SUIT tools. Post-suit offers fall under \u00a7 9-11-68.'},
+  'q16':{t:'\u2705 Correct. "Policy limits" without stating the actual dollar figure fails Component 3. The statute requires a SPECIFIC monetary amount. Even though the adjuster knows the policy is $100K, the demand must state "$100,000.00" explicitly. This is one of the most common Holt demand compliance failures \u2014 and it forfeits the entire statutory weapon.',f:'\u274c Options A and B assume the adjuster\u2019s knowledge satisfies the statute \u2014 it does not. The requirement is that the demand document itself contains the specific number. Option D suggests the other five components can compensate \u2014 they cannot. ALL six components are independently required. Missing one = standard demand, not Holt.'},
+  'q17':{t:'\u2705 Correct. "How did you arrive at that number?" is a calibrated question that forces the adjuster to defend their position. They often cannot \u2014 which reveals that the $5K was a reflexive lowball, not a reasoned evaluation. Their response also surfaces their specific objections (causation, liability, pre-existing) so you can address each one before making your counter-offer. Never counter immediately \u2014 first understand their reasoning.',f:'\u274c Option A (counter at $60K immediately) skips the information-gathering step. You do not know WHY they offered $5K \u2014 is it causation? Liability dispute? Coverage issue? Without understanding their reasoning, your counter cannot address their objections. Option C (accept) ignores the 15:1 gap. Option D (file suit) is premature \u2014 a low offer is not per se bad faith.'},
+  'q18':{t:'\u2705 Correct. The counter-offer rule: never come down more than 50% of the gap. Gap = $60K - $35K = $25K. 50% of gap = $12,500. Floor for this counter: $60K - $12,500 = $47,500. A counter of $52,500 moves deliberately while signaling you are approaching your limit. End on a specific number ($52,500 not $52,000) \u2014 specific numbers signal precision and preparation. Decreasing increments from your first move ($15K) to your second move ($7,500) signal you are nearing your floor.',f:'\u274c Option A (split the difference at $50K) gives ground too fast \u2014 coming down $10K when they only came up $10K creates equal movement, which the adjuster reads as willingness to continue splitting. Option B ($55K) matches their increment exactly \u2014 but the counter-offer rule says never exceed 50% of the gap. Option C ($37,500) accepts the adjuster\u2019s anchor and signals desperation.'},
+  'q19':{t:'\u2705 Correct. Mirroring \u2014 repeating "$40,000?" with an upward inflection followed by silence \u2014 is one of the most effective negotiation tools. The adjuster will almost always elaborate, often revealing critical information: "Well, that\u2019s what my supervisor approved" (authority ceiling) or "Based on the causation issues" (objection you can address). Strategic silence after the mirror forces them to fill the void. This reveals constraints without you committing to a counter.',f:'\u274c Option B (counter at $55K and reveal bottom line) violates two principles: never reveal your true floor, and never counter before understanding their constraints. Option C (accept $40K) treats a negotiating position as a final number. Option D (24-hour threat) is adversarial without information \u2014 you do not know if $40K is their real ceiling or just an opening position.'},
+  'q20':{t:'\u2705 Correct. The five specific escalation triggers from the negotiation framework: (1) best offer does not clear specials with a complete file, (2) liability entirely denied, (3) 3+ rounds with no meaningful movement, (4) adjuster acting in bad faith, (5) SOL within 6 months. Each trigger signals the negotiation has exceeded the CM\u2019s authority level or the case needs litigation evaluation by an attorney.',f:'\u274c Option A (after every call) wastes attorney time on routine negotiation that CMs are authorized to handle. Option B (any gap) would trigger escalation on 100% of negotiations \u2014 gaps between demand and offer are normal. Option D (client request only) ignores that escalation triggers are fact-based, not client-driven \u2014 the CM has an independent duty to recognize when attorney involvement is needed.'},
+  'q21':{t:'\u2705 Case A is a high-value surgical case against a deep-pocket commercial defendant. Safety Checklist 9/10. Benchmarking: spinal surgery with permanent impairment = potentially 7 figures. Demand in the high six figures ($500K\u2013$750K range) supported by: (1) comparable Fulton County jury verdicts for surgical disc cases, (2) safety rule framing \u2014 distracted driving on I-285 endangered every driver, (3) client credentialing \u2014 teacher, community member, (4) permanent impairment documentation. Structure as Holt demand with all six components. Opening with Latonya\u2019s life story follows the narrative sequencing principle.',f:'\u274c Option A (2x specials = $320K) significantly undervalues a surgical case with permanent impairment. Option B ($160K specials only) anchors at the floor and eliminates general damages entirely. Option D ($1M limits) demands the maximum without documented justification \u2014 high anchor without supporting analysis undermines credibility. The demand must be proportionate to documentation.'},
+  'q22':{t:'\u2705 The draft has five components: (1) Written offer ("This letter constitutes a written offer"), (3) Specific dollar amount ($100,000.00), (4) Parties to be released (James Thornton, State Farm, agents), (5) Claims to be released (personal injury, property damage, etc.), (6) Persons to be bound (Marcus Odom and all persons claiming through Plaintiff). MISSING: (2) Time period for acceptance. The demand does not state the 30-day acceptance period. Add: "This offer shall remain open for thirty (30) days from the date of this letter."',f:'\u274c The draft explicitly contains Component 1 ("written offer" language), Component 3 ($100,000.00), Component 4 (named parties), Component 5 (listed claims), and Component 6 (binding provisions). What is missing is Component 2 \u2014 the time period for acceptance. Without specifying 30 days, the defendant has no deadline and the demand may fail to qualify as a valid Holt demand.'},
+  'q23':{t:'\u2705 Case C requires a three-part proactive strategy addressing each weakness. (1) MIST: mechanism of wreck \u2260 mechanism of harm. 8 mph delivers significant force to the human spine. (2) Pre-existing: eggshell plaintiff doctrine \u2014 18 months asymptomatic means the defendant\u2019s conduct reactivated a managed condition. (3) Treatment gap: physician-documented conservative care instructions explain the gap. Value at 1.5\u20132\u00d7 specials ($29K\u2013$39K), demand $35K\u2013$40K. Standard demand (not Holt) because the case profile favors negotiated resolution. Proactive weakness management prevents the adjuster from controlling the narrative.',f:'\u274c Option A (decline) abandons a viable case \u2014 MIST cases with proper framing are regularly settled. Option B (low demand, hide weaknesses) lets the adjuster discover and exploit the weaknesses. Option C (limits demand, ignore weaknesses) combines aggressive anchoring with no credibility \u2014 the adjuster will immediately focus on the unaddressed problems and dismiss the demand.'},
+  'q24':{t:'\u2705 Case D is a catastrophic government case requiring Harrell\u2019s authority per Pre-Lit Head Attorney SOP. Key elements: (1) Government entity requires standard demand format \u2014 Holt demands apply to private defendants, not government entities subject to the Tort Claims Act. (2) Address the discretionary function defense head-on: was bike lane maintenance ministerial or discretionary? (3) Safety rule framing is powerful \u2014 a city sanitation driver must check mirrors before merging into a bike lane. (4) Credential James as a paramedic \u2014 a first responder serving the same community. (5) Damage caps reduce but do not eliminate recovery \u2014 capped recovery on $1.2M+ projected damages is still substantial.',f:'\u274c Option B (decline for caps) ignores that capped recovery on catastrophic damages can still be hundreds of thousands. Option C (Holt demand) incorrectly applies \u00a7 9-11-67.1 to a government entity \u2014 Holt demands are for private defendants. Option D (specials only) massively undervalues a catastrophic case with permanent hardware and life care plan needs.'},
+  'q25':{t:'\u2705 Case E requires a systematic multi-step response. First: calibrated questions ("How did you arrive at $18,000?" and "Which treatments do you believe are unrelated?") to surface the adjuster\u2019s actual reasoning. Then address each tactic: (1) Causation: treating physician records link all treatment to the accident. (2) Pre-existing: eggshell plaintiff \u2014 asymptomatic, working full-time before the collision. (3) MIST: mechanism of wreck \u2260 mechanism of harm \u2014 a Sysco truck at 15 mph delivers massive cervical force. (4) The $18K does not clear $67K in specials \u2014 escalate to attorney if meaningful movement does not follow. The Holt demand\u2019s 30-day window creates legitimate urgency.',f:'\u274c Option A (counter immediately at $180K) skips the information-gathering step \u2014 you do not know which specific objections the adjuster is prioritizing. Option B (file suit for bad faith) is premature \u2014 a low offer is not per se bad faith; the adjuster has stated specific (addressable) objections. Option D (accept $18K) accepts a number that does not clear specials on a Holt demand case with strong liability.'}
+};
+
+function answer(qId,choice,isCorrect){
+  if(qDone[qId])return;
+  var cfg=Q_CONFIG[qId],block=document.getElementById(qId+'-block'),fb=document.getElementById(qId+'-fb');
+  block.querySelectorAll('.option-btn').forEach(function(b){b.classList.add('disabled');});
+  var clickedBtn=document.getElementById(qId+'-'+choice),correctBtn=document.getElementById(qId+'-'+cfg.correct);
+  if(isCorrect){
+    clickedBtn.classList.add('correct');block.classList.add('answered');qDone[qId]=true;
+    if(!cfg.isBonus){baseScore+=cfg.pts;sectionScores[cfg.section]=(sectionScores[cfg.section]||0)+cfg.pts;
+      var isFirst=(firstAttemptStillAvailable[qId]!==false);
+      if(isFirst&&cfg.pts>0){bonusPoints+=5;showToast('+'+cfg.pts+' pts  +5 bonus \u26a1',false);}
+      else if(cfg.pts>0){showToast('+'+cfg.pts+' pts',false);}
+      else{showToast('Calibration logged',false);}
+    }else{var bp=(firstAttemptStillAvailable[qId]!==false)?cfg.bonusPts:Math.floor(cfg.bonusPts/3);
+      bonusPoints+=bp;sectionScores[cfg.section]=(sectionScores[cfg.section]||0)+bp;showToast('+'+bp+' BONUS \u26a1',true);}
+    document.getElementById('total-score').textContent=baseScore;document.getElementById('bonus-score').textContent=bonusPoints;
+    fb.className='feedback-box correct show';
+  }else{
+    clickedBtn.classList.add('incorrect');
+    if(correctBtn){correctBtn.classList.remove('disabled');correctBtn.classList.add('correct');correctBtn.classList.add('disabled');}
+    block.classList.add('answered-wrong');firstAttemptStillAvailable[qId]=false;qDone[qId]=true;
+    fb.className='feedback-box incorrect show';
+  }
+  fb.innerHTML=FEEDBACK[qId]?(isCorrect?FEEDBACK[qId].t:FEEDBACK[qId].f):(isCorrect?'\u2705 Correct!':'\u274c Incorrect.');
+  updateStreak(isCorrect);mascotReact(isCorrect?'correct':'incorrect');
+  updateGlobalProgress(Object.keys(qDone).length,Object.keys(Q_CONFIG).length);
+  updateProgress();checkSectionComplete(cfg.section);
+}
+
+function checkSectionComplete(si){
+  var qs=SECTION_QUESTIONS[si];if(!qs)return;
+  if(!qs.every(function(q){return!!qDone[q];}))return;
+  var se=document.getElementById('s'+si+'-score'),sv=document.getElementById('s'+si+'-score-val'),ne=document.getElementById('s'+si+'-next');
+  var pts=sectionScores[si]||0;
+  if(sv){var sm=0;qs.forEach(function(qId){var c=Q_CONFIG[qId];sm+=c.isBonus?(c.bonusPts||0):c.pts;});
+    sv.textContent=si<=5?pts+' / '+sm+' pts':pts+' bonus pts earned';}
+  if(se)se.style.display='block';if(ne)ne.style.display='flex';
+  var pill=document.getElementById('nav-'+si);if(pill)pill.classList.add('done');
+}
+
+function goToSection(idx){
+  if(idx===7)showResults();
+  document.querySelectorAll('.section-card').forEach(function(c){c.classList.remove('active');});
+  var t=document.getElementById('section-'+idx);if(t)t.classList.add('active');
+  document.querySelectorAll('.nav-pill').forEach(function(p){p.classList.remove('active');});
+  var pill=document.getElementById('nav-'+idx);if(pill)pill.classList.add('active');
+  updateProgress();window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function updateProgress(){
+  var bq=Object.keys(Q_CONFIG).filter(function(k){return!Q_CONFIG[k].isBonus;});
+  var ans=bq.filter(function(k){return!!qDone[k];}).length,total=bq.length,pct=Math.round((ans/total)*100);
+  var l=document.getElementById('prog-label'),p=document.getElementById('prog-pct'),f=document.getElementById('prog-fill');
+  if(l)l.textContent=ans+' of '+total+' questions answered';if(p)p.textContent=pct+'%';if(f)f.style.width=pct+'%';
+}
+
+function showResults(){
+  Object.keys(Q_CONFIG).forEach(function(k){if(!firstAttemptStillAvailable.hasOwnProperty(k))firstAttemptStillAvailable[k]=true;});
+  var c=document.getElementById('results-content');if(!c)return;
+  var pct=Math.round((baseScore/BASE_MAX)*100),pass=baseScore>=PASS_THRESHOLD;
+  c.innerHTML='<div class="results-header '+(pass?'pass':'fail')+'">'+'<div class="results-grade">'+pct+'%</div>'+'<div class="results-label">'+(pass?'\u2705 GATE CLEARED':'\u26a0\ufe0f GATE NOT CLEARED')+'</div>'+'<div class="results-sub">'+baseScore+' / '+BASE_MAX+' base pts \u00b7 '+bonusPoints+' bonus pts</div></div>'+'<div class="section-body">'+'<div class="info-block"><h4>\ud83d\udcca Score Breakdown</h4><div id="breakdown-list"></div></div>'+'<div class="info-block"><h4>\ud83c\udfc6 Achievements</h4><div id="badge-container"></div></div>'+'<div class="info-block"><h4>'+(pass?'\u2705 Gate Cleared!':'\u26a0\ufe0f Not Yet')+'</h4><p>'+(pass?'<strong>Congratulations!</strong> You have demonstrated mastery of GLG\u2019s demand writing and attorney judgment framework. Proceed to the Certificate tab.':'<strong>\u26a0\ufe0f Gate Not Cleared.</strong> You need '+PASS_THRESHOLD+'/'+BASE_MAX+' (85%) to pass. Review missed sections and retake when ready.')+'</p></div>'+'<div class="info-block"><h4>\ud83d\udcdd Question Review</h4><div id="review-list" class="review-list"></div></div></div>';
+  var bl=document.getElementById('breakdown-list'),sn={1:'Demand Strategy & Valuation',2:'Safety Rule Framing',3:'Narrative Sequencing',4:'Holt Demand Compliance',5:'Post-Demand Negotiation',6:'Boss Challenge (Bonus)'};
+  for(var s=1;s<=6;s++){var sp=sectionScores[s]||0,sm=0;if(SECTION_QUESTIONS[s])SECTION_QUESTIONS[s].forEach(function(qId){var cc=Q_CONFIG[qId];sm+=cc.isBonus?(cc.bonusPts||0):cc.pts;});bl.innerHTML+='<div class="breakdown-row"><span class="breakdown-name">'+(sn[s]||'Section '+s)+'</span><span class="breakdown-pts">'+sp+'/'+sm+'</span></div>';}
+  var bc=document.getElementById('badge-container');renderBadges(calculateBadges(),bc);
+  var rl=document.getElementById('review-list'),rc=0;
+  Object.keys(Q_CONFIG).forEach(function(qId){var cfg=Q_CONFIG[qId],ok=qDone[qId]&&firstAttemptStillAvailable[qId]!==false,qt='';
+    var qb=document.getElementById(qId+'-block');if(qb){var qe=qb.querySelector('.q-text');if(qe)qt=qe.textContent.substring(0,120)+'\u2026';}
+    rc++;setTimeout(function(i,id,correct,text){return function(){var item=document.createElement('div');item.className='review-item '+(correct?'correct':'wrong');item.innerHTML='<div class="ri-q">'+id.toUpperCase()+': '+(correct?'\u2705':'\u274c')+'</div><div class="ri-ans">'+text+'</div>';rl.appendChild(item);if(i===1)playTickSound();};}(rc,qId,ok,qt),rc*80);
+  });
+  if(pass){mascotReact('complete');setTimeout(function(){playTaDa();launchConfetti();},500);}
+}
+
+function submitScoreToTracker(){
+  var n=document.getElementById('employee-name'),name=n?n.value.trim():'';
+  if(!name)name='Training Participant';
+  var pct=Math.round((baseScore/BASE_MAX)*100),pass=baseScore>=PASS_THRESHOLD;
+  fetch(TRACKER_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({moduleId:'pa2',moduleName:'PA-2 \u2014 Demand Writing: Attorney Judgment',name:name,score:baseScore,maxScore:BASE_MAX,bonus:bonusPoints,pct:pct,pass:pass,maxStreak:maxStreak,timestamp:new Date().toISOString(),badges:calculateBadges().map(function(b){return b.name;}).join(', ')})}).then(function(){var el=document.getElementById('score-confirm');if(el){el.style.display='block';el.innerHTML='\u2705 Score submitted to GLG Training Tracker.';}}).catch(function(){var el=document.getElementById('score-confirm');if(el){el.style.display='block';el.innerHTML='\u26a0\ufe0f Score submission failed \u2014 your certificate is still valid.';}});
+}
+
+function submitFeedbackAndShowCert(){
+  var cl=document.getElementById('fb-clarity'),di=document.getElementById('fb-difficulty'),re=document.getElementById('fb-realistic'),su=document.getElementById('fb-suggestions');
+  var clarity=cl?cl.value:'',difficulty=di?di.value:'',realistic=re?re.value:'',suggestions=su?su.value:'';
+  if(clarity||difficulty||realistic||suggestions){try{var ex=JSON.parse(localStorage.getItem('glg_feedback')||'[]');ex.push({moduleId:'pa2',moduleName:'PA-2 \u2014 Demand Writing: Attorney Judgment',type:'feedback',clarity:clarity,difficulty:difficulty,realistic:realistic,suggestions:suggestions,timestamp:new Date().toISOString()});localStorage.setItem('glg_feedback',JSON.stringify(ex));}catch(e){}}
+  submitScoreToTracker();
+  var ce=document.getElementById('cert-content');if(ce)ce.style.display='block';
+  var ni=document.getElementById('employee-name'),name=ni?ni.value.trim():'';if(!name)name='Training Participant';
+  var cn=document.getElementById('certNameDisplay');if(cn)cn.textContent=name;
+  var pct=Math.round((baseScore/BASE_MAX)*100),pass=baseScore>=PASS_THRESHOLD;
+  document.getElementById('certScore').textContent='Score: '+baseScore+'/'+BASE_MAX+' ('+pct+'%) \u2014 '+(pass?'PASSED':'NOT PASSED');
+  document.getElementById('certMeta').textContent='Date: '+new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})+' \u00b7 Bonus: '+bonusPoints+' pts';
+  var cb=document.getElementById('certBadges');if(cb){cb.innerHTML=calculateBadges().map(function(b){return '<span class="cert-badge-pill">'+b.icon+' '+b.name+'</span>';}).join('');}
+  showToast('\u2705 Feedback submitted \u2014 thank you!',false);
+  if(ce)ce.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function showToast(msg,isBonus){var t=document.getElementById('points-toast');if(!t)return;t.textContent=msg;t.className='points-toast show'+(isBonus?' bonus':'');setTimeout(function(){t.className='points-toast';},1800);}
+function toggleSound(){soundEnabled=!soundEnabled;localStorage.setItem('glg_sound',soundEnabled?'1':'0');var b=document.getElementById('soundToggle');if(b)b.textContent=soundEnabled?'\ud83d\udd0a':'\ud83d\udd07';if(soundEnabled)ensureAudioCtx();}
+
+function ensureAudioCtx(){if(audioCtx)return;try{audioCtx=new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();var o=audioCtx.createOscillator(),g=audioCtx.createGain();g.gain.value=0;o.connect(g);g.connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+0.01);_audioKeepalive=setInterval(function(){if(!audioCtx)return;var o2=audioCtx.createOscillator(),g2=audioCtx.createGain();g2.gain.value=0;o2.connect(g2);g2.connect(audioCtx.destination);o2.start();o2.stop(audioCtx.currentTime+0.01);},15000);}catch(e){}}
+function playDing(){if(!soundEnabled)return;ensureAudioCtx();if(!audioCtx)return;var now=audioCtx.currentTime;[[880,0,0.15],[1320,0.08,0.12]].forEach(function(n){var o=audioCtx.createOscillator(),g=audioCtx.createGain();o.frequency.value=n[0];g.gain.setValueAtTime(0.08,now+n[1]);g.gain.exponentialRampToValueAtTime(0.001,now+n[1]+n[2]);o.connect(g);g.connect(audioCtx.destination);o.start(now+n[1]);o.stop(now+n[1]+n[2]+0.05);});}
+function playWrongTone(){if(!soundEnabled)return;ensureAudioCtx();if(!audioCtx)return;var now=audioCtx.currentTime;var o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type='sawtooth';o.frequency.value=180;g.gain.setValueAtTime(0.06,now);g.gain.exponentialRampToValueAtTime(0.001,now+0.3);o.connect(g);g.connect(audioCtx.destination);o.start(now);o.stop(now+0.35);}
+function playTickSound(){if(!soundEnabled)return;ensureAudioCtx();if(!audioCtx)return;var now=audioCtx.currentTime;var o=audioCtx.createOscillator(),g=audioCtx.createGain();o.frequency.value=600;g.gain.setValueAtTime(0.04,now);g.gain.exponentialRampToValueAtTime(0.001,now+0.06);o.connect(g);g.connect(audioCtx.destination);o.start(now);o.stop(now+0.08);}
+function playTaDa(){if(!soundEnabled)return;ensureAudioCtx();if(!audioCtx)return;var now=audioCtx.currentTime;[{f:262,t:0,d:0.3,type:'triangle',g:0.14},{f:330,t:0,d:0.3,type:'sine',g:0.11},{f:392,t:0,d:0.3,type:'sine',g:0.09},{f:523,t:0.15,d:0.22,type:'sine',g:0.13},{f:659,t:0.3,d:0.22,type:'sine',g:0.12},{f:784,t:0.45,d:0.22,type:'sine',g:0.11},{f:523,t:0.65,d:0.8,type:'sine',g:0.13},{f:659,t:0.65,d:0.8,type:'sine',g:0.11},{f:784,t:0.65,d:0.8,type:'sine',g:0.09},{f:1047,t:0.65,d:0.8,type:'triangle',g:0.07},{f:1319,t:0.75,d:0.55,type:'sine',g:0.04},{f:1568,t:0.85,d:0.45,type:'sine',g:0.03}].forEach(function(n){var o=audioCtx.createOscillator(),ga=audioCtx.createGain();o.type=n.type||'sine';o.frequency.value=n.f;ga.gain.setValueAtTime(n.g,now+n.t);ga.gain.exponentialRampToValueAtTime(0.001,now+n.t+n.d);o.connect(ga);ga.connect(audioCtx.destination);o.start(now+n.t);o.stop(now+n.t+n.d+0.05);});}
+
+function updateStreak(ok){if(ok){streakCount++;if(streakCount>maxStreak)maxStreak=streakCount;questionsFirstTry++;var el=document.getElementById('streak-display');if(el)el.textContent=streakCount+' \ud83d\udd25';playDing();if(streakCount>=3)showStreakBadge(streakCount);if(streakCount===5)spawnParticles(document.querySelector('.score-bar'));}else{if(streakCount>=3)showStreakEnd();streakCount=0;incorrectCount++;var el=document.getElementById('streak-display');if(el)el.textContent='0 \ud83d\udd25';playWrongTone();}totalQuestionsAnswered++;}
+function showStreakBadge(c){var b=document.createElement('div');b.textContent=c+' in a row! \ud83d\udd25';b.style.cssText='position:fixed;top:60px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#dcb161,#e8c87a);color:#141C2C;padding:8px 20px;border-radius:20px;font-weight:700;font-size:14px;z-index:10001;animation:streakPop 0.4s ease-out,fadeUp 0.4s ease-in 1.5s forwards;';document.body.appendChild(b);setTimeout(function(){b.remove();},2000);}
+function showStreakEnd(){var b=document.createElement('div');b.textContent='Streak ended';b.style.cssText='position:fixed;top:60px;left:50%;transform:translateX(-50%);background:#333;color:#999;padding:6px 16px;border-radius:16px;font-size:12px;z-index:10001;opacity:0.8;';document.body.appendChild(b);setTimeout(function(){b.remove();},1500);}
+function checkMilestone(cur,tot){var pct=Math.round((cur/tot)*100);var ms={25:'Quarter complete! \ud83d\udcaa',50:'Halfway there! \ud83c\udfaf',75:'Almost there! \u26a1',100:'Final stretch! \ud83c\udfc6'};for(var m in ms){if(pct>=parseInt(m)&&!milestonesTriggered[m]){milestonesTriggered[m]=true;showMilestoneToast(ms[m]);}}}
+function showMilestoneToast(msg){var t=document.createElement('div');t.textContent=msg;t.style.cssText='position:fixed;top:-50px;left:50%;transform:translateX(-50%);background:#141C2C;color:#dcb161;padding:10px 24px;border-radius:12px;font-weight:700;font-size:14px;z-index:10002;transition:top 0.4s ease;box-shadow:0 4px 20px rgba(0,0,0,0.3);';document.body.appendChild(t);requestAnimationFrame(function(){t.style.top='20px';});setTimeout(function(){t.style.top='-50px';setTimeout(function(){t.remove();},500);},2500);}
+function updateGlobalProgress(cur,tot){var f=document.getElementById('globalProgressFill');if(f)f.style.width=Math.round((cur/tot)*100)+'%';checkMilestone(cur,tot);}
+function spawnParticles(anchor){var r=anchor?anchor.getBoundingClientRect():{left:window.innerWidth/2,top:window.innerHeight/2,width:0};for(var i=0;i<20;i++){var p=document.createElement('div'),sz=4+Math.random()*6,a=(Math.PI*2*i)/20+(Math.random()*0.3),d=60+Math.random()*80;p.style.cssText='position:fixed;width:'+sz+'px;height:'+sz+'px;background:#dcb161;border-radius:50%;left:'+(r.left+r.width/2)+'px;top:'+r.top+'px;z-index:10003;pointer-events:none;opacity:1;transition:all 0.8s ease-out;';document.body.appendChild(p);requestAnimationFrame(function(pp,aa,dd){return function(){pp.style.left=(parseFloat(pp.style.left)+Math.cos(aa)*dd)+'px';pp.style.top=(parseFloat(pp.style.top)+Math.sin(aa)*dd)+'px';pp.style.opacity='0';};}(p,a,d));setTimeout(function(pp){pp.remove();}.bind(null,p),900);}}
+
+function initMascot(){var g=document.createElement('div');g.id='mascotFloat';g.innerHTML='<svg viewBox="0 0 60 70" xmlns="http://www.w3.org/2000/svg" style="width:50px;height:58px;"><rect x="27" y="18" width="6" height="38" rx="1.5" fill="#8B7D3C"/><rect x="18" y="54" width="24" height="5" rx="2.5" fill="#6B5E2E"/><rect x="22" y="52" width="16" height="4" rx="1" fill="#8B7D3C"/><rect x="6" y="16" width="48" height="4" rx="2" fill="#8B7D3C"/><circle cx="30" cy="12" r="5" fill="#dcb161" stroke="#8B7D3C" stroke-width="1.5"/><text x="30" y="14.5" text-anchor="middle" font-size="7" font-weight="bold" fill="#141C2C">\u2696</text><line x1="12" y1="20" x2="12" y2="32" stroke="#8B7D3C" stroke-width="1.5"/><line x1="48" y1="20" x2="48" y2="32" stroke="#8B7D3C" stroke-width="1.5"/><path d="M4 33 Q8 38 12 33 Q16 38 20 33" stroke="#dcb161" stroke-width="1.5" fill="none"/><ellipse cx="12" cy="34" rx="9" ry="2.5" fill="#dcb161" opacity="0.3"/><path d="M40 33 Q44 38 48 33 Q52 38 56 33" stroke="#dcb161" stroke-width="1.5" fill="none"/><ellipse cx="48" cy="34" rx="9" ry="2.5" fill="#dcb161" opacity="0.3"/></svg>';g.style.cssText='position:fixed;bottom:16px;right:16px;z-index:9998;cursor:pointer;animation:scaleBob 3s ease-in-out infinite;opacity:0.7;transition:opacity 0.3s,transform 0.3s;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.2));';g.onmouseenter=function(){this.style.opacity='1';this.style.transform='scale(1.1)';};g.onmouseleave=function(){this.style.opacity='0.7';this.style.transform='scale(1)';};document.body.appendChild(g);}
+function mascotReact(type){var g=document.getElementById('mascotFloat');if(!g)return;g.style.animation='none';void g.offsetHeight;if(type==='correct')g.style.animation='scaleCelebrate 0.5s ease-out, scaleBob 3s ease-in-out 0.6s infinite';else if(type==='incorrect')g.style.animation='scaleTilt 0.6s ease-in-out, scaleBob 3s ease-in-out 0.7s infinite';else if(type==='complete'){g.style.animation='scaleTriumph 1.5s ease-in-out, scaleBob 3s ease-in-out 1.6s infinite';g.style.opacity='1';g.style.transform='scale(1.15)';}}
+var confettiActive=false;
+function launchConfetti(){var cv=document.getElementById('confettiCanvas');if(!cv)return;cv.width=window.innerWidth;cv.height=window.innerHeight;var ctx=cv.getContext('2d'),cols=['#dcb161','#c0c0c0','#141c2c'],ps=[],cx=cv.width/2,cy=cv.height/2;for(var i=0;i<150;i++){var a=Math.random()*Math.PI*2,sp=3+Math.random()*9;ps.push({x:cx,y:cy,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-5,color:cols[Math.floor(Math.random()*cols.length)],w:4+Math.random()*6,h:2+Math.random()*4,rotation:Math.random()*360,rotSpeed:(Math.random()-0.5)*12,gravity:0.10+Math.random()*0.08,opacity:1,shape:Math.random()>0.4?'rect':'circle'});}confettiActive=true;var st=Date.now();function anim(){if(!confettiActive)return;var el=Date.now()-st;if(el>4000){confettiActive=false;ctx.clearRect(0,0,cv.width,cv.height);return;}ctx.clearRect(0,0,cv.width,cv.height);ps.forEach(function(p){p.x+=p.vx;p.vy+=p.gravity;p.y+=p.vy;p.vx*=0.99;p.rotation+=p.rotSpeed;if(el>2500)p.opacity=Math.max(0,p.opacity-0.02);ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rotation*Math.PI/180);ctx.globalAlpha=p.opacity;ctx.fillStyle=p.color;if(p.shape==='rect')ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);else{ctx.beginPath();ctx.arc(0,0,p.w/2,0,Math.PI*2);ctx.fill();}ctx.restore();});requestAnimationFrame(anim);}requestAnimationFrame(anim);}
+function calculateBadges(){var badges=[],pct=Math.round((baseScore/BASE_MAX)*100),elapsed=(Date.now()-moduleStartTime)/60000,bqc=Object.keys(Q_CONFIG).filter(function(k){return!Q_CONFIG[k].isBonus;}).length;if(questionsFirstTry===bqc&&incorrectCount===0)badges.push({icon:'\u2b50',name:'Perfect Pass',desc:'All correct on first try'});if(incorrectCount===0&&totalQuestionsAnswered>0)badges.push({icon:'\ud83c\udfaf',name:'No Stumbles',desc:'Zero incorrect'});if(elapsed<30)badges.push({icon:'\u26a1',name:'Speed Run',desc:'Under 30 minutes'});if(pct>=90)badges.push({icon:'\ud83c\udfc6',name:'Master Strategist',desc:'Above 90%'});if(maxStreak>=10)badges.push({icon:'\ud83d\udd25',name:'On Fire',desc:'10+ streak'});if(incorrectCount>3&&pct>=70)badges.push({icon:'\ud83d\udcaa',name:'Persistent',desc:'Finished despite struggles'});return badges;}
+function renderBadges(badges,container){if(!badges.length){container.innerHTML='<p style="color:#888;font-size:13px;">Complete the module to earn badges!</p>';return;}badges.forEach(function(b,i){setTimeout(function(){var el=document.createElement('span');el.textContent=b.icon+' '+b.name;el.title=b.desc;el.style.cssText='display:inline-block;background:#dcb161;color:#141C2C;font-size:12px;font-weight:700;padding:5px 12px;border-radius:14px;margin:4px;animation:badgeFlip 0.5s ease-out;';container.appendChild(el);},i*400);});}
+
+document.addEventListener('DOMContentLoaded',function(){if(localStorage.getItem('glg_sound')==='1'){soundEnabled=true;var b=document.getElementById('soundToggle');if(b)b.textContent='\ud83d\udd0a';}function iac(){ensureAudioCtx();document.removeEventListener('click',iac);document.removeEventListener('touchstart',iac);document.removeEventListener('touchend',iac);}document.addEventListener('click',iac);document.addEventListener('touchstart',iac);document.addEventListener('touchend',iac);function rag(){if(audioCtx&&audioCtx.state==='suspended')audioCtx.resume();}document.addEventListener('touchstart',rag,true);document.addEventListener('touchend',rag,true);document.addEventListener('click',rag,true);initMascot();});
+goToSection(0);
+</script>
+</body>
+</html>

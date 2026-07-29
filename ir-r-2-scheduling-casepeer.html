@@ -1,0 +1,1837 @@
+<!--
+IR-R-2 - Scheduling & CasePeer Basics
+Built: July 19, 2026 | Base: ir-r-1-phone-handling.html (IR-R-track canonical chassis)
+Track: IR-R (Intake/Reception — Receptionist)
+Learner: Jessica (Receptionist)
+moduleId: ir-r-2
+Base: 20 questions × 10 pts = 200 | Bonus: 5 boss tasks × 10 bonus pts = 50 max | Pass: 160/200 (80%)
+Answer Key: q1→B q2→C q3→A q4→D  q5→C q6→B q7→D q8→A
+            q9→B q10→D q11→C q12→A  q13→D q14→A q15→B q16→C
+            q17→A q18→D q19→B q20→C
+            q21→A(boss) q22→D(boss) q23→B(boss) q24→C(boss) q25→A(boss)
+Distribution: A:5 B:5 C:5 D:5 (base) | Boss: A:2 B:1 C:1 D:1
+Boss Challenge: Maria Santos, GLG-2026-4217
+Sources: IR-R-2-MEMO-SURVEY.md (7 PRIMARY, 6 SECONDARY), Reception_SOP.md §§1,6, CasePeer_Basics_Training.md §§1-3,4,8, CasePeer_Template_Quick_Reference.md
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>IR-R-2 - Scheduling &amp; CasePeer Basics | Gunn Law Group</title>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;color:#333;font-size:16px;line-height:1.6;-webkit-text-size-adjust:100%;overflow-x:hidden;}
+
+    /* ── HEADER ── */
+    header{background:linear-gradient(135deg,#141C2C 0%,#0E1420 100%);color:#e0e0e0;padding:20px 16px 16px;text-align:center;}
+    .day-badge{display:inline-block;background:#1C2433;color:#dcb161;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:10px;}
+    header h1{font-size:clamp(17px,5vw,24px);font-weight:800;line-height:1.3;color:#ffffff;}
+    header p{margin-top:6px;color:#c0c0c0;font-size:13px;}
+    .score-bar{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:12px;padding:10px 16px;background:#1C2433;border-radius:10px;}
+    .score-label{color:#c0c0c0;font-size:12px;font-weight:600;}
+    .score-value{color:#fff;font-size:22px;font-weight:800;}
+
+    /* ── PROGRESS ── */
+    .progress-wrap{background:#1C2433;padding:10px 16px;}
+    .progress-meta{color:#c0c0c0;font-size:11px;margin-bottom:5px;display:flex;justify-content:space-between;}
+    .progress-bg{background:#0E1420;border-radius:4px;height:6px;width:100%;}
+    .progress-fill{background:#dcb161;height:6px;border-radius:4px;width:0%;transition:width .5s ease;}
+
+    /* ── NAV PILLS ── */
+    .section-nav{display:flex;flex-wrap:wrap;gap:6px;padding:12px 14px;background:#fff;border-bottom:2px solid #e0e3e8;justify-content:center;position:sticky;top:0;z-index:100;}
+    .nav-pill{padding:7px 11px;border-radius:20px;border:2px solid #e0e3e8;background:#fff;color:#666;font-size:11px;font-weight:700;cursor:pointer;min-height:44px;min-width:44px;display:flex;align-items:center;transition:all .2s;white-space:nowrap;-webkit-tap-highlight-color:transparent;}
+    .nav-pill.active{background:#141C2C;color:#fff;border-color:#141C2C;}
+    .nav-pill.done{border-color:#10774A;color:#10774A;}
+    .nav-pill.done::after{content:' ✓';}
+
+    /* ── MAIN / CARDS ── */
+    main{max-width:800px;margin:0 auto;padding:0 0 60px;}
+    .section-card{display:none;background:#fff;margin:16px;border-radius:14px;box-shadow:0 2px 16px rgba(0,0,0,.09);overflow:visible;}
+    .section-card.active{display:block;}
+    .section-header{background:#141C2C;color:#fff;padding:18px 20px;}
+    .section-num{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#dcb161;margin-bottom:4px;}
+    .section-header h2{font-size:clamp(15px,4vw,20px);font-weight:800;}
+    .section-subhead{color:#c0c0c0;font-size:13px;margin-top:4px;}
+    .section-body{padding:20px;}
+
+    /* ── SCENARIO BOX ── */
+    .scenario{background:#141C2C;color:#fff;border-radius:12px;padding:20px;margin-bottom:20px;border-left:3px solid #dcb161;}
+    .scenario-tag{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#dcb161;margin-bottom:8px;}
+    .scenario h3{font-size:clamp(15px,4vw,18px);font-weight:700;line-height:1.4;margin-bottom:10px;}
+    .scenario p{font-size:14px;color:#c8d0e0;line-height:1.6;}
+    .scenario .highlight{color:#dcb161;font-weight:700;}
+    .scenario .urgent{color:#e74c3c;font-weight:700;}
+
+    /* ── INFO BLOCKS ── */
+    .info-block{background:#f0f4f8;border-radius:10px;padding:16px;margin-bottom:14px;}
+    .info-block h4{color:#141c2c;font-size:14px;font-weight:700;margin-bottom:8px;}
+    .info-block p,.info-block li{font-size:14px;color:#444;line-height:1.6;}
+    .info-block ul,.info-block ol{padding-left:18px;}
+
+    /* ── QUESTIONS ── */
+    .question-block{border:2px solid #e8ecf0;border-radius:12px;padding:18px;margin-bottom:16px;transition:border-color .2s;}
+    .question-block.answered{border-color:#10774A;}
+    .question-block.answered-wrong{border-color:#870101;}
+    .q-num{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888;margin-bottom:6px;}
+    .q-text{font-size:clamp(14px,3.5vw,16px);font-weight:700;color:#141c2c;margin-bottom:14px;line-height:1.4;}
+    .options{display:flex;flex-direction:column;gap:10px;}
+    .option-btn{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border:2px solid #e0e3e8;border-radius:10px;background:#fff;cursor:pointer;text-align:left;font-size:14px;color:#333;min-height:44px;transition:all .15s;-webkit-tap-highlight-color:transparent;width:100%;}
+    .option-btn:hover,.option-btn:focus{border-color:#232e54;background:#f8f9ff;}
+    .option-btn.correct{border-color:#10774A!important;background:#e8f8ee!important;color:#10774A!important;}
+    .option-btn.incorrect{border-color:#870101!important;background:#fce8e8!important;color:#870101!important;}
+    .option-btn.disabled{pointer-events:none;opacity:.75;}
+    .opt-letter{background:#141C2C;color:#dcb161;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0;margin-top:1px;}
+    .opt-text{flex:1;line-height:1.5;}
+
+    /* ── FEEDBACK ── */
+    .feedback-box{border-radius:10px;padding:14px 16px;margin-top:12px;display:none;font-size:14px;line-height:1.6;}
+    .feedback-box.correct{background:#d4edda;border-left:4px solid #10774A;color:#155724;}
+    .feedback-box.incorrect{background:#f8d7da;border-left:4px solid #870101;color:#721c24;}
+    .feedback-box.show{display:block;}
+
+    /* ── POINTS TOAST ── */
+    .points-toast{position:fixed;top:80px;right:16px;background:#10774A;color:#fff;padding:10px 16px;border-radius:30px;font-weight:700;font-size:15px;box-shadow:0 4px 16px rgba(0,0,0,.2);z-index:999;transform:translateY(-20px);opacity:0;transition:all .3s;pointer-events:none;}
+    .points-toast.show{transform:translateY(0);opacity:1;}
+    .points-toast.bonus{background:#dcb161;color:#141C2C;}
+
+    /* ── SECTION SCORE ── */
+    .section-score{background:#f0f4f8;border-radius:10px;padding:14px;text-align:center;margin-bottom:16px;}
+    .section-score .score-display{font-size:32px;font-weight:800;color:#141c2c;}
+    .section-score .score-label{font-size:13px;color:#666;margin-top:2px;}
+
+    /* ── CASE FILE ── */
+    .case-file{background:#fff;border:2px solid #141c2c;border-radius:12px;padding:18px;margin-bottom:20px;}
+    .case-file-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:12px;border-bottom:2px solid #f0f4f8;}
+    .case-file-icon{background:#141c2c;color:#fff;width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+    .case-file-title{font-weight:800;color:#141c2c;font-size:15px;}
+    .case-file-sub{font-size:12px;color:#888;}
+    .case-detail{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #f0f4f8;font-size:14px;}
+    .case-detail:last-child{border-bottom:none;}
+    .case-key{font-weight:700;color:#141c2c;min-width:160px;flex-shrink:0;}
+    .case-val{color:#444;}
+
+    /* ── BOSS CHALLENGE ── */
+    .boss-header{background:linear-gradient(135deg,#870101 0%,#5a0000 100%);color:#fff;border-radius:12px;padding:24px;margin-bottom:20px;text-align:center;}
+    .boss-header .boss-icon{font-size:40px;margin-bottom:10px;}
+    .boss-header h3{font-size:clamp(17px,4.5vw,22px);font-weight:800;margin-bottom:8px;}
+    .boss-header p{font-size:14px;opacity:.9;line-height:1.5;}
+
+    /* ── RESULTS ── */
+    .results-header{padding:28px 20px;text-align:center;color:#fff;}
+    .results-header.pass{background:linear-gradient(135deg,#10774A,#0a5c38);}
+    .results-header.fail{background:linear-gradient(135deg,#870101,#6b0000);}
+    .results-grade{font-size:56px;font-weight:900;line-height:1;}
+    .results-label{font-size:16px;margin-top:6px;opacity:.9;}
+    .results-sub{font-size:13px;margin-top:4px;opacity:.75;}
+    .breakdown-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #f0f4f8;font-size:15px;}
+    .breakdown-row:last-child{border-bottom:none;}
+    .breakdown-name{color:#333;font-weight:600;}
+    .breakdown-pts{font-weight:800;color:#141c2c;}
+    .achievement-grid{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0;}
+    .badge{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;font-size:13px;font-weight:700;border:2px solid #e0e3e8;color:#888;background:#f8f9fa;}
+    .badge.earned{border-color:#dcb161;background:#fffaed;color:#7a5c00;}
+    .badge .badge-icon{font-size:20px;}
+
+    /* ── CERTIFICATE ── */
+    .cert-wrap{background:linear-gradient(180deg,#ffffff 0%,#fafaf5 100%);border:4px double #141c2c;border-radius:14px;padding:2.5rem 1.75rem;text-align:center;margin-bottom:1rem;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(20,28,44,0.10);animation:certPopIn 0.8s 0.1s cubic-bezier(0.34,1.56,0.64,1) both;}
+    @keyframes certPopIn{0%{opacity:0;transform:scale(0.7);box-shadow:0 2px 8px rgba(20,28,44,0.05)}60%{opacity:1;transform:scale(1.04);box-shadow:0 8px 32px rgba(20,28,44,0.18)}80%{transform:scale(0.98)}100%{opacity:1;transform:scale(1);box-shadow:0 10px 40px rgba(20,28,44,0.16)}}
+    .cert-wrap::before{content:'';position:absolute;inset:10px;border:1px solid #dcb161;border-radius:8px;pointer-events:none;opacity:0.45;}
+    .cert-wrap::after{content:'\2696\FE0F';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:180px;opacity:0.03;pointer-events:none;z-index:0;}
+    .cert-firm{font-size:0.67rem;letter-spacing:0.22em;text-transform:uppercase;color:#232e54;font-weight:600;margin-bottom:0.6rem;position:relative;z-index:1;}
+    .cert-title{font-size:clamp(1.5rem,5vw,1.9rem);font-weight:800;color:#141c2c;margin-bottom:0.3rem;text-transform:uppercase;letter-spacing:0.04em;position:relative;z-index:1;}
+    .cert-subtitle{font-size:0.8rem;color:#888;margin-bottom:1.4rem;position:relative;z-index:1;}
+    .cert-presents{font-size:0.85rem;color:#777;font-style:italic;margin-bottom:0.3rem;position:relative;z-index:1;}
+    .cert-name{font-size:clamp(1.6rem,6vw,2.2rem);font-weight:700;color:#232e54;font-style:italic;border-bottom:2px solid #dcb161;display:inline-block;padding:0 0.75rem 0.2rem;margin-bottom:0.85rem;min-width:60%;position:relative;z-index:1;}
+    .cert-for{font-size:0.85rem;color:#666;margin-bottom:0.35rem;position:relative;z-index:1;}
+    .cert-module{font-size:1.05rem;font-weight:600;color:#141c2c;margin-bottom:1.1rem;position:relative;z-index:1;}
+    .cert-meta{font-size:0.8rem;color:#888;position:relative;z-index:1;}
+    .cert-score{font-size:1.1rem;font-weight:700;color:#10774A;margin-top:0.5rem;position:relative;z-index:1;}
+    .cert-seal{font-size:2.5rem;margin:0.85rem 0 0.3rem;display:block;position:relative;z-index:1;}
+    .cert-signature{margin-top:1.5rem;position:relative;z-index:1;}
+    .cert-sig-line{width:200px;border-top:1px solid #141c2c;margin:0 auto 0.3rem;}
+    .cert-sig-name{font-size:1rem;font-weight:600;color:#141c2c;font-style:italic;}
+    .cert-sig-title{font-size:0.75rem;color:#888;letter-spacing:0.05em;}
+    .cert-badges{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:14px;position:relative;z-index:1;}
+    .cert-badge-pill{display:inline-block;background:#dcb161;color:#141C2C;font-size:0.68rem;font-weight:700;padding:4px 12px;border-radius:14px;letter-spacing:0.03em;animation:badgeFlip 0.5s ease-out backwards;}
+    #confettiCanvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10005;}
+
+    /* ── REVIEW LIST ── */
+    .review-list{display:flex;flex-direction:column;gap:0.65rem;margin-top:1rem;}
+    .review-item{background:#f8f9fa;border-radius:10px;padding:0.8rem 1.1rem;border-left:4px solid #ddd;font-size:0.88rem;transition:transform 0.15s ease;}
+    .review-item:hover{transform:translateX(2px);}
+    .review-item.correct{border-color:#10774A;}
+    .review-item.wrong{border-color:#870101;}
+    .review-item .ri-q{font-weight:600;margin-bottom:0.35rem;color:#141c2c;}
+    .review-item .ri-ans{font-size:0.82rem;}
+
+    /* ── NAME INPUT ── */
+    .name-input-wrap{margin-bottom:1rem;}
+    .name-input-wrap label{display:block;font-size:0.85rem;font-weight:600;color:#232e54;margin-bottom:0.4rem;}
+    .name-input{width:100%;padding:0.82rem 1rem;border:2px solid #e0e3e8;border-radius:9px;font-size:1rem;color:#333;background:#fff;transition:border-color 0.2s ease,box-shadow 0.2s ease;-webkit-appearance:none;}
+    .name-input:focus{outline:none;border-color:#232e54;box-shadow:0 0 0 3px rgba(35,46,84,0.1);}
+
+    /* ── FEEDBACK FORM ── */
+    .fb-question{margin-bottom:18px;}
+    .fb-question label{display:block;font-weight:700;color:#141c2c;font-size:15px;margin-bottom:8px;}
+    .fb-question select,.fb-question textarea{width:100%;padding:12px;border:2px solid #e0e3e8;border-radius:9px;font-size:14px;background:#fff;color:#333;-webkit-appearance:none;transition:border-color 0.2s ease;font-family:inherit;}
+    .fb-question select:focus,.fb-question textarea:focus{outline:none;border-color:#141c2c;}
+    .fb-question textarea{resize:vertical;min-height:80px;}
+
+    /* ── BUTTONS ── */
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 22px;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;min-height:44px;transition:all .2s;-webkit-tap-highlight-color:transparent;font-family:inherit;}
+    .btn-primary{background:#141C2C;color:#fff;}
+    .btn-primary:hover{background:#232e54;}
+    .btn-secondary{background:#f0f4f8;color:#141c2c;}
+    .btn-block{width:100%;margin-top:12px;}
+    .btn-group{display:flex;flex-direction:column;gap:10px;margin-top:16px;}
+
+    /* ── CALLOUT ── */
+    .callout{border-radius:10px;padding:14px 16px;margin:14px 0;font-size:14px;line-height:1.6;}
+    .callout-warn{background:#fff3cd;border-left:4px solid #f39c12;color:#533f03;}
+    .callout-danger{background:#fce8e8;border-left:4px solid #870101;color:#721c24;}
+    .callout-success{background:#d4edda;border-left:4px solid #10774A;color:#155724;}
+    .callout-info{background:#d6e8f8;border-left:4px solid #3498db;color:#174a7e;}
+    .callout strong{font-weight:700;}
+
+    /* ── STAT TABLE ── */
+    .stat-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13px;}
+    .stat-table th{background:#141c2c;color:#dcb161;padding:8px 10px;text-align:left;font-weight:700;}
+    .stat-table td{padding:7px 10px;border-bottom:1px solid #e0e3e8;vertical-align:top;}
+    .stat-table tr:last-child td{border-bottom:none;}
+    .stat-table tr:nth-child(even) td{background:#f8f9fa;}
+
+    /* ── DIVIDER / TAGS / UTILS ── */
+    .divider{border:none;border-top:2px solid #f0f4f8;margin:16px 0;}
+    .tag{display:inline-block;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
+    .tag-warn{background:#fff3cd;color:#856404;}
+    .tag-danger{background:#fce8e8;color:#7b1a1a;}
+    .tag-success{background:#d4edda;color:#155724;}
+    .tag-info{background:#d6e8f8;color:#174a7e;}
+    .tag-gold{background:#fffaed;color:#7a5c00;border:1px solid #dcb161;}
+    .text-center{text-align:center;}
+    .mt-4{margin-top:16px;}
+    .mb-4{margin-bottom:16px;}
+
+    /* ── SCORE CONFIRM ── */
+    .score-confirm{border-radius:10px;padding:14px 16px;margin:14px 0;font-size:14px;line-height:1.6;background:#d4edda;border-left:4px solid #10774A;color:#155724;display:none;}
+
+    .glg-logo{display:block;margin:0 auto 10px;max-height:50px;width:auto;}
+
+    /* ── GAMIFICATION ANIMATIONS ── */
+    @keyframes streakPop{0%{transform:translateX(-50%) scale(0.5);opacity:0}50%{transform:translateX(-50%) scale(1.15)}100%{transform:translateX(-50%) scale(1);opacity:1}}
+    @keyframes fadeUp{to{opacity:0;transform:translateX(-50%) translateY(-20px);}}
+    @keyframes scaleBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+    @keyframes scaleCelebrate{0%{transform:scale(1) rotate(0)}25%{transform:scale(1.2) rotate(-8deg)}50%{transform:scale(1.15) rotate(5deg)}75%{transform:scale(1.1) rotate(-3deg)}100%{transform:scale(1) rotate(0)}}
+    @keyframes scaleTilt{0%{transform:rotate(0)}30%{transform:rotate(10deg)}70%{transform:rotate(-8deg)}100%{transform:rotate(0)}}
+    @keyframes scaleTriumph{0%{transform:scale(1)}20%{transform:scale(1.3)}40%{transform:scale(1.25) rotate(-5deg)}60%{transform:scale(1.25) rotate(5deg)}80%{transform:scale(1.3)}100%{transform:scale(1)}}
+    @keyframes badgeFlip{0%{transform:rotateY(90deg) scale(0.5);opacity:0}60%{transform:rotateY(-10deg) scale(1.05)}100%{transform:rotateY(0) scale(1);opacity:1}}
+    @keyframes correctPulse{0%{box-shadow:0 0 0 0 rgba(39,174,96,0.4)}70%{box-shadow:0 0 0 12px rgba(39,174,96,0)}100%{box-shadow:0 0 0 0 rgba(39,174,96,0)}}
+    @keyframes incorrectShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+    .option-btn.correct{animation:correctPulse 0.6s ease-out;}
+    .option-btn.incorrect{animation:incorrectShake 0.4s ease-out;}
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     HEADER
+════════════════════════════════════════════ -->
+<header>
+  <img src="https://www.thegunnlawgroup.com/wp-content/uploads/2023/01/gunn-logo.png" alt="Gunn Law Group" class="glg-logo">
+  <div class="day-badge">IR-R-2 · Scheduling &amp; CasePeer Basics</div>
+  <h1>IR-R-2 — Scheduling &amp; CasePeer Basics</h1>
+  <p>Gunn Law Group · Reception Training</p>
+  <div class="score-bar">
+    <div>
+      <div class="score-label">BASE SCORE</div>
+      <div class="score-value" id="total-score">0</div>
+    </div>
+    <div>
+      <div class="score-label">POSSIBLE</div>
+      <div class="score-value">200</div>
+    </div>
+    <div>
+      <div class="score-label">BONUS</div>
+      <div class="score-value" id="bonus-score">0</div>
+    </div>
+    <div>
+      <div class="score-label">STREAK</div>
+      <div class="score-value" id="streak-display">0 🔥</div>
+    </div>
+  </div>
+</header>
+
+<!-- Sound Toggle -->
+<button id="soundToggle" style="position:fixed;top:12px;right:12px;z-index:10000;background:#1C2433;color:#c0c0c0;border:1px solid #333;border-radius:8px;padding:6px 10px;cursor:pointer;font-size:16px;" onclick="toggleSound()" title="Toggle Sound">🔇</button>
+<!-- Global Progress Bar -->
+<div id="globalProgress" style="position:fixed;top:0;left:0;width:100%;height:4px;background:#1C2433;z-index:9999;"><div id="globalProgressFill" style="height:100%;width:0%;background:linear-gradient(90deg,#dcb161,#e8c87a);transition:width 0.5s ease;"></div></div>
+
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <div class="progress-meta">
+    <span id="prog-label">Section 1 of 9</span>
+    <span id="prog-pct">0%</span>
+  </div>
+  <div class="progress-bg"><div class="progress-fill" id="prog-fill"></div></div>
+</div>
+
+<!-- NAV PILLS -->
+<nav class="section-nav" id="section-nav">
+  <button class="nav-pill active" id="nav-0" onclick="goToSection(0)">1. Intro</button>
+  <button class="nav-pill" id="nav-1" onclick="goToSection(1)">2. Navigation</button>
+  <button class="nav-pill" id="nav-2" onclick="goToSection(2)">3. Notes</button>
+  <button class="nav-pill" id="nav-3" onclick="goToSection(3)">4. Tasks</button>
+  <button class="nav-pill" id="nav-4" onclick="goToSection(4)">5. Calendar</button>
+  <button class="nav-pill" id="nav-5" onclick="goToSection(5)">6. Status</button>
+  <button class="nav-pill" id="nav-6" onclick="goToSection(6)">7. Boss</button>
+  <button class="nav-pill" id="nav-7" onclick="goToSection(7)">8. Results</button>
+  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">9. Certificate</button>
+</nav>
+
+<!-- Points Toast -->
+<div class="points-toast" id="points-toast"></div>
+
+<!-- Confetti Canvas -->
+<canvas id="confettiCanvas"></canvas>
+
+<main>
+
+<!-- ══════════════════════════════════════════
+     SECTION 0 — INTRO / WELCOME
+════════════════════════════════════════════ -->
+<div class="section-card active" id="section-0">
+  <div class="section-header">
+    <div class="section-num">Section 1 · Welcome</div>
+    <h2>Scheduling &amp; CasePeer Basics</h2>
+    <div class="section-subhead">You learned HOW to answer the phone. Now learn WHERE the information goes.</div>
+  </div>
+  <div class="section-body">
+    <div class="scenario">
+      <div class="scenario-tag">IR-R Track — Module 2</div>
+      <h3>A paralegal gets a call from an upset client: "I called your office TWO DAYS AGO and left a message about rescheduling my appointment. Nobody got back to me and I showed up at the wrong time." The paralegal checks CasePeer — no message logged, no task created, no calendar update. The message vanished into thin air.</h3>
+      <p>The receptionist took the message. Wrote it on a sticky note. Got busy. The sticky note fell behind the desk. Two days later, the client drove 45 minutes to the office for an appointment that had been moved — <span class="highlight">but no one updated CasePeer.</span> The client's trust in the firm dropped to zero. <span class="urgent">If it's not in CasePeer, it didn't happen.</span></p>
+    </div>
+    <div class="info-block">
+      <h4>📋 What You Will Learn</h4>
+      <ul>
+        <li>CasePeer dashboard navigation — login, search, calendar, daily routine</li>
+        <li>Logging communication notes at reception level — good notes vs useless notes</li>
+        <li>Creating tasks in CasePeer — message relay, callback reminders, follow-up flags</li>
+        <li>Calendar management — checking availability, scheduling appointments, avoiding double-bookings</li>
+        <li>Case status awareness (read-only) — how status knowledge makes you a smarter router</li>
+        <li>Template awareness — knowing templates exist without creating them</li>
+        <li>The reception-level daily CasePeer checklist — opening and closing routines</li>
+      </ul>
+    </div>
+    <div class="callout callout-warn"><strong>Building on IR-R-1:</strong> Module 1 taught you the human interaction layer — greetings, routing, de-escalation. Module 2 teaches the systems layer — where every message, appointment, and routing decision gets recorded in CasePeer. The greeting is the front door; CasePeer is the foundation underneath.</div>
+    <div class="callout callout-info"><strong>Scoring:</strong> 20 questions × 10 pts = 200 base pts possible. Pass gate: 160/200 (80%). Boss Challenge adds up to 50 bonus points. Bonus points do not count toward the pass gate but do appear on your certificate.</div>
+    <div class="callout callout-danger"><strong>The Golden Rule:</strong> If it's not in CasePeer, it didn't happen. Every message you take, every appointment you schedule, every visitor who walks through the door — it all goes into CasePeer. No exceptions. No "I'll log it later." No sticky notes as substitutes.</div>
+    <div class="btn-group"><button class="btn btn-primary btn-block" onclick="goToSection(1)">Begin: CasePeer Navigation &amp; Daily Routine &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 1 — CASEPEER NAVIGATION & DAILY ROUTINE (Q1–Q4)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-1">
+  <div class="section-header">
+    <div class="section-num">Section 2 · CasePeer Navigation &amp; Daily Routine · Up to 40 pts</div>
+    <h2>Dashboard, Calendar &amp; the Opening/Closing Checklist</h2>
+    <div class="section-subhead">CasePeer is the firm's single source of truth. Your day starts and ends here.</div>
+  </div>
+  <div class="section-body">
+    <div class="info-block">
+      <h4>🖥️ The CasePeer Dashboard</h4>
+      <p>When you log in, the dashboard shows you:</p>
+      <ul>
+        <li><strong>Assigned tasks</strong> — due today, overdue, upcoming</li>
+        <li><strong>Recent activity</strong> on cases</li>
+        <li><strong>Calendar events</strong> — today's appointments and meetings</li>
+        <li><strong>Quick search bar</strong> at the top — find cases, contacts, calendar entries</li>
+      </ul>
+      <p style="margin-top:10px;font-weight:700;">At reception level, the calendar is your command center. It tells you who's coming in, when attorneys are available, and where scheduling gaps exist.</p>
+    </div>
+    <div class="info-block">
+      <h4>📋 The Reception Opening Checklist (Both Systems)</h4>
+      <table class="stat-table">
+        <tr><th>Physical (Reception SOP §6)</th><th>CasePeer (Basics Training §8)</th></tr>
+        <tr><td>Workstation on and logged in</td><td>Check dashboard for tasks/messages</td></tr>
+        <tr><td>Phones active and forwarding tested</td><td>Review today's calendar &amp; appointments</td></tr>
+        <tr><td>Voicemail checked and messages routed</td><td>Note any overdue tasks (for assigned staff)</td></tr>
+        <tr><td>Front desk &amp; waiting area presentable</td><td>Daily message log open and ready</td></tr>
+      </table>
+      <p style="margin-top:10px;">Both checklists run in parallel. Physical setup AND CasePeer setup — before 9:00 AM, every day.</p>
+    </div>
+    <div class="callout callout-danger"><strong>Closing Routine:</strong> Before you leave: all messages relayed AND logged in CasePeer, no orphan tasks (every message has a task to a named person), phones forwarded, desk cleared, unresolved items flagged to supervisor. When you close your laptop, every communication is logged and every task is set.</div>
+
+    <!-- Q1 -->
+    <div class="question-block" id="q1-block">
+      <div class="q-num">Question 1 of 20 · 10 pts</div>
+      <div class="q-text">It's 8:50 AM. You've just logged into CasePeer. The dashboard shows 2 overdue tasks (assigned to a paralegal), 3 calendar events for today, and 4 new messages. Per the reception-level daily routine, what is your first action?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q1','a',false)" id="q1-a"><span class="opt-letter">A</span><span class="opt-text">Tackle the 2 overdue tasks first — overdue items always come before everything else, regardless of whose they are</span></button>
+        <button class="option-btn" onclick="answer('q1','b',true)" id="q1-b"><span class="opt-letter">B</span><span class="opt-text">Review the calendar events to understand today's schedule — you need to know who has appointments and when so you can greet visitors and manage scheduling accurately</span></button>
+        <button class="option-btn" onclick="answer('q1','c',false)" id="q1-c"><span class="opt-letter">C</span><span class="opt-text">Read through the 4 new messages to see if any are urgent before doing anything else</span></button>
+        <button class="option-btn" onclick="answer('q1','d',false)" id="q1-d"><span class="opt-letter">D</span><span class="opt-text">Clear the dashboard notifications so it looks clean, then work through items as they come in during the day</span></button>
+      </div>
+      <div class="feedback-box" id="q1-fb"></div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="question-block" id="q2-block">
+      <div class="q-num">Question 2 of 20 · 10 pts</div>
+      <div class="q-text">You're building your morning opening routine. The Reception SOP has a physical checklist and CasePeer has a daily routine. Which combination correctly maps the full opening procedure?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q2','a',false)" id="q2-a"><span class="opt-letter">A</span><span class="opt-text">Log into CasePeer, check for overdue tasks assigned to you, handle those first, then organize the desk and check phones</span></button>
+        <button class="option-btn" onclick="answer('q2','b',false)" id="q2-b"><span class="opt-letter">B</span><span class="opt-text">Organize the desk first, turn on the phones, then log into CasePeer whenever there's a break in calls</span></button>
+        <button class="option-btn" onclick="answer('q2','c',true)" id="q2-c"><span class="opt-letter">C</span><span class="opt-text">Log into CasePeer, review today's calendar and appointments, check for messages needing relay — AND phones active, voicemail checked, desk organized, waiting area presentable. Both systems, before 9:00 AM.</span></button>
+        <button class="option-btn" onclick="answer('q2','d',false)" id="q2-d"><span class="opt-letter">D</span><span class="opt-text">The CasePeer opening routine replaces the physical checklist — once you're logged in and dashboard is reviewed, the physical setup can wait</span></button>
+      </div>
+      <div class="feedback-box" id="q2-fb"></div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="question-block" id="q3-block">
+      <div class="q-num">Question 3 of 20 · 10 pts</div>
+      <div class="q-text">A client calls at 10:30 AM: "Hi, I'm calling about my appointment today. I think it's at 2:00 but I'm not sure. My name is David Chen." You need to confirm his appointment. Where in CasePeer do you look?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q3','a',true)" id="q3-a"><span class="opt-letter">A</span><span class="opt-text">Check the CasePeer calendar for today — search for David Chen's appointment to confirm the time, then relay the confirmation to the client</span></button>
+        <button class="option-btn" onclick="answer('q3','b',false)" id="q3-b"><span class="opt-letter">B</span><span class="opt-text">Use the CasePeer quick search bar to pull up David Chen's case file, then check the case notes for appointment details</span></button>
+        <button class="option-btn" onclick="answer('q3','c',false)" id="q3-c"><span class="opt-letter">C</span><span class="opt-text">Ask David which attorney or paralegal his appointment is with, then check that person's individual calendar</span></button>
+        <button class="option-btn" onclick="answer('q3','d',false)" id="q3-d"><span class="opt-letter">D</span><span class="opt-text">Tell David to hold while you check the physical appointment book — CasePeer calendar entries aren't always reliable for same-day appointments</span></button>
+      </div>
+      <div class="feedback-box" id="q3-fb"></div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="question-block" id="q4-block">
+      <div class="q-num">Question 4 of 20 · 10 pts · Confidence Check</div>
+      <div class="q-text">Rate your confidence (1-5 in your head) on CasePeer's closing routine. Now answer: It's 5:55 PM. Which of these must be completed BEFORE you leave?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q4','a',false)" id="q4-a"><span class="opt-letter">A</span><span class="opt-text">All phone calls returned, all emails answered, and CasePeer dashboard cleared to zero items</span></button>
+        <button class="option-btn" onclick="answer('q4','b',false)" id="q4-b"><span class="opt-letter">B</span><span class="opt-text">Outgoing mail processed, front desk cleared, phones forwarded — but CasePeer entries can be caught up tomorrow morning</span></button>
+        <button class="option-btn" onclick="answer('q4','c',false)" id="q4-c"><span class="opt-letter">C</span><span class="opt-text">Phones forwarded, desk organized, any unresolved messages flagged for the morning team to handle</span></button>
+        <button class="option-btn" onclick="answer('q4','d',true)" id="q4-d"><span class="opt-letter">D</span><span class="opt-text">All messages relayed AND logged in CasePeer, no orphan tasks (every message has a task assigned to a named person), phones forwarded, front desk cleared, unresolved items flagged to supervisor BEFORE leaving</span></button>
+      </div>
+      <div class="feedback-box" id="q4-fb"></div>
+    </div>
+
+    <div class="section-score" id="s1-score" style="display:none;"><div class="score-display" id="s1-score-val"></div><div class="score-label">Section 2 Score</div></div>
+    <div class="btn-group" id="s1-next"><button class="btn btn-primary btn-block" onclick="goToSection(2)">Next: Communication Notes &amp; the 15-Minute Relay &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 2 — COMMUNICATION NOTES & 15-MIN RELAY (Q5–Q8)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-2">
+  <div class="section-header">
+    <div class="section-num">Section 3 · Communication Notes · Up to 40 pts</div>
+    <h2>Logging Messages in CasePeer &amp; the 15-Minute Relay</h2>
+    <div class="section-subhead">"Called client" is not a note. It's a waste of pixels.</div>
+  </div>
+  <div class="section-body">
+    <div class="scenario">
+      <div class="scenario-tag">Good Note vs Bad Note</div>
+      <h3>Two receptionists. Same message. One logs: "Client called about records." The other logs: "Client Robert Williams called at 2:15 PM at (678) 555-3421. Asking about status of medical records from Dr. Patel — says records were supposed to be ready last week. Has follow-up appointment Thursday. Task set for case manager Tanya — callback today."</h3>
+      <p>When Tanya picks up the first note, she has to call the client just to find out what they wanted. When she picks up the second note, she already knows the issue, the urgency, and can prepare the answer before dialing. <span class="highlight">The difference between a good note and a bad note is 5 extra minutes of effort — and it saves everyone 30 minutes of confusion.</span></p>
+    </div>
+    <div class="info-block">
+      <h4>📝 Every CasePeer Note Must Include</h4>
+      <ol>
+        <li><strong>WHO</strong> you contacted — name, title, phone number</li>
+        <li><strong>WHAT</strong> was discussed — specific topics, not vague summaries</li>
+        <li><strong>WHAT WAS DECIDED</strong> or learned</li>
+        <li><strong>NEXT STEPS</strong> — and corresponding tasks set in CasePeer</li>
+      </ol>
+    </div>
+    <div class="callout callout-warn"><strong>The 15-Minute Relay, Systematized:</strong> In IR-R-1 you learned to relay messages within 15 minutes. In CasePeer, this means: log the communication note AND create a task to the named recipient within 15 minutes. CasePeer is the audit trail — the proof that the relay happened.</div>
+
+    <!-- Q5 -->
+    <div class="question-block" id="q5-block">
+      <div class="q-num">Question 5 of 20 · 10 pts</div>
+      <div class="q-text">You took a message at 2:15 PM: existing client Robert Williams called about his medical records. You log it in CasePeer. Which note meets the firm's communication logging standard?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q5','a',false)" id="q5-a"><span class="opt-letter">A</span><span class="opt-text">"Robert Williams called about records."</span></button>
+        <button class="option-btn" onclick="answer('q5','b',false)" id="q5-b"><span class="opt-letter">B</span><span class="opt-text">"Client Robert Williams called at 2:15 PM re: medical records. Will follow up."</span></button>
+        <button class="option-btn" onclick="answer('q5','c',true)" id="q5-c"><span class="opt-letter">C</span><span class="opt-text">"Client Robert Williams called at 2:15 PM at (678) 555-3421. Asking about status of medical records request from Dr. Patel's office — says records were supposed to be ready last week. Urgent: client has follow-up appointment Thursday. Message relayed to case manager Tanya via CasePeer task. Task set for callback today."</span></button>
+        <button class="option-btn" onclick="answer('q5','d',false)" id="q5-d"><span class="opt-letter">D</span><span class="opt-text">"Received call from Robert Williams. Forwarded to Tanya's voicemail. Client seems frustrated about records."</span></button>
+      </div>
+      <div class="feedback-box" id="q5-fb"></div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="question-block" id="q6-block">
+      <div class="q-num">Question 6 of 20 · 10 pts</div>
+      <div class="q-text">A new potential client calls. Victoria (Intake) is in a meeting. You take a complete message per IR-R-1 training. Now you need to handle the CasePeer side. At reception level, what's the correct CasePeer action?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q6','a',false)" id="q6-a"><span class="opt-letter">A</span><span class="opt-text">Create a new case file for the potential client in CasePeer, then log the communication note under that new case</span></button>
+        <button class="option-btn" onclick="answer('q6','b',true)" id="q6-b"><span class="opt-letter">B</span><span class="opt-text">Log the message as a communication note in CasePeer's reception log AND create a task assigned to Victoria (Intake) with the complete message details and "URGENT — new potential client" flag</span></button>
+        <button class="option-btn" onclick="answer('q6','c',false)" id="q6-c"><span class="opt-letter">C</span><span class="opt-text">Don't log it in CasePeer yet — reception only logs messages for existing cases. Text Victoria the details and she'll create the intake record</span></button>
+        <button class="option-btn" onclick="answer('q6','d',false)" id="q6-d"><span class="opt-letter">D</span><span class="opt-text">Log a brief note ("New PNC called — message left for Victoria") and put the sticky note with details on Victoria's desk</span></button>
+      </div>
+      <div class="feedback-box" id="q6-fb"></div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="question-block" id="q7-block">
+      <div class="q-num">Question 7 of 20 · 10 pts</div>
+      <div class="q-text">At 3:45 PM, you take a message from an insurance adjuster for paralegal Sarah. You log it in CasePeer and create a task assigned to Sarah. It's now 4:00 PM — 15 minutes later. Sarah hasn't checked her CasePeer tasks. What do you do?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q7','a',false)" id="q7-a"><span class="opt-letter">A</span><span class="opt-text">Nothing further — you've logged it and created the task. Your obligation is met once it's in the system.</span></button>
+        <button class="option-btn" onclick="answer('q7','b',false)" id="q7-b"><span class="opt-letter">B</span><span class="opt-text">Wait until Sarah comes up for air — interrupting someone on a deadline is worse than a delayed relay</span></button>
+        <button class="option-btn" onclick="answer('q7','c',false)" id="q7-c"><span class="opt-letter">C</span><span class="opt-text">Send a follow-up email to Sarah as backup, but wait for her to check CasePeer</span></button>
+        <button class="option-btn" onclick="answer('q7','d',true)" id="q7-d"><span class="opt-letter">D</span><span class="opt-text">Walk over or send a quick text/Teams message: "Adjuster message in your CasePeer tasks — flagged." The 15-minute relay rule means the message is RECEIVED by the named person within 15 minutes, not just entered in the system.</span></button>
+      </div>
+      <div class="feedback-box" id="q7-fb"></div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="question-block" id="q8-block">
+      <div class="q-num">Question 8 of 20 · 10 pts · Interleaving from IR-R-1</div>
+      <div class="q-text">An existing client in a litigation matter calls at 11:00 AM. Their litigation paralegal is in court. You take a complete message. Now you need to handle the CasePeer side. Which actions are correct at reception level?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q8','a',true)" id="q8-a"><span class="opt-letter">A</span><span class="opt-text">Log a communication note with WHO called, WHAT they discussed, and NEXT STEPS, then create a task assigned to the litigation paralegal by name with the complete message — flag it if the client mentioned urgency</span></button>
+        <button class="option-btn" onclick="answer('q8','b',false)" id="q8-b"><span class="opt-letter">B</span><span class="opt-text">Pull up the client's case file in CasePeer, add a communication note directly to the case, and update the case status to reflect the client's call</span></button>
+        <button class="option-btn" onclick="answer('q8','c',false)" id="q8-c"><span class="opt-letter">C</span><span class="opt-text">Create a task for the Managing Attorney since the paralegal is in court — Attorney Gunn should know when litigation clients can't reach their paralegal</span></button>
+        <button class="option-btn" onclick="answer('q8','d',false)" id="q8-d"><span class="opt-letter">D</span><span class="opt-text">Log the note in CasePeer and email the paralegal — CasePeer tasks aren't reliable when someone is out of the office</span></button>
+      </div>
+      <div class="feedback-box" id="q8-fb"></div>
+    </div>
+
+    <div class="section-score" id="s2-score" style="display:none;"><div class="score-display" id="s2-score-val"></div><div class="score-label">Section 3 Score</div></div>
+    <div class="btn-group" id="s2-next"><button class="btn btn-primary btn-block" onclick="goToSection(3)">Next: Task Creation &amp; Follow-Up Routing &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 3 — TASK CREATION & FOLLOW-UP ROUTING (Q9–Q12)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-3">
+  <div class="section-header">
+    <div class="section-num">Section 4 · Task Creation · Up to 40 pts</div>
+    <h2>Creating Tasks, Routing to Named People &amp; Catching Gaps</h2>
+    <div class="section-subhead">A task addressed to "the team" is assigned to no one. Every task goes to a named person.</div>
+  </div>
+  <div class="section-body">
+    <div class="scenario">
+      <div class="scenario-tag">Real-World Consequence</div>
+      <h3>A CasePeer task reads: "Follow up." That's it. No client name. No phone number. No context. No due date. It sits in a paralegal's queue for three days because they don't know what it refers to — and when they finally click into it, they can't figure out what "follow up" even means.</h3>
+      <p>Meanwhile, the client who called three days ago is now furious. They call the Managing Attorney directly. <span class="highlight">The task existed — but it was useless.</span> <span class="urgent">A vague task is worse than no task at all because it creates the illusion that something is being handled.</span></p>
+    </div>
+    <div class="info-block">
+      <h4>✅ Good Task vs ❌ Bad Task</h4>
+      <table class="stat-table">
+        <tr><th>❌ Bad Task</th><th>✅ Good Task</th></tr>
+        <tr><td>"Follow up"</td><td>"Follow up with Dr. Martinez office for final medical records — called 3/15, said 7-10 days"</td></tr>
+        <tr><td>"Client called"</td><td>"Client Angela Davis called at 10:45 AM, (404) 555-8892 — PD question about rental car return. Needs callback before 3 PM today."</td></tr>
+        <tr><td>"Check on case"</td><td>"Follow up with State Farm adjuster Jane Doe on demand response — demand sent 3/1"</td></tr>
+      </table>
+    </div>
+    <div class="callout callout-danger"><strong>The Named Person Rule:</strong> Every CasePeer task must be assigned to a specific, named person. Not "Pre-Lit Team." Not "Front Desk." Not "Whoever's Available." If you don't know who handles the case, ask — don't assign to a group and hope.</div>
+
+    <!-- Q9 -->
+    <div class="question-block" id="q9-block">
+      <div class="q-num">Question 9 of 20 · 10 pts</div>
+      <div class="q-text">You need to create a CasePeer task for a message you took. Client Angela Davis called about a property damage question — her case manager is Marcus. Which task description meets the standard?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q9','a',false)" id="q9-a"><span class="opt-letter">A</span><span class="opt-text">"Client called — needs callback."</span></button>
+        <button class="option-btn" onclick="answer('q9','b',true)" id="q9-b"><span class="opt-letter">B</span><span class="opt-text">"Client Angela Davis called at 10:45 AM, (404) 555-8892 — PD question. Rental car company contacting her about returning vehicle, hasn't heard from adjuster about repairs. Needs callback before 3:00 PM today. ASSIGNED TO: Marcus."</span></button>
+        <button class="option-btn" onclick="answer('q9','c',false)" id="q9-c"><span class="opt-letter">C</span><span class="opt-text">"Angela Davis PD question — see sticky note on Marcus's desk for details."</span></button>
+        <button class="option-btn" onclick="answer('q9','d',false)" id="q9-d"><span class="opt-letter">D</span><span class="opt-text">"Please call Angela Davis at (404) 555-8892 about her property damage."</span></button>
+      </div>
+      <div class="feedback-box" id="q9-fb"></div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="question-block" id="q10-block">
+      <div class="q-num">Question 10 of 20 · 10 pts</div>
+      <div class="q-text">You've taken three messages in the last hour. You need to create CasePeer tasks for each. Which set of task assignments is correct?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q10','a',false)" id="q10-a"><span class="opt-letter">A</span><span class="opt-text">All three tasks assigned to "Front Desk Follow-Up" — reception owns the relay and should track all three until completion</span></button>
+        <button class="option-btn" onclick="answer('q10','b',false)" id="q10-b"><span class="opt-letter">B</span><span class="opt-text">All three tasks assigned to Adriauna (Head Attorney) — she oversees pre-lit and can distribute from there</span></button>
+        <button class="option-btn" onclick="answer('q10','c',false)" id="q10-c"><span class="opt-letter">C</span><span class="opt-text">Two tasks assigned to specific case managers, the third to "Pre-Lit Team" since you're not sure who handles that case</span></button>
+        <button class="option-btn" onclick="answer('q10','d',true)" id="q10-d"><span class="opt-letter">D</span><span class="opt-text">Each task assigned to the specific named person responsible. If you don't know who handles the third case, you find out before assigning. No task goes to a team or generic group.</span></button>
+      </div>
+      <div class="feedback-box" id="q10-fb"></div>
+    </div>
+
+    <!-- Q11 -->
+    <div class="question-block" id="q11-block">
+      <div class="q-num">Question 11 of 20 · 10 pts</div>
+      <div class="q-text">You took a message at 2:15 PM and created a CasePeer task for paralegal Tanya. At 2:30 PM the same client calls again — they haven't heard back. What's the correct CasePeer action?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q11','a',false)" id="q11-a"><span class="opt-letter">A</span><span class="opt-text">Create a duplicate task for Tanya — the second call shows the first task isn't working</span></button>
+        <button class="option-btn" onclick="answer('q11','b',false)" id="q11-b"><span class="opt-letter">B</span><span class="opt-text">Delete the original task and create a new one with updated urgency, since the first one was clearly ignored</span></button>
+        <button class="option-btn" onclick="answer('q11','c',true)" id="q11-c"><span class="opt-letter">C</span><span class="opt-text">Add a note to the existing task: "Client called again at 2:30 PM — second attempt. Escalate priority." Then ping Tanya directly to ensure she's seen it.</span></button>
+        <button class="option-btn" onclick="answer('q11','d',false)" id="q11-d"><span class="opt-letter">D</span><span class="opt-text">Escalate: create a task for the Managing Attorney noting the client called twice in 15 minutes and Tanya hasn't responded</span></button>
+      </div>
+      <div class="feedback-box" id="q11-fb"></div>
+    </div>
+
+    <!-- Q12 -->
+    <div class="question-block" id="q12-block">
+      <div class="q-num">Question 12 of 20 · 10 pts</div>
+      <div class="q-text">It's 5:50 PM, closing routine. You notice a message from 3:00 PM that you logged in CasePeer communication notes but never created a task for — the intended recipient was paralegal David. You got busy and forgot. What do you do?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q12','a',true)" id="q12-a"><span class="opt-letter">A</span><span class="opt-text">Create the task now — assign to David with a note that the original message was from 3:00 PM, mark urgent since there's a 3-hour delay, text David that a late task is incoming. Flag it in your closing checklist as "delayed relay."</span></button>
+        <button class="option-btn" onclick="answer('q12','b',false)" id="q12-b"><span class="opt-letter">B</span><span class="opt-text">Make a note to create the task first thing tomorrow morning — it's too late for David to act on it today anyway</span></button>
+        <button class="option-btn" onclick="answer('q12','c',false)" id="q12-c"><span class="opt-letter">C</span><span class="opt-text">The communication note in CasePeer is sufficient — David will see it when he reviews his case notes</span></button>
+        <button class="option-btn" onclick="answer('q12','d',false)" id="q12-d"><span class="opt-letter">D</span><span class="opt-text">Email David the message details and skip the CasePeer task — the email serves the same function for today</span></button>
+      </div>
+      <div class="feedback-box" id="q12-fb"></div>
+    </div>
+
+    <div class="section-score" id="s3-score" style="display:none;"><div class="score-display" id="s3-score-val"></div><div class="score-label">Section 4 Score</div></div>
+    <div class="btn-group" id="s3-next"><button class="btn btn-primary btn-block" onclick="goToSection(4)">Next: Calendar &amp; Appointment Scheduling &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 4 — CALENDAR & APPOINTMENT SCHEDULING (Q13–Q16)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-4">
+  <div class="section-header">
+    <div class="section-num">Section 5 · Calendar &amp; Scheduling · Up to 40 pts</div>
+    <h2>Appointments, Availability &amp; Avoiding Double-Bookings</h2>
+    <div class="section-subhead">The calendar is your command center. If the appointment isn't in CasePeer, it doesn't exist.</div>
+  </div>
+  <div class="section-body">
+    <div class="scenario">
+      <div class="scenario-tag">Real-World Consequence</div>
+      <h3>Two clients show up at the same time for the same paralegal. One has a 2:00 PM appointment in CasePeer. The other has a "confirmed" appointment — but it was only written on a desk calendar and never entered in the system.</h3>
+      <p>The paralegal is blindsided. One client waits 45 minutes. The other leaves angry. <span class="highlight">A desk calendar and CasePeer showed two different realities — and neither client got the experience they deserved.</span> <span class="urgent">One system. One calendar. CasePeer.</span></p>
+    </div>
+    <div class="info-block">
+      <h4>📅 The Scheduling Workflow (3 Steps)</h4>
+      <ol>
+        <li><strong>Enter</strong> — Add the appointment in CasePeer calendar with client name, time, assigned staff, and reason for visit</li>
+        <li><strong>Confirm</strong> — Read back the details to the client: "You're confirmed for Thursday at 10:00 AM with Attorney Gunn"</li>
+        <li><strong>Notify</strong> — Alert the assigned staff member that a new appointment has been added</li>
+      </ol>
+      <p style="margin-top:10px;">All three steps. Every time. Skip one and the system has a gap.</p>
+    </div>
+    <div class="callout callout-warn"><strong>Avoiding Double-Bookings:</strong> Always check the CasePeer calendar BEFORE confirming any appointment. If you see a potential overlap, offer alternative times — don't book over existing commitments and hope it works out.</div>
+
+    <!-- Q13 -->
+    <div class="question-block" id="q13-block">
+      <div class="q-num">Question 13 of 20 · 10 pts</div>
+      <div class="q-text">A client calls to schedule an appointment with Attorney Gunn. You check CasePeer and see a 10:00 AM Thursday slot and a 2:00 PM Friday slot open. The client says Thursday works. What's the complete scheduling workflow?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q13','a',false)" id="q13-a"><span class="opt-letter">A</span><span class="opt-text">Tell the client "You're set for Thursday at 10:00 AM" and move on to the next call</span></button>
+        <button class="option-btn" onclick="answer('q13','b',false)" id="q13-b"><span class="opt-letter">B</span><span class="opt-text">Write "Client appointment Thursday 10 AM" on the desk calendar and tell the client to come in</span></button>
+        <button class="option-btn" onclick="answer('q13','c',false)" id="q13-c"><span class="opt-letter">C</span><span class="opt-text">Enter the appointment in CasePeer, tell the client, and assume Attorney Gunn will see it on his dashboard</span></button>
+        <button class="option-btn" onclick="answer('q13','d',true)" id="q13-d"><span class="opt-letter">D</span><span class="opt-text">Enter in CasePeer calendar with client name and reason, confirm back to the client ("You're confirmed for Thursday at 10:00 AM with Attorney Gunn"), then notify Attorney Gunn or his assistant that a new appointment has been added</span></button>
+      </div>
+      <div class="feedback-box" id="q13-fb"></div>
+    </div>
+
+    <!-- Q14 -->
+    <div class="question-block" id="q14-block">
+      <div class="q-num">Question 14 of 20 · 10 pts</div>
+      <div class="q-text">A client wants an appointment Tuesday at 1:00 PM. CasePeer shows the paralegal has a 12:30 PM meeting that could run until 1:15 PM. What do you do?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q14','a',true)" id="q14-a"><span class="opt-letter">A</span><span class="opt-text">Offer alternatives: "I want to make sure you get her full attention. She has a commitment that might run past 1:00 — could we do 1:30 PM instead, or would another day work better?"</span></button>
+        <button class="option-btn" onclick="answer('q14','b',false)" id="q14-b"><span class="opt-letter">B</span><span class="opt-text">Book 1:00 PM anyway — meetings often run short, and there's probably a buffer built in</span></button>
+        <button class="option-btn" onclick="answer('q14','c',false)" id="q14-c"><span class="opt-letter">C</span><span class="opt-text">Tell the client Tuesday is completely booked and offer Wednesday instead</span></button>
+        <button class="option-btn" onclick="answer('q14','d',false)" id="q14-d"><span class="opt-letter">D</span><span class="opt-text">Book 1:00 PM and add a note: "May overlap with 12:30 meeting — adjust as needed"</span></button>
+      </div>
+      <div class="feedback-box" id="q14-fb"></div>
+    </div>
+
+    <!-- Q15 -->
+    <div class="question-block" id="q15-block">
+      <div class="q-num">Question 15 of 20 · 10 pts</div>
+      <div class="q-text">A paralegal asks you to reschedule a client from Wednesday 3:00 PM to Thursday 11:00 AM. You update CasePeer. What else must happen?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q15','a',false)" id="q15-a"><span class="opt-letter">A</span><span class="opt-text">Nothing — the CasePeer calendar update is sufficient. The client will see the change if they check their confirmation.</span></button>
+        <button class="option-btn" onclick="answer('q15','b',true)" id="q15-b"><span class="opt-letter">B</span><span class="opt-text">Call the client to inform them of the change, confirm the new time works, and update CasePeer with a note: "Rescheduled from Wed 3:00 PM to Thu 11:00 AM per [paralegal]. Client confirmed."</span></button>
+        <button class="option-btn" onclick="answer('q15','c',false)" id="q15-c"><span class="opt-letter">C</span><span class="opt-text">Send the client an email with the new time and assume they'll reply if it doesn't work</span></button>
+        <button class="option-btn" onclick="answer('q15','d',false)" id="q15-d"><span class="opt-letter">D</span><span class="opt-text">Update CasePeer and text the client — texting is faster than calling for schedule changes</span></button>
+      </div>
+      <div class="feedback-box" id="q15-fb"></div>
+    </div>
+
+    <!-- Q16 -->
+    <div class="question-block" id="q16-block">
+      <div class="q-num">Question 16 of 20 · 10 pts</div>
+      <div class="q-text">CasePeer shows Attorney Gunn is blocked out 1:00 PM to 5:00 PM for a deposition. A new potential client calls asking to come in today. How do you use this calendar information?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q16','a',false)" id="q16-a"><span class="opt-letter">A</span><span class="opt-text">Tell them Attorney Gunn is unavailable this afternoon and suggest they call back tomorrow</span></button>
+        <button class="option-btn" onclick="answer('q16','b',false)" id="q16-b"><span class="opt-letter">B</span><span class="opt-text">Tell them about the deposition for transparency: "Attorney Gunn is in a deposition this afternoon, but we could schedule for tomorrow"</span></button>
+        <button class="option-btn" onclick="answer('q16','c',true)" id="q16-c"><span class="opt-letter">C</span><span class="opt-text">Route intelligently: "Let me check our schedule... our afternoon is committed today. Could I schedule you for tomorrow morning, or another day this week?" Then route the potential client to Intake (Victoria) per IR-R-1 protocol.</span></button>
+        <button class="option-btn" onclick="answer('q16','d',false)" id="q16-d"><span class="opt-letter">D</span><span class="opt-text">Schedule them for 5:30 PM after the deposition — Attorney Gunn might be willing to stay late</span></button>
+      </div>
+      <div class="feedback-box" id="q16-fb"></div>
+    </div>
+
+    <div class="section-score" id="s4-score" style="display:none;"><div class="score-display" id="s4-score-val"></div><div class="score-label">Section 5 Score</div></div>
+    <div class="btn-group" id="s4-next"><button class="btn btn-primary btn-block" onclick="goToSection(5)">Next: Case Status &amp; Template Awareness &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 5 — CASE STATUS AWARENESS & TEMPLATE OVERVIEW (Q17–Q20)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-5">
+  <div class="section-header">
+    <div class="section-num">Section 6 · Case Status &amp; Templates · Up to 40 pts</div>
+    <h2>Case Status Awareness &amp; Template Recognition</h2>
+    <div class="section-subhead">You see statuses. You use them to route smarter. You never share them with clients.</div>
+  </div>
+  <div class="section-body">
+    <div class="info-block">
+      <h4>📊 Case Statuses at a Glance (Read-Only for Reception)</h4>
+      <table class="stat-table">
+        <tr><th>Status</th><th>What It Means</th><th>How It Helps You at Reception</th></tr>
+        <tr><td><strong>New / Intake</strong></td><td>Case just signed</td><td>Route to intake team or assigned paralegal</td></tr>
+        <tr><td><strong>Active Treatment</strong></td><td>Client is actively treating</td><td>Client may call about appointments, treatment questions</td></tr>
+        <tr><td><strong>Records Retrieval</strong></td><td>Gathering medical records</td><td>Client may call about records status — route to case manager</td></tr>
+        <tr><td><strong>Demand Sent</strong></td><td>Demand delivered to insurer</td><td>Client is likely anxious about timeline — route to pre-lit paralegal</td></tr>
+        <tr><td><strong>Negotiation</strong></td><td>Offers &amp; counters in progress</td><td>Client may ask about settlement — NEVER disclose, route to paralegal</td></tr>
+        <tr><td><strong>Litigation</strong></td><td>Lawsuit filed</td><td>Route to litigation paralegal, not pre-lit</td></tr>
+      </table>
+    </div>
+    <div class="callout callout-danger"><strong>The Line You Never Cross:</strong> Case status is internal routing intelligence. You see it. You use it to write smarter task notes. You NEVER share it with clients. Not even "I think it's in pre-lit." The Reception SOP is absolute: reception does NOT provide case updates of any kind.</div>
+    <div class="info-block">
+      <h4>📄 Template Awareness (Not Template Creation)</h4>
+      <p>CasePeer uses numbered document templates (Welcome Letters, LOPs, Demand Letters, etc.). At reception level, you should know:</p>
+      <ul>
+        <li><strong>Templates exist</strong> — they automate standard firm documents</li>
+        <li><strong>What they are</strong> — so you can route intelligently when clients ask about them</li>
+        <li><strong>You don't create them</strong> — that's the paralegal's or case manager's job</li>
+        <li><strong>You don't discuss them</strong> — template activity is case-specific information</li>
+      </ul>
+    </div>
+
+    <!-- Q17 -->
+    <div class="question-block" id="q17-block">
+      <div class="q-num">Question 17 of 20 · 10 pts</div>
+      <div class="q-text">A client calls worried because "nobody's been in touch." You know they're a pre-lit client and can see in CasePeer that their case is in "Demand Sent" status. How does this help you at reception level?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q17','a',true)" id="q17-a"><span class="opt-letter">A</span><span class="opt-text">Use it to write a smarter task note: route to the pre-lit paralegal and note "Client called re: status — case in Demand Sent phase." This gives the paralegal callback context without you disclosing anything to the client.</span></button>
+        <button class="option-btn" onclick="answer('q17','b',false)" id="q17-b"><span class="opt-letter">B</span><span class="opt-text">Reassure the client: "I can see your case is in Demand Sent, which means your demand letter has been submitted to insurance."</span></button>
+        <button class="option-btn" onclick="answer('q17','c',false)" id="q17-c"><span class="opt-letter">C</span><span class="opt-text">Case statuses are only for case managers — reception should ignore them and route all calls the same way</span></button>
+        <button class="option-btn" onclick="answer('q17','d',false)" id="q17-d"><span class="opt-letter">D</span><span class="opt-text">Check the status and decide whether the client's concern is warranted — if the case is active, tell them not to worry</span></button>
+      </div>
+      <div class="feedback-box" id="q17-fb"></div>
+    </div>
+
+    <!-- Q18 -->
+    <div class="question-block" id="q18-block">
+      <div class="q-num">Question 18 of 20 · 10 pts</div>
+      <div class="q-text">Two clients call within 5 minutes. Client A's case is "Active Treatment." Client B's case is "Demand Sent." Both paralegals are unavailable. How might case status affect your CasePeer task creation?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q18','a',false)" id="q18-a"><span class="opt-letter">A</span><span class="opt-text">Both tasks should be identical — status doesn't change how reception creates tasks</span></button>
+        <button class="option-btn" onclick="answer('q18','b',false)" id="q18-b"><span class="opt-letter">B</span><span class="opt-text">Client B's task should go to the Managing Attorney since "Demand Sent" is higher-stakes</span></button>
+        <button class="option-btn" onclick="answer('q18','c',false)" id="q18-c"><span class="opt-letter">C</span><span class="opt-text">Client A's task should include their next treatment appointment details from CasePeer</span></button>
+        <button class="option-btn" onclick="answer('q18','d',true)" id="q18-d"><span class="opt-letter">D</span><span class="opt-text">Both tasks go to assigned paralegals, but you add context: "Case in Active Treatment — client checking in" vs "Case in Demand Sent — client asking about status, may have timeline questions." Status context helps each paralegal prepare.</span></button>
+      </div>
+      <div class="feedback-box" id="q18-fb"></div>
+    </div>
+
+    <!-- Q19 -->
+    <div class="question-block" id="q19-block">
+      <div class="q-num">Question 19 of 20 · 10 pts</div>
+      <div class="q-text">A client calls: "My case manager mentioned a 'letter of protection' being sent to my doctor. What is that?" You know the LOP is Template #12 in CasePeer. What's the correct reception-level response?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q19','a',false)" id="q19-a"><span class="opt-letter">A</span><span class="opt-text">Explain it: "An LOP guarantees the doctor will be paid from your settlement" — it's common knowledge and the client deserves to understand</span></button>
+        <button class="option-btn" onclick="answer('q19','b',true)" id="q19-b"><span class="opt-letter">B</span><span class="opt-text">"That's a great question, and your case manager is the best person to explain the details. Let me get a message to them so they can walk you through it. Can I confirm the best number to reach you?"</span></button>
+        <button class="option-btn" onclick="answer('q19','c',false)" id="q19-c"><span class="opt-letter">C</span><span class="opt-text">"I can see Template #12 was generated on your case. It went out last Tuesday." — confirming it was sent reassures the client</span></button>
+        <button class="option-btn" onclick="answer('q19','d',false)" id="q19-d"><span class="opt-letter">D</span><span class="opt-text">"I'm not familiar with that term. You'll have to ask your case manager."</span></button>
+      </div>
+      <div class="feedback-box" id="q19-fb"></div>
+    </div>
+
+    <!-- Q20 -->
+    <div class="question-block" id="q20-block">
+      <div class="q-num">Question 20 of 20 · 10 pts · Synthesis</div>
+      <div class="q-text">It's 11:00 AM. A new potential client calls about scheduling. While on the phone, an existing client walks in for their 11:15 appointment. Your CasePeer dashboard shows an overdue task from this morning. In what order do you handle these?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q20','a',false)" id="q20-a"><span class="opt-letter">A</span><span class="opt-text">Handle the CasePeer task first (it's overdue), then greet the walk-in, then get back to the caller</span></button>
+        <button class="option-btn" onclick="answer('q20','b',false)" id="q20-b"><span class="opt-letter">B</span><span class="opt-text">Put the caller on hold, greet the walk-in fully, then return to the caller, then the task</span></button>
+        <button class="option-btn" onclick="answer('q20','c',true)" id="q20-c"><span class="opt-letter">C</span><span class="opt-text">Greet the walk-in immediately: "Welcome to Gunn Law Group — I'll be right with you." Return to the caller, collect info and route to Intake. Notify staff the 11:15 client arrived. Then address the overdue task. Live humans first, then system tasks.</span></button>
+        <button class="option-btn" onclick="answer('q20','d',false)" id="q20-d"><span class="opt-letter">D</span><span class="opt-text">Focus on the caller (they were first), let the walk-in wait until you're done, then handle the task</span></button>
+      </div>
+      <div class="feedback-box" id="q20-fb"></div>
+    </div>
+
+    <div class="section-score" id="s5-score" style="display:none;"><div class="score-display" id="s5-score-val"></div><div class="score-label">Section 6 Score</div></div>
+    <div class="btn-group" id="s5-next"><button class="btn btn-primary btn-block" onclick="goToSection(6)">Next: Boss Challenge &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 6 — BOSS CHALLENGE (Q21–Q25)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-6">
+  <div class="section-header">
+    <div class="section-num">Section 7 · Boss Challenge · Up to 50 Bonus pts</div>
+    <h2>⚔️ Full Scenario: The Santos Appointment</h2>
+    <div class="section-subhead">Everything you've learned. One afternoon. Five critical decisions.</div>
+  </div>
+  <div class="section-body">
+    <div class="boss-header">
+      <div class="boss-icon">⚔️</div>
+      <h3>Boss Challenge: Maria Santos</h3>
+      <p>Five bonus questions testing everything from this module — CasePeer navigation, task creation, calendar management, and case status awareness — all woven into one real scenario.</p>
+    </div>
+
+    <div class="case-file">
+      <div class="case-file-header">
+        <div class="case-file-icon">📋</div>
+        <div>
+          <div class="case-file-title">Maria Santos — GLG-2026-4217</div>
+          <div class="case-file-sub">Pre-Lit · Active Treatment · Rear-End Collision</div>
+        </div>
+      </div>
+      <div class="case-detail"><span class="case-key">Client</span><span class="case-val">Maria Santos</span></div>
+      <div class="case-detail"><span class="case-key">Case Number</span><span class="case-val">GLG-2026-4217</span></div>
+      <div class="case-detail"><span class="case-key">Status</span><span class="case-val">Active Treatment</span></div>
+      <div class="case-detail"><span class="case-key">Case Manager</span><span class="case-val">Paralegal Tanya Richards</span></div>
+      <div class="case-detail"><span class="case-key">Today's Appointment</span><span class="case-val">2:00 PM with Tanya — treatment progress review</span></div>
+      <div class="case-detail"><span class="case-key">Current Time</span><span class="case-val">1:30 PM</span></div>
+    </div>
+
+    <!-- Q21 -->
+    <div class="question-block" id="q21-block">
+      <div class="q-num">Boss Question 1 of 5 · 10 Bonus pts</div>
+      <div class="q-text">It's 1:30 PM. You see Maria's 2:00 PM appointment on CasePeer. Tanya is on a call. Then the phone rings — a State Farm adjuster calling about the Santos case with a settlement offer. What's your first priority action?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q21','a',true)" id="q21-a"><span class="opt-letter">A</span><span class="opt-text">Handle the adjuster: take complete details (name, company, callback number, settlement offer), log in CasePeer, create URGENT task for Tanya: "Settlement offer — Santos case GLG-2026-4217." Text Tanya: "Urgent adjuster task in CasePeer — settlement offer, Santos."</span></button>
+        <button class="option-btn" onclick="answer('q21','b',false)" id="q21-b"><span class="opt-letter">B</span><span class="opt-text">Focus on Maria's arrival prep — the adjuster can call back since Tanya is busy right now</span></button>
+        <button class="option-btn" onclick="answer('q21','c',false)" id="q21-c"><span class="opt-letter">C</span><span class="opt-text">Transfer the adjuster directly to Tanya, interrupting her current call — settlement offers take priority</span></button>
+        <button class="option-btn" onclick="answer('q21','d',false)" id="q21-d"><span class="opt-letter">D</span><span class="opt-text">Take the message, log it, and tell Tanya when Maria arrives — she'll want to discuss it with Maria anyway</span></button>
+      </div>
+      <div class="feedback-box" id="q21-fb"></div>
+    </div>
+
+    <!-- Q22 -->
+    <div class="question-block" id="q22-block">
+      <div class="q-num">Boss Question 2 of 5 · 10 Bonus pts</div>
+      <div class="q-text">Maria arrives at 1:55 PM: "Hi, I'm Maria Santos, I have a 2:00 with Tanya." You confirm the appointment in CasePeer. What's the complete reception workflow?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q22','a',false)" id="q22-a"><span class="opt-letter">A</span><span class="opt-text">"Hi Maria! Yes, your appointment is confirmed. Tanya should be ready shortly." Then continue your work.</span></button>
+        <button class="option-btn" onclick="answer('q22','b',false)" id="q22-b"><span class="opt-letter">B</span><span class="opt-text">"While you wait, I can pull up your case and give you a quick update on where things stand."</span></button>
+        <button class="option-btn" onclick="answer('q22','c',false)" id="q22-c"><span class="opt-letter">C</span><span class="opt-text">"I see your appointment — let me double-check the time. Actually, are you sure it's today?"</span></button>
+        <button class="option-btn" onclick="answer('q22','d',true)" id="q22-d"><span class="opt-letter">D</span><span class="opt-text">Greet warmly: "Good afternoon, Ms. Santos! Welcome to Gunn Law Group. Your 2:00 appointment with Tanya is confirmed — you're right on time." Offer a seat and water. Immediately notify Tanya that her 2:00 client has arrived. Log the arrival in CasePeer.</span></button>
+      </div>
+      <div class="feedback-box" id="q22-fb"></div>
+    </div>
+
+    <!-- Q23 -->
+    <div class="question-block" id="q23-block">
+      <div class="q-num">Boss Question 3 of 5 · 10 Bonus pts</div>
+      <div class="q-text">While Maria is with Tanya, three things happen in 10 minutes: (1) A new potential client calls. (2) The mail arrives with a certified letter for Attorney Gunn. (3) A delivery driver brings a package. Prioritize these.</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q23','a',false)" id="q23-a"><span class="opt-letter">A</span><span class="opt-text">Handle them in arrival order — first come, first served</span></button>
+        <button class="option-btn" onclick="answer('q23','b',true)" id="q23-b"><span class="opt-letter">B</span><span class="opt-text">(1) Handle the new PNC call first — collect info, route to Intake, log in CasePeer. (2) Flag the certified letter to the Managing Attorney immediately per SOP — same-day escalation. (3) Sign for the package and log it.</span></button>
+        <button class="option-btn" onclick="answer('q23','c',false)" id="q23-c"><span class="opt-letter">C</span><span class="opt-text">Certified letter first — legal documents always take priority over phone calls</span></button>
+        <button class="option-btn" onclick="answer('q23','d',false)" id="q23-d"><span class="opt-letter">D</span><span class="opt-text">Get the PNC to Victoria, sign for the package, then open the certified letter to check urgency before routing</span></button>
+      </div>
+      <div class="feedback-box" id="q23-fb"></div>
+    </div>
+
+    <!-- Q24 -->
+    <div class="question-block" id="q24-block">
+      <div class="q-num">Boss Question 4 of 5 · 10 Bonus pts</div>
+      <div class="q-text">End of day. You pull up CasePeer for your closing routine. Which set of entries should exist from today's Santos-related activity?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q24','a',false)" id="q24-a"><span class="opt-letter">A</span><span class="opt-text">One entry: "Maria Santos arrived for 2:00 PM appointment with Tanya"</span></button>
+        <button class="option-btn" onclick="answer('q24','b',false)" id="q24-b"><span class="opt-letter">B</span><span class="opt-text">The adjuster communication note is sufficient — it covers the most important event</span></button>
+        <button class="option-btn" onclick="answer('q24','c',true)" id="q24-c"><span class="opt-letter">C</span><span class="opt-text">Three entries minimum: (1) Communication note + URGENT task from adjuster settlement offer call; (2) Note logging Maria's arrival and notification to Tanya; (3) Any follow-up messages after the meeting. Every Santos interaction = a CasePeer entry.</span></button>
+        <button class="option-btn" onclick="answer('q24','d',false)" id="q24-d"><span class="opt-letter">D</span><span class="opt-text">Tanya handles CasePeer entries for her own clients — reception doesn't log Santos activity</span></button>
+      </div>
+      <div class="feedback-box" id="q24-fb"></div>
+    </div>
+
+    <!-- Q25 -->
+    <div class="question-block" id="q25-block">
+      <div class="q-num">Boss Question 5 of 5 · 10 Bonus pts</div>
+      <div class="q-text">Final scenario: CasePeer went down at 2:00 PM and came back at 4:30 PM. During those 2.5 hours you took 6 messages, scheduled 2 appointments, and greeted 3 visitors. What must you do when it comes back online?</div>
+      <div class="options">
+        <button class="option-btn" onclick="answer('q25','a',true)" id="q25-a"><span class="opt-letter">A</span><span class="opt-text">Enter everything: all 6 messages as communication notes with timestamps, tasks for each assigned to named people, both appointments in the calendar, all 3 visitor arrivals logged. Every interaction during the outage gets retroactively entered with accurate timestamps. Then run your full checklist.</span></button>
+        <button class="option-btn" onclick="answer('q25','b',false)" id="q25-b"><span class="opt-letter">B</span><span class="opt-text">Log the urgent messages in CasePeer, handle the rest tomorrow — 2.5 hours of backlog will take too long</span></button>
+        <button class="option-btn" onclick="answer('q25','c',false)" id="q25-c"><span class="opt-letter">C</span><span class="opt-text">The messages were already relayed via text during the outage — they don't need CasePeer entries now</span></button>
+        <button class="option-btn" onclick="answer('q25','d',false)" id="q25-d"><span class="opt-letter">D</span><span class="opt-text">Enter appointments first (most time-sensitive), then log messages over the next few days as time allows</span></button>
+      </div>
+      <div class="feedback-box" id="q25-fb"></div>
+    </div>
+
+    <div class="section-score" id="s6-score" style="display:none;"><div class="score-display" id="s6-score-val"></div><div class="score-label">Boss Challenge Score</div></div>
+    <div class="btn-group" id="s6-next"><button class="btn btn-primary btn-block" onclick="showResults()">See Results &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 7 — RESULTS
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-7">
+  <div class="section-header">
+    <div class="section-num">Section 8 · Results</div>
+    <h2>Assessment Results</h2>
+  </div>
+  <div class="section-body">
+    <div id="results-header-wrap"></div>
+    <div id="results-body"></div>
+    <div id="badgeContainer" class="achievement-grid"></div>
+    <div class="score-confirm" id="score-confirmation"></div>
+    <div id="score-submit-form" style="display:none;">
+      <hr class="divider">
+      <h3 style="font-size:1.1rem;font-weight:700;color:#141c2c;margin-bottom:1rem;">📝 Feedback &amp; Certificate</h3>
+      <div class="fb-question">
+        <label>How clear was the content?</label>
+        <select id="fb-clarity"><option value="">Select...</option><option value="Very Clear">Very Clear</option><option value="Clear">Clear</option><option value="Somewhat Clear">Somewhat Clear</option><option value="Confusing">Confusing</option></select>
+      </div>
+      <div class="fb-question">
+        <label>How was the difficulty level?</label>
+        <select id="fb-difficulty"><option value="">Select...</option><option value="Too Easy">Too Easy</option><option value="Just Right">Just Right</option><option value="Challenging">Challenging</option><option value="Too Hard">Too Hard</option></select>
+      </div>
+      <div class="fb-question">
+        <label>How realistic were the scenarios?</label>
+        <select id="fb-realistic"><option value="">Select...</option><option value="Very Realistic">Very Realistic</option><option value="Realistic">Realistic</option><option value="Somewhat Realistic">Somewhat Realistic</option><option value="Not Realistic">Not Realistic</option></select>
+      </div>
+      <div class="fb-question">
+        <label>Any suggestions or comments? (Optional)</label>
+        <textarea id="fb-suggestions" placeholder="What would make this module better?"></textarea>
+      </div>
+      <div class="name-input-wrap">
+        <label for="trainee-name-input">Your Full Name (required for certificate):</label>
+        <input type="text" id="trainee-name-input" class="name-input" placeholder="Enter your full name" autocomplete="name">
+      </div>
+      <button class="btn btn-primary btn-block" onclick="submitScoreAndBuildCert()">Submit &amp; Generate Certificate →</button>
+    </div>
+    <p id="reviewCounter" style="text-align:center;font-size:0.82rem;color:#888;margin-top:0.8rem;"></p>
+    <div class="review-list" id="reviewList"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 8 — CERTIFICATE
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-8">
+  <div class="section-header">
+    <div class="section-num">Section 9 · Certificate</div>
+    <h2>Training Certificate</h2>
+  </div>
+  <div class="section-body">
+    <div id="cert-content" style="display:none;">
+      <div class="cert-wrap">
+        <div class="cert-firm">Gunn Law Group</div>
+        <div class="cert-title">Certificate of Completion</div>
+        <div class="cert-subtitle">Staff Training &amp; Development Program</div>
+        <div class="cert-presents">This certifies that</div>
+        <div class="cert-name" id="certNameDisplay">—</div>
+        <div class="cert-for">has successfully completed</div>
+        <div class="cert-module">IR-R-2: Scheduling &amp; CasePeer Basics</div>
+        <div class="cert-meta" id="certMeta"></div>
+        <div class="cert-score" id="certScore"></div>
+        <span class="cert-seal">⚖️</span>
+        <div class="cert-badges" id="certBadges"></div>
+        <div class="cert-signature">
+          <div class="cert-sig-line"></div>
+          <div class="cert-sig-name">Harrell Gunn, Esq.</div>
+          <div class="cert-sig-title">Managing Attorney</div>
+        </div>
+      </div>
+      <div class="score-confirm" id="score-confirmation-cert"></div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<!-- ══════════════════════════════════════════
+     JAVASCRIPT ENGINE
+════════════════════════════════════════════ -->
+<script>
+// ═══════════════════════════════════════════════
+// MODULE CONFIG
+// ═══════════════════════════════════════════════
+var TRACKER_URL = 'https://script.google.com/macros/s/AKfycbzHJZ0C3BqnLatfq7RIiUP5KQdgYoXTJlozd8ZGZiwIf2bdVmvnPMo3JLm0dA5gQhJyxA/exec';
+var BASE_MAX = 200;
+var PASS_THRESHOLD = 160;
+var TOTAL_SECTIONS = 9;
+
+// ═══════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════
+var baseScore = 0;
+var bonusPoints = 0;
+var qDone = {};
+var firstAttemptStillAvailable = {};
+var sectionScores = {};
+var currentSection = 0;
+var streakCount = 0;
+var maxStreak = 0;
+var questionsFirstTry = 0;
+var incorrectCount = 0;
+var totalQuestionsAnswered = 0;
+var moduleStartTime = Date.now();
+var audioCtx = null;
+var soundEnabled = false;
+var _audioKeepalive = null;
+var milestonesTriggered = {};
+
+// ═══════════════════════════════════════════════
+// QUESTION CONFIG
+// ═══════════════════════════════════════════════
+var Q_CONFIG = {
+  'q1':  { correct:'b', pts:10, section:1, isBonus:false },
+  'q2':  { correct:'c', pts:10, section:1, isBonus:false },
+  'q3':  { correct:'a', pts:10, section:1, isBonus:false },
+  'q4':  { correct:'d', pts:10, section:1, isBonus:false },
+  'q5':  { correct:'c', pts:10, section:2, isBonus:false },
+  'q6':  { correct:'b', pts:10, section:2, isBonus:false },
+  'q7':  { correct:'d', pts:10, section:2, isBonus:false },
+  'q8':  { correct:'a', pts:10, section:2, isBonus:false },
+  'q9':  { correct:'b', pts:10, section:3, isBonus:false },
+  'q10': { correct:'d', pts:10, section:3, isBonus:false },
+  'q11': { correct:'c', pts:10, section:3, isBonus:false },
+  'q12': { correct:'a', pts:10, section:3, isBonus:false },
+  'q13': { correct:'d', pts:10, section:4, isBonus:false },
+  'q14': { correct:'a', pts:10, section:4, isBonus:false },
+  'q15': { correct:'b', pts:10, section:4, isBonus:false },
+  'q16': { correct:'c', pts:10, section:4, isBonus:false },
+  'q17': { correct:'a', pts:10, section:5, isBonus:false },
+  'q18': { correct:'d', pts:10, section:5, isBonus:false },
+  'q19': { correct:'b', pts:10, section:5, isBonus:false },
+  'q20': { correct:'c', pts:10, section:5, isBonus:false },
+  'q21': { correct:'a', pts:0, section:6, isBonus:true, bonusPts:10 },
+  'q22': { correct:'d', pts:0, section:6, isBonus:true, bonusPts:10 },
+  'q23': { correct:'b', pts:0, section:6, isBonus:true, bonusPts:10 },
+  'q24': { correct:'c', pts:0, section:6, isBonus:true, bonusPts:10 },
+  'q25': { correct:'a', pts:0, section:6, isBonus:true, bonusPts:10 }
+};
+
+var SECTION_QUESTIONS = {
+  1: ['q1','q2','q3','q4'],
+  2: ['q5','q6','q7','q8'],
+  3: ['q9','q10','q11','q12'],
+  4: ['q13','q14','q15','q16'],
+  5: ['q17','q18','q19','q20'],
+  6: ['q21','q22','q23','q24','q25']
+};
+
+// ═══════════════════════════════════════════════
+// FEEDBACK
+// ═══════════════════════════════════════════════
+var FEEDBACK = {
+  'q1': {
+    t: '✅ At reception level, the calendar is your command center. Those overdue tasks belong to a paralegal — they\'re not yours to handle. But the 3 calendar events directly affect YOUR job: knowing who\'s coming in, when attorneys are available, and what appointments are on the books lets you greet visitors accurately, route calls intelligently, and schedule without conflicts. After the calendar, check messages for anything needing immediate relay.',
+    f: '❌ The overdue tasks (A) belong to a paralegal — reception doesn\'t handle other people\'s case tasks. Jumping to messages (C) before understanding the day\'s schedule means you\'re reacting instead of preparing. Clearing notifications (D) without reviewing them is how things fall through cracks. At reception, the calendar drives your day: appointments, attorney availability, scheduled visitors. Review it first so you know what\'s coming before the phones start ringing.'
+  },
+  'q2': {
+    t: '✅ The opening procedure is BOTH systems running in parallel. The Reception SOP §6 requires: workstation on, phones active, voicemail checked, front desk organized. CasePeer Basics §8 requires: check dashboard, review calendar, prioritize tasks. At reception level, these merge into one seamless routine. A clean desk with no CasePeer awareness is as useless as a logged-in screen with phones still off. Both systems, before 9:00 AM, every day.',
+    f: '❌ The CasePeer and physical opening routines aren\'t alternatives — they\'re complementary. Skipping the physical checklist (A, D) means phones might not be forwarded, voicemail might not be checked, and the waiting area might not be presentable. Delaying CasePeer (B) means you won\'t know who has appointments today when the first visitor walks in at 9:01. The standard: both systems, before 9:00 AM.'
+  },
+  'q3': {
+    t: '✅ The CasePeer calendar is the source of truth for appointments. When David calls, the calendar shows when his appointment is, with whom, and whether it\'s confirmed. You verify the time and confirm: "Yes, Mr. Chen, I see your 2:00 appointment — you\'re confirmed." Quick, confident, done. Remember from IR-R-1: every interaction is an opportunity to reinforce client confidence.',
+    f: '❌ Pulling up the full case file (B) to check an appointment is over-engineering — and at reception level, you\'re not digging into case files. Asking the client who they\'re meeting with (C) puts the burden on them and signals the firm is disorganized. A physical appointment book (D) is not the system — CasePeer IS the system. If it\'s in CasePeer, it\'s the truth. If it\'s not in CasePeer, it didn\'t happen.'
+  },
+  'q4': {
+    t: '✅ The closing routine is the mirror of the opening. Reception SOP §6 requires: all messages relayed and logged, outgoing mail processed, front desk cleared, phones forwarded, unresolved items flagged to supervisor. CasePeer Basics §8 adds: "Every communication is logged, every task is set, every case status is current." At reception level, "every task is set" means every message you took during the day has a corresponding CasePeer entry routing it to a named person. Zero orphan messages.',
+    f: '❌ Returning all calls and clearing the dashboard (A) goes beyond reception\'s scope. But the real issue with B and C is delayed CasePeer logging. "Catch up tomorrow" (B) violates the golden rule — overnight, a message could get lost. "Flagging for the morning team" (C) without a CasePeer entry means there\'s no audit trail. The rule: every message taken during the day has a CasePeer entry before you leave. No exceptions.'
+  },
+  'q5': {
+    t: '✅ Every note must include WHO (Robert Williams, phone number), WHAT was discussed (status of medical records from Dr. Patel), WHAT was learned (records supposed to be ready last week, follow-up Thursday), and NEXT STEPS (task set for Tanya, callback today). Option C captures all four elements plus urgency context. The next person who reads this note knows exactly what happened, why it matters, and what to do next.',
+    f: '❌ "Called about records" (A) tells the next person nothing — which records? Which provider? What\'s the status? "Will follow up" (B) is better but still vague — follow up on what? By when? "Forwarded to voicemail" (D) documents the relay method but not the substance. The standard: WHO, WHAT, WHAT WAS DECIDED, NEXT STEPS. If your note doesn\'t answer all four, it\'s incomplete.'
+  },
+  'q6': {
+    t: '✅ EVERY message gets logged in CasePeer — including messages for potential new clients who don\'t have a case file yet. You can\'t create a case file (that\'s intake\'s job), but you CAN log the message and create a task assigned to Victoria. The task must include all the details: caller\'s name, phone, callback time, reason, urgency. This creates an audit trail AND ensures Victoria sees it on her CasePeer dashboard. The 15-minute relay rule applies: the CasePeer entry IS the relay mechanism.',
+    f: '❌ Creating a case file (A) exceeds reception\'s scope — intake handles case creation. But skipping CasePeer entirely (C) because "it\'s not an existing case" creates a gap: if Victoria\'s text gets buried, that potential client\'s message has no trail. And a brief note with a sticky (D) is the worst of both worlds — a useless CasePeer entry plus an easily-lost physical note. Every message → CasePeer, with full details, assigned to a named person.'
+  },
+  'q7': {
+    t: '✅ The 15-minute relay rule means the message is RECEIVED by the named person within 15 minutes — not just entered in a queue they haven\'t checked. CasePeer is the audit trail, but the relay is the human notification. If Sarah hasn\'t seen the task after 15 minutes, a quick heads-up ensures delivery. This is especially important for adjuster calls — settlement communication is time-sensitive.',
+    f: '❌ Entering it in CasePeer (A) is necessary but not sufficient — the 15-minute clock runs from when the call ended, not when the person checks their tasks. Waiting (B) might mean Sarah doesn\'t see it until end of day. A follow-up email (C) adds delay. The relay rule is about delivery confirmation: the recipient must actually receive the message within 15 minutes. CasePeer is the log; the ping is the delivery.'
+  },
+  'q8': {
+    t: '✅ This combines IR-R-1 routing knowledge with CasePeer systems. From IR-R-1: litigation clients route to the assigned litigation paralegal (never to the attorney without paralegal direction). In CasePeer: log the communication note with full details (WHO, WHAT, NEXT STEPS) and create a task assigned to that specific paralegal by name. The paralegal will see it when they return from court. The note is the record; the task is the assignment.',
+    f: '❌ Pulling up the case file and adding notes directly (B) exceeds reception\'s CasePeer scope — and updating case status is definitely not a reception task. Routing to the Managing Attorney (C) violates the IR-R-1 routing rule. And CasePeer tasks are perfectly reliable when someone is out (D) — they persist and appear the moment someone checks their dashboard. That\'s the system working as designed.'
+  },
+  'q9': {
+    t: '✅ CasePeer Basics §3: tasks need a "clear, specific description — not just \'follow up.\'" Option B captures everything Marcus needs: who called, when, their number, the specific issue (rental car company pressing about return, no adjuster contact about repairs), urgency (before 3:00 PM), and assignment. When Marcus reads this task, he can prepare before calling Angela back.',
+    f: '❌ "Client called — needs callback" (A) is the textbook example of a BAD task description. Referencing a sticky note (C) defeats the purpose of CasePeer — the system IS the record. And while D has the phone number, it\'s missing the WHY (PD question about what?), the urgency, and the context. Marcus can\'t prepare for a callback he doesn\'t understand. Specific > vague, every time.'
+  },
+  'q10': {
+    t: '✅ A task addressed to a team is assigned to no one. Every CasePeer task goes to a specific, named person. If you don\'t know who the case manager is, you find out — ask a supervisor or check the case assignment board. You never assign to "Pre-Lit Team," "Front Desk," or any group name. When one person owns the task, that person follows through. When "the team" owns it, everyone assumes someone else will handle it.',
+    f: '❌ "Front Desk Follow-Up" (A) makes reception responsible for case-level follow-through — not your role. Assigning to Adriauna (B) adds an unnecessary routing step and creates delay. "Pre-Lit Team" (C) is the dangerous one: two tasks go to named people, but the third goes into a void. If you can\'t find the assigned person, ask — don\'t assign to a group and hope. Named person, every time.'
+  },
+  'q11': {
+    t: '✅ Don\'t duplicate tasks (A) — that creates confusion. Don\'t delete the original (B) — that erases the audit trail. Don\'t escalate to the Managing Attorney after just 15 minutes (D) — that\'s premature. The correct action: update the existing task with new information (second call, increased urgency), and follow up directly with Tanya. CasePeer tasks should grow with the situation, not multiply.',
+    f: '❌ Duplicate tasks (A) mean Tanya sees two items for the same issue — which does she action? Deleting (B) removes the record of the first call. Escalating to the Managing Attorney (D) after 15 minutes is premature — Tanya may be on another call. The escalation path: update task → direct notification → then supervisor if still unresolved after reasonable time. Don\'t skip steps.'
+  },
+  'q12': {
+    t: '✅ This is the "never miss twice" principle. You missed the task creation at 3:00 PM. But the worst thing you can do is delay another 14 hours until tomorrow. Create the task NOW with honest timestamps ("original message 3:00 PM, task created 5:50 PM — delayed"). Text David so he has the information. Flag it in your closing notes. The closing checklist exists to catch exactly these gaps.',
+    f: '❌ "Tomorrow morning" (B) turns a 3-hour delay into a 17-hour delay. The message might be urgent. A communication note without a task (C) is passive — no notification, no assignment, no accountability. Email-only (D) has no CasePeer trail. The rule: every message gets a task to a named person. Late is better than never.'
+  },
+  'q13': {
+    t: '✅ The complete scheduling workflow has three steps: (1) Enter in CasePeer calendar with client name and reason; (2) Confirm with the client — read back the details; (3) Notify the assigned staff member. Verbal-only (A) leaves no system record. A desk calendar (B) is not the system. Entry without notification (C) risks the staff member not knowing. All three steps, every time.',
+    f: '❌ Verbal confirmation only (A) means the appointment doesn\'t exist in CasePeer. A desk calendar (B) is not the system — CasePeer is the system. Entry without notification (C) means Attorney Gunn might not check his calendar until Thursday morning. The three-step workflow ensures the appointment is recorded, confirmed, and communicated.'
+  },
+  'q14': {
+    t: '✅ When you see a potential overlap, you don\'t guess that it\'ll be fine — you manage it proactively. Option A acknowledges the conflict without oversharing, offers a realistic alternative (1:30 gives buffer), and lets the client choose. This protects the paralegal\'s schedule, respects the client\'s time, and prevents the awkward wait when a meeting runs over.',
+    f: '❌ Booking despite overlap (B) is a gamble — if the 12:30 meeting runs long, the 1:00 client waits with no explanation. "Completely booked" (C) is a lie — there ARE available times, just not 1:00. Booking with an "adjust as needed" note (D) pushes the conflict to the paralegal. Scheduling is your job — solve the problem now, not later.'
+  },
+  'q15': {
+    t: '✅ Rescheduling requires client confirmation — you can\'t just move an appointment and assume. Call the client (not text or email for schedule changes — you need real-time confirmation), confirm the new time, and log the change in CasePeer with context. If Thursday 11:00 AM doesn\'t work, you need to know NOW — not after a no-show.',
+    f: '❌ Not notifying the client (A) is a near-guaranteed no-show. Email (C) is passive — clients may not check in time. Texting (D) doesn\'t confirm acceptance in real time. A phone call gives immediate confirmation: "Does Thursday at 11:00 work?" Yes → confirmed. No → find alternative now. The change isn\'t complete until the client confirms.'
+  },
+  'q16': {
+    t: '✅ This synthesizes calendar awareness with IR-R-1 routing. Use the calendar to know Attorney Gunn is unavailable without disclosing why (deposition details are confidential). Offer alternatives. And remember from IR-R-1: new potential clients go through Intake (Victoria). The calendar tells you WHEN is available; the routing table tells you WHO handles it. Both systems work together.',
+    f: '❌ "Call back tomorrow" (A) risks losing the potential client. Disclosing the deposition (B) shares confidential schedule details. Scheduling at 5:30 PM after a deposition (D) is unrealistic — and you can\'t commit someone\'s time after hours without approval. Use calendar intelligence for realistic alternatives, keep details confidential, and route through intake.'
+  },
+  'q17': {
+    t: '✅ Case status awareness at reception is about routing intelligence, not disclosure. You never tell a client their status — but knowing it internally helps you write better CasePeer tasks. "Client called re: status — case in Demand Sent phase" gives the paralegal immediate callback context. The paralegal knows what the client is worried about before picking up the phone.',
+    f: '❌ Sharing case status with the client (B) violates the Reception SOP §3 — reception does NOT provide case updates of any kind. Ignoring statuses entirely (C) wastes valuable routing intelligence. Making judgment calls about whether concern is warranted (D) exceeds your role. The status informs your task notes, not your client communications.'
+  },
+  'q18': {
+    t: '✅ The case status doesn\'t change WHO gets the task (both go to assigned paralegals) or bypass the routing table. But it changes the CONTEXT in your task notes. A paralegal calling back a client in Active Treatment knows to discuss treatment progress. A paralegal calling back a Demand Sent client knows they\'re anxious about timeline. Status context helps each paralegal prepare the right talking points.',
+    f: '❌ Identical tasks (A) waste valuable intelligence. Routing to the Managing Attorney (B) based on case phase violates the routing table. Pulling treatment appointment details (C) goes beyond reception-level CasePeer access. You observe statuses, you don\'t investigate case details. Context, not investigation.'
+  },
+  'q19': {
+    t: '✅ Template awareness means knowing templates exist and what they\'re for — so you route intelligently. But explaining content (A) or confirming template activity (C) crosses into case-specific territory. "I\'m not familiar" (D) is unnecessary dishonesty. Option B is the sweet spot: acknowledge warmly, redirect to the expert, take action to connect them. You know enough to route well — you don\'t disclose.',
+    f: '❌ Explaining the LOP (A) is legal information that could be misleading without full case context. Confirming template activity (C) shares case-specific information. "I\'m not familiar" (D) is dishonest when you DO know what an LOP is. The distinction: internal knowledge for routing vs. external disclosure to clients. Use the former, never the latter.'
+  },
+  'q20': {
+    t: '✅ This tests everything from both modules. IR-R-1\'s 30-second rule: acknowledge the walk-in IMMEDIATELY — even mid-call. A quick "Welcome to Gunn Law Group, I\'ll be right with you" takes 3 seconds. Then return to the active caller (new PNC → collect info → route to Victoria). Then notify staff the 11:15 arrived. THEN the CasePeer task. Priority: live humans first, then system tasks.',
+    f: '❌ CasePeer task first (A) while a client stands at the desk? That\'s backwards — live humans always come before system tasks. Fully greeting the walk-in before returning to the caller (B) makes the caller wait too long. Ignoring the walk-in (D) violates the 30-second rule. Priority cascade: acknowledge humans → serve humans → then systems.'
+  },
+  'q21': {
+    t: '✅ Settlement offer calls are time-sensitive. Per IR-R-1: adjuster settlement offers go to the assigned pre-lit paralegal. Tanya is on a call, so take a complete message, log in CasePeer, create URGENT task. Then text Tanya for delivery confirmation. Why FIRST priority? Because Tanya needs this BEFORE Maria walks in at 2:00. If she knows about the offer before the meeting, she can discuss it during the appointment. The 30-minute buffer is your advantage.',
+    f: '❌ Telling the adjuster to call back (B) is unprofessional and delays a settlement. Interrupting Tanya\'s call (C) is unnecessary with 30 minutes until the appointment. Waiting until Maria arrives (D) misses the window — if Tanya sees the offer BEFORE the meeting, she can incorporate it. Use the buffer.'
+  },
+  'q22': {
+    t: '✅ Full reception workflow for an expected arrival: (1) Warm greeting using name; (2) Confirm appointment details; (3) Offer hospitality — seat and water; (4) Immediately notify assigned staff; (5) Log arrival in CasePeer. Maria walks in nervous and walks out of the lobby feeling like the firm has their act together. Every step matters.',
+    f: '❌ Casual greeting without notification (A) means Tanya might not know Maria is here. Offering case updates (B) violates every role boundary. Fabricating a discrepancy (C) creates confusion and anxiety. Confirm what CasePeer says, trust the system, execute the workflow.'
+  },
+  'q23': {
+    t: '✅ Priority reasoning: The PNC is a live caller on the phone — handle first (collect info, route to Victoria, log in CasePeer). Certified letter flagged to Managing Attorney immediately per Reception SOP §5 — same-day escalation, logged in mail log. Package is routine — sign, log, route. You do NOT open certified mail — that\'s the recipient\'s role.',
+    f: '❌ First-come-first-served (A) ignores priority levels. But the caller IS live and waiting, which gives natural priority over items that arrived simultaneously. Certified first (C) sounds right but the caller is on the line. Opening certified mail (D) is never reception\'s role. Live humans first, then time-sensitive documents, then routine items.'
+  },
+  'q24': {
+    t: '✅ "If it\'s not in CasePeer, it didn\'t happen." Every interaction gets logged — even at reception level. Today\'s Santos activity: (1) Adjuster call — communication note + urgent task to Tanya; (2) Maria\'s arrival — logged with timestamp; (3) Any post-meeting follow-ups. Each is a separate CasePeer entry. The closing routine verifies: every interaction from the day has a corresponding record. Zero gaps.',
+    f: '❌ One entry (A) misses the adjuster call — the most consequential event. Just the adjuster note (B) misses the arrival. "Tanya handles it" (D) assumes someone else documents reception-level interactions — they won\'t. Tanya documents HER interactions during the meeting. YOU document YOURS: the adjuster message, the arrival, any lobby interactions. Each person logs their own touchpoints.'
+  },
+  'q25': {
+    t: '✅ CasePeer went down — but the standard didn\'t. Those 2.5 hours have NO audit trail until you enter them. Every message, appointment, and visitor arrival gets retroactively logged with accurate timestamps. This might take 30-45 minutes — and it\'s worth every minute. Tomorrow, when a paralegal checks for a 3:15 PM message, it needs to be there. The system\'s reliability depends on your discipline even when the system itself failed.',
+    f: '❌ "Most important only" (B) means you\'re deciding which messages matter — not your call. "Already relayed" (C) misses the audit trail — verbal relays have no CasePeer record, so they "didn\'t happen" from a system perspective. "Appointments first, messages later" (D) creates a multi-day backlog that gets less accurate daily. Everything gets entered, with accurate timestamps, today.'
+  }
+};
+
+// ═══════════════════════════════════════════════
+// ANSWER HANDLER
+// ═══════════════════════════════════════════════
+function answer(qId, choice, isCorrect) {
+  if (qDone[qId]) return;
+  qDone[qId] = true;
+
+  var cfg = Q_CONFIG[qId];
+  var block = document.getElementById(qId + '-block');
+  var fb = document.getElementById(qId + '-fb');
+  var btns = block.querySelectorAll('.option-btn');
+
+  btns.forEach(function(b){ b.classList.add('disabled'); });
+
+  var clickedBtn = document.getElementById(qId + '-' + choice);
+  var correctBtn = document.getElementById(qId + '-' + cfg.correct);
+
+  if (choice === cfg.correct) {
+    clickedBtn.classList.add('correct');
+    block.classList.add('answered');
+    if (!cfg.isBonus) {
+      baseScore += cfg.pts;
+      showToast('+' + cfg.pts + ' pts', false);
+      var isFirst = (firstAttemptStillAvailable[qId] !== false);
+      if (isFirst) {
+        bonusPoints += 5;
+      }
+    } else {
+      var bonusPts = (firstAttemptStillAvailable[qId] !== false) ? cfg.bonusPts : Math.floor(cfg.bonusPts / 3);
+      bonusPoints += bonusPts;
+      showToast('+' + bonusPts + ' bonus', true);
+    }
+    document.getElementById('total-score').textContent = baseScore;
+    document.getElementById('bonus-score').textContent = bonusPoints;
+    updateStreak(true);
+    mascotReact('correct');
+    spawnParticles(clickedBtn);
+  } else {
+    clickedBtn.classList.add('incorrect');
+    correctBtn.classList.add('correct');
+    block.classList.add('answered-wrong');
+    firstAttemptStillAvailable[qId] = false;
+    updateStreak(false);
+    mascotReact('incorrect');
+  }
+
+  var fbData = FEEDBACK[qId];
+  if (fbData) {
+    fb.innerHTML = (choice === cfg.correct) ? fbData.t : fbData.f;
+    fb.className = 'feedback-box ' + (choice === cfg.correct ? 'correct' : 'incorrect') + ' show';
+  }
+
+  var totalQs = Object.keys(Q_CONFIG).length;
+  var answeredCount = Object.keys(qDone).length;
+  updateGlobalProgress(answeredCount, totalQs);
+  updateProgress();
+
+  // Check section completion
+  for (var si = 1; si <= 6; si++) {
+    var qs = SECTION_QUESTIONS[si];
+    if (!qs) continue;
+    var allDone = qs.every(function(q){ return !!qDone[q]; });
+    if (allDone) {
+      var scoreEl = document.getElementById('s' + si + '-score');
+      var nextEl = document.getElementById('s' + si + '-next');
+      if (scoreEl) {
+        var pts = 0;
+        var sectionMax = 0;
+        var sqList = SECTION_QUESTIONS[si];
+        sqList.forEach(function(qId2){
+          var c2 = Q_CONFIG[qId2];
+          sectionMax += c2.isBonus ? (c2.bonusPts || 0) : c2.pts;
+        });
+        sqList.forEach(function(qId2){
+          var c2 = Q_CONFIG[qId2];
+          var blk = document.getElementById(qId2 + '-block');
+          if (blk && blk.classList.contains('answered')) {
+            pts += c2.isBonus ? (c2.bonusPts || 0) : c2.pts;
+          }
+        });
+        var scoreVal = scoreEl.querySelector('.score-display');
+        if (scoreVal) scoreVal.textContent = pts + ' / ' + sectionMax + ' pts';
+        scoreEl.style.display = 'block';
+      }
+      if (nextEl) nextEl.style.display = 'block';
+      var pill = document.getElementById('nav-' + si);
+      if (pill) pill.classList.add('done');
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════
+function goToSection(idx) {
+  currentSection = idx;
+  document.querySelectorAll('.section-card').forEach(function(c){ c.classList.remove('active'); });
+  document.getElementById('section-' + idx).classList.add('active');
+  document.querySelectorAll('.nav-pill').forEach(function(p){ p.classList.remove('active'); });
+  document.getElementById('nav-' + idx).classList.add('active');
+  document.getElementById('prog-label').textContent = 'Section ' + (idx+1) + ' of ' + TOTAL_SECTIONS;
+  updateProgress();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// ═══════════════════════════════════════════════
+// PROGRESS BAR
+// ═══════════════════════════════════════════════
+function updateProgress() {
+  var baseQs = Object.keys(Q_CONFIG).filter(function(k){ return !Q_CONFIG[k].isBonus; });
+  var answered = baseQs.filter(function(k){ return !!qDone[k]; }).length;
+  var pct = Math.round((answered / baseQs.length) * 100);
+  var navPct = Math.round((currentSection / (TOTAL_SECTIONS - 1)) * 100);
+  document.getElementById('prog-fill').style.width = Math.max(pct, navPct) + '%';
+  document.getElementById('prog-pct').textContent = Math.max(pct, navPct) + '%';
+}
+
+// ═══════════════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════════════
+function showToast(msg, isBonus) {
+  var t = document.getElementById('points-toast');
+  t.textContent = msg;
+  t.className = 'points-toast' + (isBonus ? ' bonus' : '') + ' show';
+  setTimeout(function(){ t.classList.remove('show'); }, 1800);
+}
+
+// ═══════════════════════════════════════════════
+// FINISH MODULE
+// ═══════════════════════════════════════════════
+function showResults() {
+  goToSection(7);
+  buildResults();
+}
+
+function restartQuiz() {
+  _scoreSubmitted = false;
+  baseScore = 0;
+  bonusPoints = 0;
+  qDone = {};
+  firstAttemptStillAvailable = {};
+  sectionScores = {};
+  streakCount = 0;
+  maxStreak = 0;
+  questionsFirstTry = 0;
+  incorrectCount = 0;
+  totalQuestionsAnswered = 0;
+  moduleStartTime = Date.now();
+  window._irr2Passed = false;
+
+  document.querySelectorAll('.question-block').forEach(function(block) {
+    block.classList.remove('answered', 'answered-wrong');
+    block.querySelectorAll('.option-btn').forEach(function(btn) {
+      btn.classList.remove('correct', 'incorrect', 'disabled');
+      btn.style.pointerEvents = '';
+      btn.style.opacity = '';
+    });
+    var fb = block.querySelector('.feedback-box');
+    if (fb) { fb.className = 'feedback-box'; fb.innerHTML = ''; }
+  });
+
+  for (var i = 1; i <= 6; i++) {
+    var scoreEl = document.getElementById('s' + i + '-score');
+    var nextEl = document.getElementById('s' + i + '-next');
+    if (scoreEl) scoreEl.style.display = 'none';
+    if (nextEl) nextEl.style.display = 'none';
+    var pill = document.getElementById('nav-' + i);
+    if (pill) pill.classList.remove('done');
+  }
+
+  document.getElementById('total-score').textContent = '0';
+  document.getElementById('bonus-score').textContent = '0';
+  document.getElementById('streak-display').textContent = '0 🔥';
+
+  Object.keys(Q_CONFIG).forEach(function(k) { firstAttemptStillAvailable[k] = true; });
+
+  goToSection(0);
+}
+
+function buildResults() {
+  mascotReact('complete');
+  spawnParticles(document.querySelector('header'));
+  var totalQs = Object.keys(Q_CONFIG).length;
+  updateGlobalProgress(totalQs, totalQs);
+
+  var pct = Math.round((baseScore / BASE_MAX) * 100);
+  var pass = baseScore >= PASS_THRESHOLD;
+
+  var headerEl = document.getElementById('results-header-wrap');
+  headerEl.innerHTML = '<div class="results-header ' + (pass ? 'pass' : 'fail') + '">'
+    + '<div class="results-grade">' + pct + '%</div>'
+    + '<div class="results-label">' + (pass ? '🏆 Assessment Passed!' : '📚 Not Yet — 80% Required to Pass') + '</div>'
+    + '<div class="results-sub">' + baseScore + ' / 200 base pts · ' + bonusPoints + ' bonus pts</div>'
+    + '</div>';
+
+  var letters = ['a','b','c','d'];
+  var letterLabels = ['A','B','C','D'];
+  var reviewList = document.getElementById('reviewList');
+  var reviewHTML = '';
+  Object.keys(Q_CONFIG).forEach(function(qId, idx) {
+    var cfg = Q_CONFIG[qId];
+    var block = document.getElementById(qId + '-block');
+    if (!block) return;
+    var qText = block.querySelector('.q-text');
+    var questionText = qText ? qText.textContent : 'Question ' + (idx+1);
+    var isAnswered = !!qDone[qId];
+    var wasCorrect = isAnswered && block.classList.contains('answered');
+    var correctLetter = cfg.correct.toUpperCase();
+    var correctBtn = document.getElementById(qId + '-' + cfg.correct);
+    var correctText = correctBtn ? correctBtn.querySelector('.opt-text').textContent : '';
+    var userAnswer = '(not answered)';
+    var userLetter = '';
+    if (isAnswered) {
+      letters.forEach(function(l, li) {
+        var btn = document.getElementById(qId + '-' + l);
+        if (btn && (btn.classList.contains('correct') || btn.classList.contains('incorrect'))) {
+          if (btn.classList.contains('incorrect') || (btn.classList.contains('correct') && !block.classList.contains('answered-wrong'))) {
+            userAnswer = btn.querySelector('.opt-text').textContent;
+            userLetter = letterLabels[li];
+          }
+        }
+      });
+      if (wasCorrect && !userLetter) {
+        userAnswer = correctText;
+        userLetter = correctLetter;
+      }
+    }
+
+    reviewHTML += '<div class="review-item ' + (wasCorrect ? 'correct' : 'wrong') + '" style="opacity:0;transform:translateY(8px);transition:opacity 0.25s ease,transform 0.25s ease;" data-review-idx="' + idx + '">'
+      + '<div class="ri-q">' + (idx+1) + '. ' + questionText.substring(0,120) + (questionText.length>120?'...':'') + '</div>'
+      + '<div class="ri-ans">'
+      + (wasCorrect ? '✅' : '❌') + ' Your answer: <strong>' + userLetter + '. ' + userAnswer.substring(0,100) + (userAnswer.length>100?'...':'') + '</strong>'
+      + (!wasCorrect ? '<br>✅ Correct: <strong>' + correctLetter + '. ' + correctText.substring(0,100) + (correctText.length>100?'...':'') + '</strong>' : '')
+      + '</div></div>';
+  });
+  reviewList.innerHTML = reviewHTML;
+
+  var reviewEls = reviewList.querySelectorAll('[data-review-idx]');
+  reviewEls.forEach(function(el, i) {
+    setTimeout(function() {
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+      playTickSound();
+      var counterEl = document.getElementById('reviewCounter');
+      if (counterEl) counterEl.textContent = 'Reviewing ' + (i+1) + '/' + totalQs;
+    }, i * 120);
+  });
+
+  setTimeout(function() {
+    var counterEl = document.getElementById('reviewCounter');
+    if (counterEl) counterEl.textContent = totalQs + '/' + totalQs + ' ✓ Review Complete';
+  }, reviewEls.length * 120 + 200);
+
+  window._irr2Passed = pass;
+
+  var bodyEl = document.getElementById('results-body');
+  var buttonsHtml;
+  if (pass) {
+    buttonsHtml = '<div class="btn-group">'
+      + '<button class="btn btn-primary btn-block" onclick="goToSection(8)">Submit Feedback &amp; Get Certificate →</button>'
+      + '</div>';
+  } else {
+    buttonsHtml = '<div class="btn-group" style="display:flex;gap:10px;">'
+      + '<button class="btn btn-secondary" style="flex:1;" onclick="goToSection(0)">Review Content</button>'
+      + '<button class="btn btn-primary" style="flex:1;" onclick="restartQuiz()">Try Again</button>'
+      + '</div>';
+  }
+  bodyEl.innerHTML = '<div class="section-score" style="margin-bottom:20px;">'
+    + '<div class="score-display">' + baseScore + '/200</div>'
+    + '<div class="score-label">Base Score · ' + bonusPoints + ' Bonus Points</div>'
+    + '</div>'
+    + '<div class="callout ' + (pass ? 'callout-success' : 'callout-warn') + '">'
+    + (pass
+        ? '<strong>✅ Gate Passed.</strong> You have demonstrated competency in CasePeer navigation, communication logging, task creation, calendar management, case status awareness, and template recognition. You are cleared to continue in the IR-R track.'
+        : '<strong>⚠️ Gate Not Cleared.</strong> You need 160/200 (80%) to pass. Review the sections where you missed questions — the feedback explains exactly what to remember. Retake when ready.')
+    + '</div>'
+    + buttonsHtml;
+
+  submitScoreToTracker();
+
+  var badgeContainer = document.getElementById('badgeContainer');
+  if (badgeContainer) {
+    var gamBadges = calculateBadges();
+    renderBadges(gamBadges, badgeContainer);
+  }
+
+  if (pass) {
+    document.getElementById('score-submit-form').style.display = 'block';
+  }
+}
+
+// ═══════════════════════════════════════════════
+// AUTO-SUBMIT SCORE
+// ═══════════════════════════════════════════════
+var _scoreSubmitted = false;
+function submitScoreToTracker() {
+  // DISABLED: cert flow handles submission with employee name
+  return;
+}
+
+// ═══════════════════════════════════════════════
+// SUBMIT SCORE + BUILD CERTIFICATE
+// ═══════════════════════════════════════════════
+function submitScoreAndBuildCert() {
+  if (!window._irr2Passed) {
+    showToast('⚠️ 80% required for certificate', false);
+    return;
+  }
+  var nameInput = document.getElementById('trainee-name-input');
+  var name = (nameInput.value || '').trim();
+  if (!name || name === 'Unknown' || name === 'Training Participant') {
+    nameInput.style.border = '2px solid red';
+    nameInput.focus();
+    showToast('⚠️ Please enter your full name', false);
+    return;
+  }
+  document.getElementById('certNameDisplay').textContent = name;
+  document.getElementById('score-submit-form').style.display = 'none';
+  document.getElementById('cert-content').style.display = 'block';
+
+  var pct = Math.round((baseScore / BASE_MAX) * 100);
+  document.getElementById('certScore').textContent = 'Score: ' + baseScore + '/200 (' + pct + '%) — PASSED';
+  var now = new Date();
+  document.getElementById('certMeta').textContent = 'Issued: ' + now.toLocaleDateString('en-US', {year:'numeric', month:'long', day:'numeric'});
+
+  var certBadgesEl = document.getElementById('certBadges');
+  if (certBadgesEl) {
+    var badges = calculateBadges();
+    badges.push({icon: '🖥️', name: 'IR-R-2 Complete', desc: 'Completed module IR-R-2'});
+    certBadgesEl.innerHTML = '';
+    badges.forEach(function(b, i) {
+      var pill = document.createElement('span');
+      pill.className = 'cert-badge-pill';
+      pill.textContent = b.icon + ' ' + b.name;
+      pill.style.animationDelay = (i * 0.15) + 's';
+      certBadgesEl.appendChild(pill);
+    });
+  }
+
+  setTimeout(function() {
+    launchConfetti();
+    playTaDa();
+    mascotReact('complete');
+  }, 350);
+
+  if (TRACKER_URL) {
+    var payload = {
+      employeeName: name,
+      moduleId: 'ir-r-2',
+      moduleName: 'Scheduling & CasePeer Basics',
+      score: baseScore,
+      maxScore: 200,
+      bonusScore: bonusPoints,
+      maxStreak: maxStreak,
+      badges: calculateBadges().map(function(b){ return b.name; }).join(', '),
+      elapsedMinutes: Math.round((Date.now() - moduleStartTime) / 60000),
+      passedAt: new Date().toISOString(),
+      feedback: {
+        clarity: document.getElementById('fb-clarity').value || '',
+        difficulty: document.getElementById('fb-difficulty').value || '',
+        realistic: document.getElementById('fb-realistic').value || '',
+        suggestions: document.getElementById('fb-suggestions').value || ''
+      }
+    };
+    fetch(TRACKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(payload),
+      mode: 'no-cors'
+    }).then(function() {
+      var el = document.getElementById('score-confirmation');
+      if (el) { el.innerHTML = '✅ Score submitted successfully.'; el.style.display = 'block'; }
+      var el2 = document.getElementById('score-confirmation-cert');
+      if (el2) { el2.innerHTML = '✅ Score submitted successfully.'; el2.style.display = 'block'; }
+    }).catch(function() {
+      var el = document.getElementById('score-confirmation');
+      if (el) {
+        el.innerHTML = '⚠️ Auto-submission failed — please screenshot your results and email to hgunn@thegunnlawgroup.com';
+        el.style.background = '#fff3cd';
+        el.style.borderLeftColor = '#f39c12';
+        el.style.color = '#856404';
+        el.style.display = 'block';
+      }
+    });
+  }
+}
+
+// ═══════════════════════════════════════════════
+// GLG GAMIFICATION ENGINE v1.0 — IR-R-2 CHASSIS
+// ═══════════════════════════════════════════════
+
+// ── SOUND ENGINE ──
+function ensureAudioCtx() {
+  if (!audioCtx) {
+    try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) { return false; }
+  }
+  if (audioCtx.state === 'suspended') { audioCtx.resume().catch(function(){}); }
+  if (!_audioKeepalive && audioCtx) {
+    try {
+      var silentOsc = audioCtx.createOscillator();
+      var silentGain = audioCtx.createGain();
+      silentGain.gain.value = 0;
+      silentOsc.connect(silentGain);
+      silentGain.connect(audioCtx.destination);
+      silentOsc.start();
+      _audioKeepalive = silentOsc;
+    } catch(e) {}
+  }
+  return true;
+}
+
+function toggleSound() {
+  soundEnabled = !soundEnabled;
+  if (soundEnabled) ensureAudioCtx();
+  document.getElementById('soundToggle').textContent = soundEnabled ? '🔊' : '🔇';
+  localStorage.setItem('glg_sound', soundEnabled ? '1' : '0');
+}
+
+function playTone(freq, duration, type, gainVal, scheduleAt) {
+  if (!soundEnabled || !audioCtx) return;
+  if (audioCtx.state === 'suspended') audioCtx.resume().catch(function(){});
+  var startTime = (scheduleAt !== undefined) ? audioCtx.currentTime + scheduleAt : audioCtx.currentTime;
+  var o = audioCtx.createOscillator();
+  var g = audioCtx.createGain();
+  o.type = type || 'sine';
+  o.frequency.value = freq;
+  g.gain.setValueAtTime(gainVal || 0.15, startTime);
+  g.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+  o.connect(g); g.connect(audioCtx.destination);
+  o.start(startTime); o.stop(startTime + duration + 0.01);
+}
+
+function playDing() {
+  if (!soundEnabled) return;
+  ensureAudioCtx();
+  playTone(523, 0.15, 'sine', 0.13, 0);
+  playTone(659, 0.18, 'sine', 0.11, 0.1);
+}
+
+function playWrongTone() {
+  if (!soundEnabled) return;
+  ensureAudioCtx();
+  if (!audioCtx) return;
+  playTone(520, 0.12, 'triangle', 0.12, 0);
+  playTone(440, 0.15, 'triangle', 0.10, 0.08);
+}
+
+function playTickSound() {
+  if (!soundEnabled) return;
+  ensureAudioCtx();
+  if (!audioCtx) return;
+  playTone(800, 0.05, 'triangle', 0.06);
+}
+
+function playTaDa() {
+  if (!soundEnabled) return;
+  ensureAudioCtx();
+  if (!audioCtx) return;
+  var now = audioCtx.currentTime;
+  var notes = [
+    {f:262,t:0,d:0.30,type:'triangle',g:0.14},{f:330,t:0,d:0.30,type:'sine',g:0.11},
+    {f:392,t:0,d:0.30,type:'sine',g:0.09},{f:523,t:0.15,d:0.22,type:'sine',g:0.13},
+    {f:659,t:0.30,d:0.22,type:'sine',g:0.12},{f:784,t:0.45,d:0.22,type:'sine',g:0.11},
+    {f:523,t:0.65,d:0.80,type:'sine',g:0.13},{f:659,t:0.65,d:0.80,type:'sine',g:0.11},
+    {f:784,t:0.65,d:0.80,type:'sine',g:0.09},{f:1047,t:0.65,d:0.80,type:'triangle',g:0.07},
+    {f:1319,t:0.75,d:0.55,type:'sine',g:0.04},{f:1568,t:0.85,d:0.45,type:'sine',g:0.03}
+  ];
+  notes.forEach(function(n) {
+    var osc = audioCtx.createOscillator();
+    var gain = audioCtx.createGain();
+    osc.type = n.type || 'sine';
+    osc.frequency.value = n.f;
+    gain.gain.setValueAtTime(n.g, now + n.t);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + n.t + n.d);
+    osc.connect(gain); gain.connect(audioCtx.destination);
+    osc.start(now + n.t); osc.stop(now + n.t + n.d + 0.05);
+  });
+}
+
+// ── STREAK SYSTEM ──
+function updateStreak(isCorrect) {
+  if (isCorrect) {
+    streakCount++;
+    if (streakCount > maxStreak) maxStreak = streakCount;
+    questionsFirstTry++;
+    var el = document.getElementById('streak-display');
+    if (el) el.textContent = streakCount + ' 🔥';
+    playDing();
+    if (streakCount >= 3) showStreakBadge(streakCount);
+    if (streakCount === 5) spawnParticles(document.querySelector('.score-bar'));
+  } else {
+    if (streakCount >= 3) showStreakEnd();
+    streakCount = 0;
+    incorrectCount++;
+    var el = document.getElementById('streak-display');
+    if (el) el.textContent = '0 🔥';
+    playWrongTone();
+  }
+  totalQuestionsAnswered++;
+}
+
+function showStreakBadge(count) {
+  var badge = document.createElement('div');
+  badge.textContent = count + ' in a row! 🔥';
+  badge.style.cssText = 'position:fixed;top:60px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#dcb161,#e8c87a);color:#141C2C;padding:8px 20px;border-radius:20px;font-weight:700;font-size:14px;z-index:10001;animation:streakPop 0.4s ease-out,fadeUp 0.4s ease-in 1.5s forwards;';
+  document.body.appendChild(badge);
+  setTimeout(function(){ badge.remove(); }, 2000);
+}
+
+function showStreakEnd() {
+  var badge = document.createElement('div');
+  badge.textContent = 'Streak ended';
+  badge.style.cssText = 'position:fixed;top:60px;left:50%;transform:translateX(-50%);background:#333;color:#999;padding:6px 16px;border-radius:16px;font-size:12px;z-index:10001;opacity:0.8;';
+  document.body.appendChild(badge);
+  setTimeout(function(){ badge.remove(); }, 1500);
+}
+
+// ── MILESTONE TOASTS ──
+function checkMilestone(current, total) {
+  var pct = Math.round((current / total) * 100);
+  var milestones = {25:'Quarter complete! 💪',50:'Halfway there! 🎯',75:'Almost there! ⚡',100:'Final stretch! 🏆'};
+  for (var m in milestones) {
+    if (pct >= parseInt(m) && !milestonesTriggered[m]) {
+      milestonesTriggered[m] = true;
+      showMilestoneToast(milestones[m]);
+    }
+  }
+}
+
+function showMilestoneToast(msg) {
+  var t = document.createElement('div');
+  t.textContent = msg;
+  t.style.cssText = 'position:fixed;top:-50px;left:50%;transform:translateX(-50%);background:#141C2C;color:#dcb161;padding:10px 24px;border-radius:12px;font-weight:700;font-size:14px;z-index:10002;transition:top 0.4s ease;box-shadow:0 4px 20px rgba(0,0,0,0.3);';
+  document.body.appendChild(t);
+  requestAnimationFrame(function(){ t.style.top = '20px'; });
+  setTimeout(function(){ t.style.top = '-50px'; setTimeout(function(){ t.remove(); }, 500); }, 2500);
+}
+
+// ── GLOBAL PROGRESS BAR ──
+function updateGlobalProgress(current, total) {
+  var fill = document.getElementById('globalProgressFill');
+  if (fill) fill.style.width = Math.round((current / total) * 100) + '%';
+  checkMilestone(current, total);
+}
+
+// ── PARTICLES ──
+function spawnParticles(anchor) {
+  var rect = anchor ? anchor.getBoundingClientRect() : {left:window.innerWidth/2,top:window.innerHeight/2,width:0};
+  for (var i = 0; i < 20; i++) {
+    var p = document.createElement('div');
+    var size = 4 + Math.random() * 6;
+    var angle = (Math.PI * 2 * i) / 20 + (Math.random() * 0.3);
+    var dist = 60 + Math.random() * 80;
+    p.style.cssText = 'position:fixed;width:' + size + 'px;height:' + size + 'px;background:#dcb161;border-radius:50%;left:' + (rect.left + rect.width/2) + 'px;top:' + (rect.top) + 'px;z-index:10003;pointer-events:none;opacity:1;transition:all 0.8s ease-out;';
+    document.body.appendChild(p);
+    requestAnimationFrame(function(pp, a, d) { return function() {
+      pp.style.left = (parseFloat(pp.style.left) + Math.cos(a) * d) + 'px';
+      pp.style.top = (parseFloat(pp.style.top) + Math.sin(a) * d) + 'px';
+      pp.style.opacity = '0';
+    }; }(p, angle, dist));
+    setTimeout(function(pp){ pp.remove(); }.bind(null, p), 900);
+  }
+}
+
+// ── MASCOT (Scales of Justice) ──
+function initMascot() {
+  var gavel = document.createElement('div');
+  gavel.id = 'mascotFloat';
+  gavel.innerHTML = '<svg viewBox="0 0 60 70" xmlns="http://www.w3.org/2000/svg" style="width:50px;height:58px;">'
+    + '<rect x="27" y="18" width="6" height="38" rx="1.5" fill="#8B7D3C"/>'
+    + '<rect x="18" y="54" width="24" height="5" rx="2.5" fill="#6B5E2E"/>'
+    + '<rect x="22" y="52" width="16" height="4" rx="1" fill="#8B7D3C"/>'
+    + '<rect x="6" y="16" width="48" height="4" rx="2" fill="#8B7D3C"/>'
+    + '<circle cx="30" cy="12" r="5" fill="#dcb161" stroke="#8B7D3C" stroke-width="1.5"/>'
+    + '<text x="30" y="14.5" text-anchor="middle" font-size="7" font-weight="bold" fill="#141C2C">⚖</text>'
+    + '<line x1="12" y1="20" x2="12" y2="32" stroke="#8B7D3C" stroke-width="1.5"/>'
+    + '<line x1="48" y1="20" x2="48" y2="32" stroke="#8B7D3C" stroke-width="1.5"/>'
+    + '<path d="M4 33 Q8 38 12 33 Q16 38 20 33" stroke="#dcb161" stroke-width="1.5" fill="none"/>'
+    + '<ellipse cx="12" cy="34" rx="9" ry="2.5" fill="#dcb161" opacity="0.3"/>'
+    + '<path d="M40 33 Q44 38 48 33 Q52 38 56 33" stroke="#dcb161" stroke-width="1.5" fill="none"/>'
+    + '<ellipse cx="48" cy="34" rx="9" ry="2.5" fill="#dcb161" opacity="0.3"/>'
+    + '</svg>';
+  gavel.style.cssText = 'position:fixed;bottom:16px;right:16px;z-index:9998;cursor:pointer;animation:scaleBob 3s ease-in-out infinite;opacity:0.7;transition:opacity 0.3s,transform 0.3s;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.2));';
+  gavel.onmouseenter = function(){ this.style.opacity='1';this.style.transform='scale(1.1)'; };
+  gavel.onmouseleave = function(){ this.style.opacity='0.7';this.style.transform='scale(1)'; };
+  document.body.appendChild(gavel);
+}
+
+function mascotReact(type) {
+  var g = document.getElementById('mascotFloat');
+  if (!g) return;
+  g.style.animation = 'none';
+  void g.offsetHeight;
+  if (type === 'correct') {
+    g.style.animation = 'scaleCelebrate 0.5s ease-out, scaleBob 3s ease-in-out 0.6s infinite';
+  } else if (type === 'incorrect') {
+    g.style.animation = 'scaleTilt 0.6s ease-in-out, scaleBob 3s ease-in-out 0.7s infinite';
+  } else if (type === 'complete') {
+    g.style.animation = 'scaleTriumph 1.5s ease-in-out, scaleBob 3s ease-in-out 1.6s infinite';
+    g.style.opacity = '1';
+    g.style.transform = 'scale(1.15)';
+  }
+}
+
+// ── CONFETTI ──
+var confettiActive = false;
+function launchConfetti() {
+  var canvas = document.getElementById('confettiCanvas');
+  if (!canvas) return;
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  var ctx = canvas.getContext('2d');
+  var colors = ['#dcb161','#c0c0c0','#141c2c'];
+  var particles = [];
+  var cx = canvas.width / 2;
+  var cy = canvas.height / 2;
+  for (var i = 0; i < 150; i++) {
+    var angle = Math.random() * Math.PI * 2;
+    var speed = 3 + Math.random() * 9;
+    particles.push({
+      x:cx, y:cy,
+      vx:Math.cos(angle)*speed, vy:Math.sin(angle)*speed-5,
+      color:colors[Math.floor(Math.random()*colors.length)],
+      w:4+Math.random()*6, h:2+Math.random()*4,
+      rotation:Math.random()*360, rotSpeed:(Math.random()-0.5)*12,
+      gravity:0.10+Math.random()*0.08, opacity:1,
+      shape:Math.random()>0.4?'rect':'circle'
+    });
+  }
+  confettiActive = true;
+  var startTime = Date.now();
+  function animate() {
+    if (!confettiActive) return;
+    var elapsed = Date.now() - startTime;
+    if (elapsed > 4000) {
+      confettiActive = false;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      return;
+    }
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(function(p) {
+      p.x+=p.vx; p.vy+=p.gravity; p.y+=p.vy; p.vx*=0.99; p.rotation+=p.rotSpeed;
+      if (elapsed>2500) p.opacity=Math.max(0,p.opacity-0.02);
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rotation*Math.PI/180);
+      ctx.globalAlpha=p.opacity; ctx.fillStyle=p.color;
+      if (p.shape==='rect'){ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);}
+      else{ctx.beginPath();ctx.arc(0,0,p.w/2,0,Math.PI*2);ctx.fill();}
+      ctx.restore();
+    });
+    requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+}
+
+// ── ACHIEVEMENT BADGES ──
+function calculateBadges() {
+  var badges = [];
+  var pct = Math.round((baseScore / BASE_MAX) * 100);
+  var elapsed = (Date.now() - moduleStartTime) / 60000;
+  var baseQCount = Object.keys(Q_CONFIG).filter(function(k){ return !Q_CONFIG[k].isBonus; }).length;
+  if (questionsFirstTry === baseQCount && incorrectCount === 0) badges.push({icon:'⭐', name:'Perfect Pass', desc:'All correct on first try'});
+  if (incorrectCount === 0 && totalQuestionsAnswered > 0) badges.push({icon:'🎯', name:'No Stumbles', desc:'Zero incorrect'});
+  if (elapsed < 20) badges.push({icon:'⚡', name:'Speed Run', desc:'Under 20 minutes'});
+  if (pct >= 90) badges.push({icon:'🏆', name:'Master', desc:'Above 90%'});
+  if (maxStreak >= 10) badges.push({icon:'🔥', name:'On Fire', desc:'10+ streak'});
+  if (incorrectCount > 3 && pct >= 70) badges.push({icon:'💪', name:'Persistent', desc:'Finished despite struggles'});
+  return badges;
+}
+
+function renderBadges(badges, container) {
+  badges.forEach(function(b, i) {
+    setTimeout(function() {
+      var el = document.createElement('span');
+      el.textContent = b.icon + ' ' + b.name;
+      el.title = b.desc;
+      el.style.cssText = 'display:inline-block;background:#dcb161;color:#141C2C;font-size:12px;font-weight:700;padding:5px 12px;border-radius:14px;margin:4px;animation:badgeFlip 0.5s ease-out;';
+      container.appendChild(el);
+    }, i * 400);
+  });
+}
+
+// ── GAMIFICATION INIT ──
+document.addEventListener('DOMContentLoaded', function() {
+  if (localStorage.getItem('glg_sound') === '1') {
+    soundEnabled = true;
+    var btn = document.getElementById('soundToggle');
+    if (btn) btn.textContent = '🔊';
+  }
+
+  function initAudioOnFirstClick() {
+    ensureAudioCtx();
+    document.removeEventListener('click', initAudioOnFirstClick);
+    document.removeEventListener('touchstart', initAudioOnFirstClick);
+    document.removeEventListener('touchend', initAudioOnFirstClick);
+  }
+  document.addEventListener('click', initAudioOnFirstClick);
+  document.addEventListener('touchstart', initAudioOnFirstClick);
+  document.addEventListener('touchend', initAudioOnFirstClick);
+
+  function resumeAudioOnGesture() {
+    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+  }
+  document.addEventListener('touchstart', resumeAudioOnGesture, true);
+  document.addEventListener('touchend', resumeAudioOnGesture, true);
+  document.addEventListener('click', resumeAudioOnGesture, true);
+
+  initMascot();
+});
+
+// Init
+goToSection(0);
+</script>
+</body>
+</html>
