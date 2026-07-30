@@ -40,7 +40,7 @@ Citation Log: /glg/training/manifests/NH-4_CITATION_LOG.md
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>NH-5 — LORs, LOPs, Police Reports &amp; Templates | Gunn Law Group</title>
+<title>NH-4 — LORs, LOPs, Police Reports &amp; Templates | Gunn Law Group</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -393,7 +393,7 @@ button, .btn, .option-btn, [onclick] {
       <div class="header-firm-name">Gunn Law Group</div>
       <div class="header-dept">New Hire Training</div>
     </div>
-    <div class="module-badge">NH-5</div>
+    <div class="module-badge">NH-4</div>
   </div>
   <div class="score-bar-mini">
     <div class="score-chip"><div class="score-chip-label">Score</div><div class="score-chip-value" id="hdr-score">—</div></div>
@@ -422,7 +422,7 @@ button, .btn, .option-btn, [onclick] {
 <div class="screen active" id="screen-0">
   <div class="welcome-hero">
     <div class="welcome-icon">⚖️</div>
-    <h1>NH-5 — LORs, LOPs, Police Reports &amp; Templates</h1>
+    <h1>NH-4 — LORs, LOPs, Police Reports &amp; Templates</h1>
     <p>Documentation drives case value. Learn the GLG system for records, Letters of Representation, Letters of Protection, and CasePeer templates.</p>
   </div>
   <div class="content-card" style="border-radius: var(--radius);">
@@ -479,12 +479,25 @@ button, .btn, .option-btn, [onclick] {
         <div class="framework-card">
           <h4>💰 Quantify Damages</h4>
           <p>Bills provide the economic foundation for the demand package. No bills = no damages number.</p>
+          <p><strong>Three bills, not one.</strong> If the client had imaging, request the <strong>physician bill</strong> and the <strong>radiology bill</strong> separately in addition to the hospital facility bill. The facility bill alone understates the specials.</p>
         </div>
         <div class="framework-card">
           <h4>🛡️ Counter Defense Arguments</h4>
           <p>Complete records prevent "pre-existing condition" claims and gaps the defense can exploit.</p>
         </div>
       </div>
+    </div>
+
+    
+    <div class="info-block">
+      <h4>&#9878;&#65039; What the Bills Are Worth &mdash; O.C.G.A. &sect; 51-12-1.1</h4>
+      <p>Georgia&rsquo;s 2025 Tort Reform Act added <strong>O.C.G.A. &sect; 51-12-1.1</strong>, which changed how the value of medical specials is proven. Recoverable special damages are limited to the <strong>reasonable value of medically necessary care</strong>, and the trier of fact decides what that is. Both the amount <em>charged</em> and the amount actually <em>necessary to satisfy</em> the charge under the client&rsquo;s insurance contract are admissible on that question.</p>
+      <ul>
+        <li><strong>Effective-date limit:</strong> this section applies only to causes of action arising <strong>on or after April 21, 2025</strong>. Pre-4/21/2025 accidents are governed by prior law. Verify the date of loss before anyone invokes it.</li>
+        <li><strong>It is a trial-evidence rule.</strong> Adjusters cite it as pre-suit leverage, but that leverage is only real if the case would actually try under this statute.</li>
+      </ul>
+      <div class="callout callout-warn"><strong>Never say this to a client:</strong> &ldquo;insurance can limit your settlement.&rdquo; That is wrong and it damages trust. The accurate version: <em>&ldquo;Georgia law now limits recoverable medical damages to the reasonable value of necessary treatment, and what your insurance paid is one piece of evidence on that. Your attorney will handle how we prove the value.&rdquo;</em></div>
+      <p>Collect complete billing either way &mdash; you cannot argue reasonable value from an incomplete file.</p>
     </div>
 
     <div class="subsection">
@@ -849,7 +862,7 @@ button, .btn, .option-btn, [onclick] {
 <div class="screen" id="screen-quiz">
   <div class="section-header">
     <div class="section-label" id="quiz-section-label">Question 1 of 10</div>
-    <div class="section-title">Knowledge Check — NH-5</div>
+    <div class="section-title">Knowledge Check — NH-4</div>
   </div>
   <div class="content-card">
     <div class="quiz-dots" id="quizDots"></div>
@@ -899,11 +912,11 @@ button, .btn, .option-btn, [onclick] {
         <div class="cert-firm">Gunn Law Group · Personal Injury · Atlanta, Georgia</div>
         <div class="cert-seal">⚖️</div>
         <div class="cert-title">Certificate of Completion</div>
-        <div class="cert-subtitle">New Hire Training Program — NH-5</div>
+        <div class="cert-subtitle">New Hire Training Program — NH-4</div>
         <div class="cert-presents">This certifies that</div>
         <div class="cert-name" id="certNameDisplay">___________________</div>
         <div class="cert-for">has successfully completed</div>
-        <div class="cert-module">NH-5 — LORs, LOPs, Police Reports &amp; Templates</div>
+        <div class="cert-module">NH-4 — LORs, LOPs, Police Reports &amp; Templates</div>
         <div class="cert-score" id="certScore"></div>
         <div class="cert-meta" id="certMeta"></div>
         <div class="cert-badges" id="certBadges"></div>
@@ -945,7 +958,7 @@ button, .btn, .option-btn, [onclick] {
 
 <script>
 // ══════════════════════════════════════
-// NH-5 — LORs, LOPs, Police Reports & Templates
+// NH-4 — LORs, LOPs, Police Reports & Templates
 // Module ID: nh4  |  Pass threshold: 8/10 (80%)
 // Chassis: NH-1 canonical (module-a1.html)
 // ══════════════════════════════════════
@@ -1298,7 +1311,7 @@ function submitScoreAndBuildCert() {
   var certBadgesEl = document.getElementById('certBadges');
   if (certBadgesEl) {
     var badges = calculateBadges();
-    badges.push({icon: '⚖️', name: 'NH-5 Complete', desc: 'Completed module NH-5'});
+    badges.push({icon: '⚖️', name: 'NH-4 Complete', desc: 'Completed module NH-4'});
     certBadgesEl.innerHTML = '';
     badges.forEach(function(b, i){
       var pill = document.createElement('span');
@@ -1318,8 +1331,8 @@ function submitScoreAndBuildCert() {
   if (TRACKER_URL) {
     var payload = {
       employeeName: name,
-      moduleId: 'nh5',
-      moduleName: 'NH-5 — LORs, LOPs, Police Reports & Templates',
+      moduleId: 'nh4',
+      moduleName: 'NH-4 — LORs, LOPs, Police Reports & Templates',
       score: score,
       maxScore: 10,
       bonusScore: 0,

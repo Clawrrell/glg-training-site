@@ -33,7 +33,7 @@ QA Checklist: ✅ PASSED
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Day 7 — Coverage Verification Mastery | Gunn Law Group</title>
+  <title>NH-7 — Coverage Verification Mastery | Gunn Law Group</title>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
@@ -230,7 +230,7 @@ QA Checklist: ✅ PASSED
 <header>
   
   <img src="https://www.thegunnlawgroup.com/wp-content/uploads/2023/01/gunn-logo.png" alt="Gunn Law Group" class="glg-logo">
-<div class="day-badge">Day 7 · Coverage Verification</div>
+<div class="day-badge">NH-7 · Coverage Verification</div>
   <h1>Coverage Verification Mastery</h1>
   <p>Gunn Law Group · Legal Assistant Training</p>
   <div class="score-bar">
@@ -1672,7 +1672,7 @@ function buildResults() {
   if (bonusPoints >= 20)      badges.push({icon:'⚡', name:'Stacking Expert'});
   if (sectionScores['s1'] === 40) badges.push({icon:'📋', name:'Coverage Types Master'});
   if (sectionScores['s7'] === 30) badges.push({icon:'🔴', name:'Boss Challenger'});
-  if (pass)                   badges.push({icon:'🎓', name:'Day 7 Complete'});
+  if (pass)                   badges.push({icon:'🎓', name:'NH-7 Complete'});
 
   var badgeHTML = '';
   badges.forEach(function(b){
@@ -1797,7 +1797,7 @@ function showCertificate(name) {
     + '<div style="font-size:13px;color:#888;margin-bottom:8px;">Gunn Law Group Training System</div>'
     + '<div class="cert-name">' + name + '</div>'
     + '<div class="cert-details">'
-    + 'Day 7: Coverage Verification Mastery<br>'
+    + 'NH-7: Coverage Verification Mastery<br>'
     + 'Score: <strong>' + baseScore + '/200 (' + pct + '%)</strong> · Bonus: <strong>' + bonusPoints + ' pts</strong><br>'
     + 'Completed: ' + new Date().toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'})
     + '</div>'
@@ -1805,7 +1805,7 @@ function showCertificate(name) {
     + (baseScore >= 200 ? '<span class="cert-badge">🌟 Perfect Score</span>' : '')
     + (bonusPoints >= 40 ? '<span class="cert-badge">💎 Boss Slayer</span>' : '')
     + (bonusPoints >= 20 ? '<span class="cert-badge">⚡ Stacking Expert</span>' : '')
-    + '<span class="cert-badge">🎓 Day 7 Complete</span>'
+    + '<span class="cert-badge">🎓 NH-7 Complete</span>'
     + '</div>'
     + '</div>'
     + '<div class="callout callout-success" style="margin-top:16px;"><strong>✅ Score submitted successfully.</strong> Great work today, ' + name.split(" ")[0] + '. Coverage verification is now part of your toolkit — use it on every case from Day 1.</div>';
