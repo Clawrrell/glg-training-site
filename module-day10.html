@@ -403,8 +403,8 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
  </div>
  <div class="section-body">
 
-  <div class="callout callout-info">
-   <strong>Previously you learned:</strong> In NH-9, you explored the fundamentals of client communication — why it matters, how clients experience the firm, and the basics of proactive outreach. Now we go deeper: the specific protocol, scripts, documentation standards, and conversation techniques that make communication work at GLG.
+  <div class="callout red">
+   <strong>Non-negotiable rule:</strong> If it's not documented in CasePeer, it didn't happen. Every call, email, and case action must be logged immediately. This protects the client, the firm, and you. Six months from now, nobody will remember the details of a phone call. CasePeer will.
   </div>
 
   <div class="framework-box">
@@ -1701,10 +1701,12 @@ function answer(qNum, chosen, isCorrect) {
 }
 
 function showQuestion(num) {
- // For quiz questions 1-16
+ // For quiz questions 1-20
  document.querySelectorAll('#quiz-section .question-block').forEach(function(el) {
   el.classList.remove('active');
  });
+ var label = document.getElementById('qNum');
+ if (label) label.textContent = 'Question ' + num + ' of 20';
  var target = document.getElementById('q' + num);
  if (target) target.classList.add('active');
  window.scrollTo(0, 0);
