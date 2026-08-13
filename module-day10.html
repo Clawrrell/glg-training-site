@@ -1301,7 +1301,7 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
 <!-- ══════════ QUIZ SCREEN ══════════ -->
 <div class="screen" id="screen-quiz">
   <div class="section-header">
-    <div class="section-label" id="quiz-section-label">Question 1 of 10</div>
+    <div class="section-label" id="quiz-section-label">Question 1 of 20</div>
     <div class="section-title">Knowledge Check — NH-10 — Client Communication Mastery</div>
   </div>
   <div class="content-card">
@@ -1705,8 +1705,6 @@ function showQuestion(num) {
  document.querySelectorAll('#quiz-section .question-block').forEach(function(el) {
   el.classList.remove('active');
  });
- var label = document.getElementById('qNum');
- if (label) label.textContent = 'Question ' + num + ' of 20';
  var target = document.getElementById('q' + num);
  if (target) target.classList.add('active');
  window.scrollTo(0, 0);
