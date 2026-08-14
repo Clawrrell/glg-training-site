@@ -357,7 +357,7 @@
       <div class="options">
         <button class="option-btn" onclick="answer('q1','a',false)" id="q1-a"><span class="opt-letter">A</span><span class="opt-text">"Gunn Law Group, please hold." [places caller on hold immediately]</span></button>
         <button class="option-btn" onclick="answer('q1','b',false)" id="q1-b"><span class="opt-letter">B</span><span class="opt-text">"Good morning, you've reached Gunn Law. How can I direct your call?"</span></button>
-        <button class="option-btn" onclick="answer('q1','c',true)" id="q1-c"><span class="opt-letter">C</span><span class="opt-text">"Thank you for calling Gunn Law Group, this is Jessica, how can I help you?"</span></button>
+        <button class="option-btn" onclick="answer('q1','c',true)" id="q1-c"><span class="opt-letter">C</span><span class="opt-text">"Thank you for calling Gunn Law Group, this is Ingrid, how can I help you?"</span></button>
         <button class="option-btn" onclick="answer('q1','d',false)" id="q1-d"><span class="opt-letter">D</span><span class="opt-text">"Hello, thanks for calling. What can I do for you today?"</span></button>
       </div>
       <div class="feedback-box" id="q1-fb"></div>
@@ -421,7 +421,7 @@
       <h4>📋 GLG Call Routing Table</h4>
       <table class="stat-table">
         <tr><th>Caller Type</th><th>Route To</th><th>Key Rule</th></tr>
-        <tr><td><strong>New potential client</strong></td><td>Intake (Victoria)</td><td>If unavailable: full message + notify intake immediately</td></tr>
+        <tr><td><strong>New potential client</strong></td><td>Intake (Priya)</td><td>If unavailable: full message + notify intake immediately</td></tr>
         <tr><td><strong>Existing client (pre-lit)</strong></td><td>Assigned pre-lit paralegal</td><td>Do NOT route to attorney without paralegal's direction</td></tr>
         <tr><td><strong>Existing client (litigation)</strong></td><td>Assigned litigation paralegal</td><td>Do NOT route to attorney without paralegal's direction</td></tr>
         <tr><td><strong>Adjuster — settlement offer</strong></td><td>Assigned pre-lit paralegal</td><td>Paralegal documents; consults Head Attorney (Adriauna) before accepting</td></tr>
@@ -439,7 +439,7 @@
       <div class="options">
         <button class="option-btn" onclick="answer('q5','a',false)" id="q5-a"><span class="opt-letter">A</span><span class="opt-text">Transfer directly to the Managing Attorney — truck accident cases are high-value and need immediate attorney attention</span></button>
         <button class="option-btn" onclick="answer('q5','b',false)" id="q5-b"><span class="opt-letter">B</span><span class="opt-text">Take a brief message and email it to the general office inbox for someone to follow up when they're available</span></button>
-        <button class="option-btn" onclick="answer('q5','c',true)" id="q5-c"><span class="opt-letter">C</span><span class="opt-text">Reassure them ("You've called the right place"), collect basic info (name, phone, email, brief description of accident, injuries, existing attorney), and transfer to Intake (Victoria) — or if she's unavailable, take a full message and notify intake immediately</span></button>
+        <button class="option-btn" onclick="answer('q5','c',true)" id="q5-c"><span class="opt-letter">C</span><span class="opt-text">Reassure them ("You've called the right place"), collect basic info (name, phone, email, brief description of accident, injuries, existing attorney), and transfer to Intake (Priya) — or if she's unavailable, take a full message and notify intake immediately</span></button>
         <button class="option-btn" onclick="answer('q5','d',false)" id="q5-d"><span class="opt-letter">D</span><span class="opt-text">Ask them detailed questions about the accident to determine if they have a valid case before deciding whether to transfer to intake</span></button>
       </div>
       <div class="feedback-box" id="q5-fb"></div>
@@ -784,7 +784,7 @@
         </div>
       </div>
       <div class="case-detail"><span class="case-key">Situation</span><span class="case-val">You've completed morning opening checklist. Voicemail had 2 messages — both relayed. Desk is clean. Phones are active.</span></div>
-      <div class="case-detail"><span class="case-key">Staff Status</span><span class="case-val">Victoria (Intake) — at her desk. Adriauna (Head Attorney) — in office. Attorney Gunn — arriving at 9:30. Paralegals — all in.</span></div>
+      <div class="case-detail"><span class="case-key">Staff Status</span><span class="case-val">Priya (Intake) — at her desk. Adriauna (Head Attorney) — in office. Attorney Gunn — arriving at 9:30. Paralegals — all in.</span></div>
       <div class="case-detail"><span class="case-key">What Happens Next</span><span class="case-val">Five events in rapid succession. Handle each one correctly.</span></div>
     </div>
 
@@ -794,7 +794,7 @@
       <div class="q-text">9:17 AM — Phone rings (Line 1). Caller: "Um, hi... I was in an accident on I-285 yesterday. A friend gave me your number. I don't really know how this works... do I need a lawyer?" They sound nervous and uncertain. What do you do?</div>
       <div class="options">
         <button class="option-btn" onclick="answer('q21','a',false)" id="q21-a"><span class="opt-letter">A</span><span class="opt-text">"Yes, you probably need a lawyer, especially for a highway accident. Let me transfer you to our intake department." [transfers without collecting any information]</span></button>
-        <button class="option-btn" onclick="answer('q21','b',true)" id="q21-b"><span class="opt-letter">B</span><span class="opt-text">"I'm sorry to hear about your accident. You've called the right place — we handle exactly these kinds of cases." Collect: full name, phone, email, brief description (I-285, yesterday), injuries, whether they're treating, whether they have an attorney. "Let me transfer you to Victoria on our intake team. If we get disconnected, you can call back and ask for her directly. We'll take great care of you."</span></button>
+        <button class="option-btn" onclick="answer('q21','b',true)" id="q21-b"><span class="opt-letter">B</span><span class="opt-text">"I'm sorry to hear about your accident. You've called the right place — we handle exactly these kinds of cases." Collect: full name, phone, email, brief description (I-285, yesterday), injuries, whether they're treating, whether they have an attorney. "Let me transfer you to Priya on our intake team. If we get disconnected, you can call back and ask for her directly. We'll take great care of you."</span></button>
         <button class="option-btn" onclick="answer('q21','c',false)" id="q21-c"><span class="opt-letter">C</span><span class="opt-text">"You should definitely get a lawyer — highway accidents can be complicated. Can I schedule you for a consultation next week?" [schedules without routing to intake]</span></button>
         <button class="option-btn" onclick="answer('q21','d',false)" id="q21-d"><span class="opt-letter">D</span><span class="opt-text">"Let me ask you some questions to figure out if you have a valid case first. How fast were you going? Was the other driver cited? Did you go to the hospital?"</span></button>
       </div>
@@ -1057,8 +1057,8 @@ var FEEDBACK = {
     f: '❌ The consistency test is not about the number of rings (C — and it\'s 3, not 2), self-sufficiency (B — reception routes, it doesn\'t resolve), or memorization (D — personal service matters, but the test is about systematic consistency). The SOP asks: could someone step into this role tomorrow and deliver the identical experience? That requires systematized greeting, routing, message-taking, and boundaries — not individual heroics.'
   },
   'q5': {
-    t: '✅ A first-time caller describing an accident is a new potential client — they get routed to Intake (Victoria). But first: reassure them ("You\'ve called the right place"), collect the essential info (name, phone, email, brief description, injuries, existing attorney), then transfer. If Victoria is unavailable, take a complete message and notify intake immediately. Option A bypasses intake — the Managing Attorney doesn\'t handle intake calls. Option B sends it to a general inbox where it could sit for hours. Option D has you evaluating the case — that\'s intake\'s job, not reception\'s.',
-    f: '❌ New potential clients always go to Intake (Victoria). Not the Managing Attorney (A) — that skips the intake process. Not a general inbox (B) — messages addressed to "the team" are addressed to no one. Not your own case evaluation (D) — reception doesn\'t determine case viability. Your job: warmth, basic info collection, and a clean handoff to intake.'
+    t: '✅ A first-time caller describing an accident is a new potential client — they get routed to Intake (Priya). But first: reassure them ("You\'ve called the right place"), collect the essential info (name, phone, email, brief description, injuries, existing attorney), then transfer. If Priya is unavailable, take a complete message and notify intake immediately. Option A bypasses intake — the Managing Attorney doesn\'t handle intake calls. Option B sends it to a general inbox where it could sit for hours. Option D has you evaluating the case — that\'s intake\'s job, not reception\'s.',
+    f: '❌ New potential clients always go to Intake (Priya). Not the Managing Attorney (A) — that skips the intake process. Not a general inbox (B) — messages addressed to "the team" are addressed to no one. Not your own case evaluation (D) — reception doesn\'t determine case viability. Your job: warmth, basic info collection, and a clean handoff to intake.'
   },
   'q6': {
     t: '✅ Court staff calls — judges, clerks, court personnel — get transferred immediately. No screening. No delays. No "let me take a message first." The Phone Script is explicit: "Transfer IMMEDIATELY. Do not screen." Jennifer identified herself as court staff with an urgent filing deadline matter. The only correct action is an immediate transfer. Option A takes a message when the call should be transferred. Option C screens the call by asking for case details. Option D delays a time-sensitive court communication.',
@@ -1121,7 +1121,7 @@ var FEEDBACK = {
     f: '❌ There is no exception for "simple" case questions. "Is my case settled?" sounds harmless, but: What if it settled for less than they expected? What if it hasn\'t settled but you say the wrong thing? What if it settled last week and no one told the client yet? Every scenario has a downside. That\'s why the rule is absolute: reception does not provide case-specific information. Period. The standard language from the Phone Script handles it warmly and redirects effectively.'
   },
   'q21': {
-    t: '✅ The Phone Script for new potential clients lays out the exact procedure: reassure ("You\'ve called the right place"), collect essential info (name, phone, email, accident description, injuries, treatment status, existing attorney), and transfer to Intake (Victoria) with a warm handoff. Giving them a callback number in case of disconnect shows the firm cares about follow-through. Option A transfers without any info collection. Option C schedules without routing to intake. Option D has you evaluating the case — that\'s intake\'s job.',
+    t: '✅ The Phone Script for new potential clients lays out the exact procedure: reassure ("You\'ve called the right place"), collect essential info (name, phone, email, accident description, injuries, treatment status, existing attorney), and transfer to Intake (Priya) with a warm handoff. Giving them a callback number in case of disconnect shows the firm cares about follow-through. Option A transfers without any info collection. Option C schedules without routing to intake. Option D has you evaluating the case — that\'s intake\'s job.',
     f: '❌ Transferring without info (A) means if the call drops, the firm has no way to follow up. Scheduling without intake (C) bypasses the intake process entirely. Evaluating the case yourself (D) exceeds reception\'s role — you don\'t determine case viability. The correct flow: warmth → info collection → clean handoff to intake with a safety net (callback number).'
   },
   'q22': {

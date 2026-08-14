@@ -450,12 +450,12 @@
     <!-- Q6 -->
     <div class="question-block" id="q6-block">
       <div class="q-num">Question 6 of 20 · 10 pts</div>
-      <div class="q-text">A new potential client calls. Victoria (Intake) is in a meeting. You take a complete message per IR-R-1 training. Now you need to handle the CasePeer side. At reception level, what's the correct CasePeer action?</div>
+      <div class="q-text">A new potential client calls. Priya (Intake) is in a meeting. You take a complete message per IR-R-1 training. Now you need to handle the CasePeer side. At reception level, what's the correct CasePeer action?</div>
       <div class="options">
         <button class="option-btn" onclick="answer('q6','a',false)" id="q6-a"><span class="opt-letter">A</span><span class="opt-text">Create a new case file for the potential client in CasePeer, then log the communication note under that new case</span></button>
-        <button class="option-btn" onclick="answer('q6','b',true)" id="q6-b"><span class="opt-letter">B</span><span class="opt-text">Log the message as a communication note in CasePeer's reception log AND create a task assigned to Victoria (Intake) with the complete message details and "URGENT — new potential client" flag</span></button>
-        <button class="option-btn" onclick="answer('q6','c',false)" id="q6-c"><span class="opt-letter">C</span><span class="opt-text">Don't log it in CasePeer yet — reception only logs messages for existing cases. Text Victoria the details and she'll create the intake record</span></button>
-        <button class="option-btn" onclick="answer('q6','d',false)" id="q6-d"><span class="opt-letter">D</span><span class="opt-text">Log a brief note ("New PNC called — message left for Victoria") and put the sticky note with details on Victoria's desk</span></button>
+        <button class="option-btn" onclick="answer('q6','b',true)" id="q6-b"><span class="opt-letter">B</span><span class="opt-text">Log the message as a communication note in CasePeer's reception log AND create a task assigned to Priya (Intake) with the complete message details and "URGENT — new potential client" flag</span></button>
+        <button class="option-btn" onclick="answer('q6','c',false)" id="q6-c"><span class="opt-letter">C</span><span class="opt-text">Don't log it in CasePeer yet — reception only logs messages for existing cases. Text Priya the details and she'll create the intake record</span></button>
+        <button class="option-btn" onclick="answer('q6','d',false)" id="q6-d"><span class="opt-letter">D</span><span class="opt-text">Log a brief note ("New PNC called — message left for Priya") and put the sticky note with details on Priya's desk</span></button>
       </div>
       <div class="feedback-box" id="q6-fb"></div>
     </div>
@@ -646,7 +646,7 @@
       <div class="options">
         <button class="option-btn" onclick="answer('q16','a',false)" id="q16-a"><span class="opt-letter">A</span><span class="opt-text">Tell them Attorney Gunn is unavailable this afternoon and suggest they call back tomorrow</span></button>
         <button class="option-btn" onclick="answer('q16','b',false)" id="q16-b"><span class="opt-letter">B</span><span class="opt-text">Tell them about the deposition for transparency: "Attorney Gunn is in a deposition this afternoon, but we could schedule for tomorrow"</span></button>
-        <button class="option-btn" onclick="answer('q16','c',true)" id="q16-c"><span class="opt-letter">C</span><span class="opt-text">Route intelligently: "Let me check our schedule... our afternoon is committed today. Could I schedule you for tomorrow morning, or another day this week?" Then route the potential client to Intake (Victoria) per IR-R-1 protocol.</span></button>
+        <button class="option-btn" onclick="answer('q16','c',true)" id="q16-c"><span class="opt-letter">C</span><span class="opt-text">Route intelligently: "Let me check our schedule... our afternoon is committed today. Could I schedule you for tomorrow morning, or another day this week?" Then route the potential client to Intake (Priya) per IR-R-1 protocol.</span></button>
         <button class="option-btn" onclick="answer('q16','d',false)" id="q16-d"><span class="opt-letter">D</span><span class="opt-text">Schedule them for 5:30 PM after the deposition — Attorney Gunn might be willing to stay late</span></button>
       </div>
       <div class="feedback-box" id="q16-fb"></div>
@@ -814,7 +814,7 @@
         <button class="option-btn" onclick="answer('q23','a',false)" id="q23-a"><span class="opt-letter">A</span><span class="opt-text">Handle them in arrival order — first come, first served</span></button>
         <button class="option-btn" onclick="answer('q23','b',true)" id="q23-b"><span class="opt-letter">B</span><span class="opt-text">(1) Handle the new PNC call first — collect info, route to Intake, log in CasePeer. (2) Flag the certified letter to the Managing Attorney immediately per SOP — same-day escalation. (3) Sign for the package and log it.</span></button>
         <button class="option-btn" onclick="answer('q23','c',false)" id="q23-c"><span class="opt-letter">C</span><span class="opt-text">Certified letter first — legal documents always take priority over phone calls</span></button>
-        <button class="option-btn" onclick="answer('q23','d',false)" id="q23-d"><span class="opt-letter">D</span><span class="opt-text">Get the PNC to Victoria, sign for the package, then open the certified letter to check urgency before routing</span></button>
+        <button class="option-btn" onclick="answer('q23','d',false)" id="q23-d"><span class="opt-letter">D</span><span class="opt-text">Get the PNC to Priya, sign for the package, then open the certified letter to check urgency before routing</span></button>
       </div>
       <div class="feedback-box" id="q23-fb"></div>
     </div>
@@ -1025,8 +1025,8 @@ var FEEDBACK = {
     f: '❌ "Called about records" (A) tells the next person nothing — which records? Which provider? What\'s the status? "Will follow up" (B) is better but still vague — follow up on what? By when? "Forwarded to voicemail" (D) documents the relay method but not the substance. The standard: WHO, WHAT, WHAT WAS DECIDED, NEXT STEPS. If your note doesn\'t answer all four, it\'s incomplete.'
   },
   'q6': {
-    t: '✅ EVERY message gets logged in CasePeer — including messages for potential new clients who don\'t have a case file yet. You can\'t create a case file (that\'s intake\'s job), but you CAN log the message and create a task assigned to Victoria. The task must include all the details: caller\'s name, phone, callback time, reason, urgency. This creates an audit trail AND ensures Victoria sees it on her CasePeer dashboard. The 15-minute relay rule applies: the CasePeer entry IS the relay mechanism.',
-    f: '❌ Creating a case file (A) exceeds reception\'s scope — intake handles case creation. But skipping CasePeer entirely (C) because "it\'s not an existing case" creates a gap: if Victoria\'s text gets buried, that potential client\'s message has no trail. And a brief note with a sticky (D) is the worst of both worlds — a useless CasePeer entry plus an easily-lost physical note. Every message → CasePeer, with full details, assigned to a named person.'
+    t: '✅ EVERY message gets logged in CasePeer — including messages for potential new clients who don\'t have a case file yet. You can\'t create a case file (that\'s intake\'s job), but you CAN log the message and create a task assigned to Priya. The task must include all the details: caller\'s name, phone, callback time, reason, urgency. This creates an audit trail AND ensures Priya sees it on her CasePeer dashboard. The 15-minute relay rule applies: the CasePeer entry IS the relay mechanism.',
+    f: '❌ Creating a case file (A) exceeds reception\'s scope — intake handles case creation. But skipping CasePeer entirely (C) because "it\'s not an existing case" creates a gap: if Priya\'s text gets buried, that potential client\'s message has no trail. And a brief note with a sticky (D) is the worst of both worlds — a useless CasePeer entry plus an easily-lost physical note. Every message → CasePeer, with full details, assigned to a named person.'
   },
   'q7': {
     t: '✅ The 15-minute relay rule means the message is RECEIVED by the named person within 15 minutes — not just entered in a queue they haven\'t checked. CasePeer is the audit trail, but the relay is the human notification. If Sarah hasn\'t seen the task after 15 minutes, a quick heads-up ensures delivery. This is especially important for adjuster calls — settlement communication is time-sensitive.',
@@ -1065,7 +1065,7 @@ var FEEDBACK = {
     f: '❌ Not notifying the client (A) is a near-guaranteed no-show. Email (C) is passive — clients may not check in time. Texting (D) doesn\'t confirm acceptance in real time. A phone call gives immediate confirmation: "Does Thursday at 11:00 work?" Yes → confirmed. No → find alternative now. The change isn\'t complete until the client confirms.'
   },
   'q16': {
-    t: '✅ This synthesizes calendar awareness with IR-R-1 routing. Use the calendar to know Attorney Gunn is unavailable without disclosing why (deposition details are confidential). Offer alternatives. And remember from IR-R-1: new potential clients go through Intake (Victoria). The calendar tells you WHEN is available; the routing table tells you WHO handles it. Both systems work together.',
+    t: '✅ This synthesizes calendar awareness with IR-R-1 routing. Use the calendar to know Attorney Gunn is unavailable without disclosing why (deposition details are confidential). Offer alternatives. And remember from IR-R-1: new potential clients go through Intake (Priya). The calendar tells you WHEN is available; the routing table tells you WHO handles it. Both systems work together.',
     f: '❌ "Call back tomorrow" (A) risks losing the potential client. Disclosing the deposition (B) shares confidential schedule details. Scheduling at 5:30 PM after a deposition (D) is unrealistic — and you can\'t commit someone\'s time after hours without approval. Use calendar intelligence for realistic alternatives, keep details confidential, and route through intake.'
   },
   'q17': {
@@ -1081,7 +1081,7 @@ var FEEDBACK = {
     f: '❌ Explaining the LOP (A) is legal information that could be misleading without full case context. Confirming template activity (C) shares case-specific information. "I\'m not familiar" (D) is dishonest when you DO know what an LOP is. The distinction: internal knowledge for routing vs. external disclosure to clients. Use the former, never the latter.'
   },
   'q20': {
-    t: '✅ This tests everything from both modules. IR-R-1\'s 30-second rule: acknowledge the walk-in IMMEDIATELY — even mid-call. A quick "Welcome to Gunn Law Group, I\'ll be right with you" takes 3 seconds. Then return to the active caller (new PNC → collect info → route to Victoria). Then notify staff the 11:15 arrived. THEN the CasePeer task. Priority: live humans first, then system tasks.',
+    t: '✅ This tests everything from both modules. IR-R-1\'s 30-second rule: acknowledge the walk-in IMMEDIATELY — even mid-call. A quick "Welcome to Gunn Law Group, I\'ll be right with you" takes 3 seconds. Then return to the active caller (new PNC → collect info → route to Priya). Then notify staff the 11:15 arrived. THEN the CasePeer task. Priority: live humans first, then system tasks.',
     f: '❌ CasePeer task first (A) while a client stands at the desk? That\'s backwards — live humans always come before system tasks. Fully greeting the walk-in before returning to the caller (B) makes the caller wait too long. Ignoring the walk-in (D) violates the 30-second rule. Priority cascade: acknowledge humans → serve humans → then systems.'
   },
   'q21': {
@@ -1093,7 +1093,7 @@ var FEEDBACK = {
     f: '❌ Casual greeting without notification (A) means Tanya might not know Maria is here. Offering case updates (B) violates every role boundary. Fabricating a discrepancy (C) creates confusion and anxiety. Confirm what CasePeer says, trust the system, execute the workflow.'
   },
   'q23': {
-    t: '✅ Priority reasoning: The PNC is a live caller on the phone — handle first (collect info, route to Victoria, log in CasePeer). Certified letter flagged to Managing Attorney immediately per Reception SOP §5 — same-day escalation, logged in mail log. Package is routine — sign, log, route. You do NOT open certified mail — that\'s the recipient\'s role.',
+    t: '✅ Priority reasoning: The PNC is a live caller on the phone — handle first (collect info, route to Priya, log in CasePeer). Certified letter flagged to Managing Attorney immediately per Reception SOP §5 — same-day escalation, logged in mail log. Package is routine — sign, log, route. You do NOT open certified mail — that\'s the recipient\'s role.',
     f: '❌ First-come-first-served (A) ignores priority levels. But the caller IS live and waiting, which gives natural priority over items that arrived simultaneously. Certified first (C) sounds right but the caller is on the line. Opening certified mail (D) is never reception\'s role. Live humans first, then time-sensitive documents, then routine items.'
   },
   'q24': {
