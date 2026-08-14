@@ -1,0 +1,6 @@
+# Gunn Law Group — internal staff training site
+# Indexing measure only. This is NOT an access control.
+# The site remains publicly reachable by URL; robots.txt is advisory
+# and is honored only by cooperating crawlers.
+User-agent: *
+Disallow: /
