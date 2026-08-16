@@ -19,3 +19,6 @@ apps_script*
 *credential*
 *token*
 .DS_Store
+
+# Timestamped .bak files from module edits — working-tree only, never committed.
+*.bak-*
