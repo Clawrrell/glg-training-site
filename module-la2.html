@@ -313,7 +313,7 @@
         <li>CasePeer section navigation &mdash; know which section holds which templates</li>
       </ul>
     </div>
-    <div class="callout callout-warn"><strong>Prerequisite:</strong> LA-1 knowledge is tested in this module. The 14-day follow-up rule and records request protocols from LA-1 are embedded in LA-2 questions.</div>
+    <div class="callout callout-warn"><strong>Prerequisite:</strong> LA-1 knowledge is tested in this module. The 7-day follow-up rule and records request protocols from LA-1 are embedded in LA-2 questions.</div>
     <div class="callout callout-info"><strong>GLG has 120+ templates in CasePeer.</strong> You are not memorizing all 120. You are learning which template to reach for in each situation &mdash; and more importantly, why the wrong template is so costly.</div>
     <div class="btn-group"><button class="btn btn-primary btn-block" onclick="goToSection(1)">Begin: The Template System &rarr;</button></div>
   </div>
@@ -337,7 +337,7 @@
       <h4>&#128203; The Intake Package — What Goes Out First</h4>
       <ul>
         <li><strong>Within 48 hours of signing:</strong> Welcome letter, HIPAA Authorization, LOR to carrier(s)</li>
-        <li><strong>Within 72 hours:</strong> Records requests to all identified providers</li>
+        <li><strong>Within 48 hours of treatment completion:</strong> Records requests to all identified providers &mdash; this clock starts at treatment-done, not at signing</li>
         <li>Every template has a number. Every number has one correct context. Verify before generating.</li>
       </ul>
     </div>
@@ -357,7 +357,7 @@
 
     <div class="question-block" id="q2-block">
       <div class="q-num">Question 2 of 26 &middot; 10 pts</div>
-      <div class="q-text">You need to send a follow-up records request (Template #74) to a medical provider who has not responded in 14 days. You open the Defendants section in CasePeer but cannot find the records request templates. What is the most likely explanation?</div>
+      <div class="q-text">You need to send a follow-up records request (Template #74) to a medical provider who has not responded in 7 days. You open the Defendants section in CasePeer but cannot find the records request templates. What is the most likely explanation?</div>
       <div class="options">
         <button class="option-btn" onclick="answer('q2','a',false)" id="q2-a"><span class="opt-letter">A</span><span class="opt-text">CasePeer is experiencing a system error — log a support ticket and wait for resolution. — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken</span></button>
         <button class="option-btn" onclick="answer('q2','b',false)" id="q2-b"><span class="opt-letter">B</span><span class="opt-text">Records request templates require attorney approval before they appear in the dropdown.</span></button>
@@ -371,8 +371,8 @@
       <div class="q-num">Question 3 of 26 &middot; 10 pts &middot; LA-1 Callback</div>
       <div class="q-text">Based on your LA-1 training on records follow-up: when a records request gets no response, what is the firm&rsquo;s follow-up deadline and template?</div>
       <div class="options">
-        <button class="option-btn" onclick="answer('q3','a',false)" id="q3-a"><span class="opt-letter">A</span><span class="opt-text">7 business days — then place a call to the provider and document the call in CasePeer as the first formal follow-up attempt.</span></button>
-        <button class="option-btn" onclick="answer('q3','b',true)" id="q3-b"><span class="opt-letter">B</span><span class="opt-text">14 days from the send date — generate Template #74 Follow-Up Records Request and log the follow-up in CasePeer immediately.</span></button>
+        <button class="option-btn" onclick="answer('q3','a',false)" id="q3-a"><span class="opt-letter">A</span><span class="opt-text">21 days from the send date — then place a call to the provider and document the call in CasePeer as the first formal follow-up attempt.</span></button>
+        <button class="option-btn" onclick="answer('q3','b',true)" id="q3-b"><span class="opt-letter">B</span><span class="opt-text">7 days from the send date — generate Template #74 Follow-Up Records Request and log the follow-up in CasePeer immediately.</span></button>
         <button class="option-btn" onclick="answer('q3','c',false)" id="q3-c"><span class="opt-letter">C</span><span class="opt-text">30 calendar days — this matches the provider&rsquo;s legal response window under HIPAA and is the appropriate internal follow-up trigger.</span></button>
         <button class="option-btn" onclick="answer('q3','d',false)" id="q3-d"><span class="opt-letter">D</span><span class="opt-text">Follow up only when the paralegal or CM asks about the outstanding records during their weekly case review.</span></button>
       </div>
@@ -507,7 +507,7 @@
         <tr><td class="tmpl-num">#07</td><td>SOAP Notes Only</td><td>Narrow request for just the clinical progress notes</td></tr>
         <tr><td class="tmpl-num">#12</td><td>Letter of Protection (LOP)</td><td>Authorizes provider to defer billing until case settles</td></tr>
         <tr><td class="tmpl-num">#14</td><td>Treatment Gap Letter</td><td>Explains a gap in treatment to the adjuster</td></tr>
-        <tr><td class="tmpl-num">#74</td><td>Follow-Up Records Request</td><td>14-day follow-up when provider has not responded</td></tr>
+        <tr><td class="tmpl-num">#74</td><td>Follow-Up Records Request</td><td>7-day follow-up when provider has not responded</td></tr>
         <tr><td class="tmpl-num">#75</td><td>Updated Records Request</td><td>Request for updated records from a provider who has already sent initial records</td></tr>
       </table>
     </div>
@@ -528,11 +528,11 @@
 
     <div class="question-block" id="q11-block">
       <div class="q-num">Question 11 of 26 &middot; 10 pts</div>
-      <div class="q-text">It has been 14 days since the initial records request with no response from the provider. What are the next TWO required steps?</div>
+      <div class="q-text">It has been 7 days since the initial records request with no response from the provider. What are the next TWO required steps?</div>
       <div class="options">
-        <button class="option-btn" onclick="answer('q11','a',true)" id="q11-a"><span class="opt-letter">A</span><span class="opt-text">Generate Template #74 Follow-Up Records Request AND log the follow-up in CasePeer with the date, provider, and next 14-day follow-up task set. Both steps are required.</span></button>
-        <button class="option-btn" onclick="answer('q11','b',false)" id="q11-b"><span class="opt-letter">B</span><span class="opt-text">Call the provider directly and document the call in CasePeer, then wait another 14 days before sending any written follow-up communication.</span></button>
-        <button class="option-btn" onclick="answer('q11','c',false)" id="q11-c"><span class="opt-letter">C</span><span class="opt-text">Escalate immediately to the paralegal since 14 days with no response indicates a non-responsive provider requiring attorney-level intervention.</span></button>
+        <button class="option-btn" onclick="answer('q11','a',true)" id="q11-a"><span class="opt-letter">A</span><span class="opt-text">Generate Template #74 Follow-Up Records Request AND log the follow-up in CasePeer with the date, provider, and next 7-day follow-up task set. Both steps are required.</span></button>
+        <button class="option-btn" onclick="answer('q11','b',false)" id="q11-b"><span class="opt-letter">B</span><span class="opt-text">Call the provider directly and document the call in CasePeer, then wait another 7 days before sending any written follow-up communication.</span></button>
+        <button class="option-btn" onclick="answer('q11','c',false)" id="q11-c"><span class="opt-letter">C</span><span class="opt-text">Escalate immediately to the paralegal since 7 days with no response indicates a non-responsive provider requiring attorney-level intervention.</span></button>
         <button class="option-btn" onclick="answer('q11','d',false)" id="q11-d"><span class="opt-letter">D</span><span class="opt-text">Generate Template #75 Updated Records Request since the original request is now stale and a fresh request with new authorization is more likely to succeed. — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken</span></button>
       </div>
       <div class="feedback-box" id="q11-fb"></div>
@@ -728,7 +728,7 @@
         <li>Generate PDF — review it before sending</li>
         <li>Send via appropriate method (fax, mail, certified mail per template type)</li>
         <li>Log the send in CasePeer: date, recipient, template number used</li>
-        <li>Set follow-up task (14 days for records; 30 days for demand)</li>
+        <li>Set follow-up task (7 days for records; 30 days for demand)</li>
       </ol>
     </div>
     <div class="callout callout-danger"><strong>Error rule:</strong> If a generated document has incorrect information, DELETE it and REGENERATE from scratch. Never manually edit template output with PDF tools, Word, or any other software. Template output is a firm document &mdash; you do not alter it.</div>
@@ -740,7 +740,7 @@
       <div class="options">
         <button class="option-btn" onclick="answer('q19','a',false)" id="q19-a"><span class="opt-letter">A</span><span class="opt-text">Mark the case status as &ldquo;LOR Sent&rdquo; in the case stage dropdown — this updates the CasePeer dashboard so the CM can see the claim has been opened.</span></button>
         <button class="option-btn" onclick="answer('q19','b',false)" id="q19-b"><span class="opt-letter">B</span><span class="opt-text">Forward the generated PDF to the managing attorney for review before filing it in the case notes — all carrier correspondence requires attorney sign-off.</span></button>
-        <button class="option-btn" onclick="answer('q19','c',true)" id="q19-c"><span class="opt-letter">C</span><span class="opt-text">Log the send in case notes with the date, carrier/recipient name, template number used, and set a 14-day follow-up task. Both the log and the follow-up task are required.</span></button>
+        <button class="option-btn" onclick="answer('q19','c',true)" id="q19-c"><span class="opt-letter">C</span><span class="opt-text">Log the send in case notes with the date, carrier/recipient name, template number used, and set a 7-day follow-up task. Both the log and the follow-up task are required.</span></button>
         <button class="option-btn" onclick="answer('q19','d',false)" id="q19-d"><span class="opt-letter">D</span><span class="opt-text">Upload the PDF to the case&rsquo;s OneDrive folder and paste the shared link into CasePeer notes — this creates a document trail without requiring additional CasePeer entries.</span></button>
       </div>
       <div class="feedback-box" id="q19-fb"></div>
@@ -834,7 +834,7 @@
       <div class="q-text">30 days later: records received from 2 of 3 providers. Peachtree Imaging has not responded to the original records request. What is the next step?</div>
       <div class="options">
         <button class="option-btn" onclick="answer('q24','a',false)" id="q24-a"><span class="opt-letter">A</span><span class="opt-text">Call Peachtree Imaging directly and request the records verbally — 30 days of non-response indicates a phone call is more effective than another written request.</span></button>
-        <button class="option-btn" onclick="answer('q24','b',true)" id="q24-b"><span class="opt-letter">B</span><span class="opt-text">Generate Template #74 Follow-Up Records Request for Peachtree Imaging, log the follow-up in CasePeer with date and provider, and set the next 14-day follow-up task.</span></button>
+        <button class="option-btn" onclick="answer('q24','b',true)" id="q24-b"><span class="opt-letter">B</span><span class="opt-text">Generate Template #74 Follow-Up Records Request for Peachtree Imaging, log the follow-up in CasePeer with date and provider, and set the next 7-day follow-up task.</span></button>
         <button class="option-btn" onclick="answer('q24','c',false)" id="q24-c"><span class="opt-letter">C</span><span class="opt-text">Escalate to the paralegal immediately — 30 days of non-response exceeds the firm&rsquo;s escalation threshold and requires attorney-level follow-up with the provider.</span></button>
         <button class="option-btn" onclick="answer('q24','d',false)" id="q24-d"><span class="opt-letter">D</span><span class="opt-text">Generate Template #75 Updated Records Request — since 30 days have passed, any records that do arrive should be the most current version of Peachtree&rsquo;s imaging documentation.</span></button>
       </div>
@@ -1071,8 +1071,8 @@ var FEEDBACK = {
     f: '❌ This is not a system error or status gate. CasePeer puts templates in the section matching the recipient. Medical provider letters → Medical Treatment. Insurance carrier letters → Defendants → Adjusters. Client letters → Client section. Wrong section = can\'t find the template.'
   },
   'q3': {
-    t: '✅ 14 days from the send date — that\'s the LA-1 baseline. Template #74 Follow-Up Records Request + CasePeer log. The clock starts on the SEND date, not when the paralegal asks about it. This rule doesn\'t change in LA-2.',
-    f: '❌ LA-1 established the 14-day follow-up rule. Not 7 days, not 30, not "when asked." 14 days → Template #74 → CasePeer logged. This is non-negotiable carry-forward knowledge.'
+    t: '✅ 7 days from the send date — canon is System 1, Pending Demand row: phone follow-up every 7 days, escalate at day 21. Template #74 Follow-Up Records Request + CasePeer log. The clock starts on the SEND date, not when the paralegal asks about it.',
+    f: '❌ Records follow-up is every 7 days — not 21, not 30, not "when asked." 7 days → Template #74 → CasePeer logged, and escalate at day 21. This is non-negotiable.'
   },
   'q4': {
     t: '✅ Template #44 is the HIPAA Authorization. It goes out in the 48-hour welcome package. No #44 = no records = no demand. Template #12 (LOP) is completely different — it authorizes billing to be deferred to settlement. Never confuse these two.',
@@ -1103,8 +1103,8 @@ var FEEDBACK = {
     f: '❌ Specificity matters. You already have bills → don\'t request them again (#04 or #05). You need the missing records only → #06 Medical Records Only. Using #04 wastes the provider\'s time and often delays the actual delivery of what you need.'
   },
   'q11': {
-    t: '✅ 14 days → Template #74 Follow-Up Records Request + CasePeer log with date, provider, and next 14-day task. Two steps, both required. The template is the written follow-up. The log and follow-up task ensure the chain continues.',
-    f: '❌ Phone calls alone are not the template-based written follow-up. After 14 days with no response, the required steps are: (1) Generate Template #74, (2) Send it, (3) Log it in CasePeer, (4) Set the next 14-day follow-up task. All four.'
+    t: '✅ 7 days → Template #74 Follow-Up Records Request + CasePeer log with date, provider, and next 7-day task. Two steps, both required. The template is the written follow-up. The log and follow-up task ensure the chain continues.',
+    f: '❌ Phone calls alone are not the template-based written follow-up. After 7 days with no response, the required steps are: (1) Generate Template #74, (2) Send it, (3) Log it in CasePeer, (4) Set the next 7-day follow-up task. All four.'
   },
   'q12': {
     t: '✅ Treatment gaps weaken demands. A 3-week gap in active treatment = adjuster ammunition. Flag to the CM immediately. Template #14 Treatment Gap Letter may be needed to explain it. Don\'t wait for demand prep — that\'s too late.',
@@ -1135,8 +1135,8 @@ var FEEDBACK = {
     f: '❌ The LA does not generate demand templates (#08/#09) or send demands to adjusters. GLG uses an outside vendor (Marley, Trivent as fallback) who writes the narrative. The LA delivers a complete records package to the vendor — every record, every bill, organized and verified.'
   },
   'q19': {
-    t: '✅ Log in CasePeer: date sent, carrier/recipient name, template number used, and set the 14-day follow-up task. Both the log AND the follow-up task are required. No log = no record the letter went out. No task = no follow-up trigger.',
-    f: '❌ Status dropdowns are not logs. Attorney review is not required for LORs. OneDrive without CasePeer note = invisible to CM. The complete LOR send log requires: date + recipient + template number + 14-day follow-up task. All four, immediately after sending.'
+    t: '✅ Log in CasePeer: date sent, carrier/recipient name, template number used, and set the 7-day follow-up task. Both the log AND the follow-up task are required. No log = no record the letter went out. No task = no follow-up trigger.',
+    f: '❌ Status dropdowns are not logs. Attorney review is not required for LORs. OneDrive without CasePeer note = invisible to CM. The complete LOR send log requires: date + recipient + template number + 7-day follow-up task. All four, immediately after sending.'
   },
   'q20': {
     t: '✅ Delete the incorrect document. Regenerate from CasePeer with correct information. Template output is a firm document — you never manually edit it with PDF tools, Word, or any other software. Clean slate: delete and regenerate.',
@@ -1155,8 +1155,8 @@ var FEEDBACK = {
     f: '❌ Bilingual Spanish-preferred client = Spanish templates FIRST. Both carriers (Progressive Commercial at-fault AND State Farm UM) need attention. Skipping #41 means the client has no Spanish LOR on file. Skipping #62 means State Farm is not on notice. Skipping #65 means no accident report.'
   },
   'q24': {
-    t: '✅ 30 days since the initial request = the first 14-day follow-up was already due at day 14. This is the second follow-up cycle. Generate Template #74 Follow-Up Records Request for Peachtree Imaging, log it in CasePeer, set the next 14-day task. Not yet escalation time.',
-    f: '❌ Template #75 is for updating already-received records — not for following up on non-responsive providers. 30 days is NOT the escalation threshold (that comes after 3 documented attempts). Template #74 + CasePeer log + next 14-day task.'
+    t: '✅ 30 days since the initial request = 7-day follow-ups were due at days 7, 14 and 21 — and day 21 is the escalation trigger, already passed. Generate Template #74 Follow-Up Records Request for Peachtree Imaging, log it in CasePeer, set the next 7-day task. Not yet escalation time.',
+    f: '❌ Template #75 is for updating already-received records — not for following up on non-responsive providers. 30 days is NOT the escalation threshold (that comes after 3 documented attempts). Template #74 + CasePeer log + next 7-day task.'
   },
   'q25': {
     t: '✅ Two insurance tracks = two separate records packages. Each carrier gets their own complete demand from the vendor. Verify both packages are complete. Log both handoffs separately in CasePeer — date, vendor, which carrier.',

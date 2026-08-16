@@ -18,6 +18,9 @@ QA Checklist:
   ✅ Title fixed: "NH-4 — Records, LORs & Templates | Gunn Law Group"
   ✅ Template numbers grounded: T01 (LOR At-Fault), T02 (LOR UM), T04/05 (Records/Bills), T12 (LOP), T44 (HIPAA Auth), T74 (Records Follow-Up)
   ✅ 14-day rule confirmed: CasePeer_Basics_Training.md — "Every 14 days" for pre-lit cases
+  ⚠️ SUPERSEDED 2026-08-15 (Harrell ruling msg 42783): records follow-up = EVERY 7 DAYS, escalate day 21,
+     per System-1-GLG-Operating-System.md:44 (Pending Demand row). The June 21 confirmation above is
+     retained as build provenance only. CasePeer_Basics_Training.md:62 is itself a defect, reported separately.
   ✅ Sound engine: _audioKeepalive, playTone(), playWrongTone() 520/440Hz triangle, playDing() WebAudio scheduling
   ✅ Mascot: ⚖️ floating scales of justice
   ✅ Certificate: pass gate (8/10 = 80%), confetti canvas, Harrell Gunn signature
@@ -505,7 +508,7 @@ button, .btn, .option-btn, [onclick] {
       <h3>The System Principle</h3>
       <div class="callout green">
         <span class="callout-icon">🔧</span>
-        <span><strong>The records process must work independently of any individual.</strong> If records retrieval depends on any person remembering to follow up, the system has failed. The 14-day follow-up rule and CasePeer tracking create the "franchise prototype" for records retrieval — any qualified team member should be able to maintain it.</span>
+        <span><strong>The records process must work independently of any individual.</strong> If records retrieval depends on any person remembering to follow up, the system has failed. The 7-day follow-up rule and CasePeer tracking create the "franchise prototype" for records retrieval — any qualified team member should be able to maintain it.</span>
       </div>
     </div>
 
@@ -731,14 +734,14 @@ button, .btn, .option-btn, [onclick] {
         <div class="lifecycle-step">
           <div class="lifecycle-num">4</div>
           <div class="lifecycle-content">
-            <div class="lifecycle-title">Log and set 14-day follow-up in CasePeer</div>
-            <div class="lifecycle-desc">Document the request date in CasePeer and immediately set a 14-day follow-up task. For pre-litigation cases, every outstanding records request gets a follow-up every 14 days — no exceptions. This is the GLG standard.</div>
+            <div class="lifecycle-title">Log and set 7-day follow-up in CasePeer</div>
+            <div class="lifecycle-desc">Document the request date in CasePeer and immediately set a 7-day follow-up task. For pre-litigation cases, every outstanding records request gets a phone follow-up every 7 days — no exceptions — and is escalated at day 21. This is the GLG standard.</div>
           </div>
         </div>
         <div class="lifecycle-step">
           <div class="lifecycle-num">5</div>
           <div class="lifecycle-content">
-            <div class="lifecycle-title">Follow up every 14 days (Template 74)</div>
+            <div class="lifecycle-title">Follow up every 7 days (Template 74)</div>
             <div class="lifecycle-desc">Log every follow-up call with date, time, and contact person. Use <strong>Template 74</strong> (Follow-Up Records Request) for written follow-ups. After three follow-ups with no response, escalate to the CM for more aggressive action.</div>
           </div>
         </div>
@@ -746,10 +749,10 @@ button, .btn, .option-btn, [onclick] {
     </div>
 
     <div class="subsection">
-      <h3>The 14-Day Rule & Never Miss Twice</h3>
+      <h3>The 7-Day Rule & Never Miss Twice</h3>
       <div class="callout red">
         <span class="callout-icon">🚨</span>
-        <span><strong>14-Day Rule:</strong> Every outstanding records request gets a follow-up every 14 days. No exceptions. Log every follow-up call in CasePeer with date, time, and contact person.</span>
+        <span><strong>7-Day Rule:</strong> Every outstanding records request gets a phone follow-up every 7 days. No exceptions. Escalate at day 21. Log every follow-up call in CasePeer with date, time, and contact person.</span>
       </div>
       <div class="callout amber" style="margin-top: 0.75rem;">
         <span class="callout-icon">⚠️</span>
@@ -1023,15 +1026,15 @@ var questions = [
     explanation: "Always request both medical records (Template 04) and itemized billing statements. Records document injuries; bills document economic damages. Both are required for the demand package."
   },
   {
-    q: "The 14-day follow-up rule means:",
+    q: "The 7-day records follow-up rule means:",
     options: [
       "Clients must be contacted every 14 days",
-      "Cases are reviewed every 14 days",
-      "Every outstanding records request gets a follow-up every 14 days",
-      "Demand letters are sent 14 days after treatment ends — following the documented procedural framework and established expectations at GLG"
+      "Cases are reviewed every 7 days",
+      "Every outstanding records request gets a follow-up every 7 days",
+      "Demand letters are sent 7 days after treatment ends — following the documented procedural framework and established expectations at GLG"
     ],
     correct: 2,
-    explanation: "Every outstanding records request gets a follow-up every 14 days. This is the GLG standard for pre-litigation cases — no exceptions. Log every follow-up in CasePeer."
+    explanation: "Every outstanding records request gets a phone follow-up every 7 days, and is escalated at day 21. This is the GLG standard for pre-litigation cases — no exceptions. Log every follow-up in CasePeer. Note option A is a real rule but a different one: CLIENT contact runs on a 14-day clock (System 1, Treatment row) and is CM-owned. Records follow-up is 7 days (System 1, Pending Demand row). Do not confuse the two clocks."
   },
   {
     q: "Before requesting medical records from any provider, you must have:",

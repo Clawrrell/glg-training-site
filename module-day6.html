@@ -381,7 +381,7 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
       <ul>
         <li><strong>Section 2:</strong> Why medical records are the foundation of every case</li>
         <li><strong>Section 3:</strong> Types of records, how to request them, HIPAA compliance</li>
-        <li><strong>Section 4:</strong> The 14-day follow-up rule and GLG's escalation ladder</li>
+        <li><strong>Section 4:</strong> The 7-day follow-up rule and GLG's escalation ladder</li>
         <li><strong>Section 5:</strong> How to review records for completeness and spot red flags</li>
         <li><strong>Section 6:</strong> Boss Challenge — a real-world crisis scenario</li>
       </ul>
@@ -661,7 +661,7 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
 <div class="section-card" id="section-3">
   <div class="section-header">
     <div class="section-num">Section 4 · 4 min · Up to 50 pts</div>
-    <h2>The 14-Day Rule & Escalation Ladder</h2>
+    <h2>The 7-Day Rule & Escalation Ladder</h2>
     <div class="section-subhead">Following up is not optional. It's your job.</div>
   </div>
   <div class="section-body">
@@ -692,19 +692,27 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
       <h4>📋 GLG Medical Records Escalation Ladder</h4>
       <div class="ladder">
         <div class="ladder-rung">
-          <div class="rung-dot rung-14">14</div>
+          <div class="rung-dot rung-14">7</div>
           <div class="rung-body">
             <div class="rung-who">Legal Assistant</div>
-            <div class="rung-title">Day 14 — First Follow-Up</div>
-            <div class="rung-action">LA calls or messages provider. Confirms receipt of request. Gets ETA. Logs call in CasePeer.</div>
+            <div class="rung-title">Day 7 — First Phone Follow-Up</div>
+            <div class="rung-action">LA phones provider. Confirms receipt of request. Gets ETA. Logs call in CasePeer. Repeats <strong>every 7 days</strong> — no gaps.</div>
+          </div>
+        </div>
+        <div class="ladder-rung">
+          <div class="rung-dot rung-30">21</div>
+          <div class="rung-body">
+            <div class="rung-who">Case Manager Flagged</div>
+            <div class="rung-title">Day 21 — CM Escalation</div>
+            <div class="rung-action">Three 7-day follow-ups with no records is a blocked file, not a slow one. LA flags CM. CM reviews case. LA continues follow-up every 7 days and documents each attempt. (System 1, Pending Demand row: "Escalate at day 21.")</div>
           </div>
         </div>
         <div class="ladder-rung">
           <div class="rung-dot rung-30">30</div>
           <div class="rung-body">
-            <div class="rung-who">Case Manager Flagged</div>
-            <div class="rung-title">Day 30 — CM Escalation</div>
-            <div class="rung-action">LA flags CM. CM reviews case. LA continues follow-up every 5–7 days and documents each attempt.</div>
+            <div class="rung-who">Case Manager Review</div>
+            <div class="rung-title">Day 30 — CM Weekly Check-In</div>
+            <div class="rung-action">Records outstanding past 30 days are reported to the CM at the weekly check-in. Escalation has already occurred at Day 21 — this is the standing review, not the trigger.</div>
           </div>
         </div>
         <div class="ladder-rung">
@@ -734,7 +742,7 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
         <button class="option-btn" onclick="answer('q11','a')" id="q11-a"><span class="opt-letter">A</span><span class="opt-text">Nothing went wrong — 55 days is normal for records retrieval — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken</span></button>
         <button class="option-btn" onclick="answer('q11','b')" id="q11-b"><span class="opt-letter">B</span><span class="opt-text">The initial request should have been sent certified mail rather than fax or portal — certified mail creates a legal proof of delivery with return receipt, and providers are required to respond within 30 days of receiving a certified records request under applicable regulations</span></button>
         <button class="option-btn" onclick="answer('q11','c')" id="q11-c"><span class="opt-letter">C</span><span class="opt-text">Only one thing went wrong — nobody called Atlanta Spine to follow up, but since Grady's records arrived by Day 18, the retrieval process was working and the other providers were just slower to respond</span></button>
-        <button class="option-btn" onclick="answer('q11','d')" id="q11-d"><span class="opt-letter">D</span><span class="opt-text">(1) No 14-day follow-up call was made or logged for either provider. (2) Because the escalation ladder wasn't followed, the CM was never flagged at Day 30, and we've now blown past Day 30 without escalation.</span></button>
+        <button class="option-btn" onclick="answer('q11','d')" id="q11-d"><span class="opt-letter">D</span><span class="opt-text">(1) No 7-day follow-up calls were made or logged for either provider. (2) Because the escalation ladder wasn't followed, the CM was never flagged at Day 21, and we've now blown past both Day 21 and Day 30 without escalation.</span></button>
       </div>
       <div class="feedback-box" id="q11-feedback"></div>
     </div>
@@ -747,7 +755,7 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
         <button class="option-btn" onclick="answer('q12','a')" id="q12-a"><span class="opt-letter">A</span><span class="opt-text">Wait until Day 60 — that's when the next step starts on the escalation ladder, and jumping ahead of the scheduled timeline can create confusion in CasePeer tracking and may result in duplicate outreach that frustrates the provider's records department</span></button>
         <button class="option-btn" onclick="answer('q12','b')" id="q12-b"><span class="opt-letter">B</span><span class="opt-text">Send a new records request — the original one probably expired or was lost by the provider, so starting fresh with a clean request and a new HIPAA authorization is more likely to produce results than following up on a stale submission</span></button>
         <button class="option-btn" onclick="answer('q12','c')" id="q12-c"><span class="opt-letter">C</span><span class="opt-text">Call both providers and if they don't answer, the case is on hold, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity</span></button>
-        <button class="option-btn" onclick="answer('q12','d')" id="q12-d"><span class="opt-letter">D</span><span class="opt-text">Flag the CM immediately (Day 30 threshold was passed 25 days ago). Make follow-up calls to both providers today. Log everything in CasePeer. The CM needs to know and may need to call directly.</span></button>
+        <button class="option-btn" onclick="answer('q12','d')" id="q12-d"><span class="opt-letter">D</span><span class="opt-text">Flag the CM immediately (the Day 21 escalation threshold was passed 34 days ago). Make follow-up calls to both providers today. Log everything in CasePeer. The CM needs to know and may need to call directly.</span></button>
       </div>
       <div class="feedback-box" id="q12-feedback"></div>
     </div>
@@ -1257,12 +1265,12 @@ var feedbackText = {
     incorrect: '❌ Provider portals are generally faster and more trackable than fax. Use the portal when available, fax when required. Always log your method in CasePeer.'
   },
   q11: {
-    correct: '✅ Exactly. Two failures: (1) no 14-day follow-up call was made or logged, and (2) no CM escalation happened at Day 30. Both are required by GLG policy. Missing them allowed the case to slide to Day 55 without any intervention.',
-    incorrect: '❌ There were two distinct failures: the 14-day follow-up was skipped AND the CM was never flagged at Day 30. Both failures compounded to create the current situation.'
+    correct: '✅ Exactly. Two failures: (1) no 7-day follow-up calls were made or logged — by Day 55 that is seven missed cycles, and (2) no CM escalation happened at Day 21. Both are required by GLG policy. Missing them allowed the case to slide to Day 55 without any intervention.',
+    incorrect: '❌ There were two distinct failures: the 7-day follow-ups were skipped AND the CM was never flagged at Day 21. Both failures compounded to create the current situation.'
   },
   q12: {
-    correct: '✅ Right. You\'re past the Day 30 threshold by 25 days. Don\'t wait — flag the CM now, make calls today, and document everything. The escalation ladder doesn\'t reset; you step in at the current level.',
-    incorrect: '❌ The escalation steps are thresholds, not starting points. At Day 55 you\'ve passed Day 30 — flag the CM immediately and start active follow-up today.'
+    correct: '✅ Right. You\'re past the Day 21 escalation threshold by 34 days. Don\'t wait — flag the CM now, make calls today, and document everything. The escalation ladder doesn\'t reset; you step in at the current level.',
+    incorrect: '❌ The escalation steps are thresholds, not starting points. At Day 55 you\'ve passed the Day 21 escalation threshold — flag the CM immediately and start active follow-up today.'
   },
   q13: {
     correct: '✅ Exactly. Vague notes like "called, records coming soon" are useless. Log: date, time, who you spoke with, their exact ETA, your next follow-up date, and CM notification. Details protect the case.',
