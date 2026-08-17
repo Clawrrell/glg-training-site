@@ -313,7 +313,7 @@
       </ul>
     </div>
     <div class="callout callout-warn"><strong>Shared Module:</strong> This module is LA-6 for Legal Assistants, LIT-6 for Litigation Staff, and CM-11 for Case Managers. HB 1344 affects every role — from intake to trial. Everyone needs to know this.</div>
-    <div class="callout callout-info"><strong>Performance standard:</strong> 80% (160/200 base points) required to pass. HB 1344 compliance is not optional — it is the regulatory environment every Georgia PI case now operates within.</div>
+    <div class="callout callout-info"><strong>Performance standard:</strong> 80% (152/190 base points) required to pass. HB 1344 compliance is not optional — it is the regulatory environment every Georgia PI case now operates within.</div>
     <div class="btn-group"><button class="btn btn-primary btn-block" onclick="goToSection(1)">Begin: HB 1344 Overview &amp; Key Provisions &rarr;</button></div>
   </div>
 </div>
@@ -995,9 +995,9 @@
 // ═══════════════════════════════════════════════
 var TRACKER_URL = 'https://script.google.com/macros/s/AKfycbzHJZ0C3BqnLatfq7RIiUP5KQdgYoXTJlozd8ZGZiwIf2bdVmvnPMo3JLm0dA5gQhJyxA/exec';
 var TOTAL_SECTIONS = 9;
-var PASS_THRESHOLD = 16; // 80% of 20 = 16
-var PASS_SCORE = PASS_THRESHOLD * 10; // = 160 pts required
-var BASE_MAX = 200;
+var PASS_THRESHOLD = 152; // POINTS (was question-units 16). 80% of 190 true achievable base (q12 unscored calibration) — Harrell ruling Aug 17 2026 (Option C)
+var PASS_SCORE = PASS_THRESHOLD; // threshold now stored in points
+var BASE_MAX = 190;
 
 // ═══════════════════════════════════════════════
 // STATE
@@ -1037,7 +1037,7 @@ var Q_CONFIG = {
   'q9':  {section:3, pts:10, isBonus:false, correct:'d'},
   'q10': {section:3, pts:10, isBonus:false, correct:'a'},
   'q11': {section:3, pts:10, isBonus:false, correct:'b'},
-  'q12': {section:3, pts:10, isBonus:false, correct:'a'},
+  'q12': {section:3, pts:0, isBonus:false, correct:'a'},
   'q13': {section:4, pts:10, isBonus:false, correct:'c'},
   'q14': {section:4, pts:10, isBonus:false, correct:'d'},
   'q15': {section:4, pts:10, isBonus:false, correct:'a'},
@@ -1384,7 +1384,7 @@ function buildResults() {
   headerEl.innerHTML = '<div class="results-header ' + (pass ? 'pass' : 'fail') + '">' +
     '<div class="results-grade">' + pct + '%</div>' +
     '<div class="results-label">' + (pass ? '\uD83C\uDFC6 Assessment Passed!' : '\uD83D\uDCDA Not Yet \u2014 80% Required to Pass') + '</div>' +
-    '<div class="results-sub">' + baseScore + ' / 200 base pts \u00B7 ' + bonusPoints + ' bonus pts</div>' +
+    '<div class="results-sub">' + baseScore + ' / 190 base pts \u00B7 ' + bonusPoints + ' bonus pts</div>' +
     '</div>';
 
   var letters = ['a','b','c','d'];
@@ -1460,13 +1460,13 @@ function buildResults() {
       '</div>';
   }
   bodyEl.innerHTML = '<div class="section-score" style="margin-bottom:20px;">' +
-    '<div class="score-display">' + baseScore + '/200</div>' +
+    '<div class="score-display">' + baseScore + '/190</div>' +
     '<div class="score-label">Base Score \u00B7 ' + bonusPoints + ' Bonus Points</div>' +
     '</div>' +
     '<div class="callout ' + (pass ? 'callout-success' : 'callout-warn') + '">' +
     (pass
         ? '<strong>\u2705 Gate Passed.</strong> You have demonstrated competency in HB 1344 compliance: the Insurance Affordability Claims Integrity Act\'s key provisions, fraud detection and reporting requirements, claims processing changes, motor vehicle insurance updates, and GLG workflow adjustments. This knowledge applies to your role as LA, CM, or Lit Staff.'
-        : '<strong>\u26A0\uFE0F Gate Not Cleared.</strong> You need 160/200 (80%) to pass. Review the sections where you missed questions \u2014 the feedback explains exactly what to remember. Retake when ready.')
+        : '<strong>\u26A0\uFE0F Gate Not Cleared.</strong> You need 152/190 (80%) to pass. Review the sections where you missed questions \u2014 the feedback explains exactly what to remember. Retake when ready.')
     + '</div>'
     + buttonsHtml;
 
@@ -1537,7 +1537,7 @@ function submitScoreAndBuildCert() {
 
   var pct = Math.round((baseScore / BASE_MAX) * 100);
   var pass = baseScore >= PASS_SCORE;
-  document.getElementById('certScore').textContent = 'Score: ' + baseScore + '/200 (' + pct + '%) \u2014 ' + (pass ? 'PASSED' : 'NOT PASSED');
+  document.getElementById('certScore').textContent = 'Score: ' + baseScore + '/190 (' + pct + '%) \u2014 ' + (pass ? 'PASSED' : 'NOT PASSED');
   var now = new Date();
   document.getElementById('certMeta').textContent = 'Issued: ' + now.toLocaleDateString('en-US', {year:'numeric', month:'long', day:'numeric'});
 

@@ -355,7 +355,7 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
       <h4>&#128203; How It Works</h4>
       <ul>
         <li><strong>20 base questions</strong> &times; 10 pts = 200 points possible</li>
-        <li><strong>Pass threshold:</strong> 160/200 (80%)</li>
+        <li><strong>Pass threshold:</strong> 128/160 (80%)</li>
         <li><strong>Bonus points</strong> for first-try correct answers (+5 each)</li>
         <li><strong>Boss Challenge</strong> (Section 7): bonus-only points from a complex scenario</li>
         <li><strong>Streaks:</strong> consecutive correct answers build combos &#128293;</li>
@@ -790,8 +790,8 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
 // ═══════════════════════════════════════════════
 var TRACKER_URL = 'https://script.google.com/macros/s/AKfycbzHJZ0C3BqnLatfq7RIiUP5KQdgYoXTJlozd8ZGZiwIf2bdVmvnPMo3JLm0dA5gQhJyxA/exec';
 var TOTAL_SECTIONS = 9;
-var PASS_THRESHOLD = 160;
-var BASE_MAX = 200;
+var PASS_THRESHOLD = 128; // 80% of 160 true achievable base — Harrell ruling Aug 17
+var BASE_MAX = 160; // true achievable base: 16 graded x 10 (q17-q20 are bonus-only, pts:0)
 
 // ═══════════════════════════════════════════════
 // STATE
@@ -1094,7 +1094,7 @@ function buildResults() {
     + '<div class="callout ' + (pass ? 'callout-success' : 'callout-warn') + '">'
     + (pass
         ? '<strong>✅ Gate Unlocked: 60-Day Gate — Week 2 Comprehensive Assessment.</strong> You have demonstrated competency across medical records, coverage verification, liens &amp; post-settlement, and client communication. You are cleared to progress to role-specific training tracks.'
-        : '<strong>⚠️ Gate Not Cleared.</strong> You need 160/200 (80%) to pass. Review the sections where you missed questions — the feedback explains exactly what to remember. Retake when ready.')
+        : '<strong>⚠️ Gate Not Cleared.</strong> You need 128/160 (80%) to pass. Review the sections where you missed questions — the feedback explains exactly what to remember. Retake when ready.')
     + '</div>'
     + '<div class="btn-group">'
     + '<button class="btn btn-primary btn-block" onclick="goToSection(8)">Submit Feedback to Complete →</button>'
