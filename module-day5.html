@@ -1054,7 +1054,7 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
       <div class="cert-name" id="cert-name-display">Training Participant</div>
       <div class="cert-details">
         Date: <span id="cert-date"></span><br>
-        Score: <span id="cert-score"></span> / 200 points (<span id="cert-pct"></span>%)<br>
+        Score: <span id="cert-score"></span> / <span id="cert-max">249</span> base pts (<span id="cert-pct"></span>%)<br>
         Status: <span id="cert-status"></span>
       </div>
       <div class="cert-achievements" id="cert-achievements"></div>
@@ -1081,11 +1081,30 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
 // ═══════════════════════════════════════════════
 // STATE
 // ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════════════
+// SCORING CONSTANTS — measured by execution, not asserted
+// Verified 2026-08-18 with a strict-DOM harness: every correct answer() call plus the
+// real checkMatching() grader, then read state.
+//   24 MC items × 10 = 240   +   q20 chip-match = 9   =   249 base
+//   bonus on a flawless run = 120 (5 per first-try correct + section bonuses)
+// Section 4 is 49, not 50, because q20 is the 3-chip match scored 3×round(10/3)=9.
+// Sections are indexed 1-5 (the quiz cards). The prior code assumed 2-6 and read
+// sectionScores keys that the scorer never writes — every breakdown row rendered 0.
+// ═══════════════════════════════════════════════════════════════════════════
+const SECTION_MAX = {1:50, 2:50, 3:50, 4:49, 5:50};
+const BASE_MAX = 249;                 // == sum(SECTION_MAX)
+const BONUS_MAX = 120;                // recognition only — never in the numerator
+// 80% of 249 = 199.2. Rounded UP to the next 10-point boundary per Harrell's ceiling
+// convention (2026-08-18): nobody is seated below the true threshold on a rounding
+// technicality. See the note in the completion report re: day6 at 178.
+const PASS_THRESHOLD = 200;
+const PASS_PCT = 80;
+
 let state = {
   currentSection: 0,
   totalScore: 0,
   bonusScore: 0,
-  sectionScores: {2:0, 3:0, 4:0, 5:0, 6:0},
+  sectionScores: {1:0, 2:0, 3:0, 4:0, 5:0},
   answered: {},        // q1..q25: true/false (first attempt correct)
   answeredWrong: {},   // questions that were answered wrong first
   sectionComplete: {},
@@ -1357,7 +1376,9 @@ function checkMatching() {
 
   const pts = correct_count * Math.round(10/3);
   state.totalScore += pts;
-  state.sectionScores[5] = (state.sectionScores[5] || 0) + pts;
+  // q20 lives in section 4 ("Send the Documents"), verified by DOM offset. The hard-coded 5
+  // credited the Boss Challenge for a Documents question and left section 4 short.
+  state.sectionScores[4] = (state.sectionScores[4] || 0) + pts;
 
   const fb = document.getElementById('q20-feedback');
   if (allCorrect) {
@@ -1434,10 +1455,11 @@ function showToast(msg, color) {
 // BUILD RESULTS PAGE
 // ═══════════════════════════════════════════════
 function buildResults() {
-  const total = state.totalScore + state.bonusScore;
-  const pct = Math.round((total / 200) * 100);
-  const PASS_THRESHOLD = 80; // Harrell ruling Jul 6
-  const pass = pct >= PASS_THRESHOLD;
+  // BASE-ONLY GRADING (Harrell ruling 2026-08-18). Bonus is recognition, not credit;
+  // it is reported alongside the score and never enters the numerator.
+  const total = state.totalScore;
+  const pct = Math.round((total / BASE_MAX) * 100);
+  const pass = total >= PASS_THRESHOLD;
 
   // Header
   const hdr = document.getElementById('results-header-wrap');
@@ -1445,36 +1467,38 @@ function buildResults() {
     <div class="results-header ${pass ? 'pass' : 'fail'}">
       <div class="results-grade">${pct}%</div>
       <div class="results-label">${pass ? '🎉 Week 1 Complete!' : '📚 Keep Studying'}</div>
-      <div class="results-sub">${total} / 200 points · ${state.bonusScore} bonus pts</div>
+      <div class="results-sub">${total} / ${BASE_MAX} base pts · ${state.bonusScore} bonus pts</div>
     </div>`;
 
-  // Breakdown
+  // Breakdown. Keys are the REAL section indices the scorer writes to (1-5), not 2-6.
   const sections = [
-    {n:'Know Your Firm', key:2},
-    {n:'Read the Case', key:3},
-    {n:'Work the Insurance', key:4},
-    {n:'Send the Documents', key:5},
-    {n:'Boss Challenge', key:6},
+    {n:'Know Your Firm', key:1},
+    {n:'Read the Case', key:2},
+    {n:'Work the Insurance', key:3},
+    {n:'Send the Documents', key:4},
+    {n:'Boss Challenge', key:5},
   ];
   let html = '';
   sections.forEach(s => {
     const pts = state.sectionScores[s.key] || 0;
-    const color = pts >= 40 ? '#27ae60' : pts >= 25 ? '#f39c12' : '#c0392b';
-    html += `<div class="breakdown-row"><span class="breakdown-name">${s.n}</span><span class="breakdown-pts" style="color:${color}">${pts} / 50</span></div>`;
+    const max = SECTION_MAX[s.key] || 0;
+    const color = (max && pts >= max * 0.8) ? '#27ae60' : (max && pts >= max * 0.5) ? '#f39c12' : '#c0392b';
+    html += `<div class="breakdown-row"><span class="breakdown-name">${s.n}</span><span class="breakdown-pts" style="color:${color}">${pts} / ${max}</span></div>`;
   });
   document.getElementById('breakdown-list').innerHTML = html;
 
-  // Achievements
-  const s3 = (state.sectionScores[3] || 0) >= 30;
-  const s4 = (state.sectionScores[4] || 0) >= 30;
-  const s5 = (state.sectionScores[5] || 0) >= 30;
-  const s6 = (state.sectionScores[6] || 0) >= 30;
+  // Achievements — gated on 60% of each section's REAL max, at the REAL section index.
+  const secPass = k => (state.sectionScores[k] || 0) >= Math.round(SECTION_MAX[k] * 0.6);
+  const s3 = secPass(2);   // Read the Case
+  const s4 = secPass(3);   // Work the Insurance
+  const s5 = secPass(4);   // Send the Documents
+  const s6 = secPass(5);   // Boss Challenge
   const perfect = pct >= 90;
 
   const badges = [
-    {icon:'🏛️', name:'PI Foundations', earned: s3, tip:'Passed Section 3'},
-    {icon:'💰', name:'Insurance Navigator', earned: s4, tip:'Passed Section 4'},
-    {icon:'📄', name:'Template Expert', earned: s5, tip:'Passed Section 5'},
+    {icon:'🏛️', name:'PI Foundations', earned: s3, tip:'Passed Read the Case'},
+    {icon:'💰', name:'Insurance Navigator', earned: s4, tip:'Passed Work the Insurance'},
+    {icon:'📄', name:'Template Expert', earned: s5, tip:'Passed Send the Documents'},
     {icon:'⚔️', name:'Case Commander', earned: s6, tip:'Passed the Boss Challenge'},
     {icon:'🌟', name:'Perfect Week', earned: perfect, tip:'Scored 90%+ overall'},
   ];
@@ -1487,16 +1511,18 @@ function buildResults() {
 
   // Review links
   let reviewHtml = '';
-  if ((state.sectionScores[2] || 0) < 40) reviewHtml += `<a class="review-link" href="#" onclick="goToSection(1);return false;">↩ Review: GLG Operations (Module A1)</a>`;
-  if ((state.sectionScores[3] || 0) < 40) reviewHtml += `<a class="review-link" href="#" onclick="goToSection(2);return false;">↩ Review: PI Case Types (Day 2)</a>`;
-  if ((state.sectionScores[4] || 0) < 40) reviewHtml += `<a class="review-link" href="#" onclick="goToSection(3);return false;">↩ Review: Insurance (Day 3)</a>`;
-  if ((state.sectionScores[5] || 0) < 40) reviewHtml += `<a class="review-link" href="#" onclick="goToSection(4);return false;">↩ Review: LORs & Templates (Day 4)</a>`;
+  const needsReview = k => (state.sectionScores[k] || 0) < Math.round(SECTION_MAX[k] * 0.8);
+  if (needsReview(1)) reviewHtml += `<a class="review-link" href="#" onclick="goToSection(1);return false;">↩ Review: GLG Operations (Module A1)</a>`;
+  if (needsReview(2)) reviewHtml += `<a class="review-link" href="#" onclick="goToSection(2);return false;">↩ Review: PI Case Types (Day 2)</a>`;
+  if (needsReview(3)) reviewHtml += `<a class="review-link" href="#" onclick="goToSection(3);return false;">↩ Review: Insurance (Day 3)</a>`;
+  if (needsReview(4)) reviewHtml += `<a class="review-link" href="#" onclick="goToSection(4);return false;">↩ Review: LORs & Templates (Day 4)</a>`;
   if (!reviewHtml) reviewHtml = '<p style="color:#27ae60;font-weight:700;">✅ All sections passed — strong week!</p>';
   document.getElementById('review-links').innerHTML = reviewHtml;
 
   // Populate certificate
   document.getElementById('cert-date').textContent = new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
-  document.getElementById('cert-score').textContent = total;
+  document.getElementById('cert-score').textContent = total;      // base only
+  document.getElementById('cert-max').textContent = BASE_MAX;
   document.getElementById('cert-pct').textContent = pct;
   document.getElementById('cert-status').textContent = pass ? 'PASSED ✅' : 'NEEDS REVIEW ⚠️';
 
@@ -1530,7 +1556,7 @@ function submitScoreAndBuildCert() {
   document.getElementById('cert-action-btns').style.display = 'flex';
 
   // Submit to tracker
-  const maxPts  = 200;
+  const maxPts  = BASE_MAX;
   if (TRACKER_URL) {
     const payload = {
       employeeName: name,
@@ -1573,13 +1599,14 @@ function submitScoreAndBuildCert() {
 // SUBMIT RESULTS
 // ═══════════════════════════════════════════════
 function submitResults() {
-  const total = state.totalScore + state.bonusScore;
-  const pct = Math.round((total / 200) * 100);
+  const total = state.totalScore;                       // base only
+  const pct = Math.round((total / BASE_MAX) * 100);
   const badges = [];
-  if ((state.sectionScores[3]||0)>=30) badges.push('PI Foundations');
-  if ((state.sectionScores[4]||0)>=30) badges.push('Insurance Navigator');
-  if ((state.sectionScores[5]||0)>=30) badges.push('Template Expert');
-  if ((state.sectionScores[6]||0)>=30) badges.push('Case Commander');
+  const secPass = k => (state.sectionScores[k] || 0) >= Math.round(SECTION_MAX[k] * 0.6);
+  if (secPass(2)) badges.push('PI Foundations');
+  if (secPass(3)) badges.push('Insurance Navigator');
+  if (secPass(4)) badges.push('Template Expert');
+  if (secPass(5)) badges.push('Case Commander');
   if (pct>=90) badges.push('Perfect Week');
 
   const subject = encodeURIComponent('Day 5 Completion — ' + (state.traineeFirstName || 'Trainee') + ' · ' + pct + '%');
@@ -1588,14 +1615,14 @@ function submitResults() {
     '─────────────────────────────────\n' +
     'Trainee: ' + (state.traineeFirstName || 'N/A') + '\n' +
     'Date: ' + new Date().toLocaleDateString() + '\n' +
-    'Score: ' + total + ' / 200 (' + pct + '%)\n' +
-    'Bonus Points: ' + state.bonusScore + '\n\n' +
+    'Score: ' + total + ' / ' + BASE_MAX + ' (' + pct + '%) — ' + (total >= PASS_THRESHOLD ? 'PASS' : 'NEEDS REVIEW') + '\n' +
+    'Bonus Points: ' + state.bonusScore + ' (recognition only, not graded)\n\n' +
     'Section Breakdown:\n' +
-    '  Know Your Firm: ' + (state.sectionScores[2]||0) + '/50\n' +
-    '  Read the Case: ' + (state.sectionScores[3]||0) + '/50\n' +
-    '  Work the Insurance: ' + (state.sectionScores[4]||0) + '/50\n' +
-    '  Send the Documents: ' + (state.sectionScores[5]||0) + '/50\n' +
-    '  Boss Challenge: ' + (state.sectionScores[6]||0) + '/50\n\n' +
+    '  Know Your Firm: ' + (state.sectionScores[1]||0) + '/' + SECTION_MAX[1] + '\n' +
+    '  Read the Case: ' + (state.sectionScores[2]||0) + '/' + SECTION_MAX[2] + '\n' +
+    '  Work the Insurance: ' + (state.sectionScores[3]||0) + '/' + SECTION_MAX[3] + '\n' +
+    '  Send the Documents: ' + (state.sectionScores[4]||0) + '/' + SECTION_MAX[4] + '\n' +
+    '  Boss Challenge: ' + (state.sectionScores[5]||0) + '/' + SECTION_MAX[5] + '\n\n' +
     'Achievements: ' + (badges.length ? badges.join(', ') : 'None earned') + '\n\n' +
     'Feedback:\n' +
     '  Clarity: ' + (document.getElementById('fb-clarity').value || 'Not rated') + '\n' +
@@ -1605,7 +1632,8 @@ function submitResults() {
   );
 
   window.location.href = 'mailto:hgunn@thegunnlawgroup.com?subject=' + subject + '&body=' + body;
-  document.getElementById('submit-confirm').style.display = 'block';
+  const sc = document.getElementById('submit-confirm');
+  if (sc) sc.style.display = 'block';
 }
 
 function printCert() {
@@ -1739,19 +1767,24 @@ function _checkMilestone(done,total){var pct=Math.round((done/total)*100);var ms
 function _initMascot(){var el=document.createElement('div');el.id='mascotFloat';el.innerHTML='<svg viewBox="0 0 60 70" xmlns="http://www.w3.org/2000/svg" style="width:50px;height:58px;"><rect x="27" y="18" width="6" height="38" rx="1.5" fill="#8B7D3C"/><rect x="18" y="54" width="24" height="5" rx="2.5" fill="#6B5E2E"/><rect x="6" y="16" width="48" height="4" rx="2" fill="#8B7D3C"/><circle cx="30" cy="12" r="5" fill="#dcb161" stroke="#8B7D3C" stroke-width="1.5"/><line x1="12" y1="20" x2="12" y2="32" stroke="#8B7D3C" stroke-width="1.5"/><line x1="48" y1="20" x2="48" y2="32" stroke="#8B7D3C" stroke-width="1.5"/><path d="M4 33 Q8 38 12 33 Q16 38 20 33" stroke="#dcb161" stroke-width="1.5" fill="none"/><path d="M40 33 Q44 38 48 33 Q52 38 56 33" stroke="#dcb161" stroke-width="1.5" fill="none"/></svg>';el.style.cssText='position:fixed;bottom:16px;right:16px;z-index:9998;cursor:pointer;animation:scaleBob 3s ease-in-out infinite;opacity:0.7;transition:opacity 0.3s;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.2));';el.onmouseenter=function(){this.style.opacity='1';};el.onmouseleave=function(){this.style.opacity='0.7';};document.body.appendChild(el);}
 
 function generateCertificate() {
-  var name = (document.getElementById('trainee-name-input') || {}).value || '';
-  if (!name.trim()) { alert('Please enter your name.'); return; }
-  var scoreEl = document.getElementById('total-score'), bonusEl = document.getElementById('bonus-score');
-  var base = parseInt((scoreEl||{}).textContent||0), bonus = parseInt((bonusEl||{}).textContent||0);
-  var total = base + bonus;
-  document.getElementById('cert-name-form').style.display = 'none';
-  document.getElementById('certName').textContent = name;
-  document.getElementById('cert-date').textContent = new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
-  document.getElementById('cert-score-display').textContent = total + ' points';
-  document.getElementById('certDisplay').style.display = 'block';
-  document.getElementById('certActions').style.display = 'flex';
+  var nameEl = document.getElementById('trainee-name-input');
+  var name = ((nameEl || {}).value || '').trim();
+  if (!name) { alert('Please enter your name.'); return; }
+  // Read from state, not from rendered DOM text. The DOM read summed base+bonus into one
+  // undifferentiated number (the 369-vs-249 defect) and silently yielded 0 if the score
+  // strip had not painted yet.
+  var base = state.totalScore, bonus = state.bonusScore;
+  var pct = Math.round((base / BASE_MAX) * 100);
+  var pass = base >= PASS_THRESHOLD;
+  var cf = document.getElementById('cert-name-form'); if (cf) cf.style.display = 'none';
+  var cn = document.getElementById('certName'); if (cn) cn.textContent = name;
+  var cd = document.getElementById('cert-date');
+  if (cd) cd.textContent = new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  var csd = document.getElementById('cert-score-display');
+  if (csd) csd.textContent = base + ' / ' + BASE_MAX + ' (' + pct + '%) · ' + bonus + ' bonus · ' + (pass ? 'PASSED' : 'NEEDS REVIEW');
+  var cdisp = document.getElementById('certDisplay'); if (cdisp) cdisp.style.display = 'block';
+  var cact = document.getElementById('certActions'); if (cact) cact.style.display = 'flex';
   _launchConfetti(); _playTaDa();
-  // Submit to tracker
   submitToTracker(name, base, bonus);
 }
 

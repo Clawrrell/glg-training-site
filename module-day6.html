@@ -393,8 +393,8 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
         <li>Each question is worth <strong>10 points</strong></li>
         <li>First-try correct = <strong>10 pts + 5 bonus pts</strong></li>
         <li>Correct after wrong answer = <strong>5 pts</strong>, no bonus</li>
-        <li>200 points possible + bonus points in the Boss Challenge</li>
-        <li>Earn <strong>achievement badges</strong> by passing each section (≥30 pts)</li>
+        <li>222 base points possible + up to 75 bonus points in the Boss Challenge</li>
+        <li>Earn <strong>achievement badges</strong> by passing each section (≥60% of that section)</li>
         <li>Score 90%+ overall to unlock <strong>Records Expert</strong></li>
       </ul>
     </div>
@@ -1201,6 +1201,28 @@ var state = {
   traineeFirstName: ''
 };
 
+// ═══════════════════════════════════════════════
+// SCORING CONSTANTS — measured, not asserted
+// Verified 2026-08-18 by executing this file's real answer()/checkMatching() with every
+// correct response, then reading state.sectionScores:
+//   {1:50, 2:72, 3:50, 4:50}  sum = 222 base   |  bonusScore = 75 (section 5)
+// Section 2 is 72 (not 50) because the chip-matching exercise contributes 32 base points
+// to that section. The prior code divided by a hard-coded 200, which produced 111% for a
+// perfect run and made the pass gate meaningless.
+// ═══════════════════════════════════════════════
+var SECTION_MAX = {1:50, 2:72, 3:50, 4:50};
+var BASE_MAX = 222;                                  // == sum(SECTION_MAX)
+var BONUS_MAX = 75;                                  // section 5, boss challenge
+var PASS_THRESHOLD = Math.ceil(BASE_MAX * 0.80);     // 178 — same 80%-of-real-denominator
+                                                     // rule as day7 (Harrell ruling Aug 18)
+var PASS_PCT = 80;
+
+// Null-safe DOM writers. buildResults() previously wrote to four ids that do not exist in
+// this file's markup; with a real browser those throw TypeError and abort the function.
+function _setText(id, v){ var e = document.getElementById(id); if (e) e.textContent = v; return !!e; }
+function _setHTML(id, v){ var e = document.getElementById(id); if (e) e.innerHTML = v; return !!e; }
+function _val(id, fallback){ var e = document.getElementById(id); return (e && e.value) ? e.value : (fallback || 'Not rated'); }
+
 // Q → section index map (1-indexed sections = section-card indices +1)
 // Section 2 = idx 1, Section 3 = idx 2, Section 4 = idx 3, Section 5 = idx 4, Section 6 = idx 5
 var qSectionMap = {
@@ -1595,12 +1617,11 @@ function showToast(msg, color) {
 // ═══════════════════════════════════════════════
 function buildResults() {
   var baseTotal = state.totalScore;
-  var pct = Math.round((baseTotal / 200) * 100);
-  var PASS_THRESHOLD = 80; // Harrell ruling Jul 6
-  var pass = pct >= PASS_THRESHOLD;
+  var pct = Math.round((baseTotal / BASE_MAX) * 100);
+  var pass = baseTotal >= PASS_THRESHOLD;
 
   var hdr = document.getElementById('results-header-wrap');
-  hdr.innerHTML = '<div class="results-header ' + (pass ? 'pass' : 'fail') + '"><div class="results-grade">' + pct + '%</div><div class="results-label">' + (pass ? '🎉 Medical Records Mastery Complete!' : '📚 Keep Studying') + '</div><div class="results-sub">' + baseTotal + ' / 200 points · ' + state.bonusScore + ' bonus pts</div></div>';
+  hdr.innerHTML = '<div class="results-header ' + (pass ? 'pass' : 'fail') + '"><div class="results-grade">' + pct + '%</div><div class="results-label">' + (pass ? '🎉 Medical Records Mastery Complete!' : '📚 Keep Studying') + '</div><div class="results-sub">' + baseTotal + ' / ' + BASE_MAX + ' points · ' + state.bonusScore + ' bonus pts</div></div>';
 
   var sections = [
     {n:'The Foundation', key:1},
@@ -1612,16 +1633,16 @@ function buildResults() {
   var html = '';
   sections.forEach(function(s){
     var pts2 = state.sectionScores[s.key] || 0;
-    var max = s.key === 5 ? state.bonusScore : 50;
-    var color = pts2 >= 40 ? '#27ae60' : pts2 >= 25 ? '#f39c12' : '#c0392b';
-    html += '<div class="breakdown-row"><span class="breakdown-name">' + s.n + '</span><span class="breakdown-pts" style="color:' + color + '">' + pts2 + (s.key !== 5 ? ' / 50' : ' bonus') + '</span></div>';
+    var max = SECTION_MAX[s.key] || 0;
+    var color = (max && pts2 >= max * 0.8) ? '#27ae60' : (max && pts2 >= max * 0.5) ? '#f39c12' : '#c0392b';
+    html += '<div class="breakdown-row"><span class="breakdown-name">' + s.n + '</span><span class="breakdown-pts" style="color:' + color + '">' + pts2 + (s.key !== 5 ? ' / ' + max : ' bonus') + '</span></div>';
   });
   document.getElementById('breakdown-list').innerHTML = html;
 
-  var s1p = (state.sectionScores[1]||0) >= 30;
-  var s2p = (state.sectionScores[2]||0) >= 30;
-  var s3p = (state.sectionScores[3]||0) >= 30;
-  var s4p = (state.sectionScores[4]||0) >= 30;
+  var s1p = (state.sectionScores[1]||0) >= Math.round(SECTION_MAX[1] * 0.6);
+  var s2p = (state.sectionScores[2]||0) >= Math.round(SECTION_MAX[2] * 0.6);
+  var s3p = (state.sectionScores[3]||0) >= Math.round(SECTION_MAX[3] * 0.6);
+  var s4p = (state.sectionScores[4]||0) >= Math.round(SECTION_MAX[4] * 0.6);
   var bossPoints = state.bonusScore >= 30;
   var perfect = pct >= 90;
 
@@ -1648,16 +1669,18 @@ function buildResults() {
   if (!reviewHtml) reviewHtml = '<p style="color:#27ae60;font-weight:700;">✅ All sections passed — strong performance!</p>';
   document.getElementById('review-links').innerHTML = reviewHtml;
 
-  document.getElementById('cert-date').textContent = new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
-  document.getElementById('cert-score').textContent = total;
-  document.getElementById('cert-pct').textContent = pct;
-  document.getElementById('cert-status').textContent = pass ? 'PASSED ✅' : 'NEEDS REVIEW ⚠️';
+  // Certificate fields. IDs verified present in this file 2026-08-18 by strict-DOM execution.
+  // Previous version wrote to cert-score / cert-pct / cert-status / cert-achievements, none of
+  // which exist in this module's markup, and used an undefined identifier `total` — that threw
+  // ReferenceError here and aborted buildResults() before the certificate ever rendered.
+  _setText('cert-date', new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}));
+  _setText('cert-score-display', baseTotal + ' / ' + BASE_MAX + ' (' + pct + '%) · ' + state.bonusScore + ' bonus · ' + (pass ? 'PASSED' : 'NEEDS REVIEW'));
 
   var certBadges = '';
   badges.filter(function(b){ return b.earned; }).forEach(function(b){
     certBadges += '<span class="cert-badge">' + b.icon + ' ' + b.name + '</span>';
   });
-  document.getElementById('cert-achievements').innerHTML = certBadges || '<span style="color:#888;font-size:13px;">Complete the module to earn badges</span>';
+  _setHTML('certBadges', certBadges || '<span style="color:#888;font-size:13px;">Complete the module to earn badges</span>');
 }
 
 // ═══════════════════════════════════════════════
@@ -1676,10 +1699,13 @@ function submitScoreAndBuildCert() {
   }
   state.traineeFirstName = name;
 
-  document.getElementById('cert-name-display').textContent = name;
-  document.getElementById('score-submit-form').style.display = 'none';
-  document.getElementById('completion-cert').style.display = 'block';
-  document.getElementById('cert-action-btns').style.display = 'flex';
+  // NOTE: this function is NOT wired to any control in this file (the live path is
+  // generateCertificate(), button in section 7). Kept null-safe so it cannot throw if
+  // re-wired later — four of the ids it wrote to do not exist in this markup.
+  _setText('cert-name-display', name);
+  var _f1 = document.getElementById('score-submit-form'); if (_f1) _f1.style.display = 'none';
+  var _f2 = document.getElementById('completion-cert');   if (_f2) _f2.style.display = 'block';
+  var _f3 = document.getElementById('cert-action-btns');  if (_f3) _f3.style.display = 'flex';
 
   var baseTotal = state.totalScore;
   var payload = {
@@ -1687,10 +1713,10 @@ function submitScoreAndBuildCert() {
     moduleId: 'nh7',
     moduleName: 'Medical Records Mastery',
     score: baseTotal,
-    maxScore: 222,
+    maxScore: BASE_MAX,
     bonusScore: state.bonusScore || 0,
     maxStreak: state.maxStreak || 0,
-    badges: (function(){ var b=[]; if((state.sectionScores[1]||0)>=30) b.push('Records Foundation'); if((state.sectionScores[2]||0)>=30) b.push('Request Expert'); if((state.sectionScores[3]||0)>=30) b.push('Follow-Up Pro'); if((state.sectionScores[4]||0)>=30) b.push('Escalation Specialist'); return b.join(', '); })(),
+    badges: (function(){ var b=[]; if((state.sectionScores[1]||0)>=Math.round(SECTION_MAX[1]*0.6)) b.push('Records Foundation'); if((state.sectionScores[2]||0)>=Math.round(SECTION_MAX[2]*0.6)) b.push('Request Expert'); if((state.sectionScores[3]||0)>=Math.round(SECTION_MAX[3]*0.6)) b.push('Follow-Up Pro'); if((state.sectionScores[4]||0)>=Math.round(SECTION_MAX[4]*0.6)) b.push('Escalation Specialist'); return b.join(', '); })(),
     elapsedMinutes: Math.round((Date.now() - state.startTime) / 60000),
     passedAt: new Date().toISOString()
   };
@@ -1721,12 +1747,12 @@ function submitScoreAndBuildCert() {
 // ═══════════════════════════════════════════════
 function submitResults() {
   var baseTotal = state.totalScore;
-  var pct = Math.round((baseTotal / 200) * 100);
+  var pct = Math.round((baseTotal / BASE_MAX) * 100);
   var badges = [];
-  if ((state.sectionScores[1]||0)>=30) badges.push('Records Foundation');
-  if ((state.sectionScores[2]||0)>=30) badges.push('Request Expert');
-  if ((state.sectionScores[3]||0)>=30) badges.push('Follow-Up Pro');
-  if ((state.sectionScores[4]||0)>=30) badges.push('Red Flag Detector');
+  if ((state.sectionScores[1]||0)>=Math.round(SECTION_MAX[1]*0.6)) badges.push('Records Foundation');
+  if ((state.sectionScores[2]||0)>=Math.round(SECTION_MAX[2]*0.6)) badges.push('Request Expert');
+  if ((state.sectionScores[3]||0)>=Math.round(SECTION_MAX[3]*0.6)) badges.push('Follow-Up Pro');
+  if ((state.sectionScores[4]||0)>=Math.round(SECTION_MAX[4]*0.6)) badges.push('Red Flag Detector');
   if (state.bonusScore >= 30) badges.push('Crisis Manager');
   if (pct >= 90) badges.push('Records Expert');
 
@@ -1736,24 +1762,27 @@ function submitResults() {
     '───────────────────────────────────────\n' +
     'Trainee: ' + (state.traineeFirstName || 'N/A') + '\n' +
     'Date: ' + new Date().toLocaleDateString() + '\n' +
-    'Score: ' + total + ' / 200 (' + pct + '%)\n' +
+    'Score: ' + baseTotal + ' / ' + BASE_MAX + ' (' + pct + '%)\n' +
     'Bonus Points: ' + state.bonusScore + '\n\n' +
     'Section Breakdown:\n' +
-    '  The Foundation: ' + (state.sectionScores[1]||0) + '/50\n' +
-    '  Types & Requests: ' + (state.sectionScores[2]||0) + '/50\n' +
-    '  Follow-Up & Escalation: ' + (state.sectionScores[3]||0) + '/50\n' +
-    '  Review & Red Flags: ' + (state.sectionScores[4]||0) + '/50\n' +
+    '  The Foundation: ' + (state.sectionScores[1]||0) + '/' + SECTION_MAX[1] + '\n' +
+    '  Types & Requests: ' + (state.sectionScores[2]||0) + '/' + SECTION_MAX[2] + '\n' +
+    '  Follow-Up & Escalation: ' + (state.sectionScores[3]||0) + '/' + SECTION_MAX[3] + '\n' +
+    '  Review & Red Flags: ' + (state.sectionScores[4]||0) + '/' + SECTION_MAX[4] + '\n' +
     '  Boss Challenge Bonus: ' + state.bonusScore + ' pts\n\n' +
     'Achievements: ' + (badges.length ? badges.join(', ') : 'None earned') + '\n\n' +
     'Feedback:\n' +
-    '  Clarity: ' + (document.getElementById('fb-clarity').value || 'Not rated') + '\n' +
-    '  Difficulty: ' + (document.getElementById('fb-difficulty').value || 'Not rated') + '\n' +
-    '  Realistic: ' + (document.getElementById('fb-realistic').value || 'Not rated') + '\n' +
-    '  Suggestions: ' + (document.getElementById('fb-suggestions').value || 'None') + '\n'
+    '  Clarity: ' + _val('fb-clarity') + '\n' +
+    '  Difficulty: ' + _val('fb-difficulty') + '\n' +
+    '  Realistic: ' + _val('fb-realistic') + '\n' +
+    '  Suggestions: ' + _val('fb-suggestions', 'None') + '\n'
   );
 
   window.location.href = 'mailto:hgunn@thegunnlawgroup.com?subject=' + subject + '&body=' + body;
-  document.getElementById('submit-confirm').style.display = 'block';
+  // 'submit-confirm' does not exist in this markup — writing to it threw and killed the
+  // function on its last line. 'score-confirmation' is the real element.
+  var _sc = document.getElementById('score-confirmation');
+  if (_sc) { _sc.innerHTML = '✅ Results email opened — send it to complete submission.'; _sc.style.display = 'block'; }
 }
 
 function retakeModule() {
@@ -1880,19 +1909,21 @@ function _checkMilestone(done,total){var pct=Math.round((done/total)*100);var ms
 function _initMascot(){var el=document.createElement('div');el.id='mascotFloat';el.innerHTML='<svg viewBox="0 0 60 70" xmlns="http://www.w3.org/2000/svg" style="width:50px;height:58px;"><rect x="27" y="18" width="6" height="38" rx="1.5" fill="#8B7D3C"/><rect x="18" y="54" width="24" height="5" rx="2.5" fill="#6B5E2E"/><rect x="6" y="16" width="48" height="4" rx="2" fill="#8B7D3C"/><circle cx="30" cy="12" r="5" fill="#dcb161" stroke="#8B7D3C" stroke-width="1.5"/><line x1="12" y1="20" x2="12" y2="32" stroke="#8B7D3C" stroke-width="1.5"/><line x1="48" y1="20" x2="48" y2="32" stroke="#8B7D3C" stroke-width="1.5"/><path d="M4 33 Q8 38 12 33 Q16 38 20 33" stroke="#dcb161" stroke-width="1.5" fill="none"/><path d="M40 33 Q44 38 48 33 Q52 38 56 33" stroke="#dcb161" stroke-width="1.5" fill="none"/></svg>';el.style.cssText='position:fixed;bottom:16px;right:16px;z-index:9998;cursor:pointer;animation:scaleBob 3s ease-in-out infinite;opacity:0.7;transition:opacity 0.3s;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.2));';el.onmouseenter=function(){this.style.opacity='1';};el.onmouseleave=function(){this.style.opacity='0.7';};document.body.appendChild(el);}
 
 function generateCertificate() {
-  var name = (document.getElementById('trainee-name-input') || {}).value || '';
-  if (!name.trim()) { alert('Please enter your name.'); return; }
-  var scoreEl = document.getElementById('total-score'), bonusEl = document.getElementById('bonus-score');
-  var base = parseInt((scoreEl||{}).textContent||0), bonus = parseInt((bonusEl||{}).textContent||0);
-  var total = base + bonus;
-  document.getElementById('cert-name-form').style.display = 'none';
-  document.getElementById('certName').textContent = name;
-  document.getElementById('cert-date').textContent = new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
-  document.getElementById('cert-score-display').textContent = total + ' points';
-  document.getElementById('certDisplay').style.display = 'block';
-  document.getElementById('certActions').style.display = 'flex';
+  var nameEl = document.getElementById('trainee-name-input');
+  var name = ((nameEl || {}).value || '').trim();
+  if (!name) { alert('Please enter your name.'); return; }
+  // Read scores from state, not from rendered DOM text. The DOM read summed base+bonus with
+  // no denominator and silently yielded 0 if the progress bar had not painted yet.
+  var base = state.totalScore, bonus = state.bonusScore;
+  var pct = Math.round((base / BASE_MAX) * 100);
+  var pass = base >= PASS_THRESHOLD;
+  var _cf = document.getElementById('cert-name-form'); if (_cf) _cf.style.display = 'none';
+  _setText('certName', name);
+  _setText('cert-date', new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}));
+  _setText('cert-score-display', base + ' / ' + BASE_MAX + ' (' + pct + '%) · ' + bonus + ' bonus · ' + (pass ? 'PASSED' : 'NEEDS REVIEW'));
+  var _cd = document.getElementById('certDisplay'); if (_cd) _cd.style.display = 'block';
+  var _ca = document.getElementById('certActions'); if (_ca) _ca.style.display = 'flex';
   _launchConfetti(); _playTaDa();
-  // Submit to tracker
   submitToTracker(name, base, bonus);
 }
 
