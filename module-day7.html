@@ -1300,7 +1300,7 @@ QA Checklist: ✅ PASSED
     </div>
 
     <div class="section-score" id="s7-score" style="display:none;">
-      <div class="score-display" id="s7-score-val">0/30 base</div>
+      <div class="score-display" id="s7-score-val">0/20 base</div>
       <div class="score-label">Boss Score (+ bonus shown above)</div>
     </div>
 
@@ -1406,7 +1406,13 @@ var sectionsDone = {};
 
 // Section point tracking
 var sectionScores = {s1:0, s2:0, s3:0, s4:0, s5:0, s6:0, s7:0};
-var sectionTotals = {s1:40, s2:40, s3:30, s4:30, s5:30, s6:30, s7:30}; // base only
+var sectionTotals = {s1:40, s2:40, s3:30, s4:30, s5:30, s6:30, s7:20}; // base only
+// s7 base ceiling is 20, not 30 — verified by live execution 2026-08-18.
+// q-7-1/q-7-2 score to s7 as base (+10 each). q-7-3 is listed in sectionQMap.s7 for
+// COMPLETION-GATING but scores to bonusPoints via section 's7b', as do q-7-4..q-7-6.
+// Old sectionTotals summed to 230 against a 220 achievable base.
+var BASE_MAX = 220;        // == sum(sectionTotals), matches measured achievable base
+var PASS_THRESHOLD = 176;  // 80% of 220 — Harrell ruling Aug 18 2026 (msg 45171)
 
 // Q completion trackers
 var qDone = {};
@@ -1611,7 +1617,7 @@ function checkSectionComplete(section) {
 
   if (scoreEl) {
     var pts = (idx === 7) ? sectionScores['s7'] : (sectionScores[section] || 0);
-    var max = (idx === 7) ? 30 : (sectionTotals[section] || 0);
+    var max = (idx === 7) ? 20 : (sectionTotals[section] || 0);
     if (scoreVal) scoreVal.textContent = pts + '/' + max + ' base';
     scoreEl.style.display = 'block';
   }
@@ -1653,8 +1659,7 @@ function finishModule() {
 }
 
 function buildResults() {
-  var pct = Math.round((baseScore / 200) * 100);
-  var PASS_THRESHOLD = 160; // 80% — Harrell ruling Jul 6
+  var pct = Math.round((baseScore / BASE_MAX) * 100);
   var pass = baseScore >= PASS_THRESHOLD;
   var grade = pct + '%';
 
@@ -1662,17 +1667,17 @@ function buildResults() {
   headerEl.innerHTML = '<div class="results-header ' + (pass ? 'pass' : 'fail') + '">'
     + '<div class="results-grade">' + grade + '</div>'
     + '<div class="results-label">' + (pass ? '🏆 Module Passed!' : '📚 Keep Practicing') + '</div>'
-    + '<div class="results-sub">' + baseScore + ' / 200 base pts · ' + bonusPoints + ' bonus pts</div>'
+    + '<div class="results-sub">' + baseScore + ' / ' + BASE_MAX + ' base pts · ' + bonusPoints + ' bonus pts</div>'
     + '</div>';
 
   // Achievements
   var badges = [];
-  if (baseScore >= 200)       badges.push({icon:'🌟', name:'Perfect Score'});
-  if (baseScore >= 160)       badges.push({icon:'🔥', name:'Coverage Pro'});
+  if (baseScore >= BASE_MAX)  badges.push({icon:'🌟', name:'Perfect Score'});
+  if (baseScore >= PASS_THRESHOLD) badges.push({icon:'🔥', name:'Coverage Pro'});
   if (bonusPoints >= 40)      badges.push({icon:'💎', name:'Boss Slayer'});
   if (bonusPoints >= 20)      badges.push({icon:'⚡', name:'Stacking Expert'});
   if (sectionScores['s1'] === 40) badges.push({icon:'📋', name:'Coverage Types Master'});
-  if (sectionScores['s7'] === 30) badges.push({icon:'🔴', name:'Boss Challenger'});
+  if (sectionScores['s7'] === sectionTotals.s7) badges.push({icon:'🔴', name:'Boss Challenger'});
   if (pass)                   badges.push({icon:'🎓', name:'NH-7 Complete'});
 
   var badgeHTML = '';
@@ -1682,7 +1687,7 @@ function buildResults() {
 
   var bodyEl = document.getElementById('results-body');
   bodyEl.innerHTML = '<div class="section-score" style="margin-bottom:20px;">'
-    + '<div class="score-display">' + baseScore + '/200</div>'
+    + '<div class="score-display">' + baseScore + '/' + BASE_MAX + '</div>'
     + '<div class="score-label">Base Score · ' + bonusPoints + ' Bonus Points</div>'
     + '</div>'
     + '<div class="info-block"><h4>📊 Section Breakdown</h4>'
@@ -1692,8 +1697,8 @@ function buildResults() {
     + '<div class="breakdown-row"><span class="breakdown-name">UM/UIM Claims</span><span class="breakdown-pts">' + (sectionScores['s4']||0) + '/30</span></div>'
     + '<div class="breakdown-row"><span class="breakdown-name">Stacking + Commercial</span><span class="breakdown-pts">' + (sectionScores['s5']||0) + '/30</span></div>'
     + '<div class="breakdown-row"><span class="breakdown-name">Coverage + Case Value</span><span class="breakdown-pts">' + (sectionScores['s6']||0) + '/30</span></div>'
-    + '<div class="breakdown-row"><span class="breakdown-name">Boss Challenge (base)</span><span class="breakdown-pts">' + (sectionScores['s7']||0) + '/30</span></div>'
-    + '<div class="breakdown-row" style="border-top:2px solid #141c2c;margin-top:6px;padding-top:12px;"><span class="breakdown-name" style="font-weight:800;">TOTAL BASE</span><span class="breakdown-pts" style="color:#27ae60;font-size:18px;">' + baseScore + '/200</span></div>'
+    + '<div class="breakdown-row"><span class="breakdown-name">Boss Challenge (base)</span><span class="breakdown-pts">' + (sectionScores['s7']||0) + '/' + sectionTotals.s7 + '</span></div>'
+    + '<div class="breakdown-row" style="border-top:2px solid #141c2c;margin-top:6px;padding-top:12px;"><span class="breakdown-name" style="font-weight:800;">TOTAL BASE</span><span class="breakdown-pts" style="color:#27ae60;font-size:18px;">' + baseScore + '/' + BASE_MAX + '</span></div>'
     + '<div class="breakdown-row"><span class="breakdown-name">Bonus Points</span><span class="breakdown-pts" style="color:#f39c12;">' + bonusPoints + ' pts</span></div>'
     + '</div>'
     + '<div class="info-block"><h4>🏅 Achievements Earned</h4>'
@@ -1790,7 +1795,7 @@ function submitFeedback() {
 }
 
 function showCertificate(name) {
-  var pct = Math.round((baseScore / 200) * 100);
+  var pct = Math.round((baseScore / BASE_MAX) * 100);
   var fbSection = document.getElementById('section-9');
   fbSection.querySelector('.section-body').innerHTML = '<div class="cert">'
     + '<div class="cert-logo">🏆</div>'
@@ -1799,7 +1804,7 @@ function showCertificate(name) {
     + '<div class="cert-name">' + name + '</div>'
     + '<div class="cert-details">'
     + 'NH-7: Coverage Verification Mastery<br>'
-    + 'Score: <strong>' + baseScore + '/200 (' + pct + '%)</strong> · Bonus: <strong>' + bonusPoints + ' pts</strong><br>'
+    + 'Score: <strong>' + baseScore + '/' + BASE_MAX + ' (' + pct + '%)</strong> · Bonus: <strong>' + bonusPoints + ' pts</strong><br>'
     + 'Completed: ' + new Date().toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'})
     + '</div>'
     + '<div class="cert-achievements">'
