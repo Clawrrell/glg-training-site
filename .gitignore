@@ -1,0 +1,24 @@
+# HARD BLOCK — nothing from the firm workspace may ever enter this repo.
+# This repo contains ONLY training module HTML + logo assets.
+# Root cause of SEC-AUDIT-01: the old repo's root WAS the workspace.
+
+glg/
+staff/
+comm_notices/
+*.docx
+*.xlsx
+*.xls
+*.pdf
+*.csv
+*.jsonl
+*.bak
+archive/
+apps_script*
+*.env
+*secret*
+*credential*
+*token*
+.DS_Store
+
+# Timestamped .bak files from module edits — working-tree only, never committed.
+*.bak-*
