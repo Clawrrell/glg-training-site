@@ -334,6 +334,159 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
 .option-btn.wrong .option-letter { background: rgba(192,57,43,0.12); color: var(--red); }
 
 </style>
+
+<style>
+/* ── GLG QUIZ ENGINE — question type styles (2026-09-02) ──────────────────
+     All classes rendered by api-quiz-engine.js. Tokens: navy #141c2c, gold #C5975B.
+     Sourced from engine.html stylesheet + the Managing Attorney Part 8c spec. */
+
+  /* Question card */
+  .q { background:#fff; border:1px solid #e2e5ea; border-radius:10px;
+       padding:20px; margin:16px 0; box-shadow:0 1px 6px rgba(20,28,44,.06); }
+  .q-num { font-size:12px; letter-spacing:.06em; color:#C5975B; font-weight:700;
+            text-transform:uppercase; margin-bottom:8px; }
+  .q-text { font-weight:600; margin:8px 0 16px; font-size:1rem; line-height:1.55;
+             color:#141c2c; }
+
+  /* MC option buttons */
+  button.opt { display:block; width:100%; text-align:left; padding:13px 15px; margin:7px 0;
+    border:1px solid #d8dbe3; border-radius:8px; background:#fafbfd; cursor:pointer;
+    font-size:15px; font-family:var(--font-b); color:#222; line-height:1.45;
+    transition:background .12s, border-color .12s; }
+  button.opt:hover:not(.locked) { background:#eef4ff; border-color:#141c2c; }
+  button.opt.correct { background:#d4edda; border-color:#10774A; }
+  button.opt.incorrect { background:#f8d7da; border-color:#870101; }
+  button.opt.locked { cursor:default; opacity:.85; }
+
+  /* Fill-in-the-blank */
+  .fill-stem { font-weight:600; margin:8px 0 14px; line-height:2.2; }
+  input.blank { display:inline-block; min-height:44px; min-width:120px; padding:8px 10px;
+    margin:2px 4px; border:1px solid #ccd; border-radius:8px; background:#fafbfd;
+    font-size:16px; font-family:var(--font-b); vertical-align:middle;
+    box-sizing:border-box; max-width:100%; }
+  input.blank:focus { outline:2px solid #141c2c; background:#fff; }
+  input.blank.correct { background:#d4edda; border-color:#10774A; }
+  input.blank.incorrect { background:#f8d7da; border-color:#870101; }
+  input.blank.locked { opacity:.85; }
+  button.submit-fill { min-height:44px; padding:11px 20px; margin-top:12px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-fill.locked { opacity:.5; cursor:default; }
+
+  /* Markup */
+  .markup-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .markup-passage { margin:0 0 10px; border:1px solid #e2e5ea; border-radius:8px; overflow:hidden; }
+  button.span { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:11px 13px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:16px; font-family:var(--font-b);
+    color:#222; line-height:1.5; overflow-wrap:break-word; }
+  button.span:last-child { border-bottom:0; }
+  button.span:hover:not(.locked) { background:#eef4ff; }
+  button.span.selected { background:#fff3cd; box-shadow:inset 4px 0 0 #b8860b; font-weight:600; }
+  button.span.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.span.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.span.locked { cursor:default; opacity:.9; }
+  button.submit-markup { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-markup.locked { opacity:.5; cursor:default; }
+  .markup-count { font-size:13px; color:#555; margin-top:8px; }
+
+  /* Sort rows with up/down controls */
+  .sort-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .sort-list { margin:0 0 12px; border:1px solid #e2e5ea; border-radius:8px;
+               overflow:hidden; background:#fff; }
+  .sort-row { display:flex; align-items:stretch; border-bottom:1px solid #eef0f3;
+              background:#fff; }
+  .sort-row:last-child { border-bottom:0; }
+  .sort-pos { flex:0 0 34px; display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700; color:#C5975B; background:#f5f5f0; }
+  .sort-text { flex:1 1 auto; padding:11px 12px; font-size:15px; line-height:1.45;
+    display:flex; align-items:center; overflow-wrap:break-word; min-width:0; }
+  .sort-moves { flex:0 0 auto; display:flex; align-items:center; gap:4px; padding:4px 6px; }
+  button.sort-move { min-height:44px; min-width:44px; border:1px solid #ccd; border-radius:8px;
+    background:#fafbfd; cursor:pointer; font-size:15px; color:#141c2c;
+    font-family:var(--font-b); }
+  button.sort-move:hover:not(:disabled) { background:#eef4ff; }
+  button.sort-move:disabled { opacity:.35; cursor:default; }
+  .sort-row.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  .sort-row.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  .sort-row.locked .sort-text { opacity:.9; }
+  button.submit-sort { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-sort.locked { opacity:.5; cursor:default; }
+
+  /* Match chips + slot rows */
+  .match-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .match-tray { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px; padding:10px;
+    border:1px dashed #ccd; border-radius:8px; background:#fafbfd; }
+  button.chip { min-height:44px; padding:10px 16px; border:1px solid #ccd; border-radius:22px;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b); color:#222;
+    max-width:100%; overflow-wrap:break-word; text-align:left; }
+  button.chip:hover:not(.locked) { background:#eef4ff; }
+  button.chip.selected { background:#141c2c; color:#fff; border-color:#141c2c; font-weight:600; }
+  button.chip.placed { opacity:.35; }
+  button.chip.locked { cursor:default; }
+  .match-slots { border:1px solid #e2e5ea; border-radius:8px; overflow:hidden;
+                 background:#fff; margin-bottom:12px; }
+  button.slot { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:10px 14px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b);
+    color:#222; line-height:1.45; overflow-wrap:break-word; }
+  button.slot:last-child { border-bottom:0; }
+  button.slot:hover:not(.locked) { background:#eef4ff; }
+  button.slot.armed { box-shadow:inset 4px 0 0 #C5975B; background:#fffdf5; }
+  .slot-label { font-weight:600; display:block; }
+  .slot-fill { display:block; font-size:14px; margin-top:3px; color:#C5975B; font-weight:600; }
+  .slot-fill.empty { color:#8a8f98; font-weight:400; font-style:italic; }
+  button.slot.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.slot.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.slot.locked { cursor:default; opacity:.9; }
+  button.submit-match { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-match.locked { opacity:.5; cursor:default; }
+  .match-count { font-size:13px; color:#555; margin-top:8px; }
+  .match-credit { font-size:13px; font-weight:600; color:#8a6d1f; margin-top:6px; }
+
+  /* Feedback */
+  .fb { margin-top:12px; padding:12px 14px; border-radius:8px; font-size:14px; display:none; }
+  .fb.show { display:block; }
+  .fb.ok { background:#d4edda; border-left:4px solid #10774A; }
+  .fb.no { background:#f8d7da; border-left:4px solid #870101; }
+  .fb.neutral { background:#eef0f6; border-left:4px solid #6c757d; color:#333; } /* self_assessment: no verdict */
+
+  /* Branching nodes */
+  .branch-scenario { border-left:4px solid #C5975B; padding-left:12px; margin:14px 0; }
+  .branch-turn { font-size:12px; letter-spacing:.06em; color:#8a6d1f; font-weight:700;
+                 text-transform:uppercase; }
+  .branch-instruction { font-weight:600; margin:6px 0 10px; color:#141c2c; }
+  .branch-consequence { margin-top:10px; padding:10px 12px; border-left:4px solid #141c2c;
+    background:#eef2f7; border-radius:0 8px 8px 0; font-size:13px; color:#33415c; display:none; }
+  .branch-consequence.show { display:block; }
+
+  /* Pagination — one question at a time (the Managing Attorney Part 8b) */
+  .q-base { display: none !important; }
+  .q-base.q-active { display: block !important; }
+  .q-nav { display:flex; justify-content:space-between; align-items:center;
+            margin-top:20px; padding-top:16px; border-top:1px solid #e8e6e0; }
+  .q-nav-btn { min-height:44px; padding:10px 22px; border-radius:8px;
+                font-size:15px; cursor:pointer; font-family:var(--font-b);
+                font-weight:600; transition:background .12s; }
+  .q-nav-btn.next { background:#141c2c; color:#C5975B; border:2px solid #141c2c; }
+  .q-nav-btn.next:hover { background:#1e2a40; }
+  .q-nav-btn.back { background:#fff; color:#141c2c; border:2px solid #c8c5be; }
+  .q-nav-btn.back:hover { background:#f5f5f0; }
+  .q-pg-spacer { display:inline-block; min-width:40px; }
+  #q-progress { font-size:12px; color:#C5975B; font-weight:600;
+                letter-spacing:.5px; text-transform:uppercase; }
+
+
+</style>
+
+<!-- CUTOVER: server-side grading. Answer keys are not in this file. -->
+    <link rel="stylesheet" href="boss-challenge.css">
 </head>
 <body>
 
@@ -388,7 +541,7 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
  <button class="nav-pill" data-target="4" onclick="goToSection(4)">5. Tough Calls</button>
  <button class="nav-pill" data-target="5" onclick="goToSection(5)">6. Scripts</button>
  <button class="nav-pill" data-target="6" onclick="goToSection(6)">7. Scenarios</button>
- <button class="nav-pill" data-target="7" onclick="goToSection(7)">Quiz</button>
+ <button class="nav-pill" data-target="7" onclick="startQuiz()">Quiz</button>
  <button class="nav-pill" data-target="8" onclick="goToSection(8)">Boss</button>
 </nav>
 
@@ -688,7 +841,7 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
 
   <div class="danger-block">
    <h3>Escalation Triggers</h3>
-   <p><strong>Gap of 30+ days:</strong> Escalate to Harrell or Adriauna immediately.<br>
+   <p><strong>Gap of 30+ days:</strong> Escalate to the Managing Attorney or the Pre-Lit Head Attorney immediately.<br>
    <strong>Client wants to stop treating:</strong> Do NOT accept without attorney sign-off. Ever.<br>
    <strong>3 unanswered attempts in 2 weeks:</strong> Escalate — do not let the file sit idle.</p>
   </div>
@@ -947,7 +1100,7 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
     <li>Be direct about the risk: "If you stop before your doctor officially releases you, the insurance company will argue your injuries resolved on their own. That argument lowers what we can recover."</li>
     <li>Offer to have the <strong>attorney call</strong> to explain what's at stake for his specific case.</li>
     <li><strong>Never accept a client stopping treatment without attorney approval.</strong></li>
-    <li>Escalate to Harrell or Adriauna immediately.</li>
+    <li>Escalate to the Managing Attorney or the Pre-Lit Head Attorney immediately.</li>
    </ul>
   </div>
 
@@ -962,243 +1115,64 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
  </div>
  <div class="section-footer">
   <button class="btn btn-outline" onclick="goToSection(5)">&larr; Back</button>
-  <button class="btn btn-success" onclick="startQuiz()">Start Quiz &rarr;</button>
+  <div style="margin-bottom:1rem;">
+      <label for="trainee-name-input" style="display:block;font-size:0.85rem;font-weight:600;color:#141c2c;margin-bottom:0.4rem;">Your Name — required to start</label>
+      <input type="text" id="trainee-name-input" placeholder="Enter your full name" autocomplete="name" style="width:100%;padding:0.5rem 0.75rem;border:1.5px solid #cbd5e1;border-radius:6px;font-size:0.9rem;box-sizing:border-box;">
+    </div>
+    <button class="btn btn-success" onclick="startQuiz()">Start Quiz &rarr;</button>
  </div>
 </div>
 
 <!-- ══════════════════════════════════════════
      QUIZ SECTION (Questions 1–16)
 ════════════════════════════════════════════ -->
-<div class="section-card" id="quiz-section">
+<div class="section-card" id="section-7">
  <div class="quiz-header">
   <div class="section-num">Knowledge Check</div>
   <h2>Quiz — 20 Questions, 200 Points</h2>
  </div>
  <div class="quiz-body">
+    <!-- engine DOM injected by port-module.py (day10 variant) -->
+    <div style="font-family:system-ui,sans-serif;font-size:13px;color:#33415c;padding:8px 0 12px;border-bottom:1px solid #e8eaf0;margin-bottom:16px;">
+      Base: <b id="base">0</b> / <b id="basemax">—</b>
+      &nbsp;&middot;&nbsp; Bonus: <b id="bonus">0</b>
+      &nbsp;&middot;&nbsp; Pass gate: <b id="gate">80</b>%
+      &nbsp;&middot;&nbsp; <span id="q-progress" style="color:#dcb161;font-weight:700;"></span>
+    </div>
+    <div id="questions"></div>
+    <div id="result" style="background:#fff;border:2px solid #0b2545;border-radius:10px;padding:18px;margin:18px 0;display:none;"></div>
 
   <!-- Q1 -->
-  <div class="question-block" id="q1">
-   <div class="q-counter">QUESTION 1 OF 20 &bull; 10 POINTS</div>
-   <div class="q-text">What is the minimum contact frequency for pre-litigation clients at GLG?</div>
-   <div class="options">
-    <button class="option-btn" onclick="answer(1,'a',false)"><span class="option-letter">A</span> Every 7 days</button>
-    <button class="option-btn" onclick="answer(1,'b',true)"><span class="option-letter">B</span> Every 14 days — no exceptions</button>
-    <button class="option-btn" onclick="answer(1,'c',false)"><span class="option-letter">C</span> Every 30 days</button>
-    <button class="option-btn" onclick="answer(1,'d',false)"><span class="option-letter">D</span> Only when there's a substantive case update</button>
-   </div>
-   <div class="feedback" id="fb1"></div>
-   <div class="quiz-nav"><button class="btn btn-primary" id="next1" style="display:none" onclick="showQuestion(2)">Next &rarr;</button></div>
-  </div>
 
   <!-- Q2 -->
-  <div class="question-block" id="q2">
-   <div class="q-counter">QUESTION 2 OF 20 &bull; 10 POINTS</div>
-   <div class="q-text">The 14-day client call simultaneously serves as which three things?</div>
-   <div class="options">
-    <button class="option-btn" onclick="answer(2,'a',false)"><span class="option-letter">A</span> CasePeer audit, treatment review, fee discussion</button>
-    <button class="option-btn" onclick="answer(2,'b',false)"><span class="option-letter">B</span> Attorney update, client therapy, insurance check</button>
-    <button class="option-btn" onclick="answer(2,'c',true)"><span class="option-letter">C</span> A satisfaction tool, a referral generator, and a case-value driver</button>
-    <button class="option-btn" onclick="answer(2,'d',false)"><span class="option-letter">D</span> Compliance check, billing update, referral request — coordinate with your team before making this change</button>
-   </div>
-   <div class="feedback" id="fb2"></div>
-   <div class="quiz-nav"><button class="btn btn-primary" id="next2" style="display:none" onclick="showQuestion(3)">Next &rarr;</button></div>
-  </div>
 
   <!-- Q3 — INTERLEAVING -->
-  <div class="question-block" id="q3">
-   <div class="q-counter">QUESTION 3 OF 20 &bull; 10 POINTS &bull; REVIEW</div>
-   <div class="q-text">When reviewing medical records, what type of finding most strongly supports the decision to escalate treatment beyond conservative care?</div>
-   <div class="options">
-    <button class="option-btn" onclick="answer(3,'a',true)"><span class="option-letter">A</span> MRI showing disc herniation or structural damage</button>
-    <button class="option-btn" onclick="answer(3,'b',false)"><span class="option-letter">B</span> Patient's verbal pain rating at a 7 out of 10 — make sure the case file is updated accordingly</button>
-    <button class="option-btn" onclick="answer(3,'c',false)"><span class="option-letter">C</span> Number of chiropractic visits completed</button>
-    <button class="option-btn" onclick="answer(3,'d',false)"><span class="option-letter">D</span> Normal X-ray results</button>
-   </div>
-   <div class="feedback" id="fb3"></div>
-   <div class="quiz-nav"><button class="btn btn-primary" id="next3" style="display:none" onclick="showQuestion(4)">Next &rarr;</button></div>
-  </div>
 
   <!-- Q4 -->
-  <div class="question-block" id="q4">
-   <div class="q-counter">QUESTION 4 OF 20 &bull; 10 POINTS</div>
-   <div class="q-text">Every client update must include five elements. Which of the following is NOT one of them?</div>
-   <div class="options">
-    <button class="option-btn" onclick="answer(4,'a',false)"><span class="option-letter">A</span> Current case stage</button>
-    <button class="option-btn" onclick="answer(4,'b',true)"><span class="option-letter">B</span> Estimated settlement amount</button>
-    <button class="option-btn" onclick="answer(4,'c',false)"><span class="option-letter">C</span> What we are waiting on — the firm requires strict compliance with this rule</button>
-    <button class="option-btn" onclick="answer(4,'d',false)"><span class="option-letter">D</span> Realistic timeframe</button>
-   </div>
-   <div class="feedback" id="fb4"></div>
-   <div class="quiz-nav"><button class="btn btn-primary" id="next4" style="display:none" onclick="showQuestion(5)">Next &rarr;</button></div>
-  </div>
 
   <!-- Q5 -->
-  <div class="question-block" id="q5">
-   <div class="q-counter">QUESTION 5 OF 20 &bull; 10 POINTS</div>
-   <div class="q-text">You just tried calling a client and got voicemail. You left a message. What must you do immediately after hanging up?</div>
-   <div class="options">
-    <button class="option-btn" onclick="answer(5,'a',false)"><span class="option-letter">A</span> Log the call in CasePeer at end of day</button>
-    <button class="option-btn" onclick="answer(5,'b',false)"><span class="option-letter">B</span> Email the attorney about the missed call</button>
-    <button class="option-btn" onclick="answer(5,'c',false)"><span class="option-letter">C</span> Wait 48 hours and try again</button>
-    <button class="option-btn" onclick="answer(5,'d',true)"><span class="option-letter">D</span> Send a follow-up text to the client</button>
-   </div>
-   <div class="feedback" id="fb5"></div>
-   <div class="quiz-nav"><button class="btn btn-primary" id="next5" style="display:none" onclick="showQuestion(6)">Next &rarr;</button></div>
-  </div>
 
   <!-- Q6 -->
-  <div class="question-block" id="q6">
-   <div class="q-counter">QUESTION 6 OF 20 &bull; 10 POINTS</div>
-   <div class="q-text">What format must every CasePeer communication note follow?</div>
-   <div class="options">
-    <button class="option-btn" onclick="answer(6,'a',false)"><span class="option-letter">A</span> Client Name | Notes</button>
-    <button class="option-btn" onclick="answer(6,'b',true)"><span class="option-letter">B</span> Date | Method | Who | What | Next Steps</button>
-    <button class="option-btn" onclick="answer(6,'c',false)"><span class="option-letter">C</span> Date | Summary</button>
-    <button class="option-btn" onclick="answer(6,'d',false)"><span class="option-letter">D</span> Time | Duration | Outcome — make sure the case file is updated accordingly</button>
-   </div>
-   <div class="feedback" id="fb6"></div>
-   <div class="quiz-nav"><button class="btn btn-primary" id="next6" style="display:none" onclick="showQuestion(7)">Next &rarr;</button></div>
-  </div>
 
   <!-- Q7 -->
-  <div class="question-block" id="q7">
-   <div class="q-counter">QUESTION 7 OF 20 &bull; 10 POINTS</div>
-   <div class="q-text">The "handoff test" for communication notes asks one question. What is it?</div>
-   <div class="options">
-    <button class="option-btn" onclick="answer(7,'a',false)"><span class="option-letter">A</span> Is the note under 100 words?</button>
-    <button class="option-btn" onclick="answer(7,'b',false)"><span class="option-letter">B</span> Did the attorney review it?</button>
-    <button class="option-btn" onclick="answer(7,'c',true)"><span class="option-letter">C</span> Could a colleague who has never touched this file read your note and pick up where you left off?</button>
-    <button class="option-btn" onclick="answer(7,'d',false)"><span class="option-letter">D</span> Is the note formatted in bullet points? — log this in CasePeer immediately for the record</button>
-   </div>
-   <div class="feedback" id="fb7"></div>
-   <div class="quiz-nav"><button class="btn btn-primary" id="next7" style="display:none" onclick="showQuestion(8)">Next &rarr;</button></div>
-  </div>
 
   <!-- Q8 -->
-  <div class="question-block" id="q8">
-   <div class="q-counter">QUESTION 8 OF 20 &bull; 10 POINTS</div>
-   <div class="q-text">When opening a treatment check-in call, what should you say BEFORE asking about appointment compliance?</div>
-   <div class="options">
-    <button class="option-btn" onclick="answer(8,'a',true)"><span class="option-letter">A</span> "How are you doing? How are you feeling?"</button>
-    <button class="option-btn" onclick="answer(8,'b',false)"><span class="option-letter">B</span> "Are you still going to your appointments?"</button>
-    <button class="option-btn" onclick="answer(8,'c',false)"><span class="option-letter">C</span> "When is your next appointment?"</button>
-    <button class="option-btn" onclick="answer(8,'d',false)"><span class="option-letter">D</span> "Have you missed any appointments recently?"</button>
-   </div>
-   <div class="feedback" id="fb8"></div>
-   <div class="quiz-nav"><button class="btn btn-primary" id="next8" style="display:none" onclick="showQuestion(9)">Next &rarr;</button></div>
-  </div>
 
   <!-- Q9 -->
-  <div class="question-block" id="q9">
-   <div class="q-counter">QUESTION 9 OF 20 &bull; 10 POINTS</div>
-   <div class="q-text">A client has missed two chiropractic appointments. Before explaining the consequences of treatment gaps, what must you do first?</div>
-   <div class="options">
-    <button class="option-btn" onclick="answer(9,'a',false)"><span class="option-letter">A</span> Tell them treatment gaps hurt their case value — follow up within the appropriate timeframe as well</button>
-    <button class="option-btn" onclick="answer(9,'b',false)"><span class="option-letter">B</span> Send them a formal letter about compliance</button>
-    <button class="option-btn" onclick="answer(9,'c',true)"><span class="option-letter">C</span> Ask what's actually getting in the way — find the real barrier before advising</button>
-    <button class="option-btn" onclick="answer(9,'d',false)"><span class="option-letter">D</span> Transfer them to the attorney immediately</button>
-   </div>
-   <div class="feedback" id="fb9"></div>
-   <div class="quiz-nav"><button class="btn btn-primary" id="next9" style="display:none" onclick="showQuestion(10)">Next &rarr;</button></div>
-  </div>
 
   <!-- Q10 -->
-  <div class="question-block" id="q10">
-   <div class="q-counter">QUESTION 10 OF 20 &bull; 10 POINTS</div>
-   <div class="q-text">A client says "I feel better, I don't think I need to keep going to the chiropractor." What is the correct response?</div>
-   <div class="options">
-    <button class="option-btn" onclick="answer(10,'a',false)"><span class="option-letter">A</span> "That's fine — if you feel better, you can stop" — this is outlined in the firm's standard procedures</button>
-    <button class="option-btn" onclick="answer(10,'b',true)"><span class="option-letter">B</span> Acknowledge their progress, explain that stopping before discharge gives insurance ammunition to reduce their recovery, and escalate to the attorney</button>
-    <button class="option-btn" onclick="answer(10,'c',false)"><span class="option-letter">C</span> "You have to keep going or we drop your case"</button>
-    <button class="option-btn" onclick="answer(10,'d',false)"><span class="option-letter">D</span> Log it and move on without further discussion</button>
-   </div>
-   <div class="feedback" id="fb10"></div>
-   <div class="quiz-nav"><button class="btn btn-primary" id="next10" style="display:none" onclick="showQuestion(11)">Next &rarr;</button></div>
-  </div>
 
   <!-- Q11 -->
-  <div class="question-block" id="q11">
-   <div class="q-counter">QUESTION 11 OF 20 &bull; 10 POINTS</div>
-   <div class="q-text">In the STATE method for high-stakes conversations, what does "Share facts first" mean?</div>
-   <div class="options">
-    <button class="option-btn" onclick="answer(11,'a',true)"><span class="option-letter">A</span> Lead with objective facts from the record — "Here's what the records show..." — before sharing your interpretation</button>
-    <button class="option-btn" onclick="answer(11,'b',false)"><span class="option-letter">B</span> Share the firm's policies before discussing the client's concern</button>
-    <button class="option-btn" onclick="answer(11,'c',false)"><span class="option-letter">C</span> Tell the client everything that went wrong with their case up front — the firm requires strict compliance with this rule</button>
-    <button class="option-btn" onclick="answer(11,'d',false)"><span class="option-letter">D</span> Send a written summary before making the call</button>
-   </div>
-   <div class="feedback" id="fb11"></div>
-   <div class="quiz-nav"><button class="btn btn-primary" id="next11" style="display:none" onclick="showQuestion(12)">Next &rarr;</button></div>
-  </div>
 
   <!-- Q12 -->
-  <div class="question-block" id="q12">
-   <div class="q-counter">QUESTION 12 OF 20 &bull; 10 POINTS</div>
-   <div class="q-text">A client calls upset, saying no one has contacted them in a month. What is your FIRST response?</div>
-   <div class="options">
-    <button class="option-btn" onclick="answer(12,'a',false)"><span class="option-letter">A</span> Pull up CasePeer to prove someone called them — the SOP requires documentation of this step</button>
-    <button class="option-btn" onclick="answer(12,'b',false)"><span class="option-letter">B</span> Apologize and promise it won't happen again</button>
-    <button class="option-btn" onclick="answer(12,'c',false)"><span class="option-letter">C</span> Transfer the call to the attorney</button>
-    <button class="option-btn" onclick="answer(12,'d',true)"><span class="option-letter">D</span> Acknowledge what they're feeling — "I hear that you're frustrated, and that makes complete sense" — then pull up their file</button>
-   </div>
-   <div class="feedback" id="fb12"></div>
-   <div class="quiz-nav"><button class="btn btn-primary" id="next12" style="display:none" onclick="showQuestion(13)">Next &rarr;</button></div>
-  </div>
 
   <!-- Q13 -->
-  <div class="question-block" id="q13">
-   <div class="q-counter">QUESTION 13 OF 20 &bull; 10 POINTS</div>
-   <div class="q-text">Under GLG's callback standard, how long do you have to return a client's phone call?</div>
-   <div class="options">
-    <button class="option-btn" onclick="answer(13,'a',false)"><span class="option-letter">A</span> Same business day</button>
-    <button class="option-btn" onclick="answer(13,'b',false)"><span class="option-letter">B</span> 48 hours</button>
-    <button class="option-btn" onclick="answer(13,'c',true)"><span class="option-letter">C</span> 24 hours — non-negotiable</button>
-    <button class="option-btn" onclick="answer(13,'d',false)"><span class="option-letter">D</span> By the end of the week — confirm with your case manager before taking action</button>
-   </div>
-   <div class="feedback" id="fb13"></div>
-   <div class="quiz-nav"><button class="btn btn-primary" id="next13" style="display:none" onclick="showQuestion(14)">Next &rarr;</button></div>
-  </div>
 
   <!-- Q14 -->
-  <div class="question-block" id="q14">
-   <div class="q-counter">QUESTION 14 OF 20 &bull; 10 POINTS</div>
-   <div class="q-text">When must you escalate a difficult client conversation to the Pre-Lit Head Attorney?</div>
-   <div class="options">
-    <button class="option-btn" onclick="answer(14,'a',false)"><span class="option-letter">A</span> Any time a client raises their voice</button>
-    <button class="option-btn" onclick="answer(14,'b',true)"><span class="option-letter">B</span> When a client has complained 2+ times without resolution, threatens to terminate, or threatens to contact the bar</button>
-    <button class="option-btn" onclick="answer(14,'c',false)"><span class="option-letter">C</span> Only when the client sends a written complaint</button>
-    <button class="option-btn" onclick="answer(14,'d',false)"><span class="option-letter">D</span> Never — paralegals handle all client issues independently — the supervising attorney should review this first</button>
-   </div>
-   <div class="feedback" id="fb14"></div>
-   <div class="quiz-nav"><button class="btn btn-primary" id="next14" style="display:none" onclick="showQuestion(15)">Next &rarr;</button></div>
-  </div>
 
   <!-- Q15 — INTERLEAVING -->
-  <div class="question-block" id="q15">
-   <div class="q-counter">QUESTION 15 OF 20 &bull; 10 POINTS &bull; REVIEW</div>
-   <div class="q-text">In the treatment progression ladder, what must happen before a client can be referred for injections or surgery?</div>
-   <div class="options">
-    <button class="option-btn" onclick="answer(15,'a',false)"><span class="option-letter">A</span> The client must request it personally</button>
-    <button class="option-btn" onclick="answer(15,'b',false)"><span class="option-letter">B</span> The insurance company must pre-approve each step — the firm requires strict compliance with this rule</button>
-    <button class="option-btn" onclick="answer(15,'c',false)"><span class="option-letter">C</span> The attorney must authorize the referral</button>
-    <button class="option-btn" onclick="answer(15,'d',true)"><span class="option-letter">D</span> Conservative treatment must be tried first and shown to fail — you cannot skip steps</button>
-   </div>
-   <div class="feedback" id="fb15"></div>
-   <div class="quiz-nav"><button class="btn btn-primary" id="next15" style="display:none" onclick="showQuestion(16)">Next &rarr;</button></div>
-  </div>
 
   <!-- Q16 -->
-  <div class="question-block" id="q16">
-   <div class="q-counter">QUESTION 16 OF 20 &bull; 10 POINTS</div>
-   <div class="q-text">You log a CasePeer note that reads: "Called client. Left voicemail." What is wrong with this note?</div>
-   <div class="options">
-    <button class="option-btn" onclick="answer(16,'a',true)"><span class="option-letter">A</span> It's missing the date, phone number, call purpose, what the voicemail said, and next steps</button>
-    <button class="option-btn" onclick="answer(16,'b',false)"><span class="option-letter">B</span> Nothing — it captures the essential information — the client should receive written notice of this</button>
-    <button class="option-btn" onclick="answer(16,'c',false)"><span class="option-letter">C</span> Voicemails don't need to be logged in CasePeer</button>
-    <button class="option-btn" onclick="answer(16,'d',false)"><span class="option-letter">D</span> It should have been an email, not a phone note</button>
-   </div>
-   <div class="feedback" id="fb16"></div>
-   <div class="quiz-nav"><button class="btn btn-primary" id="next16" style="display:none" onclick="goToBoss()">Continue to Boss Challenge &rarr;</button></div>
-  </div>
 
  </div>
 </div>
@@ -1237,60 +1211,12 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
   </div>
 
   <!-- Q17 -->
-  <div class="question-block" id="q17">
-   <div class="q-counter">BOSS CHALLENGE &bull; QUESTION 17 OF 20 &bull; 10 POINTS</div>
-   <div class="q-text">Tanya is clearly upset and threatening to leave the firm. What is the very first thing you should do?</div>
-   <div class="options">
-    <button class="option-btn" onclick="answer(17,'a',false)"><span class="option-letter">A</span> Pull up CasePeer and prove someone called her recently</button>
-    <button class="option-btn" onclick="answer(17,'b',false)"><span class="option-letter">B</span> Transfer her to the attorney immediately since she mentioned another lawyer — this is covered in the employee onboarding materials</button>
-    <button class="option-btn" onclick="answer(17,'c',true)"><span class="option-letter">C</span> Acknowledge what she's feeling — "It sounds like you're frustrated and feeling like you've been left in the dark. That makes complete sense. I want to fix this."</button>
-    <button class="option-btn" onclick="answer(17,'d',false)"><span class="option-letter">D</span> Explain that the firm has been busy with other cases</button>
-   </div>
-   <div class="feedback" id="fb17"></div>
-   <div class="quiz-nav"><button class="btn btn-primary" id="next17" style="display:none" onclick="showBossQuestion(18)">Next &rarr;</button></div>
-  </div>
 
   <!-- Q18 -->
-  <div class="question-block" id="q18">
-   <div class="q-counter">BOSS CHALLENGE &bull; QUESTION 18 OF 20 &bull; 10 POINTS</div>
-   <div class="q-text">After listening to Tanya, you discover her real barrier: she received a $1,200 bill from Peachtree Chiropractic and panicked — she thought she had to pay out of pocket, so she stopped going. How do you address the billing issue?</div>
-   <div class="options">
-    <button class="option-btn" onclick="answer(18,'a',false)"><span class="option-letter">A</span> Tell her to pay the bill and submit receipts to the firm later — always verify deadlines before proceeding further</button>
-    <button class="option-btn" onclick="answer(18,'b',false)"><span class="option-letter">B</span> Tell her to ignore the bill — it's not her problem</button>
-    <button class="option-btn" onclick="answer(18,'c',false)"><span class="option-letter">C</span> Suggest she find a cheaper provider who won't send bills</button>
-    <button class="option-btn" onclick="answer(18,'d',true)"><span class="option-letter">D</span> Explain that she should not be paying anything out of pocket — her treatment is under a Letter of Protection, the provider will be paid from settlement proceeds, and you will contact the provider today to correct the error</button>
-   </div>
-   <div class="feedback" id="fb18"></div>
-   <div class="quiz-nav"><button class="btn btn-primary" id="next18" style="display:none" onclick="showBossQuestion(19)">Next &rarr;</button></div>
-  </div>
 
   <!-- Q19 -->
-  <div class="question-block" id="q19">
-   <div class="q-counter">BOSS CHALLENGE &bull; QUESTION 19 OF 20 &bull; 10 POINTS</div>
-   <div class="q-text">Tanya's billing concern is resolved and she's calming down. Now you need to address the 18-day treatment gap. What specific commitment must you capture before ending the call?</div>
-   <div class="options">
-    <button class="option-btn" onclick="answer(19,'a',true)"><span class="option-letter">A</span> A specific appointment date with her provider, confirmed verbally, with a follow-up date when you will call her back — both logged in CasePeer</button>
-    <button class="option-btn" onclick="answer(19,'b',false)"><span class="option-letter">B</span> "I'll try to go back soon"</button>
-    <button class="option-btn" onclick="answer(19,'c',false)"><span class="option-letter">C</span> Her agreement to "think about it"</button>
-    <button class="option-btn" onclick="answer(19,'d',false)"><span class="option-letter">D</span> A written promise from the chiropractor to stop billing her — the client should receive written notice of this</button>
-   </div>
-   <div class="feedback" id="fb19"></div>
-   <div class="quiz-nav"><button class="btn btn-primary" id="next19" style="display:none" onclick="showBossQuestion(20)">Next &rarr;</button></div>
-  </div>
 
   <!-- Q20 -->
-  <div class="question-block" id="q20">
-   <div class="q-counter">BOSS CHALLENGE &bull; QUESTION 20 OF 20 &bull; 10 POINTS</div>
-   <div class="q-text">You've resolved Tanya's concerns and captured her commitment. Now you need to document the call. Which CasePeer note meets GLG documentation standards?</div>
-   <div class="options">
-    <button class="option-btn" onclick="answer(20,'a',false)"><span class="option-letter">A</span> "Spoke with client. She was upset. Fixed billing issue." — this is a standard expectation across all case types</button>
-    <button class="option-btn" onclick="answer(20,'b',true)"><span class="option-letter">B</span> "6/16/2026 — Phone call (inbound) from Tanya Baker. Client expressed frustration re: lack of contact (3 weeks) and billing confusion from Peachtree Chiro ($1,200). Acknowledged frustration. Explained LOP coverage — no out-of-pocket cost. Will contact Peachtree today to resolve billing. Treatment gap: 18 days. Client agreed to resume — appt Thursday 6/19 at 2pm. Follow-up call Monday 6/23. Next: (1) Call provider re: billing today; (2) Verify appt kept by 6/20."</button>
-    <button class="option-btn" onclick="answer(20,'c',false)"><span class="option-letter">C</span> "Tanya called and was angry. Told her about the LOP."</button>
-    <button class="option-btn" onclick="answer(20,'d',false)"><span class="option-letter">D</span> "Client Baker — treatment gap resolved."</button>
-   </div>
-   <div class="feedback" id="fb20"></div>
-   <div class="quiz-nav"><button class="btn btn-primary" id="next20" style="display:none" onclick="showResults()">See Results &rarr;</button></div>
-  </div>
 
  </div>
 </div>
@@ -1360,7 +1286,7 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
         <div class="cert-badges" id="certBadges"></div>
         <div class="cert-signature">
           <div class="cert-sig-line"></div>
-          <div class="cert-sig-name">Harrell Gunn</div>
+          <div class="cert-sig-name">the Managing Attorney Gunn</div>
           <div class="cert-sig-title">Managing Attorney · Gunn Law Group</div>
         </div>
       </div>
@@ -1480,7 +1406,7 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
   <span class="cert-seal">⚖️</span>
   <div class="cert-signature">
     <div class="cert-sig-line"></div>
-    <div class="cert-sig-name">Harrell Gunn</div>
+    <div class="cert-sig-name">the Managing Attorney Gunn</div>
     <div class="cert-sig-title">Managing Attorney, Gunn Law Group</div>
   </div>
   <div class="cert-badges" id="certBadges"></div>
@@ -1502,7 +1428,7 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
  <div class="cert-date" id="cert-date"></div>
  <div class="cert-sig">
   <div class="cert-sig-line"></div>
-  <div class="cert-sig-label">Harrell Gunn — Managing Attorney, Gunn Law Group</div>
+  <div class="cert-sig-label">the Managing Attorney Gunn — Managing Attorney, Gunn Law Group</div>
  </div>
  <button class="btn btn-primary print-btn" onclick="window.print()">Print Certificate</button>
 </div>
@@ -1520,90 +1446,9 @@ const answers = {};
 let lastScore = 0;
 let starRating = 0;
 
-const correctAnswers = {1:'b',2:'c',3:'a',4:'b',5:'d',6:'b',7:'c',8:'a',9:'c',10:'b',11:'a',12:'d',13:'c',14:'b',15:'d',16:'a',17:'c',18:'d',19:'a',20:'b'};
+const correctAnswers = {} /* CUTOVER: answer key removed — the engine grades */;
 
-const feedbackText = {
- 1: {
-  correct: "Correct! Pre-litigation clients must be contacted every 14 days. This is the firm standard — non-negotiable. If a client calls asking for an update, we already failed.",
-  incorrect: "Not quite. The pre-litigation contact standard is every 14 days — not 7, not 30, and not just when there's news. Updates must happen even if nothing has changed."
- },
- 2: {
-  correct: "Correct! The 14-day call serves three purposes simultaneously: keeps the client satisfied, generates referrals through consistent attentiveness, and drives case value by catching treatment gaps. One behavior, three systems' payoff.",
-  incorrect: "Incorrect. The 14-day call is a satisfaction tool (client feels heard), a referral generator (satisfied clients tell others), and a case-value driver (treatment compliance = bigger settlement). One behavior, three payoffs."
- },
- 3: {
-  correct: "Correct! MRI findings — disc herniations, bulges, or structural damage — are objective evidence that drives treatment escalation. Subjective complaints alone don't support moving beyond conservative care. (Review from NH-6)",
-  incorrect: "Not quite. MRI showing disc herniation or structural damage is the key finding that supports escalating beyond conservative treatment. Verbal pain ratings and visit counts are not objective diagnostic evidence. (Review from NH-6)"
- },
- 4: {
-  correct: "Correct! You never quote settlement amounts — not a number, not a range, not even an approximation. The five required elements are: current case stage, what we're waiting on, next step, realistic timeframe, and expectation reset if needed.",
-  incorrect: "Incorrect. Estimated settlement amount is NOT one of the five required elements. You never quote a number. The five are: current case stage, what we're waiting on, next step, realistic timeframe, and expectation reset if needed."
- },
- 5: {
-  correct: "Correct! After EVERY call attempt — answered or not — send a follow-up text. It creates a written record, shows the client you're actively working their case, and gives them a way to respond on their own time.",
-  incorrect: "Incorrect. After every call attempt, the follow-up text goes out immediately. Not logged at end of day, not emailed to the attorney, not deferred. The text creates a record and shows the client you're working on their case."
- },
- 6: {
-  correct: "Correct! Every CasePeer note must follow the five-part format: Date, Method, Who, What, and Next Steps. A note missing any of these elements fails the documentation standard.",
-  incorrect: "Not quite. The required format is Date | Method | Who | What | Next Steps. A simple summary or client name isn't enough — every element is required for the note to pass the handoff test."
- },
- 7: {
-  correct: "Correct! The handoff test: could a colleague who has never touched this file read your note and pick up where you left off without calling you? If yes, it's a good note. If no, rewrite it.",
-  incorrect: "Incorrect. The handoff test isn't about length, attorney review, or formatting. It asks: could someone who's never seen this file read your note and seamlessly take over? That's the standard."
- },
- 8: {
-  correct: "Correct! Person first, file second. 'How are you doing?' before 'Are you going to your appointments?' The client who feels the firm sees them as a person is more engaged, more compliant, and more likely to refer.",
-  incorrect: "Not quite. The first question should always be about the person, not the file. 'How are you doing? How are you feeling?' comes before any compliance questions. Clients who feel seen as people — not case numbers — are more likely to stay engaged."
- },
- 9: {
-  correct: "Correct! Find the real barrier first. Ask 'What's the real challenge here?' and 'And what else?' at least once. The first answer is often the presenting reason — not the actual one. You can't solve the right problem if you don't find it first.",
-  incorrect: "Incorrect. Before explaining consequences, you must find the barrier. Ask what's getting in the way — transportation? billing? scheduling? The first answer is often not the real one. Ask 'And what else?' to uncover the actual issue."
- },
- 10: {
-  correct: "Correct! Acknowledge their progress genuinely, then explain the risk: stopping before official discharge gives the insurance company evidence to argue the injuries resolved on their own. Then escalate to the attorney. Never accept a client stopping treatment without attorney sign-off.",
-  incorrect: "Not quite. Never just accept a client stopping treatment. And never threaten them. Acknowledge progress, explain the risk (insurance will use the gap), and escalate to the attorney. This is a case-value decision that requires attorney involvement."
- },
- 11: {
-  correct: "Correct! 'Share facts first' means leading with objective facts from the record — not opinions, not accusations. 'Here's what the records show...' before 'My read is that...' Facts establish common ground before interpretation.",
-  incorrect: "Incorrect. 'Share facts first' means leading with objective, verifiable information from the case file before sharing your interpretation. Facts establish common ground; opinions without facts create conflict."
- },
- 12: {
-  correct: "Correct! Acknowledge the emotion first — name what they're feeling before doing anything else. 'I hear that you're frustrated, and that makes complete sense.' Proving them wrong, apologizing reflexively, or transferring immediately all fail to address the emotional reality. Safety first, then content.",
-  incorrect: "Not quite. The first response to an upset client is always to acknowledge what they're feeling. Not to prove them wrong, not to transfer them, and not to make empty promises. Name the emotion: 'I hear that you're frustrated.' Then address the substance."
- },
- 13: {
-  correct: "Correct! 24 hours — non-negotiable. Messages after 5 PM get a response by noon the next business day. Callbacks older than 24 hours are a firm vital sign. Target: zero.",
-  incorrect: "Incorrect. The callback standard is 24 hours from the time of the call — not same day, not 48 hours, not end of week. This is one of three metrics that tells the firm whether it's working."
- },
- 14: {
-  correct: "Correct! Escalate when: 2+ unresolved complaints, client threatens to terminate or contact the bar, settlement dispute beyond paralegal authority, or attorney callback not fulfilled within 24 hours. Escalating is the system working correctly.",
-  incorrect: "Not quite. Escalation triggers are specific: 2+ complaints without resolution, threats to terminate or contact the bar, settlement disputes beyond your authority. A raised voice alone isn't a trigger — but threats to leave or file complaints are."
- },
- 15: {
-  correct: "Correct! The treatment ladder must be followed in order: conservative, then diagnostic, then interventional, then surgical. Each step must fail before the next is justified. Insurance companies will deny claims where treatment jumps steps. (Review from prior modules)",
-  incorrect: "Not quite. The treatment progression is strict: conservative care first, then diagnostic imaging, then injections, then surgery. You cannot skip steps. Insurance companies expect documented failure at each level before escalating. (Review from prior modules)"
- },
- 16: {
-  correct: "Correct! That note is missing almost everything: no date, no phone number called, no purpose of the call, no detail about the voicemail content, and no next steps. It fails the handoff test completely. A colleague reading it would know nothing.",
-  incorrect: "Incorrect. 'Called client. Left voicemail.' is a bad note. It's missing the date, phone number, reason for the call, what the voicemail said, and next steps. Per GLG standards, that note would be treated as if the contact didn't happen."
- },
- 17: {
-  correct: "Correct! Acknowledge first, always. Name what she's feeling before doing anything else. 'It sounds like you're frustrated and feeling left in the dark.' Proving you called, transferring, or making excuses all fail to address the emotional reality. Restore safety first, then handle the substance.",
-  incorrect: "Not quite. The first move with an upset client is always to acknowledge the emotion. Not defend, not transfer, not explain. 'It sounds like you're frustrated and feeling left in the dark. That makes complete sense.' Once she feels heard, you can address everything else."
- },
- 18: {
-  correct: "Correct! She should not be paying out of pocket — her treatment is under a Letter of Protection. The provider agreed to wait for payment from the settlement. Contact Peachtree Chiro today to resolve the billing error. Don't tell her to ignore the bill or pay it — solve the problem.",
-  incorrect: "Not quite. The correct response is to explain the LOP: she should not be paying anything out of pocket. Her treatment is covered, the provider will be paid from settlement proceeds, and you will contact the provider today to fix the error. Ignoring the bill or paying it are both wrong."
- },
- 19: {
-  correct: "Correct! A real commitment has three parts: a specific appointment date, verbal confirmation from the client, and a follow-up call date — all logged in CasePeer. 'I'll try to go back soon' is not a commitment. A date and a follow-up are.",
-  incorrect: "Not quite. 'I'll try to go back soon' and 'I'll think about it' are not commitments. You need a specific date for her next appointment, verbal confirmation, and a specific date when you'll follow up — both documented in CasePeer before you hang up."
- },
- 20: {
-  correct: "Correct! The full note includes: date, method, client's concern in their words, what you said, what you promised and by when, billing resolution steps, treatment gap details, appointment commitment, and follow-up date. That's a note that passes the handoff test.",
-  incorrect: "Not quite. 'She was upset. Fixed it.' tells the next person nothing. GLG documentation requires: date, method, specific concern in the client's words, your response, what was promised, deadlines, treatment gap details, and next steps. The detailed note is the only one that passes the handoff test."
- }
-};
+const feedbackText = {} /* CUTOVER: feedback served per-answer by the engine */;
 
 const qTexts = [
  "14-day contact frequency",
@@ -1637,7 +1482,7 @@ function goToSection(idx) {
  document.getElementById('certificate').classList.remove('show');
 
  if (idx === 7) {
-  document.getElementById('quiz-section').classList.add('active');
+  document.getElementById('section-7').classList.add('active');
  } else if (idx === 8) {
   document.getElementById('boss-section').classList.add('active');
  } else {
@@ -1651,6 +1496,14 @@ function goToSection(idx) {
 }
 
 function startQuiz() {
+  var _ni = document.getElementById('trainee-name-input');
+  var _name = (_ni && _ni.value.trim()) || '';
+  if (!_name) {
+    if (typeof showToast === 'function') showToast('\u26a0\ufe0f Please enter your name before starting the quiz', false);
+    else alert('Please enter your name before starting the quiz.');
+    return;
+  }
+
  for (let i = 0; i < totalSections; i++) sectionsDone.add(i);
  updateNavPills();
  goToSection(7);
@@ -1677,7 +1530,7 @@ function resetQuizUI() {
  }
 }
 
-function answer(qNum, chosen, isCorrect) {
+window.answerUI = function answerUI(qNum, chosen, isCorrect) {
  if (answers[qNum] !== undefined) return;
  answers[qNum] = isCorrect;
  var qBlock = document.getElementById('q' + qNum);
@@ -1754,7 +1607,7 @@ function showResults() {
 
  var score = correctCount * 10;
  var pct = Math.round((score / 200) * 100);
- var PASS_THRESHOLD = 160; // 80% — Harrell ruling Jul 6
+ var PASS_THRESHOLD = 160; // 80% — the Managing Attorney ruling Jul 6
  var passed = score >= PASS_THRESHOLD;
  lastScore = score;
 
@@ -2008,5 +1861,79 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
 </script>
+
+
+
+<script>
+/* ── go() / startQuiz() — quiz entry point (day10 variant) ── */
+/* Override day10's local startQuiz() — engine version fires beginAttempt() first */
+window.startQuiz = async function() {
+  var _ni = document.getElementById('trainee-name-input');
+  var _name = (_ni && _ni.value.trim()) || '';
+  if (!_name) {
+    if (typeof showToast === 'function') showToast('⚠️ Please enter your name before starting the quiz', false);
+    else alert('Please enter your name before starting the quiz.');
+    return;
+  }
+  // Bug-2 fix: await attempt start before navigating to quiz
+  await window.GLGQuiz.beginAttempt(_name);
+  goToSection(7);
+};
+function go(screen) {
+  if (screen === 'quiz') window.startQuiz();
+}
+
+/* ── GLG MODULE CONFIG — wires api-quiz-engine.js to module-day10.html ── */
+window.GLG_MODULE_CONFIG = {
+  moduleId: 'day10',
+  onBankLoaded: function(bank) {
+    var basemax = document.getElementById('basemax');
+    var gate    = document.getElementById('gate');
+    if (basemax) basemax.textContent = bank.base_max;
+    if (gate)    gate.textContent    = bank.pass_pct;
+    /* Show content-section next buttons */
+    for (var i = 1; i <= 6; i++) {
+      var nextEl = document.getElementById('s' + i + '-next');
+      if (nextEl) nextEl.style.display = 'flex';
+    }
+  },
+  onStartQuiz: function() {
+    /* No audio ctx in day10 — harmless no-op */
+  },
+  onAnswered: function(r) {
+    var ts = document.getElementById('total-score');
+    if (ts) ts.textContent = r.base_score;
+    var bs = document.getElementById('bonus-score');
+    if (bs) bs.textContent = r.bonus_score;
+  },
+  onComplete: function(r) {
+    window._day10Passed = r.passed;
+    /* Show results-section with engine data */
+    document.querySelectorAll('.section-card').forEach(function(el) { el.classList.remove('active'); });
+    var rs = document.getElementById('results-section');
+    if (rs) {
+      rs.style.display = 'block';
+      rs.classList.add('active');
+      var sc = document.getElementById('results-score');
+      if (sc) sc.textContent = r.base_score + ' / ' + r.base_max;
+      var st = document.getElementById('results-status');
+      if (st) st.textContent = r.passed ? 'You Passed! 🏆' : 'Keep Practicing 📚';
+      var rh = document.getElementById('results-header');
+      if (rh) rh.className = 'results-header ' + (r.passed ? 'pass' : 'fail');
+      var rb = document.getElementById('retake-btn');
+      if (rb) rb.style.display = r.passed ? 'none' : 'block';
+      if (r.passed) {
+        var fb = document.getElementById('feedback-section');
+        if (fb) fb.style.display = 'block';
+      }
+    }
+    /* Update nav pills */
+    document.querySelectorAll('.nav-pill').forEach(function(p) { p.classList.remove('active'); });
+    updateProgress(9, r.passed);
+    window.scrollTo(0, 0);
+  }
+};
+</script>
+<script src="api-quiz-engine.js"></script>
 </body>
 </html>

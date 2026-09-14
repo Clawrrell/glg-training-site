@@ -5,7 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
   <title>LA-5 — Insurance Verification Support | Gunn Law Group</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <style>
+:root {
+    --navy: #141c2c;
+    --gold: #dcb161;
+    --gold-lt: #f0d89a;
+}
+
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
     body{font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;color:#333;font-size:16px;line-height:1.6;-webkit-text-size-adjust:100%;overflow-x:hidden;}
@@ -178,6 +185,159 @@
     .option-btn.correct{animation:correctPulse 0.6s ease-out;}
     .option-btn.incorrect{animation:incorrectShake 0.4s ease-out;}
   </style>
+
+<style>
+/* ── GLG QUIZ ENGINE — question type styles (2026-09-02) ──────────────────
+     All classes rendered by api-quiz-engine.js. Tokens: navy #141c2c, gold #C5975B.
+     Sourced from engine.html stylesheet + the Managing Attorney Part 8c spec. */
+
+  /* Question card */
+  .q { background:#fff; border:1px solid #e2e5ea; border-radius:10px;
+       padding:20px; margin:16px 0; box-shadow:0 1px 6px rgba(20,28,44,.06); }
+  .q-num { font-size:12px; letter-spacing:.06em; color:#C5975B; font-weight:700;
+            text-transform:uppercase; margin-bottom:8px; }
+  .q-text { font-weight:600; margin:8px 0 16px; font-size:1rem; line-height:1.55;
+             color:#141c2c; }
+
+  /* MC option buttons */
+  button.opt { display:block; width:100%; text-align:left; padding:13px 15px; margin:7px 0;
+    border:1px solid #d8dbe3; border-radius:8px; background:#fafbfd; cursor:pointer;
+    font-size:15px; font-family:var(--font-b); color:#222; line-height:1.45;
+    transition:background .12s, border-color .12s; }
+  button.opt:hover:not(.locked) { background:#eef4ff; border-color:#141c2c; }
+  button.opt.correct { background:#d4edda; border-color:#10774A; }
+  button.opt.incorrect { background:#f8d7da; border-color:#870101; }
+  button.opt.locked { cursor:default; opacity:.85; }
+
+  /* Fill-in-the-blank */
+  .fill-stem { font-weight:600; margin:8px 0 14px; line-height:2.2; }
+  input.blank { display:inline-block; min-height:44px; min-width:120px; padding:8px 10px;
+    margin:2px 4px; border:1px solid #ccd; border-radius:8px; background:#fafbfd;
+    font-size:16px; font-family:var(--font-b); vertical-align:middle;
+    box-sizing:border-box; max-width:100%; }
+  input.blank:focus { outline:2px solid #141c2c; background:#fff; }
+  input.blank.correct { background:#d4edda; border-color:#10774A; }
+  input.blank.incorrect { background:#f8d7da; border-color:#870101; }
+  input.blank.locked { opacity:.85; }
+  button.submit-fill { min-height:44px; padding:11px 20px; margin-top:12px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-fill.locked { opacity:.5; cursor:default; }
+
+  /* Markup */
+  .markup-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .markup-passage { margin:0 0 10px; border:1px solid #e2e5ea; border-radius:8px; overflow:hidden; }
+  button.span { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:11px 13px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:16px; font-family:var(--font-b);
+    color:#222; line-height:1.5; overflow-wrap:break-word; }
+  button.span:last-child { border-bottom:0; }
+  button.span:hover:not(.locked) { background:#eef4ff; }
+  button.span.selected { background:#fff3cd; box-shadow:inset 4px 0 0 #b8860b; font-weight:600; }
+  button.span.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.span.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.span.locked { cursor:default; opacity:.9; }
+  button.submit-markup { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-markup.locked { opacity:.5; cursor:default; }
+  .markup-count { font-size:13px; color:#555; margin-top:8px; }
+
+  /* Sort rows with up/down controls */
+  .sort-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .sort-list { margin:0 0 12px; border:1px solid #e2e5ea; border-radius:8px;
+               overflow:hidden; background:#fff; }
+  .sort-row { display:flex; align-items:stretch; border-bottom:1px solid #eef0f3;
+              background:#fff; }
+  .sort-row:last-child { border-bottom:0; }
+  .sort-pos { flex:0 0 34px; display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700; color:#C5975B; background:#f5f5f0; }
+  .sort-text { flex:1 1 auto; padding:11px 12px; font-size:15px; line-height:1.45;
+    display:flex; align-items:center; overflow-wrap:break-word; min-width:0; }
+  .sort-moves { flex:0 0 auto; display:flex; align-items:center; gap:4px; padding:4px 6px; }
+  button.sort-move { min-height:44px; min-width:44px; border:1px solid #ccd; border-radius:8px;
+    background:#fafbfd; cursor:pointer; font-size:15px; color:#141c2c;
+    font-family:var(--font-b); }
+  button.sort-move:hover:not(:disabled) { background:#eef4ff; }
+  button.sort-move:disabled { opacity:.35; cursor:default; }
+  .sort-row.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  .sort-row.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  .sort-row.locked .sort-text { opacity:.9; }
+  button.submit-sort { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-sort.locked { opacity:.5; cursor:default; }
+
+  /* Match chips + slot rows */
+  .match-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .match-tray { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px; padding:10px;
+    border:1px dashed #ccd; border-radius:8px; background:#fafbfd; }
+  button.chip { min-height:44px; padding:10px 16px; border:1px solid #ccd; border-radius:22px;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b); color:#222;
+    max-width:100%; overflow-wrap:break-word; text-align:left; }
+  button.chip:hover:not(.locked) { background:#eef4ff; }
+  button.chip.selected { background:#141c2c; color:#fff; border-color:#141c2c; font-weight:600; }
+  button.chip.placed { opacity:.35; }
+  button.chip.locked { cursor:default; }
+  .match-slots { border:1px solid #e2e5ea; border-radius:8px; overflow:hidden;
+                 background:#fff; margin-bottom:12px; }
+  button.slot { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:10px 14px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b);
+    color:#222; line-height:1.45; overflow-wrap:break-word; }
+  button.slot:last-child { border-bottom:0; }
+  button.slot:hover:not(.locked) { background:#eef4ff; }
+  button.slot.armed { box-shadow:inset 4px 0 0 #C5975B; background:#fffdf5; }
+  .slot-label { font-weight:600; display:block; }
+  .slot-fill { display:block; font-size:14px; margin-top:3px; color:#C5975B; font-weight:600; }
+  .slot-fill.empty { color:#8a8f98; font-weight:400; font-style:italic; }
+  button.slot.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.slot.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.slot.locked { cursor:default; opacity:.9; }
+  button.submit-match { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-match.locked { opacity:.5; cursor:default; }
+  .match-count { font-size:13px; color:#555; margin-top:8px; }
+  .match-credit { font-size:13px; font-weight:600; color:#8a6d1f; margin-top:6px; }
+
+  /* Feedback */
+  .fb { margin-top:12px; padding:12px 14px; border-radius:8px; font-size:14px; display:none; }
+  .fb.show { display:block; }
+  .fb.ok { background:#d4edda; border-left:4px solid #10774A; }
+  .fb.no { background:#f8d7da; border-left:4px solid #870101; }
+  .fb.neutral { background:#eef0f6; border-left:4px solid #6c757d; color:#333; } /* self_assessment: no verdict */
+
+  /* Branching nodes */
+  .branch-scenario { border-left:4px solid #C5975B; padding-left:12px; margin:14px 0; }
+  .branch-turn { font-size:12px; letter-spacing:.06em; color:#8a6d1f; font-weight:700;
+                 text-transform:uppercase; }
+  .branch-instruction { font-weight:600; margin:6px 0 10px; color:#141c2c; }
+  .branch-consequence { margin-top:10px; padding:10px 12px; border-left:4px solid #141c2c;
+    background:#eef2f7; border-radius:0 8px 8px 0; font-size:13px; color:#33415c; display:none; }
+  .branch-consequence.show { display:block; }
+
+  /* Pagination — one question at a time (the Managing Attorney Part 8b) */
+  .q-base { display: none !important; }
+  .q-base.q-active { display: block !important; }
+  .q-nav { display:flex; justify-content:space-between; align-items:center;
+            margin-top:20px; padding-top:16px; border-top:1px solid #e8e6e0; }
+  .q-nav-btn { min-height:44px; padding:10px 22px; border-radius:8px;
+                font-size:15px; cursor:pointer; font-family:var(--font-b);
+                font-weight:600; transition:background .12s; }
+  .q-nav-btn.next { background:#141c2c; color:#C5975B; border:2px solid #141c2c; }
+  .q-nav-btn.next:hover { background:#1e2a40; }
+  .q-nav-btn.back { background:#fff; color:#141c2c; border:2px solid #c8c5be; }
+  .q-nav-btn.back:hover { background:#f5f5f0; }
+  .q-pg-spacer { display:inline-block; min-width:40px; }
+  #q-progress { font-size:12px; color:#C5975B; font-weight:600;
+                letter-spacing:.5px; text-transform:uppercase; }
+
+
+</style>
+
+<!-- CUTOVER: server-side grading. Answer keys are not in this file. -->
+    <link rel="stylesheet" href="boss-challenge.css">
 </head>
 <body>
 
@@ -209,8 +369,9 @@
   <button class="nav-pill" id="nav-4" onclick="goToSection(4)">UM Sources</button>
   <button class="nav-pill" id="nav-5" onclick="goToSection(5)">Docs &amp; Escalation</button>
   <button class="nav-pill" id="nav-6" onclick="goToSection(6)">👾 Boss</button>
-  <button class="nav-pill" id="nav-7" onclick="goToSection(7)">Results</button>
-  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">Certificate</button>
+  <button class="nav-pill" id="nav-7" onclick="startQuiz()">8. Quiz</button>
+  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">9. Results</button>
+  <button class="nav-pill" id="nav-9" onclick="goToSection(9)">10. Feedback</button>
 </nav>
 
 <main>
@@ -289,56 +450,12 @@
     </div>
 
     <!-- Q1 -->
-    <div class="question-block" id="q1-block">
-      <div class="q-num">Question 1 · 10 pts · Coverage Type Identification</div>
-      <div class="q-text">Freya's new case: client Diane Patel was rear-ended at a stoplight. The at-fault driver has Progressive insurance. Diane has her own GEICO policy. At intake, Freya needs to identify coverage sources. What does "BI coverage" refer to in this case?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q1','a',false)" id="q1-a"><span class="opt-letter">A</span><span class="opt-text">The coverage on Diane's GEICO policy that will pay her medical bills regardless of fault — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage</span></button>
-        <button class="option-btn" onclick="answer('q1','b',false)" id="q1-b"><span class="opt-letter">B</span><span class="opt-text">Diane's uninsured motorist coverage that activates if Progressive denies the claim</span></button>
-        <button class="option-btn" onclick="answer('q1','c',true)" id="q1-c"><span class="opt-letter">C</span><span class="opt-text">The at-fault driver's liability coverage — the Progressive policy that compensates Diane for her injuries</span></button>
-        <button class="option-btn" onclick="answer('q1','d',false)" id="q1-d"><span class="opt-letter">D</span><span class="opt-text">Diane's MedPay rider on her GEICO policy that covers immediate medical expenses</span></button>
-      </div>
-      <div class="feedback-box" id="q1-fb"></div>
-    </div>
 
     <!-- Q2 -->
-    <div class="question-block" id="q2-block">
-      <div class="q-num">Question 2 · 10 pts · Excess vs. Reduced UM Math</div>
-      <div class="q-text">The at-fault driver in Carlos Rivera's accident has a $25,000 liability policy. Carlos has a $100,000 EXCESS UM policy through his own carrier. If Carlos's total damages are $150,000, what is the maximum he can collect from BOTH sources combined?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q2','a',false)" id="q2-a"><span class="opt-letter">A</span><span class="opt-text">$100,000 — UM only covers up to its policy limits; the at-fault payment is absorbed into that cap</span></button>
-        <button class="option-btn" onclick="answer('q2','b',true)" id="q2-b"><span class="opt-letter">B</span><span class="opt-text">$125,000 — the $25K at-fault liability payout PLUS the full $100K Excess UM stacking on top</span></button>
-        <button class="option-btn" onclick="answer('q2','c',false)" id="q2-c"><span class="opt-letter">C</span><span class="opt-text">$75,000 — Excess UM pays only the gap ($100K minus the $25K already collected from at-fault)</span></button>
-        <button class="option-btn" onclick="answer('q2','d',false)" id="q2-d"><span class="opt-letter">D</span><span class="opt-text">$150,000 — Carlos collects full damages regardless of policy limits when he has both BI and UM</span></button>
-      </div>
-      <div class="feedback-box" id="q2-fb"></div>
-    </div>
 
     <!-- Q3 -->
-    <div class="question-block" id="q3-block">
-      <div class="q-num">Question 3 · 10 pts · Written Rejection Rule</div>
-      <div class="q-text">Client Michael Torres says: "I told my insurance agent I didn't want UM coverage to save money — it's cheaper without it." Freya checks CasePeer and finds no UM rejection form on file. What is the correct rule under Georgia law?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q3','a',true)" id="q3-a"><span class="opt-letter">A</span><span class="opt-text">Without a signed, written rejection on file, Michael legally has UM coverage — verbal rejections are invalid and the coverage exists by operation of Georgia law</span></button>
-        <button class="option-btn" onclick="answer('q3','b',false)" id="q3-b"><span class="opt-letter">B</span><span class="opt-text">Michael's statement to his agent is legally sufficient to remove UM coverage — verbal rejections are honored under Georgia law</span></button>
-        <button class="option-btn" onclick="answer('q3','c',false)" id="q3-c"><span class="opt-letter">C</span><span class="opt-text">The absence of a rejection form means the insurer must re-offer the coverage at renewal — it does not mean Michael currently has it</span></button>
-        <button class="option-btn" onclick="answer('q3','d',false)" id="q3-d"><span class="opt-letter">D</span><span class="opt-text">UM coverage is automatically removed when the insured selects a lower premium tier — no written form is required for premium-based adjustments, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
-      </div>
-      <div class="feedback-box" id="q3-fb"></div>
-    </div>
 
     <!-- Q4 -->
-    <div class="question-block" id="q4-block">
-      <div class="q-num">Question 4 · 10 pts · MedPay Identification</div>
-      <div class="q-text">Client Angela Washington was hit by an uninsured driver. She went to urgent care the same day and has $3,200 in medical bills. Angela has her own State Farm policy. What should Freya check for FIRST on Angela's own policy to help with the immediate medical bills?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q4','a',false)" id="q4-a"><span class="opt-letter">A</span><span class="opt-text">Whether Angela has a UM claim available — that is the primary recovery source for an uninsured driver case — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value</span></button>
-        <button class="option-btn" onclick="answer('q4','b',false)" id="q4-b"><span class="opt-letter">B</span><span class="opt-text">Whether Angela has PIP coverage — Georgia is a no-fault state and PIP may cover these bills immediately</span></button>
-        <button class="option-btn" onclick="answer('q4','c',true)" id="q4-c"><span class="opt-letter">C</span><span class="opt-text">Whether Angela has MedPay coverage on her State Farm policy — it pays medical bills immediately, regardless of fault, without waiting for liability to be sorted out</span></button>
-        <button class="option-btn" onclick="answer('q4','d',false)" id="q4-d"><span class="opt-letter">D</span><span class="opt-text">Whether Angela can submit these bills to the at-fault driver's liability carrier as the primary source</span></button>
-      </div>
-      <div class="feedback-box" id="q4-fb"></div>
-    </div>
 
     <div class="section-score" id="s1-score" style="display:none;"><div class="score-display" id="s1-score-val"></div><div class="score-label">Section 1 Score</div></div>
     <div class="btn-group" id="s1-next"><button class="btn btn-primary btn-block" onclick="goToSection(2)">Section 2: Opening the Claims →</button></div>
@@ -378,56 +495,12 @@
     </div>
 
     <!-- Q5 -->
-    <div class="question-block" id="q5-block">
-      <div class="q-num">Question 5 · 10 pts · Template 01 vs. Template 02</div>
-      <div class="q-text">Yusuf identifies two insurance sources for client Tanya Brown: (1) the at-fault driver's Allstate liability policy, and (2) Tanya's own Progressive UM policy. He needs to send Letters of Representation to open both claims. Which templates does he use for each?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q5','a',false)" id="q5-a"><span class="opt-letter">A</span><span class="opt-text">Template 01 to Allstate AND Template 01 to Progressive — the same LOR format works for both insurers</span></button>
-        <button class="option-btn" onclick="answer('q5','b',true)" id="q5-b"><span class="opt-letter">B</span><span class="opt-text">Template 01 to Allstate (at-fault liability carrier), Template 02 to Progressive (client's UM carrier)</span></button>
-        <button class="option-btn" onclick="answer('q5','c',false)" id="q5-c"><span class="opt-letter">C</span><span class="opt-text">Template 02 to Allstate (at-fault), Template 01 to Progressive (client's UM) — UM claims open first in the sequence</span></button>
-        <button class="option-btn" onclick="answer('q5','d',false)" id="q5-d"><span class="opt-letter">D</span><span class="opt-text">Template 01 to Allstate only — the UM claim does not need its own LOR until the at-fault claim is resolved</span></button>
-      </div>
-      <div class="feedback-box" id="q5-fb"></div>
-    </div>
 
     <!-- Q6 -->
-    <div class="question-block" id="q6-block">
-      <div class="q-num">Question 6 · 10 pts · Template 62 — What's the Difference?</div>
-      <div class="q-text">During intake for new client Rafael Garza, Noor confirms Rafael has a $150,000 UM policy with GEICO. She sends Template 02 (LOR UM) to GEICO. Her paralegal reviews the file and asks: "Did you also put them on notice?" What is the paralegal referring to, and what is Noor missing?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q6','a',false)" id="q6-a"><span class="opt-letter">A</span><span class="opt-text">Nothing is missing — Template 02 already puts the UM carrier on notice; the paralegal is confused about which template does what — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken</span></button>
-        <button class="option-btn" onclick="answer('q6','b',true)" id="q6-b"><span class="opt-letter">B</span><span class="opt-text">Template 62 (UM Insurer On Notice) — a separate notification that formally puts the UM carrier on notice of the potential claim, distinct from the LOR that opens the file. Both are required and go to the same UM carrier.</span></button>
-        <button class="option-btn" onclick="answer('q6','c',false)" id="q6-c"><span class="opt-letter">C</span><span class="opt-text">The paralegal means the demand letter — you cannot collect UM benefits without a formal demand first (Template 11)</span></button>
-        <button class="option-btn" onclick="answer('q6','d',false)" id="q6-d"><span class="opt-letter">D</span><span class="opt-text">A spoliation letter (Template 31) to preserve any evidence relevant to the UM claim</span></button>
-      </div>
-      <div class="feedback-box" id="q6-fb"></div>
-    </div>
 
     <!-- Q7 -->
-    <div class="question-block" id="q7-block">
-      <div class="q-num">Question 7 · 10 pts · 48-Hour LOR Deadline</div>
-      <div class="q-text">Sanne is assigned a new file on Tuesday morning at 9:00 AM. She gets pulled into helping with an emergency on another case and loses track of the LOR task. By Thursday morning at 9:00 AM, she still hasn't sent the at-fault LOR. Per the Legal Assistant SOP, what is the status of this situation?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q7','a',true)" id="q7-a"><span class="opt-letter">A</span><span class="opt-text">The LOR deadline has been reached — the 48-hour window from Tuesday 9:00 AM expires Thursday 9:00 AM. She is at exactly the limit with zero margin. She must send immediately and log the near-miss.</span></button>
-        <button class="option-btn" onclick="answer('q7','b',false)" id="q7-b"><span class="opt-letter">B</span><span class="opt-text">The LOR is on time — the 48-hour clock only starts when Sanne is actually available to work the task, not when the file was assigned, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity</span></button>
-        <button class="option-btn" onclick="answer('q7','c',false)" id="q7-c"><span class="opt-letter">C</span><span class="opt-text">The 48-hour window is a target, not a hard deadline — Sanne should send it today and note the reason for the delay in CasePeer</span></button>
-        <button class="option-btn" onclick="answer('q7','d',false)" id="q7-d"><span class="opt-letter">D</span><span class="opt-text">The LOR is 24 hours overdue — the SOP standard is same business day, not 48 hours</span></button>
-      </div>
-      <div class="feedback-box" id="q7-fb"></div>
-    </div>
 
     <!-- Q8 — CALIBRATION -->
-    <div class="question-block" id="q8-block">
-      <div class="q-num">Question 8 · 10 pts · Calibration Check — Multi-Source Case ⚡</div>
-      <div class="q-text">Think carefully before answering. Client Patricia Kim was a passenger in her friend David's car. David was driving with permission from his mother Karen, who owns the car and carries the insurance (Allstate). An underinsured driver hit them. Patricia has her own USAA UM policy. What is the complete set of template actions Yusuf must execute at intake to open ALL coverage sources?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q8','a',false)" id="q8-a"><span class="opt-letter">A</span><span class="opt-text">Template 01 to the at-fault insurer only — UM claims should wait until at-fault limits are confirmed in writing</span></button>
-        <button class="option-btn" onclick="answer('q8','b',false)" id="q8-b"><span class="opt-letter">B</span><span class="opt-text">Templates 01 to at-fault, plus Templates 02 and 62 to Patricia's USAA UM — those are the only two coverage sources</span></button>
-        <button class="option-btn" onclick="answer('q8','c',true)" id="q8-c"><span class="opt-letter">C</span><span class="opt-text">Template 01 to at-fault insurer, Templates 02 and 62 to Patricia's USAA UM, AND investigate Karen's Allstate for a separate UM claim — Patricia was a guest in Karen's vehicle, and David was Karen's permissive driver, making Patricia a covered insured under Karen's policy. Three coverage sources require three separate claim openings.</span></button>
-        <button class="option-btn" onclick="answer('q8','d',false)" id="q8-d"><span class="opt-letter">D</span><span class="opt-text">Templates 01 and 62 to the at-fault insurer, plus Template 02 to Patricia's USAA — two LORs to at-fault are required when the driver and vehicle owner are different people — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage</span></button>
-      </div>
-      <div class="feedback-box" id="q8-fb"></div>
-    </div>
 
     <div class="section-score" id="s2-score" style="display:none;"><div class="score-display" id="s2-score-val"></div><div class="score-label">Section 2 Score</div></div>
     <div class="btn-group" id="s2-next"><button class="btn btn-primary btn-block" onclick="goToSection(3)">Section 3: Carrier Calls →</button></div>
@@ -465,56 +538,12 @@
     </div>
 
     <!-- Q9 -->
-    <div class="question-block" id="q9-block">
-      <div class="q-num">Question 9 · 10 pts · What to Confirm in a Carrier Call</div>
-      <div class="q-text">Sanne calls Progressive to confirm coverage for the at-fault driver in client Marcus Bell's case. The Progressive rep picks up. Which combination of information must Sanne capture and document during this call?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q9','a',false)" id="q9-a"><span class="opt-letter">A</span><span class="opt-text">The adjuster's name, the claim number, and whether a recorded statement from the client will be needed</span></button>
-        <button class="option-btn" onclick="answer('q9','b',false)" id="q9-b"><span class="opt-letter">B</span><span class="opt-text">The carrier name, claim number, and the adjuster's callback number — all other details come in the written confirmation</span></button>
-        <button class="option-btn" onclick="answer('q9','c',true)" id="q9-c"><span class="opt-letter">C</span><span class="opt-text">Carrier confirmed; policy limits by coverage type (BI, PD, UM); whether UM is Excess or Reduced; whether coverage was in force on the date of loss; dec page requested; rep's full name and direct contact</span></button>
-        <button class="option-btn" onclick="answer('q9','d',false)" id="q9-d"><span class="opt-letter">D</span><span class="opt-text">Only the policy number and claim number — all substantive coverage information must come from the insurer's written response, not a phone call, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
-      </div>
-      <div class="feedback-box" id="q9-fb"></div>
-    </div>
 
     <!-- Q10 -->
-    <div class="question-block" id="q10-block">
-      <div class="q-num">Question 10 · 10 pts · Coverage Call Documentation Standard</div>
-      <div class="q-text">Noor calls Mercury Insurance to confirm coverage for client Josephine Wells. She reaches billing rep Marco Diaz at 2:30 PM. He confirms: "$100,000 BI limits and $50,000 Excess UM limits." She enters in CasePeer: "Called Mercury — confirmed limits." What is wrong with this documentation?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q10','a',false)" id="q10-a"><span class="opt-letter">A</span><span class="opt-text">Nothing — the limits are in the CasePeer coverage fields; the note doesn't need to repeat what's already in the system</span></button>
-        <button class="option-btn" onclick="answer('q10','b',false)" id="q10-b"><span class="opt-letter">B</span><span class="opt-text">She should have sent a follow-up email to Mercury before logging anything — verbal confirmations are not sufficient</span></button>
-        <button class="option-btn" onclick="answer('q10','c',true)" id="q10-c"><span class="opt-letter">C</span><span class="opt-text">The note completely fails the handoff test — it's missing the rep's name and contact, the time of the call, the specific limits confirmed (amounts AND Excess type), whether a dec page was requested, and what follow-up task was set</span></button>
-        <button class="option-btn" onclick="answer('q10','d',false)" id="q10-d"><span class="opt-letter">D</span><span class="opt-text">She needs a separate note for each coverage type — BI and UM must be logged as individual entries per the Communication Logging Standards — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value</span></button>
-      </div>
-      <div class="feedback-box" id="q10-fb"></div>
-    </div>
 
     <!-- Q11 -->
-    <div class="question-block" id="q11-block">
-      <div class="q-num">Question 11 · 10 pts · When the At-Fault Carrier Denies Coverage</div>
-      <div class="q-text">Sanne calls State Farm to confirm coverage for the at-fault driver in Rosa Martinez's case. The State Farm rep says: "We're not going to cover this claim — the driver was using the vehicle for commercial delivery, which is excluded from his personal auto policy." What should Sanne do NEXT?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q11','a',false)" id="q11-a"><span class="opt-letter">A</span><span class="opt-text">Accept the denial, note it in CasePeer as "at-fault insurer denies coverage," and flag the case for the attorney to evaluate next steps</span></button>
-        <button class="option-btn" onclick="answer('q11','b',true)" id="q11-b"><span class="opt-letter">B</span><span class="opt-text">Request the written denial letter, log the call immediately with full details, and notify the paralegal right away — when the at-fault insurer formally denies coverage, the at-fault driver is treated as UNINSURED under Georgia law, which triggers the client's own UM coverage</span></button>
-        <button class="option-btn" onclick="answer('q11','c',false)" id="q11-c"><span class="opt-letter">C</span><span class="opt-text">Contact State Farm's supervisor to appeal the denial before taking any other action — coverage disputes should be escalated within the carrier first — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken</span></button>
-        <button class="option-btn" onclick="answer('q11','d',false)" id="q11-d"><span class="opt-letter">D</span><span class="opt-text">Send Template 01 again to State Farm — a second LOR sometimes resolves coverage disputes when the first contact produces a denial</span></button>
-      </div>
-      <div class="feedback-box" id="q11-fb"></div>
-    </div>
 
     <!-- Q12 -->
-    <div class="question-block" id="q12-block">
-      <div class="q-num">Question 12 · 10 pts · 5-Business-Day Deadline</div>
-      <div class="q-text">Yusuf received his file assignment on Monday, June 16th. Today is Tuesday, June 24th. He has not yet confirmed insurance coverage or policy limits. Per the Legal Assistant SOP, what is the status of this task?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q12','a',false)" id="q12-a"><span class="opt-letter">A</span><span class="opt-text">He's on time — the 5-business-day window starts only after the paralegal formally identifies all carriers, not from the date of file assignment, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity</span></button>
-        <button class="option-btn" onclick="answer('q12','b',false)" id="q12-b"><span class="opt-letter">B</span><span class="opt-text">He's within the window — 7 calendar days from June 16th puts him exactly at the 5-business-day limit on June 24th</span></button>
-        <button class="option-btn" onclick="answer('q12','c',true)" id="q12-c"><span class="opt-letter">C</span><span class="opt-text">The deadline was missed yesterday — Monday June 16th + 5 business days = Monday June 23rd. Today is Tuesday June 24th. Yusuf must complete coverage confirmation immediately and notify his paralegal that the deadline passed.</span></button>
-        <button class="option-btn" onclick="answer('q12','d',false)" id="q12-d"><span class="opt-letter">D</span><span class="opt-text">The 5-business-day standard applies to medical records requests, not coverage confirmation — coverage has a 30-day standard from the SOP</span></button>
-      </div>
-      <div class="feedback-box" id="q12-fb"></div>
-    </div>
 
     <div class="section-score" id="s3-score" style="display:none;"><div class="score-display" id="s3-score-val"></div><div class="score-label">Section 3 Score</div></div>
     <div class="btn-group" id="s3-next"><button class="btn btn-primary btn-block" onclick="goToSection(4)">Section 4: UM/UIM Sources →</button></div>
@@ -546,61 +575,17 @@
     </div>
     <div class="info-block">
       <h4>🚨 The $100K Escalation Rule</h4>
-      <p>When total available UM coverage across ALL policies exceeds <strong>$100,000</strong> — alert Adriauna (Lead Pre-Lit) <strong>IMMEDIATELY</strong>. Not at the weekly check-in. Not after you finish the rest of the intake. Immediately.</p>
+      <p>When total available UM coverage across ALL policies exceeds <strong>$100,000</strong> — alert the Pre-Lit Head Attorney <strong>IMMEDIATELY</strong>. Not at the weekly check-in. Not after you finish the rest of the intake. Immediately.</p>
       <p style="margin-top:8px;">This is a required escalation, not a suggestion. Cases with total UM above $100K require elevated strategy from the moment that threshold is confirmed.</p>
     </div>
 
     <!-- Q13 -->
-    <div class="question-block" id="q13-block">
-      <div class="q-num">Question 13 · 10 pts · Resident Relative Stacking</div>
-      <div class="q-text">Client Derek James was driving his own car when an uninsured driver ran a red light and hit him. Derek lives with his wife Tamika, who has her own Toyota Camry insured with GEICO with $100,000 UM limits. Derek has his own $50,000 UM policy. What is the correct analysis of available UM coverage?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q13','a',false)" id="q13-a"><span class="opt-letter">A</span><span class="opt-text">Only Derek's own $50,000 UM policy applies — Tamika's policy only covers Tamika and her Camry</span></button>
-        <button class="option-btn" onclick="answer('q13','b',false)" id="q13-b"><span class="opt-letter">B</span><span class="opt-text">Tamika's policy doesn't apply because Derek was not in Tamika's vehicle at the time of the accident</span></button>
-        <button class="option-btn" onclick="answer('q13','c',false)" id="q13-c"><span class="opt-letter">C</span><span class="opt-text">Stacking only applies when both people were in the same vehicle — since Derek was in his car alone, Tamika's coverage cannot be accessed — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage</span></button>
-        <button class="option-btn" onclick="answer('q13','d',true)" id="q13-d"><span class="opt-letter">D</span><span class="opt-text">Derek can stack both policies — as a resident relative (spouse) living in the same household, Derek is an insured under Tamika's GEICO UM policy even though he was in his own car. Total available: $150,000 ($50K + $100K).</span></button>
-      </div>
-      <div class="feedback-box" id="q13-fb"></div>
-    </div>
 
     <!-- Q14 -->
-    <div class="question-block" id="q14-block">
-      <div class="q-num">Question 14 · 10 pts · UM Follows the Person</div>
-      <div class="q-text">Client Maria Chen has a $200,000 UM policy through Nationwide on her own Honda Civic. She was a passenger in her coworker's Subaru Outback when an uninsured driver hit them. Maria was not in her own car. Which statement is correct?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q14','a',false)" id="q14-a"><span class="opt-letter">A</span><span class="opt-text">Maria's Nationwide UM policy does NOT apply — she can only use it when she is driving her own Honda Civic</span></button>
-        <button class="option-btn" onclick="answer('q14','b',true)" id="q14-b"><span class="opt-letter">B</span><span class="opt-text">Maria can claim on her Nationwide UM policy even though she was a passenger in a different vehicle — UM coverage follows the person, not the car. She may also have access to the Subaru's UM coverage as a guest.</span></button>
-        <button class="option-btn" onclick="answer('q14','c',false)" id="q14-c"><span class="opt-letter">C</span><span class="opt-text">Maria can only use the UM coverage that came with the Subaru Outback's insurance — her own Nationwide policy is suspended when she is a passenger in someone else's vehicle, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
-        <button class="option-btn" onclick="answer('q14','d',false)" id="q14-d"><span class="opt-letter">D</span><span class="opt-text">Maria must wait until the Subaru's UM coverage is exhausted before her Nationwide policy can be accessed</span></button>
-      </div>
-      <div class="feedback-box" id="q14-fb"></div>
-    </div>
 
     <!-- Q15 -->
-    <div class="question-block" id="q15-block">
-      <div class="q-num">Question 15 · 10 pts · Hit-and-Run UM Requirements</div>
-      <div class="q-text">Client Kevin Thompson was run off the road by a fleeing driver. Kevin's car swerved off the road to avoid being hit — there was NO physical contact between vehicles. There were no other witnesses. Kevin has UM coverage. What is the correct analysis of his UM claim?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q15','a',false)" id="q15-a"><span class="opt-letter">A</span><span class="opt-text">Kevin's UM claim is valid — a driver's negligent driving that forces someone off the road qualifies under hit-and-run rules regardless of whether there was physical contact — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value</span></button>
-        <button class="option-btn" onclick="answer('q15','b',true)" id="q15-b"><span class="opt-letter">B</span><span class="opt-text">Kevin's UM claim will likely fail — Georgia law requires EITHER physical contact between the unidentified vehicle and Kevin's vehicle or body, OR an independent eyewitness. Kevin has neither.</span></button>
-        <button class="option-btn" onclick="answer('q15','c',false)" id="q15-c"><span class="opt-letter">C</span><span class="opt-text">Kevin's UM claim is valid as long as he filed a police report documenting the incident within 48 hours of the accident</span></button>
-        <button class="option-btn" onclick="answer('q15','d',false)" id="q15-d"><span class="opt-letter">D</span><span class="opt-text">Kevin's UM claim is valid because the at-fault driver fled the scene — fleeing is treated as a constructive admission of uninsured status</span></button>
-      </div>
-      <div class="feedback-box" id="q15-fb"></div>
-    </div>
 
     <!-- Q16 -->
-    <div class="question-block" id="q16-block">
-      <div class="q-num">Question 16 · 10 pts · The $100K Escalation Trigger</div>
-      <div class="q-text">While investigating coverage for client Sandra Williams, Noor identifies three UM sources: Sandra's own Allstate UM ($100,000 Excess), Sandra's husband's Liberty Mutual UM ($75,000 Excess), and the vehicle Sandra was in (insured by Travelers) UM ($50,000 Reduced). Total available UM = $225,000. What is Noor's REQUIRED action?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q16','a',false)" id="q16-a"><span class="opt-letter">A</span><span class="opt-text">Nothing additional — confirm limits in CasePeer and continue working the case at the standard pace</span></button>
-        <button class="option-btn" onclick="answer('q16','b',false)" id="q16-b"><span class="opt-letter">B</span><span class="opt-text">Flag the total UM for the paralegal at the next weekly check-in — UM over $100K is noted in the weekly team meeting</span></button>
-        <button class="option-btn" onclick="answer('q16','c',false)" id="q16-c"><span class="opt-letter">C</span><span class="opt-text">Get attorney review and approval before entering these limits in CasePeer — large UM cases require attorney sign-off on coverage documentation — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken</span></button>
-        <button class="option-btn" onclick="answer('q16','d',true)" id="q16-d"><span class="opt-letter">D</span><span class="opt-text">Alert Adriauna (Lead Pre-Lit) IMMEDIATELY — when total available UM across all policies exceeds $100,000, this is a required immediate escalation, not a weekly check-in item</span></button>
-      </div>
-      <div class="feedback-box" id="q16-fb"></div>
-    </div>
 
     <div class="section-score" id="s4-score" style="display:none;"><div class="score-display" id="s4-score-val"></div><div class="score-label">Section 4 Score</div></div>
     <div class="btn-group" id="s4-next"><button class="btn btn-primary btn-block" onclick="goToSection(5)">Section 5: Docs &amp; Escalation →</button></div>
@@ -618,7 +603,7 @@
     <div class="scenario">
       <div class="scenario-tag">⚡ Why This Matters</div>
       <h3>$350,000 in UM confirmed at intake. Worked as a routine case for 11 months.</h3>
-      <p>The coverage audit came six weeks before trial. Three separate UM policies. $350,000 total. The $100K escalation threshold had been met on Day 1. Nobody had alerted Adriauna. The case had been worked with a routine demand strategy — for nearly a year. <span class="urgent">At trial prep, the partners asked: "Why wasn't this escalated?"</span> The answer was silence. Someone had confirmed the limits. The data was in CasePeer. But the escalation never happened.</p>
+      <p>The coverage audit came six weeks before trial. Three separate UM policies. $350,000 total. The $100K escalation threshold had been met on Day 1. Nobody had alerted the Pre-Lit Head Attorney. The case had been worked with a routine demand strategy — for nearly a year. <span class="urgent">At trial prep, the partners asked: "Why wasn't this escalated?"</span> The answer was silence. Someone had confirmed the limits. The data was in CasePeer. But the escalation never happened.</p>
     </div>
     <div class="info-block">
       <h4>📋 CasePeer Coverage Standards</h4>
@@ -633,7 +618,7 @@
       <h4>🚨 Escalation Triggers — Know These Cold</h4>
       <table class="cov-table">
         <tr><th>Situation</th><th>Escalate To</th><th>When</th></tr>
-        <tr><td>Total UM > $100,000</td><td>Adriauna (Lead Pre-Lit)</td><td>IMMEDIATELY upon confirming threshold</td></tr>
+        <tr><td>Total UM > $100,000</td><td>the Pre-Lit Head Attorney</td><td>IMMEDIATELY upon confirming threshold</td></tr>
         <tr><td>At-fault insurer denies coverage</td><td>Paralegal</td><td>Immediately after denial</td></tr>
         <tr><td>At-fault insurer is insolvent/in receivership</td><td>Paralegal</td><td>Immediately upon learning</td></tr>
         <tr><td>Coverage confirmation > 5 business days overdue</td><td>Paralegal</td><td>Before the deadline passes</td></tr>
@@ -641,56 +626,12 @@
     </div>
 
     <!-- Q17 -->
-    <div class="question-block" id="q17-block">
-      <div class="q-num">Question 17 · 10 pts · When Coverage Goes Into CasePeer</div>
-      <div class="q-text">Yusuf has just confirmed: the at-fault driver's carrier is State Farm with $50,000 BI limits. He also confirmed the client has $100,000 Excess UM with USAA. He plans to update CasePeer's coverage fields by end of week when he completes his full intake review. Is this acceptable?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q17','a',false)" id="q17-a"><span class="opt-letter">A</span><span class="opt-text">Yes — end-of-week is within the 24-hour documentation standard in the SOP</span></button>
-        <button class="option-btn" onclick="answer('q17','b',false)" id="q17-b"><span class="opt-letter">B</span><span class="opt-text">Yes — coverage fields can wait until the full intake review is complete; updating partial information creates confusion</span></button>
-        <button class="option-btn" onclick="answer('q17','c',false)" id="q17-c"><span class="opt-letter">C</span><span class="opt-text">No — coverage fields must be updated AND emailed to the paralegal as a separate notification; entering only in CasePeer is insufficient, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity</span></button>
-        <button class="option-btn" onclick="answer('q17','d',true)" id="q17-d"><span class="opt-letter">D</span><span class="opt-text">No — the Legal Assistant SOP requires coverage info to be updated in CasePeer IMMEDIATELY upon confirmation, meaning the same day. End of week is a violation. Coverage data drives demand strategy and cannot wait.</span></button>
-      </div>
-      <div class="feedback-box" id="q17-fb"></div>
-    </div>
 
     <!-- Q18 -->
-    <div class="question-block" id="q18-block">
-      <div class="q-num">Question 18 · 10 pts · Dec Page Requirement</div>
-      <div class="q-text">Freya calls GEICO and verbally confirms that client Alicia Johnson has $100,000 Excess UM coverage. She updates CasePeer's coverage fields immediately. Her paralegal reviews the file and sends Freya a reminder note. What step is Freya missing?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q18','a',true)" id="q18-a"><span class="opt-letter">A</span><span class="opt-text">She needs to request and obtain the declaration page — verbal confirmation from a rep starts the process, but the dec page is the required written documentation for the actual limits, coverage type, and any exclusions. Demand packages require the actual dec page.</span></button>
-        <button class="option-btn" onclick="answer('q18','b',false)" id="q18-b"><span class="opt-letter">B</span><span class="opt-text">She needs to send Template 62 now that UM coverage is confirmed — putting GEICO on notice is the step that follows coverage confirmation</span></button>
-        <button class="option-btn" onclick="answer('q18','c',false)" id="q18-c"><span class="opt-letter">C</span><span class="opt-text">She needs to alert Adriauna — $100,000 UM triggers the escalation threshold</span></button>
-        <button class="option-btn" onclick="answer('q18','d',false)" id="q18-d"><span class="opt-letter">D</span><span class="opt-text">She should confirm whether the UM is Excess or Reduced before updating CasePeer — the type must be confirmed before any fields are entered — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage</span></button>
-      </div>
-      <div class="feedback-box" id="q18-fb"></div>
-    </div>
 
     <!-- Q19 -->
-    <div class="question-block" id="q19-block">
-      <div class="q-num">Question 19 · 10 pts · At-Fault Insurer Insolvency</div>
-      <div class="q-text">Mid-case, Sanne learns that the at-fault driver's carrier — a smaller regional insurer — has been placed into receivership by the state insurance commissioner. What does this mean for the case and what must Sanne do?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q19','a',false)" id="q19-a"><span class="opt-letter">A</span><span class="opt-text">The case is paused — once an insurer is in receivership, all pending claims are frozen until the receivership process concludes</span></button>
-        <button class="option-btn" onclick="answer('q19','b',false)" id="q19-b"><span class="opt-letter">B</span><span class="opt-text">The case continues unchanged — the Georgia Insurers Insolvency Pool automatically takes over all PI claims, so Sanne needs to do nothing</span></button>
-        <button class="option-btn" onclick="answer('q19','c',false)" id="q19-c"><span class="opt-letter">C</span><span class="opt-text">Sanne should contact the at-fault driver directly to determine whether they have personal assets that could be pursued — insolvency shifts the recovery strategy to a direct defendant lawsuit, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
-        <button class="option-btn" onclick="answer('q19','d',true)" id="q19-d"><span class="opt-letter">D</span><span class="opt-text">The insolvent insurer is treated the same as no insurance under Georgia law — Sanne must immediately flag this to the paralegal so a UM claim can be confirmed or opened, and check whether UM notice deadlines require immediate action given how far the case has progressed</span></button>
-      </div>
-      <div class="feedback-box" id="q19-fb"></div>
-    </div>
 
     <!-- Q20 -->
-    <div class="question-block" id="q20-block">
-      <div class="q-num">Question 20 · 10 pts · LA Communication Limits ⚡ Boundary Test</div>
-      <div class="q-text">Bram calls Allstate to follow up on coverage confirmation for client Jordan Mitchell. The Allstate adjuster asks: "So what kind of damages are we looking at on this one — can you give me a ballpark?" What should Bram say?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q20','a',false)" id="q20-a"><span class="opt-letter">A</span><span class="opt-text">Give a rough estimate based on the medical records already received — being helpful to adjusters builds a better working relationship and speeds up the claim — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value</span></button>
-        <button class="option-btn" onclick="answer('q20','b',false)" id="q20-b"><span class="opt-letter">B</span><span class="opt-text">Ask the paralegal to call back — an LA should never be the primary contact for an adjuster on an active claim</span></button>
-        <button class="option-btn" onclick="answer('q20','c',false)" id="q20-c"><span class="opt-letter">C</span><span class="opt-text">Decline to answer and end the call — any question about case value is legally privileged and cannot be discussed even informally</span></button>
-        <button class="option-btn" onclick="answer('q20','d',true)" id="q20-d"><span class="opt-letter">D</span><span class="opt-text">Tell the adjuster that any communication about case value or damages should be directed to the paralegal or attorney — then log the question and the adjuster's contact information in CasePeer</span></button>
-      </div>
-      <div class="feedback-box" id="q20-fb"></div>
-    </div>
 
     <div class="section-score" id="s5-score" style="display:none;"><div class="score-display" id="s5-score-val"></div><div class="score-label">Section 5 Score</div></div>
     <div class="btn-group" id="s5-next"><button class="btn btn-primary btn-block" onclick="goToSection(6)">👾 Boss Challenge →</button></div>
@@ -735,77 +676,47 @@
     </div>
 
     <!-- Q21 (Boss) -->
-    <div class="question-block" id="q21-block">
-      <div class="q-num"><span class="boss-q-badge">BOSS TASK 1</span> · Question 21 · Bonus 10 pts · Template Sequence</div>
-      <div class="q-text">Jordan's case just came in. The at-fault driver has no insurance. Bram needs to send the correct templates within 48 hours. Which set of actions is correct?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q21','a',false)" id="q21-a"><span class="opt-letter">A</span><span class="opt-text">Template 01 (LOR At-Fault) to the uninsured driver directly — then wait 5 business days to see if they respond before opening UM claims</span></button>
-        <button class="option-btn" onclick="answer('q21','b',false)" id="q21-b"><span class="opt-letter">B</span><span class="opt-text">Templates 02 and 62 to Jordan's Nationwide UM only — since there is no at-fault carrier and Jordan lives alone, those are the only templates required — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken</span></button>
-        <button class="option-btn" onclick="answer('q21','c',false)" id="q21-c"><span class="opt-letter">C</span><span class="opt-text">Template 01 to the at-fault driver's personal address to create a paper trail, then open UM claims after the 5-day confirmation window</span></button>
-        <button class="option-btn" onclick="answer('q21','d',true)" id="q21-d"><span class="opt-letter">D</span><span class="opt-text">Templates 02 and 62 to Jordan's Nationwide UM immediately, AND investigate Diane's State Farm policy for a separate UM claim — Jordan was a guest in Diane's vehicle, and Kevin was a permissive driver under Diane's policy, making Jordan a covered insured under Diane's UM. Two coverage sources require two separate claim openings.</span></button>
-      </div>
-      <div class="feedback-box" id="q21-fb"></div>
-    </div>
 
     <!-- Q22 (Boss) -->
-    <div class="question-block" id="q22-block">
-      <div class="q-num"><span class="boss-q-badge">BOSS TASK 2</span> · Question 22 · Bonus 10 pts · Total UM + Escalation</div>
-      <div class="q-text">Bram has confirmed: Jordan's Nationwide $100,000 Excess UM and Diane's State Farm $75,000 Reduced UM. Jordan lives alone (no resident relatives). What is the total available UM, and what escalation action is required?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q22','a',true)" id="q22-a"><span class="opt-letter">A</span><span class="opt-text">$175,000 total (Nationwide $100K + State Farm $75K) — escalation threshold IS met. Bram must alert Adriauna IMMEDIATELY. The $5,000 MedPay should also be submitted now to start covering Jordan's medical bills during treatment.</span></button>
-        <button class="option-btn" onclick="answer('q22','b',false)" id="q22-b"><span class="opt-letter">B</span><span class="opt-text">$100,000 total — only Jordan's own Nationwide applies since she has no resident relatives. No escalation required — threshold not met.</span></button>
-        <button class="option-btn" onclick="answer('q22','c',false)" id="q22-c"><span class="opt-letter">C</span><span class="opt-text">$100,000 total — Diane's State Farm is Reduced UM, which means it only applies after Jordan's Nationwide Excess is exhausted first. No escalation needed., which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity</span></button>
-        <button class="option-btn" onclick="answer('q22','d',false)" id="q22-d"><span class="opt-letter">D</span><span class="opt-text">$175,000 total, but the escalation threshold is $200K, not $100K — no immediate escalation required</span></button>
-      </div>
-      <div class="feedback-box" id="q22-fb"></div>
-    </div>
 
     <!-- Q23 (Boss) -->
-    <div class="question-block" id="q23-block">
-      <div class="q-num"><span class="boss-q-badge">BOSS TASK 3</span> · Question 23 · Bonus 10 pts · MedPay Activation</div>
-      <div class="q-text">Jordan's medical bills are at $3,800 and growing. She has $5,000 MedPay through Nationwide. Bram confirmed this at intake 2 days ago but has not taken any action on it. It's now the morning of day 2. What is the situation and what must Bram do?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q23','a',true)" id="q23-a"><span class="opt-letter">A</span><span class="opt-text">MedPay should have been submitted at intake — it is designed to pay NOW, during treatment, not at settlement. Bram must notify his paralegal and submit the MedPay claim today. Some carriers have reporting requirements that, if delayed, can affect the claim.</span></button>
-        <button class="option-btn" onclick="answer('q23','b',false)" id="q23-b"><span class="opt-letter">B</span><span class="opt-text">Nothing is wrong — MedPay is applied automatically at settlement when the final disbursement is calculated; no action is needed now</span></button>
-        <button class="option-btn" onclick="answer('q23','c',false)" id="q23-c"><span class="opt-letter">C</span><span class="opt-text">MedPay only activates on UM cases after the UM claim is formally opened — Bram must open the Nationwide UM claim first, then MedPay becomes available as a secondary resource</span></button>
-        <button class="option-btn" onclick="answer('q23','d',false)" id="q23-d"><span class="opt-letter">D</span><span class="opt-text">MedPay is the paralegal's responsibility to submit — Bram should flag it as a pending item in CasePeer and wait for the paralegal to assign the specific task</span></button>
-      </div>
-      <div class="feedback-box" id="q23-fb"></div>
-    </div>
 
     <!-- Q24 (Boss) -->
-    <div class="question-block" id="q24-block">
-      <div class="q-num"><span class="boss-q-badge">BOSS TASK 4</span> · Question 24 · Bonus 10 pts · Documentation Standard</div>
-      <div class="q-text">Bram calls State Farm to confirm coverage on Diane's policy. The State Farm rep confirms $75,000 Reduced UM and provides claim number CLM-2026-48291. The dec page will be emailed within 3 business days. Which CasePeer entry passes the documentation standard?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q24','a',true)" id="q24-a"><span class="opt-letter">A</span><span class="opt-text">"Called State Farm claims line 6/25/26 at 11:40 AM. Spoke with rep Derek Watts (ext. 7812). Confirmed $75,000 Reduced UM on Diane Mitchell's (vehicle owner) policy. Claim number: CLM-2026-48291. Dec page being emailed within 3 business days. Follow-up task set for 6/28/26 to confirm dec page received. Coverage fields updated in CasePeer."</span></button>
-        <button class="option-btn" onclick="answer('q24','b',false)" id="q24-b"><span class="opt-letter">B</span><span class="opt-text">"Called State Farm 6/25/26 — confirmed $75K UM. Claim# CLM-2026-48291."</span></button>
-        <button class="option-btn" onclick="answer('q24','c',false)" id="q24-c"><span class="opt-letter">C</span><span class="opt-text">"State Farm confirmed UM. Dec page pending. Filed in OneDrive when received."</span></button>
-        <button class="option-btn" onclick="answer('q24','d',false)" id="q24-d"><span class="opt-letter">D</span><span class="opt-text">"6/25 — State Farm $75K UM (Reduced). CLM-2026-48291. Dec page in 3 days."</span></button>
-      </div>
-      <div class="feedback-box" id="q24-fb"></div>
-    </div>
 
     <!-- Q25 (Boss) -->
-    <div class="question-block" id="q25-block">
-      <div class="q-num"><span class="boss-q-badge">BOSS TASK 5</span> · Question 25 · Bonus 10 pts · Simultaneous Deadlines</div>
-      <div class="q-text">It is now Day 2 on Jordan's case. Bram has confirmed $175K total UM and sent Templates 02 and 62 to Nationwide. But Templates 02 and 62 for Diane's State Farm UM have NOT been sent yet — the 48-hour deadline for these LORs is approaching. The paralegal is in a meeting. What does Bram do?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q25','a',true)" id="q25-a"><span class="opt-letter">A</span><span class="opt-text">Send Templates 02 and 62 to State Farm NOW — this is within LA authority, the 48-hour deadline is at risk, and no permission is needed to do what the SOP requires. Then alert Adriauna about the $175K UM total immediately, log everything in CasePeer, and update the paralegal as soon as she's available.</span></button>
-        <button class="option-btn" onclick="answer('q25','b',false)" id="q25-b"><span class="opt-letter">B</span><span class="opt-text">Wait for the paralegal to finish her meeting and then brief her on everything — no action should be taken on a second UM carrier without supervisor direction</span></button>
-        <button class="option-btn" onclick="answer('q25','c',false)" id="q25-c"><span class="opt-letter">C</span><span class="opt-text">Alert Adriauna about the $175K threshold first and wait for her direction before sending any more templates — large UM cases require elevated authorization for each template action</span></button>
-        <button class="option-btn" onclick="answer('q25','d',false)" id="q25-d"><span class="opt-letter">D</span><span class="opt-text">Flag the missing templates as a pending item in CasePeer and document that the paralegal was unavailable — this protects Bram from responsibility if the deadline passes</span></button>
-      </div>
-      <div class="feedback-box" id="q25-fb"></div>
-    </div>
 
     <div class="section-score" id="s6-score" style="display:none;"><div class="score-display" id="s6-score-val"></div><div class="score-label">Boss Challenge Bonus Score</div></div>
-    <div class="btn-group" id="s6-next"><button class="btn btn-primary btn-block" onclick="showResults()">See Results →</button></div>
+    <div class="btn-group" id="s6-next"><div style="margin-bottom:1rem;">
+      <label for="trainee-name-input" style="display:block;font-size:0.85rem;font-weight:600;color:#141c2c;margin-bottom:0.4rem;">Your Name — required to start</label>
+      <input type="text" id="trainee-name-input" placeholder="Enter your full name" autocomplete="name" style="width:100%;padding:0.5rem 0.75rem;border:1.5px solid #cbd5e1;border-radius:6px;font-size:0.9rem;box-sizing:border-box;">
+    </div>
+    <button class="btn btn-primary btn-block" onclick="startQuiz()">Take the Quiz &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 7 — QUIZ (api-quiz-engine.js)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-7">
+  <div class="section-header">
+    <div class="section-num">Knowledge Check</div>
+    <h2>Module Assessment</h2>
+    <div class="section-subhead">Answer each question. One attempt — wrong answer reveals the correct answer and unlocks Next.</div>
+  </div>
+  <div class="section-body">
+    <div style="font-family:system-ui,sans-serif;font-size:13px;color:#33415c;padding:8px 0 12px;border-bottom:1px solid #e8eaf0;margin-bottom:16px;">
+      Base: <b id="base">0</b> / <b id="basemax">—</b>
+      &nbsp;·&nbsp; Bonus: <b id="bonus">0</b>
+      &nbsp;·&nbsp; Pass gate: <b id="gate">80</b>%
+      &nbsp;·&nbsp; <span id="q-progress" style="color:#dcb161;font-weight:700;"></span>
+    </div>
+    <div id="questions"></div>
+    <div id="result" style="background:#fff;border:2px solid #0b2545;border-radius:10px;padding:18px;margin:18px 0;display:none;"></div>
   </div>
 </div>
 
 <!-- ══ SECTION 7 — RESULTS ══ -->
-<div class="section-card" id="section-7">
+<div class="section-card" id="section-8">
   <div id="results-header-wrap"></div>
   <div class="section-body">
     <div id="results-body"></div>
@@ -817,7 +728,7 @@
 </div>
 
 <!-- ══ SECTION 8 — FEEDBACK + CERTIFICATE ══ -->
-<div class="section-card" id="section-8">
+<div class="section-card" id="section-9">
   <div class="section-header">
     <div class="section-num">Section 8 · Feedback &amp; Certificate</div>
     <h2>Certificate of Completion</h2>
@@ -888,7 +799,7 @@
         <div class="cert-badges" id="certBadges"></div>
         <div class="cert-signature">
           <div class="cert-sig-line"></div>
-          <div class="cert-sig-name">Harrell Gunn</div>
+          <div class="cert-sig-name">the Managing Attorney Gunn</div>
           <div class="cert-sig-title">Managing Attorney</div>
         </div>
       </div>
@@ -910,8 +821,8 @@
 // CONFIGURATION
 // ═══════════════════════════════════════════════
 var TRACKER_URL = 'https://script.google.com/macros/s/AKfycbzHJZ0C3BqnLatfq7RIiUP5KQdgYoXTJlozd8ZGZiwIf2bdVmvnPMo3JLm0dA5gQhJyxA/exec';
-var TOTAL_SECTIONS = 9;
-var PASS_THRESHOLD = 160; // 80% of 200 — Harrell ruling Jul 6
+var TOTAL_SECTIONS = 10;
+var PASS_THRESHOLD = 160; // 80% of 200 — the Managing Attorney ruling Jul 6
 var BASE_MAX = 200;
 
 // ═══════════════════════════════════════════════
@@ -937,31 +848,31 @@ var milestonesTriggered = {};
 // QUESTION CONFIG
 // ═══════════════════════════════════════════════
 var Q_CONFIG = {
-  'q1':  {section:1, pts:10, isBonus:false, correct:'c'},
-  'q2':  {section:1, pts:10, isBonus:false, correct:'b'},
-  'q3':  {section:1, pts:10, isBonus:false, correct:'a'},
-  'q4':  {section:1, pts:10, isBonus:false, correct:'c'},
-  'q5':  {section:2, pts:10, isBonus:false, correct:'b'},
-  'q6':  {section:2, pts:10, isBonus:false, correct:'b'},
-  'q7':  {section:2, pts:10, isBonus:false, correct:'a'},
-  'q8':  {section:2, pts:10, isBonus:false, correct:'c'},
-  'q9':  {section:3, pts:10, isBonus:false, correct:'c'},
-  'q10': {section:3, pts:10, isBonus:false, correct:'c'},
-  'q11': {section:3, pts:10, isBonus:false, correct:'b'},
-  'q12': {section:3, pts:10, isBonus:false, correct:'c'},
-  'q13': {section:4, pts:10, isBonus:false, correct:'d'},
-  'q14': {section:4, pts:10, isBonus:false, correct:'b'},
-  'q15': {section:4, pts:10, isBonus:false, correct:'b'},
-  'q16': {section:4, pts:10, isBonus:false, correct:'d'},
-  'q17': {section:5, pts:10, isBonus:false, correct:'d'},
-  'q18': {section:5, pts:10, isBonus:false, correct:'a'},
-  'q19': {section:5, pts:10, isBonus:false, correct:'d'},
-  'q20': {section:5, pts:10, isBonus:false, correct:'d'},
-  'q21': {section:6, pts:0, isBonus:true, bonusPts:10, correct:'d'},
-  'q22': {section:6, pts:0, isBonus:true, bonusPts:10, correct:'a'},
-  'q23': {section:6, pts:0, isBonus:true, bonusPts:10, correct:'a'},
-  'q24': {section:6, pts:0, isBonus:true, bonusPts:10, correct:'a'},
-  'q25': {section:6, pts:0, isBonus:true, bonusPts:10, correct:'a'}
+  'q1':  {section:1, pts:10, isBonus:false},
+  'q2':  {section:1, pts:10, isBonus:false},
+  'q3':  {section:1, pts:10, isBonus:false},
+  'q4':  {section:1, pts:10, isBonus:false},
+  'q5':  {section:2, pts:10, isBonus:false},
+  'q6':  {section:2, pts:10, isBonus:false},
+  'q7':  {section:2, pts:10, isBonus:false},
+  'q8':  {section:2, pts:10, isBonus:false},
+  'q9':  {section:3, pts:10, isBonus:false},
+  'q10': {section:3, pts:10, isBonus:false},
+  'q11': {section:3, pts:10, isBonus:false},
+  'q12': {section:3, pts:10, isBonus:false},
+  'q13': {section:4, pts:10, isBonus:false},
+  'q14': {section:4, pts:10, isBonus:false},
+  'q15': {section:4, pts:10, isBonus:false},
+  'q16': {section:4, pts:10, isBonus:false},
+  'q17': {section:5, pts:10, isBonus:false},
+  'q18': {section:5, pts:10, isBonus:false},
+  'q19': {section:5, pts:10, isBonus:false},
+  'q20': {section:5, pts:10, isBonus:false},
+  'q21': {section:6, pts:0, isBonus:true, bonusPts:10},
+  'q22': {section:6, pts:0, isBonus:true, bonusPts:10},
+  'q23': {section:6, pts:0, isBonus:true, bonusPts:10},
+  'q24': {section:6, pts:0, isBonus:true, bonusPts:10},
+  'q25': {section:6, pts:0, isBonus:true, bonusPts:10}
 };
 
 var SECTION_QUESTIONS = {
@@ -976,108 +887,7 @@ var SECTION_QUESTIONS = {
 // ═══════════════════════════════════════════════
 // FEEDBACK
 // ═══════════════════════════════════════════════
-var FEEDBACK = {
-  'q1': {
-    t: '✅ Correct! BI — Bodily Injury — is the at-fault driver\'s liability coverage. In Diane\'s case, Progressive is the BI carrier. BI pays the injured party (Diane) from the at-fault driver\'s policy. It is the first source to confirm on any new case.',
-    f: '❌ BI stands for Bodily Injury liability — the at-fault DRIVER\'s coverage that compensates the injured party. It is NOT on Diane\'s own policy. MedPay is the no-fault medical coverage on a client\'s own policy; UM activates when the at-fault driver is uninsured or underinsured.'
-  },
-  'q2': {
-    t: '✅ Correct! EXCESS (Add-On) UM stacks ON TOP of the at-fault liability payout. $25K from Progressive liability + $100K Excess UM = $125K total available. The full UM limit is never reduced by the at-fault payout — that\'s the entire value of Excess coverage.',
-    f: '❌ That math describes REDUCED (Offset) UM — where you subtract the at-fault payout from the UM limit. With EXCESS UM, the full $100K adds to whatever the at-fault carrier pays. Always confirm which type the client has on the dec page — it changes every calculation.'
-  },
-  'q3': {
-    t: '✅ Correct! O.C.G.A. § 33-7-11(a)(3) is unambiguous: UM coverage can ONLY be rejected in writing, signed by the named insured. A verbal rejection — even to an agent, even noted in the file — carries no legal weight. If no signed written rejection is on file, Michael has UM coverage by operation of Georgia law.',
-    f: '❌ Georgia law requires a WRITTEN, SIGNED rejection for UM coverage to be validly excluded. Verbal rejections are legally void regardless of what the client said or what the agent noted. If there is no signed rejection form, Michael has UM coverage whether he knows it or not. Always ask for the rejection form before concluding UM doesn\'t exist.'
-  },
-  'q4': {
-    t: '✅ Correct! MedPay is the first resource to tap for immediate medical bills. It is available on Angela\'s own State Farm policy and pays regardless of fault — she doesn\'t need to wait for the at-fault insurer to accept liability. Note: Georgia is NOT a no-fault state, so PIP is not standard coverage — making that answer a trap.',
-    f: '❌ MedPay on Angela\'s own policy is the first resource to check for immediate bills. It pays now, regardless of fault, without waiting for liability to be established. UM is also absolutely a resource here — but MedPay handles the immediate medical bills faster. Georgia is NOT a no-fault state, so PIP is not standard.'
-  },
-  'q5': {
-    t: '✅ Correct! Template 01 (LOR At-Fault) goes to Allstate (the at-fault carrier). Template 02 (LOR UM) goes to Progressive (the client\'s UM carrier). Both go out SIMULTANEOUSLY at intake — never wait to open the UM claim. Late notice arguments from UM carriers are real and can cost the client coverage.',
-    f: '❌ Template 01 is for at-fault liability claims; Template 02 is for the client\'s UM carrier. They are not interchangeable — they signal different legal relationships to different insurers. Both go out at intake, at the same time. Waiting to open the UM claim is a serious error.'
-  },
-  'q6': {
-    t: '✅ Correct! Templates 02 and 62 serve different legal purposes even though they go to the same UM carrier. Template 02 opens the claim and establishes representation. Template 62 formally notifies the UM carrier of the potential claim — critical for preserving the client\'s rights and meeting insurer notification requirements. Both are required.',
-    f: '❌ Templates 02 and 62 are different documents with different legal purposes. An LOR establishes representation; Template 62 separately notifies the UM carrier of a potential claim. Missing Template 62 can create late notice arguments down the line. Both are required at intake.'
-  },
-  'q7': {
-    t: '✅ Correct! The Legal Assistant SOP requires LORs within 48 hours of paralegal instruction. Tuesday 9:00 AM + 48 hours = Thursday 9:00 AM. Sanne is at exactly the limit with zero margin. There is no flexibility built into the 48-hour standard. She must send immediately.',
-    f: '❌ The 48-hour LOR deadline is measured from when the task was assigned — Tuesday 9:00 AM — not from when Sanne becomes available. Competing priorities do not pause the clock. The 48-hour window is a hard standard in the SOP, not a target.'
-  },
-  'q8': {
-    t: '✅ Correct! Three coverage sources = three separate claim openings: (1) Template 01 to at-fault liability carrier; (2) Templates 02 and 62 to Patricia\'s own USAA UM; (3) Investigate Karen\'s Allstate UM — Patricia was a guest in Karen\'s vehicle, and David was Karen\'s permissive driver, making Patricia a covered insured under Karen\'s policy. Escalate to your paralegal to confirm all sources.',
-    f: '❌ The key miss: the vehicle owner\'s (Karen\'s) Allstate UM policy. Patricia was a guest in Karen\'s vehicle; David was Karen\'s permissive driver. Two UM carriers = two separate claim openings, not one.'
-  },
-  'q9': {
-    t: '✅ Correct! A coverage confirmation call must capture: (1) Carrier confirmed in force on the date of loss; (2) Policy limits by type — BI, PD, UM; (3) UM type — Excess or Reduced; (4) Dec page requested; (5) Rep\'s full name and direct contact. Claim number is also important, but adjuster name alone doesn\'t confirm coverage exists.',
-    f: '❌ Adjuster name and claim number don\'t confirm coverage. A claim number can exist even when coverage is disputed. The critical data: limits confirmed by type, Excess vs. Reduced for UM, coverage in force on date of loss, dec page requested, and full rep name/contact.'
-  },
-  'q10': {
-    t: '✅ Correct! A proper coverage call note must include: WHO (full name, title, direct contact), time of call, WHAT was confirmed (specific limits AND Excess vs. Reduced type), WHAT was requested (dec page), and NEXT STEPS (follow-up task set, CasePeer fields updated). "Called Mercury — confirmed limits" fails the handoff test completely.',
-    f: '❌ CasePeer coverage fields store the data — but the communication log must separately record HOW you got that data: who confirmed it, when, what was specifically stated, whether a dec page was requested, and what follow-up was set. The note is your defensible record.'
-  },
-  'q11': {
-    t: '✅ Correct! Under Georgia law, when an at-fault insurer formally denies coverage, the at-fault driver is treated as UNINSURED. This activates the client\'s own UM coverage. This is actually good news. Sanne\'s steps: (1) Get written denial letter; (2) Log the call immediately with full details; (3) Notify the paralegal immediately to open a UM claim. Never accept a denial as case closure.',
-    f: '❌ A coverage denial by the at-fault insurer is NOT a dead end — it triggers a UM claim opportunity. Georgia law treats an at-fault driver whose insurer denies coverage as legally uninsured, activating the client\'s UM coverage. Immediate escalation to the paralegal is required.'
-  },
-  'q12': {
-    t: '✅ Correct! Count business days from Monday June 16: Tue 17 (1), Wed 18 (2), Thu 19 (3), Fri 20 (4), Mon 23 (5). The deadline was Monday June 23rd. Today is Tuesday June 24th — the deadline was missed yesterday. Yusuf must complete coverage confirmation today and notify his paralegal that the deadline passed.',
-    f: '❌ Count carefully: Monday June 16 + 5 business days = Monday June 23. It is now Tuesday June 24 — one business day past the deadline. The SOP standard is 5 business days from file assignment. The clock started on June 16th, not when carriers were identified.'
-  },
-  'q13': {
-    t: '✅ Correct! Georgia\'s resident relative provision covers spouses and household relatives under each other\'s UM policies — even when they were NOT in that relative\'s vehicle. Derek lives with Tamika; he is an insured on her GEICO UM policy. Derek\'s own $50K + Tamika\'s $100K = $150K total. Which vehicle anyone was in does NOT limit this right.',
-    f: '❌ Georgia UM law covers resident relatives regardless of what vehicle they were in. Derek is a resident relative (spouse) in the same household as Tamika — he qualifies as an insured on her GEICO UM policy whether he was in her car or his own. Always ask about ALL household members with auto insurance.'
-  },
-  'q14': {
-    t: '✅ Correct! UM follows the person, not the car. Georgia law covers the named insured "while in a motor vehicle or otherwise." Maria can claim on her Nationwide UM policy regardless of whose car she was riding in. She may also have access to the Subaru\'s UM coverage as a guest — two potential sources.',
-    f: '❌ This is the most common UM misconception. UM is not tied to the vehicle — it follows the policyholder wherever they go. Being in someone else\'s car does not suspend the client\'s own UM coverage. Always pull the client\'s own dec page first.'
-  },
-  'q15': {
-    t: '✅ Correct! Georgia law requires EITHER physical contact with the unidentified vehicle OR an independent eyewitness for a hit-and-run UM claim. Kevin had neither — no contact, no witness. This claim will likely fail. The moment you hear "they ran me off the road," ask immediately: (1) Did they hit your car? (2) Were there witnesses? Document both answers.',
-    f: '❌ Georgia\'s hit-and-run UM statute has specific requirements: physical contact OR an eyewitness. A police report helps document the incident but does not substitute for these statutory requirements. Proximity and negligent driving alone are not enough.'
-  },
-  'q16': {
-    t: '✅ Correct! Total UM = $225,000. The $100K escalation threshold is met — exceeded by $125K. Both the Coverage Maximization Checklist and the UM/UIM Training Guide are explicit: alert Adriauna IMMEDIATELY. Not at the weekly check-in. Sandra\'s case requires elevated strategy from the moment this threshold is confirmed.',
-    f: '❌ The $100K total UM escalation is immediate — not a weekly check-in item and not attorney-gated for documentation. Every dollar across all policies counts toward the threshold. When the total hits $100K, alert Adriauna now. This changes the case strategy.'
-  },
-  'q17': {
-    t: '✅ Correct! The Legal Assistant SOP requires coverage and liability info to be updated in CasePeer IMMEDIATELY upon confirmation — meaning the same day. "End of week" is a violation of this standard. Coverage data drives demand strategy; stale or missing coverage data blocks everything downstream.',
-    f: '❌ The SOP standard is immediate — same day as confirmation. "End of week" and "24 hours" both miss the mark. Coverage fields are not optional or deferrable. The moment you confirm limits, those fields get updated.'
-  },
-  'q18': {
-    t: '✅ Correct! Verbal confirmation from a rep starts the process — but the declaration page is the required written documentation. Dec pages are the authoritative source for limits, coverage type (Excess vs. Reduced), and exclusions. Phone reps can be wrong. Demand packages require the actual dec page, not a note about a call.',
-    f: '❌ The UM type (Excess vs. Reduced) is critical and the dec page confirms it definitively — but the question is about what Freya is missing. The answer is the dec page itself, required by the Coverage Maximization Checklist. Verbal confirmation is a starting point, not the finish line.'
-  },
-  'q19': {
-    t: '✅ Correct! Under Georgia law, an insolvent at-fault insurer is treated the same as no insurance — the at-fault driver becomes legally "uninsured," activating the client\'s own UM coverage. Sanne\'s immediate steps: flag to paralegal, confirm UM claim status, check notice deadlines. This is an immediate escalation — not a wait-and-see situation.',
-    f: '❌ Insolvency does not freeze the case — it shifts the case to UM. The Georgia Insurers Insolvency Pool does not automatically handle all PI claims. The correct path: escalate immediately to the paralegal, confirm UM coverage is being activated, check for any notice deadline risk.'
-  },
-  'q20': {
-    t: '✅ Correct! The Legal Assistant SOP is explicit: LAs may contact providers and insurers for records and coverage confirmation — but LAs NEVER provide case valuations, settlement expectations, or attorney opinions to any external party. Bram redirects the adjuster to the appropriate person and logs the exchange in CasePeer.',
-    f: '❌ Sharing any estimate of damages — even a rough one — puts Bram\'s words on record and can be used against the client. This is strictly outside LA role boundaries. Redirect the adjuster to the paralegal or attorney, log the question in CasePeer, and move on.'
-  },
-  'q21': {
-    t: '✅ Correct! With no at-fault carrier, the strategy pivots entirely to UM. Templates 02 and 62 go to Jordan\'s Nationwide immediately. But Bram MUST ALSO investigate Diane\'s State Farm policy — Jordan was a guest in the vehicle, and Kevin was Diane\'s permissive driver, making Jordan a covered insured under Diane\'s UM. Two coverage sources = two separate claim openings.',
-    f: '❌ Template 01 has no recipient (no at-fault carrier). Stopping at Jordan\'s Nationwide UM misses the vehicle owner\'s policy entirely. Jordan qualifies as a guest insured under Diane\'s State Farm policy because Kevin had Diane\'s permission to drive — that\'s a second UM source that requires its own Templates 02 and 62.'
-  },
-  'q22': {
-    t: '✅ Correct! Jordan\'s Nationwide $100K Excess UM + Diane\'s State Farm $75K Reduced UM = $175,000 total. She lives alone, so no resident relative stacking. The $100K threshold IS met — Bram must alert Adriauna IMMEDIATELY. The $5,000 MedPay should also be submitted now to start covering Jordan\'s medical bills during treatment.',
-    f: '❌ Jordan doesn\'t need resident relatives to access Diane\'s State Farm UM — she qualifies as a guest insured because Kevin was Diane\'s permissive driver. Total UM = $175K. The $100K escalation threshold is met; alert Adriauna immediately. The escalation threshold is $100K, not $200K.'
-  },
-  'q23': {
-    t: '✅ Correct! MedPay is designed to pay NOW — during treatment, before any settlement. Waiting 2 days with growing medical bills means it should have been submitted at intake. Bram must notify his paralegal and submit the MedPay claim today. Some carriers have reporting requirements that, if delayed, can affect the claim. This is not a settlement-stage action.',
-    f: '❌ MedPay does NOT apply automatically at settlement. It must be actively submitted, and its entire value is that it pays DURING treatment — faster than any liability claim can resolve. A 2-day delay is already a gap. Notify the paralegal and submit today.'
-  },
-  'q24': {
-    t: '✅ Correct! Only Option B passes the documentation standard. It includes: date and time, rep\'s full name and extension, specific amount AND type (Reduced — this changes the math), whose policy it is under, claim number, dec page timeline, follow-up task set with a specific date, and confirmation that CasePeer fields were updated. Every other option fails the handoff test.',
-    f: '❌ The documentation standard requires: date and time, full rep name and contact, specific limits AND type (Reduced vs. Excess matters for calculation), whose policy this is, claim number, dec page status and timeline, follow-up task set, and CasePeer fields updated. Partial notes create defensibility gaps.'
-  },
-  'q25': {
-    t: '✅ Correct! Two things happen simultaneously: (1) Bram sends Templates 02 and 62 to State Farm NOW — this is within LA authority, the 48-hour deadline is at risk, and no permission is needed to do what the SOP requires; (2) He alerts Adriauna about the $175K UM total — this is his obligation and doesn\'t require the paralegal\'s prior approval. Then he logs everything and updates the paralegal when she\'s available.',
-    f: '❌ Waiting for permission to send a template that is already approaching its deadline is a systems failure. Sending the LOR templates is entirely within the LA\'s authority on this file. Alerting Adriauna is also his obligation. Both happen now — not after the meeting ends.'
-  }
-};
+var FEEDBACK = {} /* CUTOVER: feedback text is served per-answer by the engine, never shipped to the client up front */;
 
 // ═══════════════════════════════════════════════
 // INIT FIRST-ATTEMPT FLAGS
@@ -1089,7 +899,7 @@ var FEEDBACK = {
 // ═══════════════════════════════════════════════
 // ANSWER HANDLER
 // ═══════════════════════════════════════════════
-function answer(qId, selectedOption, isCorrect) {
+window.answerUI = function answerUI(qId, selectedOption, isCorrect) {
   var cfg = Q_CONFIG[qId];
   if (!cfg) return;
   if (qDone[qId] && isCorrect) return;
@@ -1098,7 +908,7 @@ function answer(qId, selectedOption, isCorrect) {
   var block = document.getElementById(qId + '-block');
   var fb = document.getElementById(qId + '-fb');
   var clickedBtn = document.getElementById(qId + '-' + selectedOption);
-  var correctBtn = document.getElementById(qId + '-' + cfg.correct);
+  var correctBtn = document.getElementById(qId + '-' + (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || ''));
 
   if (!block || !fb || !clickedBtn) return;
 
@@ -1190,7 +1000,7 @@ function checkSectionComplete(sectionIdx) {
 // NAVIGATION
 // ═══════════════════════════════════════════════
 function goToSection(idx) {
-  if (idx === 8 && !window._la5Passed) { showToast('⚠️ 80% required for certificate', false); return; }
+  if (idx === 9 && !window._la5Passed) { showToast('⚠️ 80% required for certificate', false); return; }
   document.querySelectorAll('.section-card').forEach(function(c){ c.classList.remove('active'); });
   document.querySelectorAll('.nav-pill').forEach(function(p){ p.classList.remove('active'); });
   var card = document.getElementById('section-' + idx);
@@ -1255,7 +1065,7 @@ function buildResults() {
     var questionText = qText ? qText.textContent : 'Question ' + (idx + 1);
     var isAnswered = !!qDone[qId];
     var wasCorrect = isAnswered && block.classList.contains('answered');
-    var correctBtn = document.getElementById(qId + '-' + cfg.correct);
+    var correctBtn = document.getElementById(qId + '-' + (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || ''));
     var correctText = correctBtn ? correctBtn.querySelector('.opt-text').textContent : '';
     var userAnswer = '(not answered)'; var userLetter = '';
     if (isAnswered) {
@@ -1267,13 +1077,13 @@ function buildResults() {
           }
         }
       });
-      if (wasCorrect && !userLetter) { userAnswer = correctText; userLetter = cfg.correct.toUpperCase(); }
+      if (wasCorrect && !userLetter) { userAnswer = correctText; userLetter = (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || '').toUpperCase(); }
     }
     reviewHTML += '<div class="review-item ' + (wasCorrect ? 'correct' : 'wrong') + '" style="opacity:0;transform:translateY(8px);transition:opacity 0.25s ease,transform 0.25s ease;" data-review-idx="' + idx + '">'
       + '<div class="ri-q">' + (idx + 1) + '. ' + questionText.substring(0, 120) + (questionText.length > 120 ? '…' : '') + '</div>'
       + '<div class="ri-ans">'
       + (wasCorrect ? '✅' : '❌') + ' Your answer: <strong>' + userLetter + '. ' + userAnswer.substring(0, 100) + (userAnswer.length > 100 ? '…' : '') + '</strong>'
-      + (!wasCorrect ? '<br>✅ Correct: <strong>' + cfg.correct.toUpperCase() + '. ' + correctText.substring(0, 100) + (correctText.length > 100 ? '…' : '') + '</strong>' : '')
+      + (!wasCorrect ? '<br>✅ Correct: <strong>' + (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || '').toUpperCase() + '. ' + correctText.substring(0, 100) + (correctText.length > 100 ? '…' : '') + '</strong>' : '')
       + '</div></div>';
   });
   reviewList.innerHTML = reviewHTML;
@@ -1639,5 +1449,67 @@ document.addEventListener('DOMContentLoaded', function() {
   initMascot();
 });
 </script>
+
+
+
+<script>
+/* ── go() / startQuiz() — quiz entry point (the Managing Attorney ruling 2026-09-03) ── */
+async function go(screen) {
+  if (screen === 'quiz') {
+    var _ni = document.getElementById('trainee-name-input');
+    var _name = (_ni && _ni.value.trim()) || '';
+    if (!_name) {
+      if (typeof showToast === 'function') showToast('⚠️ Please enter your name before starting the quiz', false);
+      else alert('Please enter your name before starting the quiz.');
+      return;
+    }
+    // Bug-2 fix: await attempt start before making questions interactive
+    await window.GLGQuiz.beginAttempt(_name);
+    goToSection(7);
+  }
+}
+
+function startQuiz() { go('quiz'); }
+
+/* ── GLG MODULE CONFIG — wires api-quiz-engine.js to module-la5.html ── */
+window.GLG_MODULE_CONFIG = {
+  moduleId: 'la5',
+  onBankLoaded: function(bank) {
+    var basemax = document.getElementById('basemax');
+    var gate    = document.getElementById('gate');
+    if (basemax) basemax.textContent = bank.base_max;
+    if (gate)    gate.textContent    = bank.pass_pct;
+    for (var i = 1; i <= 6; i++) {
+      var nextEl = document.getElementById('s' + i + '-next');
+      if (nextEl) nextEl.style.display = 'flex';
+    }
+  },
+  onStartQuiz: function() {
+    if (typeof audioCtx !== 'undefined' && audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume().catch(function(){});
+    }
+  },
+  onAnswered: function(r) {
+    baseScore   = r.base_score;
+    bonusPoints = r.bonus_score;
+    streakCount = r.streak;
+    maxStreak   = Math.max(maxStreak || 0, r.maxStreak || 0);
+    var ts = document.getElementById('total-score');
+    if (ts) ts.textContent = r.base_score;
+    var bs = document.getElementById('bonus-score');
+    if (bs) bs.textContent = r.bonus_score;
+    if (typeof updateStreak  === 'function') updateStreak(r.correct);
+    if (typeof mascotReact   === 'function') mascotReact(r.correct ? 'correct' : 'incorrect');
+  },
+  onComplete: function(r) {
+    window._la5Passed = r.passed;
+    baseScore   = r.base_score;
+    bonusPoints = r.bonus_score;
+    goToSection(8);   // results is now section-8 after port
+    if (typeof buildResults === 'function') buildResults();
+  }
+};
+</script>
+<script src="api-quiz-engine.js"></script>
 </body>
 </html>
