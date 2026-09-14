@@ -11,7 +11,14 @@ power-of-a-system-memo.md, ga-bar-rules-resources-memo.md -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
   <title>PA-1 — Case Evaluation Strategy | Gunn Law Group</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <style>
+:root {
+    --navy: #141c2c;
+    --gold: #dcb161;
+    --gold-lt: #f0d89a;
+}
+
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
     body{font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;color:#333;font-size:16px;line-height:1.6;-webkit-text-size-adjust:100%;overflow-x:hidden;}
@@ -107,11 +114,7 @@ power-of-a-system-memo.md, ga-bar-rules-resources-memo.md -->
     .case-val .flag-warn{display:inline-block;background:#f39c12;color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;margin-left:6px;}
     .case-val .flag-ok{display:inline-block;background:#10774A;color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;margin-left:6px;}
 
-    /* ── BOSS CHALLENGE ── */
-    .boss-header{background:linear-gradient(135deg,#870101 0%,#5a0000 100%);color:#fff;border-radius:12px;padding:24px;margin-bottom:20px;text-align:center;}
-    .boss-header .boss-icon{font-size:40px;margin-bottom:10px;}
-    .boss-header h3{font-size:clamp(17px,4.5vw,22px);font-weight:800;margin-bottom:8px;}
-    .boss-header p{font-size:14px;opacity:.9;line-height:1.5;}
+    
 
     /* ── RESULTS ── */
     .results-header{padding:28px 20px;text-align:center;color:#fff;}
@@ -244,6 +247,159 @@ power-of-a-system-memo.md, ga-bar-rules-resources-memo.md -->
       header{background:#141C2C!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
     }
   </style>
+
+<style>
+/* ── GLG QUIZ ENGINE — question type styles (2026-09-02) ──────────────────
+     All classes rendered by api-quiz-engine.js. Tokens: navy #141c2c, gold #C5975B.
+     Sourced from engine.html stylesheet + the Managing Attorney Part 8c spec. */
+
+  /* Question card */
+  .q { background:#fff; border:1px solid #e2e5ea; border-radius:10px;
+       padding:20px; margin:16px 0; box-shadow:0 1px 6px rgba(20,28,44,.06); }
+  .q-num { font-size:12px; letter-spacing:.06em; color:#C5975B; font-weight:700;
+            text-transform:uppercase; margin-bottom:8px; }
+  .q-text { font-weight:600; margin:8px 0 16px; font-size:1rem; line-height:1.55;
+             color:#141c2c; }
+
+  /* MC option buttons */
+  button.opt { display:block; width:100%; text-align:left; padding:13px 15px; margin:7px 0;
+    border:1px solid #d8dbe3; border-radius:8px; background:#fafbfd; cursor:pointer;
+    font-size:15px; font-family:var(--font-b); color:#222; line-height:1.45;
+    transition:background .12s, border-color .12s; }
+  button.opt:hover:not(.locked) { background:#eef4ff; border-color:#141c2c; }
+  button.opt.correct { background:#d4edda; border-color:#10774A; }
+  button.opt.incorrect { background:#f8d7da; border-color:#870101; }
+  button.opt.locked { cursor:default; opacity:.85; }
+
+  /* Fill-in-the-blank */
+  .fill-stem { font-weight:600; margin:8px 0 14px; line-height:2.2; }
+  input.blank { display:inline-block; min-height:44px; min-width:120px; padding:8px 10px;
+    margin:2px 4px; border:1px solid #ccd; border-radius:8px; background:#fafbfd;
+    font-size:16px; font-family:var(--font-b); vertical-align:middle;
+    box-sizing:border-box; max-width:100%; }
+  input.blank:focus { outline:2px solid #141c2c; background:#fff; }
+  input.blank.correct { background:#d4edda; border-color:#10774A; }
+  input.blank.incorrect { background:#f8d7da; border-color:#870101; }
+  input.blank.locked { opacity:.85; }
+  button.submit-fill { min-height:44px; padding:11px 20px; margin-top:12px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-fill.locked { opacity:.5; cursor:default; }
+
+  /* Markup */
+  .markup-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .markup-passage { margin:0 0 10px; border:1px solid #e2e5ea; border-radius:8px; overflow:hidden; }
+  button.span { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:11px 13px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:16px; font-family:var(--font-b);
+    color:#222; line-height:1.5; overflow-wrap:break-word; }
+  button.span:last-child { border-bottom:0; }
+  button.span:hover:not(.locked) { background:#eef4ff; }
+  button.span.selected { background:#fff3cd; box-shadow:inset 4px 0 0 #b8860b; font-weight:600; }
+  button.span.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.span.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.span.locked { cursor:default; opacity:.9; }
+  button.submit-markup { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-markup.locked { opacity:.5; cursor:default; }
+  .markup-count { font-size:13px; color:#555; margin-top:8px; }
+
+  /* Sort rows with up/down controls */
+  .sort-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .sort-list { margin:0 0 12px; border:1px solid #e2e5ea; border-radius:8px;
+               overflow:hidden; background:#fff; }
+  .sort-row { display:flex; align-items:stretch; border-bottom:1px solid #eef0f3;
+              background:#fff; }
+  .sort-row:last-child { border-bottom:0; }
+  .sort-pos { flex:0 0 34px; display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700; color:#C5975B; background:#f5f5f0; }
+  .sort-text { flex:1 1 auto; padding:11px 12px; font-size:15px; line-height:1.45;
+    display:flex; align-items:center; overflow-wrap:break-word; min-width:0; }
+  .sort-moves { flex:0 0 auto; display:flex; align-items:center; gap:4px; padding:4px 6px; }
+  button.sort-move { min-height:44px; min-width:44px; border:1px solid #ccd; border-radius:8px;
+    background:#fafbfd; cursor:pointer; font-size:15px; color:#141c2c;
+    font-family:var(--font-b); }
+  button.sort-move:hover:not(:disabled) { background:#eef4ff; }
+  button.sort-move:disabled { opacity:.35; cursor:default; }
+  .sort-row.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  .sort-row.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  .sort-row.locked .sort-text { opacity:.9; }
+  button.submit-sort { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-sort.locked { opacity:.5; cursor:default; }
+
+  /* Match chips + slot rows */
+  .match-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .match-tray { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px; padding:10px;
+    border:1px dashed #ccd; border-radius:8px; background:#fafbfd; }
+  button.chip { min-height:44px; padding:10px 16px; border:1px solid #ccd; border-radius:22px;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b); color:#222;
+    max-width:100%; overflow-wrap:break-word; text-align:left; }
+  button.chip:hover:not(.locked) { background:#eef4ff; }
+  button.chip.selected { background:#141c2c; color:#fff; border-color:#141c2c; font-weight:600; }
+  button.chip.placed { opacity:.35; }
+  button.chip.locked { cursor:default; }
+  .match-slots { border:1px solid #e2e5ea; border-radius:8px; overflow:hidden;
+                 background:#fff; margin-bottom:12px; }
+  button.slot { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:10px 14px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b);
+    color:#222; line-height:1.45; overflow-wrap:break-word; }
+  button.slot:last-child { border-bottom:0; }
+  button.slot:hover:not(.locked) { background:#eef4ff; }
+  button.slot.armed { box-shadow:inset 4px 0 0 #C5975B; background:#fffdf5; }
+  .slot-label { font-weight:600; display:block; }
+  .slot-fill { display:block; font-size:14px; margin-top:3px; color:#C5975B; font-weight:600; }
+  .slot-fill.empty { color:#8a8f98; font-weight:400; font-style:italic; }
+  button.slot.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.slot.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.slot.locked { cursor:default; opacity:.9; }
+  button.submit-match { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-match.locked { opacity:.5; cursor:default; }
+  .match-count { font-size:13px; color:#555; margin-top:8px; }
+  .match-credit { font-size:13px; font-weight:600; color:#8a6d1f; margin-top:6px; }
+
+  /* Feedback */
+  .fb { margin-top:12px; padding:12px 14px; border-radius:8px; font-size:14px; display:none; }
+  .fb.show { display:block; }
+  .fb.ok { background:#d4edda; border-left:4px solid #10774A; }
+  .fb.no { background:#f8d7da; border-left:4px solid #870101; }
+  .fb.neutral { background:#eef0f6; border-left:4px solid #6c757d; color:#333; } /* self_assessment: no verdict */
+
+  /* Branching nodes */
+  .branch-scenario { border-left:4px solid #C5975B; padding-left:12px; margin:14px 0; }
+  .branch-turn { font-size:12px; letter-spacing:.06em; color:#8a6d1f; font-weight:700;
+                 text-transform:uppercase; }
+  .branch-instruction { font-weight:600; margin:6px 0 10px; color:#141c2c; }
+  .branch-consequence { margin-top:10px; padding:10px 12px; border-left:4px solid #141c2c;
+    background:#eef2f7; border-radius:0 8px 8px 0; font-size:13px; color:#33415c; display:none; }
+  .branch-consequence.show { display:block; }
+
+  /* Pagination — one question at a time (the Managing Attorney Part 8b) */
+  .q-base { display: none !important; }
+  .q-base.q-active { display: block !important; }
+  .q-nav { display:flex; justify-content:space-between; align-items:center;
+            margin-top:20px; padding-top:16px; border-top:1px solid #e8e6e0; }
+  .q-nav-btn { min-height:44px; padding:10px 22px; border-radius:8px;
+                font-size:15px; cursor:pointer; font-family:var(--font-b);
+                font-weight:600; transition:background .12s; }
+  .q-nav-btn.next { background:#141c2c; color:#C5975B; border:2px solid #141c2c; }
+  .q-nav-btn.next:hover { background:#1e2a40; }
+  .q-nav-btn.back { background:#fff; color:#141c2c; border:2px solid #c8c5be; }
+  .q-nav-btn.back:hover { background:#f5f5f0; }
+  .q-pg-spacer { display:inline-block; min-width:40px; }
+  #q-progress { font-size:12px; color:#C5975B; font-weight:600;
+                letter-spacing:.5px; text-transform:uppercase; }
+
+
+</style>
+
+<!-- CUTOVER: server-side grading. Answer keys are not in this file. -->
+    <link rel="stylesheet" href="boss-challenge.css">
 </head>
 <body>
 
@@ -298,8 +454,9 @@ power-of-a-system-memo.md, ga-bar-rules-resources-memo.md -->
   <button class="nav-pill" id="nav-4" onclick="goToSection(4)">5. Red Flags</button>
   <button class="nav-pill" id="nav-5" onclick="goToSection(5)">6. Gov't Cases</button>
   <button class="nav-pill" id="nav-6" onclick="goToSection(6)">7. Boss</button>
-  <button class="nav-pill" id="nav-7" onclick="goToSection(7)">8. Results</button>
-  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">9. Certificate</button>
+  <button class="nav-pill" id="nav-7" onclick="startQuiz()">8. Quiz</button>
+  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">9. Results</button>
+  <button class="nav-pill" id="nav-9" onclick="goToSection(9)">10. Feedback</button>
 </nav>
 
 <!-- Points Toast -->
@@ -380,53 +537,9 @@ power-of-a-system-memo.md, ga-bar-rules-resources-memo.md -->
     </div>
     <div class="callout callout-warn"><strong>The Score Is Not the Decision.</strong> A case scoring 3/10 on the Safety Checklist is not an automatic decline — but it IS an automatic escalation. Per GLG's evaluation SOP: cases scoring below 5 require review by the Pre-Lit Head before acceptance. The score tells you where to direct attention, not whether to accept.</div>
 
-    <div class="question-block" id="q1-block">
-      <div class="q-num">Question 1 of 20 · 10 pts</div>
-      <div class="q-text">Scenario: A potential client was rear-ended at a red light by a delivery truck driver who was texting. The client went to the ER same day, has a documented herniated disc at L4-L5, and is now facing possible surgery. The trucking company has had three prior rear-end collisions in the past two years. You run the Case Safety Checklist. Which of the following items would score STRONGEST for this case?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q1','a',false)" id="q1-a"><span class="opt-letter">A</span><span class="opt-text">Item 9 (Plaintiff credibility) — the client went to the ER same day, establishing treatment urgency</span></button>
-        <button class="option-btn" onclick="answer('q1','b',true)" id="q1-b"><span class="opt-letter">B</span><span class="opt-text">Items 2, 3, 6, and 7 — clear safety rule violation (texting while driving), community-scope protection, prior knowledge (3 prior collisions), and pattern evidence</span></button>
-        <button class="option-btn" onclick="answer('q1','c',false)" id="q1-c"><span class="opt-letter">C</span><span class="opt-text">Item 10 (Injury severity) — a herniated disc with possible surgery is the dominant factor in every evaluation</span></button>
-        <button class="option-btn" onclick="answer('q1','d',false)" id="q1-d"><span class="opt-letter">D</span><span class="opt-text">Item 1 (Random victim potential) — anyone could have been at that red light, making this primarily a random-victim case</span></button>
-      </div>
-      <div class="feedback-box" id="q1-fb"></div>
-    </div>
 
-    <div class="question-block" id="q2-block">
-      <div class="q-num">Question 2 of 20 · 10 pts</div>
-      <div class="q-text">A slip-and-fall case comes in: client slipped on a wet floor at a restaurant. No "Wet Floor" sign was posted. The client broke her wrist. She was wearing heels on a rainy day. You need to evaluate Item 3 of the Safety Checklist: "Does the safety rule protect the community, not just this plaintiff?" Which framing BEST satisfies Item 3?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q2','a',false)" id="q2-a"><span class="opt-letter">A</span><span class="opt-text">"The restaurant owed a duty of care to this specific customer under premises liability law"</span></button>
-        <button class="option-btn" onclick="answer('q2','b',false)" id="q2-b"><span class="opt-letter">B</span><span class="opt-text">"The client's heels are a comparative fault issue but don't eliminate the restaurant's duty"</span></button>
-        <button class="option-btn" onclick="answer('q2','c',true)" id="q2-c"><span class="opt-letter">C</span><span class="opt-text">"Every person who walks into this restaurant on a rainy day — your mother, your child, anyone — is endangered by an unmarked wet floor. The safety rule that property owners must warn of known hazards protects every visitor."</span></button>
-        <button class="option-btn" onclick="answer('q2','d',false)" id="q2-d"><span class="opt-letter">D</span><span class="opt-text">"The restaurant has a legal obligation under O.C.G.A. § 51-3-1 to maintain safe premises for invitees"</span></button>
-      </div>
-      <div class="feedback-box" id="q2-fb"></div>
-    </div>
 
-    <div class="question-block" id="q3-block">
-      <div class="q-num">Question 3 of 20 · 10 pts</div>
-      <div class="q-text">A potential case scores 4/10 on the Safety Checklist. The intake specialist logged the score in CasePeer and set the status to "Intake Review." Under GLG's evaluation SOP, what happens next?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q3','a',true)" id="q3-a"><span class="opt-letter">A</span><span class="opt-text">The Pre-Lit Head (Adriauna) must review the case before any acceptance decision — all cases scoring below 5 require this review</span></button>
-        <button class="option-btn" onclick="answer('q3','b',false)" id="q3-b"><span class="opt-letter">B</span><span class="opt-text">The case is automatically declined — scores below 5 do not meet minimum acceptance thresholds</span></button>
-        <button class="option-btn" onclick="answer('q3','c',false)" id="q3-c"><span class="opt-letter">C</span><span class="opt-text">The intake specialist sends the Declined Case Letter and logs the reason in CasePeer</span></button>
-        <button class="option-btn" onclick="answer('q3','d',false)" id="q3-d"><span class="opt-letter">D</span><span class="opt-text">The case proceeds to standard workflow — the score is informational only and does not trigger mandatory review</span></button>
-      </div>
-      <div class="feedback-box" id="q3-fb"></div>
-    </div>
 
-    <div class="question-block" id="q4-block">
-      <div class="q-num">Question 4 of 20 · 10 pts</div>
-      <div class="q-text">You are evaluating a dog bite case. The dog's owner lives in a gated community. The dog has bitten two other people in the past year — both incidents were reported to animal control. The owner did nothing. Which Checklist items does the prior-incident pattern MOST directly strengthen?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q4','a',false)" id="q4-a"><span class="opt-letter">A</span><span class="opt-text">Items 1 and 5 — random victim potential and juror community relevance</span></button>
-        <button class="option-btn" onclick="answer('q4','b',false)" id="q4-b"><span class="opt-letter">B</span><span class="opt-text">Items 2 and 3 — safety rule clarity and community-scope protection</span></button>
-        <button class="option-btn" onclick="answer('q4','c',false)" id="q4-c"><span class="opt-letter">C</span><span class="opt-text">Items 8 and 10 — mechanism of harm and injury severity</span></button>
-        <button class="option-btn" onclick="answer('q4','d',true)" id="q4-d"><span class="opt-letter">D</span><span class="opt-text">Items 4, 6, and 7 — could happen again (owner did nothing), prior knowledge (two reported bites), and prior incidents (documented pattern)</span></button>
-      </div>
-      <div class="feedback-box" id="q4-fb"></div>
-    </div>
 
     <div class="section-score" id="s1-score" style="display:none;"><div class="score-display" id="s1-score-val"></div><div class="score-label">Section 2 Score</div></div>
     <div class="btn-group" id="s1-next"><button class="btn btn-primary btn-block" onclick="goToSection(2)">Next: Liability Assessment &rarr;</button></div>
@@ -481,53 +594,9 @@ power-of-a-system-memo.md, ga-bar-rules-resources-memo.md -->
       <p style="margin-top:8px;">Vicarious liability doubles or triples the available coverage — the at-fault driver's personal policy PLUS the employer's commercial policy. Identifying an employer-defendant can convert a $25K-limits case into a $1M case.</p>
     </div>
 
-    <div class="question-block" id="q5-block">
-      <div class="q-num">Question 5 of 20 · 10 pts</div>
-      <div class="q-text">Scenario: Client was T-boned at an intersection. She says she had the green light. Police report shows no witnesses, no camera footage, and both drivers claimed green. The at-fault driver's carrier has $100K/$300K limits. Medical specials are $42,000 and climbing. How do you evaluate this case's liability position?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q5','a',false)" id="q5-a"><span class="opt-letter">A</span><span class="opt-text">Strong liability — the client's testimony establishes she had the green light, and $42K in specials supports a viable case</span></button>
-        <button class="option-btn" onclick="answer('q5','b',true)" id="q5-b"><span class="opt-letter">B</span><span class="opt-text">Disputed liability with significant risk — without independent evidence, this is a "he-said-she-said" scenario. Under Georgia's 50% bar rule, if the jury splits fault evenly, recovery is completely barred. Investigate for traffic cameras, dashcam footage, or cell tower data before committing resources.</span></button>
-        <button class="option-btn" onclick="answer('q5','c',false)" id="q5-c"><span class="opt-letter">C</span><span class="opt-text">Decline immediately — disputed liability cases are not viable under Georgia's comparative fault system</span></button>
-        <button class="option-btn" onclick="answer('q5','d',false)" id="q5-d"><span class="opt-letter">D</span><span class="opt-text">Accept and proceed — $42K in specials with $100K limits gives enough room to justify the risk regardless of liability questions</span></button>
-      </div>
-      <div class="feedback-box" id="q5-fb"></div>
-    </div>
 
-    <div class="question-block" id="q6-block">
-      <div class="q-num">Question 6 of 20 · Unscored Calibration</div>
-      <div class="q-text"><em>(This is a self-assessment — no points awarded or deducted. All answers reveal the same teaching content.)</em><br><br>You're evaluating a case where the client was injured in a rear-end collision. She was not wearing a seatbelt at the time of impact. On a scale of 1–5, how confident are you that you can identify every way SB 68 changes the evaluation calculus for this case compared to pre-April 2025 law?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q6','a',true)" id="q6-a"><span class="opt-letter">A</span><span class="opt-text">1–2 — Not confident. I know SB 68 changed seatbelt rules but I'm not sure of all the implications.</span></button>
-        <button class="option-btn" onclick="answer('q6','b',true)" id="q6-b"><span class="opt-letter">B</span><span class="opt-text">3 — Somewhat confident. I know it makes seatbelt evidence admissible but I'm not sure on all the specific uses.</span></button>
-        <button class="option-btn" onclick="answer('q6','c',true)" id="q6-c"><span class="opt-letter">C</span><span class="opt-text">4 — Fairly confident. I know the main admissibility changes and can apply them in evaluation.</span></button>
-        <button class="option-btn" onclick="answer('q6','d',true)" id="q6-d"><span class="opt-letter">D</span><span class="opt-text">5 — Fully confident. I can identify every SB 68 impact on case evaluation and advise clients accordingly.</span></button>
-      </div>
-      <div class="feedback-box" id="q6-fb"></div>
-    </div>
 
-    <div class="question-block" id="q7-block">
-      <div class="q-num">Question 7 of 20 · 10 pts</div>
-      <div class="q-text">A pizza delivery driver rear-ended your client on the highway. The driver was on the clock, driving a company vehicle. The driver's personal auto policy has $25K limits. What is the MOST important evaluation step regarding liability and coverage?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q7','a',false)" id="q7-a"><span class="opt-letter">A</span><span class="opt-text">Accept the case based on clear rear-end liability and evaluate the $25K personal limits as the recovery ceiling</span></button>
-        <button class="option-btn" onclick="answer('q7','b',false)" id="q7-b"><span class="opt-letter">B</span><span class="opt-text">Check whether the driver has an umbrella policy that might supplement the $25K limits</span></button>
-        <button class="option-btn" onclick="answer('q7','c',true)" id="q7-c"><span class="opt-letter">C</span><span class="opt-text">Identify the employer as a respondeat superior defendant — the driver was on the clock in a company vehicle, meaning the employer's commercial policy (likely $1M+) is the real recovery source. This converts a $25K case into a potential seven-figure case.</span></button>
-        <button class="option-btn" onclick="answer('q7','d',false)" id="q7-d"><span class="opt-letter">D</span><span class="opt-text">File a negligent entrustment claim against the vehicle owner to access additional personal assets</span></button>
-      </div>
-      <div class="feedback-box" id="q7-fb"></div>
-    </div>
 
-    <div class="question-block" id="q8-block">
-      <div class="q-num">Question 8 of 20 · 10 pts</div>
-      <div class="q-text">A pedestrian was struck in a crosswalk by a driver making a right turn. The driver was cited for failure to yield. The client suffered a tibial fracture requiring surgical fixation. Under Georgia law, the traffic citation has what effect on the liability analysis?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q8','a',true)" id="q8-a"><span class="opt-letter">A</span><span class="opt-text">The citation establishes negligence per se — violation of a traffic statute designed to protect pedestrians in crosswalks. Breach is established; focus evaluation effort on causation, damages, and comparative fault arguments the defense might raise.</span></button>
-        <button class="option-btn" onclick="answer('q8','b',false)" id="q8-b"><span class="opt-letter">B</span><span class="opt-text">The citation is inadmissible hearsay — traffic citations cannot be used as evidence of negligence in Georgia civil proceedings</span></button>
-        <button class="option-btn" onclick="answer('q8','c',false)" id="q8-c"><span class="opt-letter">C</span><span class="opt-text">The citation proves the driver was at fault but does not establish a specific standard of care</span></button>
-        <button class="option-btn" onclick="answer('q8','d',false)" id="q8-d"><span class="opt-letter">D</span><span class="opt-text">The citation creates a rebuttable presumption of liability but the driver can defeat it by showing the pedestrian was also negligent</span></button>
-      </div>
-      <div class="feedback-box" id="q8-fb"></div>
-    </div>
 
     <div class="section-score" id="s2-score" style="display:none;"><div class="score-display" id="s2-score-val"></div><div class="score-label">Section 3 Score</div></div>
     <div class="btn-group" id="s2-next"><button class="btn btn-primary btn-block" onclick="goToSection(3)">Next: Damages Valuation &rarr;</button></div>
@@ -588,53 +657,9 @@ power-of-a-system-memo.md, ga-bar-rules-resources-memo.md -->
     </div>
     <div class="callout callout-warn"><strong>Treatment Gap = Value Killer.</strong> A two-week lapse in treatment gives the insurer ammunition to argue the injuries resolved — or were never real. During evaluation, check: When was the accident? When did treatment start? Are there any gaps longer than 14 days? A 47-day gap before first treatment (as in our opening scenario) doesn't just weaken the case — it destroys the causation chain.</div>
 
-    <div class="question-block" id="q9-block">
-      <div class="q-num">Question 9 of 20 · 10 pts</div>
-      <div class="q-text">Scenario: Client has $28,000 in medical specials from a rear-end collision. Clear liability — other driver cited. Client's treatment has been consistent with no gaps. Injuries are soft tissue, non-surgical. The defendant has $50K policy limits. Using the benchmarking framework, what is the most realistic evaluation of this case's value?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q9','a',false)" id="q9-a"><span class="opt-letter">A</span><span class="opt-text">$28,000 — specials only, since soft tissue cases don't command general damages multipliers</span></button>
-        <button class="option-btn" onclick="answer('q9','b',false)" id="q9-b"><span class="opt-letter">B</span><span class="opt-text">$84,000 — apply a 3× multiplier for pain and suffering on top of specials</span></button>
-        <button class="option-btn" onclick="answer('q9','c',false)" id="q9-c"><span class="opt-letter">C</span><span class="opt-text">$56,000 — 2× specials is the standard multiplier, and coverage limits are irrelevant to case valuation</span></button>
-        <button class="option-btn" onclick="answer('q9','d',true)" id="q9-d"><span class="opt-letter">D</span><span class="opt-text">$42,000–$50,000 — soft tissue non-surgical typically values at 1.5–2× specials ($42K–$56K), but the $50K policy limit creates a ceiling. The realistic recovery is the lesser of the calculated value or available coverage. Check for UM/UIM and resident relative policies to increase the ceiling.</span></button>
-      </div>
-      <div class="feedback-box" id="q9-fb"></div>
-    </div>
 
-    <div class="question-block" id="q10-block">
-      <div class="q-num">Question 10 of 20 · 10 pts</div>
-      <div class="q-text">You are evaluating a case where the client was injured on April 30, 2025 — nine days after SB 68 took effect. The client was unbelted. Surgery was billed at $95,000. The health insurer's contracted rate was $31,000. Under SB 68, how does this billing information affect your case valuation?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q10','a',false)" id="q10-a"><span class="opt-letter">A</span><span class="opt-text">Only the $95,000 billed amount matters — juries always see the full bill regardless of what insurance paid</span></button>
-        <button class="option-btn" onclick="answer('q10','b',true)" id="q10-b"><span class="opt-letter">B</span><span class="opt-text">Both numbers are now discoverable and presentable to the jury. The defense will argue the "reasonable value" is closer to $31,000. The unbuckled status adds a comparative fault argument. Factor both the reduced medical value and the seatbelt exposure into your evaluation — this case is worth significantly less than the billed amount suggests.</span></button>
-        <button class="option-btn" onclick="answer('q10','c',false)" id="q10-c"><span class="opt-letter">C</span><span class="opt-text">SB 68 only applies to cases filed after April 21, 2025 — since the case hasn't been filed yet, the pre-SB 68 rules apply</span></button>
-        <button class="option-btn" onclick="answer('q10','d',false)" id="q10-d"><span class="opt-letter">D</span><span class="opt-text">The insurer's contracted rate is privileged information and cannot be disclosed under Georgia insurance law</span></button>
-      </div>
-      <div class="feedback-box" id="q10-fb"></div>
-    </div>
 
-    <div class="question-block" id="q11-block">
-      <div class="q-num">Question 11 of 20 · 10 pts</div>
-      <div class="q-text">Client was in a highway collision with a Sysco food distribution truck. The truck driver was on the clock. Your client has a surgically-repaired tibial plateau fracture and $185,000 in current specials with projected future medical needs. The truck driver's personal policy is $100K. What coverage investigation step MOST changes the evaluation?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q11','a',false)" id="q11-a"><span class="opt-letter">A</span><span class="opt-text">Check the client's UM/UIM coverage to supplement the $100K personal policy</span></button>
-        <button class="option-btn" onclick="answer('q11','b',false)" id="q11-b"><span class="opt-letter">B</span><span class="opt-text">Request an affidavit from the truck driver confirming no umbrella policy</span></button>
-        <button class="option-btn" onclick="answer('q11','c',true)" id="q11-c"><span class="opt-letter">C</span><span class="opt-text">Identify Sysco as the employer and target their commercial auto policy — major commercial carriers typically carry $1M–$5M in coverage. The truck driver was on the clock, creating respondeat superior liability. This transforms the available coverage from $100K to potentially $5M+.</span></button>
-        <button class="option-btn" onclick="answer('q11','d',false)" id="q11-d"><span class="opt-letter">D</span><span class="opt-text">File immediately to trigger litigation coverage rates before the pre-lit window closes</span></button>
-      </div>
-      <div class="feedback-box" id="q11-fb"></div>
-    </div>
 
-    <div class="question-block" id="q12-block">
-      <div class="q-num">Question 12 of 20 · 10 pts</div>
-      <div class="q-text">You are evaluating a case involving a client who was diagnosed with a mild traumatic brain injury (mTBI) following a motor vehicle accident. According to the case value benchmarking framework, what is the critical evaluation factor for mTBI cases?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q12','a',true)" id="q12-a"><span class="opt-letter">A</span><span class="opt-text">mTBI cases are the hardest to evaluate — they require neuropsychological evaluation, cognitive testing, and daily function evidence. Must litigate to recover fair value. Evaluate whether the firm has the resources and the case has the liability strength to sustain a litigation timeline.</span></button>
-        <button class="option-btn" onclick="answer('q12','b',false)" id="q12-b"><span class="opt-letter">B</span><span class="opt-text">mTBI cases are straightforward — the diagnosis itself commands 7-figure value based on the benchmarking tiers</span></button>
-        <button class="option-btn" onclick="answer('q12','c',false)" id="q12-c"><span class="opt-letter">C</span><span class="opt-text">mTBI cases should be declined unless the client has MRI evidence of structural brain damage</span></button>
-        <button class="option-btn" onclick="answer('q12','d',false)" id="q12-d"><span class="opt-letter">D</span><span class="opt-text">mTBI cases should be evaluated using the standard soft-tissue benchmarking tier since most resolve with conservative treatment</span></button>
-      </div>
-      <div class="feedback-box" id="q12-fb"></div>
-    </div>
 
     <div class="section-score" id="s3-score" style="display:none;"><div class="score-display" id="s3-score-val"></div><div class="score-label">Section 4 Score</div></div>
     <div class="btn-group" id="s3-next"><button class="btn btn-primary btn-block" onclick="goToSection(4)">Next: Red Flags &amp; Decline Criteria &rarr;</button></div>
@@ -687,60 +712,16 @@ power-of-a-system-memo.md, ga-bar-rules-resources-memo.md -->
       <table class="stat-table">
         <tr><th>Decision Maker</th><th>Authority Scope</th></tr>
         <tr><td class="stat-num">Intake Specialist (Priya)</td><td>Screens against minimum thresholds and red flags. Can decline cases that hit red flag auto-declines. Cannot accept borderline cases.</td></tr>
-        <tr><td class="stat-num">Pre-Lit Head (Adriauna)</td><td>Reviews all borderline cases and any case with Safety Checklist score below 5. Can accept or decline within standard parameters.</td></tr>
-        <tr><td class="stat-num">Managing Attorney (Harrell)</td><td>Final authority on: policy limits above $500K, government defendants, and any case flagged for decline where the client is pushing back.</td></tr>
+        <tr><td class="stat-num">Pre-Lit Head Attorney</td><td>Reviews all borderline cases and any case with Safety Checklist score below 5. Can accept or decline within standard parameters.</td></tr>
+        <tr><td class="stat-num">Managing Attorney</td><td>Final authority on: policy limits above $500K, government defendants, and any case flagged for decline where the client is pushing back.</td></tr>
       </table>
     </div>
     <div class="callout callout-danger"><strong>Georgia Bar Rule 1.1 (Competence):</strong> An attorney must not accept a case she cannot competently handle. If a case type falls outside firm expertise — complex medical malpractice, products liability, maritime law — declining is not just smart business, it is an ethical obligation. Accepting and then providing substandard representation is worse than declining and referring.</div>
     <div class="callout callout-info"><strong>Rule 1.16(a) — Mandatory Withdrawal:</strong> Georgia Bar rules require declining or withdrawing from representation in certain circumstances — including when the lawyer's condition materially impairs ability to represent the client, or when continued representation would result in violation of the Rules of Professional Conduct.</div>
 
-    <div class="question-block" id="q13-block">
-      <div class="q-num">Question 13 of 20 · 10 pts</div>
-      <div class="q-text">Scenario: A potential client calls about a car accident that happened 23 months ago. She has not seen a doctor since the accident — she says she "toughed it out" but now her back is getting worse. The at-fault driver has $100K limits. Applying the red flag framework, what is the correct evaluation?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q13','a',false)" id="q13-a"><span class="opt-letter">A</span><span class="opt-text">Accept — the SOL hasn't expired (24 months for PI), and $100K limits make this viable</span></button>
-        <button class="option-btn" onclick="answer('q13','b',true)" id="q13-b"><span class="opt-letter">B</span><span class="opt-text">Two red flags: (1) No medical treatment within 30 days — a 23-month gap obliterates causation; and (2) SOL pressure — only 1 month remaining, insufficient time to build a viable case. Even if the SOL hasn't technically expired, the 23-month treatment gap makes this case virtually indefensible on causation. Decline with referral.</span></button>
-        <button class="option-btn" onclick="answer('q13','c',false)" id="q13-c"><span class="opt-letter">C</span><span class="opt-text">Accept immediately — the approaching SOL means we must file a protective complaint to preserve the claim, then evaluate the merits later</span></button>
-        <button class="option-btn" onclick="answer('q13','d',false)" id="q13-d"><span class="opt-letter">D</span><span class="opt-text">Escalate to Harrell — any case with $100K limits and approaching SOL requires managing attorney review</span></button>
-      </div>
-      <div class="feedback-box" id="q13-fb"></div>
-    </div>
 
-    <div class="question-block" id="q14-block">
-      <div class="q-num">Question 14 of 20 · 10 pts</div>
-      <div class="q-text">A potential client was injured when her car hit a pothole on a city-maintained road, causing a blowout and subsequent collision. The accident happened 5 months ago. She has significant injuries and clear causation. Who has final authority on whether to accept this case?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q14','a',false)" id="q14-a"><span class="opt-letter">A</span><span class="opt-text">Adriauna — as Pre-Lit Head, she has authority over all case acceptance decisions</span></button>
-        <button class="option-btn" onclick="answer('q14','b',false)" id="q14-b"><span class="opt-letter">B</span><span class="opt-text">Priya — intake can accept cases with clear liability and significant injuries</span></button>
-        <button class="option-btn" onclick="answer('q14','c',false)" id="q14-c"><span class="opt-letter">C</span><span class="opt-text">Adriauna, after confirming the ante litem notice deadline hasn't passed (6 months for municipal claims)</span></button>
-        <button class="option-btn" onclick="answer('q14','d',true)" id="q14-d"><span class="opt-letter">D</span><span class="opt-text">Harrell — the defendant is a government entity (city-maintained road), and per the decision authority matrix, Harrell retains final authority on all government defendant cases. Also critical: the 6-month ante litem deadline for municipal claims is only 1 month away — this must be flagged immediately.</span></button>
-      </div>
-      <div class="feedback-box" id="q14-fb"></div>
-    </div>
 
-    <div class="question-block" id="q15-block">
-      <div class="q-num">Question 15 of 20 · 10 pts</div>
-      <div class="q-text">A potential client was injured in a slip-and-fall at a hotel. During the intake interview, you notice inconsistencies: she initially said she fell in the lobby, then changed it to the pool area. A LexisNexis CLUE report shows two prior PI claims in the last 18 months — one for a "fall" at a different hotel, one for a "parking lot trip" at a strip mall. What is the correct evaluation?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q15','a',true)" id="q15-a"><span class="opt-letter">A</span><span class="opt-text">Red flag #7 — fraud indicators. Conflicting stories plus multiple prior PI claims in a short period are fraud warning signs. Decline with documentation. Do NOT sign a fee agreement.</span></button>
-        <button class="option-btn" onclick="answer('q15','b',false)" id="q15-b"><span class="opt-letter">B</span><span class="opt-text">Accept with caution — prior claims don't prove fraud, and the inconsistency may just be nervousness. Investigate further before deciding.</span></button>
-        <button class="option-btn" onclick="answer('q15','c',false)" id="q15-c"><span class="opt-letter">C</span><span class="opt-text">Escalate to Harrell — the hotel's coverage is likely high enough to warrant managing attorney review regardless of fraud concerns</span></button>
-        <button class="option-btn" onclick="answer('q15','d',false)" id="q15-d"><span class="opt-letter">D</span><span class="opt-text">Accept but run additional background checks — conflicting statements alone are not sufficient for an auto-decline</span></button>
-      </div>
-      <div class="feedback-box" id="q15-fb"></div>
-    </div>
 
-    <div class="question-block" id="q16-block">
-      <div class="q-num">Question 16 of 20 · 10 pts</div>
-      <div class="q-text">You have declined a case because the client was clearly at fault — she ran a red light and T-boned another vehicle. She is upset and says: "You're the third lawyer who has told me no. I'm going to leave a terrible review." What is the correct response?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q16','a',false)" id="q16-a"><span class="opt-letter">A</span><span class="opt-text">Reconsider the case — a negative review could damage the firm's online reputation, and there may be a comparative fault angle worth exploring</span></button>
-        <button class="option-btn" onclick="answer('q16','b',false)" id="q16-b"><span class="opt-letter">B</span><span class="opt-text">End the call — the decision has been made and the firm has no obligation to continue the conversation</span></button>
-        <button class="option-btn" onclick="answer('q16','c',true)" id="q16-c"><span class="opt-letter">C</span><span class="opt-text">Acknowledge her frustration without defensiveness: "I hear you — being told no is frustrating, especially when you're hurting." Explain the specific reason factually. Offer to connect her with another legal resource if one exists. Send the Declined Case Letter. Do NOT accept a case that fails evaluation because of review pressure.</span></button>
-        <button class="option-btn" onclick="answer('q16','d',false)" id="q16-d"><span class="opt-letter">D</span><span class="opt-text">Escalate to Harrell — per the decision authority matrix, Harrell handles cases "flagged for decline where client is pushing back"</span></button>
-      </div>
-      <div class="feedback-box" id="q16-fb"></div>
-    </div>
 
     <div class="section-score" id="s4-score" style="display:none;"><div class="score-display" id="s4-score-val"></div><div class="score-label">Section 5 Score</div></div>
     <div class="btn-group" id="s4-next"><button class="btn btn-primary btn-block" onclick="goToSection(5)">Next: Government Entity Cases &rarr;</button></div>
@@ -753,7 +734,7 @@ power-of-a-system-memo.md, ga-bar-rules-resources-memo.md -->
 <div class="section-card" id="section-5">
   <div class="section-header">
     <div class="section-num">Section 6 · Government Entity Cases &amp; Decision Authority · Up to 40 pts</div>
-    <h2>Ante Litem, Sovereign Immunity &amp; the Cases That Require Harrell</h2>
+    <h2>Ante Litem, Sovereign Immunity &amp; the Cases That Require the Managing Attorney</h2>
     <div class="section-subhead">Government cases play by different rules. Miss an ante litem deadline and no amount of damages, liability strength, or brilliant lawyering can save the claim.</div>
   </div>
   <div class="section-body">
@@ -790,59 +771,15 @@ power-of-a-system-memo.md, ga-bar-rules-resources-memo.md -->
         <li><strong>Discretionary immunity eliminates entire categories of claims</strong> — many negligence theories that work against private defendants fail against government</li>
         <li><strong>Shorter deadlines create malpractice risk</strong> — 6-month municipal deadline means evaluation and notice must happen within weeks of intake</li>
         <li><strong>Discovery is harder</strong> — open records requests replace standard discovery for pre-suit investigation</li>
-        <li><strong>Per GLG SOP §5:</strong> Harrell retains final authority on ALL government defendant cases — do NOT sign a fee agreement before Harrell reviews</li>
+        <li><strong>Per GLG SOP §5:</strong> the Managing Attorney retains final authority on ALL government defendant cases — do NOT sign a fee agreement before the Managing Attorney reviews</li>
       </ul>
     </div>
     <div class="callout callout-danger"><strong>Ante Litem Dollar Amount Requirement:</strong> The ante litem notice must demand a <em>specific dollar amount</em> that covers the full likely verdict. "An amount exceeding $X" is insufficient. If you send an ante litem demanding $100K and the verdict is $500K, the recovery is capped at the amount in the notice. Get the number right the first time.</div>
     <div class="callout callout-info"><strong>HB 1344 Impact on Evaluation:</strong> Georgia's Insurance Affordability Claims Integrity Act strengthens fraud detection, modifies claims processing timelines, and enhances regulatory enforcement. For case evaluation: expect insurers to conduct more aggressive fraud screening on incoming claims. Ensure every case accepted has clean documentation — conflicting records, suspicious patterns, or incomplete medical timelines will receive more scrutiny than before HB 1344.</div>
 
-    <div class="question-block" id="q17-block">
-      <div class="q-num">Question 17 of 20 · 10 pts</div>
-      <div class="q-text">A client was injured when a MARTA bus (city transit authority) ran a red light and struck her vehicle. The accident was 5 months and 2 weeks ago. She has $92,000 in medical specials and counting. Clear liability. What is the single most urgent action in this evaluation?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q17','a',false)" id="q17-a"><span class="opt-letter">A</span><span class="opt-text">Evaluate the Case Safety Checklist score — with $92K in specials and clear liability, this case likely scores 8+ and should be prioritized</span></button>
-        <button class="option-btn" onclick="answer('q17','b',true)" id="q17-b"><span class="opt-letter">B</span><span class="opt-text">Immediately flag the government entity and calculate the ante litem deadline. MARTA is a municipal/transit authority — the 6-month notice deadline is only 2 weeks away. The ante litem notice must be drafted, served, and documented BEFORE any other evaluation step. Missing this deadline kills the case permanently.</span></button>
-        <button class="option-btn" onclick="answer('q17','c',false)" id="q17-c"><span class="opt-letter">C</span><span class="opt-text">Escalate to Harrell for final authority on the government defendant, then proceed with standard evaluation while awaiting his decision</span></button>
-        <button class="option-btn" onclick="answer('q17','d',false)" id="q17-d"><span class="opt-letter">D</span><span class="opt-text">Accept the case and begin standard intake — the 2-year SOL gives plenty of time for a thorough evaluation</span></button>
-      </div>
-      <div class="feedback-box" id="q17-fb"></div>
-    </div>
 
-    <div class="question-block" id="q18-block">
-      <div class="q-num">Question 18 of 20 · 10 pts</div>
-      <div class="q-text">A client was injured when she tripped over a broken sidewalk maintained by the Georgia Department of Transportation (state entity). The accident was 10 months ago. She suffered a hip fracture. The state's defense will likely invoke the "discretionary function exception." What does this exception mean for your evaluation?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q18','a',false)" id="q18-a"><span class="opt-letter">A</span><span class="opt-text">The state cannot raise the discretionary function exception for sidewalk maintenance — maintenance is a ministerial duty, not a discretionary function</span></button>
-        <button class="option-btn" onclick="answer('q18','b',false)" id="q18-b"><span class="opt-letter">B</span><span class="opt-text">The discretionary function exception only applies to high-level policy decisions, not to operational negligence like sidewalk repair</span></button>
-        <button class="option-btn" onclick="answer('q18','c',false)" id="q18-c"><span class="opt-letter">C</span><span class="opt-text">The exception applies automatically to all government defendants and makes the case non-viable</span></button>
-        <button class="option-btn" onclick="answer('q18','d',true)" id="q18-d"><span class="opt-letter">D</span><span class="opt-text">The discretionary function exception provides that the state has no liability for discretionary acts, "whether or not the discretion involved is abused." You must evaluate whether sidewalk maintenance decisions were discretionary (resource allocation, prioritization = likely immune) or ministerial (specific duty to maintain = potentially liable). This distinction is the central litigation risk and must be part of the evaluation and the conversation with Harrell.</span></button>
-      </div>
-      <div class="feedback-box" id="q18-fb"></div>
-    </div>
 
-    <div class="question-block" id="q19-block">
-      <div class="q-num">Question 19 of 20 · 10 pts</div>
-      <div class="q-text">A case comes in with potential policy limits of $750,000. The client has catastrophic injuries — bilateral leg fractures, TBI screening positive, projected life care plan exceeding $2M. Liability is strong. Who makes the final acceptance decision?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q19','a',true)" id="q19-a"><span class="opt-letter">A</span><span class="opt-text">Harrell — per the decision authority matrix, Harrell retains final authority on all cases with policy limits above $500,000. Adriauna conducts the initial evaluation but the sign-off must come from the managing attorney.</span></button>
-        <button class="option-btn" onclick="answer('q19','b',false)" id="q19-b"><span class="opt-letter">B</span><span class="opt-text">Adriauna — as Pre-Lit Head, she has authority over all pre-litigation case acceptance regardless of policy limits</span></button>
-        <button class="option-btn" onclick="answer('q19','c',false)" id="q19-c"><span class="opt-letter">C</span><span class="opt-text">Either attorney can accept — the $500K threshold only applies to settlement authority, not case acceptance</span></button>
-        <button class="option-btn" onclick="answer('q19','d',false)" id="q19-d"><span class="opt-letter">D</span><span class="opt-text">Priya can accept at intake — catastrophic injuries with clear liability and high limits don't require attorney review</span></button>
-      </div>
-      <div class="feedback-box" id="q19-fb"></div>
-    </div>
 
-    <div class="question-block" id="q20-block">
-      <div class="q-num">Question 20 of 20 · 10 pts</div>
-      <div class="q-text">You have completed the evaluation of a case involving a motorcycle accident. Your Safety Checklist score is 7/10, liability is clear (other driver cited for failure to yield), specials are $38,000, defendant has $100K limits, and there are no red flags. What is the correct CasePeer documentation when you accept?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q20','a',false)" id="q20-a"><span class="opt-letter">A</span><span class="opt-text">Log "Accepted" in CasePeer with the Safety Checklist score and move the status to "Treating"</span></button>
-        <button class="option-btn" onclick="answer('q20','b',false)" id="q20-b"><span class="opt-letter">B</span><span class="opt-text">Log the acceptance and set initial tasks: medical records request, welcome letter, client check-in</span></button>
-        <button class="option-btn" onclick="answer('q20','c',true)" id="q20-c"><span class="opt-letter">C</span><span class="opt-text">Log "Accepted" with documented reason, Safety Checklist score (7/10), reviewing attorney. Set up ALL initial tasks per SOP §6: medical records request, welcome letter, adjuster contact, client check-in scheduled. Move status from Intake Review to Treating. Do NOT sign a fee agreement until the appropriate decision-maker has approved.</span></button>
-        <button class="option-btn" onclick="answer('q20','d',false)" id="q20-d"><span class="opt-letter">D</span><span class="opt-text">Sign the fee agreement immediately and backfill the CasePeer documentation later — speed of signing prevents client loss to competing firms</span></button>
-      </div>
-      <div class="feedback-box" id="q20-fb"></div>
-    </div>
 
     <div class="section-score" id="s5-score" style="display:none;"><div class="score-display" id="s5-score-val"></div><div class="score-label">Section 6 Score</div></div>
     <div class="btn-group" id="s5-next"><button class="btn btn-primary btn-block" onclick="goToSection(6)">Next: Boss Challenge — Multi-Case Evaluation &rarr;</button></div>
@@ -885,17 +822,6 @@ power-of-a-system-memo.md, ga-bar-rules-resources-memo.md -->
       <div class="case-detail"><span class="case-key">Coverage</span><span class="case-val">Driver personal: $50K. Amazon commercial policy: TBD (likely $1M+)</span></div>
       <div class="case-detail"><span class="case-key">Safety Checklist</span><span class="case-val">Score: 9/10</span></div>
     </div>
-    <div class="question-block" id="q21-block">
-      <div class="q-num">Boss Task 1 of 5 · 10 bonus pts</div>
-      <div class="q-text">Evaluate Case A (Thibodeaux). What is the correct disposition?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q21','a',false)" id="q21-a"><span class="opt-letter">A</span><span class="opt-text">Accept and proceed with standard workflow — strong liability, good specials, adequate coverage</span></button>
-        <button class="option-btn" onclick="answer('q21','b',false)" id="q21-b"><span class="opt-letter">B</span><span class="opt-text">Accept but escalate to Harrell — Amazon's commercial policy may exceed $500K, triggering the managing attorney threshold</span></button>
-        <button class="option-btn" onclick="answer('q21','c',true)" id="q21-c"><span class="opt-letter">C</span><span class="opt-text">Accept and PRIORITIZE — Safety Checklist 9/10, clear liability with dashcam evidence, immediate treatment with no gaps, respondeat superior against Amazon (employer liability = $1M+ commercial coverage), potential surgical case. This is a high-value case that warrants priority resources, early investigation, and immediate demand for Amazon's policy limits declaration.</span></button>
-        <button class="option-btn" onclick="answer('q21','d',false)" id="q21-d"><span class="opt-letter">D</span><span class="opt-text">Accept but wait for the shoulder surgery consult before committing resources — the case value depends entirely on whether surgery happens</span></button>
-      </div>
-      <div class="feedback-box" id="q21-fb"></div>
-    </div>
 
     <!-- BOSS CASE 2 -->
     <div class="case-file">
@@ -916,17 +842,6 @@ power-of-a-system-memo.md, ga-bar-rules-resources-memo.md -->
       <div class="case-detail"><span class="case-key">Coverage</span><span class="case-val">Kroger commercial general liability: likely $1M+</span></div>
       <div class="case-detail"><span class="case-key">Red Flags</span><span class="case-val">None <span class="flag-ok">Clear</span></span></div>
       <div class="case-detail"><span class="case-key">Safety Checklist</span><span class="case-val">Score: 6/10</span></div>
-    </div>
-    <div class="question-block" id="q22-block">
-      <div class="q-num">Boss Task 2 of 5 · 10 bonus pts</div>
-      <div class="q-text">Evaluate Case B (Odom). What is the correct disposition?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q22','a',false)" id="q22-a"><span class="opt-letter">A</span><span class="opt-text">Decline — "act of God" weather defense will likely succeed, and the disputed liability makes this too risky</span></button>
-        <button class="option-btn" onclick="answer('q22','b',true)" id="q22-b"><span class="opt-letter">B</span><span class="opt-text">Accept and proceed — Safety Checklist 6/10 (average), but strong compensating factors: surgical hip fracture in a 61-year-old = significant permanency and daily-function impact, $87K specials with deep-pocket defendant (Kroger $1M+ CGL), no red flags. Liability is disputed but winnable — Kroger's duty to maintain safe premises for invitees (O.C.G.A. § 51-3-1) includes responding to known weather hazards. Investigate whether Kroger had constructive knowledge (weather warnings) and failed to act.</span></button>
-        <button class="option-btn" onclick="answer('q22','c',false)" id="q22-c"><span class="opt-letter">C</span><span class="opt-text">Escalate to Harrell — the disputed liability makes this a borderline case requiring managing attorney review</span></button>
-        <button class="option-btn" onclick="answer('q22','d',false)" id="q22-d"><span class="opt-letter">D</span><span class="opt-text">Accept only if Patricia can identify a witness who saw the icy condition before she fell — without witness corroboration, the constructive knowledge argument fails</span></button>
-      </div>
-      <div class="feedback-box" id="q22-fb"></div>
     </div>
 
     <!-- BOSS CASE 3 -->
@@ -950,17 +865,6 @@ power-of-a-system-memo.md, ga-bar-rules-resources-memo.md -->
       <div class="case-detail"><span class="case-key">SB 68 Note</span><span class="case-val">Accident date March 15, 2025 — pre-SB 68 effective date (April 21, 2025)</span></div>
       <div class="case-detail"><span class="case-key">Safety Checklist</span><span class="case-val">Score: 2/10</span></div>
     </div>
-    <div class="question-block" id="q23-block">
-      <div class="q-num">Boss Task 3 of 5 · 10 bonus pts</div>
-      <div class="q-text">Evaluate Case C (Kimble). What is the correct disposition?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q23','a',false)" id="q23-a"><span class="opt-letter">A</span><span class="opt-text">Accept with caution — the case is weak but the approaching SOL (March 2027) gives time to investigate and the pre-SB 68 date avoids seatbelt evidence issues</span></button>
-        <button class="option-btn" onclick="answer('q23','b',false)" id="q23-b"><span class="opt-letter">B</span><span class="opt-text">Escalate to Adriauna — the Safety Checklist score of 2 requires Pre-Lit Head review per the SOP</span></button>
-        <button class="option-btn" onclick="answer('q23','c',false)" id="q23-c"><span class="opt-letter">C</span><span class="opt-text">Accept only if the prior attorney confirms the case was dropped for non-substantive reasons (e.g., personality conflict, not case quality)</span></button>
-        <button class="option-btn" onclick="answer('q23','d',true)" id="q23-d"><span class="opt-letter">D</span><span class="opt-text">Decline — multiple compounding weaknesses: Safety Checklist 2/10, disputed liability with no corroborating evidence, 6-week treatment gap destroying causation, minimal specials ($4,200), $25K minimum limits, AND prior representation (Red Flag #4 — why did the other firm drop or get fired?). No single factor is survivable; together they make the case non-viable. Send Declined Case Letter with referral.</span></button>
-      </div>
-      <div class="feedback-box" id="q23-fb"></div>
-    </div>
 
     <!-- BOSS CASE 4 -->
     <div class="case-file">
@@ -982,17 +886,6 @@ power-of-a-system-memo.md, ga-bar-rules-resources-memo.md -->
       <div class="case-detail"><span class="case-key">Coverage</span><span class="case-val">Government entity — City of Atlanta. Damage caps apply. <span class="flag-warn">Gov't</span></span></div>
       <div class="case-detail"><span class="case-key">Ante Litem Status</span><span class="case-val">Not sent. 6-month municipal deadline = July 28, 2026 (8 DAYS from intake) <span class="flag">URGENT</span></span></div>
       <div class="case-detail"><span class="case-key">Safety Checklist</span><span class="case-val">Score: 8/10</span></div>
-    </div>
-    <div class="question-block" id="q24-block">
-      <div class="q-num">Boss Task 4 of 5 · 10 bonus pts</div>
-      <div class="q-text">Evaluate Case D (Whitfield). What is the correct disposition?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q24','a',true)" id="q24-a"><span class="opt-letter">A</span><span class="opt-text">Accept — but the ante litem notice is the FIRST action, before anything else. The 6-month municipal deadline (O.C.G.A. § 36-33-5) expires in 8 days. Draft and serve the ante litem notice with a specific dollar amount covering the full projected damages ($2M+) TODAY. Simultaneously escalate to Harrell — government defendant requires managing attorney final authority. This is a catastrophic case with a ticking procedural bomb.</span></button>
-        <button class="option-btn" onclick="answer('q24','b',false)" id="q24-b"><span class="opt-letter">B</span><span class="opt-text">Escalate to Harrell first — do not take any action on a government case without managing attorney approval</span></button>
-        <button class="option-btn" onclick="answer('q24','c',false)" id="q24-c"><span class="opt-letter">C</span><span class="opt-text">Decline — government entity cases with damage caps make the economics unfavorable despite catastrophic injuries</span></button>
-        <button class="option-btn" onclick="answer('q24','d',false)" id="q24-d"><span class="opt-letter">D</span><span class="opt-text">Accept and begin standard intake — the 12-month state ante litem deadline gives adequate time for evaluation</span></button>
-      </div>
-      <div class="feedback-box" id="q24-fb"></div>
     </div>
 
     <!-- BOSS CASE 5 -->
@@ -1016,27 +909,41 @@ power-of-a-system-memo.md, ga-bar-rules-resources-memo.md -->
       <div class="case-detail"><span class="case-key">Complication</span><span class="case-val">Car 2's attorney may try to apportion fault to Car 1 (non-party) under O.C.G.A. § 51-12-33(c). Several liability means Car 2 pays only their share. <span class="flag-warn">Apportionment risk</span></span></div>
       <div class="case-detail"><span class="case-key">Safety Checklist</span><span class="case-val">Score: 7/10</span></div>
     </div>
-    <div class="question-block" id="q25-block">
-      <div class="q-num">Boss Task 5 of 5 · 10 bonus pts</div>
-      <div class="q-text">Evaluate Case E (Sellers). Multi-vehicle collision with apportionment risk. What is the correct evaluation and disposition?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q25','a',false)" id="q25-a"><span class="opt-letter">A</span><span class="opt-text">Decline — the multi-vehicle chain collision creates too much apportionment risk under Georgia's several-liability system</span></button>
-        <button class="option-btn" onclick="answer('q25','b',false)" id="q25-b"><span class="opt-letter">B</span><span class="opt-text">Accept but only pursue Car 2 — Car 1 is not worth naming since the police didn't cite them</span></button>
-        <button class="option-btn" onclick="answer('q25','c',true)" id="q25-c"><span class="opt-letter">C</span><span class="opt-text">Accept — Safety Checklist 7/10, strong liability for Raymond (dashcam + citation), potential surgical case with climbing specials, no treatment gaps. Apportionment risk is manageable: even if the jury assigns 20% to Car 1, Raymond recovers 80% from Car 2. Investigate Car 1's coverage as additional source. Raymond's dashcam defeats any comparative fault against him. Check his UM/UIM for additional coverage.</span></button>
-        <button class="option-btn" onclick="answer('q25','d',false)" id="q25-d"><span class="opt-letter">D</span><span class="opt-text">Escalate to Harrell — multi-vehicle cases with apportionment complexity require managing attorney review</span></button>
-      </div>
-      <div class="feedback-box" id="q25-fb"></div>
-    </div>
 
     <div class="section-score" id="s6-score" style="display:none;"><div class="score-display" id="s6-score-val"></div><div class="score-label">Boss Challenge Bonus</div></div>
-    <div class="btn-group" id="s6-next"><button class="btn btn-primary btn-block" onclick="goToSection(7)">View Results →</button></div>
+    <div class="btn-group" id="s6-next"><div style="margin-bottom:1rem;">
+      <label for="trainee-name-input" style="display:block;font-size:0.85rem;font-weight:600;color:#141c2c;margin-bottom:0.4rem;">Your Name — required to start</label>
+      <input type="text" id="trainee-name-input" placeholder="Enter your full name" autocomplete="name" style="width:100%;padding:0.5rem 0.75rem;border:1.5px solid #cbd5e1;border-radius:6px;font-size:0.9rem;box-sizing:border-box;">
+    </div>
+    <button class="btn btn-primary btn-block" onclick="startQuiz()">Take the Quiz →</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 7 — QUIZ (api-quiz-engine.js)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-7">
+  <div class="section-header">
+    <div class="section-num">Knowledge Check</div>
+    <h2>Module Assessment</h2>
+    <div class="section-subhead">Answer each question. One attempt — wrong answer reveals the correct answer and unlocks Next.</div>
+  </div>
+  <div class="section-body">
+    <div style="font-family:system-ui,sans-serif;font-size:13px;color:#33415c;padding:8px 0 12px;border-bottom:1px solid #e8eaf0;margin-bottom:16px;">
+      Base: <b id="base">0</b> / <b id="basemax">—</b>
+      &nbsp;·&nbsp; Bonus: <b id="bonus">0</b>
+      &nbsp;·&nbsp; Pass gate: <b id="gate">80</b>%
+      &nbsp;·&nbsp; <span id="q-progress" style="color:#dcb161;font-weight:700;"></span>
+    </div>
+    <div id="questions"></div>
+    <div id="result" style="background:#fff;border:2px solid #0b2545;border-radius:10px;padding:18px;margin:18px 0;display:none;"></div>
   </div>
 </div>
 
 <!-- ══════════════════════════════════════════
      SECTION 7 — RESULTS
 ════════════════════════════════════════════ -->
-<div class="section-card" id="section-7">
+<div class="section-card" id="section-8">
   <div id="results-content">
     <div class="section-body text-center">
       <p style="color:#888;margin-top:40px;">Complete all sections to see your results.</p>
@@ -1047,7 +954,7 @@ power-of-a-system-memo.md, ga-bar-rules-resources-memo.md -->
 <!-- ══════════════════════════════════════════
      SECTION 8 — FEEDBACK & CERTIFICATE
 ════════════════════════════════════════════ -->
-<div class="section-card" id="section-8">
+<div class="section-card" id="section-9">
   <div class="section-header">
     <div class="section-num">Feedback &amp; Certificate</div>
     <h2>Module Feedback</h2>
@@ -1055,7 +962,7 @@ power-of-a-system-memo.md, ga-bar-rules-resources-memo.md -->
   <div class="section-body">
     <div class="name-input-wrap">
       <label for="employee-name">Your Full Name (for certificate):</label>
-      <input type="text" id="employee-name" class="name-input" placeholder="Enter your full name" value="Adriauna Gunn">
+      <input type="text" id="employee-name" class="name-input" placeholder="Enter your full name" value="the Pre-Lit Head Attorney Gunn">
     </div>
     <div class="fb-question">
       <label for="fb-clarity">How clear were the case evaluation concepts?</label>
@@ -1081,7 +988,7 @@ power-of-a-system-memo.md, ga-bar-rules-resources-memo.md -->
         <div class="cert-title">Certificate of Completion</div>
         <div class="cert-subtitle">Pre-Lit Attorney Training Program</div>
         <div class="cert-presents">This certifies that</div>
-        <div class="cert-name" id="certNameDisplay">Adriauna Gunn</div>
+        <div class="cert-name" id="certNameDisplay">the Pre-Lit Head Attorney Gunn</div>
         <div class="cert-for">has successfully completed</div>
         <div class="cert-module">PA-1 — Case Evaluation Strategy</div>
         <div class="cert-seal">⚖️</div>
@@ -1090,7 +997,7 @@ power-of-a-system-memo.md, ga-bar-rules-resources-memo.md -->
         <div class="cert-badges" id="certBadges"></div>
         <div class="cert-signature">
           <div class="cert-sig-line"></div>
-          <div class="cert-sig-name">Harrell Gunn</div>
+          <div class="cert-sig-name">the Managing Attorney Gunn</div>
           <div class="cert-sig-title">Managing Attorney · Gunn Law Group</div>
         </div>
       </div>
@@ -1104,71 +1011,45 @@ power-of-a-system-memo.md, ga-bar-rules-resources-memo.md -->
 <script>
 var baseScore=0,bonusPoints=0,qDone={},firstAttemptStillAvailable={},sectionScores={},streakCount=0,maxStreak=0,questionsFirstTry=0,incorrectCount=0,totalQuestionsAnswered=0,milestonesTriggered={},moduleStartTime=Date.now(),audioCtx=null,soundEnabled=false,_audioKeepalive=null;
 var TRACKER_URL='https://script.google.com/macros/s/AKfycbzHJZ0C3BqnLatfq7RIiUP5KQdgYoXTJlozd8ZGZiwIf2bdVmvnPMo3JLm0dA5gQhJyxA/exec';
-var TOTAL_SECTIONS=9,PASS_THRESHOLD=162/*85% of 190 — Harrell ruling Aug 17 2026 (Option C)*/,BASE_MAX=190;
+var TOTAL_SECTIONS=10,PASS_THRESHOLD=152/*80% of 190 — the Managing Attorney ruling Aug 22 2026 msg 47296, REVERSES Aug 17 Option C (85%)*/,BASE_MAX=190;
 
 var Q_CONFIG={
-  'q1':{section:1,pts:10,isBonus:false,correct:'b'},
-  'q2':{section:1,pts:10,isBonus:false,correct:'c'},
-  'q3':{section:1,pts:10,isBonus:false,correct:'a'},
-  'q4':{section:1,pts:10,isBonus:false,correct:'d'},
-  'q5':{section:2,pts:10,isBonus:false,correct:'b'},
-  'q6':{section:2,pts:0,isBonus:false,correct:'a'},
-  'q7':{section:2,pts:10,isBonus:false,correct:'c'},
-  'q8':{section:2,pts:10,isBonus:false,correct:'a'},
-  'q9':{section:3,pts:10,isBonus:false,correct:'d'},
-  'q10':{section:3,pts:10,isBonus:false,correct:'b'},
-  'q11':{section:3,pts:10,isBonus:false,correct:'c'},
-  'q12':{section:3,pts:10,isBonus:false,correct:'a'},
-  'q13':{section:4,pts:10,isBonus:false,correct:'b'},
-  'q14':{section:4,pts:10,isBonus:false,correct:'d'},
-  'q15':{section:4,pts:10,isBonus:false,correct:'a'},
-  'q16':{section:4,pts:10,isBonus:false,correct:'c'},
-  'q17':{section:5,pts:10,isBonus:false,correct:'b'},
-  'q18':{section:5,pts:10,isBonus:false,correct:'d'},
-  'q19':{section:5,pts:10,isBonus:false,correct:'a'},
-  'q20':{section:5,pts:10,isBonus:false,correct:'c'},
-  'q21':{section:6,pts:0,isBonus:true,bonusPts:10,correct:'c'},
-  'q22':{section:6,pts:0,isBonus:true,bonusPts:10,correct:'b'},
-  'q23':{section:6,pts:0,isBonus:true,bonusPts:10,correct:'d'},
-  'q24':{section:6,pts:0,isBonus:true,bonusPts:10,correct:'a'},
-  'q25':{section:6,pts:0,isBonus:true,bonusPts:10,correct:'c'}
+  'q1':{section:1,pts:10,isBonus:false},
+  'q2':{section:1,pts:10,isBonus:false},
+  'q3':{section:1,pts:10,isBonus:false},
+  'q4':{section:1,pts:10,isBonus:false},
+  'q5':{section:2,pts:10,isBonus:false},
+  'q6':{section:2,pts:0,isBonus:false},
+  'q7':{section:2,pts:10,isBonus:false},
+  'q8':{section:2,pts:10,isBonus:false},
+  'q9':{section:3,pts:10,isBonus:false},
+  'q10':{section:3,pts:10,isBonus:false},
+  'q11':{section:3,pts:10,isBonus:false},
+  'q12':{section:3,pts:10,isBonus:false},
+  'q13':{section:4,pts:10,isBonus:false},
+  'q14':{section:4,pts:10,isBonus:false},
+  'q15':{section:4,pts:10,isBonus:false},
+  'q16':{section:4,pts:10,isBonus:false},
+  'q17':{section:5,pts:10,isBonus:false},
+  'q18':{section:5,pts:10,isBonus:false},
+  'q19':{section:5,pts:10,isBonus:false},
+  'q20':{section:5,pts:10,isBonus:false},
+  'q21':{section:6,pts:0,isBonus:true,bonusPts:10},
+  'q22':{section:6,pts:0,isBonus:true,bonusPts:10},
+  'q23':{section:6,pts:0,isBonus:true,bonusPts:10},
+  'q24':{section:6,pts:0,isBonus:true,bonusPts:10},
+  'q25':{section:6,pts:0,isBonus:true,bonusPts:10}
 };
 
 var SECTION_QUESTIONS={1:['q1','q2','q3','q4'],2:['q5','q6','q7','q8'],3:['q9','q10','q11','q12'],4:['q13','q14','q15','q16'],5:['q17','q18','q19','q20'],6:['q21','q22','q23','q24','q25']};
 
-var FEEDBACK={
-  'q1':{t:'✅ The strongest items are 2, 3, 6, and 7 — the safety rule cluster. Clear safety rule violation (texting while driving), community-scope protection (endangers every driver on the road), prior knowledge (3 prior rear-end collisions — the company knew their drivers were dangerous), and pattern evidence (this is not a one-time event). Items 9 and 10 are also strong here, but the Checklist\'s core power comes from the community danger cluster (Items 1-7). A case with devastating injuries (Item 10) but no community danger scores poorly. A case with moderate injuries but strong community danger scores high — because the jury CARES.',f:'❌ While individual items like plaintiff credibility (A), injury severity (C), or random victim (D) matter, the STRONGEST elements are the safety rule cluster: Items 2, 3, 6, and 7. The trucking company\'s 3 prior collisions (Item 7) combined with their knowledge (Item 6) and the clear safety rule (Item 2) that protects the entire community (Item 3) — this combination is what makes the case exceptional. The Safety Checklist measures community danger, not just individual harm.'},
-  'q2':{t:'✅ Item 3 asks whether the safety rule protects the COMMUNITY — not just this plaintiff. "Every person who walks into this restaurant — your mother, your child, anyone — is endangered by an unmarked wet floor." This framing activates the jury\'s self-protective instinct. Options A and D state the legal duty correctly but frame it as plaintiff-specific. The legal analysis is identical — but the Safety Checklist evaluates jury impact, not legal sufficiency. A jury that sees this as THEIR problem enforces the rule.',f:'❌ Options A and D correctly state the legal duty under O.C.G.A. § 51-3-1, but Item 3 doesn\'t ask about legal sufficiency — it asks about community-scope protection. The framing that "every person who walks into this restaurant" is endangered converts this from a plaintiff-specific claim to a community safety enforcement case. Option B (comparative fault from heels) is a valid legal consideration but doesn\'t address Item 3.'},
-  'q3':{t:'✅ Per GLG\'s evaluation SOP §5: the Pre-Lit Head reviews all borderline cases and any case with Safety Checklist score below 5. A score of 4/10 triggers mandatory review before any acceptance decision. The score is NOT an automatic decline — a weak Safety Checklist case can still be viable if other factors compensate. But it IS an automatic escalation with procedural consequences.',f:'❌ A Safety Checklist score of 4/10 triggers mandatory Pre-Lit Head review per SOP §5 — not automatic decline (B), not intake-level decline authority (C), and not informational-only (D). The score has procedural consequences: cases below 5 require attorney review before acceptance.'},
-  'q4':{t:'✅ Two prior reported bites with no corrective action directly strengthen Items 4, 6, and 7. Item 4: Could it happen again? Yes — the owner did nothing. Item 6: Prior knowledge — two reported bites = documented awareness of the danger. Item 7: Prior incidents — two documented bites establish a pattern. One bite is an incident; two bites with no corrective action followed by a third is a deliberate choice to endanger the community.',f:'❌ The prior-incident pattern most directly strengthens Items 4 (could happen again — owner did nothing), 6 (prior knowledge — two reported bites), and 7 (prior incidents — documented pattern). Items 1/5 relate to community scope, not the pattern specifically. Items 2/3 relate to safety rule clarity. Items 8/10 relate to this specific bite, not the history.'},
-  'q5':{t:'✅ Disputed liability with no independent corroboration is a significant risk under Georgia\'s 50% bar rule (O.C.G.A. § 51-12-33). Without camera footage, witnesses, dashcam, or cell data, this is "he-said-she-said." If the jury splits fault 50/50, recovery is completely barred — zero. The correct evaluation: acknowledge the risk, investigate for corroborating evidence BEFORE committing resources, then make a final decision. This is not an automatic decline — but it requires investigation before commitment.',f:'❌ Disputed liability with no independent evidence is a significant risk under Georgia\'s 50% bar rule. Option A treats client testimony as sufficient — it is not when both drivers tell the same story. Option C (automatic decline) is too extreme. Option D ignores the liability risk entirely. The 50% bar means recovery could be zero if fault is split evenly.'},
-  'q6':{t:'📋 SB 68 Impact on Case Evaluation — Complete Breakdown:<br><br>1. <strong>Seatbelt non-use now admissible</strong> on: negligence, comparative negligence, causation, assumption of risk, apportionment, AND to diminish damages.<br>2. <strong>Comparative fault argument</strong>: Defense argues unbuckled plaintiff assumed risk of enhanced injuries.<br>3. <strong>Causation splitting</strong>: Biomechanical expert testifies which injuries were "seatbelt-preventable."<br>4. <strong>Separate apportionment</strong>: Jury can assign fault percentage specifically for the seatbelt decision.<br>5. <strong>Evaluation impact</strong>: Unbuckled client in post-April 2025 case faces materially different risk profile.<br>6. <strong>Court discretion</strong>: Judge retains exclusion discretion under O.C.G.A. § 24-4-403, but admission is expected in most courts.',f:'📋 Same SB 68 breakdown for all confidence levels. Six key impacts: admissibility on multiple grounds, new comparative fault argument, causation-splitting by experts, separate apportionment, material valuation impact, and court discretion. Every post-April 2025 case evaluation must include seatbelt status assessment.'},
-  'q7':{t:'✅ Identify the employer as a respondeat superior defendant. The driver was on the clock in a company vehicle — employer vicarious liability applies. The employer\'s commercial auto policy (typically $1M+ for delivery companies) becomes the real recovery source, converting a $25K case into a potential seven-figure case. Always ask at evaluation: Was the at-fault party working?',f:'❌ The $25K personal limits are NOT the ceiling — the driver was on the clock in a company vehicle, creating respondeat superior liability. Option A treats $25K as the ceiling. Option B (umbrella) targets the wrong source. Option D (negligent entrustment) addresses the vehicle owner, not the employer. The employer\'s commercial policy is the primary recovery target.'},
-  'q8':{t:'✅ The traffic citation for failure to yield establishes negligence per se — violation of a statute designed to protect pedestrians in crosswalks. Breach is established as a matter of law. Focus evaluation resources on causation and damages instead of re-proving breach. Check for potential comparative fault arguments the defense might raise.',f:'❌ The citation IS admissible and DOES establish negligence per se. Option B (inadmissible) is wrong. Option C (no standard of care) is wrong — the statute IS the standard. Option D (rebuttable presumption) mislabels the effect. Negligence per se establishes breach; comparative negligence is a separate analysis.'},
-  'q9':{t:'✅ Correct valuation: soft tissue non-surgical = 1.5–2× specials = $42K–$56K. But the $50K policy limit creates a ceiling. Realistic recovery: $42K–$50K. Critical next step: check for UM/UIM and resident relative policies to raise the ceiling. Coverage investigation can convert a $50K case into $100K+.',f:'❌ Case value requires both damages calculation AND coverage ceiling. Option A ignores general damages. Option B applies too high a multiplier for non-surgical. Option C ignores coverage limits. The $50K policy is the ceiling — investigate additional coverage sources.'},
-  'q10':{t:'✅ SB 68 applies because the cause of action arose April 30, 2025 — after the effective date. Both the $95K billed and $31K paid amounts are discoverable. The defense will argue "reasonable value" is closer to $31K. Combined with seatbelt comparative fault, this case faces two value suppressors. Factor both into evaluation.',f:'❌ SB 68 applies based on when the cause of action arises, not filing date. Both billed and paid amounts are now discoverable. The jury decides "reasonable value" seeing both numbers. Option C misidentifies the trigger. Option D is wrong — contracted rates are explicitly discoverable post-SB 68.'},
-  'q11':{t:'✅ Identify Sysco as employer-defendant. The driver was on the clock — respondeat superior creates access to Sysco\'s commercial fleet policy ($1M–$5M+). This transforms available coverage from $100K to potentially millions. UM/UIM is secondary. The driver\'s personal umbrella is irrelevant compared to the employer\'s commercial policy.',f:'❌ The driver\'s $100K personal policy is not the relevant coverage. Sysco\'s commercial policy ($1M–$5M+) is accessible via respondeat superior. Option A (UM/UIM) is secondary. Option B targets the wrong party. Option D (file immediately) serves no strategic purpose at evaluation stage.'},
-  'q12':{t:'✅ Mild TBI cases are the hardest category — they require neuropsychological evaluation, cognitive testing, and daily function evidence. Standard imaging often shows nothing; the injury is functional, not structural. These cases must typically be litigated. The evaluation question: does the firm have the resources and liability strength to sustain a litigation timeline?',f:'❌ mTBI cases are NOT straightforward (B), should NOT be auto-declined without MRI (C — neuropsych testing is the diagnostic tool, not MRI), and should NOT be evaluated as soft tissue (D — different injury category entirely). They require specialized evidence and typically must be litigated.'},
-  'q13':{t:'✅ Two compounding red flags make this non-viable. Red Flag #3: no treatment within 30 days — a 23-month gap obliterates causation. Plus SOL pressure — only 1 month remaining, insufficient time to build a viable case. The $100K limits are irrelevant when causation is destroyed. Filing a protective complaint wastes resources on a case that cannot survive summary judgment.',f:'❌ The $100K limits don\'t save a case with destroyed causation (23-month gap). Filing a protective complaint (C) wastes resources. Escalating to Harrell (D) applies the wrong threshold. Two compounding red flags = decline with referral.'},
-  'q14':{t:'✅ Per SOP §5: Harrell retains final authority on ALL government defendant cases. A city-maintained road = city defendant = government entity. Additionally: the 6-month municipal ante litem deadline is only 1 month away — this must be flagged immediately alongside the Harrell escalation.',f:'❌ Government defendants trigger managing attorney authority per SOP §5 — regardless of liability strength. Option A (Adriauna) exceeds her scope for government cases. Option B (Priya) cannot accept specialized cases. Option C gets the deadline right but authority wrong.'},
-  'q15':{t:'✅ Red Flag #7 — fraud indicators. Conflicting stories (lobby vs. pool area) plus two prior PI claims in 18 months form a pattern consistent with serial fraud. The SOP classifies fraud indicators as auto-decline unless attorney override with documented reasoning. Do NOT sign a fee agreement.',f:'❌ Conflicting stories + multiple prior claims = Red Flag #7. The SOP treats fraud indicators as auto-declines, not investigation triggers (B). Fraud declines don\'t require Harrell (C). "Accept but investigate" (D) reverses the SOP\'s presumption.'},
-  'q16':{t:'✅ The decline conversation: (1) Acknowledge frustration without defensiveness; (2) Share facts, not judgments; (3) Maintain mutual purpose; (4) Offer alternatives; (5) Send the Declined Case Letter. Do NOT accept under review pressure. Do NOT cut off the conversation. The "client pushing back" SOP provision refers to borderline CASES, not review threats on clearly non-viable cases.',f:'❌ Option A (reconsider for reviews) leads to accepting non-viable cases — malpractice risk. Option B (end the call) abandons the relationship unnecessarily. Option D misapplies the SOP — "pushing back" refers to borderline cases, not review threats.'},
-  'q17':{t:'✅ The ante litem notice is the FIRST action. MARTA is municipal — 6-month deadline (O.C.G.A. § 36-33-5) expires in ~2 weeks. Missing it kills the case permanently. The notice must be drafted and served BEFORE any other evaluation step. Yes, Harrell reviews government cases — but the notice cannot wait for his review schedule. Serve first, escalate simultaneously.',f:'❌ Every other option delays the ante litem notice. Option A (Checklist first) — the checklist doesn\'t matter if the claim is barred. Option C (Harrell first) — correct but temporally wrong; serve the notice WHILE escalating. Option D (2-year SOL) — catastrophically wrong; the 6-month municipal deadline SUPERSEDES the 2-year SOL.'},
-  'q18':{t:'✅ The discretionary function exception (O.C.G.A. § 50-21-24) is the central litigation risk. The state has "no liability for discretionary acts, whether or not the discretion involved is abused." You must evaluate whether sidewalk maintenance was discretionary (resource allocation, prioritization = likely immune) or ministerial (specific duty to maintain = potentially liable). This distinction determines case viability and must be part of the Harrell conversation.',f:'❌ Options A and B assume the answer without investigating. Whether maintenance was discretionary or ministerial depends on specific facts — mandatory schedules, documented hazard reports, specific duties. Option C is too broad — many government cases survive the defense. The correct evaluation acknowledges uncertainty and factors it into risk analysis.'},
-  'q19':{t:'✅ Per SOP §5: Harrell retains final authority on all cases with policy limits above $500,000. The $750K limits exceed this threshold. Adriauna evaluates; Harrell signs off. This catastrophic case also likely triggers a bad faith strategy discussion.',f:'❌ The $750K limits exceed the $500K threshold — Harrell must approve. Option B (Adriauna decides) exceeds her authority scope. Option C misidentifies when the threshold applies. Option D (Priya accepts) is wrong for any case requiring attorney evaluation.'},
-  'q20':{t:'✅ Complete documentation per SOP §6: decision logged with reason, Safety Checklist score (7/10), reviewing attorney, ALL initial tasks (medical records, welcome letter, adjuster contact, client check-in), status moved Intake Review → Treating. Critical: DO NOT sign fee agreement until appropriate decision-maker has approved.',f:'❌ Option A is incomplete — missing initial tasks. Option B is incomplete — missing full task set and documentation. Option D violates SOP §5 — fee agreement AFTER approval, not before. Complete = decision + reason + score + attorney + all tasks + proper status transition.'},
-  'q21':{t:'✅ Case A is a PRIORITIZE case — Safety Checklist 9/10. Clear liability with dashcam, immediate treatment, respondeat superior against Amazon ($1M+ commercial policy), potential surgical case. Score 8-10 = prioritize resources per SOP. Standard workflow (A) undervalues a 9/10 case. Escalation for $500K+ (B) is premature — limits unconfirmed. Waiting for surgery consult (D) delays unnecessarily.',f:'❌ A 9/10 Safety Checklist triggers PRIORITIZE — not standard workflow. Option B is premature (limits unconfirmed). Option D delays unnecessarily. The case warrants immediate priority attention and policy limits demand.'},
-  'q22':{t:'✅ Case B is an ACCEPT — strong compensating factors overcome disputed liability. Patricia is 61 with surgical hip fracture: significant permanency, daily-function impact, jury resonance. $87K specials against Kroger\'s $1M+ CGL. The "act of God" defense is winnable — weather warnings = constructive knowledge. Disputed liability is real but not fatal.',f:'❌ Option A (decline for weather defense) is too conservative — constructive knowledge from weather warnings defeats "act of God." Option C (escalate to Harrell) applies wrong threshold — no government defendant, no $500K+ limits. Option D (conditional on witness) is unnecessarily restrictive — constructive knowledge can be established other ways.'},
-  'q23':{t:'✅ Case C should be DECLINED. Multiple compounding weaknesses: Safety Checklist 2/10, disputed liability with no evidence, 6-week treatment gap, $4,200 specials, $25K limits, AND Red Flag #4 (prior representation). No single factor alone is survivable; together they make the case indefensible. Send Declined Case Letter with referral.',f:'❌ Option A (accept with caution) ignores compounding weaknesses. Option B (escalate) is technically correct per sub-5 procedure but the outcome is predetermined. Option C (conditional) invests resources into a fundamentally non-viable case. Decline with documentation.'},
-  'q24':{t:'✅ Case D requires IMMEDIATE ante litem notice — 8 days until the 6-month municipal deadline. Serve notice with specific dollar amount ($2M+ based on life care plan). Simultaneously escalate to Harrell (government defendant + likely $500K+ recovery). Option B (Harrell first) risks missing the deadline. Option C (decline for caps) ignores that capped recoveries can still be substantial. Option D (12-month) confuses entity types — City of Atlanta = municipal = 6 months.',f:'❌ Option B creates unacceptable deadline risk. Option C is premature — damage caps reduce but don\'t eliminate recovery. Option D confuses entity types — City of Atlanta is municipal (6 months), not state (12 months). Serve the notice TODAY while escalating to Harrell.'},
-  'q25':{t:'✅ Case E is an ACCEPT. Safety Checklist 7/10, strong liability (dashcam + citation), potential surgical case, no gaps. Apportionment risk is manageable: even at 80/20 split, Raymond recovers 80%. Investigate Car 1\'s coverage as additional source. Raymond\'s dashcam defeats comparative fault against HIM. Check UM/UIM for additional coverage.',f:'❌ Option A (decline for apportionment) is too conservative — apportionment reduces but doesn\'t eliminate recovery. Option B (only Car 2) misses Car 1 as potential additional source. Option D (escalate to Harrell) applies wrong threshold — multi-vehicle apportionment is within Adriauna\'s authority.'}
-};
+var FEEDBACK={} /* CUTOVER: feedback text is served per-answer by the engine, never shipped to the client up front */;
 
-function answer(qId,choice,isCorrect){
+window.answerUI = function answerUI(qId,choice,isCorrect){
   if(qDone[qId])return;
   var cfg=Q_CONFIG[qId],block=document.getElementById(qId+'-block'),fb=document.getElementById(qId+'-fb');
   block.querySelectorAll('.option-btn').forEach(function(b){b.classList.add('disabled');});
-  var clickedBtn=document.getElementById(qId+'-'+choice),correctBtn=document.getElementById(qId+'-'+cfg.correct);
+  var clickedBtn=document.getElementById(qId+'-'+choice),correctBtn=document.getElementById(qId+'-'+(cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || ''));
   if(isCorrect){
     clickedBtn.classList.add('correct');block.classList.add('answered');qDone[qId]=true;
     if(!cfg.isBonus){baseScore+=cfg.pts;sectionScores[cfg.section]=(sectionScores[cfg.section]||0)+cfg.pts;
@@ -1283,5 +1164,68 @@ function renderBadges(badges,container){if(!badges.length){container.innerHTML='
 document.addEventListener('DOMContentLoaded',function(){if(localStorage.getItem('glg_sound')==='1'){soundEnabled=true;var b=document.getElementById('soundToggle');if(b)b.textContent='🔊';}function iac(){ensureAudioCtx();document.removeEventListener('click',iac);document.removeEventListener('touchstart',iac);document.removeEventListener('touchend',iac);}document.addEventListener('click',iac);document.addEventListener('touchstart',iac);document.addEventListener('touchend',iac);function rag(){if(audioCtx&&audioCtx.state==='suspended')audioCtx.resume();}document.addEventListener('touchstart',rag,true);document.addEventListener('touchend',rag,true);document.addEventListener('click',rag,true);initMascot();});
 goToSection(0);
 </script>
+
+
+
+<script>
+/* ── go() / startQuiz() — quiz entry point (the Managing Attorney ruling 2026-09-03) ── */
+async function go(screen) {
+  if (screen === 'quiz') {
+    // Bug-2 fix: await attempt start before making questions interactive
+    await window.GLGQuiz.beginAttempt(); // uses per-session random ID
+    goToSection(7);
+  }
+}
+
+function startQuiz() {
+  var _ni = document.getElementById('trainee-name-input');
+  var _name = (_ni && _ni.value.trim()) || '';
+  if (!_name) {
+    if (typeof showToast === 'function') showToast('\u26a0\ufe0f Please enter your name before starting the quiz', false);
+    else alert('Please enter your name before starting the quiz.');
+    return;
+  }
+ go('quiz'); }
+
+/* ── GLG MODULE CONFIG — wires api-quiz-engine.js to module-pa1.html ── */
+window.GLG_MODULE_CONFIG = {
+  moduleId: 'pa1',
+  onBankLoaded: function(bank) {
+    var basemax = document.getElementById('basemax');
+    var gate    = document.getElementById('gate');
+    if (basemax) basemax.textContent = bank.base_max;
+    if (gate)    gate.textContent    = bank.pass_pct;
+    for (var i = 1; i <= 6; i++) {
+      var nextEl = document.getElementById('s' + i + '-next');
+      if (nextEl) nextEl.style.display = 'flex';
+    }
+  },
+  onStartQuiz: function() {
+    if (typeof audioCtx !== 'undefined' && audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume().catch(function(){});
+    }
+  },
+  onAnswered: function(r) {
+    baseScore   = r.base_score;
+    bonusPoints = r.bonus_score;
+    streakCount = r.streak;
+    maxStreak   = Math.max(maxStreak || 0, r.maxStreak || 0);
+    var ts = document.getElementById('total-score');
+    if (ts) ts.textContent = r.base_score;
+    var bs = document.getElementById('bonus-score');
+    if (bs) bs.textContent = r.bonus_score;
+    if (typeof updateStreak  === 'function') updateStreak(r.correct);
+    if (typeof mascotReact   === 'function') mascotReact(r.correct ? 'correct' : 'incorrect');
+  },
+  onComplete: function(r) {
+    window._pa1Passed = r.passed;
+    baseScore   = r.base_score;
+    bonusPoints = r.bonus_score;
+    goToSection(8);   // results is now section-8 after port
+    if (typeof buildResults === 'function') buildResults();
+  }
+};
+</script>
+<script src="api-quiz-engine.js"></script>
 </body>
 </html>

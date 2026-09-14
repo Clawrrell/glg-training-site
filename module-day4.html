@@ -18,12 +18,12 @@ QA Checklist:
   ✅ Title fixed: "NH-4 — Records, LORs & Templates | Gunn Law Group"
   ✅ Template numbers grounded: T01 (LOR At-Fault), T02 (LOR UM), T04/05 (Records/Bills), T12 (LOP), T44 (HIPAA Auth), T74 (Records Follow-Up)
   ✅ 14-day rule confirmed: CasePeer_Basics_Training.md — "Every 14 days" for pre-lit cases
-  ⚠️ SUPERSEDED 2026-08-15 (Harrell ruling msg 42783): records follow-up = EVERY 7 DAYS, escalate day 21,
+  ⚠️ SUPERSEDED 2026-08-15 (the Managing Attorney ruling msg 42783): records follow-up = EVERY 7 DAYS, escalate day 21,
      per System-1-GLG-Operating-System.md:44 (Pending Demand row). The June 21 confirmation above is
      retained as build provenance only. CasePeer_Basics_Training.md:62 is itself a defect, reported separately.
   ✅ Sound engine: _audioKeepalive, playTone(), playWrongTone() 520/440Hz triangle, playDing() WebAudio scheduling
   ✅ Mascot: ⚖️ floating scales of justice
-  ✅ Certificate: pass gate (8/10 = 80%), confetti canvas, Harrell Gunn signature
+  ✅ Certificate: pass gate (8/10 = 80%), confetti canvas, the Managing Attorney Gunn signature
   ✅ Tracker URL: canonical Apps Script endpoint, condition fixed (was inverted !== bug)
   ✅ Module ID: 'nh4' (was 'day4')
   ✅ startQuiz() on fail path (matches NH-1 pattern)
@@ -370,6 +370,8 @@ button, .btn, .option-btn, [onclick] {
   user-select: none; -webkit-user-select: none;
 }
 </style>
+<!-- CUTOVER: server-side grading. Answer keys are not in this file. -->
+    <link rel="stylesheet" href="boss-challenge.css">
 </head>
 <body>
 
@@ -749,14 +751,10 @@ button, .btn, .option-btn, [onclick] {
     </div>
 
     <div class="subsection">
-      <h3>The 7-Day Rule & Never Miss Twice</h3>
+      <h3>The 7-Day Rule</h3>
       <div class="callout red">
         <span class="callout-icon">🚨</span>
         <span><strong>7-Day Rule:</strong> Every outstanding records request gets a phone follow-up every 7 days. No exceptions. Escalate at day 21. Log every follow-up call in CasePeer with date, time, and contact person.</span>
-      </div>
-      <div class="callout amber" style="margin-top: 0.75rem;">
-        <span class="callout-icon">⚠️</span>
-        <span><strong>Never Miss Twice:</strong> One missed follow-up is a mistake. Two in a row is a bad habit forming. Consistency prevents system breakdown and cases from stalling.</span>
       </div>
     </div>
 
@@ -791,7 +789,7 @@ button, .btn, .option-btn, [onclick] {
       <h3>Why Templates Are Standards, Not Shortcuts</h3>
       <div class="callout green">
         <span class="callout-icon">📋</span>
-        <span><strong>Templates are how we systematize excellence.</strong> Every GLG letter should look professional, be legally compliant, and follow the same format. Templates eliminate variability and ensure consistency across all staff members — whether Harrell sends a letter or a new assistant does.</span>
+        <span><strong>Templates are how we systematize excellence.</strong> Every GLG letter should look professional, be legally compliant, and follow the same format. Templates eliminate variability and ensure consistency across all staff members — whether the Managing Attorney sends a letter or a new assistant does.</span>
       </div>
     </div>
 
@@ -851,11 +849,15 @@ button, .btn, .option-btn, [onclick] {
       <h3>Template Rules</h3>
       <div class="callout amber">
         <span class="callout-icon">⚠️</span>
-        <span><strong>Don't modify templates without approval.</strong> If you think a template needs changes, bring it to the CM or Harrell. Templates are carefully designed for legal compliance and professional standards — ad hoc changes can create problems.</span>
+        <span><strong>Don't modify templates without approval.</strong> If you think a template needs changes, bring it to the CM or the Managing Attorney. Templates are carefully designed for legal compliance and professional standards — ad hoc changes can create problems.</span>
       </div>
     </div>
 
-    <div class="btn-row">
+        <div class="name-input-wrap" style="margin-bottom:1rem;">
+      <label for="trainee-name-input" style="display:block;font-family:var(--font-b,sans-serif);font-size:0.85rem;font-weight:600;color:var(--navy,#141c2c);margin-bottom:0.4rem;">Your Name — required to start</label>
+      <input type="text" id="trainee-name-input" class="name-input" placeholder="Enter your full name" autocomplete="name">
+    </div>
+<div class="btn-row">
       <button class="btn btn-secondary" onclick="go(4)">← Back</button>
       <button class="btn btn-green" onclick="startQuiz()">📝 Take the Quiz →</button>
     </div>
@@ -868,16 +870,8 @@ button, .btn, .option-btn, [onclick] {
     <div class="section-label" id="quiz-section-label">Question 1 of 10</div>
     <div class="section-title">Knowledge Check — NH-4</div>
   </div>
-  <div class="content-card">
-    <div class="quiz-dots" id="quizDots"></div>
-    <div class="question-num" id="qNum"></div>
-    <div class="question-text" id="qText"></div>
-    <div class="options" id="qOptions"></div>
-    <div class="feedback-box" id="qFeedback"></div>
-    <div class="btn-row" style="margin-top: 1rem;">
-      <button class="btn btn-primary" id="qNextBtn" onclick="nextQuestion()" disabled>Next →</button>
-    </div>
-  </div>
+  <div id="questions"></div>
+</div>
 </div>
 
 <!-- ══════════ RESULTS SCREEN ══════════ -->
@@ -926,7 +920,7 @@ button, .btn, .option-btn, [onclick] {
         <div class="cert-badges" id="certBadges"></div>
         <div class="cert-signature">
           <div class="cert-sig-line"></div>
-          <div class="cert-sig-name">Harrell Gunn</div>
+          <div class="cert-sig-name">the Managing Attorney Gunn</div>
           <div class="cert-sig-title">Managing Attorney · Gunn Law Group</div>
         </div>
       </div>
@@ -978,8 +972,7 @@ var questions = [
       "The severity of the accident",
       "The insurance company's goodwill"
     ],
-    correct: 0,
-    explanation: "Records quality determines case value. Insurance companies pay based on what's documented, not what the client says happened. No documentation = no case value."
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "When must the Letter of Representation (LOR) be sent?",
@@ -989,8 +982,7 @@ var questions = [
       "Within 24–48 hours of the client signing the retainer",
       "Only if the insurer requests it"
     ],
-    correct: 2,
-    explanation: "The LOR must go out within 24–48 hours of signing. Every day without an LOR allows the insurer to legally contact the client directly and potentially damage the case."
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "What does a Letter of Protection (LOP) create for the medical provider?",
@@ -1000,19 +992,17 @@ var questions = [
       "Protection from malpractice claims",
       "A medical lien on the settlement proceeds"
     ],
-    correct: 3,
-    explanation: "An LOP creates a medical lien — a legal right to be paid from settlement proceeds. The provider treats on credit and must be paid (and negotiated with) at disbursement."
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "According to the systems principle, the records retrieval process must:",
     options: [
       "Work consistently for any staff member",
-      "Be handled personally by Harrell — which represents the conventional method for handling these scenarios in PI case management",
+      "Be handled personally by the Managing Attorney — which represents the conventional method for handling these scenarios in PI case management",
       "Be customized for each client",
       "Focus on speed over thoroughness"
     ],
-    correct: 0,
-    explanation: "The system must function independently of any individual. If records retrieval depends on any one person's memory, the system has failed. This is the franchise prototype principle."
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "When requesting medical records, you must ALWAYS request both:",
@@ -1022,8 +1012,7 @@ var questions = [
       "Electronic and paper versions",
       "Medical records and itemized billing statements"
     ],
-    correct: 3,
-    explanation: "Always request both medical records (Template 04) and itemized billing statements. Records document injuries; bills document economic damages. Both are required for the demand package."
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "The 7-day records follow-up rule means:",
@@ -1033,8 +1022,7 @@ var questions = [
       "Every outstanding records request gets a follow-up every 7 days",
       "Demand letters are sent 7 days after treatment ends — following the documented procedural framework and established expectations at GLG"
     ],
-    correct: 2,
-    explanation: "Every outstanding records request gets a phone follow-up every 7 days, and is escalated at day 21. This is the GLG standard for pre-litigation cases — no exceptions. Log every follow-up in CasePeer. Note option A is a real rule but a different one: CLIENT contact runs on a 14-day clock (System 1, Treatment row) and is CM-owned. Records follow-up is 7 days (System 1, Pending Demand row). Do not confuse the two clocks."
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "Before requesting medical records from any provider, you must have:",
@@ -1044,8 +1032,7 @@ var questions = [
       "The insurance adjuster's permission — consistent with industry-standard documentation and follow-up practices for legal teams",
       "The client's insurance card"
     ],
-    correct: 1,
-    explanation: "HIPAA requires signed patient authorization before providers can legally release records to our firm. Use Template 44 (Medical Authorization) in CasePeer. No authorization = no records."
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "According to the 'Never Miss Twice' rule:",
@@ -1055,8 +1042,7 @@ var questions = [
       "Never request the same records twice",
       "One missed follow-up is a mistake; two in a row is a bad habit forming"
     ],
-    correct: 3,
-    explanation: "One missed follow-up is just a mistake — it happens. But two consecutive misses starts forming a bad habit that compounds. Consistency prevents system breakdown."
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "After three follow-ups with no response from a medical provider, you should:",
@@ -1066,8 +1052,7 @@ var questions = [
       "Give up on getting those records",
       "Ask the client to get the records themselves"
     ],
-    correct: 0,
-    explanation: "After three follow-ups with no response, escalate to the Case Manager. They may need to issue a subpoena, send a more formal demand, or use other legal tools to obtain the records."
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "According to the Client-Centered principle, CasePeer templates ensure:",
@@ -1077,8 +1062,7 @@ var questions = [
       "Faster processing with less attention to detail — following the documented procedural framework and established expectations at GLG",
       "Reduced need for staff training"
     ],
-    correct: 1,
-    explanation: "Templates ensure consistent, professional communication that represents GLG's brand — whether sent by Harrell or a new assistant. They're not about identical letters, but about quality standards."
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   }
 ];
 
@@ -1138,16 +1122,16 @@ function go(screen) {
 }
 
 // ── QUIZ ENGINE ──
-function startQuiz() {
-  currentQ = 0;
-  answers = new Array(questions.length).fill(null);
-  score = 0;
-  streakCount = 0; maxStreak = 0;
-  questionsFirstTry = 0; incorrectCount = 0; totalQuestionsAnswered = 0;
-  milestonesTriggered = {};
-  moduleStartTime = Date.now();
-  renderQuizDots();
-  renderQuestion();
+async function startQuiz() {
+  var _ni = document.getElementById('trainee-name-input');
+  var _name = (_ni && _ni.value.trim()) || '';
+  if (!_name) {
+    if (typeof showToast === 'function') showToast('\u26a0\ufe0f Please enter your name before starting the quiz', false);
+    else alert('Please enter your name before starting the quiz.');
+    return;
+  }
+  // Bug-1/2 fix (Sep 10 2026): learner name from cover screen; await before rendering quiz
+  await window.GLGQuiz.beginAttempt(_name);
   go('quiz');
 }
 
@@ -1174,17 +1158,17 @@ function renderQuestion() {
   nb.textContent = currentQ < questions.length - 1 ? 'Next →' : 'See Results';
 }
 
-function selectOption(idx) {
+window.selectOptionUI = function selectOptionUI(idx, isCorrect, __glgKey, __glgFbHtml) {
   if (answers[currentQ] !== null) return;
   answers[currentQ] = idx;
   var q = questions[currentQ];
-  var isCorrect = idx === q.correct;
+  /* CUTOVER: verdict is supplied by the engine, not computed here. */
   if (isCorrect) score++;
 
   var opts = document.querySelectorAll('.option-btn');
   opts.forEach(function(o, i){
     o.disabled = true;
-    if (i === q.correct) o.classList.add('correct');
+    if (__glgKey >= 0 && i === __glgKey) o.classList.add('correct');
     else if (i === idx && !isCorrect) o.classList.add('wrong');
   });
 
@@ -1194,7 +1178,7 @@ function selectOption(idx) {
   var fb = document.getElementById('qFeedback');
   fb.style.display = 'block';
   fb.className = 'feedback-box ' + (isCorrect ? 'correct' : 'wrong');
-  fb.innerHTML = (isCorrect ? '✅ <strong>Correct!</strong> ' : '❌ <strong>Incorrect.</strong> ') + q.explanation;
+  fb.innerHTML = (isCorrect ? '✅ <strong>Correct!</strong> ' : '❌ <strong>Incorrect.</strong> ') + (__glgFbHtml || '');
 
   document.getElementById('qNextBtn').disabled = false;
 
@@ -1253,13 +1237,13 @@ function showResults() {
   var letters = ['A','B','C','D'];
   var reviewList = document.getElementById('reviewList');
   reviewList.innerHTML = questions.map(function(q, i){
-    var correct = answers[i] === q.correct;
+    var correct = !!(window.__glgVerdicts || [])[i];
     return '<div class="review-item ' + (correct ? 'correct' : 'wrong') + '" style="opacity:0;transform:translateY(8px);transition:opacity 0.25s ease,transform 0.25s ease;" data-review-idx="' + i + '">'
       + '<div class="ri-q">' + (i+1) + '. ' + q.q + '</div>'
       + '<div class="ri-ans">'
       + (correct ? '✅' : '❌') + ' Your answer: <strong>' + letters[answers[i]] + '. ' + q.options[answers[i]] + '</strong>'
-      + (!correct ? '<br>✅ Correct: <strong>' + letters[q.correct] + '. ' + q.options[q.correct] + '</strong>' : '')
-      + (!correct ? '<br><em style="color:#666;font-size:0.8rem;">' + q.explanation + '</em>' : '')
+      + (!correct && (window.__glgKeyIdx || [])[i] >= 0 ? '<br>✅ Correct: <strong>' + letters[window.__glgKeyIdx[i]] + '. ' + q.options[window.__glgKeyIdx[i]] + '</strong>' : '')
+      + (!correct && (window.__glgFb || [])[i] ? '<br><em style="color:#666;font-size:0.8rem;">' + window.__glgFb[i] + '</em>' : '')
       + '</div></div>';
   }).join('');
 
@@ -1740,6 +1724,116 @@ document.addEventListener('DOMContentLoaded', function(){
   initMascot();
 });
 </script>
+
+
+<script>
+/* CUTOVER SHIM (P2-A) — server-side grading. Injected by tools/cutover-shell.py.
+   No answer key in this file. selectOption() posts the choice; the ENGINE returns
+   the verdict and the feedback; the authored handler (renamed selectOptionUI) does
+   every bit of the UI it did before — streak, dots, mascot, score header, progress. */
+(function () {
+  var MODULE_ID = 'day4';
+  var LETTERS = 'abcdefgh';
+  var attemptId = null;
+  var startPromise = null;
+
+  window.__glgVerdicts = window.__glgVerdicts || [];
+  window.__glgKeyIdx   = window.__glgKeyIdx   || [];   /* -1 = engine did not disclose */
+  window.__glgFb       = window.__glgFb       || [];
+
+  function api(path, body) {
+    return fetch('/api/quiz/' + path, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(body)
+    }).then(function (r) {
+      if (!r.ok) return r.text().then(function (t) { throw new Error(t || ('HTTP ' + r.status)); });
+      return r.json();
+    });
+  }
+
+  function learner() {
+    try { return localStorage.getItem('glg_learner') || 'anonymous'; }
+    catch (e) { return 'anonymous'; }
+  }
+
+  function ensureAttempt() {
+    if (attemptId) return Promise.resolve(attemptId);
+    if (!startPromise) {
+      startPromise = api('start', { module: MODULE_ID, learner: learner() })
+        .then(function (d) { attemptId = d.attempt_id; return attemptId; });
+    }
+    return startPromise;
+  }
+
+  function showError(msg) {
+    var fb = document.getElementById('qFeedback');
+    if (!fb) return;
+    fb.style.display = 'block';
+    fb.className = 'feedback-box wrong';
+    fb.innerHTML = '⚠️ <strong>Could not reach the grading server.</strong> Your answer was '
+                 + 'NOT recorded — check your connection and choose again. (' + msg + ')';
+  }
+
+  /* P2-A questions are positional: the Nth object in the array is bank id q(N+1),
+     and option index i is bank option LETTERS[i]. Proven against all 5 banks. */
+  window.selectOption = function (idx) {
+    if (typeof answers !== 'undefined' && answers[currentQ] !== null) return;   /* already scored */
+    if (currentQ === 0) { window.__glgVerdicts = []; window.__glgKeyIdx = []; window.__glgFb = []; }
+    var qi = currentQ;
+    return ensureAttempt().then(function (aid) {
+      return api('answer', { attempt_id: aid, qid: 'q' + (qi + 1), choice: LETTERS[idx] });
+    }).then(function (d) {
+      var keyIdx = (d.correct_id && LETTERS.indexOf(d.correct_id) >= 0)
+                 ? LETTERS.indexOf(d.correct_id) : -1;
+      window.__glgVerdicts[qi] = !!d.correct;
+      window.__glgKeyIdx[qi]   = keyIdx;
+      window.__glgFb[qi]       = d.feedback || '';
+      if (typeof window.selectOptionUI === 'function') {
+        window.selectOptionUI(idx, !!d.correct, keyIdx, d.feedback || '');
+      }
+      /* Authoritative completion once every question has been submitted. */
+      if (typeof answers !== 'undefined' && typeof questions !== 'undefined'
+          && answers.filter(function (a) { return a !== null; }).length === questions.length) {
+        api('complete', { attempt_id: attemptId })
+          .then(function (r) { window.__glgResult = r; })
+          .catch(function (e) { console.error('[glg-cutover] complete failed', e); });
+      }
+      return d;
+    }).catch(function (err) {
+      showError(err && err.message ? err.message : err);
+      console.error('[glg-cutover] grading failed', err);
+    });
+  };
+
+  document.addEventListener('DOMContentLoaded', function () { ensureAttempt().catch(function () {}); });
+})();
+</script>
+
+
+<script>
+/* GLGQuiz configuration — NH-4 LORs, LOPs, Police Reports & Templates */
+window.GLG_MODULE_CONFIG = {
+  moduleId: 'day4',
+  onBankLoaded: function(bank) {
+    var basemax = document.getElementById('basemax');
+    var gate    = document.getElementById('gate');
+    if (basemax) basemax.textContent = bank.base_max;
+    if (gate)    gate.textContent    = bank.pass_pct;
+  },
+  onStartQuiz: function() {
+    if (typeof audioCtx !== 'undefined' && audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume().catch(function(){});
+    }
+  },
+  onAnswered: function(r) {
+    var ts = document.getElementById('total-score');
+    if (ts) ts.textContent = r.base_score;
+    if (typeof updateStreak === 'function') updateStreak(r.correct);
+  }
+};
+</script>
+<script src="api-quiz-engine.js"></script>
 
 </body>
 </html>

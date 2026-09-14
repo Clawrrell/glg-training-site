@@ -10,7 +10,14 @@ Communication_Logging_Standards.md, Attorney_Supervision_Ethics_Guide, Firm_KPI_
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
   <title>PA-6 — Team Leadership &amp; CM Oversight | Gunn Law Group</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <style>
+:root {
+    --navy: #141c2c;
+    --gold: #dcb161;
+    --gold-lt: #f0d89a;
+}
+
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
     body{font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;color:#333;font-size:16px;line-height:1.6;-webkit-text-size-adjust:100%;overflow-x:hidden;}
@@ -192,6 +199,159 @@ Communication_Logging_Standards.md, Attorney_Supervision_Ethics_Guide, Firm_KPI_
       header{background:#141C2C!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
     }
   </style>
+
+<style>
+/* ── GLG QUIZ ENGINE — question type styles (2026-09-02) ──────────────────
+     All classes rendered by api-quiz-engine.js. Tokens: navy #141c2c, gold #C5975B.
+     Sourced from engine.html stylesheet + the Managing Attorney Part 8c spec. */
+
+  /* Question card */
+  .q { background:#fff; border:1px solid #e2e5ea; border-radius:10px;
+       padding:20px; margin:16px 0; box-shadow:0 1px 6px rgba(20,28,44,.06); }
+  .q-num { font-size:12px; letter-spacing:.06em; color:#C5975B; font-weight:700;
+            text-transform:uppercase; margin-bottom:8px; }
+  .q-text { font-weight:600; margin:8px 0 16px; font-size:1rem; line-height:1.55;
+             color:#141c2c; }
+
+  /* MC option buttons */
+  button.opt { display:block; width:100%; text-align:left; padding:13px 15px; margin:7px 0;
+    border:1px solid #d8dbe3; border-radius:8px; background:#fafbfd; cursor:pointer;
+    font-size:15px; font-family:var(--font-b); color:#222; line-height:1.45;
+    transition:background .12s, border-color .12s; }
+  button.opt:hover:not(.locked) { background:#eef4ff; border-color:#141c2c; }
+  button.opt.correct { background:#d4edda; border-color:#10774A; }
+  button.opt.incorrect { background:#f8d7da; border-color:#870101; }
+  button.opt.locked { cursor:default; opacity:.85; }
+
+  /* Fill-in-the-blank */
+  .fill-stem { font-weight:600; margin:8px 0 14px; line-height:2.2; }
+  input.blank { display:inline-block; min-height:44px; min-width:120px; padding:8px 10px;
+    margin:2px 4px; border:1px solid #ccd; border-radius:8px; background:#fafbfd;
+    font-size:16px; font-family:var(--font-b); vertical-align:middle;
+    box-sizing:border-box; max-width:100%; }
+  input.blank:focus { outline:2px solid #141c2c; background:#fff; }
+  input.blank.correct { background:#d4edda; border-color:#10774A; }
+  input.blank.incorrect { background:#f8d7da; border-color:#870101; }
+  input.blank.locked { opacity:.85; }
+  button.submit-fill { min-height:44px; padding:11px 20px; margin-top:12px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-fill.locked { opacity:.5; cursor:default; }
+
+  /* Markup */
+  .markup-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .markup-passage { margin:0 0 10px; border:1px solid #e2e5ea; border-radius:8px; overflow:hidden; }
+  button.span { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:11px 13px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:16px; font-family:var(--font-b);
+    color:#222; line-height:1.5; overflow-wrap:break-word; }
+  button.span:last-child { border-bottom:0; }
+  button.span:hover:not(.locked) { background:#eef4ff; }
+  button.span.selected { background:#fff3cd; box-shadow:inset 4px 0 0 #b8860b; font-weight:600; }
+  button.span.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.span.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.span.locked { cursor:default; opacity:.9; }
+  button.submit-markup { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-markup.locked { opacity:.5; cursor:default; }
+  .markup-count { font-size:13px; color:#555; margin-top:8px; }
+
+  /* Sort rows with up/down controls */
+  .sort-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .sort-list { margin:0 0 12px; border:1px solid #e2e5ea; border-radius:8px;
+               overflow:hidden; background:#fff; }
+  .sort-row { display:flex; align-items:stretch; border-bottom:1px solid #eef0f3;
+              background:#fff; }
+  .sort-row:last-child { border-bottom:0; }
+  .sort-pos { flex:0 0 34px; display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700; color:#C5975B; background:#f5f5f0; }
+  .sort-text { flex:1 1 auto; padding:11px 12px; font-size:15px; line-height:1.45;
+    display:flex; align-items:center; overflow-wrap:break-word; min-width:0; }
+  .sort-moves { flex:0 0 auto; display:flex; align-items:center; gap:4px; padding:4px 6px; }
+  button.sort-move { min-height:44px; min-width:44px; border:1px solid #ccd; border-radius:8px;
+    background:#fafbfd; cursor:pointer; font-size:15px; color:#141c2c;
+    font-family:var(--font-b); }
+  button.sort-move:hover:not(:disabled) { background:#eef4ff; }
+  button.sort-move:disabled { opacity:.35; cursor:default; }
+  .sort-row.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  .sort-row.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  .sort-row.locked .sort-text { opacity:.9; }
+  button.submit-sort { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-sort.locked { opacity:.5; cursor:default; }
+
+  /* Match chips + slot rows */
+  .match-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .match-tray { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px; padding:10px;
+    border:1px dashed #ccd; border-radius:8px; background:#fafbfd; }
+  button.chip { min-height:44px; padding:10px 16px; border:1px solid #ccd; border-radius:22px;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b); color:#222;
+    max-width:100%; overflow-wrap:break-word; text-align:left; }
+  button.chip:hover:not(.locked) { background:#eef4ff; }
+  button.chip.selected { background:#141c2c; color:#fff; border-color:#141c2c; font-weight:600; }
+  button.chip.placed { opacity:.35; }
+  button.chip.locked { cursor:default; }
+  .match-slots { border:1px solid #e2e5ea; border-radius:8px; overflow:hidden;
+                 background:#fff; margin-bottom:12px; }
+  button.slot { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:10px 14px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b);
+    color:#222; line-height:1.45; overflow-wrap:break-word; }
+  button.slot:last-child { border-bottom:0; }
+  button.slot:hover:not(.locked) { background:#eef4ff; }
+  button.slot.armed { box-shadow:inset 4px 0 0 #C5975B; background:#fffdf5; }
+  .slot-label { font-weight:600; display:block; }
+  .slot-fill { display:block; font-size:14px; margin-top:3px; color:#C5975B; font-weight:600; }
+  .slot-fill.empty { color:#8a8f98; font-weight:400; font-style:italic; }
+  button.slot.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.slot.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.slot.locked { cursor:default; opacity:.9; }
+  button.submit-match { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-match.locked { opacity:.5; cursor:default; }
+  .match-count { font-size:13px; color:#555; margin-top:8px; }
+  .match-credit { font-size:13px; font-weight:600; color:#8a6d1f; margin-top:6px; }
+
+  /* Feedback */
+  .fb { margin-top:12px; padding:12px 14px; border-radius:8px; font-size:14px; display:none; }
+  .fb.show { display:block; }
+  .fb.ok { background:#d4edda; border-left:4px solid #10774A; }
+  .fb.no { background:#f8d7da; border-left:4px solid #870101; }
+  .fb.neutral { background:#eef0f6; border-left:4px solid #6c757d; color:#333; } /* self_assessment: no verdict */
+
+  /* Branching nodes */
+  .branch-scenario { border-left:4px solid #C5975B; padding-left:12px; margin:14px 0; }
+  .branch-turn { font-size:12px; letter-spacing:.06em; color:#8a6d1f; font-weight:700;
+                 text-transform:uppercase; }
+  .branch-instruction { font-weight:600; margin:6px 0 10px; color:#141c2c; }
+  .branch-consequence { margin-top:10px; padding:10px 12px; border-left:4px solid #141c2c;
+    background:#eef2f7; border-radius:0 8px 8px 0; font-size:13px; color:#33415c; display:none; }
+  .branch-consequence.show { display:block; }
+
+  /* Pagination — one question at a time (the Managing Attorney Part 8b) */
+  .q-base { display: none !important; }
+  .q-base.q-active { display: block !important; }
+  .q-nav { display:flex; justify-content:space-between; align-items:center;
+            margin-top:20px; padding-top:16px; border-top:1px solid #e8e6e0; }
+  .q-nav-btn { min-height:44px; padding:10px 22px; border-radius:8px;
+                font-size:15px; cursor:pointer; font-family:var(--font-b);
+                font-weight:600; transition:background .12s; }
+  .q-nav-btn.next { background:#141c2c; color:#C5975B; border:2px solid #141c2c; }
+  .q-nav-btn.next:hover { background:#1e2a40; }
+  .q-nav-btn.back { background:#fff; color:#141c2c; border:2px solid #c8c5be; }
+  .q-nav-btn.back:hover { background:#f5f5f0; }
+  .q-pg-spacer { display:inline-block; min-width:40px; }
+  #q-progress { font-size:12px; color:#C5975B; font-weight:600;
+                letter-spacing:.5px; text-transform:uppercase; }
+
+
+</style>
+
+<!-- CUTOVER: server-side grading. Answer keys are not in this file. -->
+    <link rel="stylesheet" href="boss-challenge.css">
 </head>
 <body>
 
@@ -239,8 +399,9 @@ Communication_Logging_Standards.md, Attorney_Supervision_Ethics_Guide, Firm_KPI_
   <button class="nav-pill" id="nav-4" onclick="goToSection(4)">5. Coaching</button>
   <button class="nav-pill" id="nav-5" onclick="goToSection(5)">6. Accountability</button>
   <button class="nav-pill" id="nav-6" onclick="goToSection(6)">7. Boss</button>
-  <button class="nav-pill" id="nav-7" onclick="goToSection(7)">8. Results</button>
-  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">9. Certificate</button>
+  <button class="nav-pill" id="nav-7" onclick="startQuiz()">8. Quiz</button>
+  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">9. Results</button>
+  <button class="nav-pill" id="nav-9" onclick="goToSection(9)">10. Feedback</button>
 </nav>
 
 <div class="points-toast" id="points-toast"></div>
@@ -260,7 +421,7 @@ Communication_Logging_Standards.md, Attorney_Supervision_Ethics_Guide, Firm_KPI_
   <div class="section-body">
     <div class="scenario">
       <div class="scenario-tag">PA Track &mdash; Module 6</div>
-      <h3>Last month, a client called Harrell directly. She said nobody from the firm had contacted her in five weeks.</h3>
+      <h3>Last month, a client called the Managing Attorney directly. She said nobody from the firm had contacted her in five weeks.</h3>
       <p>The assigned CM had fallen behind on her caseload. Her callback queue had three items older than 48 hours. Communication compliance for the month was at 38%. She had stopped logging contact attempts in CasePeer. <span class="highlight">Nobody caught it.</span> Not during the weekly huddle. Not during the case file review. Not until the client &mdash; scared, frustrated, and feeling abandoned &mdash; escalated past the entire department to the managing attorney. <span class="urgent">The failure was not one CM dropping the ball. The failure was a supervision system that allowed five weeks of silence to go undetected.</span></p>
     </div>
     <div class="info-block">
@@ -270,7 +431,7 @@ Communication_Logging_Standards.md, Attorney_Supervision_Ethics_Guide, Firm_KPI_
         <li>Case review cadence &mdash; structured weekly PITT reviews, demand review protocol, settlement authority, and the demand evaluation checklist</li>
         <li>Communication compliance &amp; performance metrics &mdash; enforcing the 14-day contact cycle, 24-hour callback standard, and building a CM scorecard</li>
         <li>Coaching &amp; team development &mdash; using questions to build CM judgment, integrating coaching into every review, role clarity with your Training Lead</li>
-        <li>Accountability conversations &amp; role boundaries &mdash; diagnosing underperformance, having the difficult conversation, knowing what stays in your lane vs. what escalates to Harrell</li>
+        <li>Accountability conversations &amp; role boundaries &mdash; diagnosing underperformance, having the difficult conversation, knowing what stays in your lane vs. what escalates to the Managing Attorney</li>
         <li>Supervisory obligations under GA Bar Rules 5.1/5.3 &mdash; your personal ethical liability for every attorney and non-attorney you supervise (context for operational decisions; the ethics deep-dive is covered in the Leadership Track)</li>
       </ul>
     </div>
@@ -314,58 +475,14 @@ Communication_Logging_Standards.md, Attorney_Supervision_Ethics_Guide, Firm_KPI_
         <tr><td class="stat-num">Legal Oversight</td><td>Review every demand before submission. Set and enforce valuation standards. Review settlement posture on complex/high-value cases.</td></tr>
         <tr><td class="stat-num">Team Development</td><td>Weekly department huddle. Mentor CMs on strategy, communication, and demand preparation. Address performance issues with documented intervention.</td></tr>
         <tr><td class="stat-num">Escalation Management</td><td>First escalation point for all pre-lit matters before the Managing Attorney. Resolve escalated complaints within 48 business hours.</td></tr>
-        <tr><td class="stat-num">Reporting</td><td>Monthly performance reports to Harrell. Flag staffing and systemic issues proactively.</td></tr>
+        <tr><td class="stat-num">Reporting</td><td>Monthly performance reports to the Managing Attorney. Flag staffing and systemic issues proactively.</td></tr>
       </table>
     </div>
     <div class="callout callout-danger"><strong>GA Bar Rule 5.1 &amp; 5.3 Context:</strong> You have personal ethical liability for the work product of every attorney and non-attorney you supervise. Rule 5.1 requires reasonable efforts to ensure lawyer compliance. Rule 5.3 requires reasonable efforts to ensure non-lawyer conduct is compatible with attorney obligations. Maximum penalty: disbarment. Your operational oversight system is what makes &quot;reasonable efforts&quot; concrete and defensible.</div>
 
-    <div class="question-block" id="q1-block">
-      <div class="q-num">Question 1 of 20 &middot; 10 pts</div>
-      <div class="q-text">Scenario: One of your CMs missed the 14-day contact cycle on 4 cases this month. Two clients have gone 22 days without any logged communication. As department head, what is your response?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q1','a',false)" id="q1-a"><span class="opt-letter">A</span><span class="opt-text">Talk to the CM, remind them of the 14-day standard, and ask them to contact the clients today</span></button>
-        <button class="option-btn" onclick="answer('q1','b',false)" id="q1-b"><span class="opt-letter">B</span><span class="opt-text">Document the violations in the CM&#39;s file and put them on formal notice for the next performance review</span></button>
-        <button class="option-btn" onclick="answer('q1','c',true)" id="q1-c"><span class="opt-letter">C</span><span class="opt-text">Investigate whether it is a skill gap, a will gap, or a system gap &mdash; then own the outcome as a leadership failure to detect and intervene earlier. Contact the affected clients today. Build a monitoring system that catches gaps at day 10, not day 22.</span></button>
-        <button class="option-btn" onclick="answer('q1','d',false)" id="q1-d"><span class="opt-letter">D</span><span class="opt-text">Reassign the CM&#39;s most critical cases to another team member to protect clients from further communication lapses</span></button>
-      </div>
-      <div class="feedback-box" id="q1-fb"></div>
-    </div>
 
-    <div class="question-block" id="q2-block">
-      <div class="q-num">Question 2 of 20 &middot; 10 pts</div>
-      <div class="q-text">Scenario: Weekly huddle. Every CM reports &quot;all good.&quot; But your dashboard shows 3 demands past 60 days with no submission, callback queue at 6 items, and communication compliance at 45%. What do you do?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q2','a',true)" id="q2-a"><span class="opt-letter">A</span><span class="opt-text">Call out the discrepancy directly: &quot;The dashboard shows three demands over 60 days, six callbacks in the queue, and 45% communication compliance. I need us to surface real issues, not good news. Let&#39;s walk through each one right now.&quot; This is mining for conflict &mdash; if every meeting is harmonious but problems persist, real issues are being hidden.</span></button>
-        <button class="option-btn" onclick="answer('q2','b',false)" id="q2-b"><span class="opt-letter">B</span><span class="opt-text">Wait until after the meeting and address the individuals privately &mdash; calling out discrepancies in a group setting damages trust and creates defensiveness</span></button>
-        <button class="option-btn" onclick="answer('q2','c',false)" id="q2-c"><span class="opt-letter">C</span><span class="opt-text">Share the dashboard numbers and ask the team to submit written explanations by end of day &mdash; documentation is the appropriate first step</span></button>
-        <button class="option-btn" onclick="answer('q2','d',false)" id="q2-d"><span class="opt-letter">D</span><span class="opt-text">Accept the reports for now &mdash; the dashboard may have data lag, and team members know their caseloads better than the metrics suggest</span></button>
-      </div>
-      <div class="feedback-box" id="q2-fb"></div>
-    </div>
 
-    <div class="question-block" id="q3-block">
-      <div class="q-num">Question 3 of 20 &middot; 10 pts</div>
-      <div class="q-text">You have been the firm&#39;s strongest case evaluator for years. Now as department head, you catch yourself spending 80% of your time reviewing individual case files and 20% on team development and systems. What is the problem?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q3','a',false)" id="q3-a"><span class="opt-letter">A</span><span class="opt-text">Nothing &mdash; thorough case review IS the department head&#39;s primary job, and quality control requires your personal attention on every file</span></button>
-        <button class="option-btn" onclick="answer('q3','b',false)" id="q3-b"><span class="opt-letter">B</span><span class="opt-text">The 80/20 split is correct for now &mdash; once the team is more experienced, you can shift to more system-building work</span></button>
-        <button class="option-btn" onclick="answer('q3','c',false)" id="q3-c"><span class="opt-letter">C</span><span class="opt-text">The split should be closer to 50/50 &mdash; balance direct case review with equal time on team development and coaching activities</span></button>
-        <button class="option-btn" onclick="answer('q3','d',true)" id="q3-d"><span class="opt-letter">D</span><span class="opt-text">You are working IN the system instead of ON the system. The department head builds a review cadence, develops CM capability, and monitors metrics &mdash; so the system produces quality whether you personally review every file or not. An 80/20 split toward individual case work means you have built yourself a job, not a department.</span></button>
-      </div>
-      <div class="feedback-box" id="q3-fb"></div>
-    </div>
 
-    <div class="question-block" id="q4-block">
-      <div class="q-num">Question 4 of 20 &middot; 10 pts</div>
-      <div class="q-text">In your first department meeting as head attorney, you share that you missed a demand review deadline last week. Several CMs look surprised. Why is this disclosure strategically valuable?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q4','a',false)" id="q4-a"><span class="opt-letter">A</span><span class="opt-text">It demonstrates humility, which makes the team respect you more as a leader who does not pretend to be perfect</span></button>
-        <button class="option-btn" onclick="answer('q4','b',true)" id="q4-b"><span class="opt-letter">B</span><span class="opt-text">Vulnerability-based trust: when the leader goes first on admitting mistakes, it creates psychological safety for the team to surface their own issues &mdash; which means problems get found before they become crises. The goal is not to look humble; the goal is to build a team where hiding problems is harder than reporting them.</span></button>
-        <button class="option-btn" onclick="answer('q4','c',false)" id="q4-c"><span class="opt-letter">C</span><span class="opt-text">It shows the team that even the head attorney makes mistakes, so they should feel less pressure about their own performance standards</span></button>
-        <button class="option-btn" onclick="answer('q4','d',false)" id="q4-d"><span class="opt-letter">D</span><span class="opt-text">It establishes that deadline misses are acceptable as long as they are acknowledged openly rather than hidden</span></button>
-      </div>
-      <div class="feedback-box" id="q4-fb"></div>
-    </div>
 
     <div class="section-score" id="s1-score" style="display:none;"><div class="score-display" id="s1-score-val"></div><div class="score-label">Section 2 Score</div></div>
     <div class="btn-group" id="s1-next"><button class="btn btn-primary btn-block" onclick="goToSection(2)">Next: Case Review Cadence &amp; Quality Control &rarr;</button></div>
@@ -412,53 +529,9 @@ Communication_Logging_Standards.md, Attorney_Supervision_Ethics_Guide, Firm_KPI_
     <div class="callout callout-warn"><strong>Demand Review Turnaround:</strong> Per the SOP performance standards, your demand review turnaround must be within 48 hours of CM submission. If a CM submits a demand and waits a week for your review, the bottleneck is YOU. Calendar-block demand review time daily so they never stack up.</div>
     <div class="callout callout-info"><strong>&quot;Verbal Policy = No Policy&quot;:</strong> If the review cadence is not documented and calendared, it does not exist. A commitment to &quot;review demands when they come in&quot; is not a system. A calendar block that says &quot;Demand Review: 10&ndash;11 AM daily&quot; with a CasePeer checklist &mdash; that is a system.</div>
 
-    <div class="question-block" id="q5-block">
-      <div class="q-num">Question 5 of 20 &middot; 10 pts</div>
-      <div class="q-text">Under GLG&#39;s Pre-Lit Head Attorney SOP, what is the demand review standard?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q5','a',false)" id="q5-a"><span class="opt-letter">A</span><span class="opt-text">Demands over $50K are reviewed by the head attorney; routine demands under $50K proceed to the adjuster after CM self-review</span></button>
-        <button class="option-btn" onclick="answer('q5','b',false)" id="q5-b"><span class="opt-letter">B</span><span class="opt-text">Demands are reviewed during weekly PITT sessions and feedback is provided within 7 business days of submission</span></button>
-        <button class="option-btn" onclick="answer('q5','c',true)" id="q5-c"><span class="opt-letter">C</span><span class="opt-text">Every demand letter is reviewed and approved by the head attorney BEFORE it goes out to the adjuster &mdash; no exceptions. Review turnaround must be within 48 hours of CM submission. No demand leaves the firm without your sign-off.</span></button>
-        <button class="option-btn" onclick="answer('q5','d',false)" id="q5-d"><span class="opt-letter">D</span><span class="opt-text">Demands are spot-checked monthly; the head attorney reviews a random sample of 20% of all demands to identify quality trends across the department</span></button>
-      </div>
-      <div class="feedback-box" id="q5-fb"></div>
-    </div>
 
-    <div class="question-block" id="q6-block">
-      <div class="q-num">Question 6 of 20 &middot; Unscored Calibration</div>
-      <div class="q-text"><em>(This is a self-assessment &mdash; no points awarded or deducted. All answers reveal the same teaching content.)</em><br><br>Before reading the next section, rate your confidence: How well do you know the five specific elements every demand must address before you approve it for submission?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q6','a',true)" id="q6-a"><span class="opt-letter">A</span><span class="opt-text">1&ndash;2 &mdash; Not confident. I know demands need review but I could not list the specific checklist items.</span></button>
-        <button class="option-btn" onclick="answer('q6','b',true)" id="q6-b"><span class="opt-letter">B</span><span class="opt-text">3 &mdash; Somewhat confident. I know most of the checklist items but might miss one or two under time pressure.</span></button>
-        <button class="option-btn" onclick="answer('q6','c',true)" id="q6-c"><span class="opt-letter">C</span><span class="opt-text">4 &mdash; Fairly confident. I can list all five elements and apply them in a real demand review.</span></button>
-        <button class="option-btn" onclick="answer('q6','d',true)" id="q6-d"><span class="opt-letter">D</span><span class="opt-text">5 &mdash; Fully confident. I can review any demand against the checklist and provide specific, actionable feedback to the CM on every element.</span></button>
-      </div>
-      <div class="feedback-box" id="q6-fb"></div>
-    </div>
 
-    <div class="question-block" id="q7-block">
-      <div class="q-num">Question 7 of 20 &middot; 10 pts</div>
-      <div class="q-text">A CM submits a demand for a rear-end collision case with $32K in specials and clear liability. The demand requests $48K. You review it and notice: no safety rule violation identified, no mechanism of harm explained, no community interest framing. Per the demand evaluation checklist, what do you do?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q7','a',true)" id="q7-a"><span class="opt-letter">A</span><span class="opt-text">Return it to the CM for revision &mdash; a demand that does not establish a safety rule violation cannot anchor an aggressive settlement position. Walk through each missing element with the CM so they learn to include them independently next time.</span></button>
-        <button class="option-btn" onclick="answer('q7','b',false)" id="q7-b"><span class="opt-letter">B</span><span class="opt-text">Approve it &mdash; $48K on $32K specials is a reasonable ask, and the safety rule elements are optional enhancements that strengthen but are not required in every demand</span></button>
-        <button class="option-btn" onclick="answer('q7','c',false)" id="q7-c"><span class="opt-letter">C</span><span class="opt-text">Revise the demand yourself to add the missing elements &mdash; time is critical and the adjuster response window is ticking</span></button>
-        <button class="option-btn" onclick="answer('q7','d',false)" id="q7-d"><span class="opt-letter">D</span><span class="opt-text">Send it as-is with a note to the adjuster that supplemental framing information will follow in a separate letter</span></button>
-      </div>
-      <div class="feedback-box" id="q7-fb"></div>
-    </div>
 
-    <div class="question-block" id="q8-block">
-      <div class="q-num">Question 8 of 20 &middot; 10 pts</div>
-      <div class="q-text">Your department&#39;s weekly demand target is 18&ndash;20 demands sent. This week, only 12 went out. Three CMs cite &quot;waiting on records&quot; for the shortfall. How do you diagnose the root cause?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q8','a',false)" id="q8-a"><span class="opt-letter">A</span><span class="opt-text">Accept the explanation &mdash; records delays are outside the firm&#39;s control and the CMs cannot submit demands until records are complete</span></button>
-        <button class="option-btn" onclick="answer('q8','b',false)" id="q8-b"><span class="opt-letter">B</span><span class="opt-text">Ask each CM to identify which specific providers are delayed and escalate those requests to the records team for follow-up</span></button>
-        <button class="option-btn" onclick="answer('q8','c',false)" id="q8-c"><span class="opt-letter">C</span><span class="opt-text">Increase next week&#39;s target to 24&ndash;26 to make up the shortfall and hold the team accountable for the higher number</span></button>
-        <button class="option-btn" onclick="answer('q8','d',true)" id="q8-d"><span class="opt-letter">D</span><span class="opt-text">Pull the demand pipeline report: How many cases are demand-ready but not yet sent? How many have been &quot;waiting on records&quot; for 30+ days without escalation? If cases are stuck that long without follow-up, the issue is the escalation system, not the providers. A records bottleneck that persists for 30+ days without escalation to the head attorney is a supervision gap.</span></button>
-      </div>
-      <div class="feedback-box" id="q8-fb"></div>
-    </div>
 
     <div class="section-score" id="s2-score" style="display:none;"><div class="score-display" id="s2-score-val"></div><div class="score-label">Section 3 Score</div></div>
     <div class="btn-group" id="s2-next"><button class="btn btn-primary btn-block" onclick="goToSection(3)">Next: Communication Compliance &amp; Metrics &rarr;</button></div>
@@ -485,7 +558,7 @@ Communication_Logging_Standards.md, Attorney_Supervision_Ethics_Guide, Firm_KPI_
       <table class="stat-table">
         <tr><th>KPI</th><th>Standard</th><th>Why It Matters</th></tr>
         <tr class="stat-warn"><td class="stat-num">Communication Compliance</td><td>95%+ of clients contacted every 14 days</td><td>Currently at 26%. This is the #1 driver of client complaints and bar risk. Moving this metric is your most urgent leadership priority.</td></tr>
-        <tr><td class="stat-num">Callback Response Rate</td><td>100% within 24 hours &mdash; zero exceptions</td><td>Any callback older than 24 hours escalates to Harrell. No waiting, no explanations. An aging callback is a signal the system needs intervention NOW.</td></tr>
+        <tr><td class="stat-num">Callback Response Rate</td><td>100% within 24 hours &mdash; zero exceptions</td><td>Any callback older than 24 hours escalates to the Managing Attorney. No waiting, no explanations. An aging callback is a signal the system needs intervention NOW.</td></tr>
         <tr><td class="stat-num">Demand Quality</td><td>Every demand passes the 5-point checklist</td><td>Demand quality is the #1 lever for case value. A weak demand anchors a weak negotiation. A strong demand anchors a strong one.</td></tr>
         <tr><td class="stat-num">Cases Past 90 Days</td><td>Zero stagnant without documented action plan</td><td>Cases stagnant beyond 90 days without demand readiness get reviewed by you. If they are sitting without a plan, that is a supervision failure.</td></tr>
       </table>
@@ -503,55 +576,11 @@ Communication_Logging_Standards.md, Attorney_Supervision_Ethics_Guide, Firm_KPI_
       </ul>
     </div>
     <div class="callout callout-info"><strong>The Pulse vs. The Review:</strong> A weekly pulse check catches fires (callback queue, communication gaps, demand pipeline). A monthly KPI review analyzes trends (is demand quality improving? Are complaints declining?). You need both. The pulse catches the symptom; the monthly review diagnoses the disease.</div>
-    <div class="callout callout-danger"><strong>The 24-Hour Callback Standard:</strong> Per the Communication Logging Standards SOP, any incoming call, voicemail, or message from a client or adjuster must receive a response within 24 hours on business days. Messages received after 5 PM get a response by noon the following business day. Callbacks older than 24 hours escalate to Harrell &mdash; no waiting, no exceptions. This is one of three firm vital signs.</div>
+    <div class="callout callout-danger"><strong>The 24-Hour Callback Standard:</strong> Per the Communication Logging Standards SOP, any incoming call, voicemail, or message from a client or adjuster must receive a response within 24 hours on business days. Messages received after 5 PM get a response by noon the following business day. Callbacks older than 24 hours escalate to the Managing Attorney &mdash; no waiting, no exceptions. This is one of three firm vital signs.</div>
 
-    <div class="question-block" id="q9-block">
-      <div class="q-num">Question 9 of 20 &middot; 10 pts</div>
-      <div class="q-text">GLG&#39;s communication standard requires pre-lit client contact every 14 days. The firm-wide compliance rate was recently 26%. As department head, what is your target and how do you get there?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q9','a',false)" id="q9-a"><span class="opt-letter">A</span><span class="opt-text">Set a 50% target for next quarter &mdash; incremental improvement from 26% is more realistic and achievable than immediately demanding full compliance</span></button>
-        <button class="option-btn" onclick="answer('q9','b',true)" id="q9-b"><span class="opt-letter">B</span><span class="opt-text">Target is 95%+. Build it into the weekly huddle: review each CM&#39;s compliance rate, identify specific overdue cases, assign same-day action items. Monitor the callback queue daily &mdash; any callback older than 24 hours escalates immediately. The 14-day standard is not aspirational; it is the firm&#39;s baseline identity standard. From 26% to 95% requires system change, not just reminders.</span></button>
-        <button class="option-btn" onclick="answer('q9','c',false)" id="q9-c"><span class="opt-letter">C</span><span class="opt-text">Focus on the highest-value cases first &mdash; 14-day contact on every case is ideal, but the team should prioritize by case value to maximize return on communication effort</span></button>
-        <button class="option-btn" onclick="answer('q9','d',false)" id="q9-d"><span class="opt-letter">D</span><span class="opt-text">Assign a Legal Assistant to make the 14-day check-in calls &mdash; routine client contact is an administrative function that can be delegated to free CM time</span></button>
-      </div>
-      <div class="feedback-box" id="q9-fb"></div>
-    </div>
 
-    <div class="question-block" id="q10-block">
-      <div class="q-num">Question 10 of 20 &middot; 10 pts</div>
-      <div class="q-text">Your dashboard shows that CM Kiril has a callback response rate of 75% within 24 hours this week. The standard is 100%. Three callbacks were returned at the 36-hour mark. How do you address this?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q10','a',false)" id="q10-a"><span class="opt-letter">A</span><span class="opt-text">Monitor for another week &mdash; 75% may be an anomaly and Kiril is generally a reliable performer</span></button>
-        <button class="option-btn" onclick="answer('q10','b',false)" id="q10-b"><span class="opt-letter">B</span><span class="opt-text">Note it in the quarterly review &mdash; callback data should be discussed in formal performance conversations, not addressed ad-hoc between review cycles</span></button>
-        <button class="option-btn" onclick="answer('q10','c',true)" id="q10-c"><span class="opt-letter">C</span><span class="opt-text">Address it this week, directly: &quot;Kiril, three callbacks returned at 36 hours. The standard is 24 hours, zero exceptions. Help me understand what happened &mdash; is this a workload issue, a tracking issue, or something else? Let&#39;s solve it so it does not become a pattern.&quot; The 24-hour callback standard is a firm vital sign. Waiting weeks or months to address it normalizes non-compliance.</span></button>
-        <button class="option-btn" onclick="answer('q10','d',false)" id="q10-d"><span class="opt-letter">D</span><span class="opt-text">Reassign some of Kiril&#39;s caseload to reduce his workload &mdash; the callbacks are probably a capacity issue that will resolve when his case count goes down</span></button>
-      </div>
-      <div class="feedback-box" id="q10-fb"></div>
-    </div>
 
-    <div class="question-block" id="q11-block">
-      <div class="q-num">Question 11 of 20 &middot; 10 pts</div>
-      <div class="q-text">You are building a weekly performance scorecard for each CM. Which combination of metrics gives you the most actionable oversight of pre-lit operations?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q11','a',false)" id="q11-a"><span class="opt-letter">A</span><span class="opt-text">Total cases assigned and average case age &mdash; volume and velocity tell you whether CMs are keeping up with their workload</span></button>
-        <button class="option-btn" onclick="answer('q11','b',false)" id="q11-b"><span class="opt-letter">B</span><span class="opt-text">Client satisfaction surveys and complaint count &mdash; if clients are happy and complaints are low, the operation is running well</span></button>
-        <button class="option-btn" onclick="answer('q11','c',false)" id="q11-c"><span class="opt-letter">C</span><span class="opt-text">Demand count sent per week and total settlements closed &mdash; output metrics drive firm revenue and measure CM productivity</span></button>
-        <button class="option-btn" onclick="answer('q11','d',true)" id="q11-d"><span class="opt-letter">D</span><span class="opt-text">Communication compliance rate (14-day cycle), callback response rate (24-hour standard), demand quality score (per your review), and cases past 90 days without demand readiness &mdash; these leading indicators predict whether the system is working before lagging outcomes reveal failure.</span></button>
-      </div>
-      <div class="feedback-box" id="q11-fb"></div>
-    </div>
 
-    <div class="question-block" id="q12-block">
-      <div class="q-num">Question 12 of 20 &middot; 10 pts</div>
-      <div class="q-text">What is the difference between a weekly pulse check and a monthly KPI review, and why does the department need both?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q12','a',true)" id="q12-a"><span class="opt-letter">A</span><span class="opt-text">The weekly pulse check reviews 3&ndash;5 leading metrics (callback queue, communication compliance, demand pipeline) to catch problems in real time. The monthly KPI review analyzes trends across all measurables to identify systemic issues and measure progress toward department goals. The pulse catches the fire; the review fixes the wiring. Without both, you either detect problems too late or fix symptoms without addressing root causes.</span></button>
-        <button class="option-btn" onclick="answer('q12','b',false)" id="q12-b"><span class="opt-letter">B</span><span class="opt-text">They are redundant &mdash; the monthly KPI review captures everything the weekly check covers, just at a larger scale with more data to work with</span></button>
-        <button class="option-btn" onclick="answer('q12','c',false)" id="q12-c"><span class="opt-letter">C</span><span class="opt-text">The weekly check is for CMs and the monthly review is for Harrell &mdash; different audiences require different cadences and levels of detail</span></button>
-        <button class="option-btn" onclick="answer('q12','d',false)" id="q12-d"><span class="opt-letter">D</span><span class="opt-text">The weekly check tracks individual CM performance while the monthly review tracks department-level outcomes &mdash; different scopes, different audiences</span></button>
-      </div>
-      <div class="feedback-box" id="q12-fb"></div>
-    </div>
 
     <div class="section-score" id="s3-score" style="display:none;"><div class="score-display" id="s3-score-val"></div><div class="score-label">Section 4 Score</div></div>
     <div class="btn-group" id="s3-next"><button class="btn btn-primary btn-block" onclick="goToSection(4)">Next: Coaching &amp; Team Development &rarr;</button></div>
@@ -596,55 +625,11 @@ Communication_Logging_Standards.md, Attorney_Supervision_Ethics_Guide, Firm_KPI_
       </table>
     </div>
     <div class="callout callout-info"><strong>Coaching vs. Directing:</strong> Coaching builds the CM&#39;s judgment (&quot;What do you think the best approach is?&quot;). Directing tells them what to do (&quot;Send the records request to Dr. Martin today&quot;). Both have a place: coach on strategy and judgment, direct on compliance and deadlines. The mistake is defaulting to directing on everything &mdash; it is faster but it produces a team that cannot function without you.</div>
-    <div class="callout callout-warn"><strong>Training Integration &mdash; Role Boundaries:</strong> Marisol is the firm&#39;s Training &amp; Mentorship Lead. Skill-building sessions and competency gates are her domain. Legal quality oversight and case review coaching are yours. Clear swim lanes prevent overlap and dropped balls. When a CM has a development need, coordinate with Marisol on who handles which aspect.</div>
+    <div class="callout callout-warn"><strong>Training Integration &mdash; Role Boundaries:</strong> The training lead owns the firm&#39;s training and mentorship function. Skill-building sessions and competency gates are her domain. Legal quality oversight and case review coaching are yours. Clear swim lanes prevent overlap and dropped balls. When a CM has a development need, coordinate with the training lead on who handles which aspect.</div>
 
-    <div class="question-block" id="q13-block">
-      <div class="q-num">Question 13 of 20 &middot; 10 pts</div>
-      <div class="q-text">During a PITT case review, a CM presents a complex liability case and asks: &quot;What should I do?&quot; You know the answer. What is the most effective leadership response?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q13','a',false)" id="q13-a"><span class="opt-letter">A</span><span class="opt-text">Give the answer immediately &mdash; the CM needs clear direction and the case needs to progress without unnecessary delay</span></button>
-        <button class="option-btn" onclick="answer('q13','b',false)" id="q13-b"><span class="opt-letter">B</span><span class="opt-text">Refer the CM to the relevant SOP &mdash; self-directed learning is more effective than being told the answer</span></button>
-        <button class="option-btn" onclick="answer('q13','c',true)" id="q13-c"><span class="opt-letter">C</span><span class="opt-text">Ask: &quot;What&#39;s on your mind with this one?&quot; then &quot;What have you considered so far?&quot; and &quot;What&#39;s the real challenge here for you?&quot; Use questions to develop the CM&#39;s analytical judgment. Give direction only after understanding their thinking. The goal is to build CMs who can analyze, not just CMs who ask.</span></button>
-        <button class="option-btn" onclick="answer('q13','d',false)" id="q13-d"><span class="opt-letter">D</span><span class="opt-text">Table it for the next team meeting &mdash; complex cases benefit from the collective perspective of the entire department</span></button>
-      </div>
-      <div class="feedback-box" id="q13-fb"></div>
-    </div>
 
-    <div class="question-block" id="q14-block">
-      <div class="q-num">Question 14 of 20 &middot; 10 pts</div>
-      <div class="q-text">You notice a pattern: a CM&#39;s demand packets consistently omit the mechanism of harm section. This is the third demand in a row with the same gap. How do you address it?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q14','a',false)" id="q14-a"><span class="opt-letter">A</span><span class="opt-text">Add &quot;mechanism of harm&quot; to a department-wide checklist and announce it at the next huddle &mdash; making it systemic avoids singling one person out</span></button>
-        <button class="option-btn" onclick="answer('q14','b',true)" id="q14-b"><span class="opt-letter">B</span><span class="opt-text">Meet with the CM directly: &quot;I care about your growth, and I need to be straight with you &mdash; three consecutive demands have been missing the mechanism of harm section. That section connects the defendant&#39;s conduct to the client&#39;s injury. Let&#39;s look at one together so I can show you what a strong one looks like, then I want you to revise the other two.&quot; Care personally AND challenge directly.</span></button>
-        <button class="option-btn" onclick="answer('q14','c',false)" id="q14-c"><span class="opt-letter">C</span><span class="opt-text">Return the demands for revision with written comments &mdash; the CM can figure it out from the detailed feedback without needing a one-on-one meeting</span></button>
-        <button class="option-btn" onclick="answer('q14','d',false)" id="q14-d"><span class="opt-letter">D</span><span class="opt-text">Assign the CM&#39;s next few demands to a senior CM for collaborative mentoring until the gap is consistently closed</span></button>
-      </div>
-      <div class="feedback-box" id="q14-fb"></div>
-    </div>
 
-    <div class="question-block" id="q15-block">
-      <div class="q-num">Question 15 of 20 &middot; 10 pts</div>
-      <div class="q-text">A CM consistently produces quality work but never speaks up in team meetings, does not ask questions during case reviews, and seems disengaged from team discussions. Other CMs have started to notice. What is the most likely underlying issue and how do you address it?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q15','a',false)" id="q15-a"><span class="opt-letter">A</span><span class="opt-text">The CM is naturally introverted &mdash; some people work best independently and do not need active team participation to be effective contributors</span></button>
-        <button class="option-btn" onclick="answer('q15','b',false)" id="q15-b"><span class="opt-letter">B</span><span class="opt-text">Have a private conversation to check whether the CM is considering leaving &mdash; disengagement is often a precursor to resignation</span></button>
-        <button class="option-btn" onclick="answer('q15','c',false)" id="q15-c"><span class="opt-letter">C</span><span class="opt-text">Give the CM more responsibility &mdash; engagement often increases when people feel ownership over meaningful work</span></button>
-        <button class="option-btn" onclick="answer('q15','d',true)" id="q15-d"><span class="opt-letter">D</span><span class="opt-text">The team may not feel psychologically safe enough for everyone to participate. Go first on vulnerability in meetings &mdash; share your own uncertainties and mistakes. Ask quieter members direct, specific questions: &quot;You handled a similar case last month &mdash; what did you learn?&quot; Build participation habits gradually. If trust is present, engagement follows. If this CM never contributes despite safety, then address it individually.</span></button>
-      </div>
-      <div class="feedback-box" id="q15-fb"></div>
-    </div>
 
-    <div class="question-block" id="q16-block">
-      <div class="q-num">Question 16 of 20 &middot; 10 pts</div>
-      <div class="q-text">Marisol is the firm&#39;s Training &amp; Mentorship Lead. A new CM is struggling with demand preparation in her second month. What is the correct leadership response regarding training?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q16','a',true)" id="q16-a"><span class="opt-letter">A</span><span class="opt-text">Work with Marisol to assess where the new CM is on the competency curve for demand prep. Develop a targeted coaching plan. Agree on clear swim lanes: Marisol leads the skill-building sessions, you review the CM&#39;s work product for legal quality. Training delivery is Marisol&#39;s role; legal oversight is yours. Coordinate, do not duplicate.</span></button>
-        <button class="option-btn" onclick="answer('q16','b',false)" id="q16-b"><span class="opt-letter">B</span><span class="opt-text">Take over the new CM&#39;s training yourself &mdash; as head attorney, you can teach demand preparation more effectively than a senior CM, and it ensures legal accuracy</span></button>
-        <button class="option-btn" onclick="answer('q16','c',false)" id="q16-c"><span class="opt-letter">C</span><span class="opt-text">Send the CM back through the training modules &mdash; the issue is that she did not absorb the material during initial onboarding</span></button>
-        <button class="option-btn" onclick="answer('q16','d',false)" id="q16-d"><span class="opt-letter">D</span><span class="opt-text">Give the CM more time &mdash; two months is too early to intervene on a new hire who is still learning the firm&#39;s processes</span></button>
-      </div>
-      <div class="feedback-box" id="q16-fb"></div>
-    </div>
 
     <div class="section-score" id="s4-score" style="display:none;"><div class="score-display" id="s4-score-val"></div><div class="score-label">Section 5 Score</div></div>
     <div class="btn-group" id="s4-next"><button class="btn btn-primary btn-block" onclick="goToSection(5)">Next: Accountability &amp; Role Boundaries &rarr;</button></div>
@@ -671,7 +656,7 @@ Communication_Logging_Standards.md, Attorney_Supervision_Ethics_Guide, Firm_KPI_
       <p>Before choosing your intervention, diagnose the root cause. The wrong fix for the wrong cause wastes time and demoralizes the CM.</p>
       <table class="stat-table">
         <tr><th>Gap Type</th><th>Description</th><th>Correct Intervention</th></tr>
-        <tr><td class="stat-num">Skill Gap</td><td>The CM does not know HOW to do what is required. They lack training, knowledge, or experience.</td><td>Training, coaching, mentoring. Work with Marisol on skill-building. Provide examples and practice opportunities.</td></tr>
+        <tr><td class="stat-num">Skill Gap</td><td>The CM does not know HOW to do what is required. They lack training, knowledge, or experience.</td><td>Training, coaching, mentoring. Work with the training lead on skill-building. Provide examples and practice opportunities.</td></tr>
         <tr><td class="stat-num">Will Gap</td><td>The CM KNOWS how but is not doing it. They have the capability but not the motivation or discipline.</td><td>Direct accountability conversation. Clear expectations. Documented consequences. &quot;What is getting in the way?&quot;</td></tr>
         <tr><td class="stat-num">System Gap</td><td>The process itself is making success harder than it should be. Tools, workload, unclear expectations.</td><td>Process redesign. Workload rebalancing. Clearer standards. Fix the system before blaming the person.</td></tr>
       </table>
@@ -691,62 +676,18 @@ Communication_Logging_Standards.md, Attorney_Supervision_Ethics_Guide, Firm_KPI_
       <h4>&#127922; Role Boundaries &mdash; Your Lane, Their Lanes</h4>
       <table class="stat-table">
         <tr><th>Role</th><th>Owns</th><th>Does NOT Own</th></tr>
-        <tr><td class="stat-num">You (Head Attorney)</td><td>Legal quality, demand review, settlement authority, CM development, case review cadence, escalation management</td><td>Operational dashboards, SOP enforcement mechanics, training curriculum delivery, compensation/discipline decisions (Harrell)</td></tr>
-        <tr><td class="stat-num">Ingrid (Ops Manager)</td><td>Dashboards, clocks, SOP compliance monitoring, operational infrastructure, deadline enforcement</td><td>Legal quality decisions, CM coaching on case strategy, settlement authority</td></tr>
-        <tr><td class="stat-num">Marisol (Training Lead)</td><td>Mentorship, competency gates, training delivery, skill-building sessions, onboarding curriculum</td><td>Legal oversight, demand review, performance discipline, case-level decisions</td></tr>
-        <tr><td class="stat-num">Harrell (Managing Attorney)</td><td>Final authority on discipline, compensation, policy. Government cases. Cases &gt; $500K. Any decision you cannot make alone.</td><td>Day-to-day CM management (that is YOUR job)</td></tr>
+        <tr><td class="stat-num">You (Head Attorney)</td><td>Legal quality, demand review, settlement authority, CM development, case review cadence, escalation management</td><td>Operational dashboards, SOP enforcement mechanics, training curriculum delivery, compensation/discipline decisions (the Managing Attorney)</td></tr>
+        <tr><td class="stat-num">Operations Manager</td><td>Dashboards, clocks, SOP compliance monitoring, operational infrastructure, deadline enforcement</td><td>Legal quality decisions, CM coaching on case strategy, settlement authority</td></tr>
+        <tr><td class="stat-num">Training Lead</td><td>Mentorship, competency gates, training delivery, skill-building sessions, onboarding curriculum</td><td>Legal oversight, demand review, performance discipline, case-level decisions</td></tr>
+        <tr><td class="stat-num">the Managing Attorney (Managing Attorney)</td><td>Final authority on discipline, compensation, policy. Government cases. Cases &gt; $500K. Any decision you cannot make alone.</td><td>Day-to-day CM management (that is YOUR job)</td></tr>
       </table>
     </div>
-    <div class="callout callout-danger"><strong>Escalation to Harrell &mdash; When:</strong> Per the Chain of Command SOP, these require Harrell&#39;s involvement: (1) Any Tier 3 client complaint (bar complaint threats, malpractice allegations). (2) Compensation, discipline, or termination decisions. (3) Government entity cases. (4) Cases with policy limits above $500K. (5) Staffing or conduct issues that impact operations. (6) Ethical concerns or potential violations. Do NOT bypass Harrell on these. Do NOT send him routine operational issues that are within your authority.</div>
+    <div class="callout callout-danger"><strong>Escalation to the Managing Attorney &mdash; When:</strong> Per the Chain of Command SOP, these require the Managing Attorney&#39;s involvement: (1) Any Tier 3 client complaint (bar complaint threats, malpractice allegations). (2) Compensation, discipline, or termination decisions. (3) Government entity cases. (4) Cases with policy limits above $500K. (5) Staffing or conduct issues that impact operations. (6) Ethical concerns or potential violations. Do NOT bypass the Managing Attorney on these. Do NOT send him routine operational issues that are within your authority.</div>
     <div class="callout callout-warn"><strong>UPL Prevention Reminder:</strong> CMs must NEVER cross the line into legal advice, case valuation, settlement authority, or strategic decisions. A CM who accepts a settlement offer without attorney consultation has committed an act of unauthorized practice of law. Your supervision system must build the habits and judgment that keep CMs safely inside the line. GA Bar Rule 5.3 makes this YOUR personal ethical obligation.</div>
 
-    <div class="question-block" id="q17-block">
-      <div class="q-num">Question 17 of 20 &middot; 10 pts</div>
-      <div class="q-text">A CM&#39;s performance has declined: missed communications, weak demands, two client complaints. You have coached them once with no improvement. What are the three possible root causes you must diagnose before choosing your next step?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q17','a',false)" id="q17-a"><span class="opt-letter">A</span><span class="opt-text">Laziness, incompetence, or insubordination &mdash; the three categories that cover all forms of underperformance in a structured workplace</span></button>
-        <button class="option-btn" onclick="answer('q17','b',false)" id="q17-b"><span class="opt-letter">B</span><span class="opt-text">Personal issues, workload overload, or personality conflict with a colleague &mdash; external factors usually explain sudden performance drops in otherwise capable employees</span></button>
-        <button class="option-btn" onclick="answer('q17','c',true)" id="q17-c"><span class="opt-letter">C</span><span class="opt-text">Skill gap (they do not know how), will gap (they know how but are not doing it), or system gap (the process is making it harder than it should be). Each requires a different intervention: training for skill, accountability for will, process redesign for system. Misdiagnosing the root cause means applying the wrong fix &mdash; and the problem persists.</span></button>
-        <button class="option-btn" onclick="answer('q17','d',false)" id="q17-d"><span class="opt-letter">D</span><span class="opt-text">The CM needs more supervision &mdash; increase the review frequency and monitor every case personally until performance improves</span></button>
-      </div>
-      <div class="feedback-box" id="q17-fb"></div>
-    </div>
 
-    <div class="question-block" id="q18-block">
-      <div class="q-num">Question 18 of 20 &middot; 10 pts</div>
-      <div class="q-text">A CM has been underperforming for 6 weeks. You have had two coaching conversations with documented follow-up commitments. The behavior has not changed. What is the correct next step per GLG&#39;s chain of command?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q18','a',true)" id="q18-a"><span class="opt-letter">A</span><span class="opt-text">Document the pattern &mdash; dates, specific incidents, what was discussed in each coaching conversation, and the outcomes &mdash; then bring it to Harrell. The managing attorney must be involved before any formal performance action. You cannot make compensation, discipline, or termination decisions without managing attorney approval.</span></button>
-        <button class="option-btn" onclick="answer('q18','b',false)" id="q18-b"><span class="opt-letter">B</span><span class="opt-text">Give the CM one final warning and set a 30-day performance improvement plan with specific metrics and consequences for non-compliance</span></button>
-        <button class="option-btn" onclick="answer('q18','c',false)" id="q18-c"><span class="opt-letter">C</span><span class="opt-text">Reassign the CM&#39;s highest-value cases to other team members to protect client outcomes while continuing to coach the struggling CM</span></button>
-        <button class="option-btn" onclick="answer('q18','d',false)" id="q18-d"><span class="opt-letter">D</span><span class="opt-text">Discuss the situation with other CMs informally to get their perspective on the colleague&#39;s performance before escalating to Harrell</span></button>
-      </div>
-      <div class="feedback-box" id="q18-fb"></div>
-    </div>
 
-    <div class="question-block" id="q19-block">
-      <div class="q-num">Question 19 of 20 &middot; 10 pts</div>
-      <div class="q-text">Ingrid (Operations Manager) flags that a CM&#39;s CasePeer task completion rate is below 60%. Ingrid wants to coach the CM on task management. Is this within Ingrid&#39;s role?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q19','a',false)" id="q19-a"><span class="opt-letter">A</span><span class="opt-text">No &mdash; Ingrid should flag the data to you and let you handle all CM coaching regardless of the topic</span></button>
-        <button class="option-btn" onclick="answer('q19','b',false)" id="q19-b"><span class="opt-letter">B</span><span class="opt-text">Yes &mdash; Ingrid manages operations and task completion is an operational metric fully within her authority</span></button>
-        <button class="option-btn" onclick="answer('q19','c',false)" id="q19-c"><span class="opt-letter">C</span><span class="opt-text">Yes, but only if the CM consents to being coached by Ingrid rather than the head attorney on this particular issue</span></button>
-        <button class="option-btn" onclick="answer('q19','d',true)" id="q19-d"><span class="opt-letter">D</span><span class="opt-text">Ingrid owns dashboards, clocks, and SOP compliance monitoring. She can and should flag the data, enforce deadlines, and escalate persistent issues. But the coaching conversation about WHY tasks are being missed &mdash; whether it is a skill gap, workload issue, or case complexity problem &mdash; belongs to you as the CM&#39;s supervising attorney. Ingrid monitors the system; you develop the people.</span></button>
-      </div>
-      <div class="feedback-box" id="q19-fb"></div>
-    </div>
 
-    <div class="question-block" id="q20-block">
-      <div class="q-num">Question 20 of 20 &middot; 10 pts</div>
-      <div class="q-text">Which of the following situations requires immediate escalation to Harrell (Managing Attorney)?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q20','a',false)" id="q20-a"><span class="opt-letter">A</span><span class="opt-text">A CM disagrees with your demand valuation recommendation and wants to discuss alternative approaches to the case</span></button>
-        <button class="option-btn" onclick="answer('q20','b',true)" id="q20-b"><span class="opt-letter">B</span><span class="opt-text">A client has filed a Tier 3 complaint: she alleges no one from the firm contacted her in over a month, she is threatening to file a bar complaint, and she says she is hiring another attorney. Per the Client Complaint SOP, Harrell must be notified within 2 hours of any bar complaint threat or mention of hiring another attorney.</span></button>
-        <button class="option-btn" onclick="answer('q20','c',false)" id="q20-c"><span class="opt-letter">C</span><span class="opt-text">A CM&#39;s communication compliance dropped below 50% this month &mdash; this is a serious metric failure that requires managing attorney visibility</span></button>
-        <button class="option-btn" onclick="answer('q20','d',false)" id="q20-d"><span class="opt-letter">D</span><span class="opt-text">Two CMs have a personal conflict about case handoff protocols that is affecting team morale and needs to be resolved at a higher level</span></button>
-      </div>
-      <div class="feedback-box" id="q20-fb"></div>
-    </div>
 
     <div class="section-score" id="s5-score" style="display:none;"><div class="score-display" id="s5-score-val"></div><div class="score-label">Section 6 Score</div></div>
     <div class="btn-group" id="s5-next"><button class="btn btn-primary btn-block" onclick="goToSection(6)">Next: Boss Challenge &mdash; The Monday Morning Dashboard &rarr;</button></div>
@@ -784,17 +725,6 @@ Communication_Logging_Standards.md, Attorney_Supervision_Ethics_Guide, Firm_KPI_
       <div class="case-detail"><span class="case-key">Tomas&#39;s Response</span><span class="case-val">&quot;I&#39;ve been meaning to follow up on those.&quot;</span></div>
       <div class="case-detail"><span class="case-key">Other Metrics</span><span class="case-val">Communication compliance: 72%. Callback rate: 90%. Demand quality: adequate when submitted.</span></div>
     </div>
-    <div class="question-block" id="q21-block">
-      <div class="q-num">Boss Task 1 of 5 &middot; 10 bonus pts</div>
-      <div class="q-text">How do you handle Situation 1 (Tomas&#39;s stagnant cases)?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q21','a',false)" id="q21-a"><span class="opt-letter">A</span><span class="opt-text">Schedule a 1-on-1 later this week to discuss the aging cases &mdash; this is a coaching opportunity, not an urgent situation requiring immediate attention</span></button>
-        <button class="option-btn" onclick="answer('q21','b',true)" id="q21-b"><span class="opt-letter">B</span><span class="opt-text">Address it now: &quot;Tomas, four cases past 90 days with no demand readiness is a pattern. The two with 60-day records delays and no escalation &mdash; per our SOP, records bottlenecks beyond 30 days should be escalated to me. Let&#39;s pull each one up right now, build action plans with deadlines, and I want a status update by Friday. Going forward, any records request over 30 days without a response triggers an escalation.&quot; Log this conversation as a supervision note in CasePeer.</span></button>
-        <button class="option-btn" onclick="answer('q21','c',false)" id="q21-c"><span class="opt-letter">C</span><span class="opt-text">Send the records follow-up requests yourself &mdash; the CM is overwhelmed and needs practical help, not more accountability pressure</span></button>
-        <button class="option-btn" onclick="answer('q21','d',false)" id="q21-d"><span class="opt-letter">D</span><span class="opt-text">Add records aging to the weekly huddle agenda and make it a department-wide discussion rather than singling Tomas out in a direct conversation</span></button>
-      </div>
-      <div class="feedback-box" id="q21-fb"></div>
-    </div>
 
     <!-- BOSS SITUATION 2 -->
     <div class="case-file">
@@ -810,17 +740,6 @@ Communication_Logging_Standards.md, Attorney_Supervision_Ethics_Guide, Firm_KPI_
       <div class="case-detail"><span class="case-key">Dollar Amounts</span><span class="case-val">All three demands hit reasonable dollar figures &mdash; the VALUES are fine, the FRAMING is missing</span></div>
       <div class="case-detail"><span class="case-key">Prior Training</span><span class="case-val">Safety rule framework was covered in onboarding modules and referenced in the demand checklist template</span></div>
     </div>
-    <div class="question-block" id="q22-block">
-      <div class="q-num">Boss Task 2 of 5 &middot; 10 bonus pts</div>
-      <div class="q-text">Three CMs, same gap. Demand values are fine but safety rule framing is consistently missing. What is your diagnostic and response?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q22','a',false)" id="q22-a"><span class="opt-letter">A</span><span class="opt-text">Return all three demands for revision with identical written feedback explaining the missing elements and require resubmission within 48 hours</span></button>
-        <button class="option-btn" onclick="answer('q22','b',false)" id="q22-b"><span class="opt-letter">B</span><span class="opt-text">Add a mandatory demand quality checklist to the submission process &mdash; systemic problems need systemic solutions, not individual conversations</span></button>
-        <button class="option-btn" onclick="answer('q22','c',false)" id="q22-c"><span class="opt-letter">C</span><span class="opt-text">Hold individual meetings with each of the three CMs to address their specific knowledge gaps on safety rule framing</span></button>
-        <button class="option-btn" onclick="answer('q22','d',true)" id="q22-d"><span class="opt-letter">D</span><span class="opt-text">This is a system gap, not three individual failures. Step 1: Check whether the demand checklist is being used or whether CMs are skipping it. Step 2: Review your recent PITT sessions &mdash; did you actually teach the safety rule framework during reviews, or just check for completion? Step 3: Build a demand quality workshop (coordinate with Marisol on training delivery), then require checklist sign-off on every submission. When three CMs have the same gap, the leader owns the system that failed to teach it.</span></button>
-      </div>
-      <div class="feedback-box" id="q22-fb"></div>
-    </div>
 
     <!-- BOSS SITUATION 3 -->
     <div class="case-file">
@@ -828,24 +747,13 @@ Communication_Logging_Standards.md, Attorney_Supervision_Ethics_Guide, Firm_KPI_
         <div class="case-file-icon">&#128680;</div>
         <div>
           <div class="case-file-title">Situation 3 &mdash; Tier 3 Client Complaint</div>
-          <div class="case-file-sub">Harrell Call: Monday 9:15 AM</div>
+          <div class="case-file-sub">the Managing Attorney Call: Monday 9:15 AM</div>
         </div>
       </div>
-      <div class="case-detail"><span class="case-key">Source</span><span class="case-val">Harrell called you directly: &quot;Mrs. Williams just called me. She says nobody contacted her in 5 weeks. She&#39;s threatening a bar complaint.&quot; <span class="flag">TIER 3</span></span></div>
+      <div class="case-detail"><span class="case-key">Source</span><span class="case-val">the Managing Attorney called you directly: &quot;Mrs. Williams just called me. She says nobody contacted her in 5 weeks. She&#39;s threatening a bar complaint.&quot; <span class="flag">TIER 3</span></span></div>
       <div class="case-detail"><span class="case-key">CasePeer Check</span><span class="case-val">Last logged communication with Mrs. Williams: 37 days ago <span class="flag">CONFIRMED GAP</span></span></div>
       <div class="case-detail"><span class="case-key">Assigned CM</span><span class="case-val">Elena Kowalczyk &mdash; zero notes, zero tasks, zero follow-up attempts in 37-day period</span></div>
       <div class="case-detail"><span class="case-key">Client Tone</span><span class="case-val">&quot;Furious. Crying. Said she feels abandoned.&quot;</span></div>
-    </div>
-    <div class="question-block" id="q23-block">
-      <div class="q-num">Boss Task 3 of 5 &middot; 10 bonus pts</div>
-      <div class="q-text">Harrell called you about Mrs. Williams. 37-day communication gap confirmed. Bar complaint threatened. How do you handle this?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q23','a',true)" id="q23-a"><span class="opt-letter">A</span><span class="opt-text">This is a Tier 3 complaint &mdash; the 2-hour Harrell notification is satisfied (he called you). Call Mrs. Williams within the hour: acknowledge, apologize for the experience, commit to a specific resolution plan. Then address Elena directly: &quot;37 days with zero contact, zero documentation. Walk me through what happened.&quot; Diagnose skill/will/system. Document everything. The bar complaint threat makes this urgent, but the 37-day gap is the systemic failure that must be fixed regardless of whether the client follows through.</span></button>
-        <button class="option-btn" onclick="answer('q23','b',false)" id="q23-b"><span class="opt-letter">B</span><span class="opt-text">Call Mrs. Williams first to de-escalate the immediate crisis, then investigate what happened with Elena later this week when you have time for a proper coaching conversation</span></button>
-        <button class="option-btn" onclick="answer('q23','c',false)" id="q23-c"><span class="opt-letter">C</span><span class="opt-text">Ask Elena to call Mrs. Williams immediately with a personal apology &mdash; the CM who dropped the ball should be the one to repair the relationship</span></button>
-        <button class="option-btn" onclick="answer('q23','d',false)" id="q23-d"><span class="opt-letter">D</span><span class="opt-text">Draft a written response to Mrs. Williams documenting all firm contact history, then investigate whether CasePeer logging was incomplete before drawing conclusions about Elena</span></button>
-      </div>
-      <div class="feedback-box" id="q23-fb"></div>
     </div>
 
     <!-- BOSS SITUATION 4 -->
@@ -854,24 +762,13 @@ Communication_Logging_Standards.md, Attorney_Supervision_Ethics_Guide, Firm_KPI_
         <div class="case-file-icon">&#9888;&#65039;</div>
         <div>
           <div class="case-file-title">Situation 4 &mdash; Team Conflict</div>
-          <div class="case-file-sub">Marisol flagged this Friday afternoon: Monday 9:40 AM follow-up</div>
+          <div class="case-file-sub">The training lead flagged this Friday afternoon: Monday 9:40 AM follow-up</div>
         </div>
       </div>
-      <div class="case-detail"><span class="case-key">Conflict</span><span class="case-val">Marisol says Kiril left incomplete handoff notes when transferring a case to her. She missed a follow-up deadline as a result.</span></div>
+      <div class="case-detail"><span class="case-key">Conflict</span><span class="case-val">The training lead says Kiril left incomplete handoff notes when transferring a case to her. She missed a follow-up deadline as a result.</span></div>
       <div class="case-detail"><span class="case-key">Kiril&#39;s Position</span><span class="case-val">&quot;My notes were fine. She&#39;s making excuses for missing her own deadline.&quot;</span></div>
       <div class="case-detail"><span class="case-key">Impact</span><span class="case-val">Client follow-up missed by 3 days. Other CMs are taking sides. Huddle on Friday was tense. <span class="flag-warn">Morale Risk</span></span></div>
       <div class="case-detail"><span class="case-key">CasePeer Record</span><span class="case-val">Kiril&#39;s handoff notes: 2 sentences. No next steps documented. No task set for follow-up. <span class="flag">Incomplete</span></span></div>
-    </div>
-    <div class="question-block" id="q24-block">
-      <div class="q-num">Boss Task 4 of 5 &middot; 10 bonus pts</div>
-      <div class="q-text">Marisol and Kiril are in conflict about a case handoff. A client follow-up was missed. Team morale is affected. How do you resolve this?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q24','a',false)" id="q24-a"><span class="opt-letter">A</span><span class="opt-text">Let them work it out &mdash; healthy teams resolve peer conflicts without management stepping in for every disagreement</span></button>
-        <button class="option-btn" onclick="answer('q24','b',false)" id="q24-b"><span class="opt-letter">B</span><span class="opt-text">Tell both CMs to move on &mdash; the deadline was missed and arguing about blame will not fix the client impact</span></button>
-        <button class="option-btn" onclick="answer('q24','c',true)" id="q24-c"><span class="opt-letter">C</span><span class="opt-text">Meet with each CM separately first to understand their perspective. Then bring them together: &quot;This is not about who is right &mdash; it is about what happened to the client. Marisol, walk me through what was in the handoff notes. Kiril, walk me through what you documented.&quot; Review the CasePeer notes together. Two-sentence notes with no next steps and no task set violate documentation standards &mdash; address that with Kiril. But also address the missed deadline with Marisol &mdash; the incomplete notes explain it but do not excuse it. Build a handoff checklist so this cannot happen again. Fix the system, not just the people.</span></button>
-        <button class="option-btn" onclick="answer('q24','d',false)" id="q24-d"><span class="opt-letter">D</span><span class="opt-text">Counsel Marisol privately &mdash; regardless of handoff note quality, missing a follow-up deadline is ultimately her responsibility once the case was assigned to her</span></button>
-      </div>
-      <div class="feedback-box" id="q24-fb"></div>
     </div>
 
     <!-- BOSS SITUATION 5 -->
@@ -889,25 +786,39 @@ Communication_Logging_Standards.md, Attorney_Supervision_Ethics_Guide, Firm_KPI_
       <div class="case-detail"><span class="case-key">Strengths</span><span class="case-val">Eager, hardworking, well-liked by clients. Communication compliance: 88%. Callback rate: 95%. <span class="flag-ok">Strong Rapport</span></span></div>
       <div class="case-detail"><span class="case-key">Settlement Status</span><span class="case-val">Verbal acceptance only &mdash; no written confirmation sent to adjuster yet</span></div>
     </div>
-    <div class="question-block" id="q25-block">
-      <div class="q-num">Boss Task 5 of 5 &middot; 10 bonus pts</div>
-      <div class="q-text">Rasmus is 8 weeks in. Good strengths, but two critical errors: lien verification skipped and settlement offer accepted without attorney review. How do you handle this?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q25','a',false)" id="q25-a"><span class="opt-letter">A</span><span class="opt-text">This is a skill gap &mdash; schedule targeted retraining on lien verification and settlement authority procedures, then monitor her work more closely for the next 30 days</span></button>
-                <button class="option-btn" onclick="answer('q25','b',true)" id="q25-b"><span class="opt-letter">B</span><span class="opt-text">The lien verification error is a training gap &mdash; work with Marisol on targeted coaching. But the settlement authority issue is a potential UPL violation: CMs are NOT authorized to accept settlement offers without attorney consultation. Address this immediately and document it. Meet with Rasmus: acknowledge her strengths, then be direct about the boundary: &quot;Accepting a settlement offer without attorney review crosses a line that cannot be crossed again &mdash; it puts the client, the firm, and your career at risk.&quot; Verify the settlement was not finalized without client authorization. Flag to Harrell if it was.</span></button>
-        <button class="option-btn" onclick="answer('q25','c',false)" id="q25-c"><span class="opt-letter">C</span><span class="opt-text">Let it go for now &mdash; Rasmus is new and enthusiastic, and over-correcting this early could damage her confidence and motivation during a critical onboarding period</span></button>
-        <button class="option-btn" onclick="answer('q25','d',false)" id="q25-d"><span class="opt-letter">D</span><span class="opt-text">Reassign Rasmus to lower-risk cases until she completes additional training modules on lien procedures and settlement authority boundaries</span></button>
-      </div>
-      <div class="feedback-box" id="q25-fb"></div>
-    </div>
 
     <div class="section-score" id="s6-score" style="display:none;"><div class="score-display" id="s6-score-val"></div><div class="score-label">Boss Challenge Bonus</div></div>
-    <div class="btn-group" id="s6-next"><button class="btn btn-primary btn-block" onclick="goToSection(7)">View Results &rarr;</button></div>
+    <div class="btn-group" id="s6-next"><div style="margin-bottom:1rem;">
+      <label for="trainee-name-input" style="display:block;font-size:0.85rem;font-weight:600;color:#141c2c;margin-bottom:0.4rem;">Your Name — required to start</label>
+      <input type="text" id="trainee-name-input" placeholder="Enter your full name" autocomplete="name" style="width:100%;padding:0.5rem 0.75rem;border:1.5px solid #cbd5e1;border-radius:6px;font-size:0.9rem;box-sizing:border-box;">
+    </div>
+    <button class="btn btn-primary btn-block" onclick="startQuiz()">Take the Quiz &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 7 — QUIZ (api-quiz-engine.js)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-7">
+  <div class="section-header">
+    <div class="section-num">Knowledge Check</div>
+    <h2>Module Assessment</h2>
+    <div class="section-subhead">Answer each question. One attempt — wrong answer reveals the correct answer and unlocks Next.</div>
+  </div>
+  <div class="section-body">
+    <div style="font-family:system-ui,sans-serif;font-size:13px;color:#33415c;padding:8px 0 12px;border-bottom:1px solid #e8eaf0;margin-bottom:16px;">
+      Base: <b id="base">0</b> / <b id="basemax">—</b>
+      &nbsp;·&nbsp; Bonus: <b id="bonus">0</b>
+      &nbsp;·&nbsp; Pass gate: <b id="gate">80</b>%
+      &nbsp;·&nbsp; <span id="q-progress" style="color:#dcb161;font-weight:700;"></span>
+    </div>
+    <div id="questions"></div>
+    <div id="result" style="background:#fff;border:2px solid #0b2545;border-radius:10px;padding:18px;margin:18px 0;display:none;"></div>
   </div>
 </div>
 
 <!-- SECTION 7 — RESULTS -->
-<div class="section-card" id="section-7">
+<div class="section-card" id="section-8">
   <div id="results-content">
     <div class="section-body text-center">
       <p style="color:#888;margin-top:40px;">Complete all sections to see your results.</p>
@@ -916,7 +827,7 @@ Communication_Logging_Standards.md, Attorney_Supervision_Ethics_Guide, Firm_KPI_
 </div>
 
 <!-- SECTION 8 — FEEDBACK & CERTIFICATE -->
-<div class="section-card" id="section-8">
+<div class="section-card" id="section-9">
   <div class="section-header">
     <div class="section-num">Feedback &amp; Certificate</div>
     <h2>Module Feedback</h2>
@@ -924,7 +835,7 @@ Communication_Logging_Standards.md, Attorney_Supervision_Ethics_Guide, Firm_KPI_
   <div class="section-body">
     <div class="name-input-wrap">
       <label for="employee-name">Your Full Name (for certificate):</label>
-      <input type="text" id="employee-name" class="name-input" placeholder="Enter your full name" value="Adriauna Gunn">
+      <input type="text" id="employee-name" class="name-input" placeholder="Enter your full name" value="the Pre-Lit Head Attorney Gunn">
     </div>
     <div class="fb-question">
       <label for="fb-clarity">How clear were the team leadership concepts?</label>
@@ -950,7 +861,7 @@ Communication_Logging_Standards.md, Attorney_Supervision_Ethics_Guide, Firm_KPI_
         <div class="cert-title">Certificate of Completion</div>
         <div class="cert-subtitle">Pre-Lit Attorney Training Program</div>
         <div class="cert-presents">This certifies that</div>
-        <div class="cert-name" id="certNameDisplay">Adriauna Gunn</div>
+        <div class="cert-name" id="certNameDisplay">the Pre-Lit Head Attorney Gunn</div>
         <div class="cert-for">has successfully completed</div>
         <div class="cert-module">PA-6 &mdash; Team Leadership &amp; CM Oversight</div>
         <div class="cert-seal">&#9878;&#65039;</div>
@@ -959,7 +870,7 @@ Communication_Logging_Standards.md, Attorney_Supervision_Ethics_Guide, Firm_KPI_
         <div class="cert-badges" id="certBadges"></div>
         <div class="cert-signature">
           <div class="cert-sig-line"></div>
-          <div class="cert-sig-name">Harrell Gunn</div>
+          <div class="cert-sig-name">the Managing Attorney Gunn</div>
           <div class="cert-sig-title">Managing Attorney &middot; Gunn Law Group</div>
         </div>
       </div>
@@ -973,71 +884,45 @@ Communication_Logging_Standards.md, Attorney_Supervision_Ethics_Guide, Firm_KPI_
 <script>
 var baseScore=0,bonusPoints=0,qDone={},firstAttemptStillAvailable={},sectionScores={},streakCount=0,maxStreak=0,questionsFirstTry=0,incorrectCount=0,totalQuestionsAnswered=0,milestonesTriggered={},moduleStartTime=Date.now(),audioCtx=null,soundEnabled=false,_audioKeepalive=null;
 var TRACKER_URL='https://script.google.com/macros/s/AKfycbzHJZ0C3BqnLatfq7RIiUP5KQdgYoXTJlozd8ZGZiwIf2bdVmvnPMo3JLm0dA5gQhJyxA/exec';
-var TOTAL_SECTIONS=9,PASS_THRESHOLD=162/*85% of 190 — Harrell ruling Aug 17 2026 (Option C)*/,BASE_MAX=190;
+var TOTAL_SECTIONS=10,PASS_THRESHOLD=152/*80% of 190 — the Managing Attorney ruling Aug 22 2026 msg 47296, REVERSES Aug 17 Option C (85%)*/,BASE_MAX=190;
 
 var Q_CONFIG={
-  'q1':{section:1,pts:10,isBonus:false,correct:'c'},
-  'q2':{section:1,pts:10,isBonus:false,correct:'a'},
-  'q3':{section:1,pts:10,isBonus:false,correct:'d'},
-  'q4':{section:1,pts:10,isBonus:false,correct:'b'},
-  'q5':{section:2,pts:10,isBonus:false,correct:'c'},
-  'q6':{section:2,pts:0,isBonus:false,correct:'a'},
-  'q7':{section:2,pts:10,isBonus:false,correct:'a'},
-  'q8':{section:2,pts:10,isBonus:false,correct:'d'},
-  'q9':{section:3,pts:10,isBonus:false,correct:'b'},
-  'q10':{section:3,pts:10,isBonus:false,correct:'c'},
-  'q11':{section:3,pts:10,isBonus:false,correct:'d'},
-  'q12':{section:3,pts:10,isBonus:false,correct:'a'},
-  'q13':{section:4,pts:10,isBonus:false,correct:'c'},
-  'q14':{section:4,pts:10,isBonus:false,correct:'b'},
-  'q15':{section:4,pts:10,isBonus:false,correct:'d'},
-  'q16':{section:4,pts:10,isBonus:false,correct:'a'},
-  'q17':{section:5,pts:10,isBonus:false,correct:'c'},
-  'q18':{section:5,pts:10,isBonus:false,correct:'a'},
-  'q19':{section:5,pts:10,isBonus:false,correct:'d'},
-  'q20':{section:5,pts:10,isBonus:false,correct:'b'},
-  'q21':{section:6,pts:0,isBonus:true,bonusPts:10,correct:'b'},
-  'q22':{section:6,pts:0,isBonus:true,bonusPts:10,correct:'d'},
-  'q23':{section:6,pts:0,isBonus:true,bonusPts:10,correct:'a'},
-  'q24':{section:6,pts:0,isBonus:true,bonusPts:10,correct:'c'},
-  'q25':{section:6,pts:0,isBonus:true,bonusPts:10,correct:'b'}
+  'q1':{section:1,pts:10,isBonus:false},
+  'q2':{section:1,pts:10,isBonus:false},
+  'q3':{section:1,pts:10,isBonus:false},
+  'q4':{section:1,pts:10,isBonus:false},
+  'q5':{section:2,pts:10,isBonus:false},
+  'q6':{section:2,pts:0,isBonus:false},
+  'q7':{section:2,pts:10,isBonus:false},
+  'q8':{section:2,pts:10,isBonus:false},
+  'q9':{section:3,pts:10,isBonus:false},
+  'q10':{section:3,pts:10,isBonus:false},
+  'q11':{section:3,pts:10,isBonus:false},
+  'q12':{section:3,pts:10,isBonus:false},
+  'q13':{section:4,pts:10,isBonus:false},
+  'q14':{section:4,pts:10,isBonus:false},
+  'q15':{section:4,pts:10,isBonus:false},
+  'q16':{section:4,pts:10,isBonus:false},
+  'q17':{section:5,pts:10,isBonus:false},
+  'q18':{section:5,pts:10,isBonus:false},
+  'q19':{section:5,pts:10,isBonus:false},
+  'q20':{section:5,pts:10,isBonus:false},
+  'q21':{section:6,pts:0,isBonus:true,bonusPts:10},
+  'q22':{section:6,pts:0,isBonus:true,bonusPts:10},
+  'q23':{section:6,pts:0,isBonus:true,bonusPts:10},
+  'q24':{section:6,pts:0,isBonus:true,bonusPts:10},
+  'q25':{section:6,pts:0,isBonus:true,bonusPts:10}
 };
 
 var SECTION_QUESTIONS={1:['q1','q2','q3','q4'],2:['q5','q6','q7','q8'],3:['q9','q10','q11','q12'],4:['q13','q14','q15','q16'],5:['q17','q18','q19','q20'],6:['q21','q22','q23','q24','q25']};
 
-var FEEDBACK={
-  'q1':{t:`\u2705 Correct. The department head\'s response to a CM\'s communication failure is not just to remind or punish \u2014 it is to diagnose the ROOT CAUSE (skill gap, will gap, or system gap) and then own the outcome as a leadership failure. Why didn\'t your monitoring system catch this at day 10 instead of day 22? The clients need contact TODAY, but the systemic fix \u2014 building an early-warning trigger \u2014 is what prevents this from recurring.`,f:`\u274c The correct approach is to investigate the root cause (skill/will/system gap), take immediate action for the affected clients, AND build a monitoring system that catches gaps earlier. Option A (remind) addresses the symptom, not the cause. Option B (document and wait) delays intervention while clients suffer. Option D (reassign) removes cases but does not develop the CM or fix the detection gap.`},
-  'q2':{t:`\u2705 Correct. When dashboard data contradicts verbal reports, the leader must surface the discrepancy directly \u2014 in the meeting, not after it. This is mining for productive conflict. If every huddle is harmonious but the numbers say otherwise, real issues are being hidden. The huddle exists to surface problems, not to hear good news. Walking through each issue right now, together, models the behavior you expect: facts over comfort.`,f:`\u274c The dashboard shows 3 demands over 60 days, 6 callbacks in the queue, and 45% communication compliance \u2014 and every CM said "all good." Option B (address privately) avoids the team accountability moment. Option C (written explanations) is bureaucratic and delays resolution. Option D (accept the reports) normalizes the disconnect between data and reporting. The leader must call it out directly, in the room, using the data.`},
-  'q3':{t:`\u2705 Correct. Spending 80% of your time on individual case files means you are working IN the system, not ON the system. The department head\'s job is to build a review cadence, develop CM capability, and monitor metrics \u2014 so the system produces quality whether you personally review every file or not. If the department falls apart when you take a day off, you have built yourself a job, not a department.`,f:`\u274c The 80/20 split toward individual case work is the problem, not the solution. Option A treats case review as the primary job \u2014 it is important but it is not the MOST important job. Option B delays the transition indefinitely. Option C (50/50) is closer but still misses the point. The department head builds SYSTEMS that produce quality, not just personal reviews that check quality.`},
-  'q4':{t:`\u2705 Correct. Vulnerability-based trust means the leader goes first. When you admit your own mistake, you are not trying to look humble \u2014 you are building a team culture where hiding problems is harder than reporting them. If the head attorney can say "I missed a deadline," then CMs can say "I\'m struggling with this case" before the client calls Harrell. The goal is psychological safety that produces early problem detection.`,f:`\u274c The strategic value is not about humility (A), reduced pressure (C), or normalizing deadline misses (D). It is about building vulnerability-based trust: when the leader goes first on admitting mistakes, the team learns that surfacing problems is safe \u2014 which means issues get detected before they become crises. Option D is especially wrong \u2014 the point is NOT that deadline misses are acceptable.`},
-  'q5':{t:`\u2705 Correct. Per the Pre-Lit Head Attorney SOP: every demand letter is reviewed and approved by the head attorney BEFORE it goes out. No exceptions. No dollar threshold. No self-review option. Review turnaround must be within 48 hours. This is the single most important quality control lever in pre-lit \u2014 the demand sets the anchor for every negotiation that follows.`,f:`\u274c The SOP is clear: EVERY demand is reviewed before submission, not just high-value ones (A), not in batch during weekly sessions (B), and not as a random sample (D). The demand review is the head attorney\'s primary quality control checkpoint. Turnaround: 48 hours.`},
-  'q6':{t:`\ud83d\udccb Calibration logged. The five demand evaluation checklist items are: (1) Safety rule violation identified and stated, (2) Mechanism of harm explained, (3) Community interest established, (4) Random victim framing applied, (5) Demand value anchored appropriately. These five elements transform a demand from a list of medical bills into a narrative that establishes why the jury and the adjuster should care.`,f:`\ud83d\udccb Same calibration content for all confidence levels. The five checklist items: safety rule violation, mechanism of harm, community interest, random victim framing, and appropriate value anchoring. Regardless of your current confidence, the next section tests whether you can apply each element in a real demand review scenario.`},
-  'q7':{t:`\u2705 Correct. Return it for revision. A demand without a safety rule violation, mechanism of harm, or community framing cannot anchor an aggressive negotiation. But critically: WALK THROUGH each missing element with the CM. Do not just return it with red marks. Show them what a strong mechanism of harm section looks like. The goal is that the next demand comes in complete \u2014 because the CM understands WHY each element matters.`,f:`\u274c The demand must be returned for revision \u2014 not approved (B), not revised by you (C), and not sent incomplete (D). A $48K demand without safety rule framing, mechanism of harm, or community framing leaves money on the table. Option C (revising it yourself) solves the immediate problem but teaches the CM nothing. Return it AND teach.`},
-  'q8':{t:`\u2705 Correct. "Waiting on records" is the most common explanation for demand delays \u2014 and it is often a surface symptom, not the root cause. Pull the pipeline data: if cases have been "waiting on records" for 30-60+ days without escalation, the issue is the follow-up system, not the providers. Per the SOP, cases stagnant beyond 90 days without demand readiness get reviewed by you. A records bottleneck that persists without escalation is a supervision gap.`,f:`\u274c Option A accepts the surface explanation without investigation. Option B identifies specific providers but does not check whether the CMs are actually following up. Option C (increase the target) punishes the team for a systemic problem. The correct approach is to pull the pipeline data and diagnose whether cases are truly stuck on records or stuck on follow-up.`},
-  'q9':{t:`\u2705 Correct. The target is 95%+, not an incremental improvement from 26%. The Communication Logging Standards SOP states this is the firm\'s identity standard \u2014 not a policy to comply with, but who the firm IS. Build it into the weekly huddle: review each CM\'s compliance rate, identify overdue cases, assign same-day action items. Monitor callbacks daily. From 26% to 95% requires a system change: calendar blocks for client contact, daily callback queue review, and weekly accountability.`,f:`\u274c Option A (50% target) treats the standard as aspirational \u2014 it is not. Option C (prioritize by case value) creates a two-tier system where lower-value clients get worse service. Option D (delegate to Legal Assistants) violates the Legal Assistant SOP \u2014 Legal Assistants have no client contact under any circumstances. The standard is 95%+ and the path is systemic.`},
-  'q10':{t:`\u2705 Correct. Address it THIS WEEK, directly, with curiosity and firmness. The 24-hour callback standard is a firm vital sign \u2014 any callback older than 24 hours escalates to Harrell. Three callbacks at 36 hours in one week is a pattern, not an anomaly. But diagnose before prescribing: is it workload? A tracking issue? Something personal? Care personally AND challenge directly.`,f:`\u274c Option A (monitor another week) normalizes non-compliance. Option B (wait for quarterly review) delays intervention by months while clients wait for callbacks. Option D (reassign caseload) assumes the cause without asking. Address it this week with the direct conversation: facts, diagnosis, resolution plan.`},
-  'q11':{t:`\u2705 Correct. Communication compliance, callback response rate, demand quality score, and cases past 90 days are LEADING indicators \u2014 they predict failure before lagging outcomes reveal it. Total cases and case age (A) are volume metrics, not quality metrics. Satisfaction surveys (B) are lagging and subjective. Demand count and settlements (C) measure output but not process quality. The scorecard should answer: "Is the system working?"`,f:`\u274c Options A, B, and C measure different things but not the RIGHT things for weekly operational oversight. Volume (A) does not tell you about quality. Satisfaction (B) is lagging. Output (C) measures productivity but not process health. The correct metrics are leading indicators that predict outcomes before they happen.`},
-  'q12':{t:`\u2705 Correct. The weekly pulse catches fires in real time \u2014 callback queues, communication gaps, demand pipeline status. The monthly KPI review analyzes trends and systemic patterns. Without the pulse, you detect problems too late. Without the review, you fix symptoms without addressing root causes. Both are necessary. The pulse catches the fire; the review fixes the wiring.`,f:`\u274c Option B (redundant) misses the time-scale difference. Option C (different audiences) is partially right but misses the primary purpose \u2014 they serve different TIME HORIZONS, not just different people. Option D is also partially right but too narrow. Both cadences serve the department head\'s need to detect AND prevent.`},
-  'q13':{t:`\u2705 Correct. "What\'s on your mind?" opens the conversation. "What have you considered?" tests their thinking. "What\'s the real challenge here for you?" focuses on the core issue. These questions develop the CM\'s analytical judgment \u2014 the goal is to build CMs who can THINK through complex cases, not just CMs who ask you for the answer. Give direction only after understanding their thinking.`,f:`\u274c Option A (give the answer) is fastest but builds the weakest team. Option B (refer to SOP) is correct for procedural questions but not for complex judgment calls. Option D (table for team meeting) delays the case unnecessarily. The coaching conversation \u2014 asking before telling \u2014 is the most effective leadership response.`},
-  'q14':{t:`\u2705 Correct. Three consecutive demands with the same gap requires a direct, caring, specific conversation. "I care about your growth" (care personally) + "three demands missing the same section" (challenge directly) + "let\'s look at one together" (coaching, not just critique). Option A hides the individual issue. Option C avoids the personal investment. Option D outsources YOUR leadership responsibility.`,f:`\u274c A pattern of three consecutive errors requires direct individual coaching, not systemic workarounds (A), impersonal written feedback (C), or delegation to a mentor (D). The effective approach combines personal care with direct challenge: show the CM what good looks like, then hold them accountable for producing it.`},
-  'q15':{t:`\u2705 Correct. Silence in meetings is often a symptom of low psychological safety, not introversion. If a quality producer is not participating, the team environment may not feel safe enough for honest engagement. The leader\'s job: go first on vulnerability, ask direct specific questions to quieter members, and build participation habits gradually. If trust is present, engagement follows.`,f:`\u274c Option A (introvert) is a label that can excuse disengagement without investigating it. Option B (checking for resignation) jumps to conclusions. Option C (more responsibility) may increase stress without addressing the underlying safety issue. The correct approach addresses the team environment first.`},
-  'q16':{t:`\u2705 Correct. Marisol is the Training Lead \u2014 skill-building sessions are her domain. You own legal quality oversight. When a new CM struggles, coordinate: Marisol leads the training, you review the work product. Clear swim lanes prevent duplication and dropped balls. Option B steps into Marisol\'s lane. Option C assumes knowledge retention. Option D delays intervention.`,f:`\u274c Option B steps into Marisol\'s lane as Training Lead. Option C assumes the problem is knowledge retention rather than application skill. Option D delays intervention \u2014 two months in, a CM who cannot prepare a basic demand needs targeted coaching NOW, not more time. Coordinate with Marisol on clear swim lanes.`},
-  'q17':{t:`\u2705 Correct. The three root causes are skill gap (do not know how), will gap (know how but are not doing it), and system gap (the process makes it harder than it should be). Each requires a fundamentally different intervention. Training for skill. Accountability for will. Process redesign for system. Misdiagnosis is the most common leadership failure in performance management.`,f:`\u274c Option A (laziness/incompetence/insubordination) is judgmental, not diagnostic. Option B lists external factors but does not create a clear intervention framework. Option D (more supervision) is an action, not a diagnosis. Diagnose FIRST: skill, will, or system.`},
-  'q18':{t:`\u2705 Correct. After two coaching conversations with no improvement, the next step is to document the pattern and bring it to Harrell. Per the Chain of Command SOP: the managing attorney must be involved before any formal performance action. You do NOT have authority to make compensation, discipline, or termination decisions independently. Your job is to coach, document, and escalate when coaching is not enough.`,f:`\u274c Option B (final warning with PIP) exceeds your authority \u2014 formal performance actions require Harrell\'s involvement. Option C (reassign cases) is a band-aid. Option D (discuss with other CMs) is a confidentiality violation. Document, then escalate to Harrell.`},
-  'q19':{t:`\u2705 Correct. Ingrid monitors the system: dashboards, clocks, SOP compliance, deadline enforcement. She can flag data, enforce process, and escalate persistent issues. But the coaching conversation about WHY tasks are being missed belongs to you \u2014 the CM\'s supervising attorney. Is it a skill gap? Workload? Case complexity? These are judgment calls that require your understanding. Ingrid monitors; you develop. Clear swim lanes.`,f:`\u274c Option A underutilizes Ingrid\'s operational authority. Option B oversteps into your lane as supervising attorney. Option C misunderstands reporting relationships. The correct answer recognizes both roles: Ingrid monitors and enforces, you diagnose and develop.`},
-  'q20':{t:`\u2705 Correct. Per the Client Complaint Escalation SOP: ANY mention of bar complaint, malpractice, or hiring another attorney triggers Tier 3 \u2014 Harrell notified within 2 hours. A demand valuation disagreement (A) is within your authority. A communication compliance drop (C) is within your oversight scope. A CM conflict (D) is within your management authority. Only Option B involves a Tier 3 trigger.`,f:`\u274c Option A is a normal professional discussion within your authority. Option C is a serious metric issue but within your scope. Option D is within your management authority. Only Option B involves a Tier 3 trigger: bar complaint threat, malpractice allegation, or client hiring another attorney. These require Harrell within 2 hours.`},
-  'q21':{t:`\u2705 Correct. Four cases past 90 days with 60-day records delays and no escalation \u2014 address it NOW, not later. Pull up each case, build action plans with deadlines, set a Friday status check. Going forward: any records request over 30 days without a response triggers escalation. The key: specific cases, specific plans, specific deadlines, specific follow-up. Log the supervision note in CasePeer.`,f:`\u274c Option A delays intervention on cases past the SOP\'s 90-day trigger. Option C solves the immediate problem but does not develop accountability. Option D avoids the direct conversation. Address it now, with specifics, and document it.`},
-  'q22':{t:`\u2705 Correct. Three CMs, same gap = system failure, not three individual failures. The diagnostic: (1) Is the checklist being used? (2) Did you actually TEACH the framework during reviews? (3) What training reinforcement is needed? When multiple people have the same gap, the leader owns the system that failed to teach it. Return the demands AND fix the system.`,f:`\u274c Option A addresses the symptom but not the systemic cause. Option B is part of the fix but skips the diagnostic. Option C treats this as three individual problems when it is one system problem. When three CMs have the same gap, look in the mirror first.`},
-  'q23':{t:`\u2705 Correct. Tier 3 protocol: (1) Harrell notification satisfied (he called you). (2) Call Mrs. Williams within the hour \u2014 acknowledge, apologize, commit to a plan. (3) Address Elena directly: 37 days with zero documentation needs diagnosis. (4) Document everything. The bar complaint threat makes client contact urgent, but the 37-day gap is the systemic failure to fix. Both must be addressed today.`,f:`\u274c Option B delays the accountability conversation. Option C sends an upset client to the CM who abandoned her \u2014 the attorney must make this call. Option D delays client contact while you gather documentation. Call the client first, address the CM second, document everything.`},
-  'q24':{t:`\u2705 Correct. Separate meetings first (understand perspectives), then together (review the actual CasePeer notes). Two sentences with no next steps and no follow-up task is incomplete documentation \u2014 address that with Kiril. But the missed deadline is Marisol\'s to own \u2014 incomplete notes explain it but do not excuse it. The systemic fix: a handoff checklist that prevents this from recurring.`,f:`\u274c Option A allows the conflict to fester. Option B addresses neither the documentation gap nor the process failure. Option D ignores Kiril\'s documentation deficiency. Both CMs need addressed, and the handoff process needs a systemic fix.`},
-  'q25':{t:`\u2705 Correct. Two errors, two different severity levels. The lien verification gap is a training issue \u2014 coordinate with Marisol. But the settlement authority issue is a POTENTIAL UPL VIOLATION: CMs are NOT authorized to accept settlement offers without attorney consultation. Per GA Bar Rule 5.3, ensuring non-lawyer conduct stays within bounds is YOUR personal ethical obligation. Address it immediately, specifically, and document it. Verify the settlement was not finalized. Acknowledge strengths \u2014 then be direct about the line.`,f:`\u274c Option A treats both errors as skill gaps, but the settlement authority issue is a boundary violation, not just a knowledge gap. Option C is negligent \u2014 a UPL risk cannot be ignored regardless of how new the CM is. Option D avoids the conversation. Two errors, two responses: training for lien verification, immediate direct conversation for settlement authority.`}
-};
+var FEEDBACK={} /* CUTOVER: feedback text is served per-answer by the engine, never shipped to the client up front */;
 
-function answer(qId,choice,isCorrect){
+window.answerUI = function answerUI(qId,choice,isCorrect){
   if(qDone[qId])return;
   var cfg=Q_CONFIG[qId],block=document.getElementById(qId+'-block'),fb=document.getElementById(qId+'-fb');
   block.querySelectorAll('.option-btn').forEach(function(b){b.classList.add('disabled');});
-  var clickedBtn=document.getElementById(qId+'-'+choice),correctBtn=document.getElementById(qId+'-'+cfg.correct);
+  var clickedBtn=document.getElementById(qId+'-'+choice),correctBtn=document.getElementById(qId+'-'+(cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || ''));
   if(isCorrect){
     clickedBtn.classList.add('correct');block.classList.add('answered');qDone[qId]=true;
     if(!cfg.isBonus){baseScore+=cfg.pts;sectionScores[cfg.section]=(sectionScores[cfg.section]||0)+cfg.pts;
@@ -1153,5 +1038,68 @@ document.addEventListener('DOMContentLoaded',function(){if(localStorage.getItem(
 goToSection(0);
 
 </script>
+
+
+
+<script>
+/* ── go() / startQuiz() — quiz entry point (the Managing Attorney ruling 2026-09-03) ── */
+async function go(screen) {
+  if (screen === 'quiz') {
+    // Bug-2 fix: await attempt start before making questions interactive
+    await window.GLGQuiz.beginAttempt(); // uses per-session random ID
+    goToSection(7);
+  }
+}
+
+function startQuiz() {
+  var _ni = document.getElementById('trainee-name-input');
+  var _name = (_ni && _ni.value.trim()) || '';
+  if (!_name) {
+    if (typeof showToast === 'function') showToast('\u26a0\ufe0f Please enter your name before starting the quiz', false);
+    else alert('Please enter your name before starting the quiz.');
+    return;
+  }
+ go('quiz'); }
+
+/* ── GLG MODULE CONFIG — wires api-quiz-engine.js to module-pa6.html ── */
+window.GLG_MODULE_CONFIG = {
+  moduleId: 'pa6',
+  onBankLoaded: function(bank) {
+    var basemax = document.getElementById('basemax');
+    var gate    = document.getElementById('gate');
+    if (basemax) basemax.textContent = bank.base_max;
+    if (gate)    gate.textContent    = bank.pass_pct;
+    for (var i = 1; i <= 6; i++) {
+      var nextEl = document.getElementById('s' + i + '-next');
+      if (nextEl) nextEl.style.display = 'flex';
+    }
+  },
+  onStartQuiz: function() {
+    if (typeof audioCtx !== 'undefined' && audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume().catch(function(){});
+    }
+  },
+  onAnswered: function(r) {
+    baseScore   = r.base_score;
+    bonusPoints = r.bonus_score;
+    streakCount = r.streak;
+    maxStreak   = Math.max(maxStreak || 0, r.maxStreak || 0);
+    var ts = document.getElementById('total-score');
+    if (ts) ts.textContent = r.base_score;
+    var bs = document.getElementById('bonus-score');
+    if (bs) bs.textContent = r.bonus_score;
+    if (typeof updateStreak  === 'function') updateStreak(r.correct);
+    if (typeof mascotReact   === 'function') mascotReact(r.correct ? 'correct' : 'incorrect');
+  },
+  onComplete: function(r) {
+    window._pa6Passed = r.passed;
+    baseScore   = r.base_score;
+    bonusPoints = r.bonus_score;
+    goToSection(8);   // results is now section-8 after port
+    if (typeof buildResults === 'function') buildResults();
+  }
+};
+</script>
+<script src="api-quiz-engine.js"></script>
 </body>
 </html>

@@ -11,7 +11,14 @@ radical-candor-memo.md, client-centered-law-firm-memo.md -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
   <title>PA-5 — Client Management: Attorney Level | Gunn Law Group</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <style>
+:root {
+    --navy: #141c2c;
+    --gold: #dcb161;
+    --gold-lt: #f0d89a;
+}
+
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
     body{font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;color:#333;font-size:16px;line-height:1.6;-webkit-text-size-adjust:100%;overflow-x:hidden;}
@@ -193,6 +200,159 @@ radical-candor-memo.md, client-centered-law-firm-memo.md -->
       header{background:#141C2C!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
     }
   </style>
+
+<style>
+/* ── GLG QUIZ ENGINE — question type styles (2026-09-02) ──────────────────
+     All classes rendered by api-quiz-engine.js. Tokens: navy #141c2c, gold #C5975B.
+     Sourced from engine.html stylesheet + the Managing Attorney Part 8c spec. */
+
+  /* Question card */
+  .q { background:#fff; border:1px solid #e2e5ea; border-radius:10px;
+       padding:20px; margin:16px 0; box-shadow:0 1px 6px rgba(20,28,44,.06); }
+  .q-num { font-size:12px; letter-spacing:.06em; color:#C5975B; font-weight:700;
+            text-transform:uppercase; margin-bottom:8px; }
+  .q-text { font-weight:600; margin:8px 0 16px; font-size:1rem; line-height:1.55;
+             color:#141c2c; }
+
+  /* MC option buttons */
+  button.opt { display:block; width:100%; text-align:left; padding:13px 15px; margin:7px 0;
+    border:1px solid #d8dbe3; border-radius:8px; background:#fafbfd; cursor:pointer;
+    font-size:15px; font-family:var(--font-b); color:#222; line-height:1.45;
+    transition:background .12s, border-color .12s; }
+  button.opt:hover:not(.locked) { background:#eef4ff; border-color:#141c2c; }
+  button.opt.correct { background:#d4edda; border-color:#10774A; }
+  button.opt.incorrect { background:#f8d7da; border-color:#870101; }
+  button.opt.locked { cursor:default; opacity:.85; }
+
+  /* Fill-in-the-blank */
+  .fill-stem { font-weight:600; margin:8px 0 14px; line-height:2.2; }
+  input.blank { display:inline-block; min-height:44px; min-width:120px; padding:8px 10px;
+    margin:2px 4px; border:1px solid #ccd; border-radius:8px; background:#fafbfd;
+    font-size:16px; font-family:var(--font-b); vertical-align:middle;
+    box-sizing:border-box; max-width:100%; }
+  input.blank:focus { outline:2px solid #141c2c; background:#fff; }
+  input.blank.correct { background:#d4edda; border-color:#10774A; }
+  input.blank.incorrect { background:#f8d7da; border-color:#870101; }
+  input.blank.locked { opacity:.85; }
+  button.submit-fill { min-height:44px; padding:11px 20px; margin-top:12px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-fill.locked { opacity:.5; cursor:default; }
+
+  /* Markup */
+  .markup-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .markup-passage { margin:0 0 10px; border:1px solid #e2e5ea; border-radius:8px; overflow:hidden; }
+  button.span { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:11px 13px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:16px; font-family:var(--font-b);
+    color:#222; line-height:1.5; overflow-wrap:break-word; }
+  button.span:last-child { border-bottom:0; }
+  button.span:hover:not(.locked) { background:#eef4ff; }
+  button.span.selected { background:#fff3cd; box-shadow:inset 4px 0 0 #b8860b; font-weight:600; }
+  button.span.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.span.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.span.locked { cursor:default; opacity:.9; }
+  button.submit-markup { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-markup.locked { opacity:.5; cursor:default; }
+  .markup-count { font-size:13px; color:#555; margin-top:8px; }
+
+  /* Sort rows with up/down controls */
+  .sort-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .sort-list { margin:0 0 12px; border:1px solid #e2e5ea; border-radius:8px;
+               overflow:hidden; background:#fff; }
+  .sort-row { display:flex; align-items:stretch; border-bottom:1px solid #eef0f3;
+              background:#fff; }
+  .sort-row:last-child { border-bottom:0; }
+  .sort-pos { flex:0 0 34px; display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700; color:#C5975B; background:#f5f5f0; }
+  .sort-text { flex:1 1 auto; padding:11px 12px; font-size:15px; line-height:1.45;
+    display:flex; align-items:center; overflow-wrap:break-word; min-width:0; }
+  .sort-moves { flex:0 0 auto; display:flex; align-items:center; gap:4px; padding:4px 6px; }
+  button.sort-move { min-height:44px; min-width:44px; border:1px solid #ccd; border-radius:8px;
+    background:#fafbfd; cursor:pointer; font-size:15px; color:#141c2c;
+    font-family:var(--font-b); }
+  button.sort-move:hover:not(:disabled) { background:#eef4ff; }
+  button.sort-move:disabled { opacity:.35; cursor:default; }
+  .sort-row.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  .sort-row.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  .sort-row.locked .sort-text { opacity:.9; }
+  button.submit-sort { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-sort.locked { opacity:.5; cursor:default; }
+
+  /* Match chips + slot rows */
+  .match-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .match-tray { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px; padding:10px;
+    border:1px dashed #ccd; border-radius:8px; background:#fafbfd; }
+  button.chip { min-height:44px; padding:10px 16px; border:1px solid #ccd; border-radius:22px;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b); color:#222;
+    max-width:100%; overflow-wrap:break-word; text-align:left; }
+  button.chip:hover:not(.locked) { background:#eef4ff; }
+  button.chip.selected { background:#141c2c; color:#fff; border-color:#141c2c; font-weight:600; }
+  button.chip.placed { opacity:.35; }
+  button.chip.locked { cursor:default; }
+  .match-slots { border:1px solid #e2e5ea; border-radius:8px; overflow:hidden;
+                 background:#fff; margin-bottom:12px; }
+  button.slot { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:10px 14px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b);
+    color:#222; line-height:1.45; overflow-wrap:break-word; }
+  button.slot:last-child { border-bottom:0; }
+  button.slot:hover:not(.locked) { background:#eef4ff; }
+  button.slot.armed { box-shadow:inset 4px 0 0 #C5975B; background:#fffdf5; }
+  .slot-label { font-weight:600; display:block; }
+  .slot-fill { display:block; font-size:14px; margin-top:3px; color:#C5975B; font-weight:600; }
+  .slot-fill.empty { color:#8a8f98; font-weight:400; font-style:italic; }
+  button.slot.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.slot.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.slot.locked { cursor:default; opacity:.9; }
+  button.submit-match { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-match.locked { opacity:.5; cursor:default; }
+  .match-count { font-size:13px; color:#555; margin-top:8px; }
+  .match-credit { font-size:13px; font-weight:600; color:#8a6d1f; margin-top:6px; }
+
+  /* Feedback */
+  .fb { margin-top:12px; padding:12px 14px; border-radius:8px; font-size:14px; display:none; }
+  .fb.show { display:block; }
+  .fb.ok { background:#d4edda; border-left:4px solid #10774A; }
+  .fb.no { background:#f8d7da; border-left:4px solid #870101; }
+  .fb.neutral { background:#eef0f6; border-left:4px solid #6c757d; color:#333; } /* self_assessment: no verdict */
+
+  /* Branching nodes */
+  .branch-scenario { border-left:4px solid #C5975B; padding-left:12px; margin:14px 0; }
+  .branch-turn { font-size:12px; letter-spacing:.06em; color:#8a6d1f; font-weight:700;
+                 text-transform:uppercase; }
+  .branch-instruction { font-weight:600; margin:6px 0 10px; color:#141c2c; }
+  .branch-consequence { margin-top:10px; padding:10px 12px; border-left:4px solid #141c2c;
+    background:#eef2f7; border-radius:0 8px 8px 0; font-size:13px; color:#33415c; display:none; }
+  .branch-consequence.show { display:block; }
+
+  /* Pagination — one question at a time (the Managing Attorney Part 8b) */
+  .q-base { display: none !important; }
+  .q-base.q-active { display: block !important; }
+  .q-nav { display:flex; justify-content:space-between; align-items:center;
+            margin-top:20px; padding-top:16px; border-top:1px solid #e8e6e0; }
+  .q-nav-btn { min-height:44px; padding:10px 22px; border-radius:8px;
+                font-size:15px; cursor:pointer; font-family:var(--font-b);
+                font-weight:600; transition:background .12s; }
+  .q-nav-btn.next { background:#141c2c; color:#C5975B; border:2px solid #141c2c; }
+  .q-nav-btn.next:hover { background:#1e2a40; }
+  .q-nav-btn.back { background:#fff; color:#141c2c; border:2px solid #c8c5be; }
+  .q-nav-btn.back:hover { background:#f5f5f0; }
+  .q-pg-spacer { display:inline-block; min-width:40px; }
+  #q-progress { font-size:12px; color:#C5975B; font-weight:600;
+                letter-spacing:.5px; text-transform:uppercase; }
+
+
+</style>
+
+<!-- CUTOVER: server-side grading. Answer keys are not in this file. -->
+    <link rel="stylesheet" href="boss-challenge.css">
 </head>
 <body>
 
@@ -228,8 +388,9 @@ radical-candor-memo.md, client-centered-law-firm-memo.md -->
   <button class="nav-pill" id="nav-4" onclick="goToSection(4)">5. Drop</button>
   <button class="nav-pill" id="nav-5" onclick="goToSection(5)">6. Emotions</button>
   <button class="nav-pill" id="nav-6" onclick="goToSection(6)">7. Boss</button>
-  <button class="nav-pill" id="nav-7" onclick="goToSection(7)">8. Results</button>
-  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">9. Certificate</button>
+  <button class="nav-pill" id="nav-7" onclick="startQuiz()">8. Quiz</button>
+  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">9. Results</button>
+  <button class="nav-pill" id="nav-9" onclick="goToSection(9)">10. Feedback</button>
 </nav>
 
 <div class="points-toast" id="points-toast"></div>
@@ -299,53 +460,9 @@ radical-candor-memo.md, client-centered-law-firm-memo.md -->
     <div class="callout callout-warn"><strong>The Sequence Matters.</strong> Steps 1 and 2 (emotion + purpose) take 60 seconds. Skipping them to &quot;get to the point&quot; costs 20 minutes of damage control. A client who feels heard BEFORE receiving hard news processes it rationally. A client who gets the hard news first processes it emotionally &mdash; and then everything you say after sounds like an excuse.</div>
     <div class="callout callout-info"><strong>Direct But Caring.</strong> The standard is not &quot;nice.&quot; It is honest. The attorney who tells a client the truth with empathy earns more trust than one who avoids hard conversations. Telling a client &quot;your case has a weakness and here is how we address it&quot; is caring. Avoiding that conversation and letting them discover it at settlement is not.</div>
 
-    <div class="question-block" id="q1-block">
-      <div class="q-num">Question 1 of 20 &middot; 10 pts</div>
-      <div class="q-text">Scenario: You are calling a client to inform her that the defense has filed a strong motion to exclude her primary treating physician as an expert witness. She has been anxious about her case for weeks. What is the FIRST thing you should do on this call?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q1','a',false)" id="q1-a"><span class="opt-letter">A</span><span class="opt-text">Explain the motion in detail so she understands the legal issue before reacting emotionally to incomplete information</span></button>
-        <button class="option-btn" onclick="answer('q1','b',false)" id="q1-b"><span class="opt-letter">B</span><span class="opt-text">Reassure her that you will fight the motion and everything will be fine, so she does not worry unnecessarily</span></button>
-        <button class="option-btn" onclick="answer('q1','c',true)" id="q1-c"><span class="opt-letter">C</span><span class="opt-text">Acknowledge her emotional state before delivering any information: &quot;I know this case has been weighing on you, and I want to walk you through something important so you can make informed decisions&quot;</span></button>
-        <button class="option-btn" onclick="answer('q1','d',false)" id="q1-d"><span class="opt-letter">D</span><span class="opt-text">Send a detailed email explaining the motion first, then follow up with a call to discuss once she has read it and had time to process</span></button>
-      </div>
-      <div class="feedback-box" id="q1-fb"></div>
-    </div>
 
-    <div class="question-block" id="q2-block">
-      <div class="q-num">Question 2 of 20 &middot; 10 pts</div>
-      <div class="q-text">Scenario: You need to tell a client that his medical records reveal a pre-existing back condition that will complicate causation. He has been a cooperative, trusting client. How do you open this conversation?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q2','a',false)" id="q2-a"><span class="opt-letter">A</span><span class="opt-text">&quot;I found something in your medical records that is going to be a problem for your case. We need to talk about it.&quot;</span></button>
-        <button class="option-btn" onclick="answer('q2','b',true)" id="q2-b"><span class="opt-letter">B</span><span class="opt-text">&quot;I want to go over your medical records with you because I want to make sure we are building the strongest possible case. There is something in the records the defense will focus on, and I want you to understand it so we can address it together.&quot;</span></button>
-        <button class="option-btn" onclick="answer('q2','c',false)" id="q2-c"><span class="opt-letter">C</span><span class="opt-text">&quot;Your medical records show a pre-existing lumbar condition from 2019. This means the defense will argue your current symptoms are not from the accident.&quot;</span></button>
-        <button class="option-btn" onclick="answer('q2','d',false)" id="q2-d"><span class="opt-letter">D</span><span class="opt-text">Wait until demand preparation to raise the issue, since the pre-existing condition may not become relevant if the case settles without records review by defense</span></button>
-      </div>
-      <div class="feedback-box" id="q2-fb"></div>
-    </div>
 
-    <div class="question-block" id="q3-block">
-      <div class="q-num">Question 3 of 20 &middot; 10 pts</div>
-      <div class="q-text">Scenario: You are discussing a low settlement offer with a client. Midway through your explanation, the client goes silent. She stops asking questions. Her one-word answers suggest she has shut down. What is the best approach?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q3','a',false)" id="q3-a"><span class="opt-letter">A</span><span class="opt-text">Continue explaining the offer analysis &mdash; she needs the full picture before she can respond meaningfully</span></button>
-        <button class="option-btn" onclick="answer('q3','b',false)" id="q3-b"><span class="opt-letter">B</span><span class="opt-text">End the call and schedule a follow-up for when she has had time to process the information on her own</span></button>
-        <button class="option-btn" onclick="answer('q3','c',false)" id="q3-c"><span class="opt-letter">C</span><span class="opt-text">Summarize the key points quickly and move to next steps so you do not lose more of her engagement</span></button>
-        <button class="option-btn" onclick="answer('q3','d',true)" id="q3-d"><span class="opt-letter">D</span><span class="opt-text">Pause and use a calibrated question to re-engage: &quot;I can tell this is a lot to take in. What part of this feels most concerning to you right now?&quot; Then listen. Her silence is telling you the emotional brain has taken over &mdash; re-engage it before continuing with facts.</span></button>
-      </div>
-      <div class="feedback-box" id="q3-fb"></div>
-    </div>
 
-    <div class="question-block" id="q4-block">
-      <div class="q-num">Question 4 of 20 &middot; 10 pts</div>
-      <div class="q-text">You just completed a 40-minute phone call with a client discussing a settlement offer of $27,000 on a case the client initially expected to be worth $75,000. You walked through the medical evidence, the liability issues, and the client agreed the offer was reasonable. What is the CRITICAL next step per GLG firm policy?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q4','a',true)" id="q4-a"><span class="opt-letter">A</span><span class="opt-text">Send a written follow-up within 24 hours memorializing the discussion: the offer amount, the analysis you walked through, the client\u2019s decision, and the agreed next steps. This is firm policy for every verbal fee or settlement discussion &mdash; it exceeds the ethical minimum and protects both attorney and client.</span></button>
-        <button class="option-btn" onclick="answer('q4','b',false)" id="q4-b"><span class="opt-letter">B</span><span class="opt-text">Log the conversation in CasePeer with a detailed note and wait for the client to confirm in writing on their own timeline</span></button>
-        <button class="option-btn" onclick="answer('q4','c',false)" id="q4-c"><span class="opt-letter">C</span><span class="opt-text">Proceed to accept the settlement offer since the client verbally agreed, and send the release documents for signature</span></button>
-        <button class="option-btn" onclick="answer('q4','d',false)" id="q4-d"><span class="opt-letter">D</span><span class="opt-text">Schedule a second call in 48 hours to re-confirm the decision before taking any action, giving the client a cooling-off period</span></button>
-      </div>
-      <div class="feedback-box" id="q4-fb"></div>
-    </div>
 
     <div class="section-score" id="s1-score" style="display:none;"><div class="score-display" id="s1-score-val"></div><div class="score-label">Section 2 Score</div></div>
     <div class="btn-group" id="s1-next"><button class="btn btn-primary btn-block" onclick="goToSection(2)">Next: Fee Discussions &amp; Ethics &rarr;</button></div>
@@ -387,53 +504,9 @@ radical-candor-memo.md, client-centered-law-firm-memo.md -->
     </div>
     <div class="callout callout-danger"><strong>GLG Firm Policy: 24-Hour Written Follow-Up.</strong> Every verbal fee or settlement discussion must be memorialized in writing within 24 hours. This is not optional. This is not &quot;when you get to it.&quot; This is a same-day-or-next-morning deliverable. The written follow-up protects the firm, protects the client, and creates the documentation trail that prevents the exact bar complaint described in the scenario above.</div>
 
-    <div class="question-block" id="q5-block">
-      <div class="q-num">Question 5 of 20 &middot; 10 pts</div>
-      <div class="q-text">Under GA Bar Rule 1.5, when must fee arrangements be communicated to a client in a personal injury case?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q5','a',false)" id="q5-a"><span class="opt-letter">A</span><span class="opt-text">Only when the contingency fee agreement is signed at intake &mdash; the written contract satisfies the communication requirement</span></button>
-        <button class="option-btn" onclick="answer('q5','b',false)" id="q5-b"><span class="opt-letter">B</span><span class="opt-text">At the time of settlement, when the actual fee amount can be calculated and presented on the distribution sheet</span></button>
-        <button class="option-btn" onclick="answer('q5','c',true)" id="q5-c"><span class="opt-letter">C</span><span class="opt-text">Within a reasonable time after commencing representation, preferably in writing, and the communication must be clear enough for the client to understand the fee basis, rate, and how costs are handled &mdash; a signed contract alone does not satisfy the duty if the client does not actually understand it</span></button>
-        <button class="option-btn" onclick="answer('q5','d',false)" id="q5-d"><span class="opt-letter">D</span><span class="opt-text">Before the first court filing, since the fee arrangement must be established before the firm incurs litigation expenses on the client\u2019s behalf</span></button>
-      </div>
-      <div class="feedback-box" id="q5-fb"></div>
-    </div>
 
-    <div class="question-block" id="q6-block">
-      <div class="q-num">Question 6 of 20 &middot; Unscored Calibration</div>
-      <div class="q-text"><em>(This is a self-assessment &mdash; no points awarded or deducted. All answers reveal the same teaching content.)</em><br><br>A client calls to dispute the fee on a recently settled case. She says the costs were higher than she expected and she does not understand why she owes $6,200 in expert and records fees. How confident are you that you can handle this conversation while maintaining the relationship AND ensuring full Rule 1.5 compliance?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q6','a',true)" id="q6-a"><span class="opt-letter">A</span><span class="opt-text">1&ndash;2 &mdash; Not confident. I would need to look up the Rule and probably ask for guidance before having this call.</span></button>
-        <button class="option-btn" onclick="answer('q6','b',true)" id="q6-b"><span class="opt-letter">B</span><span class="opt-text">3 &mdash; Somewhat confident. I know the basics but fee dispute conversations feel uncomfortable and I might not handle the emotion well.</span></button>
-        <button class="option-btn" onclick="answer('q6','c',true)" id="q6-c"><span class="opt-letter">C</span><span class="opt-text">4 &mdash; Fairly confident. I can explain the fee structure clearly and address the concern, though I might struggle if the client escalates.</span></button>
-        <button class="option-btn" onclick="answer('q6','d',true)" id="q6-d"><span class="opt-letter">D</span><span class="opt-text">5 &mdash; Fully confident. I can walk through the distribution, explain every line item, address the emotion, and document the conversation within 24 hours.</span></button>
-      </div>
-      <div class="feedback-box" id="q6-fb"></div>
-    </div>
 
-    <div class="question-block" id="q7-block">
-      <div class="q-num">Question 7 of 20 &middot; 10 pts</div>
-      <div class="q-text">Scenario: A client calls upset because the case costs increased by $3,500 after an expert witness was retained. He says: &quot;Nobody told me you were going to spend more of my money.&quot; What is the best response?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q7','a',false)" id="q7-a"><span class="opt-letter">A</span><span class="opt-text">&quot;The fee agreement you signed authorizes the firm to incur reasonable case costs. Expert retention is standard. The cost is deducted from the settlement.&quot;</span></button>
-        <button class="option-btn" onclick="answer('q7','b',true)" id="q7-b"><span class="opt-letter">B</span><span class="opt-text">First acknowledge: &quot;I understand that feels like a surprise, and it should not have been. Let me walk you through exactly what happened.&quot; Then explain the expert\u2019s role, how the $3,500 strengthens his case value, what the impact is on his net recovery with a specific dollar example, and commit to a written breakdown within 24 hours. Ask what other questions he has before ending the call.</span></button>
-        <button class="option-btn" onclick="answer('q7','c',false)" id="q7-c"><span class="opt-letter">C</span><span class="opt-text">Apologize for the communication gap, reverse the expert charge, and absorb the cost as a firm expense to preserve the relationship</span></button>
-        <button class="option-btn" onclick="answer('q7','d',false)" id="q7-d"><span class="opt-letter">D</span><span class="opt-text">Transfer the call to the case manager to explain the cost breakdown, since the CM handles routine billing and cost questions</span></button>
-      </div>
-      <div class="feedback-box" id="q7-fb"></div>
-    </div>
 
-    <div class="question-block" id="q8-block">
-      <div class="q-num">Question 8 of 20 &middot; 10 pts</div>
-      <div class="q-text">Scenario: After settling a case, a client says: &quot;I was never told about the fee percentage. I thought the firm only took expenses, not a percentage of the settlement.&quot; The signed contingency fee agreement clearly states the 33.33% fee. What is the ethical exposure and correct response?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q8','a',false)" id="q8-a"><span class="opt-letter">A</span><span class="opt-text">No ethical exposure &mdash; the signed agreement is conclusive evidence of informed consent. Show the client the signature page and explain the percentage.</span></button>
-        <button class="option-btn" onclick="answer('q8','b',false)" id="q8-b"><span class="opt-letter">B</span><span class="opt-text">Reduce the fee to a flat cost-only arrangement to resolve the dispute quickly and avoid a potential bar complaint</span></button>
-        <button class="option-btn" onclick="answer('q8','c',false)" id="q8-c"><span class="opt-letter">C</span><span class="opt-text">Refer the matter to Harrell immediately as a Tier 3 escalation, since any mention of fee disputes triggers managing attorney involvement</span></button>
-        <button class="option-btn" onclick="answer('q8','d',true)" id="q8-d"><span class="opt-letter">D</span><span class="opt-text">The signed contract does NOT eliminate ethical exposure if the client genuinely did not understand the fee. Rule 1.5 requires that the basis or rate be &quot;communicated&quot; &mdash; which means understood, not just signed. Correct response: acknowledge the concern without defensiveness, walk through the agreement in plain language, send a written summary within 24 hours, and document the conversation in CasePeer. If the dispute persists, offer fee arbitration and notify Harrell per the Complaint Escalation SOP.</span></button>
-      </div>
-      <div class="feedback-box" id="q8-fb"></div>
-    </div>
 
     <div class="section-score" id="s2-score" style="display:none;"><div class="score-display" id="s2-score-val"></div><div class="score-label">Section 3 Score</div></div>
     <div class="btn-group" id="s2-next"><button class="btn btn-primary btn-block" onclick="goToSection(3)">Next: Expectation Management &rarr;</button></div>
@@ -479,53 +552,9 @@ radical-candor-memo.md, client-centered-law-firm-memo.md -->
     </div>
     <div class="callout callout-warn"><strong>Rule 1.4 Requirement: Informed Consent.</strong> The attorney must promptly inform the client of any settlement offer and explain it sufficiently for the client to make an informed decision. Withholding an offer &mdash; even a lowball one &mdash; violates Rule 1.4. Every offer gets communicated. Every offer gets explained. The client decides.</div>
 
-    <div class="question-block" id="q9-block">
-      <div class="q-num">Question 9 of 20 &middot; 10 pts</div>
-      <div class="q-text">Scenario: Your client expects her case to be worth $200,000. Based on $24,000 in soft-tissue specials, clear liability, and non-surgical treatment, the realistic range is $40,000&ndash;$55,000. She has been a cooperative client. It is month four and treatment is ending. What is the best approach?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q9','a',true)" id="q9-a"><span class="opt-letter">A</span><span class="opt-text">Have the expectation conversation now using the 5-step framework. Acknowledge: &quot;I know you have been through a lot.&quot; Establish purpose: &quot;I want to make sure you have a realistic picture so there are no surprises.&quot; Share facts: &quot;Based on your specials of $24,000 and comparable non-surgical cases, the realistic range is $40,000 to $55,000.&quot; Explore her perspective. Confirm next steps with written follow-up.</span></button>
-        <button class="option-btn" onclick="answer('q9','b',false)" id="q9-b"><span class="opt-letter">B</span><span class="opt-text">Wait until the demand is sent and a response comes back before discussing value, since the insurance company\u2019s offer will give her a concrete number to react to rather than your estimate</span></button>
-        <button class="option-btn" onclick="answer('q9','c',false)" id="q9-c"><span class="opt-letter">C</span><span class="opt-text">Tell her the case is worth $40,000 to $55,000 and explain why her $200,000 expectation is unrealistic based on specials, treatment, and comparable verdicts, so she adjusts her expectations immediately</span></button>
-        <button class="option-btn" onclick="answer('q9','d',false)" id="q9-d"><span class="opt-letter">D</span><span class="opt-text">Suggest additional treatment or specialist referrals to increase the specials and potentially bring the case value closer to her expectations</span></button>
-      </div>
-      <div class="feedback-box" id="q9-fb"></div>
-    </div>
 
-    <div class="question-block" id="q10-block">
-      <div class="q-num">Question 10 of 20 &middot; 10 pts</div>
-      <div class="q-text">Scenario: A settlement offer comes in at $22,000. Your demand was $75,000. The client\u2019s specials are $16,500 (non-surgical). The case has clear liability. How do you discuss this offer with the client?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q10','a',false)" id="q10-a"><span class="opt-letter">A</span><span class="opt-text">&quot;They offered $22,000. I think we should reject it and counter with $60,000. This is a lowball and we can get more.&quot;</span></button>
-        <button class="option-btn" onclick="answer('q10','b',false)" id="q10-b"><span class="opt-letter">B</span><span class="opt-text">&quot;The offer is $22,000. I recommend accepting because litigation costs will eat into any additional recovery and the risk is not worth it.&quot;</span></button>
-        <button class="option-btn" onclick="answer('q10','c',true)" id="q10-c"><span class="opt-letter">C</span><span class="opt-text">Present the offer neutrally: &quot;The insurance company has offered $22,000.&quot; Walk through the analysis: specials of $16,500, non-surgical case typically in the 1.5 to 2 times range ($24,750 to $33,000), so $22,000 is below the realistic range but within the negotiation zone. Show the net distribution at $22K vs. what a counter might yield. Explain options: accept, counter, or reject and litigate. Let the client decide with full information.</span></button>
-        <button class="option-btn" onclick="answer('q10','d',false)" id="q10-d"><span class="opt-letter">D</span><span class="opt-text">Tell the client you will handle the negotiation and call back when you have a better number, since the details of the back-and-forth would overwhelm a lay client</span></button>
-      </div>
-      <div class="feedback-box" id="q10-fb"></div>
-    </div>
 
-    <div class="question-block" id="q11-block">
-      <div class="q-num">Question 11 of 20 &middot; 10 pts</div>
-      <div class="q-text">Scenario: You have presented a settlement offer of $45,000 to a client. The case value range is $40,000&ndash;$55,000. You believe the offer is reasonable. The client wants to reject it because &quot;it does not feel like enough for what I went through.&quot; What is your ethical obligation?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q11','a',false)" id="q11-a"><span class="opt-letter">A</span><span class="opt-text">Accept the client\u2019s decision immediately without further discussion &mdash; it is their case and their right to reject</span></button>
-        <button class="option-btn" onclick="answer('q11','b',true)" id="q11-b"><span class="opt-letter">B</span><span class="opt-text">Ensure informed consent by explaining the risks of rejection: litigation timeline (12&ndash;18 months), additional costs (expert fees, deposition costs), trial uncertainty, and the possibility of a lower verdict or defense verdict. Ask calibrated questions: &quot;What would happen if the jury came back at less than $45,000?&quot; &quot;How would 18 more months of litigation affect your life?&quot; Then respect the client\u2019s final decision &mdash; it is their right to reject, but they must understand what they are choosing.</span></button>
-        <button class="option-btn" onclick="answer('q11','c',false)" id="q11-c"><span class="opt-letter">C</span><span class="opt-text">Recommend accepting the offer firmly and explain that rejecting a reasonable settlement is a mistake the client will regret based on your experience with similar cases</span></button>
-        <button class="option-btn" onclick="answer('q11','d',false)" id="q11-d"><span class="opt-letter">D</span><span class="opt-text">Withdraw from representation since the client\u2019s unreasonable expectations about case value make continued representation impractical</span></button>
-      </div>
-      <div class="feedback-box" id="q11-fb"></div>
-    </div>
 
-    <div class="question-block" id="q12-block">
-      <div class="q-num">Question 12 of 20 &middot; 10 pts</div>
-      <div class="q-text">You just completed a verbal discussion with a client about a $38,000 settlement offer. The client asked detailed questions about costs, net recovery, and what litigation would look like. She said she wants to think about it overnight. What must happen within 24 hours?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q12','a',false)" id="q12-a"><span class="opt-letter">A</span><span class="opt-text">Nothing until she calls back with her decision &mdash; the 24-hour follow-up only applies when a decision has been made</span></button>
-        <button class="option-btn" onclick="answer('q12','b',false)" id="q12-b"><span class="opt-letter">B</span><span class="opt-text">A CasePeer note documenting the conversation, which satisfies the internal documentation requirement</span></button>
-        <button class="option-btn" onclick="answer('q12','c',false)" id="q12-c"><span class="opt-letter">C</span><span class="opt-text">A text message confirming you will follow up tomorrow and asking if she has any additional questions</span></button>
-        <button class="option-btn" onclick="answer('q12','d',true)" id="q12-d"><span class="opt-letter">D</span><span class="opt-text">A written follow-up memorializing the discussion: the offer amount ($38,000), the analysis you walked through (specials, net recovery after fees and costs, litigation alternative), her questions and your answers, and the fact that she is considering overnight. The 24-hour written follow-up applies to every verbal fee or settlement discussion regardless of whether a decision was made &mdash; it is about memorializing the conversation, not just the outcome.</span></button>
-      </div>
-      <div class="feedback-box" id="q12-fb"></div>
-    </div>
 
     <div class="section-score" id="s3-score" style="display:none;"><div class="score-display" id="s3-score-val"></div><div class="score-label">Section 4 Score</div></div>
     <div class="btn-group" id="s3-next"><button class="btn btn-primary btn-block" onclick="goToSection(4)">Next: Case Drop &amp; Withdrawal &rarr;</button></div>
@@ -552,8 +581,8 @@ radical-candor-memo.md, client-centered-law-firm-memo.md -->
       <table class="stat-table">
         <tr><th>Criterion Category</th><th>Examples</th><th>Approval Authority</th></tr>
         <tr><td class="stat-num">Primary (Objective)</td><td>180+ day treatment gap, 3 consecutive contact attempts over 45+ days with no response, fraud/misrepresentation, SOL risk with inadequate development</td><td>CM + Supervising Attorney</td></tr>
-        <tr><td class="stat-num">Secondary (Judgment)</td><td>Adverse medical development eliminating theories, unreasonable expectations after 3+ documented education conversations, resource investment exceeding $10,000 with insufficient probable recovery</td><td>Harrell review required</td></tr>
-        <tr><td class="stat-num">Complex/Ethics</td><td>Conflict of interest, cases with ethics implications</td><td>Harrell + ethics consultation</td></tr>
+        <tr><td class="stat-num">Secondary (Judgment)</td><td>Adverse medical development eliminating theories, unreasonable expectations after 3+ documented education conversations, resource investment exceeding $10,000 with insufficient probable recovery</td><td>the Managing Attorney review required</td></tr>
+        <tr><td class="stat-num">Complex/Ethics</td><td>Conflict of interest, cases with ethics implications</td><td>the Managing Attorney + ethics consultation</td></tr>
       </table>
     </div>
     <div class="info-block">
@@ -567,55 +596,11 @@ radical-candor-memo.md, client-centered-law-firm-memo.md -->
       </div>
     </div>
     <div class="callout callout-danger"><strong>Never Say:</strong> &quot;Your case is worthless.&quot; &quot;You haven\u2019t cooperated.&quot; &quot;We don\u2019t want your case.&quot; These are factual statements that feel like judgments. Use: &quot;We have reached a point where we cannot effectively advance your case, but we want to ensure you understand all your options.&quot;</div>
-    <div class="callout callout-info"><strong>Rule 1.16 Compliance Checklist:</strong> 30-day written notice (certified mail) &bull; Return unearned fees within 15 days &bull; File available for client retrieval for 30 days post-notice &bull; SOL date communicated to client &bull; Referral resources provided &bull; If case filed: motion to withdraw within 10 days.</div>
+    <div class="callout callout-info"><strong>Rule 1.16(d) &mdash; What the Bar Rule Actually Requires:</strong> Give <em>reasonable</em> notice to the client &bull; Allow time for the client to obtain new counsel &bull; Surrender papers and property the client is entitled to &bull; Refund any advance payment of fee not earned &bull; Take steps reasonably practicable to protect the client&rsquo;s interests. The rule specifies no minimum day count, no required delivery method, and no fee-return deadline. GLG&rsquo;s withdrawal steps (attorney authorization &rarr; client call &rarr; withdrawal letters) are firm policy, not bar requirements.</div>
 
-    <div class="question-block" id="q13-block">
-      <div class="q-num">Question 13 of 20 &middot; 10 pts</div>
-      <div class="q-text">Under the GLG Case Drop Policy, which drop criterion category requires Harrell\u2019s review before a drop decision can be made?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q13','a',false)" id="q13-a"><span class="opt-letter">A</span><span class="opt-text">A 200-day medical treatment gap with no documented medical reason for the gap</span></button>
-        <button class="option-btn" onclick="answer('q13','b',false)" id="q13-b"><span class="opt-letter">B</span><span class="opt-text">Three consecutive contact attempts across 50 days with no client response on any channel</span></button>
-        <button class="option-btn" onclick="answer('q13','c',true)" id="q13-c"><span class="opt-letter">C</span><span class="opt-text">Client expectations remain unreasonable after three or more documented education conversations with different team members &mdash; this is a secondary criterion requiring Harrell\u2019s review, because it involves judgment about whether the client\u2019s expectations are truly unreasonable versus whether the firm has failed to communicate effectively</span></button>
-        <button class="option-btn" onclick="answer('q13','d',false)" id="q13-d"><span class="opt-letter">D</span><span class="opt-text">Material misrepresentation by the client about incident facts or injury history</span></button>
-      </div>
-      <div class="feedback-box" id="q13-fb"></div>
-    </div>
 
-    <div class="question-block" id="q14-block">
-      <div class="q-num">Question 14 of 20 &middot; 10 pts</div>
-      <div class="q-text">You have decided to drop a case after completing the evaluation process. The client answers the phone. What is the correct structure for the drop conversation?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q14','a',true)" id="q14-a"><span class="opt-letter">A</span><span class="opt-text">Share specific facts from the file, explain how those facts impact the case, ask the client to share their perspective, state your position tentatively (&quot;it appears that continuing representation may not serve your interests&quot;), and invite their response. Always convey: the specific reason, the SOL date, how to get their file, and referral options.</span></button>
-        <button class="option-btn" onclick="answer('q14','b',false)" id="q14-b"><span class="opt-letter">B</span><span class="opt-text">Open with the decision directly: &quot;We have decided to end our representation of your case.&quot; Then explain the reasons and offer to help them find another attorney. Being direct respects their time.</span></button>
-        <button class="option-btn" onclick="answer('q14','c',false)" id="q14-c"><span class="opt-letter">C</span><span class="opt-text">Send the Case Drop Notice Letter (Template 29) via certified mail without a phone call, since the written notice satisfies Rule 1.16 and a phone conversation risks emotional escalation</span></button>
-        <button class="option-btn" onclick="answer('q14','d',false)" id="q14-d"><span class="opt-letter">D</span><span class="opt-text">Have the case manager deliver the news since they have the closest relationship with the client, and then follow up with a supervising attorney call if the client escalates</span></button>
-      </div>
-      <div class="feedback-box" id="q14-fb"></div>
-    </div>
 
-    <div class="question-block" id="q15-block">
-      <div class="q-num">Question 15 of 20 &middot; 10 pts</div>
-      <div class="q-text">What are the GA Bar Rule 1.16 compliance requirements when withdrawing from a case that has NOT been filed in court?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q15','a',false)" id="q15-a"><span class="opt-letter">A</span><span class="opt-text">Send the withdrawal letter via email and offer to forward the file to another attorney if the client provides one within 7 days</span></button>
-        <button class="option-btn" onclick="answer('q15','b',true)" id="q15-b"><span class="opt-letter">B</span><span class="opt-text">Minimum 30-day written notice sent via certified mail, return unearned fees within 15 days, client file available for retrieval for 30 days post-notice, SOL date communicated to the client, and referral resources provided when appropriate</span></button>
-        <button class="option-btn" onclick="answer('q15','c',false)" id="q15-c"><span class="opt-letter">C</span><span class="opt-text">Verbal notice to the client with a follow-up email, return of the client\u2019s original documents, and a 15-day window for the client to object to the withdrawal</span></button>
-        <button class="option-btn" onclick="answer('q15','d',false)" id="q15-d"><span class="opt-letter">D</span><span class="opt-text">File a motion to withdraw with the court, serve the client, and wait for judicial approval before closing the file</span></button>
-      </div>
-      <div class="feedback-box" id="q15-fb"></div>
-    </div>
 
-    <div class="question-block" id="q16-block">
-      <div class="q-num">Question 16 of 20 &middot; 10 pts</div>
-      <div class="q-text">A case has been flagged for drop: 200-day treatment gap, no response to three contact attempts over 50 days. The CM wants to send the drop letter. What must happen BEFORE the drop decision under GLG\u2019s Case Drop Policy?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q16','a',false)" id="q16-a"><span class="opt-letter">A</span><span class="opt-text">Harrell must review and approve the drop since all case drops require managing attorney authorization</span></button>
-        <button class="option-btn" onclick="answer('q16','b',false)" id="q16-b"><span class="opt-letter">B</span><span class="opt-text">The CM sends a final certified letter informing the client of the intended drop and waits 14 days for a response</span></button>
-        <button class="option-btn" onclick="answer('q16','c',false)" id="q16-c"><span class="opt-letter">C</span><span class="opt-text">The case file review is completed and documented, and if the objective criteria are met, the CM can proceed directly to the drop letter</span></button>
-        <button class="option-btn" onclick="answer('q16','d',true)" id="q16-d"><span class="opt-letter">D</span><span class="opt-text">The retention attempt: the supervising ATTORNEY (not the CM) makes one final good-faith outreach call to the client, explains specifically what is needed to continue representation, and provides a minimum 14-day response window. This is mandatory before any drop decision, regardless of how clear the criteria appear. Then document the result.</span></button>
-      </div>
-      <div class="feedback-box" id="q16-fb"></div>
-    </div>
 
     <div class="section-score" id="s4-score" style="display:none;"><div class="score-display" id="s4-score-val"></div><div class="score-label">Section 5 Score</div></div>
     <div class="btn-group" id="s4-next"><button class="btn btn-primary btn-block" onclick="goToSection(5)">Next: Client Emotional Management &rarr;</button></div>
@@ -652,58 +637,14 @@ radical-candor-memo.md, client-centered-law-firm-memo.md -->
         <tr><th>Tier</th><th>Type</th><th>Examples</th><th>Response Timeline</th></tr>
         <tr class="stat-ok"><td class="stat-num">Tier 1</td><td>Service &amp; Communication</td><td>No callback in 3+ weeks, confusion about case status</td><td>Same-day acknowledgment, 48-hour resolution</td></tr>
         <tr class="stat-warn"><td class="stat-num">Tier 2</td><td>Case Strategy &amp; Expectations</td><td>Disagreement with settlement recommendation, fee questions</td><td>Same-day acknowledgment, 48h attorney consult, 72h plan</td></tr>
-        <tr class="stat-void"><td class="stat-num">Tier 3</td><td>Serious Escalation</td><td>Mentions bar complaint, hiring another attorney, negative review posted, demands file transfer</td><td>2-hour Harrell notification, same-day attorney response, 24h plan</td></tr>
+        <tr class="stat-void"><td class="stat-num">Tier 3</td><td>Serious Escalation</td><td>Mentions bar complaint, hiring another attorney, negative review posted, demands file transfer</td><td>2-hour the Managing Attorney notification, same-day attorney response, 24h plan</td></tr>
       </table>
     </div>
-    <div class="callout callout-danger"><strong>Tier 3 Triggers &mdash; Immediate Harrell Notification (2 Hours):</strong> Any mention of bar complaint or ethics violation &bull; Mention of malpractice or hiring another attorney &bull; Negative Google or social media review posted &bull; Client refuses to speak with assigned staff &bull; Demands for case file transfer &bull; Threats of media exposure. These are not judgment calls. Any one of these = Tier 3, Harrell notified within 2 hours.</div>
+    <div class="callout callout-danger"><strong>Tier 3 Triggers &mdash; Immediate the Managing Attorney Notification (2 Hours):</strong> Any mention of bar complaint or ethics violation &bull; Mention of malpractice or hiring another attorney &bull; Negative Google or social media review posted &bull; Client refuses to speak with assigned staff &bull; Demands for case file transfer &bull; Threats of media exposure. These are not judgment calls. Any one of these = Tier 3, the Managing Attorney notified within 2 hours.</div>
 
-    <div class="question-block" id="q17-block">
-      <div class="q-num">Question 17 of 20 &middot; 10 pts</div>
-      <div class="q-text">Scenario: A client calls after receiving a settlement offer of $15,000 on a case she expected to be worth $100,000. She is yelling: &quot;This is ridiculous! You told me my case was worth way more than this! I want to talk to whoever is in charge!&quot; What is your first response?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q17','a',true)" id="q17-a"><span class="opt-letter">A</span><span class="opt-text">Label the emotion first: &quot;I can hear how frustrated and disappointed you are. This offer does not reflect what you have been through, and I understand why you feel that way. Before we talk about the offer, I want to make sure I understand exactly what is concerning you most right now.&quot; Then listen before providing any analysis or explanation.</span></button>
-        <button class="option-btn" onclick="answer('q17','b',false)" id="q17-b"><span class="opt-letter">B</span><span class="opt-text">&quot;I understand you are upset. Let me explain why the offer came in at this number &mdash; your specials are $8,200 and soft-tissue cases in this range typically settle between $12,000 and $18,000 based on comparable outcomes.&quot;</span></button>
-        <button class="option-btn" onclick="answer('q17','c',false)" id="q17-c"><span class="opt-letter">C</span><span class="opt-text">&quot;I want you to know that I did not tell you your case was worth $100,000. Let me check our file notes to clarify what value range was communicated during our prior conversations.&quot;</span></button>
-        <button class="option-btn" onclick="answer('q17','d',false)" id="q17-d"><span class="opt-letter">D</span><span class="opt-text">Transfer her to Harrell immediately since she asked for &quot;whoever is in charge&quot; and client demands for management should be honored to de-escalate</span></button>
-      </div>
-      <div class="feedback-box" id="q17-fb"></div>
-    </div>
 
-    <div class="question-block" id="q18-block">
-      <div class="q-num">Question 18 of 20 &middot; 10 pts</div>
-      <div class="q-text">During a call about case strategy, a client says: &quot;If this is how you handle my case, I am going to file a complaint with the Georgia Bar and hire a real attorney.&quot; Under the Complaint Escalation SOP, what tier is this and what is the required response timeline?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q18','a',false)" id="q18-a"><span class="opt-letter">A</span><span class="opt-text">Tier 2 &mdash; case strategy disagreement. Attorney consultation within 48 hours, resolution plan within 72 hours.</span></button>
-        <button class="option-btn" onclick="answer('q18','b',false)" id="q18-b"><span class="opt-letter">B</span><span class="opt-text">Tier 1 &mdash; the client is venting but has not taken any formal action. Same-day acknowledgment, 48-hour resolution. Log the conversation and monitor.</span></button>
-        <button class="option-btn" onclick="answer('q18','c',true)" id="q18-c"><span class="opt-letter">C</span><span class="opt-text">Tier 3 &mdash; mentions of bar complaint AND hiring another attorney are both independent Tier 3 triggers. Harrell must be notified within 2 hours. Attorney response same day. Resolution plan within 24 hours. This is not a judgment call &mdash; these are automatic triggers regardless of whether the client is &quot;just venting.&quot;</span></button>
-        <button class="option-btn" onclick="answer('q18','d',false)" id="q18-d"><span class="opt-letter">D</span><span class="opt-text">Tier 2 initially, escalated to Tier 3 only if the client follows through by actually contacting the Bar or another attorney</span></button>
-      </div>
-      <div class="feedback-box" id="q18-fb"></div>
-    </div>
 
-    <div class="question-block" id="q19-block">
-      <div class="q-num">Question 19 of 20 &middot; 10 pts</div>
-      <div class="q-text">A client tells you: &quot;I feel like nobody at this firm cares about my case. I have called three times and nobody called me back. I am just a number to you people.&quot; What is the best response?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q19','a',false)" id="q19-a"><span class="opt-letter">A</span><span class="opt-text">&quot;I am sorry you feel that way. Let me check the call log and see what happened with your messages. I am sure someone tried to reach you.&quot;</span></button>
-        <button class="option-btn" onclick="answer('q19','b',true)" id="q19-b"><span class="opt-letter">B</span><span class="opt-text">&quot;I hear you, and I am sorry that has been your experience. Three calls without a callback is not acceptable and I understand why you feel ignored. Help me understand exactly what happened from your end so I can fix it. I do not want you to think we do not care about your case &mdash; what I do want is to make sure you get the attention and communication you deserve.&quot; Then commit to a specific improvement and a written follow-up with a callback schedule.</span></button>
-        <button class="option-btn" onclick="answer('q19','c',false)" id="q19-c"><span class="opt-letter">C</span><span class="opt-text">&quot;I understand the frustration. Your case manager has been handling a large caseload and some callbacks have been delayed. We are working on staffing to improve response times across the firm.&quot;</span></button>
-        <button class="option-btn" onclick="answer('q19','d',false)" id="q19-d"><span class="opt-letter">D</span><span class="opt-text">Apologize, reassign the case to a different case manager immediately, and inform the client that someone new will contact them within 24 hours</span></button>
-      </div>
-      <div class="feedback-box" id="q19-fb"></div>
-    </div>
 
-    <div class="question-block" id="q20-block">
-      <div class="q-num">Question 20 of 20 &middot; 10 pts</div>
-      <div class="q-text">What is the GLG firm policy on written follow-up after verbal fee and settlement discussions?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q20','a',false)" id="q20-a"><span class="opt-letter">A</span><span class="opt-text">Written follow-up is required only when the client makes a final decision to accept or reject a settlement offer</span></button>
-        <button class="option-btn" onclick="answer('q20','b',false)" id="q20-b"><span class="opt-letter">B</span><span class="opt-text">A CasePeer note documenting the conversation is sufficient for internal compliance; external written follow-up to the client is recommended but not required</span></button>
-        <button class="option-btn" onclick="answer('q20','c',false)" id="q20-c"><span class="opt-letter">C</span><span class="opt-text">Written follow-up within 48 hours of any verbal settlement discussion, and within 7 days for fee discussions</span></button>
-        <button class="option-btn" onclick="answer('q20','d',true)" id="q20-d"><span class="opt-letter">D</span><span class="opt-text">Written memorialization to the client within 24 hours of EVERY verbal fee or settlement discussion, regardless of whether a decision was made. This is firm policy that exceeds the ethical minimum. It protects both attorney and client by creating a contemporaneous record of what was discussed, analyzed, and decided.</span></button>
-      </div>
-      <div class="feedback-box" id="q20-fb"></div>
-    </div>
 
     <div class="section-score" id="s5-score" style="display:none;"><div class="score-display" id="s5-score-val"></div><div class="score-label">Section 6 Score</div></div>
     <div class="btn-group" id="s5-next"><button class="btn btn-primary btn-block" onclick="goToSection(6)">Next: Boss Challenge &rarr;</button></div>
@@ -738,17 +679,6 @@ radical-candor-memo.md, client-centered-law-firm-memo.md -->
       <div class="case-detail"><span class="case-key">Situation</span><span class="case-val">Keisha calls upset because she just learned the firm retained a biomechanics expert for $4,500. She says: &quot;My sister says you should have told me before spending my money. She says this is how firms take advantage of clients.&quot;</span></div>
       <div class="case-detail"><span class="case-key">Complication</span><span class="case-val">Keisha\u2019s sister is feeding her distrust. The expert was retained per standard SOP. Keisha was not proactively informed. <span class="flag-warn">Communication Gap</span></span></div>
     </div>
-    <div class="question-block" id="q21-block">
-      <div class="q-num">Boss Task 1 of 5 &middot; 10 bonus pts</div>
-      <div class="q-text">How do you handle this call?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q21','a',false)" id="q21-a"><span class="opt-letter">A</span><span class="opt-text">&quot;The fee agreement authorizes us to incur reasonable case costs. The expert is standard for cases with your injury profile. Your sister is not involved in this case and her advice may not be applicable.&quot;</span></button>
-        <button class="option-btn" onclick="answer('q21','b',true)" id="q21-b"><span class="opt-letter">B</span><span class="opt-text">First, acknowledge and label: &quot;I hear that you feel blindsided, and honestly, you should have been told about this before it happened. That is on us.&quot; Then explain: &quot;The biomechanics expert costs $4,500. Here is why we retained them &mdash; they strengthen your case by proving exactly how the impact force caused your herniated disc. Without them, the defense will argue the disc was pre-existing. Let me show you how the $4,500 actually increases your net recovery.&quot; Avoid criticizing her sister. Send a written breakdown within 24 hours showing the cost, the value it adds, and the projected impact on her net recovery.</span></button>
-        <button class="option-btn" onclick="answer('q21','c',false)" id="q21-c"><span class="opt-letter">C</span><span class="opt-text">Apologize for the communication failure, offer to cancel the expert engagement if she does not want to proceed, and let her decide whether to incur the cost</span></button>
-        <button class="option-btn" onclick="answer('q21','d',false)" id="q21-d"><span class="opt-letter">D</span><span class="opt-text">Escalate to Harrell since the mention of another firm\u2019s paralegal giving advice suggests the client may be shopping for new counsel, which is a Tier 3 trigger</span></button>
-      </div>
-      <div class="feedback-box" id="q21-fb"></div>
-    </div>
 
     <!-- BOSS SCENARIO 2 -->
     <div class="case-file">
@@ -761,17 +691,6 @@ radical-candor-memo.md, client-centered-law-firm-memo.md -->
       </div>
       <div class="case-detail"><span class="case-key">Situation</span><span class="case-val">Settlement offer: $62,000. Demand was $285,000. Keisha\u2019s specials: $52,000 (surgical consult still pending). Her expectation: &quot;at least $250,000.&quot;</span></div>
       <div class="case-detail"><span class="case-key">Analysis</span><span class="case-val">Non-surgical disc herniation with ongoing pain management. If surgery happens, value increases significantly. Current realistic pre-surgery range: $78,000&ndash;$120,000. The $62,000 offer is below the realistic range but within negotiation territory.</span></div>
-    </div>
-    <div class="question-block" id="q22-block">
-      <div class="q-num">Boss Task 2 of 5 &middot; 10 bonus pts</div>
-      <div class="q-text">How do you discuss this offer with Keisha?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q22','a',false)" id="q22-a"><span class="opt-letter">A</span><span class="opt-text">Reject the offer without calling Keisha since it is clearly below value, counter at $200,000, and inform her when a better offer comes in</span></button>
-        <button class="option-btn" onclick="answer('q22','b',false)" id="q22-b"><span class="opt-letter">B</span><span class="opt-text">&quot;They offered $62,000. I think we should reject it. Your case is worth significantly more, especially if you proceed with surgery.&quot;</span></button>
-        <button class="option-btn" onclick="answer('q22','c',false)" id="q22-c"><span class="opt-letter">C</span><span class="opt-text">&quot;The offer is $62,000. I know you were hoping for $250,000, but based on your specials and injury profile, the realistic range without surgery is $78,000 to $120,000. The $250,000 number is not supported by the evidence.&quot;</span></button>
-        <button class="option-btn" onclick="answer('q22','d',true)" id="q22-d"><span class="opt-letter">D</span><span class="opt-text">Present neutrally: &quot;The insurance company offered $62,000.&quot; Acknowledge the gap: &quot;I know that is far from what you expected, and I want to walk you through the full analysis.&quot; Share facts: specials of $52,000, realistic pre-surgery range of $78,000 to $120,000, the $62,000 is below that range. Explain options: counter (recommended), wait for surgical consult results, or accept. Show a distribution sheet at $62K and at the projected counter target. Explain what changes if surgery happens. Let her process. Ask: &quot;What questions do you have?&quot; Respect her decision. Written follow-up within 24 hours.</span></button>
-      </div>
-      <div class="feedback-box" id="q22-fb"></div>
     </div>
 
     <!-- BOSS SCENARIO 3 -->
@@ -786,17 +705,6 @@ radical-candor-memo.md, client-centered-law-firm-memo.md -->
       <div class="case-detail"><span class="case-key">Situation</span><span class="case-val">After the settlement negotiations stalled, Keisha stopped attending pain management appointments. No treatment for 7 months. No response to 2 contact attempts. Now she calls: &quot;I am ready to move forward. I want to proceed with surgery.&quot;</span></div>
       <div class="case-detail"><span class="case-key">Complication</span><span class="case-val">7-month treatment gap severely damages causation. Case was on the verge of drop review per the 180-day threshold. Surgery after a 7-month gap will be challenged by defense as unrelated. <span class="flag">210-Day Gap</span></span></div>
     </div>
-    <div class="question-block" id="q23-block">
-      <div class="q-num">Boss Task 3 of 5 &middot; 10 bonus pts</div>
-      <div class="q-text">How do you handle Keisha\u2019s reactivation request?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q23','a',true)" id="q23-a"><span class="opt-letter">A</span><span class="opt-text">Use the 5-step framework. Acknowledge: &quot;I am glad to hear from you and I understand you want to move forward.&quot; Purpose: &quot;I need to be honest with you about how this gap affects your case because I want you to make an informed decision.&quot; Facts: &quot;You have not had treatment in over 7 months. The defense will argue your injuries resolved. Surgery after this gap will be challenged as unrelated to the accident. This significantly reduces the case value.&quot; Explore: &quot;Help me understand what happened during the gap. Was there a reason you stopped treatment?&quot; Next steps: If she has a legitimate medical reason for the gap, document it and discuss whether the case remains viable. If not, have an honest conversation about reduced value and whether continuing representation serves her interests. Written follow-up within 24 hours documenting the conversation and the agreed path forward.</span></button>
-        <button class="option-btn" onclick="answer('q23','b',false)" id="q23-b"><span class="opt-letter">B</span><span class="opt-text">Drop the case immediately &mdash; the 210-day treatment gap exceeds the 180-day threshold, and her 2 unanswered contact attempts meet the non-cooperation criteria. Send the Case Drop Notice Letter.</span></button>
-        <button class="option-btn" onclick="answer('q23','c',false)" id="q23-c"><span class="opt-letter">C</span><span class="opt-text">Welcome her back, schedule the surgical consult, and resume negotiations without raising the treatment gap issue &mdash; the gap is a defense problem to address later, not a client conversation topic now</span></button>
-        <button class="option-btn" onclick="answer('q23','d',false)" id="q23-d"><span class="opt-letter">D</span><span class="opt-text">Tell her the 7-month gap means her case is now worth significantly less than the $62,000 offer she rejected, and ask if she wants to accept a lower settlement or be referred to another firm</span></button>
-      </div>
-      <div class="feedback-box" id="q23-fb"></div>
-    </div>
 
     <!-- BOSS SCENARIO 4 -->
     <div class="case-file">
@@ -810,17 +718,6 @@ radical-candor-memo.md, client-centered-law-firm-memo.md -->
       <div class="case-detail"><span class="case-key">Situation</span><span class="case-val">You explained the treatment gap impact honestly. Keisha is furious. She says: &quot;You should have MADE me go to my appointments! I am going to file a bar complaint and post a review telling everyone how you ruined my case! My sister says I should sue the firm for malpractice!&quot;</span></div>
       <div class="case-detail"><span class="case-key">Trigger Count</span><span class="case-val">Bar complaint mention + hiring another attorney + negative review threat = <span class="flag">3 Tier 3 Triggers</span></span></div>
     </div>
-    <div class="question-block" id="q24-block">
-      <div class="q-num">Boss Task 4 of 5 &middot; 10 bonus pts</div>
-      <div class="q-text">You are on the phone with Keisha right now. What do you do?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q24','a',false)" id="q24-a"><span class="opt-letter">A</span><span class="opt-text">Tell Keisha that you understand she is upset and that you will have Harrell call her directly within the hour, then transfer her to voicemail so you can brief Harrell first</span></button>
-        <button class="option-btn" onclick="answer('q24','b',false)" id="q24-b"><span class="opt-letter">B</span><span class="opt-text">Defend the firm: &quot;We sent you appointment reminders and called twice. An attorney cannot force a client to attend treatment. The gap is not the firm\u2019s responsibility.&quot;</span></button>
-        <button class="option-btn" onclick="answer('q24','c',true)" id="q24-c"><span class="opt-letter">C</span><span class="opt-text">Stay calm. Do NOT argue or defend. Label: &quot;I hear how angry and frustrated you are, and I understand this feels like the firm let you down.&quot; Do NOT dismiss the threats or tell her she is wrong. Ask: &quot;What would need to happen for you to feel like we are working in your best interest?&quot; Listen. After the call: immediately log the conversation in CasePeer, classify as Tier 3 (three independent triggers), notify Harrell within 2 hours with complete details, prepare a same-day attorney response plan, and begin a 24-hour resolution plan. Do not wait to see if she &quot;calms down&quot; &mdash; the triggers are automatic.</span></button>
-        <button class="option-btn" onclick="answer('q24','d',false)" id="q24-d"><span class="opt-letter">D</span><span class="opt-text">Immediately begin the case drop process since the client has threatened legal action against the firm, creating a conflict of interest that requires withdrawal under Rule 1.16</span></button>
-      </div>
-      <div class="feedback-box" id="q24-fb"></div>
-    </div>
 
     <!-- BOSS SCENARIO 5 -->
     <div class="case-file">
@@ -828,33 +725,47 @@ radical-candor-memo.md, client-centered-law-firm-memo.md -->
         <div class="case-file-icon">&#128221;</div>
         <div>
           <div class="case-file-title">Scenario E &mdash; The Honest Conversation</div>
-          <div class="case-file-sub">Month 16 &middot; After Harrell\u2019s Review</div>
+          <div class="case-file-sub">Month 16 &middot; After the Managing Attorney\u2019s Review</div>
         </div>
       </div>
-      <div class="case-detail"><span class="case-key">Situation</span><span class="case-val">Harrell reviewed the case and determined the firm should continue representation with conditions. The Tier 3 complaint was resolved. Keisha resumed treatment 3 weeks ago. The surgical consult concluded surgery is NOT recommended &mdash; conservative management only. This means the case value has decreased. With the 7-month gap and no surgery, the realistic range is now $35,000&ndash;$50,000.</span></div>
+      <div class="case-detail"><span class="case-key">Situation</span><span class="case-val">the Managing Attorney reviewed the case and determined the firm should continue representation with conditions. The Tier 3 complaint was resolved. Keisha resumed treatment 3 weeks ago. The surgical consult concluded surgery is NOT recommended &mdash; conservative management only. This means the case value has decreased. With the 7-month gap and no surgery, the realistic range is now $35,000&ndash;$50,000.</span></div>
       <div class="case-detail"><span class="case-key">Your Task</span><span class="case-val">Deliver the news about the reduced case value to a client who originally expected $250,000, rejected a $62,000 offer, and recently threatened to sue the firm. <span class="flag-warn">Highest Difficulty</span></span></div>
-    </div>
-    <div class="question-block" id="q25-block">
-      <div class="q-num">Boss Task 5 of 5 &middot; 10 bonus pts</div>
-      <div class="q-text">How do you deliver this news to Keisha?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q25','a',false)" id="q25-a"><span class="opt-letter">A</span><span class="opt-text">Let the case manager deliver the value update since Keisha\u2019s relationship with you is strained from the recent conflict, and a different voice may be better received</span></button>
-        <button class="option-btn" onclick="answer('q25','b',true)" id="q25-b"><span class="opt-letter">B</span><span class="opt-text">Schedule a dedicated call &mdash; do not surprise her during a routine check-in. Open by resetting the relationship: &quot;Keisha, I want you to know that I am having this conversation because I care about getting you the best possible result, and that means being completely honest with you.&quot; Label what is coming: &quot;I have an update about your case value that is difficult but important.&quot; Share facts: &quot;The surgeon determined surgery is not recommended. With your current treatment profile and the gap in care, the realistic range is $35,000 to $50,000.&quot; Acknowledge the gap from her original expectation without apologizing for reality: &quot;I know that is far from what you hoped. The treatment gap and the surgical consult changed the picture.&quot; Explore: &quot;How are you feeling about this? What questions do you have?&quot; Options: accept a settlement in this range, continue treatment and re-evaluate, or seek a second opinion. Written follow-up within 24 hours with the new value analysis, options, and next steps.</span></button>
-        <button class="option-btn" onclick="answer('q25','c',false)" id="q25-c"><span class="opt-letter">C</span><span class="opt-text">Send a written letter with the updated case valuation analysis and offer to schedule a call if she has questions, avoiding another emotionally charged phone conversation</span></button>
-        <button class="option-btn" onclick="answer('q25','d',false)" id="q25-d"><span class="opt-letter">D</span><span class="opt-text">Recommend that Harrell deliver the news directly since the case has been escalated to Tier 3 and the managing attorney\u2019s authority may carry more weight with a distrustful client</span></button>
-      </div>
-      <div class="feedback-box" id="q25-fb"></div>
     </div>
 
     <div class="section-score" id="s6-score" style="display:none;"><div class="score-display" id="s6-score-val"></div><div class="score-label">Boss Challenge Bonus</div></div>
-    <div class="btn-group" id="s6-next"><button class="btn btn-primary btn-block" onclick="goToSection(7)">View Results &rarr;</button></div>
+    <div class="btn-group" id="s6-next"><div style="margin-bottom:1rem;">
+      <label for="trainee-name-input" style="display:block;font-size:0.85rem;font-weight:600;color:#141c2c;margin-bottom:0.4rem;">Your Name — required to start</label>
+      <input type="text" id="trainee-name-input" placeholder="Enter your full name" autocomplete="name" style="width:100%;padding:0.5rem 0.75rem;border:1.5px solid #cbd5e1;border-radius:6px;font-size:0.9rem;box-sizing:border-box;">
+    </div>
+    <button class="btn btn-primary btn-block" onclick="startQuiz()">Take the Quiz &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 7 — QUIZ (api-quiz-engine.js)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-7">
+  <div class="section-header">
+    <div class="section-num">Knowledge Check</div>
+    <h2>Module Assessment</h2>
+    <div class="section-subhead">Answer each question. One attempt — wrong answer reveals the correct answer and unlocks Next.</div>
+  </div>
+  <div class="section-body">
+    <div style="font-family:system-ui,sans-serif;font-size:13px;color:#33415c;padding:8px 0 12px;border-bottom:1px solid #e8eaf0;margin-bottom:16px;">
+      Base: <b id="base">0</b> / <b id="basemax">—</b>
+      &nbsp;·&nbsp; Bonus: <b id="bonus">0</b>
+      &nbsp;·&nbsp; Pass gate: <b id="gate">80</b>%
+      &nbsp;·&nbsp; <span id="q-progress" style="color:#dcb161;font-weight:700;"></span>
+    </div>
+    <div id="questions"></div>
+    <div id="result" style="background:#fff;border:2px solid #0b2545;border-radius:10px;padding:18px;margin:18px 0;display:none;"></div>
   </div>
 </div>
 
 <!-- ══════════════════════════════════════════
      SECTION 7 — RESULTS
 ════════════════════════════════════════════ -->
-<div class="section-card" id="section-7">
+<div class="section-card" id="section-8">
   <div id="results-content">
     <div class="section-body text-center">
       <p style="color:#888;margin-top:40px;">Complete all sections to see your results.</p>
@@ -865,7 +776,7 @@ radical-candor-memo.md, client-centered-law-firm-memo.md -->
 <!-- ══════════════════════════════════════════
      SECTION 8 — FEEDBACK & CERTIFICATE
 ════════════════════════════════════════════ -->
-<div class="section-card" id="section-8">
+<div class="section-card" id="section-9">
   <div class="section-header">
     <div class="section-num">Feedback &amp; Certificate</div>
     <h2>Module Feedback</h2>
@@ -873,7 +784,7 @@ radical-candor-memo.md, client-centered-law-firm-memo.md -->
   <div class="section-body">
     <div class="name-input-wrap">
       <label for="employee-name">Your Full Name (for certificate):</label>
-      <input type="text" id="employee-name" class="name-input" placeholder="Enter your full name" value="Adriauna Gunn">
+      <input type="text" id="employee-name" class="name-input" placeholder="Enter your full name" value="the Pre-Lit Head Attorney Gunn">
     </div>
     <div class="fb-question">
       <label for="fb-clarity">How clear were the client management concepts?</label>
@@ -899,7 +810,7 @@ radical-candor-memo.md, client-centered-law-firm-memo.md -->
         <div class="cert-title">Certificate of Completion</div>
         <div class="cert-subtitle">Pre-Lit Attorney Training Program</div>
         <div class="cert-presents">This certifies that</div>
-        <div class="cert-name" id="certNameDisplay">Adriauna Gunn</div>
+        <div class="cert-name" id="certNameDisplay">the Pre-Lit Head Attorney Gunn</div>
         <div class="cert-for">has successfully completed</div>
         <div class="cert-module">PA-5 &mdash; Client Management: Attorney Level</div>
         <div class="cert-seal">&#9878;&#65039;</div>
@@ -908,7 +819,7 @@ radical-candor-memo.md, client-centered-law-firm-memo.md -->
         <div class="cert-badges" id="certBadges"></div>
         <div class="cert-signature">
           <div class="cert-sig-line"></div>
-          <div class="cert-sig-name">Harrell Gunn</div>
+          <div class="cert-sig-name">the Managing Attorney Gunn</div>
           <div class="cert-sig-title">Managing Attorney &middot; Gunn Law Group</div>
         </div>
       </div>
@@ -922,71 +833,45 @@ radical-candor-memo.md, client-centered-law-firm-memo.md -->
 <script>
 var baseScore=0,bonusPoints=0,qDone={},firstAttemptStillAvailable={},sectionScores={},streakCount=0,maxStreak=0,questionsFirstTry=0,incorrectCount=0,totalQuestionsAnswered=0,milestonesTriggered={},moduleStartTime=Date.now(),audioCtx=null,soundEnabled=false,_audioKeepalive=null;
 var TRACKER_URL='https://script.google.com/macros/s/AKfycbzHJZ0C3BqnLatfq7RIiUP5KQdgYoXTJlozd8ZGZiwIf2bdVmvnPMo3JLm0dA5gQhJyxA/exec';
-var TOTAL_SECTIONS=9,PASS_THRESHOLD=162/*85% of 190 — Harrell ruling Aug 17 2026 (Option C)*/,BASE_MAX=190;
+var TOTAL_SECTIONS=10,PASS_THRESHOLD=152/*80% of 190 — the Managing Attorney ruling Aug 22 2026 msg 47296, REVERSES Aug 17 Option C (85%)*/,BASE_MAX=190;
 
 var Q_CONFIG={
-  'q1':{section:1,pts:10,isBonus:false,correct:'c'},
-  'q2':{section:1,pts:10,isBonus:false,correct:'b'},
-  'q3':{section:1,pts:10,isBonus:false,correct:'d'},
-  'q4':{section:1,pts:10,isBonus:false,correct:'a'},
-  'q5':{section:2,pts:10,isBonus:false,correct:'c'},
-  'q6':{section:2,pts:0,isBonus:false,correct:'a'},
-  'q7':{section:2,pts:10,isBonus:false,correct:'b'},
-  'q8':{section:2,pts:10,isBonus:false,correct:'d'},
-  'q9':{section:3,pts:10,isBonus:false,correct:'a'},
-  'q10':{section:3,pts:10,isBonus:false,correct:'c'},
-  'q11':{section:3,pts:10,isBonus:false,correct:'b'},
-  'q12':{section:3,pts:10,isBonus:false,correct:'d'},
-  'q13':{section:4,pts:10,isBonus:false,correct:'c'},
-  'q14':{section:4,pts:10,isBonus:false,correct:'a'},
-  'q15':{section:4,pts:10,isBonus:false,correct:'b'},
-  'q16':{section:4,pts:10,isBonus:false,correct:'d'},
-  'q17':{section:5,pts:10,isBonus:false,correct:'a'},
-  'q18':{section:5,pts:10,isBonus:false,correct:'c'},
-  'q19':{section:5,pts:10,isBonus:false,correct:'b'},
-  'q20':{section:5,pts:10,isBonus:false,correct:'d'},
-  'q21':{section:6,pts:0,isBonus:true,bonusPts:10,correct:'b'},
-  'q22':{section:6,pts:0,isBonus:true,bonusPts:10,correct:'d'},
-  'q23':{section:6,pts:0,isBonus:true,bonusPts:10,correct:'a'},
-  'q24':{section:6,pts:0,isBonus:true,bonusPts:10,correct:'c'},
-  'q25':{section:6,pts:0,isBonus:true,bonusPts:10,correct:'b'}
+  'q1':{section:1,pts:10,isBonus:false},
+  'q2':{section:1,pts:10,isBonus:false},
+  'q3':{section:1,pts:10,isBonus:false},
+  'q4':{section:1,pts:10,isBonus:false},
+  'q5':{section:2,pts:10,isBonus:false},
+  'q6':{section:2,pts:0,isBonus:false},
+  'q7':{section:2,pts:10,isBonus:false},
+  'q8':{section:2,pts:10,isBonus:false},
+  'q9':{section:3,pts:10,isBonus:false},
+  'q10':{section:3,pts:10,isBonus:false},
+  'q11':{section:3,pts:10,isBonus:false},
+  'q12':{section:3,pts:10,isBonus:false},
+  'q13':{section:4,pts:10,isBonus:false},
+  'q14':{section:4,pts:10,isBonus:false},
+  'q15':{section:4,pts:10,isBonus:false},
+  'q16':{section:4,pts:10,isBonus:false},
+  'q17':{section:5,pts:10,isBonus:false},
+  'q18':{section:5,pts:10,isBonus:false},
+  'q19':{section:5,pts:10,isBonus:false},
+  'q20':{section:5,pts:10,isBonus:false},
+  'q21':{section:6,pts:0,isBonus:true,bonusPts:10},
+  'q22':{section:6,pts:0,isBonus:true,bonusPts:10},
+  'q23':{section:6,pts:0,isBonus:true,bonusPts:10},
+  'q24':{section:6,pts:0,isBonus:true,bonusPts:10},
+  'q25':{section:6,pts:0,isBonus:true,bonusPts:10}
 };
 
 var SECTION_QUESTIONS={1:['q1','q2','q3','q4'],2:['q5','q6','q7','q8'],3:['q9','q10','q11','q12'],4:['q13','q14','q15','q16'],5:['q17','q18','q19','q20'],6:['q21','q22','q23','q24','q25']};
 
-var FEEDBACK={
-  'q1':{t:`\u2705 Correct. Step 1 of the conversation framework: acknowledge the emotion BEFORE delivering information. \"I know this case has been weighing on you\" tells the client you see her as a person, not a file number. Once the emotional brain feels heard, the rational brain can process the legal analysis. Jumping straight to the motion details (A) triggers anxiety. False reassurance (B) erodes trust when reality contradicts it. Email-first (D) avoids the human connection that difficult conversations require.`,f:`\u274c The first step is ALWAYS acknowledging the emotion. Explaining the motion (A) delivers facts before the client is ready to hear them. Reassuring (B) is well-intentioned but dishonest if you cannot guarantee the outcome. Email-first (D) avoids the conversation that builds trust. Step 1: acknowledge, then establish purpose, then share facts.`},
-  'q2':{t:`\u2705 Correct. This opening establishes mutual purpose (Step 2): \"I want to make sure we are building the strongest possible case.\" It frames the pre-existing condition as something to ADDRESS TOGETHER rather than a problem being delivered. \"There is something the defense will focus on\" prepares her for difficulty without catastrophizing. Option A leads with alarm. Option C dumps the conclusion before establishing safety. Option D is avoidance.`,f:`\u274c The best opening establishes mutual purpose before delivering the difficult information. \"I want to make sure we are building the strongest possible case\" frames the conversation as collaborative. Option A leads with alarm (\"going to be a problem\"). Option C dumps the conclusion without establishing safety first. Option D avoids a conversation the client needs to have now.`},
-  'q3':{t:`\u2705 Correct. Client silence during a difficult conversation is a signal that the emotional brain has overwhelmed the rational brain. The calibrated question (\"What part feels most concerning?\") does three things: (1) it shows you noticed she withdrew, (2) it gives her control over the conversation direction, and (3) it re-engages her on her terms. Continuing to explain (A) talks AT her. Ending the call (B) abandons the connection. Summarizing quickly (C) rushes past the emotion.`,f:`\u274c Silence means the emotional brain has taken over. Continuing with facts (A) talks AT a person who has stopped listening. Ending the call (B) abandons the moment. Summarizing (C) rushes past the real issue. The calibrated question (\"What part feels most concerning?\") re-engages the client by giving her control over the conversation.`},
-  'q4':{t:`\u2705 Correct. GLG firm policy: every verbal fee or settlement discussion must be memorialized in writing within 24 hours. This is Step 5 of the conversation framework. The written follow-up creates a contemporaneous record that protects both attorney and client. CasePeer logging (B) is internal documentation, not client-facing written follow-up. Proceeding to accept (C) skips critical documentation. A cooling-off call (D) is optional but does not replace the written follow-up requirement.`,f:`\u274c The 24-hour written follow-up is firm policy for EVERY verbal fee or settlement discussion. CasePeer logging (B) is internal only \u2014 the policy requires a written communication TO the client. Proceeding to accept (C) skips documentation. A cooling-off call (D) does not replace the written follow-up.`},
-  'q5':{t:`\u2705 Correct. Rule 1.5 requires fee communication \"within a reasonable time after commencing representation, preferably in writing.\" Critically, \"communicated\" means the client UNDERSTOOD it \u2014 not just that they signed a document. A signed contract satisfies the writing requirement but not necessarily the communication duty. If a client genuinely did not understand the fee when they signed, the Rule 1.5 obligation has not been met.`,f:`\u274c Rule 1.5 requires communication \"within a reasonable time after commencing representation, preferably in writing.\" A signed contract (A) satisfies the writing requirement but not the understanding duty. Settlement time (B) is too late. Pre-filing (D) is not the trigger. The communication must be clear enough that the client actually understands the fee basis and cost structure.`},
-  'q6':{t:`\ud83d\udccb Fee Dispute Handling \u2014 Complete Framework:<br><br>1. <strong>Acknowledge the emotion first</strong> \u2014 the client feels taken advantage of. Name it: \"I understand this feels unfair.\"<br>2. <strong>Walk through the distribution line by line</strong> \u2014 every dollar accounted for. Use plain language, not legal terms.<br>3. <strong>Show the fee agreement language</strong> \u2014 but do not hide behind it. \"Here is what the agreement says, and let me explain what it means in practice.\"<br>4. <strong>Address each specific concern</strong> \u2014 if she is surprised by the $6,200 in costs, explain each cost and why it was incurred.<br>5. <strong>Written follow-up within 24 hours</strong> \u2014 complete breakdown of the distribution with explanations.<br>6. <strong>If unresolved</strong> \u2014 offer fee arbitration and notify Harrell per the Complaint Escalation SOP.`,f:`\ud83d\udccb Same fee dispute framework for all confidence levels. Six steps: acknowledge emotion, walk through distribution, show agreement language in plain terms, address specific concerns, written follow-up within 24 hours, and if unresolved, offer fee arbitration and notify Harrell.`},
-  'q7':{t:`\u2705 Correct. The complete response: (1) acknowledge the feeling of surprise and OWN the communication gap (\"it should not have been a surprise\"), (2) explain the expert\u2019s role and value in concrete terms, (3) show the dollar impact on net recovery with a specific example, (4) commit to a written breakdown within 24 hours. Option A is legally correct but emotionally tone-deaf \u2014 citing the fee agreement at a frustrated client escalates the situation. Option C reverses a strategic decision to manage a relationship issue. Option D passes a fee concern to a non-attorney.`,f:`\u274c Option A cites the fee agreement at a frustrated client \u2014 legally correct but emotionally escalating. Option C reverses a sound strategic decision. Option D passes an attorney-level fee concern to a non-attorney. The correct approach: own the communication gap, explain the value, show the dollar impact, and send a written breakdown within 24 hours.`},
-  'q8':{t:`\u2705 Correct. A signed contract does NOT automatically eliminate ethical exposure. Rule 1.5 requires that the fee be \"communicated\" \u2014 which means understood, not just signed. The correct response sequence: acknowledge the concern without defensiveness, explain the fee in plain language, send a written summary within 24 hours, document in CasePeer, and if the dispute persists, offer fee arbitration and notify Harrell. Option A is the trap \u2014 treating the signature as conclusive when the client is telling you they did not understand.`,f:`\u274c The signed contract is NOT conclusive evidence of understanding. Rule 1.5 requires communication, not just documentation. Option A dismisses a legitimate concern. Option B reduces the fee without addressing the real issue. Option C escalates prematurely \u2014 the attorney should attempt resolution first. The correct response: acknowledge, explain in plain language, send written follow-up, document, and escalate only if the dispute persists.`},
-  'q9':{t:`\u2705 Correct. This uses the full 5-step framework: (1) Acknowledge: \"I know you have been through a lot.\" (2) Purpose: \"so there are no surprises.\" (3) Facts: specials-based range with supporting data. (4) Explore her perspective. (5) Confirm next steps with written follow-up. Option B (wait for the offer) is the WORST choice \u2014 this is exactly how the opening scenario happened. Option C delivers the facts without empathy or purpose. Option D manipulates treatment to meet expectations rather than managing expectations to match reality.`,f:`\u274c Option B (waiting) is how clients get blindsided \u2014 the opening scenario was exactly this. Option C delivers facts without empathy, which feels like a judgment. Option D manipulates treatment to meet expectations rather than communicating honestly. The correct approach uses all 5 steps: acknowledge, establish purpose, share facts, explore perspective, confirm next steps with written follow-up.`},
-  'q10':{t:`\u2705 Correct. Present neutrally (\"The insurance company offered $22,000\"), walk through the analysis with evidence, show the distribution at different amounts, explain all options (accept, counter, litigate), and let the client decide with full information. Option A recommends without analysis. Option B recommends acceptance without client input. Option D removes the client from the decision \u2014 a Rule 1.4 violation. The client has the RIGHT to know every offer and make their own informed decision.`,f:`\u274c Every settlement offer must be communicated and explained to the client (Rule 1.4). Option A recommends without analysis. Option B recommends without exploring options. Option D removes the client from the decision entirely. Present neutrally, walk through the analysis, show distribution at different scenarios, explain options, and let the client decide.`},
-  'q11':{t:`\u2705 Correct. Informed consent requires that the client understand the implications of rejection: litigation timeline, costs, trial risk, and the possibility of a worse outcome. Calibrated questions (\"What would happen if the jury came back at less than $45,000?\") help the client evaluate their own decision without the attorney being directive. Then RESPECT the decision \u2014 it is their right. Option A accepts without ensuring understanding. Option C is too directive. Option D is a disproportionate response to a legitimate client choice.`,f:`\u274c Option A accepts the decision without ensuring the client understands the consequences. Option C is too directive \u2014 the attorney recommends, but the client decides. Option D (withdrawal) is a disproportionate response. The ethical obligation: ensure the client understands the risks of rejection through clear explanation and calibrated questions, then respect their informed decision.`},
-  'q12':{t:`\u2705 Correct. The 24-hour written follow-up applies to EVERY verbal fee or settlement discussion \u2014 regardless of whether a decision was made. It memorializes what was discussed (offer amount, analysis, questions, answers) and what was decided (in this case, that she is considering overnight). The follow-up protects both parties and creates the contemporaneous record. CasePeer notes (B) are internal. A text (C) is informal. Waiting for her decision (A) delays a time-sensitive compliance requirement.`,f:`\u274c The 24-hour written follow-up applies to every verbal fee or settlement discussion, not just when a decision is made. It memorializes the conversation itself. Option A delays a compliance requirement. Option B is internal only. Option C is informal and does not constitute a written follow-up of the discussion content.`},
-  'q13':{t:`\u2705 Correct. \"Unreasonable expectations after 3+ documented education conversations\" is a secondary criterion requiring Harrell\u2019s review. This is because the judgment call \u2014 \"are the expectations truly unreasonable, or did we fail to communicate effectively?\" \u2014 requires managing attorney oversight. Primary criteria (A, B, D) are objective and can be approved by CM + Supervising Attorney because they are factual (gap length, contact attempts, fraud evidence).`,f:`\u274c Options A (treatment gap), B (non-response), and D (fraud) are PRIMARY criteria \u2014 objective and approvable by CM + Supervising Attorney. \"Unreasonable expectations after 3+ documented conversations\" is SECONDARY because it requires judgment: are the expectations truly unreasonable, or has the firm failed to communicate effectively? That judgment requires Harrell\u2019s review.`},
-  'q14':{t:`\u2705 Correct. The drop conversation follows a specific 5-step structure: share facts, explain impact, ask their side, state position tentatively, invite response. Non-negotiable items to convey: specific reason, SOL date, how to get their file, and referral options. Option B opens with the conclusion before giving the client context. Option C avoids the conversation entirely. Option D delegates an attorney-level conversation to a non-attorney.`,f:`\u274c Option B opens with the decision before establishing context or asking the client\u2019s perspective. Option C avoids the conversation by hiding behind paperwork. Option D delegates an attorney-level conversation to a CM. The correct structure: share facts, explain impact, ask their side, state position tentatively, invite response. Always convey the reason, SOL date, file access, and referral options.`},
-  'q15':{t:`\u2705 Correct. Rule 1.16 compliance for unfiled cases: 30-day written notice via certified mail, return unearned fees within 15 days, file available for 30 days post-notice, SOL date communicated, referral resources provided. Option A (email + 7 days) is insufficient \u2014 certified mail is required for the notice. Option C misses key requirements. Option D applies only to filed cases (motion to withdraw).`,f:`\u274c Option A (email only) does not satisfy the certified mail requirement. Option C misses key elements (certified mail, fee return timeline, file availability). Option D (motion to withdraw) applies only to cases already filed in court. For unfiled cases: certified mail, 30-day notice, 15-day fee return, 30-day file availability, SOL communication, and referral resources.`},
-  'q16':{t:`\u2705 Correct. Before ANY drop decision, the retention attempt is mandatory: the supervising ATTORNEY (not the CM) makes a final outreach call, explains what is needed to continue, and provides a minimum 14-day response window. The case in the opening scenario \u2014 where the client had a legitimate reason for the gap \u2014 is exactly why this step exists. Option A is wrong \u2014 primary criteria do not require Harrell. Option B has the wrong person (CM, not attorney). Option C skips the mandatory retention attempt.`,f:`\u274c Option A is wrong \u2014 not all drops require Harrell (primary criteria = CM + Supervising Attorney). Option B sends a letter instead of making a call, and uses the CM instead of the attorney. Option C skips the mandatory retention attempt entirely. The SOP requires: supervising attorney final outreach call + 14-day response window, BEFORE any drop decision.`},
-  'q17':{t:`\u2705 Correct. When a client is yelling, the emotional brain is fully activated. Step 1: label the emotion (\"I can hear how frustrated and disappointed you are\"). Then LISTEN before providing any analysis. Option B acknowledges briefly then immediately jumps to facts \u2014 the client is not ready for specials analysis while yelling. Option C gets defensive about prior communications. Option D transfers a call that YOU should handle \u2014 the attorney who escalates to management signals they cannot handle the conversation.`,f:`\u274c Option B moves to facts too quickly \u2014 a yelling client cannot process specials analysis. Option C gets defensive (\"I did not tell you\") instead of addressing the emotion. Option D escalates to management when the attorney should handle the conversation. First: label the emotion, then listen. Analysis comes AFTER the client feels heard.`},
-  'q18':{t:`\u2705 Correct. Both \"file a complaint with the Georgia Bar\" and \"hire a real attorney\" are INDEPENDENT Tier 3 triggers. Tier 3 response: Harrell notified within 2 hours, attorney response same day, resolution plan within 24 hours. These triggers are automatic \u2014 not judgment calls about whether the client is \"just venting.\" Option A miclassifies as Tier 2. Option B dismisses as venting. Option D waits for follow-through that may never come while the clock ticks.`,f:`\u274c Mentions of bar complaint AND hiring another attorney are both automatic Tier 3 triggers per the Complaint Escalation SOP. They are not Tier 1 (B) or Tier 2 (A). They do not require the client to follow through (D). The triggers are based on what the client SAYS, not what they DO. Harrell notification: 2 hours. Attorney response: same day. Resolution plan: 24 hours.`},
-  'q19':{t:`\u2705 Correct. The complete response: (1) Acknowledge without defensiveness: \"I hear you, and I am sorry.\" (2) Own it: \"Three calls without a callback is not acceptable.\" (3) Ask their perspective: \"Help me understand exactly what happened.\" (4) Use contrasting: \"I do not want you to think we do not care \u2014 what I do want is to make sure you get the attention you deserve.\" (5) Commit to specific improvement with written follow-up. Option A checks the log defensively. Option C makes excuses about caseloads. Option D changes staff without understanding the problem.`,f:`\u274c Option A checks the log defensively (\"I am sure someone tried to reach you\" contradicts what the client just told you). Option C makes excuses about caseloads. Option D changes staff without understanding the root cause. The correct response: acknowledge, own the failure, ask for their perspective, contrast (\"what I do want\"), and commit to specific improvement with written follow-up.`},
-  'q20':{t:`\u2705 Correct. GLG firm policy: written memorialization to the CLIENT within 24 hours of EVERY verbal fee or settlement discussion, regardless of whether a decision was made. This exceeds the ethical minimum. It protects both parties. It creates a contemporaneous record. Option A limits to final decisions only. Option B treats CasePeer notes as sufficient (they are internal). Option C has the wrong timelines.`,f:`\u274c Option A limits follow-up to final decisions only \u2014 the policy covers every discussion. Option B treats internal CasePeer notes as sufficient \u2014 the policy requires client-facing written follow-up. Option C has incorrect timelines (48 hours and 7 days). The standard: written memorialization to the client within 24 hours of every verbal fee or settlement discussion.`},
-  'q21':{t:`\u2705 Correct. The complete response integrates multiple PA-5 principles: (1) Own the communication failure honestly \u2014 \"you should have been told\" builds trust by admitting the gap. (2) Explain the expert\u2019s value in case-specific terms. (3) Show the financial impact on net recovery \u2014 the $4,500 cost should increase her recovery by more than $4,500. (4) Do NOT criticize her sister \u2014 that will entrench the distrust. (5) Written breakdown within 24 hours. Option A cites the contract at an upset client. Option C reverses a sound strategic decision. Option D misclassifies \u2014 a sister giving advice is not a Tier 3 trigger.`,f:`\u274c Option A cites the contract defensively. Option C reverses strategy to manage emotion. Option D misclassifies the situation (sister\u2019s advice is not a Tier 3 trigger). The correct response: own the communication gap, explain the value, show the dollar impact, avoid criticizing the sister, and send written follow-up within 24 hours.`},
-  'q22':{t:`\u2705 Correct. This integrates the full settlement conversation structure: present neutrally, acknowledge the gap from expectation, share evidence-based analysis (specials, realistic range, offer position), explain all options with distribution examples, mention the surgical consult as a variable, let the client process and ask questions, and written follow-up within 24 hours. Option A violates Rule 1.4 \u2014 every offer must be communicated. Option B recommends without analysis. Option C is honest but delivers the reality without empathy (Step 1 missing).`,f:`\u274c Option A violates Rule 1.4 by rejecting without client knowledge. Option B recommends without providing analysis or options. Option C skips the emotional acknowledgment \u2014 telling Keisha her $250,000 expectation \"is not supported\" without empathy will trigger defensiveness. The correct approach: present neutrally, acknowledge, analyze with evidence, show options with distributions, let her decide, and follow up in writing.`},
-  'q23':{t:`\u2705 Correct. This uses the 5-step framework on one of the hardest conversations in PI practice. The key moves: (1) welcome her back genuinely, (2) be honest about the gap\u2019s impact on her case \u2014 direct but caring, (3) ASK what happened during the gap \u2014 there may be a legitimate reason, (4) if there is a medical reason, document it and assess viability; if not, have an honest conversation about reduced value. Option B drops without the mandatory retention attempt. Option C ignores a case-damaging gap. Option D delivers the bad news without empathy or exploration.`,f:`\u274c Option B skips the retention attempt \u2014 she CALLED YOU, which IS the response. Option C ignores a 7-month gap that will be challenged by defense. Option D is blunt without empathy. The correct response: welcome her, be honest about the gap impact, ask what happened (there may be a legitimate reason), and have an evidence-based conversation about the path forward with written follow-up.`},
-  'q24':{t:`\u2705 Correct. Three independent Tier 3 triggers: bar complaint mention, malpractice/hiring another attorney, and negative review threat. On the call: (1) stay calm, do NOT argue or defend, (2) label the emotion, (3) use a calibrated question to give her a sense of control, (4) listen. After the call: immediately document in CasePeer, classify Tier 3, notify Harrell within 2 hours. Option A transfers without handling the emotion. Option B defends and escalates. Option D jumps to case drop when the immediate need is de-escalation and proper escalation routing.`,f:`\u274c Option A transfers the call without de-escalation. Option B defends the firm \u2014 which escalates a Tier 3 situation. Option D jumps to case drop when the priority is de-escalation and proper Tier 3 routing. Stay calm, label the emotion, use calibrated questions, listen, then immediately classify Tier 3 and notify Harrell within 2 hours.`},
-  'q25':{t:`\u2705 Correct. This is the highest-difficulty conversation in PA-5 \u2014 delivering a substantial value reduction to a client with a history of escalation. The key moves: (1) schedule a dedicated call \u2014 do not surprise her, (2) reset the relationship with a statement of purpose, (3) pre-label the difficulty of the news, (4) share facts (surgical consult result, realistic range), (5) acknowledge the gap from her original expectation without apologizing for reality, (6) explore her feelings and questions, (7) present options, (8) written follow-up within 24 hours. Option A delegates an attorney conversation. Option C avoids the personal connection. Option D defers the attorney\u2019s responsibility.`,f:`\u274c Option A delegates to the CM \u2014 this requires attorney-level judgment and relationship management. Option C hides behind a letter to avoid emotional difficulty. Option D defers the attorney\u2019s responsibility to the managing attorney. The correct approach: schedule a dedicated call, reset the relationship, pre-label the difficulty, share facts, acknowledge the gap, explore feelings, present options, and send written follow-up within 24 hours.`}
-};
+var FEEDBACK={} /* CUTOVER: feedback text is served per-answer by the engine, never shipped to the client up front */;
 
-function answer(qId,choice,isCorrect){
+window.answerUI = function answerUI(qId,choice,isCorrect){
   if(qDone[qId])return;
   var cfg=Q_CONFIG[qId],block=document.getElementById(qId+'-block'),fb=document.getElementById(qId+'-fb');
   block.querySelectorAll('.option-btn').forEach(function(b){b.classList.add('disabled');});
-  var clickedBtn=document.getElementById(qId+'-'+choice),correctBtn=document.getElementById(qId+'-'+cfg.correct);
+  var clickedBtn=document.getElementById(qId+'-'+choice),correctBtn=document.getElementById(qId+'-'+(cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || ''));
   if(isCorrect){
     clickedBtn.classList.add('correct');block.classList.add('answered');qDone[qId]=true;
     if(!cfg.isBonus){baseScore+=cfg.pts;sectionScores[cfg.section]=(sectionScores[cfg.section]||0)+cfg.pts;
@@ -1104,5 +989,68 @@ function renderBadges(badges,container){if(!badges.length){container.innerHTML='
 document.addEventListener('DOMContentLoaded',function(){if(localStorage.getItem('glg_sound')==='1'){soundEnabled=true;var b=document.getElementById('soundToggle');if(b)b.textContent='\ud83d\udd0a';}function iac(){ensureAudioCtx();document.removeEventListener('click',iac);document.removeEventListener('touchstart',iac);document.removeEventListener('touchend',iac);}document.addEventListener('click',iac);document.addEventListener('touchstart',iac);document.addEventListener('touchend',iac);function rag(){if(audioCtx&&audioCtx.state==='suspended')audioCtx.resume();}document.addEventListener('touchstart',rag,true);document.addEventListener('touchend',rag,true);document.addEventListener('click',rag,true);initMascot();});
 goToSection(0);
 </script>
+
+
+
+<script>
+/* ── go() / startQuiz() — quiz entry point (the Managing Attorney ruling 2026-09-03) ── */
+async function go(screen) {
+  if (screen === 'quiz') {
+    // Bug-2 fix: await attempt start before making questions interactive
+    await window.GLGQuiz.beginAttempt(); // uses per-session random ID
+    goToSection(7);
+  }
+}
+
+function startQuiz() {
+  var _ni = document.getElementById('trainee-name-input');
+  var _name = (_ni && _ni.value.trim()) || '';
+  if (!_name) {
+    if (typeof showToast === 'function') showToast('\u26a0\ufe0f Please enter your name before starting the quiz', false);
+    else alert('Please enter your name before starting the quiz.');
+    return;
+  }
+ go('quiz'); }
+
+/* ── GLG MODULE CONFIG — wires api-quiz-engine.js to module-pa5.html ── */
+window.GLG_MODULE_CONFIG = {
+  moduleId: 'pa5',
+  onBankLoaded: function(bank) {
+    var basemax = document.getElementById('basemax');
+    var gate    = document.getElementById('gate');
+    if (basemax) basemax.textContent = bank.base_max;
+    if (gate)    gate.textContent    = bank.pass_pct;
+    for (var i = 1; i <= 6; i++) {
+      var nextEl = document.getElementById('s' + i + '-next');
+      if (nextEl) nextEl.style.display = 'flex';
+    }
+  },
+  onStartQuiz: function() {
+    if (typeof audioCtx !== 'undefined' && audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume().catch(function(){});
+    }
+  },
+  onAnswered: function(r) {
+    baseScore   = r.base_score;
+    bonusPoints = r.bonus_score;
+    streakCount = r.streak;
+    maxStreak   = Math.max(maxStreak || 0, r.maxStreak || 0);
+    var ts = document.getElementById('total-score');
+    if (ts) ts.textContent = r.base_score;
+    var bs = document.getElementById('bonus-score');
+    if (bs) bs.textContent = r.bonus_score;
+    if (typeof updateStreak  === 'function') updateStreak(r.correct);
+    if (typeof mascotReact   === 'function') mascotReact(r.correct ? 'correct' : 'incorrect');
+  },
+  onComplete: function(r) {
+    window._pa5Passed = r.passed;
+    baseScore   = r.base_score;
+    bonusPoints = r.bonus_score;
+    goToSection(8);   // results is now section-8 after port
+    if (typeof buildResults === 'function') buildResults();
+  }
+};
+</script>
+<script src="api-quiz-engine.js"></script>
 </body>
 </html>
