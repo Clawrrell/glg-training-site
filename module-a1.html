@@ -5,15 +5,6 @@ Date: June 8, 2026
 Deliverable: Module A1: GLG Operations — How We Work
 References Loaded: 10 files
   - /glg/GATES/COO-GATES.md
-  - /glg/books/memos/e-myth-memo.md (systems thinking, franchise prototype)
-  - /glg/books/memos/traction-eos-memo.md (EOS framework, accountability chart, rocks)
-  - /glg/books/memos/atomic-habits-memo.md (habit loops, system design)
-  - /glg/books/memos/essential-lawyering-memo.md (PI operations, case management)
-  - /glg/books/memos/client-centered-law-firm-memo.md (client experience)
-  - /glg/books/memos/radical-candor-memo.md (feedback culture)
-  - /glg/books/memos/crucial-conversations-memo.md (difficult conversations)
-  - /glg/books/memos/reptile-mist-memo.md (safety rule framework)
-  - /glg/books/memos/influence-cialdini-memo.md (persuasion principles)
 Existing Docs Checked: Previous module-a1-glg-operations.html, GLG Team Member Handbook, REFERENCE.md
 QA Checklist: ✅ PASSED
   - Systems Test: Creates repeatable systems, not just instructions
@@ -865,7 +856,155 @@ header { background:linear-gradient(135deg,#141C2C 0%,#0E1420 100%);color:#e0e0e
 header h1 { font-size:clamp(17px,5vw,24px);font-weight:800;line-height:1.3;color:#ffffff; }
 header p { margin-top:6px;color:#c0c0c0;font-size:13px; }
 
+
+  /* ── GLG QUIZ ENGINE — question type styles (2026-09-02) ──────────────────
+     All classes rendered by api-quiz-engine.js. Tokens: navy #141c2c, gold #C5975B.
+     Sourced from engine.html stylesheet + Harrell Part 8c spec. */
+
+  /* Question card */
+  .q { background:#fff; border:1px solid #e2e5ea; border-radius:10px;
+       padding:20px; margin:16px 0; box-shadow:0 1px 6px rgba(20,28,44,.06); }
+  .q-num { font-size:12px; letter-spacing:.06em; color:#C5975B; font-weight:700;
+            text-transform:uppercase; margin-bottom:8px; }
+  .q-text { font-weight:600; margin:8px 0 16px; font-size:1rem; line-height:1.55;
+             color:#141c2c; }
+
+  /* MC option buttons */
+  button.opt { display:block; width:100%; text-align:left; padding:13px 15px; margin:7px 0;
+    border:1px solid #d8dbe3; border-radius:8px; background:#fafbfd; cursor:pointer;
+    font-size:15px; font-family:var(--font-b); color:#222; line-height:1.45;
+    transition:background .12s, border-color .12s; }
+  button.opt:hover:not(.locked) { background:#eef4ff; border-color:#141c2c; }
+  button.opt.correct { background:#d4edda; border-color:#10774A; }
+  button.opt.incorrect { background:#f8d7da; border-color:#870101; }
+  button.opt.locked { cursor:default; opacity:.85; }
+
+  /* Fill-in-the-blank */
+  .fill-stem { font-weight:600; margin:8px 0 14px; line-height:2.2; }
+  input.blank { display:inline-block; min-height:44px; min-width:120px; padding:8px 10px;
+    margin:2px 4px; border:1px solid #ccd; border-radius:8px; background:#fafbfd;
+    font-size:16px; font-family:var(--font-b); vertical-align:middle;
+    box-sizing:border-box; max-width:100%; }
+  input.blank:focus { outline:2px solid #141c2c; background:#fff; }
+  input.blank.correct { background:#d4edda; border-color:#10774A; }
+  input.blank.incorrect { background:#f8d7da; border-color:#870101; }
+  input.blank.locked { opacity:.85; }
+  button.submit-fill { min-height:44px; padding:11px 20px; margin-top:12px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-fill.locked { opacity:.5; cursor:default; }
+
+  /* Markup */
+  .markup-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .markup-passage { margin:0 0 10px; border:1px solid #e2e5ea; border-radius:8px; overflow:hidden; }
+  button.span { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:11px 13px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:16px; font-family:var(--font-b);
+    color:#222; line-height:1.5; overflow-wrap:break-word; }
+  button.span:last-child { border-bottom:0; }
+  button.span:hover:not(.locked) { background:#eef4ff; }
+  button.span.selected { background:#fff3cd; box-shadow:inset 4px 0 0 #b8860b; font-weight:600; }
+  button.span.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.span.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.span.locked { cursor:default; opacity:.9; }
+  button.submit-markup { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-markup.locked { opacity:.5; cursor:default; }
+  .markup-count { font-size:13px; color:#555; margin-top:8px; }
+
+  /* Sort rows with up/down controls */
+  .sort-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .sort-list { margin:0 0 12px; border:1px solid #e2e5ea; border-radius:8px;
+               overflow:hidden; background:#fff; }
+  .sort-row { display:flex; align-items:stretch; border-bottom:1px solid #eef0f3;
+              background:#fff; }
+  .sort-row:last-child { border-bottom:0; }
+  .sort-pos { flex:0 0 34px; display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700; color:#C5975B; background:#f5f5f0; }
+  .sort-text { flex:1 1 auto; padding:11px 12px; font-size:15px; line-height:1.45;
+    display:flex; align-items:center; overflow-wrap:break-word; min-width:0; }
+  .sort-moves { flex:0 0 auto; display:flex; align-items:center; gap:4px; padding:4px 6px; }
+  button.sort-move { min-height:44px; min-width:44px; border:1px solid #ccd; border-radius:8px;
+    background:#fafbfd; cursor:pointer; font-size:15px; color:#141c2c;
+    font-family:var(--font-b); }
+  button.sort-move:hover:not(:disabled) { background:#eef4ff; }
+  button.sort-move:disabled { opacity:.35; cursor:default; }
+  .sort-row.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  .sort-row.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  .sort-row.locked .sort-text { opacity:.9; }
+  button.submit-sort { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-sort.locked { opacity:.5; cursor:default; }
+
+  /* Match chips + slot rows */
+  .match-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .match-tray { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px; padding:10px;
+    border:1px dashed #ccd; border-radius:8px; background:#fafbfd; }
+  button.chip { min-height:44px; padding:10px 16px; border:1px solid #ccd; border-radius:22px;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b); color:#222;
+    max-width:100%; overflow-wrap:break-word; text-align:left; }
+  button.chip:hover:not(.locked) { background:#eef4ff; }
+  button.chip.selected { background:#141c2c; color:#fff; border-color:#141c2c; font-weight:600; }
+  button.chip.placed { opacity:.35; }
+  button.chip.locked { cursor:default; }
+  .match-slots { border:1px solid #e2e5ea; border-radius:8px; overflow:hidden;
+                 background:#fff; margin-bottom:12px; }
+  button.slot { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:10px 14px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b);
+    color:#222; line-height:1.45; overflow-wrap:break-word; }
+  button.slot:last-child { border-bottom:0; }
+  button.slot:hover:not(.locked) { background:#eef4ff; }
+  button.slot.armed { box-shadow:inset 4px 0 0 #C5975B; background:#fffdf5; }
+  .slot-label { font-weight:600; display:block; }
+  .slot-fill { display:block; font-size:14px; margin-top:3px; color:#C5975B; font-weight:600; }
+  .slot-fill.empty { color:#8a8f98; font-weight:400; font-style:italic; }
+  button.slot.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.slot.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.slot.locked { cursor:default; opacity:.9; }
+  button.submit-match { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-match.locked { opacity:.5; cursor:default; }
+  .match-count { font-size:13px; color:#555; margin-top:8px; }
+  .match-credit { font-size:13px; font-weight:600; color:#8a6d1f; margin-top:6px; }
+
+  /* Feedback */
+  .fb { margin-top:12px; padding:12px 14px; border-radius:8px; font-size:14px; display:none; }
+  .fb.show { display:block; }
+  .fb.ok { background:#d4edda; border-left:4px solid #10774A; }
+  .fb.no { background:#f8d7da; border-left:4px solid #870101; }
+  .fb.neutral { background:#eef0f6; border-left:4px solid #6c757d; color:#333; } /* self_assessment: no verdict */
+
+  /* Branching nodes */
+  .branch-scenario { border-left:4px solid #C5975B; padding-left:12px; margin:14px 0; }
+  .branch-turn { font-size:12px; letter-spacing:.06em; color:#8a6d1f; font-weight:700;
+                 text-transform:uppercase; }
+  .branch-instruction { font-weight:600; margin:6px 0 10px; color:#141c2c; }
+  .branch-consequence { margin-top:10px; padding:10px 12px; border-left:4px solid #141c2c;
+    background:#eef2f7; border-radius:0 8px 8px 0; font-size:13px; color:#33415c; display:none; }
+  .branch-consequence.show { display:block; }
+
+  /* Pagination — one question at a time (Harrell Part 8b) */
+  .q-base { display: none !important; }
+  .q-base.q-active { display: block !important; }
+  .q-nav { display:flex; justify-content:space-between; align-items:center;
+            margin-top:20px; padding-top:16px; border-top:1px solid #e8e6e0; }
+  .q-nav-btn { min-height:44px; padding:10px 22px; border-radius:8px;
+                font-size:15px; cursor:pointer; font-family:var(--font-b);
+                font-weight:600; transition:background .12s; }
+  .q-nav-btn.next { background:#141c2c; color:#C5975B; border:2px solid #141c2c; }
+  .q-nav-btn.next:hover { background:#1e2a40; }
+  .q-nav-btn.back { background:#fff; color:#141c2c; border:2px solid #c8c5be; }
+  .q-nav-btn.back:hover { background:#f5f5f0; }
+  .q-pg-spacer { display:inline-block; min-width:40px; }
+  #q-progress { font-size:12px; color:#C5975B; font-weight:600;
+                letter-spacing:.5px; text-transform:uppercase; }
+
 </style>
+<!-- CUTOVER: server-side grading. Answer keys are not in this file. -->
 </head>
 <body>
 
@@ -908,7 +1047,7 @@ header p { margin-top:6px;color:#c0c0c0;font-size:13px; }
 <nav class="section-nav" id="sectionNav" aria-label="Course sections">
   <button class="nav-pill active" id="pill-0">Intro</button>
   <button class="nav-pill" id="pill-1">1 · Systems</button>
-  <button class="nav-pill" id="pill-2">2 · EOS</button>
+  <button class="nav-pill" id="pill-2">2 · System 1</button>
   <button class="nav-pill" id="pill-3">3 · Scorecard</button>
   <button class="nav-pill" id="pill-4">4 · Habits</button>
   <button class="nav-pill" id="pill-5">5 · Clients</button>
@@ -1001,66 +1140,66 @@ header p { margin-top:6px;color:#c0c0c0;font-size:13px; }
   </div>
 </div>
 
-<!-- ══════════ SCREEN 2: EOS & ACCOUNTABILITY ══════════ -->
+<!-- ══════════ SCREEN 2: SYSTEM 1 — HOW GLG OPERATES ══════════ -->
 <div class="screen" id="screen-2">
   <div class="section-header">
     <div class="section-label">Section 2 of 6</div>
-    <div class="section-title">EOS &amp; Accountability Structure</div>
+    <div class="section-title">System 1: How GLG Operates</div>
   </div>
   <div class="content-card">
 
     <div class="subsection">
-      <h3>GLG's Accountability Chart</h3>
-      <p>We use our <strong>accountability chart</strong> model. Unlike traditional org charts that show reporting relationships, our Accountability Chart shows who owns what function.</p>
-      <div class="accountability-chart">
-        <div class="chart-title">GLG Accountability Chart</div>
-        <div class="org-level">
-          <div class="org-node">Managing Attorney<br><small>(Visionary)</small></div>
-        </div>
-        <div class="org-level">
-          <div class="org-row">
-            <div class="org-node secondary">Pre-Litigation<br><small>Case Management</small></div>
-            <div class="org-node secondary">Litigation<br><small>Case Management</small></div>
-          </div>
-        </div>
-        <div class="org-level">
-          <div class="org-row">
-            <div class="org-node tertiary">Intake</div>
-            <div class="org-node tertiary">Records</div>
-            <div class="org-node tertiary">Demands</div>
-            <div class="org-node tertiary">Distribution</div>
-          </div>
-        </div>
-      </div>
-      <p><strong>Every seat has one accountable person.</strong> When something goes wrong, we know exactly who owns the solution. No finger-pointing. No confusion.</p>
-    </div>
-
-    <div class="subsection">
-      <h3>Quarterly Rocks System</h3>
-      <div class="callout amber">
-        <span class="callout-icon">🎯</span>
-        <span><strong>Rocks are the 3-7 most important priorities</strong> for the next 90 days. "When everything is important, nothing is important." Rocks create focus.</span>
-      </div>
-      <p>Every quarter, GLG sets company Rocks. Examples of what a quarterly Rock might look like:</p>
-      <ul>
-        <li>Achieve 85% communication compliance across all CMs</li>
-        <li>Complete PITT evaluation on all active cases</li>
-        <li>Hire and onboard a new team member for a key role</li>
-      </ul>
-      <p>Your performance directly impacts these Rocks. When you hit your metrics, the firm hits its Rocks.</p>
-    </div>
-
-    <div class="subsection">
-      <h3>The Weekly Pulse</h3>
-      <p>EOS requires a <strong>weekly Level 10 Meeting</strong> with leadership. Same time, same agenda:</p>
+      <h3>The Three Firm Vital Signs</h3>
+      <p>At GLG, leadership checks three numbers. These are the operational dashboard:</p>
       <div class="lifecycle">
-        <div class="lifecycle-step"><div class="lifecycle-num">1</div><div><strong>Scorecard Review</strong> — Are we on track? What's red?</div></div>
-        <div class="lifecycle-step"><div class="lifecycle-num">2</div><div><strong>Rock Update</strong> — Progress on quarterly priorities</div></div>
-        <div class="lifecycle-step"><div class="lifecycle-num">3</div><div><strong>Client &amp; Staff Headlines</strong> — Good news to share</div></div>
-        <div class="lifecycle-step"><div class="lifecycle-num">4</div><div><strong>Issues List</strong> — What needs solving this week?</div></div>
-        <div class="lifecycle-step"><div class="lifecycle-num">5</div><div><strong>IDS</strong> — Identify, Discuss, Solve top issues</div></div>
+        <div class="lifecycle-step">
+          <div class="lifecycle-num">1</div>
+          <div><strong>Callbacks/texts older than 24 hours — target zero.</strong> <em>Are we responsive?</em></div>
+        </div>
+        <div class="lifecycle-step">
+          <div class="lifecycle-num">2</div>
+          <div><strong>Cases past their stage deadline — target zero.</strong> <em>Are we moving?</em></div>
+        </div>
+        <div class="lifecycle-step">
+          <div class="lifecycle-num">3</div>
+          <div><strong>Average review rating.</strong> <em>Do clients actually feel it?</em></div>
+        </div>
       </div>
-      <p>Your department metrics and issues get surfaced in these meetings. Good performance gets recognized. Problems get solved quickly.</p>
+    </div>
+
+    <div class="subsection">
+      <h3>The Case Lifecycle</h3>
+      <p>Every pre-litigation case moves through defined stages in CasePeer. Each has a named owner and a clock.</p>
+      <div class="lifecycle">
+        <div class="lifecycle-step"><div class="lifecycle-num">1</div><div>Intake</div></div>
+        <div class="lifecycle-step"><div class="lifecycle-num">2</div><div>Intake Review <em>(conditional — not every case)</em></div></div>
+        <div class="lifecycle-step"><div class="lifecycle-num">3</div><div><strong>Treating</strong> — owner: CM. Treatment compliance, 14-day contact.</div></div>
+        <div class="lifecycle-step"><div class="lifecycle-num">4</div><div>Pending Demand</div></div>
+        <div class="lifecycle-step"><div class="lifecycle-num">5</div><div>Demand Writing</div></div>
+        <div class="lifecycle-step"><div class="lifecycle-num">6</div><div>Demand Prepped</div></div>
+        <div class="lifecycle-step"><div class="lifecycle-num">7</div><div><strong>Demanded</strong> — clock: 7 days from records-complete to demand sent.</div></div>
+        <div class="lifecycle-step"><div class="lifecycle-num">8</div><div>Settlement Negotiations</div></div>
+        <div class="lifecycle-step"><div class="lifecycle-num">9</div><div>Settled</div></div>
+        <div class="lifecycle-step"><div class="lifecycle-num">10</div><div>Lien Negotiations</div></div>
+        <div class="lifecycle-step"><div class="lifecycle-num">11</div><div><strong>Disbursement</strong> — clock: 2 weeks</div></div>
+        <div class="lifecycle-step"><div class="lifecycle-num">12</div><div>Disbursed</div></div>
+      </div>
+      <p style="font-size:0.78em;color:var(--navy2);margin-top:8px;">SOURCE: CasePeer stage configuration, confirmed by Harrell 2026-09-02. Demand-stage clock: 7 days from records-complete.</p>
+    </div>
+
+    <div class="subsection">
+      <h3>The Deadline Principle</h3>
+      <div class="callout amber">
+        <span class="callout-icon">📅</span>
+        <span><strong>"A yes without a date is a no."</strong> Every commitment gets a deadline when made, and is tracked.</span>
+      </div>
+      <p>Response clocks GLG enforces:</p>
+      <ul>
+        <li>Client callbacks: return within 24 hours — target zero outstanding.</li>
+        <li>Adjuster/insurance callbacks: return within 24 hours. An adjuster calling may be calling to make an offer; a delayed callback is a delayed settlement.</li>
+        <li>Demand stage: 7 days from records-complete to demand sent.</li>
+        <li>Blocked task escalation: 24–48 hours, including tasks blocked on Harrell.</li>
+      </ul>
     </div>
 
     <div class="btn-row">
@@ -1150,63 +1289,57 @@ header p { margin-top:6px;color:#c0c0c0;font-size:13px; }
   </div>
 </div>
 
-<!-- ══════════ SCREEN 4: DAILY HABITS & SYSTEMS ══════════ -->
+<!-- ══════════ SCREEN 4: WHEN THINGS GO WRONG ══════════ -->
 <div class="screen" id="screen-4">
   <div class="section-header">
     <div class="section-label">Section 4 of 6</div>
-    <div class="section-title">Building Winning Habits</div>
+    <div class="section-title">When Things Go Wrong</div>
   </div>
   <div class="content-card">
 
     <div class="subsection">
-      <h3>The Power of 1% Improvements</h3>
-      <div class="callout green">
-        <span class="callout-icon">📈</span>
-        <span><strong>Core Principle:</strong> "You do not rise to the level of your goals. You fall to the level of your systems." Small daily improvements compound into extraordinary results.</span>
+      <h3>The Root Cause Hierarchy</h3>
+      <div class="callout amber">
+        <span class="callout-icon">⚙️</span>
+        <span><strong>"A firm runs on written, enforceable systems with single named owners. Verbal policy = no policy. If it&#39;s not written, the failure belongs to the owner, not the employee."</strong></span>
       </div>
-      <p>A 1% daily improvement leads to 37x better performance over one year. Conversely, 1% daily decline compounds toward zero. At GLG, every small action either builds toward client success or undermines it.</p>
-    </div>
-
-    <div class="subsection">
-      <h3>The GLG Habit Loop</h3>
-      <p>Every reliable behavior follows the same pattern: <strong>Cue → Craving → Response → Reward</strong></p>
+      <p>When something goes wrong at GLG, the cause is diagnosed in this order — personnel is last:</p>
       <div class="framework-grid">
         <div class="framework-card">
-          <h4>Cue: Make It Obvious</h4>
-          <p>Environmental triggers that prompt good behavior. CasePeer notifications, callback logs on your desk, daily huddle check-ins.</p>
+          <h4>1. Ownership Ambiguity</h4>
+          <p>Tasks addressed to teams are owned by no one.</p>
         </div>
         <div class="framework-card">
-          <h4>Craving: Make It Attractive</h4>
-          <p>The motivation to act. Recognition for compliance, team celebrations, knowing you're helping injured clients.</p>
+          <h4>2. No Written Enforcement</h4>
+          <p>Policy by text or verbal reads as optional.</p>
         </div>
         <div class="framework-card">
-          <h4>Response: Make It Easy</h4>
-          <p>The actual behavior. Templates that take 30 seconds, one-click CasePeer updates, streamlined call scripts.</p>
+          <h4>3. No Escalation for Blocked Work</h4>
+          <p>Tasks waiting on someone — including Harrell — stall invisibly.</p>
         </div>
         <div class="framework-card">
-          <h4>Reward: Make It Satisfying</h4>
-          <p>The payoff that reinforces the loop. Green scorecard metrics, client thank-you notes, performance bonuses.</p>
+          <h4>4. People</h4>
+          <p>Residual; unmeasurable until 1–3 are fixed. No personnel verdicts inside a broken system.</p>
         </div>
       </div>
     </div>
 
     <div class="subsection">
-      <h3>Implementation at GLG</h3>
+      <h3>Fix It Once</h3>
+      <p><strong>"Fix it once. Every correction becomes a written SOP/FAQ line the same day. A second occurrence of a corrected mistake is a performance issue."</strong></p>
       <div class="callout amber">
-        <span class="callout-icon">🎯</span>
-        <span><strong>Habit Stacking:</strong> "After I update a case note in CasePeer, I will check if any callbacks are due before closing the tab." Link new habits to existing ones.</span>
+        <span class="callout-icon">📋</span>
+        <span><strong>Blocked tasks escalate visibly within 24–48 hrs,</strong> including tasks blocked on Harrell. Deadline-bearing items never live in a chat thread — calendared with a named owner plus backup before anyone replies.</span>
       </div>
-      <p><strong>The Two-Minute Rule:</strong> When establishing a new system, start small. "Check callback log" becomes "Open callback log." Once the habit of showing up is established, improvement follows naturally.</p>
-      <p><strong>Never Miss Twice:</strong> One missed callback is an error. Two in a row is the start of a bad habit. The scorecard catches these patterns before they become entrenched.</p>
     </div>
 
     <div class="subsection">
-      <h3>Identity-Based Habits</h3>
+      <h3>Accountability Without Blame</h3>
       <div class="callout navy">
         <span class="callout-icon">🏆</span>
-        <span>"Every action is a vote for the type of person you want to become." At GLG, we ARE a firm that communicates with clients, follows systems, and delivers results. That's our identity.</span>
+        <span><strong>"Clear ownership is the cure for finger-pointing, not its cause.</strong> When one name owns each task, there is nothing to point about. Consequences attach to hiding problems, never to surfacing them. Asking for help early is the expected behavior; the punishable offense is sitting on a blocked task silently."</span>
       </div>
-      <p>Don't think "I need to hit my callback targets." Think "I am a case manager who never lets clients wonder if we forgot them." Identity drives behavior more powerfully than goals.</p>
+      <p>Measure: closes loops — does the work the first time asked, on time, without follow-up.</p>
     </div>
 
     <div class="btn-row">
@@ -1338,7 +1471,11 @@ header p { margin-top:6px;color:#c0c0c0;font-size:13px; }
 
     <div class="btn-row">
       <button class="btn btn-secondary" onclick="go(5)">← Back</button>
-      <button class="btn btn-primary" onclick="startQuiz()">Take the Quiz →</button>
+      <div style="margin-bottom:1rem;">
+      <label for="trainee-name-input" style="display:block;font-size:0.85rem;font-weight:600;color:#141c2c;margin-bottom:0.4rem;">Your Name — required to start</label>
+      <input type="text" id="trainee-name-input" placeholder="Enter your full name" autocomplete="name" style="width:100%;padding:0.5rem 0.75rem;border:1.5px solid #cbd5e1;border-radius:6px;font-size:0.9rem;box-sizing:border-box;">
+    </div>
+    <button class="btn btn-primary" onclick="startQuiz()">Take the Quiz →</button>
     </div>
   </div>
 </div>
@@ -1346,22 +1483,21 @@ header p { margin-top:6px;color:#c0c0c0;font-size:13px; }
 <!-- ══════════ SCREEN 7: QUIZ ══════════ -->
 <div class="screen" id="screen-quiz">
   <div class="section-header">
-    <div class="section-label" id="quiz-section-label">Question 1 of 12</div>
-    <div class="section-title">Knowledge Check</div>
+    <div class="section-label" id="quiz-section-label">Knowledge Check</div>
+    <div class="section-title">Module Assessment</div>
   </div>
   <div class="content-card">
-    <div class="quiz-progress" id="quizDots"></div>
-    <div class="question-num" id="qNum">Question 1 of 12</div>
-    <div class="question-text" id="qText"></div>
-    <div class="options" id="qOptions"></div>
-    <div class="feedback-box" id="qFeedback"></div>
-    <div class="btn-row">
-      <button class="btn btn-primary" id="qNextBtn" onclick="nextQuestion()" disabled>Next →</button>
+    <div style="font-family:var(--font-b);font-size:13px;color:var(--navy2);padding:8px 0 12px;border-bottom:1px solid #e8eaf0;margin-bottom:16px;">
+      Base: <b id="base">0</b> / <b id="basemax">—</b>
+      &nbsp;·&nbsp; Bonus: <b id="bonus">0</b>
+      &nbsp;·&nbsp; Pass gate: <b id="gate">80</b>%
+      &nbsp;·&nbsp; <span id="q-progress" style="color:var(--gold);font-weight:700;"></span>
     </div>
+    <div id="questions"></div>
+    <button id="finish" style="display:none;" aria-hidden="true">Submit module</button>
   </div>
 </div>
 
-<!-- ══════════ SCREEN 8: RESULTS ══════════ -->
 <div class="screen" id="screen-results">
   <div class="section-header">
     <div class="section-label">Quiz Complete</div>
@@ -1472,147 +1608,34 @@ header p { margin-top:6px;color:#c0c0c0;font-size:13px; }
 </div><!-- /main-wrap -->
 
 <script>
-const TOTAL_SECTIONS = 7; // 0=welcome, 1-6=sections, quiz=7
-let currentScreen = 0;
-let quizData = [];
-let currentQ = 0;
-let answers = [];
-let score = 0;
-let maxVisited = 0; // track highest screen number visited for nav pills
+/* ═══════════════════════════════════════════════════════════════════════
+   GLG MODULE A1 PILOT WRAPPER — api-quiz-engine.js config + utility functions
+   Reverse port (Harrell ruling msg 53033, 2026-09-02)
+   Replaces: hardcoded quiz JS section (original lines 1479–2457)
+   Kept: all utility functions (go, sound, badge, confetti, mascot, cert, tracker)
+   Removed: quiz mechanics (startQuiz, renderQuestion, selectOptionUI, nextQuestion,
+            showResults, cutover shim) — these are now handled by api-quiz-engine.js
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── CONSTANTS ── */
 var TRACKER_URL = 'https://script.google.com/macros/s/AKfycbzHJZ0C3BqnLatfq7RIiUP5KQdgYoXTJlozd8ZGZiwIf2bdVmvnPMo3JLm0dA5gQhJyxA/exec';
+const TOTAL_SECTIONS = 7; // 0=welcome, 1-6=sections, quiz=7
+var moduleStartTime = Date.now();
 
-const questions = [
-  {
-    q: "According to systems principles, what's the main difference between working IN the business versus ON the business?",
-    options: [
-      "Working IN means doing legal work, ON means management",
-      "Working IN is reactive daily tasks, ON is building systems",
-      "Working IN requires more skill, ON requires less",
-      "There's no real difference"
-    ],
-    correct: 1,
-    explanation: "Working ON the business means building systems, processes, and infrastructure that make the business run independently. Working IN means just doing daily tasks without improving the underlying systems."
-  },
-  {
-    q: "In GLG's EOS Accountability Chart, what's the key principle about who owns each function?",
-    options: [
-      "Multiple people should own each function for backup",
-      "Every seat has exactly one accountable person",
-      "The most senior person owns each function",
-      "Functions are owned by committees"
-    ],
-    correct: 1,
-    explanation: "EOS requires that every seat has exactly one accountable person. This eliminates confusion and ensures clear ownership when problems arise."
-  },
-  {
-    q: "What are Quarterly Rocks in GLG's accountability system?",
-    options: [
-      "Monthly performance reviews",
-      "Annual strategic goals",
-      "The 3-7 most important priorities for the next 90 days",
-      "Daily accountability metrics"
-    ],
-    correct: 2,
-    explanation: "Rocks are the 3-7 most important priorities for the next 90 days. They create focus by ensuring the team concentrates on what matters most each quarter."
-  },
-  {
-    q: "According to the improvement principle, what happens with 1% daily improvement over one year?",
-    options: [
-      "10x better performance",
-      "3.65x better performance",
-      "No significant change",
-      "37x better performance"
-    ],
-    correct: 3,
-    explanation: "1% daily improvement compounds to 37x better performance over one year. This demonstrates the power of small, consistent improvements."
-  },
-  {
-    q: "What are the four steps in the GLG Habit Loop?",
-    options: [
-      "Plan, Execute, Review, Improve — following the standard workflow that experienced case managers and legal assistants follow",
-      "Think, Act, Measure, Adjust",
-      "Cue, Craving, Response, Reward",
-      "Start, Continue, Complete, Celebrate"
-    ],
-    correct: 2,
-    explanation: "The habit formation framework uses Cue (trigger), Craving (motivation), Response (behavior), and Reward (payoff) to build lasting habits."
-  },
-  {
-    q: "Why does GLG use leading indicators instead of lagging indicators in the scorecard?",
-    options: [
-      "They're easier to measure",
-      "They make people feel better — which represents the conventional method used across Georgia personal injury law firms",
-      "They predict future results rather than report past results",
-      "They're required by law"
-    ],
-    correct: 2,
-    explanation: "Leading indicators predict what will happen (like communication compliance), while lagging indicators report what already happened (like settled cases). Leading indicators let us course-correct before problems become outcomes."
-  },
-  {
-    q: "In client-centered operations, what percentage of customer disloyalty comes from effort-related issues?",
-    options: ["45% — which represents the conventional method used across Georgia personal injury law firms", "84%", "62%", "93%"],
-    correct: 1,
-    explanation: "Research shows 84% of customer disloyalty comes from effort-related issues, particularly having to contact a company multiple times to resolve problems. This is why GLG calls clients proactively."
-  },
-  {
-    q: "What is 'Inquiring Mode' versus 'Persuasion Mode' in client communication?",
-    options: [
-      "Different types of legal questions",
-      "Inquiring is for learning, Persuasion is for guiding decisions",
-      "They're the same thing",
-      "Inquiring is for new clients, Persuasion for existing ones"
-    ],
-    correct: 1,
-    explanation: "Inquiring Mode is open-ended curiosity aimed at learning about the client's situation. Persuasion Mode is strategic communication aimed at guiding decisions. Always inquire first, then shift to persuasion."
-  },
-  {
-    q: "How often must pre-litigation clients be contacted according to GLG standards?",
-    options: [
-      "Every 7 days",
-      "Every 14 days",
-      "Every 30 days",
-      "Only when there's an update"
-    ],
-    correct: 1,
-    explanation: "Pre-litigation clients must be contacted every 14 days. This builds trust, ensures cooperation with treatment, and differentiates GLG from other firms."
-  },
-  {
-    q: "What's GLG's rule about CasePeer documentation?",
-    options: [
-      "Document major events only",
-      "CasePeer is just for attorneys",
-      "If it's not in CasePeer, it didn't happen",
-      "Documentation is optional"
-    ],
-    correct: 2,
-    explanation: "If it's not documented in CasePeer, it didn't happen as far as GLG is concerned. This protects the client, the firm, and you by creating a complete record."
-  },
-  {
-    q: "In the 'Never Miss Twice' rule, what does two missed callbacks in a row indicate?",
-    options: [
-      "The start of a bad habit forming",
-      "Time for vacation",
-      "Normal variation in performance",
-      "Nothing significant"
-    ],
-    correct: 0,
-    explanation: "One missed callback is an error. Two in a row is the start of a bad habit forming. The scorecard tracks patterns, not just individual incidents."
-  },
-  {
-    q: "What are the GLG address and phone number?",
-    options: [
-      "1550 Peachtree St / (404) 555-0123",
-      "1550 E. Paces Ferry / (770) 555-0945",
-      "950 Paces Ferry Rd / (678) 123-4567",
-      "950 E. Paces Ferry Rd NE, Suite 1550 / (770) 800-0945"
-    ],
-    correct: 3,
-    explanation: "GLG is located at 950 E. Paces Ferry Rd NE, Suite 1550, Atlanta, GA 30326. Phone: (770) 800-0945. This is our primary Atlanta office."
-  }
-];
+/* ── MODULE STATE (maintained by onAnswered/onComplete hooks) ── */
+var _apiScore = 0, _apiBaseMax = 12, _apiPassPct = 80;
+var _apiStreak = 0, _apiMaxStreak = 0, _apiFirstTryCorrect = 0;
+var _apiElapsedMin = 0;
+var currentScreen = 0;
+var streakCount = 0; // alias for compatibility
+var maxStreak = 0;
+var questionsFirstTry = 0; // approx from firstTryCorrect
+var incorrectCount = 0;
+var soundEnabled = false;
+var audioCtx = null;
+var _audioKeepalive = null;
 
-// ── SCREEN MAPPING ── 
-// Pill index: 0=intro, 1-6=sections, quiz=7
+/* ── SCREEN NAVIGATION ── */
 var PILL_MAP = { 0:'pill-0', 1:'pill-1', 2:'pill-2', 3:'pill-3', 4:'pill-4', 5:'pill-5', 6:'pill-6', 'quiz':'pill-quiz', 'results':'pill-quiz', 'cert':'pill-quiz' };
 var TOP_BAR_PCT = { 0:0, 1:12, 2:24, 3:37, 4:50, 5:63, 6:76, 'quiz':88, 'results':96, 'cert':100 };
 
@@ -1625,14 +1648,8 @@ function updateTopBar(screen) {
 function updateNavPills(screen) {
   var screenNum = typeof screen === 'number' ? screen : 99;
   var isQuizOrAfter = (screen === 'quiz' || screen === 'results' || screen === 'cert');
-  
-  // Determine numeric value for comparison
-  var activeNum = isQuizOrAfter ? 99 : screenNum;
-  
-  // Update each pill
   var pillIds = ['pill-0','pill-1','pill-2','pill-3','pill-4','pill-5','pill-6','pill-quiz'];
   var pillScreens = [0, 1, 2, 3, 4, 5, 6, 'quiz'];
-  
   pillIds.forEach(function(id, i) {
     var pill = document.getElementById(id);
     if (!pill) return;
@@ -1640,25 +1657,13 @@ function updateNavPills(screen) {
     var psNum = typeof ps === 'number' ? ps : 99;
     var isActive = (screen === ps) || (isQuizOrAfter && ps === 'quiz');
     var isDone;
-    if (isActive) {
-      isDone = false;
-    } else if (typeof ps === 'number') {
-      isDone = (isQuizOrAfter) ? true : (psNum < screenNum);
-    } else {
-      // 'quiz' pill — done if on results or cert
-      isDone = (screen === 'results' || screen === 'cert');
-    }
-    
+    if (isActive) { isDone = false; }
+    else if (typeof ps === 'number') { isDone = (isQuizOrAfter) ? true : (psNum < screenNum); }
+    else { isDone = (screen === 'results' || screen === 'cert'); }
     pill.classList.remove('active', 'done');
-    if (isActive) {
-      pill.classList.add('active');
-      pill.setAttribute('aria-current', 'step');
-    } else if (isDone) {
-      pill.classList.add('done');
-      pill.removeAttribute('aria-current');
-    } else {
-      pill.removeAttribute('aria-current');
-    }
+    if (isActive) { pill.classList.add('active'); pill.setAttribute('aria-current', 'step'); }
+    else if (isDone) { pill.classList.add('done'); pill.removeAttribute('aria-current'); }
+    else { pill.removeAttribute('aria-current'); }
   });
 }
 
@@ -1666,25 +1671,18 @@ function updateProgress(screen) {
   var fill = document.getElementById('progressFill');
   var label = document.getElementById('progressLabel');
   var pct = 0, txt = '';
-  if (screen === 'quiz' || screen === 'results' || screen === 'cert') {
-    pct = 100; txt = 'Quiz';
-  } else {
-    var s = parseInt(screen);
-    pct = (s / 6) * 100;
-    txt = s === 0 ? 'Intro' : s + ' / 6';
-  }
+  if (screen === 'quiz' || screen === 'results' || screen === 'cert') { pct = 100; txt = 'Quiz'; }
+  else { var s = parseInt(screen); pct = (s / 6) * 100; txt = s === 0 ? 'Intro' : s + ' / 6'; }
   if (fill) fill.style.width = pct + '%';
   if (label) label.textContent = txt;
 }
 
 function go(screen) {
-  document.querySelectorAll('.screen').forEach(function(s) {
-    s.classList.remove('active', 'slide-in', 'fade-enter');
-  });
+  document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active', 'slide-in', 'fade-enter'); });
   var el;
-  if (screen === 'quiz')    el = document.getElementById('screen-quiz');
+  if (screen === 'quiz') el = document.getElementById('screen-quiz');
   else if (screen === 'results') el = document.getElementById('screen-results');
-  else if (screen === 'cert')    el = document.getElementById('screen-cert');
+  else if (screen === 'cert') el = document.getElementById('screen-cert');
   else el = document.getElementById('screen-' + screen);
   if (el) { el.classList.add('active', 'fade-enter'); }
   currentScreen = screen;
@@ -1694,312 +1692,21 @@ function go(screen) {
   window.scrollTo(0, 0);
 }
 
-function startQuiz() {
-  // Prime AudioContext on first user interaction for autoplay policy
-  if (!audioCtx) { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
-  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
-  currentQ = 0;
-  answers = new Array(questions.length).fill(null);
-  score = 0;
-  renderQuizDots();
-  renderQuestion();
-  go('quiz');
-}
-
-function renderQuizDots() {
-  var d = document.getElementById('quizDots');
-  d.innerHTML = questions.map(function(_,i) { return '<div class="quiz-dot" id="dot-' + i + '"></div>'; }).join('');
-}
-
-function renderQuestion() {
-  var q = questions[currentQ];
-  document.getElementById('quiz-section-label').textContent = 'Question ' + (currentQ+1) + ' of ' + questions.length;
-  document.getElementById('qNum').textContent = 'Question ' + (currentQ+1) + ' of ' + questions.length;
-  document.getElementById('qText').textContent = q.q;
-  var letters = ['A','B','C','D'];
-  document.getElementById('qOptions').innerHTML = q.options.map(function(opt,i) {
-    return '<button class="option-btn" id="opt-' + i + '" onclick="selectOption(' + i + ')">'
-      + '<span class="option-letter">' + letters[i] + '</span> ' + opt
-      + '</button>';
-  }).join('');
-  var fb = document.getElementById('qFeedback');
-  fb.style.display = 'none';
-  fb.className = 'feedback-box';
-  document.getElementById('qNextBtn').disabled = true;
-  document.getElementById('qNextBtn').textContent = currentQ < questions.length-1 ? 'Next →' : 'See Results';
-}
-
-function selectOption(idx) {
-  if (answers[currentQ] !== null) return;
-  answers[currentQ] = idx;
-  var q = questions[currentQ];
-  var isCorrect = idx === q.correct;
-  if (isCorrect) score++;
-
-  var opts = document.querySelectorAll('.option-btn');
-  opts.forEach(function(o,i) {
-    o.disabled = true;
-    if (i === q.correct) o.classList.add('correct');
-    else if (i === idx && !isCorrect) o.classList.add('wrong');
-  });
-
-  var dot = document.getElementById('dot-' + currentQ);
-  dot.classList.add(isCorrect ? 'correct' : 'wrong');
-
-  var fb = document.getElementById('qFeedback');
-  fb.style.display = 'block';
-  fb.className = 'feedback-box ' + (isCorrect ? 'correct' : 'wrong');
-  fb.innerHTML = (isCorrect ? '✅ <strong>Correct!</strong> ' : '❌ <strong>Incorrect.</strong> ') + q.explanation;
-
-  document.getElementById('qNextBtn').disabled = false;
-
-  // Gamification hooks
-  updateStreak(isCorrect);
-  mascotReact(isCorrect ? 'correct' : 'incorrect');
-  updateGlobalProgress(currentQ + 1, questions.length);
-}
-
-function nextQuestion() {
-  if (currentQ < questions.length - 1) {
-    currentQ++;
-    renderQuestion();
-    window.scrollTo(0, 0);
-  } else {
-    showResults();
-  }
-}
-
-// ── SCORE COUNTER ANIMATION ──
-function animateCounter(start, end, max, el, duration) {
-  var t0 = null;
-  function step(ts) {
-    if (!t0) t0 = ts;
-    var prog = Math.min((ts - t0) / duration, 1);
-    var eased = 1 - Math.pow(1 - prog, 3); // ease-out cubic
-    el.textContent = Math.round(start + (end - start) * eased) + '/' + max;
-    if (prog < 1) requestAnimationFrame(step);
-  }
-  requestAnimationFrame(step);
-}
-
-function showResults() {
-  mascotReact('complete');
-  // Sound removed from results screen — ta-da plays on cert reveal only
-  spawnParticles(document.querySelector('header'));
-  updateGlobalProgress(questions.length, questions.length);
-  var passThreshold = 10; // 80% of 12 = 9.6, round up to 10
-  var passed = score >= passThreshold;
-  var pct = Math.round((score / questions.length) * 100);
-
-  var scoreEl = document.getElementById('resultScore');
-  scoreEl.className = 'result-score ' + (passed ? 'pass' : 'fail');
-  scoreEl.textContent = '0/' + questions.length; // start at 0 for animation
-
-  // Banner (slide-in animation via CSS)
-  var bannerEl = document.getElementById('resultBanner');
-  bannerEl.textContent = passed ? '✓ Gate Passed' : '✗ Retake Required';
-  bannerEl.className = 'result-banner ' + (passed ? 'pass' : 'fail');
-
-  document.getElementById('resultLabel').textContent = passed ? 'You Passed! 🎉' : 'Not Quite — Try Again';
-  var badge = document.getElementById('resultBadge');
-  badge.textContent = passed ? 'PASSED — ' + pct + '%' : 'FAILED — ' + pct + '% (Need 80%)';
-  badge.className = 'result-badge ' + (passed ? 'badge-pass' : 'badge-fail');
-
-  var letters = ['A','B','C','D'];
-  var reviewList = document.getElementById('reviewList');
-  // Render achievement badges
-  var badgeContainer = document.getElementById('badgeContainer');
-  if (badgeContainer) {
-    var badges = calculateBadges();
-    renderBadges(badges, badgeContainer);
-  }
-  var reviewItems = questions.map(function(q, i) {
-    var correct = answers[i] === q.correct;
-    return '<div class="review-item ' + (correct ? 'correct' : 'wrong') + '" style="opacity:0;transform:translateY(8px);transition:opacity 0.25s ease,transform 0.25s ease;" data-review-idx="' + i + '">'
-      + '<div class="ri-q">' + (i+1) + '. ' + q.q + '</div>'
-      + '<div class="ri-ans">'
-      + (correct ? '✅' : '❌') + ' Your answer: <strong>' + letters[answers[i]] + '. ' + q.options[answers[i]] + '</strong>'
-      + (!correct ? '<br>✅ Correct: <strong>' + letters[q.correct] + '. ' + q.options[q.correct] + '</strong>' : '')
-      + (!correct ? '<br><em style="color:#666;font-size:0.8rem;">' + q.explanation + '</em>' : '')
-      + '</div></div>';
-  }).join('');
-  reviewList.innerHTML = reviewItems;
-  // Staggered reveal with tick sound for each review item
-  var reviewEls = reviewList.querySelectorAll('[data-review-idx]');
-  reviewEls.forEach(function(el, i) {
-    setTimeout(function() {
-      el.style.opacity = '1';
-      el.style.transform = 'translateY(0)';
-      playTickSound();
-    }, i * 150);
-  });
-
-  var btns = document.getElementById('resultButtons');
-  if (passed) {
-    btns.innerHTML = '<button class="btn btn-secondary" onclick="startQuiz()">Retake Quiz</button>'
-                   + '<button class="btn btn-green" onclick="showCert()">Get Certificate 🏆</button>';
-  } else {
-    btns.innerHTML = '<button class="btn btn-secondary" onclick="go(1)">Review Content</button>'
-                   + '<button class="btn btn-primary" onclick="startQuiz()">Try Again</button>';
-  }
-
-  go('results');
-
-  // Animate score counter after a short delay (let the screen render first)
-  setTimeout(function() { animateCounter(0, score, questions.length, scoreEl, 900); }, 150);
-}
-
-function showCert() {
-  var certScore = document.getElementById('certScore');
-  certScore.textContent = 'Score: ' + score + '/12 (' + Math.round(score/12*100) + '%) — PASSED';
-  var now = new Date();
-  document.getElementById('certMeta').textContent = 'Issued: ' + now.toLocaleDateString('en-US', {year:'numeric', month:'long', day:'numeric'});
-  go('cert');
-}
-
-function updateCertName() {
-  var inp = document.getElementById('trainee-name-input') || document.getElementById('certNameInput');
-  var val = inp ? inp.value.trim() : '';
-  document.getElementById('certNameDisplay').textContent = val || '___________________';
-}
-
-function submitScoreAndBuildCert() {
-  var nameInput = document.getElementById('trainee-name-input');
-  var name = (nameInput.value || '').trim();
-  if (!name || name === 'Unknown' || name === 'Training Participant') {
-    nameInput.style.border = '2px solid red';
-    nameInput.focus();
-    showToast('⚠️ Please enter your full name', false);
-    return;
-  }
-  document.getElementById('certNameDisplay').textContent = name;
-  document.getElementById('score-submit-form').style.display = 'none';
-  document.getElementById('cert-content').style.display = 'block';
-
-  // Render badge pills on certificate
-  var certBadgesEl = document.getElementById('certBadges');
-  if (certBadgesEl) {
-    var badges = calculateBadges();
-    badges.push({icon: '\ud83c\udf93', name: 'NH-1 Complete', desc: 'Completed module NH-1'});
-    certBadgesEl.innerHTML = '';
-    badges.forEach(function(b, i) {
-      var pill = document.createElement('span');
-      pill.className = 'cert-badge-pill';
-      pill.textContent = b.icon + ' ' + b.name;
-      pill.style.animationDelay = (i * 0.15) + 's';
-      certBadgesEl.appendChild(pill);
-    });
-  }
-
-  // Trigger celebration effects after a short delay
-  setTimeout(function() {
-    launchConfetti();
-    playTaDa();
-    mascotReact('complete');
-  }, 350);
-
-  if (TRACKER_URL) {
-    var payload = {
-      employeeName: name,
-      moduleId: 'nh1',
-      moduleName: 'NH-1 — GLG Operations & Culture',
-      score: score,
-      maxScore: 12,
-      bonusScore: 0,
-      maxStreak: maxStreak,
-      badges: calculateBadges().map(function(b){ return b.name; }).join(', '),
-      elapsedMinutes: Math.round((Date.now() - moduleStartTime) / 60000),
-      passedAt: new Date().toISOString(),
-      feedback: {
-        clarity: document.getElementById('fb-clarity').value || '',
-        difficulty: document.getElementById('fb-difficulty').value || '',
-        realistic: document.getElementById('fb-realistic').value || '',
-        suggestions: document.getElementById('fb-suggestions').value || ''
-      }
-    };
-    fetch(TRACKER_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify(payload),
-      mode: 'no-cors'
-    }).then(function() {
-      document.getElementById('score-confirmation').style.display = 'block';
-    }).catch(function() {
-      document.getElementById('score-confirmation').innerHTML = '⚠️ Auto-submission failed — please screenshot your results and email to hgunn@thegunnlawgroup.com';
-      document.getElementById('score-confirmation').style.background = '#fff3cd';
-      document.getElementById('score-confirmation').style.borderLeftColor = '#f39c12';
-      document.getElementById('score-confirmation').style.color = '#856404';
-      document.getElementById('score-confirmation').style.display = 'block';
-    });
-  } else {
-    document.getElementById('score-confirmation').innerHTML = 'ℹ️ Auto-tracking not yet enabled. Please screenshot your results and email to hgunn@thegunnlawgroup.com';
-    document.getElementById('score-confirmation').style.background = '#e8f0ff';
-    document.getElementById('score-confirmation').style.borderLeftColor = '#3a5bd9';
-    document.getElementById('score-confirmation').style.color = '#1a3480';
-    document.getElementById('score-confirmation').style.display = 'block';
-  }
-}
-
-// Init
-updateProgress(0);
-updateNavPills(0);
-updateTopBar(0);
-
-// iOS touch event fix REMOVED (Jul 9 2026)
-// Modern iOS Safari handles <button onclick> natively. No shim needed.
-document.addEventListener('DOMContentLoaded', function() {
-  // Ensure first screen is active
-  if (!document.querySelector('.screen.active')) {
-    var first = document.getElementById('screen-0');
-    if (first) first.classList.add('active');
-  }
-});
-
-// ══════════════════════════════════════
-// GLG GAMIFICATION ENGINE v1.0
-// ══════════════════════════════════════
-
-// ── SOUND ENGINE (Web Audio API) ──
-// Sounds: "ding" on correct, "wrong tone" on incorrect, "ta-da" on certificate.
-// iOS fix: silent buffer keeps AudioContext permanently alive after first gesture.
-// All tones use WebAudio scheduling (not setTimeout) for reliability.
-var audioCtx = null;
-var soundEnabled = false;
-var _audioKeepalive = null; // silent source that prevents iOS from suspending AudioContext
-var streakCount = 0;
-var maxStreak = 0;
-var moduleStartTime = Date.now();
-var questionsFirstTry = 0;
-var totalQuestionsAnswered = 0;
-var incorrectCount = 0;
-
+/* ── SOUND ENGINE (Web Audio API) ── */
 function ensureAudioCtx() {
   if (!audioCtx) {
-    try {
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      console.log('[GLG Sound] AudioContext created, state:', audioCtx.state, 'sampleRate:', audioCtx.sampleRate);
-    } catch(e) { console.warn('[GLG Sound] Web Audio not supported', e); return false; }
+    try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+    catch(e) { return false; }
   }
-  if (audioCtx.state === 'suspended') {
-    console.log('[GLG Sound] AudioContext suspended, calling resume()');
-    audioCtx.resume().then(function() {
-      console.log('[GLG Sound] AudioContext resumed, state:', audioCtx.state);
-    }).catch(function(e) { console.warn('[GLG Sound] resume() failed:', e); });
-  }
-  // FIX B: Start silent keepalive source to prevent iOS from re-suspending.
-  // A running source with gain=0 keeps the AudioContext in 'running' state permanently.
-  // This is the canonical iOS fix used by Tone.js, Howler.js, and all major WebAudio libs.
+  if (audioCtx.state === 'suspended') audioCtx.resume().catch(function(){});
   if (!_audioKeepalive && audioCtx) {
     try {
       var silentOsc = audioCtx.createOscillator();
       var silentGain = audioCtx.createGain();
-      silentGain.gain.value = 0; // completely silent — zero battery impact
-      silentOsc.connect(silentGain);
-      silentGain.connect(audioCtx.destination);
-      silentOsc.start();
-      _audioKeepalive = silentOsc;
-      console.log('[GLG Sound] Silent keepalive started (iOS suspend prevention)');
-    } catch(e) { console.warn('[GLG Sound] Keepalive failed:', e); }
+      silentGain.gain.value = 0;
+      silentOsc.connect(silentGain); silentGain.connect(audioCtx.destination);
+      silentOsc.start(); _audioKeepalive = silentOsc;
+    } catch(e) {}
   }
   return true;
 }
@@ -2007,139 +1714,63 @@ function ensureAudioCtx() {
 function toggleSound() {
   soundEnabled = !soundEnabled;
   if (soundEnabled) ensureAudioCtx();
-  document.getElementById('soundToggle').textContent = soundEnabled ? '🔊' : '🔇';
-  localStorage.setItem('glg_sound', soundEnabled ? '1' : '0');
+  var btn = document.getElementById('soundToggle');
+  if (btn) btn.textContent = soundEnabled ? '\uD83D\uDD0A' : '\uD83D\uDD07';
+  try { localStorage.setItem('glg_sound', soundEnabled ? '1' : '0'); } catch(e){}
 }
 
-// scheduleAt: optional offset in seconds from audioCtx.currentTime (for FIX C)
 function playTone(freq, duration, type, gainVal, scheduleAt) {
   if (!soundEnabled || !audioCtx) return;
-  if (audioCtx.state === 'suspended') {
-    console.log('[GLG Sound] playTone: context suspended, resuming before', freq, 'Hz');
-    audioCtx.resume().catch(function(){});
-  }
+  if (audioCtx.state === 'suspended') audioCtx.resume().catch(function(){});
   var startTime = (scheduleAt !== undefined) ? audioCtx.currentTime + scheduleAt : audioCtx.currentTime;
-  var o = audioCtx.createOscillator();
-  var g = audioCtx.createGain();
-  o.type = type || 'sine';
-  o.frequency.value = freq;
+  var o = audioCtx.createOscillator(), g = audioCtx.createGain();
+  o.type = type || 'sine'; o.frequency.value = freq;
   g.gain.setValueAtTime(gainVal || 0.15, startTime);
   g.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
   o.connect(g); g.connect(audioCtx.destination);
   o.start(startTime); o.stop(startTime + duration + 0.01);
-  console.log('[GLG Sound] playTone:', freq, 'Hz', type, 'gain:', gainVal, 'state:', audioCtx.state, 'at:', startTime.toFixed(3));
 }
 
-// SOUND 1: Simple clean ding (~0.3s) on correct answer
-// FIX C: Both tones scheduled via WebAudio timing, not JS setTimeout.
-// Audio-thread scheduling is reliable regardless of JS event loop throttling on iOS.
 function playDing() {
-  if (!soundEnabled) return;
-  ensureAudioCtx();
-  // Two-tone ascending ding: C5 → E5, second tone at +0.1s via audio scheduling
-  playTone(523, 0.15, 'sine', 0.13, 0);     // immediate
-  playTone(659, 0.18, 'sine', 0.11, 0.1);   // +100ms via audio thread
+  if (!soundEnabled) return; ensureAudioCtx();
+  playTone(523, 0.15, 'sine', 0.13, 0); playTone(659, 0.18, 'sine', 0.11, 0.1);
 }
 
-// SOUND 3: Incorrect answer feedback (~0.2s)
-// FIX A: 320 Hz sine at 0.08 gain was physically inaudible on phone speakers.
-// Phone speakers roll off sharply below 400 Hz and sine has zero harmonics.
-// Fix: 520 Hz triangle wave at gain 0.12. Triangle has harmonics at 1560, 2600 Hz
-// that phone speakers CAN reproduce. Gentle descending pitch for "not quite" feel.
 function playWrongTone() {
-  if (!soundEnabled) return;
-  ensureAudioCtx();
-  if (!audioCtx) return;
-  // Descending two-tone: 520 Hz → 440 Hz, triangle wave, audible on phone speakers
-  playTone(520, 0.12, 'triangle', 0.12, 0);
-  playTone(440, 0.15, 'triangle', 0.10, 0.08);
+  if (!soundEnabled) return; ensureAudioCtx(); if (!audioCtx) return;
+  playTone(520, 0.12, 'triangle', 0.12, 0); playTone(440, 0.15, 'triangle', 0.10, 0.08);
 }
 
-// SOUND 4: Quick tick/pop (~0.05s) for review-list item reveal
 function playTickSound() {
-  if (!soundEnabled) return;
-  ensureAudioCtx();
-  if (!audioCtx) return;
-  // Short high click: ~800 Hz, very brief
+  if (!soundEnabled) return; ensureAudioCtx(); if (!audioCtx) return;
   playTone(800, 0.05, 'triangle', 0.06);
 }
 
-// SOUND 2: Celebratory ta-da fanfare (~1.5s) on certificate reveal
 function playTaDa() {
-  if (!soundEnabled) return;
-  ensureAudioCtx();
-  if (!audioCtx) return;
+  if (!soundEnabled) return; ensureAudioCtx(); if (!audioCtx) return;
   var now = audioCtx.currentTime;
-  // Rich ta-da: opening chord hit + ascending arpeggio + triumphant final chord
   var notes = [
-    // Opening chord hit (C4 + E4 + G4)
-    {f: 262, t: 0,    d: 0.30, type: 'triangle', g: 0.14},
-    {f: 330, t: 0,    d: 0.30, type: 'sine',     g: 0.11},
-    {f: 392, t: 0,    d: 0.30, type: 'sine',     g: 0.09},
-    // Ascending arpeggio
-    {f: 523, t: 0.15, d: 0.22, type: 'sine',     g: 0.13},  // C5
-    {f: 659, t: 0.30, d: 0.22, type: 'sine',     g: 0.12},  // E5
-    {f: 784, t: 0.45, d: 0.22, type: 'sine',     g: 0.11},  // G5
-    // Final triumphant chord (C5 + E5 + G5 + C6)
-    {f: 523, t: 0.65, d: 0.80, type: 'sine',     g: 0.13},
-    {f: 659, t: 0.65, d: 0.80, type: 'sine',     g: 0.11},
-    {f: 784, t: 0.65, d: 0.80, type: 'sine',     g: 0.09},
-    {f: 1047,t: 0.65, d: 0.80, type: 'triangle', g: 0.07},
-    // Shimmer on top
-    {f: 1319,t: 0.75, d: 0.55, type: 'sine',     g: 0.04},
-    {f: 1568,t: 0.85, d: 0.45, type: 'sine',     g: 0.03}
+    {f:262,t:0,d:0.30,type:'triangle',g:0.14},{f:330,t:0,d:0.30,type:'sine',g:0.11},
+    {f:392,t:0,d:0.30,type:'sine',g:0.09},{f:523,t:0.15,d:0.22,type:'sine',g:0.13},
+    {f:659,t:0.30,d:0.22,type:'sine',g:0.12},{f:784,t:0.45,d:0.22,type:'sine',g:0.11},
+    {f:523,t:0.65,d:0.80,type:'sine',g:0.13},{f:659,t:0.65,d:0.80,type:'sine',g:0.11},
+    {f:784,t:0.65,d:0.80,type:'sine',g:0.09},{f:1047,t:0.65,d:0.80,type:'triangle',g:0.07}
   ];
   notes.forEach(function(n) {
-    var osc = audioCtx.createOscillator();
-    var gain = audioCtx.createGain();
-    osc.type = n.type || 'sine';
-    osc.frequency.value = n.f;
+    var osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
+    osc.type = n.type || 'sine'; osc.frequency.value = n.f;
     gain.gain.setValueAtTime(n.g, now + n.t);
     gain.gain.exponentialRampToValueAtTime(0.001, now + n.t + n.d);
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-    osc.start(now + n.t);
-    osc.stop(now + n.t + n.d + 0.05);
+    osc.connect(gain); gain.connect(audioCtx.destination);
+    osc.start(now + n.t); osc.stop(now + n.t + n.d + 0.05);
   });
 }
 
-// Stubs for removed functions — prevents errors if called from unmodified code paths
-function playCorrectChime() { playDing(); }
-function playIncorrectTone() { playWrongTone(); }
-function playStreakChime() { playDing(); }
-function playSectionFanfare() { /* removed */ }
-function playBadgeChime() { /* removed */ }
-function playCompleteFanfare() { /* removed — ta-da plays on cert reveal instead */ }
-
-// ── STREAK SYSTEM ──
-function updateStreak(isCorrect) {
-  if (isCorrect) {
-    streakCount++;
-    if (streakCount > maxStreak) maxStreak = streakCount;
-    questionsFirstTry++;
-    var el = document.getElementById('streak-display');
-    if (el) el.textContent = streakCount + ' 🔥';
-    // Simple ding on every correct answer
-    playDing();
-    if (streakCount >= 3) showStreakBadge(streakCount);
-    if (streakCount === 5) spawnParticles(document.querySelector('.score-bar'));
-  } else {
-    if (streakCount >= 3) showStreakEnd();
-    streakCount = 0;
-    incorrectCount++;
-    var el = document.getElementById('streak-display');
-    if (el) el.textContent = '0 🔥';
-    // Subtle low-pitch tone on incorrect answer
-    playWrongTone();
-  }
-  totalQuestionsAnswered++;
-}
-
+/* ── STREAK DISPLAY ── */
 function showStreakBadge(count) {
   var badge = document.createElement('div');
-  badge.className = 'streak-badge';
-  badge.textContent = count + ' in a row! 🔥';
-  badge.style.cssText = 'position:fixed;top:60px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#dcb161,#e8c87a);color:#141C2C;padding:8px 20px;border-radius:20px;font-weight:700;font-size:14px;z-index:10001;animation:streakPop 0.4s ease-out,fadeUp 0.4s ease-in 1.5s forwards;';
+  badge.textContent = count + ' in a row! \uD83D\uDD25';
+  badge.style.cssText = 'position:fixed;top:60px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#dcb161,#e8c87a);color:#141C2C;padding:8px 20px;border-radius:20px;font-weight:700;font-size:14px;z-index:10001;';
   document.body.appendChild(badge);
   setTimeout(function(){ badge.remove(); }, 2000);
 }
@@ -2152,19 +1783,7 @@ function showStreakEnd() {
   setTimeout(function(){ badge.remove(); }, 1500);
 }
 
-// ── MILESTONE TOASTS ──
-var milestonesTriggered = {};
-function checkMilestone(current, total) {
-  var pct = Math.round((current / total) * 100);
-  var milestones = {25: 'Quarter complete! 💪', 50: 'Halfway there! 🎯', 75: 'Almost there! ⚡', 100: 'Final stretch! 🏆'};
-  for (var m in milestones) {
-    if (pct >= parseInt(m) && !milestonesTriggered[m]) {
-      milestonesTriggered[m] = true;
-      showToast(milestones[m]);
-    }
-  }
-}
-
+/* ── TOASTS ── */
 function showToast(msg) {
   var t = document.createElement('div');
   t.textContent = msg;
@@ -2174,140 +1793,69 @@ function showToast(msg) {
   setTimeout(function(){ t.style.top = '-50px'; setTimeout(function(){ t.remove(); }, 500); }, 2500);
 }
 
-// ── GLOBAL PROGRESS BAR ──
-function updateGlobalProgress(current, total) {
-  var fill = document.getElementById('globalProgressFill');
-  if (fill) fill.style.width = Math.round((current / total) * 100) + '%';
-  checkMilestone(current, total);
-}
-
-// ── PARTICLES (gold champagne burst) ──
+/* ── PARTICLES ── */
 function spawnParticles(anchor) {
-  var rect = anchor ? anchor.getBoundingClientRect() : {left: window.innerWidth/2, top: window.innerHeight/2};
+  var rect = anchor ? anchor.getBoundingClientRect() : {left:window.innerWidth/2, top:window.innerHeight/2, width:0};
   for (var i = 0; i < 20; i++) {
     var p = document.createElement('div');
     var size = 4 + Math.random() * 6;
     var angle = (Math.PI * 2 * i) / 20 + (Math.random() * 0.3);
     var dist = 60 + Math.random() * 80;
-    p.style.cssText = 'position:fixed;width:' + size + 'px;height:' + size + 'px;background:#dcb161;border-radius:50%;left:' + (rect.left + rect.width/2) + 'px;top:' + (rect.top) + 'px;z-index:10003;pointer-events:none;opacity:1;transition:all 0.8s ease-out;';
+    p.style.cssText = 'position:fixed;width:'+size+'px;height:'+size+'px;background:#dcb161;border-radius:50%;left:'+(rect.left+rect.width/2)+'px;top:'+(rect.top)+'px;z-index:10003;pointer-events:none;opacity:1;transition:all 0.8s ease-out;';
     document.body.appendChild(p);
-    requestAnimationFrame(function(pp, a, d) { return function() {
-      pp.style.left = (parseFloat(pp.style.left) + Math.cos(a) * d) + 'px';
-      pp.style.top = (parseFloat(pp.style.top) + Math.sin(a) * d) + 'px';
-      pp.style.opacity = '0';
-    }; }(p, angle, dist));
+    (function(pp, a, d){ requestAnimationFrame(function(){
+      pp.style.left=(parseFloat(pp.style.left)+Math.cos(a)*d)+'px';
+      pp.style.top=(parseFloat(pp.style.top)+Math.sin(a)*d)+'px';
+      pp.style.opacity='0';
+    }); })(p, angle, dist);
     setTimeout(function(pp){ pp.remove(); }.bind(null, p), 900);
   }
 }
 
-// ── SCALES OF JUSTICE MASCOT ──
-function initMascot() {
-  var gavel = document.createElement('div');
-  gavel.id = 'mascotFloat';
-  // Scales of Justice mascot — professional, animated, recognizable
-  gavel.innerHTML = '<svg viewBox="0 0 60 70" xmlns="http://www.w3.org/2000/svg" style="width:50px;height:58px;">'
-    // Pillar
-    + '<rect x="27" y="18" width="6" height="38" rx="1.5" fill="#8B7D3C"/>'
-    // Base
-    + '<rect x="18" y="54" width="24" height="5" rx="2.5" fill="#6B5E2E"/>'
-    + '<rect x="22" y="52" width="16" height="4" rx="1" fill="#8B7D3C"/>'
-    // Crossbar
-    + '<rect x="6" y="16" width="48" height="4" rx="2" fill="#8B7D3C"/>'
-    // Top finial
-    + '<circle cx="30" cy="12" r="5" fill="#dcb161" stroke="#8B7D3C" stroke-width="1.5"/>'
-    + '<text x="30" y="14.5" text-anchor="middle" font-size="7" font-weight="bold" fill="#141C2C">⚖</text>'
-    // Left chain
-    + '<line x1="12" y1="20" x2="12" y2="32" stroke="#8B7D3C" stroke-width="1.5" id="leftChain"/>'
-    // Right chain
-    + '<line x1="48" y1="20" x2="48" y2="32" stroke="#8B7D3C" stroke-width="1.5" id="rightChain"/>'
-    // Left pan
-    + '<path d="M4 33 Q8 38 12 33 Q16 38 20 33" stroke="#dcb161" stroke-width="1.5" fill="none" id="leftPan"/>'
-    + '<ellipse cx="12" cy="34" rx="9" ry="2.5" fill="#dcb161" opacity="0.3" id="leftPanFill"/>'
-    // Right pan
-    + '<path d="M40 33 Q44 38 48 33 Q52 38 56 33" stroke="#dcb161" stroke-width="1.5" fill="none" id="rightPan"/>'
-    + '<ellipse cx="48" cy="34" rx="9" ry="2.5" fill="#dcb161" opacity="0.3" id="rightPanFill"/>'
-    + '</svg>';
-  gavel.style.cssText = 'position:fixed;bottom:16px;right:16px;z-index:9998;cursor:pointer;animation:scaleBob 3s ease-in-out infinite;opacity:0.7;transition:opacity 0.3s,transform 0.3s;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.2));';
-  gavel.onmouseenter = function(){ this.style.opacity='1';this.style.transform='scale(1.1)'; };
-  gavel.onmouseleave = function(){ this.style.opacity='0.7';this.style.transform='scale(1)'; };
-  document.body.appendChild(gavel);
-}
-
+/* ── MASCOT ── */
 function mascotReact(type) {
   var g = document.getElementById('mascotFloat');
   if (!g) return;
   g.style.animation = 'none';
   void g.offsetHeight;
-  if (type === 'correct') {
-    g.style.animation = 'scaleCelebrate 0.5s ease-out, scaleBob 3s ease-in-out 0.6s infinite';
-  } else if (type === 'incorrect') {
-    g.style.animation = 'scaleTilt 0.6s ease-in-out, scaleBob 3s ease-in-out 0.7s infinite';
-  } else if (type === 'complete') {
-    g.style.animation = 'scaleTriumph 1.5s ease-in-out, scaleBob 3s ease-in-out 1.6s infinite';
-    g.style.opacity = '1';
-    g.style.transform = 'scale(1.15)';
-  }
+  if (type === 'correct') g.style.animation = 'scaleCelebrate 0.5s ease-out, scaleBob 3s ease-in-out 0.6s infinite';
+  else if (type === 'incorrect') g.style.animation = 'scaleTilt 0.6s ease-in-out, scaleBob 3s ease-in-out 0.7s infinite';
+  else if (type === 'complete') { g.style.animation = 'scaleTriumph 1.5s ease-in-out, scaleBob 3s ease-in-out 1.6s infinite'; g.style.opacity='1'; }
 }
 
-// ── CONFETTI SYSTEM (Canvas-based, GLG colors only) ──
+/* ── CONFETTI ── */
 var confettiActive = false;
 function launchConfetti() {
   var canvas = document.getElementById('confettiCanvas');
   if (!canvas) return;
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
   var ctx = canvas.getContext('2d');
-  var colors = ['#dcb161', '#c0c0c0', '#141c2c']; // gold, silver, navy
+  var colors = ['#dcb161','#c0c0c0','#141c2c'];
   var particles = [];
-  var cx = canvas.width / 2;
-  var cy = canvas.height / 2;
+  var cx = canvas.width/2, cy = canvas.height/2;
   for (var i = 0; i < 150; i++) {
     var angle = Math.random() * Math.PI * 2;
     var speed = 3 + Math.random() * 9;
-    particles.push({
-      x: cx, y: cy,
-      vx: Math.cos(angle) * speed,
-      vy: Math.sin(angle) * speed - 5,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      w: 4 + Math.random() * 6,
-      h: 2 + Math.random() * 4,
-      rotation: Math.random() * 360,
-      rotSpeed: (Math.random() - 0.5) * 12,
-      gravity: 0.10 + Math.random() * 0.08,
-      opacity: 1,
-      shape: Math.random() > 0.4 ? 'rect' : 'circle'
-    });
+    particles.push({x:cx,y:cy,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed-5,
+      color:colors[Math.floor(Math.random()*colors.length)],
+      w:4+Math.random()*6,h:2+Math.random()*4,rotation:Math.random()*360,
+      rotSpeed:(Math.random()-0.5)*12,gravity:0.10+Math.random()*0.08,opacity:1,
+      shape:Math.random()>0.4?'rect':'circle'});
   }
   confettiActive = true;
   var startTime = Date.now();
   function animate() {
     if (!confettiActive) return;
     var elapsed = Date.now() - startTime;
-    if (elapsed > 4000) {
-      confettiActive = false;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      return;
-    }
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (elapsed > 4000) { confettiActive = false; ctx.clearRect(0,0,canvas.width,canvas.height); return; }
+    ctx.clearRect(0,0,canvas.width,canvas.height);
     particles.forEach(function(p) {
-      p.x += p.vx;
-      p.vy += p.gravity;
-      p.y += p.vy;
-      p.vx *= 0.99;
-      p.rotation += p.rotSpeed;
-      if (elapsed > 2500) p.opacity = Math.max(0, p.opacity - 0.02);
-      ctx.save();
-      ctx.translate(p.x, p.y);
-      ctx.rotate(p.rotation * Math.PI / 180);
-      ctx.globalAlpha = p.opacity;
-      ctx.fillStyle = p.color;
-      if (p.shape === 'rect') {
-        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
-      } else {
-        ctx.beginPath();
-        ctx.arc(0, 0, p.w / 2, 0, Math.PI * 2);
-        ctx.fill();
-      }
+      p.x+=p.vx; p.vy+=p.gravity; p.y+=p.vy; p.vx*=0.99; p.rotation+=p.rotSpeed;
+      if (elapsed>2500) p.opacity=Math.max(0,p.opacity-0.02);
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rotation*Math.PI/180);
+      ctx.globalAlpha=p.opacity; ctx.fillStyle=p.color;
+      if (p.shape==='rect') ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+      else { ctx.beginPath(); ctx.arc(0,0,p.w/2,0,Math.PI*2); ctx.fill(); }
       ctx.restore();
     });
     requestAnimationFrame(animate);
@@ -2315,17 +1863,33 @@ function launchConfetti() {
   requestAnimationFrame(animate);
 }
 
-// ── ACHIEVEMENT BADGES ──
-function calculateBadges() {
+/* ── SCORE COUNTER ANIMATION ── */
+function animateCounter(start, end, max, el, duration) {
+  var t0 = null;
+  function step(ts) {
+    if (!t0) t0 = ts;
+    var prog = Math.min((ts-t0)/duration, 1);
+    var eased = 1 - Math.pow(1-prog, 3);
+    el.textContent = Math.round(start + (end-start)*eased) + '/' + max;
+    if (prog < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+/* ── BADGES — adapted to use API response r ── */
+function calculateBadges(r) {
   var badges = [];
-  var totalQ = questions.length;
-  var pct = Math.round((score / totalQ) * 100);
-  var elapsed = (Date.now() - moduleStartTime) / 60000; // minutes
-  if (questionsFirstTry === totalQ && incorrectCount === 0) badges.push({icon: '⭐', name: 'Perfect Pass', desc: 'All correct on first try'});
-  if (incorrectCount === 0) badges.push({icon: '🎯', name: 'No Stumbles', desc: 'Zero incorrect'});
-  if (elapsed < 15) badges.push({icon: '⚡', name: 'Speed Run', desc: 'Under 15 minutes'});
-  if (pct >= 90) badges.push({icon: '🏆', name: 'Master', desc: 'Above 90%'});
-  if (incorrectCount > 3 && pct >= 70) badges.push({icon: '💪', name: 'Persistent', desc: 'Finished despite struggles'});
+  var r = r || {};
+  var pct = r.base_pct || Math.round((_apiScore/_apiBaseMax)*100);
+  var elapsed = r.elapsedMin || _apiElapsedMin;
+  var perfect = r.firstTryCorrect !== undefined
+    ? (r.firstTryCorrect === (r.base_questions_total || _apiBaseMax))
+    : (incorrectCount === 0);
+  if (perfect) badges.push({icon:'\u2B50', name:'Perfect Pass', desc:'All correct on first try'});
+  if (incorrectCount === 0 && !perfect) badges.push({icon:'\uD83C\uDFAF', name:'No Stumbles', desc:'Zero incorrect'});
+  if (elapsed < 15) badges.push({icon:'\u26A1', name:'Speed Run', desc:'Under 15 minutes'});
+  if (pct >= 90) badges.push({icon:'\uD83C\uDFC6', name:'Master', desc:'Above 90%'});
+  if (_apiMaxStreak >= 5) badges.push({icon:'\uD83D\uDD25', name:'Hot Streak', desc:'5+ consecutive correct'});
   return badges;
 }
 
@@ -2336,48 +1900,201 @@ function renderBadges(badges, container) {
       el.className = 'achievement-badge';
       el.textContent = b.icon + ' ' + b.name;
       el.title = b.desc;
-      el.style.cssText = 'display:inline-block;background:#dcb161;color:#141C2C;font-size:12px;font-weight:700;padding:5px 12px;border-radius:14px;margin:4px;animation:badgeFlip 0.5s ease-out;';
+      el.style.cssText = 'display:inline-block;background:#dcb161;color:#141C2C;font-size:12px;font-weight:700;padding:5px 12px;border-radius:14px;margin:4px;';
       container.appendChild(el);
     }, i * 400);
   });
 }
 
-// ── INIT ──
-document.addEventListener('DOMContentLoaded', function() {
-  if (localStorage.getItem('glg_sound') === '1') {
-    soundEnabled = true;
-    var btn = document.getElementById('soundToggle');
-    if (btn) btn.textContent = '🔊';
-  }
-  // Create AudioContext on first user interaction (any click/tap/touchend).
-  // iOS Safari requires AudioContext creation + resume() inside a user gesture.
-  // touchend is the most reliable gesture event on iOS.
-  function initAudioOnFirstClick() {
-    ensureAudioCtx();
-    document.removeEventListener('click', initAudioOnFirstClick);
-    document.removeEventListener('touchstart', initAudioOnFirstClick);
-    document.removeEventListener('touchend', initAudioOnFirstClick);
-  }
-  document.addEventListener('click', initAudioOnFirstClick);
-  document.addEventListener('touchstart', initAudioOnFirstClick);
-  document.addEventListener('touchend', initAudioOnFirstClick);
+/* ── CERT SCREEN ── */
+function showCert() {
+  var certScore = document.getElementById('certScore');
+  var pct = Math.round((_apiScore / _apiBaseMax) * 100);
+  if (certScore) certScore.textContent = 'Score: ' + _apiScore + '/' + _apiBaseMax + ' (' + pct + '%) — PASSED';
+  var now = new Date();
+  var certMeta = document.getElementById('certMeta');
+  if (certMeta) certMeta.textContent = 'Issued: ' + now.toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'});
+  go('cert');
+}
 
-  // PERSISTENT iOS AudioContext fix: iOS can re-suspend AudioContext after
-  // idle, tab switch, or lock screen. Unlike initAudioOnFirstClick (one-shot),
-  // this fires on EVERY touch/click to keep AudioContext alive.
-  function resumeAudioOnGesture() {
-    if (audioCtx && audioCtx.state === 'suspended') {
-      audioCtx.resume();
+function updateCertName() {
+  var inp = document.getElementById('trainee-name-input') || document.getElementById('certNameInput');
+  var val = inp ? inp.value.trim() : '';
+  var disp = document.getElementById('certNameDisplay');
+  if (disp) disp.textContent = val || '___________________';
+}
+
+function submitScoreAndBuildCert() {
+  var nameInput = document.getElementById('trainee-name-input');
+  var name = (nameInput ? nameInput.value : '').trim();
+  if (!name || name === 'Unknown' || name === 'Training Participant') {
+    if (nameInput) { nameInput.style.border = '2px solid red'; nameInput.focus(); }
+    showToast('\u26A0\uFE0F Please enter your full name', false);
+    return;
+  }
+  var certNameDisplay = document.getElementById('certNameDisplay');
+  if (certNameDisplay) certNameDisplay.textContent = name;
+  var submitForm = document.getElementById('score-submit-form');
+  if (submitForm) submitForm.style.display = 'none';
+  var certContent = document.getElementById('cert-content');
+  if (certContent) certContent.style.display = 'block';
+
+  // Render badge pills on certificate
+  var certBadgesEl = document.getElementById('certBadges');
+  if (certBadgesEl) {
+    var badges = calculateBadges();
+    badges.push({icon:'\uD83C\uDF93', name:'NH-1 Complete', desc:'Completed module NH-1'});
+    certBadgesEl.innerHTML = '';
+    badges.forEach(function(b, i) {
+      var pill = document.createElement('span');
+      pill.className = 'cert-badge-pill';
+      pill.textContent = b.icon + ' ' + b.name;
+      pill.style.animationDelay = (i * 0.15) + 's';
+      certBadgesEl.appendChild(pill);
+    });
+  }
+
+  setTimeout(function() { launchConfetti(); playTaDa(); mascotReact('complete'); }, 350);
+
+  if (TRACKER_URL) {
+    var pct = Math.round((_apiScore / _apiBaseMax) * 100);
+    var payload = {
+      employeeName: name,
+      moduleId: 'nh1',
+      moduleName: 'NH-1 — GLG Operations & Culture',
+      score: _apiScore,
+      maxScore: _apiBaseMax,
+      bonusScore: 0,
+      maxStreak: _apiMaxStreak,
+      badges: calculateBadges().map(function(b){ return b.name; }).join(', '),
+      elapsedMinutes: _apiElapsedMin,
+      passedAt: new Date().toISOString(),
+      feedback: {
+        clarity: (document.getElementById('fb-clarity') || {}).value || '',
+        difficulty: (document.getElementById('fb-difficulty') || {}).value || '',
+        realistic: (document.getElementById('fb-realistic') || {}).value || '',
+        suggestions: (document.getElementById('fb-suggestions') || {}).value || ''
+      }
+    };
+    fetch(TRACKER_URL, {
+      method: 'POST', headers: {'Content-Type': 'text/plain'},
+      body: JSON.stringify(payload), mode: 'no-cors'
+    }).then(function() {
+      var conf = document.getElementById('score-confirmation');
+      if (conf) conf.style.display = 'block';
+    }).catch(function() {
+      var conf = document.getElementById('score-confirmation');
+      if (conf) {
+        conf.innerHTML = '\u26A0\uFE0F Auto-submission failed — screenshot your results and email to hgunn@thegunnlawgroup.com';
+        conf.style.background = '#fff3cd'; conf.style.display = 'block';
+      }
+    });
+  }
+}
+
+/* startQuiz() — called by onclick="startQuiz()" on the Take the Quiz button.
+   Fires beginAttempt() on quiz entry, then navigates (Harrell ruling 2026-09-03). */
+async function startQuiz() {
+  var _ni = document.getElementById('trainee-name-input');
+  var _name = (_ni && _ni.value.trim()) || '';
+  if (!_name) {
+    if (typeof showToast === 'function') showToast('⚠️ Please enter your name before starting the quiz', false);
+    else alert('Please enter your name before starting the quiz.');
+    return;
+  }
+  // Bug-2 fix: await attempt start before navigating to quiz
+  await window.GLGQuiz.beginAttempt(_name);
+  go('quiz');
+}
+
+/* ── GLG MODULE CONFIG — wires api-quiz-engine.js to module-a1.html UI ── */
+window.GLG_MODULE_CONFIG = {
+  moduleId: 'a1',
+  onBankLoaded: function(bank) {
+    var basemax = document.getElementById('basemax');
+    var gate = document.getElementById('gate');
+    if (basemax) basemax.textContent = bank.base_max;
+    if (gate) gate.textContent = bank.pass_pct;
+    _apiBaseMax = bank.base_max;
+    _apiPassPct = bank.pass_pct;
+  },
+  onStartQuiz: function() {
+    if (!audioCtx) { try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){} }
+    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume().catch(function(){});
+  },
+  onAnswered: function(r) {
+    _apiScore = r.base_score;
+    _apiStreak = r.streak;
+    _apiMaxStreak = Math.max(_apiMaxStreak, r.maxStreak);
+    streakCount = r.streak; maxStreak = _apiMaxStreak;
+    if (r.correct) { questionsFirstTry++; } else { incorrectCount++; }
+    var sv = document.getElementById('streak-display');
+    if (sv) sv.textContent = r.streak > 0 ? r.streak + ' \uD83D\uDD25' : '0';
+    if (r.streak >= 3) showStreakBadge(r.streak);
+    else if (!r.correct && streakCount === 0) showStreakEnd();
+    if (r.correct) playDing(); else playWrongTone();
+    mascotReact(r.correct ? 'correct' : 'incorrect');
+  },
+  onComplete: function(r) {
+    _apiScore = r.base_score;
+    _apiMaxStreak = r.maxStreak;
+    _apiFirstTryCorrect = r.firstTryCorrect;
+    _apiElapsedMin = r.elapsedMin;
+    var pct = Math.round((r.base_score / r.base_max) * 100);
+    var scoreEl = document.getElementById('resultScore');
+    if (scoreEl) {
+      scoreEl.className = 'result-score ' + (r.passed ? 'pass' : 'fail');
+      animateCounter(0, r.base_score, r.base_max, scoreEl, 900);
     }
+    var bannerEl = document.getElementById('resultBanner');
+    if (bannerEl) {
+      bannerEl.textContent = r.passed ? '\u2713 Gate Passed' : '\u2717 Retake Required';
+      bannerEl.className = 'result-banner ' + (r.passed ? 'pass' : 'fail');
+    }
+    var labelEl = document.getElementById('resultLabel');
+    if (labelEl) labelEl.textContent = r.passed ? 'You Passed! \uD83C\uDF89' : 'Not Quite — Try Again';
+    var badgeEl = document.getElementById('resultBadge');
+    if (badgeEl) {
+      badgeEl.textContent = r.passed ? 'PASSED — ' + pct + '%' : 'FAILED — ' + pct + '% (Need ' + Math.round(r.pass_pct || 80) + '%)';
+      badgeEl.className = 'result-badge ' + (r.passed ? 'badge-pass' : 'badge-fail');
+    }
+    var btns = document.getElementById('resultButtons');
+    if (btns) {
+      if (r.passed) {
+        btns.innerHTML = '<button class="btn btn-secondary" onclick="window.GLGQuiz.finish()">Retake Quiz</button>'
+          + '<button class="btn btn-green" onclick="showCert()">Get Certificate \uD83C\uDFC6</button>';
+      } else {
+        btns.innerHTML = '<button class="btn btn-secondary" onclick="go(1)">Review Content</button>'
+          + '<button class="btn btn-primary" onclick="window.GLGQuiz.finish()">Try Again</button>';
+      }
+    }
+    var badgeContainer = document.getElementById('badgeContainer');
+    if (badgeContainer) renderBadges(calculateBadges(r), badgeContainer);
+    spawnParticles(document.querySelector('header'));
+    if (r.passed) setTimeout(function() { mascotReact('complete'); }, 100);
+    go('results');
+    setTimeout(function() { animateCounter(0, r.base_score, r.base_max, scoreEl, 900); }, 150);
   }
-  document.addEventListener('touchstart', resumeAudioOnGesture, true);
-  document.addEventListener('touchend', resumeAudioOnGesture, true);
-  document.addEventListener('click', resumeAudioOnGesture, true);
+};
 
-  initMascot();
+/* ── INIT ── */
+try { if (localStorage.getItem('glg_sound') === '1') { soundEnabled = true; var btn = document.getElementById('soundToggle'); if (btn) btn.textContent = '\uD83D\uDD0A'; } } catch(e){}
+function initAudioOnFirstClick() {
+  ensureAudioCtx();
+  document.removeEventListener('click', initAudioOnFirstClick);
+  document.removeEventListener('touchstart', initAudioOnFirstClick);
+}
+document.addEventListener('click', initAudioOnFirstClick);
+document.addEventListener('touchstart', initAudioOnFirstClick);
+
+document.addEventListener('DOMContentLoaded', function() {
+  updateProgress(0); updateNavPills(0); updateTopBar(0);
+  if (!document.querySelector('.screen.active')) {
+    var first = document.getElementById('screen-0');
+    if (first) first.classList.add('active');
+  }
 });
-
 </script>
-
+<script src="api-quiz-engine.js"></script>
 </body>
 </html>
