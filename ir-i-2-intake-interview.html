@@ -5,7 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
   <title>IR-I-2 - Intake Interview &amp; CasePeer Setup | Gunn Law Group</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <style>
+:root {
+    --navy: #141c2c;
+    --gold: #dcb161;
+    --gold-lt: #f0d89a;
+}
+
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
     body{font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;color:#333;font-size:16px;line-height:1.6;-webkit-text-size-adjust:100%;overflow-x:hidden;}
@@ -171,6 +178,159 @@
     .option-btn.correct{animation:correctPulse 0.6s ease-out;}
     .option-btn.incorrect{animation:incorrectShake 0.4s ease-out;}
   </style>
+
+<style>
+/* ── GLG QUIZ ENGINE — question type styles (2026-09-02) ──────────────────
+     All classes rendered by api-quiz-engine.js. Tokens: navy #141c2c, gold #C5975B.
+     Sourced from engine.html stylesheet + Harrell Part 8c spec. */
+
+  /* Question card */
+  .q { background:#fff; border:1px solid #e2e5ea; border-radius:10px;
+       padding:20px; margin:16px 0; box-shadow:0 1px 6px rgba(20,28,44,.06); }
+  .q-num { font-size:12px; letter-spacing:.06em; color:#C5975B; font-weight:700;
+            text-transform:uppercase; margin-bottom:8px; }
+  .q-text { font-weight:600; margin:8px 0 16px; font-size:1rem; line-height:1.55;
+             color:#141c2c; }
+
+  /* MC option buttons */
+  button.opt { display:block; width:100%; text-align:left; padding:13px 15px; margin:7px 0;
+    border:1px solid #d8dbe3; border-radius:8px; background:#fafbfd; cursor:pointer;
+    font-size:15px; font-family:var(--font-b); color:#222; line-height:1.45;
+    transition:background .12s, border-color .12s; }
+  button.opt:hover:not(.locked) { background:#eef4ff; border-color:#141c2c; }
+  button.opt.correct { background:#d4edda; border-color:#10774A; }
+  button.opt.incorrect { background:#f8d7da; border-color:#870101; }
+  button.opt.locked { cursor:default; opacity:.85; }
+
+  /* Fill-in-the-blank */
+  .fill-stem { font-weight:600; margin:8px 0 14px; line-height:2.2; }
+  input.blank { display:inline-block; min-height:44px; min-width:120px; padding:8px 10px;
+    margin:2px 4px; border:1px solid #ccd; border-radius:8px; background:#fafbfd;
+    font-size:16px; font-family:var(--font-b); vertical-align:middle;
+    box-sizing:border-box; max-width:100%; }
+  input.blank:focus { outline:2px solid #141c2c; background:#fff; }
+  input.blank.correct { background:#d4edda; border-color:#10774A; }
+  input.blank.incorrect { background:#f8d7da; border-color:#870101; }
+  input.blank.locked { opacity:.85; }
+  button.submit-fill { min-height:44px; padding:11px 20px; margin-top:12px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-fill.locked { opacity:.5; cursor:default; }
+
+  /* Markup */
+  .markup-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .markup-passage { margin:0 0 10px; border:1px solid #e2e5ea; border-radius:8px; overflow:hidden; }
+  button.span { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:11px 13px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:16px; font-family:var(--font-b);
+    color:#222; line-height:1.5; overflow-wrap:break-word; }
+  button.span:last-child { border-bottom:0; }
+  button.span:hover:not(.locked) { background:#eef4ff; }
+  button.span.selected { background:#fff3cd; box-shadow:inset 4px 0 0 #b8860b; font-weight:600; }
+  button.span.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.span.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.span.locked { cursor:default; opacity:.9; }
+  button.submit-markup { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-markup.locked { opacity:.5; cursor:default; }
+  .markup-count { font-size:13px; color:#555; margin-top:8px; }
+
+  /* Sort rows with up/down controls */
+  .sort-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .sort-list { margin:0 0 12px; border:1px solid #e2e5ea; border-radius:8px;
+               overflow:hidden; background:#fff; }
+  .sort-row { display:flex; align-items:stretch; border-bottom:1px solid #eef0f3;
+              background:#fff; }
+  .sort-row:last-child { border-bottom:0; }
+  .sort-pos { flex:0 0 34px; display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700; color:#C5975B; background:#f5f5f0; }
+  .sort-text { flex:1 1 auto; padding:11px 12px; font-size:15px; line-height:1.45;
+    display:flex; align-items:center; overflow-wrap:break-word; min-width:0; }
+  .sort-moves { flex:0 0 auto; display:flex; align-items:center; gap:4px; padding:4px 6px; }
+  button.sort-move { min-height:44px; min-width:44px; border:1px solid #ccd; border-radius:8px;
+    background:#fafbfd; cursor:pointer; font-size:15px; color:#141c2c;
+    font-family:var(--font-b); }
+  button.sort-move:hover:not(:disabled) { background:#eef4ff; }
+  button.sort-move:disabled { opacity:.35; cursor:default; }
+  .sort-row.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  .sort-row.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  .sort-row.locked .sort-text { opacity:.9; }
+  button.submit-sort { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-sort.locked { opacity:.5; cursor:default; }
+
+  /* Match chips + slot rows */
+  .match-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .match-tray { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px; padding:10px;
+    border:1px dashed #ccd; border-radius:8px; background:#fafbfd; }
+  button.chip { min-height:44px; padding:10px 16px; border:1px solid #ccd; border-radius:22px;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b); color:#222;
+    max-width:100%; overflow-wrap:break-word; text-align:left; }
+  button.chip:hover:not(.locked) { background:#eef4ff; }
+  button.chip.selected { background:#141c2c; color:#fff; border-color:#141c2c; font-weight:600; }
+  button.chip.placed { opacity:.35; }
+  button.chip.locked { cursor:default; }
+  .match-slots { border:1px solid #e2e5ea; border-radius:8px; overflow:hidden;
+                 background:#fff; margin-bottom:12px; }
+  button.slot { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:10px 14px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b);
+    color:#222; line-height:1.45; overflow-wrap:break-word; }
+  button.slot:last-child { border-bottom:0; }
+  button.slot:hover:not(.locked) { background:#eef4ff; }
+  button.slot.armed { box-shadow:inset 4px 0 0 #C5975B; background:#fffdf5; }
+  .slot-label { font-weight:600; display:block; }
+  .slot-fill { display:block; font-size:14px; margin-top:3px; color:#C5975B; font-weight:600; }
+  .slot-fill.empty { color:#8a8f98; font-weight:400; font-style:italic; }
+  button.slot.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.slot.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.slot.locked { cursor:default; opacity:.9; }
+  button.submit-match { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-match.locked { opacity:.5; cursor:default; }
+  .match-count { font-size:13px; color:#555; margin-top:8px; }
+  .match-credit { font-size:13px; font-weight:600; color:#8a6d1f; margin-top:6px; }
+
+  /* Feedback */
+  .fb { margin-top:12px; padding:12px 14px; border-radius:8px; font-size:14px; display:none; }
+  .fb.show { display:block; }
+  .fb.ok { background:#d4edda; border-left:4px solid #10774A; }
+  .fb.no { background:#f8d7da; border-left:4px solid #870101; }
+  .fb.neutral { background:#eef0f6; border-left:4px solid #6c757d; color:#333; } /* self_assessment: no verdict */
+
+  /* Branching nodes */
+  .branch-scenario { border-left:4px solid #C5975B; padding-left:12px; margin:14px 0; }
+  .branch-turn { font-size:12px; letter-spacing:.06em; color:#8a6d1f; font-weight:700;
+                 text-transform:uppercase; }
+  .branch-instruction { font-weight:600; margin:6px 0 10px; color:#141c2c; }
+  .branch-consequence { margin-top:10px; padding:10px 12px; border-left:4px solid #141c2c;
+    background:#eef2f7; border-radius:0 8px 8px 0; font-size:13px; color:#33415c; display:none; }
+  .branch-consequence.show { display:block; }
+
+  /* Pagination — one question at a time (Harrell Part 8b) */
+  .q-base { display: none !important; }
+  .q-base.q-active { display: block !important; }
+  .q-nav { display:flex; justify-content:space-between; align-items:center;
+            margin-top:20px; padding-top:16px; border-top:1px solid #e8e6e0; }
+  .q-nav-btn { min-height:44px; padding:10px 22px; border-radius:8px;
+                font-size:15px; cursor:pointer; font-family:var(--font-b);
+                font-weight:600; transition:background .12s; }
+  .q-nav-btn.next { background:#141c2c; color:#C5975B; border:2px solid #141c2c; }
+  .q-nav-btn.next:hover { background:#1e2a40; }
+  .q-nav-btn.back { background:#fff; color:#141c2c; border:2px solid #c8c5be; }
+  .q-nav-btn.back:hover { background:#f5f5f0; }
+  .q-pg-spacer { display:inline-block; min-width:40px; }
+  #q-progress { font-size:12px; color:#C5975B; font-weight:600;
+                letter-spacing:.5px; text-transform:uppercase; }
+
+
+</style>
+
+<!-- CUTOVER: server-side grading. Answer keys are not in this file. -->
+    <link rel="stylesheet" href="boss-challenge.css">
 </head>
 <body>
 
@@ -206,8 +366,9 @@
   <button class="nav-pill" id="nav-4" onclick="goToSection(4)">5. SOL &amp; Documents</button>
   <button class="nav-pill" id="nav-5" onclick="goToSection(5)">6. Follow-Up &amp; Comms</button>
   <button class="nav-pill" id="nav-6" onclick="goToSection(6)">7. Boss</button>
-  <button class="nav-pill" id="nav-7" onclick="goToSection(7)">8. Results</button>
-  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">9. Certificate</button>
+  <button class="nav-pill" id="nav-7" onclick="startQuiz()">8. Quiz</button>
+  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">9. Results</button>
+  <button class="nav-pill" id="nav-9" onclick="goToSection(9)">10. Feedback</button>
 </nav>
 
 <div class="points-toast" id="points-toast"></div>
@@ -278,56 +439,12 @@
     </div>
 
     <!-- Q1 -->
-    <div class="question-block" id="q1-block">
-      <div class="q-num">Question 1 of 20 · 10 pts</div>
-      <div class="q-text">You've just confirmed a caller passed screening — they have a viable MVA case and GLG is accepting it. You're about to begin the full intake interview. In what order should you structure the conversation?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q1','a',false)" id="q1-a"><span class="opt-letter">A</span><span class="opt-text">Start with insurance details since those are the most complex and determine case value, then circle back to personal info and incident details</span></button>
-        <button class="option-btn" onclick="answer('q1','b',false)" id="q1-b"><span class="opt-letter">B</span><span class="opt-text">Ask whatever comes to mind — the important thing is to collect all the information by the end, not the order you collect it in</span></button>
-        <button class="option-btn" onclick="answer('q1','c',true)" id="q1-c"><span class="opt-letter">C</span><span class="opt-text">Rapport → client info (name, DOB, contact) → incident details → insurance → medical → documents → next steps — building from comfortable to complex so the caller stays engaged and trusting throughout</span></button>
-        <button class="option-btn" onclick="answer('q1','d',false)" id="q1-d"><span class="opt-letter">D</span><span class="opt-text">Start with medical questions since injuries drive case value, then get personal information and insurance details after</span></button>
-      </div>
-      <div class="feedback-box" id="q1-fb"></div>
-    </div>
 
     <!-- Q2 -->
-    <div class="question-block" id="q2-block">
-      <div class="q-num">Question 2 of 20 · 10 pts</div>
-      <div class="q-text">A caller named Maria describes being rear-ended at a red light three days ago. She keeps pausing and says, "Sorry, I'm just really stressed about all this." How do you handle this moment before continuing with the interview?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q2','a',false)" id="q2-a"><span class="opt-letter">A</span><span class="opt-text">"No worries! Let's get through these questions quickly so we can get your case moving."</span></button>
-        <button class="option-btn" onclick="answer('q2','b',true)" id="q2-b"><span class="opt-letter">B</span><span class="opt-text">"I completely understand, Maria. What happened to you is stressful, and it's okay to take your time. We're going to walk through this together, and everything you share helps us build the strongest case for you."</span></button>
-        <button class="option-btn" onclick="answer('q2','c',false)" id="q2-c"><span class="opt-letter">C</span><span class="opt-text">"Don't apologize! This is what we do all day. So, can you give me your date of birth?"</span></button>
-        <button class="option-btn" onclick="answer('q2','d',false)" id="q2-d"><span class="opt-letter">D</span><span class="opt-text">"That's very normal. Most of our clients feel the same way. Now, do you have your insurance card handy?"</span></button>
-      </div>
-      <div class="feedback-box" id="q2-fb"></div>
-    </div>
 
     <!-- Q3 -->
-    <div class="question-block" id="q3-block">
-      <div class="q-num">Question 3 of 20 · 10 pts · Confidence Check</div>
-      <div class="q-text">Before answering: rate your confidence in understanding why GLG's intake process is systematized (1–5 in your head). Now answer: The Intake SOP states a specific consistency test for intake. Which statement captures that test?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q3','a',false)" id="q3-a"><span class="opt-letter">A</span><span class="opt-text">"Can the intake specialist handle 95% of callers without escalating to the attorney?" — the goal is self-sufficient case evaluation at intake</span></button>
-        <button class="option-btn" onclick="answer('q3','b',false)" id="q3-b"><span class="opt-letter">B</span><span class="opt-text">"Does the intake specialist have the fastest speed-to-lead response time in the market?" — speed is the primary performance metric</span></button>
-        <button class="option-btn" onclick="answer('q3','c',false)" id="q3-c"><span class="opt-letter">C</span><span class="opt-text">"Has the intake specialist memorized every CasePeer template number?" — template knowledge is the core measure of intake competency</span></button>
-        <button class="option-btn" onclick="answer('q3','d',true)" id="q3-d"><span class="opt-letter">D</span><span class="opt-text">"If Priya were replaced tomorrow, would a newly-trained replacement produce identical intake quality?" — the process must be systematized so the role delivers the same result regardless of who fills it</span></button>
-      </div>
-      <div class="feedback-box" id="q3-fb"></div>
-    </div>
 
     <!-- Q4 -->
-    <div class="question-block" id="q4-block">
-      <div class="q-num">Question 4 of 20 · 10 pts</div>
-      <div class="q-text">You're wrapping up the client information section of the interview. You've collected name, DOB, address, phone, email, and employer. The caller seems eager to tell you about the accident. What do you do before moving to incident details?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q4','a',true)" id="q4-a"><span class="opt-letter">A</span><span class="opt-text">Ask "How did you hear about Gunn Law Group?" — referral source is a required field that drives marketing spend decisions, and it's easier to capture now while you're in the personal info section than to chase it later</span></button>
-        <button class="option-btn" onclick="answer('q4','b',false)" id="q4-b"><span class="opt-letter">B</span><span class="opt-text">Move directly to incident details — the caller wants to tell their story and you should let them while they're motivated. You can get referral source at the end</span></button>
-        <button class="option-btn" onclick="answer('q4','c',false)" id="q4-c"><span class="opt-letter">C</span><span class="opt-text">Ask about their preferred language first — language preference determines whether you need an interpreter for the rest of the call</span></button>
-        <button class="option-btn" onclick="answer('q4','d',false)" id="q4-d"><span class="opt-letter">D</span><span class="opt-text">Skip referral source unless the caller mentions it on their own — it's marketing data, not case data, and doesn't affect the client's matter</span></button>
-      </div>
-      <div class="feedback-box" id="q4-fb"></div>
-    </div>
 
     <div class="section-score" id="s1-score" style="display:none;"><div class="score-display" id="s1-score-val"></div><div class="score-label">Section 2 Score</div></div>
     <div class="btn-group" id="s1-next"><button class="btn btn-primary btn-block" onclick="goToSection(2)">Next: Required Information &amp; Missing Fields &rarr;</button></div>
@@ -363,56 +480,12 @@
     <div class="callout callout-danger"><strong>The Prior Injuries Question:</strong> You MUST ask about prior injuries to the same body parts. This is not optional — the SOP marks it as a required field and a red flag item. The insurance company will discover prior treatment in medical records. It's better to know on Day 1 than to be surprised 6 months into the case.</div>
 
     <!-- Q5 -->
-    <div class="question-block" id="q5-block">
-      <div class="q-num">Question 5 of 20 · 10 pts</div>
-      <div class="q-text">You just completed an intake call. Looking at your notes, you have: full name, DOB, phone, email, incident date and location, injuries (neck and back pain), ER visit (yes, Grady Memorial), and the caller's auto insurance carrier (State Farm). Before entering in CasePeer, which critical fields are missing from this list?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q5','a',false)" id="q5-a"><span class="opt-letter">A</span><span class="opt-text">Just the police report number — everything else you listed covers the essentials for a complete intake record</span></button>
-        <button class="option-btn" onclick="answer('q5','b',true)" id="q5-b"><span class="opt-letter">B</span><span class="opt-text">SSN (last 4), home address, employer, referral source, at-fault party's insurance, UM/UIM status, health insurance, prior injuries to same body parts, incident description in client's own words, PD status, and policy number — the required checklist has 25+ fields, not 8</span></button>
-        <button class="option-btn" onclick="answer('q5','c',false)" id="q5-c"><span class="opt-letter">C</span><span class="opt-text">The caller's desired settlement amount and their attorney preferences — you need to know their expectations before opening a case</span></button>
-        <button class="option-btn" onclick="answer('q5','d',false)" id="q5-d"><span class="opt-letter">D</span><span class="opt-text">Only the at-fault party's insurance info — everything else can be filled in during the welcome call by the case manager</span></button>
-      </div>
-      <div class="feedback-box" id="q5-fb"></div>
-    </div>
 
     <!-- Q6 -->
-    <div class="question-block" id="q6-block">
-      <div class="q-num">Question 6 of 20 · 10 pts</div>
-      <div class="q-text">During the medical section of the interview, Mr. Davis tells you his neck and lower back are hurting from the accident. You need to ask about prior injuries to those same body parts. How do you ask without making the caller feel defensive?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q6','a',false)" id="q6-a"><span class="opt-letter">A</span><span class="opt-text">"You're required to disclose any pre-existing conditions. Have you ever had neck or back problems before?"</span></button>
-        <button class="option-btn" onclick="answer('q6','b',false)" id="q6-b"><span class="opt-letter">B</span><span class="opt-text">Skip the prior injuries question since it might discourage the client — let the attorney ask during the consultation</span></button>
-        <button class="option-btn" onclick="answer('q6','c',true)" id="q6-c"><span class="opt-letter">C</span><span class="opt-text">"This is something the attorney needs to know to build the best strategy for your case — have you ever had any injuries or treatment to your neck or lower back before this accident?"</span></button>
-        <button class="option-btn" onclick="answer('q6','d',false)" id="q6-d"><span class="opt-letter">D</span><span class="opt-text">"The insurance company will look into your medical history, so be honest — have you had prior injuries?"</span></button>
-      </div>
-      <div class="feedback-box" id="q6-fb"></div>
-    </div>
 
     <!-- Q7 -->
-    <div class="question-block" id="q7-block">
-      <div class="q-num">Question 7 of 20 · 10 pts</div>
-      <div class="q-text">During intake, a caller tells you she WAS wearing her seatbelt at the time of her MVA on June 15, 2026. You already screened for SB 68 impact in the screening phase. Now at the data-collection stage, what do you do with the seatbelt answer?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q7','a',true)" id="q7-a"><span class="opt-letter">A</span><span class="opt-text">Document the seatbelt confirmation verbatim in CasePeer as a prominent note — this creates the record needed for case preparation downstream, regardless of whether the answer was favorable or unfavorable</span></button>
-        <button class="option-btn" onclick="answer('q7','b',false)" id="q7-b"><span class="opt-letter">B</span><span class="opt-text">No further action needed — you already checked this during screening in IR-I-1, so the seatbelt question is fully handled</span></button>
-        <button class="option-btn" onclick="answer('q7','c',false)" id="q7-c"><span class="opt-letter">C</span><span class="opt-text">Email the attorney separately about the seatbelt status — this information doesn't go in CasePeer</span></button>
-        <button class="option-btn" onclick="answer('q7','d',false)" id="q7-d"><span class="opt-letter">D</span><span class="opt-text">Only document seatbelt status if the client was NOT wearing one — a positive answer doesn't need to be recorded</span></button>
-      </div>
-      <div class="feedback-box" id="q7-fb"></div>
-    </div>
 
     <!-- Q8 -->
-    <div class="question-block" id="q8-block">
-      <div class="q-num">Question 8 of 20 · 10 pts</div>
-      <div class="q-text">You're entering a new client's information in CasePeer. The caller provided most details but said, "I don't know my Social Security number off the top of my head — can I call you back with it?" and "I think my employer is Johnson &amp; Associates, but I'm not 100% sure." How do you handle these incomplete fields?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q8','a',false)" id="q8-a"><span class="opt-letter">A</span><span class="opt-text">Leave both fields blank and move on — the caller said they'd call back, and an unsure employer name isn't worth entering</span></button>
-        <button class="option-btn" onclick="answer('q8','b',false)" id="q8-b"><span class="opt-letter">B</span><span class="opt-text">Enter "TBD" for the SSN and skip the employer field entirely — you can fill these in when the caller calls back</span></button>
-        <button class="option-btn" onclick="answer('q8','c',false)" id="q8-c"><span class="opt-letter">C</span><span class="opt-text">Enter the employer name they gave you since it's close enough, and leave SSN blank — the client will call back eventually</span></button>
-        <button class="option-btn" onclick="answer('q8','d',true)" id="q8-d"><span class="opt-letter">D</span><span class="opt-text">Enter the employer name they gave you as provided (mark it "per client — verify"), leave SSN blank with a note "awaiting client callback," and create a CasePeer task for yourself to follow up within 48 hours if the client hasn't called back</span></button>
-      </div>
-      <div class="feedback-box" id="q8-fb"></div>
-    </div>
 
     <div class="section-score" id="s2-score" style="display:none;"><div class="score-display" id="s2-score-val"></div><div class="score-label">Section 3 Score</div></div>
     <div class="btn-group" id="s2-next"><button class="btn btn-primary btn-block" onclick="goToSection(3)">Next: Insurance Collection &amp; CasePeer Entry &rarr;</button></div>
@@ -457,60 +530,16 @@
         <tr><td>44</td><td>Medical Authorization (HIPAA)</td><td>Client signs for records release</td></tr>
         <tr><td>65</td><td>Accident Report Request</td><td>Request police report</td></tr>
       </table>
-      <p style="margin-top:8px;font-size:13px;color:#666;">Additional templates as needed: #09 (PD Authorization), #31 (Spoliation Letter for trucking), #40/#41 (Spanish versions), #62 (UM Insurer On Notice), #66/#67 (Open Records Requests).</p>
+      <p style="margin-top:8px;font-size:13px;color:#666;">Additional templates as needed: #09 (Demand Narrative), #31 (Spoliation Letter for trucking), #40/#41 (Spanish versions), #62 (UM Insurer On Notice), #66/#67 (Open Records Requests).</p>
     </div>
 
     <!-- Q9 -->
-    <div class="question-block" id="q9-block">
-      <div class="q-num">Question 9 of 20 · 10 pts</div>
-      <div class="q-text">You ask the caller about their auto insurance. They say: "I have State Farm, but I don't really know what all I have on my policy. What's UM/UIM? I don't even know if I have that." How do you handle this?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q9','a',false)" id="q9-a"><span class="opt-letter">A</span><span class="opt-text">"UM/UIM stands for uninsured/underinsured motorist coverage. Do you have that on your policy?" — define the acronym and ask again</span></button>
-        <button class="option-btn" onclick="answer('q9','b',false)" id="q9-b"><span class="opt-letter">B</span><span class="opt-text">"Don't worry about it — your case manager will verify your coverage details later. Let's move on to medical information."</span></button>
-        <button class="option-btn" onclick="answer('q9','c',false)" id="q9-c"><span class="opt-letter">C</span><span class="opt-text">"Can you pull up your insurance card and read me the policy number? I'll figure out your coverage from there."</span></button>
-        <button class="option-btn" onclick="answer('q9','d',true)" id="q9-d"><span class="opt-letter">D</span><span class="opt-text">"That's coverage that protects you if the other driver doesn't have enough insurance. It could be really important for your case. Can you check your declarations page when you get home? In the meantime, I'll note that we need to verify your UM/UIM status and create a follow-up task."</span></button>
-      </div>
-      <div class="feedback-box" id="q9-fb"></div>
-    </div>
 
     <!-- Q10 -->
-    <div class="question-block" id="q10-block">
-      <div class="q-num">Question 10 of 20 · 10 pts</div>
-      <div class="q-text">You've completed the intake interview and the case has been accepted. You're creating the new case in CasePeer. What status do you set, and what is the minimum standard before you can move to the next step?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q10','a',true)" id="q10-a"><span class="opt-letter">A</span><span class="opt-text">Set status to "Intake." All required fields populated — client info, incident details, insurance info (including UM/UIM status), medical info. SOL calendared with a named owner the same day. Documents saved to OneDrive. No blank required fields.</span></button>
-        <button class="option-btn" onclick="answer('q10','b',false)" id="q10-b"><span class="opt-letter">B</span><span class="opt-text">Set status to "Intake Review" since the case has been evaluated and accepted — remaining fields can be completed by the assigned paralegal during review</span></button>
-        <button class="option-btn" onclick="answer('q10','c',false)" id="q10-c"><span class="opt-letter">C</span><span class="opt-text">Set status to "Active Treatment" since the client mentioned they're treating — fill in fields as much as possible and gather the rest during the welcome call</span></button>
-        <button class="option-btn" onclick="answer('q10','d',false)" id="q10-d"><span class="opt-letter">D</span><span class="opt-text">Set status to "Intake." Client name and incident date are the minimum needed for case creation — remaining fields are populated over the next 3 business days before advancing</span></button>
-      </div>
-      <div class="feedback-box" id="q10-fb"></div>
-    </div>
 
     <!-- Q11 -->
-    <div class="question-block" id="q11-block">
-      <div class="q-num">Question 11 of 20 · 10 pts</div>
-      <div class="q-text">A new client just emailed you their signed retainer agreement and HIPAA release. You upload both documents to CasePeer and note the receipt in the case file. You then move on to the next task. What did you miss?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q11','a',false)" id="q11-a"><span class="opt-letter">A</span><span class="opt-text">Nothing — uploading to CasePeer is the firm's standard for document storage</span></button>
-        <button class="option-btn" onclick="answer('q11','b',false)" id="q11-b"><span class="opt-letter">B</span><span class="opt-text">You should have also printed the documents and placed them in a physical file folder</span></button>
-        <button class="option-btn" onclick="answer('q11','c',true)" id="q11-c"><span class="opt-letter">C</span><span class="opt-text">You uploaded to CasePeer but NOT to the client's OneDrive folder. The dual-upload rule requires BOTH: documents must be saved to OneDrive AND entered in CasePeer. Single upload is non-compliant.</span></button>
-        <button class="option-btn" onclick="answer('q11','d',false)" id="q11-d"><span class="opt-letter">D</span><span class="opt-text">You should have forwarded the email to the assigned paralegal before uploading anything</span></button>
-      </div>
-      <div class="feedback-box" id="q11-fb"></div>
-    </div>
 
     <!-- Q12 -->
-    <div class="question-block" id="q12-block">
-      <div class="q-num">Question 12 of 20 · 10 pts</div>
-      <div class="q-text">You've accepted a new case — standard MVA, at-fault driver has Allstate coverage, the client is English-speaking. Which CasePeer templates do you generate at intake?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q12','a',false)" id="q12-a"><span class="opt-letter">A</span><span class="opt-text">Template #03 (Welcome Letter) only — other templates are generated by the assigned paralegal after handoff</span></button>
-        <button class="option-btn" onclick="answer('q12','b',true)" id="q12-b"><span class="opt-letter">B</span><span class="opt-text">Template #01 (LOR At-Fault) to notify Allstate, Template #03 (Welcome Letter), Template #43 (Fee Agreement), Template #44 (Medical Authorization/HIPAA), and Template #65 (Accident Report Request) for the police report</span></button>
-        <button class="option-btn" onclick="answer('q12','c',false)" id="q12-c"><span class="opt-letter">C</span><span class="opt-text">Template #01 (LOR At-Fault), Template #02 (LOR UM), Template #03 (Welcome Letter), and Template #62 (UM Insurer On Notice) — always open both at-fault and UM claims</span></button>
-        <button class="option-btn" onclick="answer('q12','d',false)" id="q12-d"><span class="opt-letter">D</span><span class="opt-text">All 14 intake templates should be generated for every new case to ensure complete coverage</span></button>
-      </div>
-      <div class="feedback-box" id="q12-fb"></div>
-    </div>
 
     <div class="section-score" id="s3-score" style="display:none;"><div class="score-display" id="s3-score-val"></div><div class="score-label">Section 4 Score</div></div>
     <div class="btn-group" id="s3-next"><button class="btn btn-primary btn-block" onclick="goToSection(4)">Next: SOL Calendaring &amp; Document Collection &rarr;</button></div>
@@ -556,56 +585,12 @@
     </div>
 
     <!-- Q13 -->
-    <div class="question-block" id="q13-block">
-      <div class="q-num">Question 13 of 20 · 10 pts</div>
-      <div class="q-text">It's 4:45 PM on Friday. You just accepted a new MVA case — the accident occurred on July 20, 2024. You've created the CasePeer entry, uploaded the signed retainer to OneDrive, and entered the client's information. You're about to log off for the weekend. What critical step must happen before you leave today?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q13','a',true)" id="q13-a"><span class="opt-letter">A</span><span class="opt-text">Calendar the SOL deadline (July 20, 2026 — 2 years from the accident under O.C.G.A. § 9-3-33) with a named owner in CasePeer. This must happen the same day the case is opened — no exceptions. If the SOL passes without filing, the client's case dies and the firm faces malpractice liability.</span></button>
-        <button class="option-btn" onclick="answer('q13','b',false)" id="q13-b"><span class="opt-letter">B</span><span class="opt-text">The SOL can be calendared Monday morning — the case was just signed today and the deadline is two years away, so a weekend delay doesn't create risk</span></button>
-        <button class="option-btn" onclick="answer('q13','c',false)" id="q13-c"><span class="opt-letter">C</span><span class="opt-text">Send the case to Intake Review and let the assigned paralegal calendar the SOL — deadline tracking is their responsibility, not intake's</span></button>
-        <button class="option-btn" onclick="answer('q13','d',false)" id="q13-d"><span class="opt-letter">D</span><span class="opt-text">Calendar the SOL but only as a general reminder — the exact date doesn't need to be calculated until the case is closer to the deadline</span></button>
-      </div>
-      <div class="feedback-box" id="q13-fb"></div>
-    </div>
 
     <!-- Q14 -->
-    <div class="question-block" id="q14-block">
-      <div class="q-num">Question 14 of 20 · 10 pts</div>
-      <div class="q-text">You've completed the intake interview with a new client. The case is accepted. What documents need to be collected from the client, and how do you handle collection as a remote intake specialist?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q14','a',false)" id="q14-a"><span class="opt-letter">A</span><span class="opt-text">Only the retainer agreement — everything else is collected by the case manager during the welcome call</span></button>
-        <button class="option-btn" onclick="answer('q14','b',false)" id="q14-b"><span class="opt-letter">B</span><span class="opt-text">Retainer, HIPAA, and police report — mail physical copies for the client to sign, scan, and return</span></button>
-        <button class="option-btn" onclick="answer('q14','c',false)" id="q14-c"><span class="opt-letter">C</span><span class="opt-text">All intake documents, but email them as PDF attachments for the client to print, sign, scan, and email back</span></button>
-        <button class="option-btn" onclick="answer('q14','d',true)" id="q14-d"><span class="opt-letter">D</span><span class="opt-text">Retainer agreement, medical authorization/HIPAA release, police report authorization, photos of damage and injuries, and insurance declarations page — sent via DocuSign or the client upload portal for remote digital collection. Track which documents are received and which are outstanding.</span></button>
-      </div>
-      <div class="feedback-box" id="q14-fb"></div>
-    </div>
 
     <!-- Q15 -->
-    <div class="question-block" id="q15-block">
-      <div class="q-num">Question 15 of 20 · 10 pts</div>
-      <div class="q-text">You sent a new client their retainer agreement and HIPAA release via DocuSign on Monday. It's now Wednesday afternoon — 48 hours later — and neither document has been signed. What is the correct action?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q15','a',false)" id="q15-a"><span class="opt-letter">A</span><span class="opt-text">Wait until Friday (5 business days) before following up — 48 hours is too soon and might pressure the client</span></button>
-        <button class="option-btn" onclick="answer('q15','b',true)" id="q15-b"><span class="opt-letter">B</span><span class="opt-text">First follow-up NOW at 48 hours. If still unsigned by Monday (5 business days), follow up again. If still unsigned by the following Wednesday (10 business days), escalate to the Managing Attorney. Standard cadence: 48 hours → 5 business days → 10 business days escalate.</span></button>
-        <button class="option-btn" onclick="answer('q15','c',false)" id="q15-c"><span class="opt-letter">C</span><span class="opt-text">Call the client and create urgency: "We can't proceed until documents are signed — we need these today or the firm may not be able to take your case"</span></button>
-        <button class="option-btn" onclick="answer('q15','d',false)" id="q15-d"><span class="opt-letter">D</span><span class="opt-text">Send one follow-up email and then wait — if the client doesn't respond, they probably changed their mind</span></button>
-      </div>
-      <div class="feedback-box" id="q15-fb"></div>
-    </div>
 
     <!-- Q16 -->
-    <div class="question-block" id="q16-block">
-      <div class="q-num">Question 16 of 20 · 10 pts</div>
-      <div class="q-text">A client signed their retainer agreement on Tuesday. It's now Thursday. You've entered all required information in CasePeer, uploaded all available documents to both OneDrive and CasePeer, calendared the SOL, and sent the welcome letter. When can you advance this case from "Intake" to "Intake Review"?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q16','a',false)" id="q16-a"><span class="opt-letter">A</span><span class="opt-text">Immediately — you've completed all the required steps, so the case should move to the next stage now</span></button>
-        <button class="option-btn" onclick="answer('q16','b',false)" id="q16-b"><span class="opt-letter">B</span><span class="opt-text">Only after the assigned paralegal has reviewed and confirmed the intake record is complete</span></button>
-        <button class="option-btn" onclick="answer('q16','c',true)" id="q16-c"><span class="opt-letter">C</span><span class="opt-text">Within 3 business days of retainer signing — which means by Friday. The case must have all required fields populated and no blank CasePeer entries before advancing. Incomplete files must NOT be advanced to Intake Review.</span></button>
-        <button class="option-btn" onclick="answer('q16','d',false)" id="q16-d"><span class="opt-letter">D</span><span class="opt-text">After the 48-hour welcome checklist is fully complete, including the welcome call — the case manager needs to make contact first</span></button>
-      </div>
-      <div class="feedback-box" id="q16-fb"></div>
-    </div>
 
     <div class="section-score" id="s4-score" style="display:none;"><div class="score-display" id="s4-score-val"></div><div class="score-label">Section 5 Score</div></div>
     <div class="btn-group" id="s4-next"><button class="btn btn-primary btn-block" onclick="goToSection(5)">Next: Follow-Up &amp; Communication Standards &rarr;</button></div>
@@ -641,56 +626,12 @@
     <div class="callout callout-info"><strong>The Good CasePeer Note Standard:</strong> Every communication note must include: (1) WHO you contacted, (2) WHAT was discussed, (3) WHAT WAS DECIDED or learned, (4) NEXT STEPS with tasks set in CasePeer. "Called client" is useless. A detailed note with specifics is the standard.</div>
 
     <!-- Q17 -->
-    <div class="question-block" id="q17-block">
-      <div class="q-num">Question 17 of 20 · 10 pts</div>
-      <div class="q-text">During the intake interview, the caller asks: "Based on what I've told you, do you think my case is worth over $100,000? My injuries are pretty serious." How do you respond?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q17','a',false)" id="q17-a"><span class="opt-letter">A</span><span class="opt-text">"Based on what you've described, I'd say your case could be worth at least that. We've had similar cases settle for good amounts."</span></button>
-        <button class="option-btn" onclick="answer('q17','b',false)" id="q17-b"><span class="opt-letter">B</span><span class="opt-text">"I can't really say — I'm not a lawyer. But between us, cases like yours usually settle well."</span></button>
-        <button class="option-btn" onclick="answer('q17','c',true)" id="q17-c"><span class="opt-letter">C</span><span class="opt-text">"That's a great question — I'll make sure the attorney addresses that with you. What I can tell you is that we're going to collect all the information needed to build the strongest case possible. Now, can you tell me about your medical treatment so far?"</span></button>
-        <button class="option-btn" onclick="answer('q17','d',false)" id="q17-d"><span class="opt-letter">D</span><span class="opt-text">"I can't discuss case values, but your injuries sound serious, so you should be optimistic."</span></button>
-      </div>
-      <div class="feedback-box" id="q17-fb"></div>
-    </div>
 
     <!-- Q18 -->
-    <div class="question-block" id="q18-block">
-      <div class="q-num">Question 18 of 20 · 10 pts</div>
-      <div class="q-text">A new client says during the intake call: "I have photos of the damage to my car and my injuries on my phone. How do I send them to you?" As a remote intake specialist, what do you instruct?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q18','a',false)" id="q18-a"><span class="opt-letter">A</span><span class="opt-text">"Can you text them to my personal number? That's the fastest way to get them over."</span></button>
-        <button class="option-btn" onclick="answer('q18','b',true)" id="q18-b"><span class="opt-letter">B</span><span class="opt-text">"You can email them to us, or we'll send you a link to our secure upload portal. Once I receive them, I'll save them to your case file in both OneDrive and CasePeer."</span></button>
-        <button class="option-btn" onclick="answer('q18','c',false)" id="q18-c"><span class="opt-letter">C</span><span class="opt-text">"Bring them to the office when you come in for your consultation — we can scan them there."</span></button>
-        <button class="option-btn" onclick="answer('q18','d',false)" id="q18-d"><span class="opt-letter">D</span><span class="opt-text">"Just hold onto them for now — your case manager will collect them during the welcome call."</span></button>
-      </div>
-      <div class="feedback-box" id="q18-fb"></div>
-    </div>
 
     <!-- Q19 -->
-    <div class="question-block" id="q19-block">
-      <div class="q-num">Question 19 of 20 · 10 pts</div>
-      <div class="q-text">You just finished an intake call with James Carter. You need to log the communication in CasePeer. Which note meets the firm's documentation standard?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q19','a',false)" id="q19-a"><span class="opt-letter">A</span><span class="opt-text">"Intake call with James Carter. Collected info. Case looks good."</span></button>
-        <button class="option-btn" onclick="answer('q19','b',false)" id="q19-b"><span class="opt-letter">B</span><span class="opt-text">"Called James Carter, went through intake checklist, got most of the info. Will follow up on missing items."</span></button>
-        <button class="option-btn" onclick="answer('q19','c',false)" id="q19-c"><span class="opt-letter">C</span><span class="opt-text">"Intake call completed. All details in the intake form."</span></button>
-        <button class="option-btn" onclick="answer('q19','d',true)" id="q19-d"><span class="opt-letter">D</span><span class="opt-text">"Intake call with James Carter at (404) 555-7890. Rear-end MVA on I-85 near exit 88, 07/15/2026, 2:15 PM. Insurance: State Farm, policy #SF-1234567, UM/UIM: unknown — client to verify. Injuries: neck and lower back pain, ER at Piedmont Hospital 07/15. Prior injuries: denies prior neck/back. Seatbelt: confirmed wearing. Referral: Google search. Outstanding: SSN last 4, insurance dec page, police report #. Tasks set: follow up SSN 48h, request police report, send retainer via DocuSign."</span></button>
-      </div>
-      <div class="feedback-box" id="q19-fb"></div>
-    </div>
 
     <!-- Q20 -->
-    <div class="question-block" id="q20-block">
-      <div class="q-num">Question 20 of 20 · 10 pts · Synthesis</div>
-      <div class="q-text">You're reviewing a CasePeer entry before advancing a case to Intake Review. The following fields are blank: UM/UIM coverage status, property damage status, and referral source. The client provided all other information. What do you do?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q20','a',true)" id="q20-a"><span class="opt-letter">A</span><span class="opt-text">Do NOT advance the case. Follow up with the client to obtain the missing information. UM/UIM status, property damage status, and referral source are all required fields — blank entries mean the file is incomplete, and incomplete files must not be advanced to Intake Review.</span></button>
-        <button class="option-btn" onclick="answer('q20','b',false)" id="q20-b"><span class="opt-letter">B</span><span class="opt-text">Advance the case with a note to the paralegal to fill in the blanks — some information is better collected during the welcome call anyway</span></button>
-        <button class="option-btn" onclick="answer('q20','c',false)" id="q20-c"><span class="opt-letter">C</span><span class="opt-text">Enter "N/A" in all three fields so CasePeer shows no blanks — the paralegal can update them when the actual information is available</span></button>
-        <button class="option-btn" onclick="answer('q20','d',false)" id="q20-d"><span class="opt-letter">D</span><span class="opt-text">Advance the case since only 3 fields are blank out of 25+ — a 90% completion rate is acceptable for intake</span></button>
-      </div>
-      <div class="feedback-box" id="q20-fb"></div>
-    </div>
 
     <div class="section-score" id="s5-score" style="display:none;"><div class="score-display" id="s5-score-val"></div><div class="score-label">Section 6 Score</div></div>
     <div class="btn-group" id="s5-next"><button class="btn btn-primary btn-block" onclick="goToSection(6)">Next: Boss Challenge — Full Intake Scenario &rarr;</button></div>
@@ -732,79 +673,49 @@
     </div>
 
     <!-- BOSS Q21 -->
-    <div class="question-block" id="q21-block">
-      <div class="q-num">Boss Task 1 of 5 · 10 Bonus pts · Opening the Interview</div>
-      <div class="q-text">Keisha is upset and talking fast. She says: "I can't believe this happened. My baby was in the car. I'm shaking just talking about it. And my phone is about to die — can we make this quick?" How do you open the interview?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q21','a',false)" id="q21-a"><span class="opt-letter">A</span><span class="opt-text">"I understand. Let's skip the personal info and go straight to the accident details since your phone might die."</span></button>
-        <button class="option-btn" onclick="answer('q21','b',true)" id="q21-b"><span class="opt-letter">B</span><span class="opt-text">"Keisha, I'm so sorry this happened to you and your son. You're in the right place. Before we start — let me get your email address and a backup number in case we get disconnected, so I can reach you either way. Then we'll walk through this together at whatever pace works for you."</span></button>
-        <button class="option-btn" onclick="answer('q21','c',false)" id="q21-c"><span class="opt-letter">C</span><span class="opt-text">"Let's move fast then. What's your full name, date of birth, and Social Security number?"</span></button>
-        <button class="option-btn" onclick="answer('q21','d',false)" id="q21-d"><span class="opt-letter">D</span><span class="opt-text">"Can you plug in your phone? This interview takes about 20 minutes and I need to collect a lot of information."</span></button>
-      </div>
-      <div class="feedback-box" id="q21-fb"></div>
-    </div>
 
     <!-- BOSS Q22 -->
-    <div class="question-block" id="q22-block">
-      <div class="q-num">Boss Task 2 of 5 · 10 Bonus pts · Insurance Complexity</div>
-      <div class="q-text">You've reached the insurance section. Keisha says: "I have State Farm, I think. I don't have my card. I definitely don't know my policy number. And the guy who hit me — I have no idea who his insurance is. The police talked to him but I didn't get anything from the officer." How do you handle the insurance collection?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q22','a',false)" id="q22-a"><span class="opt-letter">A</span><span class="opt-text">Skip the insurance section entirely — you can get this from the police report later. Move on to medical information.</span></button>
-        <button class="option-btn" onclick="answer('q22','b',false)" id="q22-b"><span class="opt-letter">B</span><span class="opt-text">Enter "State Farm" as the carrier and leave everything else blank — the case manager will verify all coverage details after handoff</span></button>
-        <button class="option-btn" onclick="answer('q22','c',false)" id="q22-c"><span class="opt-letter">C</span><span class="opt-text">"I really need your policy number and the other driver's insurance. Can you call State Farm and call me back with the details?"</span></button>
-        <button class="option-btn" onclick="answer('q22','d',true)" id="q22-d"><span class="opt-letter">D</span><span class="opt-text">Enter "State Farm" as the carrier. Note policy # as pending. Ask: "Do you know if you have coverage that protects you if the other driver doesn't have enough insurance?" Note UM/UIM status as "unknown — client to verify with declarations page." Note at-fault carrier as "unknown — obtain from police report." Create tasks: (1) follow up with Keisha for insurance card/dec page, (2) request police report for at-fault driver info. No blank fields — document what you know and what's pending.</span></button>
-      </div>
-      <div class="feedback-box" id="q22-fb"></div>
-    </div>
 
     <!-- BOSS Q23 -->
-    <div class="question-block" id="q23-block">
-      <div class="q-num">Boss Task 3 of 5 · 10 Bonus pts · CasePeer Setup</div>
-      <div class="q-text">You've completed the interview with Keisha. She mentioned her 3-year-old son was in the car, she had prior physical therapy on her right shoulder "a couple years ago," she was wearing her seatbelt, and her cousin referred her. You're setting up the CasePeer entry. What must you ensure is documented?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q23','a',true)" id="q23-a"><span class="opt-letter">A</span><span class="opt-text">Status: "Intake." SOL calendared (July 18, 2028) with named owner — same day, no exceptions. Document: (1) Minor in vehicle — flag for attorney review (minor's claim may exist), (2) Prior right shoulder PT — verbatim in notes, flagged as red flag per SOP, (3) Seatbelt: confirmed wearing — documented verbatim for SB 68, (4) Referral source: cousin (client referral). All required fields populated. Dual-upload all documents. No blank insurance fields — pending items documented with follow-up tasks.</span></button>
-        <button class="option-btn" onclick="answer('q23','b',false)" id="q23-b"><span class="opt-letter">B</span><span class="opt-text">Status: "Intake Review" — the case has been fully screened and accepted. SOL can be calendared by the paralegal during review. Note the minor and prior injury as FYI items in the general notes section.</span></button>
-        <button class="option-btn" onclick="answer('q23','c',false)" id="q23-c"><span class="opt-letter">C</span><span class="opt-text">Status: "Intake." Document the basic case details. The minor's presence doesn't need specific documentation since the claim is for Keisha, not her son. Prior PT was years ago and may not be relevant.</span></button>
-        <button class="option-btn" onclick="answer('q23','d',false)" id="q23-d"><span class="opt-letter">D</span><span class="opt-text">Status: "Intake." SOL calendared. Document the prior injury and seatbelt status. Skip referral source — the cousin referral is informal and doesn't count for marketing tracking.</span></button>
-      </div>
-      <div class="feedback-box" id="q23-fb"></div>
-    </div>
 
     <!-- BOSS Q24 -->
-    <div class="question-block" id="q24-block">
-      <div class="q-num">Boss Task 4 of 5 · 10 Bonus pts · Document Collection</div>
-      <div class="q-text">Keisha's phone is dying. Before the call ends, you need to set up document collection. She's a remote client. What do you tell her, and what do you send?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q24','a',false)" id="q24-a"><span class="opt-letter">A</span><span class="opt-text">"I'll mail you the paperwork. Watch for it in about a week. Sign everything and mail it back."</span></button>
-        <button class="option-btn" onclick="answer('q24','b',false)" id="q24-b"><span class="opt-letter">B</span><span class="opt-text">"Don't worry about documents right now — your case manager will handle all of that during the welcome call."</span></button>
-        <button class="option-btn" onclick="answer('q24','c',true)" id="q24-c"><span class="opt-letter">C</span><span class="opt-text">"Keisha, I'm going to send you a few documents through DocuSign right after this call — a retainer agreement, medical authorization, and police report authorization. You can sign them on your phone or computer. I also need any photos of your car, your injuries, and your insurance card when you find it. You can email those to us or use our secure upload link. I'll follow up in 48 hours if anything is still outstanding."</span></button>
-        <button class="option-btn" onclick="answer('q24','d',false)" id="q24-d"><span class="opt-letter">D</span><span class="opt-text">"I need you to come into the office to sign the retainer in person — it's the only way we can verify your identity."</span></button>
-      </div>
-      <div class="feedback-box" id="q24-fb"></div>
-    </div>
 
     <!-- BOSS Q25 -->
-    <div class="question-block" id="q25-block">
-      <div class="q-num">Boss Task 5 of 5 · 10 Bonus pts · Pulling It All Together</div>
-      <div class="q-text">The call with Keisha just ended. You're sitting at your desk. Walk through your immediate post-call checklist: What CasePeer tasks do you create, what templates do you generate, and what is the case advancement timeline?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q25','a',false)" id="q25-a"><span class="opt-letter">A</span><span class="opt-text">Generate Template #03 (Welcome Letter) and move the case to Intake Review immediately. The paralegal will handle the rest — LOR, HIPAA, police report request, and follow-up tasks.</span></button>
-        <button class="option-btn" onclick="answer('q25','b',true)" id="q25-b"><span class="opt-letter">B</span><span class="opt-text">SOL: Calendar July 18, 2028 with named owner — right now, before anything else. Templates: #01 (LOR At-Fault — pending at-fault carrier from police report), #03 (Welcome Letter), #43 (Fee Agreement via DocuSign), #44 (HIPAA via DocuSign), #65 (Accident Report Request). Tasks: (1) Follow up Keisha for insurance card/dec page — 48h, (2) Follow up unsigned documents — 48h, (3) Request police report for at-fault info, (4) Flag minor in vehicle for attorney review, (5) Flag prior right shoulder injury for attorney review. Case advancement: "Intake" → "Intake Review" within 3 business days of retainer signing, only after all required fields populated.</span></button>
-        <button class="option-btn" onclick="answer('q25','c',false)" id="q25-c"><span class="opt-letter">C</span><span class="opt-text">SOL: Calendar July 18, 2028. Generate all 14 intake templates. Create one follow-up task for "complete intake." Case can advance to Intake Review once the retainer is signed.</span></button>
-        <button class="option-btn" onclick="answer('q25','d',false)" id="q25-d"><span class="opt-letter">D</span><span class="opt-text">SOL: Calendar Monday (next business day is fine). Templates: #01 and #03. No follow-up tasks needed — Keisha will call back with the missing information since she seemed engaged. Advance to Intake Review in 5 business days.</span></button>
-      </div>
-      <div class="feedback-box" id="q25-fb"></div>
-    </div>
 
     <div class="section-score" id="s6-score" style="display:none;"><div class="score-display" id="s6-score-val"></div><div class="score-label">Boss Challenge Bonus Points</div></div>
-    <div class="btn-group" id="s6-next"><button class="btn btn-primary btn-block" onclick="showResults()">See Results &amp; Score &rarr;</button></div>
+    <div class="btn-group" id="s6-next"><div style="margin-bottom:1rem;">
+      <label for="trainee-name-input" style="display:block;font-size:0.85rem;font-weight:600;color:#141c2c;margin-bottom:0.4rem;">Your Name — required to start</label>
+      <input type="text" id="trainee-name-input" placeholder="Enter your full name" autocomplete="name" style="width:100%;padding:0.5rem 0.75rem;border:1.5px solid #cbd5e1;border-radius:6px;font-size:0.9rem;box-sizing:border-box;">
+    </div>
+    <button class="btn btn-primary btn-block" onclick="startQuiz()">Take the Quiz &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 7 — QUIZ (api-quiz-engine.js)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-7">
+  <div class="section-header">
+    <div class="section-num">Knowledge Check</div>
+    <h2>Module Assessment</h2>
+    <div class="section-subhead">Answer each question. One attempt — wrong answer reveals the correct answer and unlocks Next.</div>
+  </div>
+  <div class="section-body">
+    <div style="font-family:system-ui,sans-serif;font-size:13px;color:#33415c;padding:8px 0 12px;border-bottom:1px solid #e8eaf0;margin-bottom:16px;">
+      Base: <b id="base">0</b> / <b id="basemax">—</b>
+      &nbsp;·&nbsp; Bonus: <b id="bonus">0</b>
+      &nbsp;·&nbsp; Pass gate: <b id="gate">80</b>%
+      &nbsp;·&nbsp; <span id="q-progress" style="color:#dcb161;font-weight:700;"></span>
+    </div>
+    <div id="questions"></div>
+    <div id="result" style="background:#fff;border:2px solid #0b2545;border-radius:10px;padding:18px;margin:18px 0;display:none;"></div>
   </div>
 </div>
 
 <!-- ══════════════════════════════════════════
      SECTION 7 — RESULTS
 ════════════════════════════════════════════ -->
-<div class="section-card" id="section-7">
+<div class="section-card" id="section-8">
   <div id="results-header-wrap"></div>
   <div class="section-body">
     <div id="results-body"></div>
@@ -827,7 +738,7 @@
 <!-- ══════════════════════════════════════════
      SECTION 8 — FEEDBACK & CERTIFICATE
 ════════════════════════════════════════════ -->
-<div class="section-card" id="section-8">
+<div class="section-card" id="section-9">
   <div class="section-header">
     <div class="section-num">Section 9 · Feedback &amp; Certificate</div>
     <h2>Module Feedback &amp; Completion Certificate</h2>
@@ -909,7 +820,7 @@ var soundEnabled = false;
 var _audioKeepalive = null;
 
 var TRACKER_URL = 'https://script.google.com/macros/s/AKfycbzHJZ0C3BqnLatfq7RIiUP5KQdgYoXTJlozd8ZGZiwIf2bdVmvnPMo3JLm0dA5gQhJyxA/exec';
-var TOTAL_SECTIONS = 9;
+var TOTAL_SECTIONS = 10;
 var PASS_THRESHOLD = 160;
 var BASE_MAX = 200;
 
@@ -917,31 +828,31 @@ var BASE_MAX = 200;
 // QUESTION CONFIG
 // ═══════════════════════════════════════════════
 var Q_CONFIG = {
-  'q1':  {section:1, pts:10, isBonus:false, correct:'c'},
-  'q2':  {section:1, pts:10, isBonus:false, correct:'b'},
-  'q3':  {section:1, pts:10, isBonus:false, correct:'d'},
-  'q4':  {section:1, pts:10, isBonus:false, correct:'a'},
-  'q5':  {section:2, pts:10, isBonus:false, correct:'b'},
-  'q6':  {section:2, pts:10, isBonus:false, correct:'c'},
-  'q7':  {section:2, pts:10, isBonus:false, correct:'a'},
-  'q8':  {section:2, pts:10, isBonus:false, correct:'d'},
-  'q9':  {section:3, pts:10, isBonus:false, correct:'d'},
-  'q10': {section:3, pts:10, isBonus:false, correct:'a'},
-  'q11': {section:3, pts:10, isBonus:false, correct:'c'},
-  'q12': {section:3, pts:10, isBonus:false, correct:'b'},
-  'q13': {section:4, pts:10, isBonus:false, correct:'a'},
-  'q14': {section:4, pts:10, isBonus:false, correct:'d'},
-  'q15': {section:4, pts:10, isBonus:false, correct:'b'},
-  'q16': {section:4, pts:10, isBonus:false, correct:'c'},
-  'q17': {section:5, pts:10, isBonus:false, correct:'c'},
-  'q18': {section:5, pts:10, isBonus:false, correct:'b'},
-  'q19': {section:5, pts:10, isBonus:false, correct:'d'},
-  'q20': {section:5, pts:10, isBonus:false, correct:'a'},
-  'q21': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'b'},
-  'q22': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'d'},
-  'q23': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'a'},
-  'q24': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'c'},
-  'q25': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'b'}
+  'q1':  {section:1, pts:10, isBonus:false},
+  'q2':  {section:1, pts:10, isBonus:false},
+  'q3':  {section:1, pts:10, isBonus:false},
+  'q4':  {section:1, pts:10, isBonus:false},
+  'q5':  {section:2, pts:10, isBonus:false},
+  'q6':  {section:2, pts:10, isBonus:false},
+  'q7':  {section:2, pts:10, isBonus:false},
+  'q8':  {section:2, pts:10, isBonus:false},
+  'q9':  {section:3, pts:10, isBonus:false},
+  'q10': {section:3, pts:10, isBonus:false},
+  'q11': {section:3, pts:10, isBonus:false},
+  'q12': {section:3, pts:10, isBonus:false},
+  'q13': {section:4, pts:10, isBonus:false},
+  'q14': {section:4, pts:10, isBonus:false},
+  'q15': {section:4, pts:10, isBonus:false},
+  'q16': {section:4, pts:10, isBonus:false},
+  'q17': {section:5, pts:10, isBonus:false},
+  'q18': {section:5, pts:10, isBonus:false},
+  'q19': {section:5, pts:10, isBonus:false},
+  'q20': {section:5, pts:10, isBonus:false},
+  'q21': {section:6, pts:0,  isBonus:true,  bonusPts:10},
+  'q22': {section:6, pts:0,  isBonus:true,  bonusPts:10},
+  'q23': {section:6, pts:0,  isBonus:true,  bonusPts:10},
+  'q24': {section:6, pts:0,  isBonus:true,  bonusPts:10},
+  'q25': {section:6, pts:0,  isBonus:true,  bonusPts:10}
 };
 
 var SECTION_QUESTIONS = {
@@ -956,113 +867,12 @@ var SECTION_QUESTIONS = {
 // ═══════════════════════════════════════════════
 // FEEDBACK TEXT
 // ═══════════════════════════════════════════════
-var FEEDBACK = {
-  'q1': {
-    t: '✅ The structured interview sequence builds from comfortable to complex: rapport → client info (easy, non-threatening) → incident details (they want to tell their story) → insurance (complex, may need prompting) → medical (sensitive) → documents (action items) → next steps. This isn\'t arbitrary — starting with easy questions builds momentum and trust. By the time you reach insurance and medical questions, the caller is engaged and more likely to share completely. Starting with insurance (A) or medical (D) before rapport creates resistance and incomplete answers.',
-    f: '❌ Interview order matters. Starting with insurance (A) or medical questions (D) before building rapport creates resistance — callers who don\'t feel comfortable sharing personal details will give incomplete answers. "Whatever comes to mind" (B) leads to missed fields and a chaotic conversation that feels like an interrogation. The sequence is: rapport → client info → incident → insurance → medical → documents → next steps. Every time. Same order.'
-  },
-  'q2': {
-    t: '✅ The Intake SOP is clear: "Be empathetic — clients are often in pain, scared, or frustrated." Maria is stressed and apologizing for it. Option B does three things right: (1) acknowledges her emotional state ("What happened to you is stressful"), (2) gives her permission to take her time, and (3) frames the interview as collaborative ("walk through this together") and purposeful ("build the strongest case"). Options A and C rush past the emotion. Option D acknowledges it superficially then pivots to insurance — jumping ahead in the sequence.',
-    f: '❌ "Let\'s get through these quickly" (A) tells Maria her feelings are an obstacle to efficiency. "Don\'t apologize! This is what we do" (C) dismisses her stress and immediately pivots to data collection. "Most clients feel the same way — now, insurance card?" (D) acknowledges the feeling but rushes past it to a complex question out of sequence. The SOP standard: be empathetic. Use the caller\'s name. Listen before asking the next question. Let them feel heard before collecting data.'
-  },
-  'q3': {
-    t: '✅ The Intake SOP\'s Franchise Standard is explicit: "If Priya were replaced tomorrow, would a newly-trained replacement produce identical intake quality?" This is the consistency test. The system must be documented and repeatable so the role delivers the same result regardless of who fills it. Self-sufficient evaluation (A) mischaracterizes the role — intake escalates to the attorney when needed. Speed (B) is one metric, not the primary test. Template memorization (C) is a tool, not the competency measure.',
-    f: '❌ The consistency test is not about self-sufficiency (A — intake does escalate), speed (B — one metric among many), or memorization (C — templates are reference tools, not memory tests). The SOP asks: could someone step into this role tomorrow and deliver identical quality? That requires every step — every field, every template, every follow-up cadence — to be systematized and documented. The process produces the result, not the individual.'
-  },
-  'q4': {
-    t: '✅ Referral source is a required field per the Intake SOP: "How they found us (referral source — critical for marketing tracking)." It\'s listed in CasePeer Documentation Standards, and referral source capture rate is a performance metric. Capturing it during the personal info section — while you\'re already asking easy questions — is natural and efficient. Saving it for later (B) risks forgetting it entirely. It\'s not optional marketing data (D) — it drives firm-level marketing spend decisions.',
-    f: '❌ "I\'ll get it later" (B) is how referral source gets missed on 30% of intakes — the caller moves to their story, you move to insurance, and the referral question never gets asked. It\'s not optional (D) — the SOP marks it as "critical for marketing tracking" and it\'s a performance metric. Language preference (C) should have been identified earlier when you first spoke with the caller. Referral source belongs in the client info section — ask it while you\'re there.'
-  },
-  'q5': {
-    t: '✅ The required information checklist has 25+ fields across 5 categories. An intake with only 8 fields captured — name, DOB, phone, email, accident date, location, injuries, and ER visit — is missing more than half the required data. Critical gaps include: SSN (last 4), home address, employer, referral source, at-fault insurance, UM/UIM status, health insurance, prior injuries, client\'s own description, PD status, and policy number. Each missing field creates a downstream delay or risk.',
-    f: '❌ "Just the police report number" (A) dramatically underestimates the required checklist. Settlement amount expectations (C) are never part of intake — intake doesn\'t evaluate case value. "Only at-fault insurance" (D) ignores a dozen other critical fields and delegates intake work to the case manager. The required information checklist exists so that every downstream function — LOR generation, insurance verification, SOL calendaring, demand preparation — has what it needs from Day 1.'
-  },
-  'q6': {
-    t: '✅ The prior injuries question is mandatory per the Intake SOP — it\'s both a required field and a red flag item. Option C frames WHY the question matters ("the attorney needs to know to build the best strategy") before asking it. This is the framing technique: explain the purpose before requesting sensitive information. "Required to disclose" (A) sounds legalistic and confrontational. Skipping it (B) violates the SOP. "The insurance company will look into it" (D) frames the client as adversarial with their own insurer.',
-    f: '❌ "Required to disclose" (A) sounds like a legal warning and creates defensiveness. Skipping the question (B) violates the SOP — prior injuries to the same body parts is a mandatory field. "The insurance company will look into it, so be honest" (D) implies the client might be dishonest and frames the question as adversarial. The correct approach: explain why the information helps the client\'s case, then ask. The frame matters as much as the question.'
-  },
-  'q7': {
-    t: '✅ The Intake SOP §4 requires: "Document answer verbatim in CasePeer" for the seatbelt question — regardless of whether the answer is yes or no. IR-I-1 handles the screening CHECK (should we proceed?). IR-I-2 handles the DATA ENTRY (creating the CasePeer record). A positive seatbelt confirmation is just as important to document as a negative one — it creates the defense-preparation record. Option B confuses screening with documentation. Options C and D fail to capture the information in CasePeer.',
-    f: '\u274c "No further action needed" (B) confuses the screening check (IR-I-1) with the documentation step (IR-I-2). Screening determines whether to proceed. Documentation creates the CasePeer record that the attorney and paralegal will reference throughout the case. Emailing the attorney separately (C) puts critical case information outside CasePeer \u2014 the single source of truth. Only documenting negative answers (D) leaves a gap in the record that could be exploited in litigation.'
-  },
-  'q8': {
-    t: '\u2705 The correct approach handles both situations: enter what you have (employer name as provided, with a "per client \u2014 verify" note), note what\'s missing (SSN blank with explanation), and create a follow-up task for 48 hours. This ensures: (1) no field is silently blank without explanation, (2) the information you do have is captured immediately, (3) there\'s a systematic follow-up so missing info doesn\'t fall through the cracks. Leaving fields blank (A) violates the no-blanks standard. "TBD" (B) without a follow-up task means nobody is tracking the gap.',
-    f: '\u274c Blank fields (A) violate the CasePeer documentation standard: "All fields must be populated." "TBD" without a follow-up task (B) means the gap is noted but nobody is responsible for closing it. Entering the employer but accepting a blank SSN without follow-up (C) is a partial solution. The standard: capture what you have, note what\'s pending, and create a task to ensure systematic follow-up within 48 hours.'
-  },
-  'q9': {
-    t: '\u2705 When a caller doesn\'t understand insurance terminology, explain it in plain language and give a clear action step. Option D does three things right: (1) explains UM/UIM simply ("coverage that protects you if the other driver doesn\'t have enough insurance"), (2) gives a concrete action ("check your declarations page"), and (3) creates a follow-up task so the information isn\'t lost. Defining the acronym (A) doesn\'t help. Skipping it (B) leaves a critical field blank. Asking for just the policy number (C) doesn\'t address UM/UIM.',
-    f: '\u274c Simply defining the acronym (A) doesn\'t help \u2014 the caller still won\'t know if they have UM/UIM coverage. Skipping the field (B) violates the "no blank UM/UIM" standard and could cost the client tens of thousands in unclaimed coverage. Asking for just the policy number (C) doesn\'t address the UM/UIM question. The correct approach: explain in plain language, give a concrete action step, and create a follow-up task.'
-  },
-  'q10': {
-    t: '\u2705 New cases start at "Intake" status. The minimum standard before moving forward: all required fields populated, SOL calendared with a named owner the same day, documents saved to OneDrive. No blank fields. Option B skips ahead to "Intake Review" and delegates field completion. Option C uses the wrong status. Option D sets the right status but treats name and date as the minimum.',
-    f: '\u274c "Intake Review" (B) is the NEXT stage \u2014 you advance to it after intake is complete, not at case creation. "Active Treatment" (C) is a downstream status. The "name and date minimum" (D) creates the problem from the intro scenario \u2014 a file with 8 fields out of 25+ populated. All required fields must be populated at case creation. No shortcuts.'
-  },
-  'q11': {
-    t: '\u2705 The dual-upload rule requires BOTH: documents saved to OneDrive AND entered in CasePeer. Uploading to only one system is non-compliant. OneDrive has the documents (files). CasePeer has the data (fields, notes, status). Both are needed. Single upload creates a gap that may not be caught until weeks later.',
-    f: '\u274c CasePeer alone (A) is not the standard \u2014 the dual-upload rule exists because CasePeer and OneDrive serve different functions. Physical files (B) are not part of the current workflow. Forwarding to the paralegal (D) adds a step but doesn\'t address the dual-upload requirement. Every document goes to BOTH OneDrive AND CasePeer. Single upload is non-compliant.'
-  },
-  'q12': {
-    t: '\u2705 For a standard MVA with known at-fault coverage and an English-speaking client: Template #01 (LOR At-Fault), #03 (Welcome Letter), #43 (Fee Agreement), #44 (Medical Authorization/HIPAA), and #65 (Accident Report Request). You do NOT generate #02 (LOR UM) unless opening a UM claim (C). You don\'t generate just the welcome letter (A). And you don\'t generate all 14 templates (D) \u2014 only those applicable to this case.',
-    f: '\u274c Only the welcome letter (A) leaves the paralegal to generate the LOR, fee agreement, HIPAA, and police report request. UM templates (C) should only be generated if a UM claim is being opened. All 14 templates (D) includes irrelevant ones. Generate what the case needs, not the entire catalog.'
-  },
-  'q13': {
-    t: '\u2705 The SOL must be calendared the same day the case is opened \u2014 this is a corrective action trigger. Georgia PI SOL = 2 years from date of incident (O.C.G.A. \u00a7 9-3-33). For a July 20, 2024 accident, the SOL is July 20, 2026. It must be calendared with a NAMED OWNER. "Monday morning" (B) violates the same-day standard. Delegating to the paralegal (C) creates an accountability gap. A "general reminder" (D) without the exact date is useless.',
-    f: '\u274c "Monday morning" (B) means the case sits for 2+ days with no calendared deadline. Delegating to the paralegal (C) creates an accountability gap: intake opened the case, intake calendars the SOL. "General reminder" (D) without an exact date is dangerously vague. The standard is non-negotiable: exact date, named owner, same day.'
-  },
-  'q14': {
-    t: '\u2705 The required documents at intake are: retainer agreement, medical authorization/HIPAA release, police report authorization, photos of damage and injuries, and insurance declarations page. As a remote specialist, these are collected digitally \u2014 DocuSign for signatures, email or secure upload portal for photos. Track what\'s received and what\'s outstanding.',
-    f: '\u274c "Only the retainer" (A) leaves critical documents uncollected. Physical mail (B) adds unnecessary delay. PDF print-sign-scan (C) creates friction. As a remote specialist, document collection is digital: DocuSign, email, upload portal, dual-upload to OneDrive and CasePeer, track outstanding items.'
-  },
-  'q15': {
-    t: '\u2705 The Intake SOP defines a specific follow-up cadence: 48 hours (first follow-up), 5 business days (second follow-up), 10 business days (escalate to Managing Attorney). It\'s Wednesday \u2014 exactly 48 hours after Monday \u2014 so the first follow-up happens NOW. Not Friday (A). Not a pressure call (C). Not a single email and give up (D).',
-    f: '\u274c Waiting until Friday (A) ignores the 48-hour trigger. A pressure call (C) creating false urgency damages trust. A single email then quit (D) assumes silence means disinterest. The cadence exists to be persistent without being aggressive: 48 hours \u2192 5 days \u2192 10 days escalate.'
-  },
-  'q16': {
-    t: '\u2705 The Intake SOP Timeliness Standard: "Case moved from Intake to Intake Review: Within 3 business days of retainer signing." Retainer signed Tuesday, deadline is Friday. But advancement requires: all required fields populated and no blank CasePeer entries \u2014 incomplete files must NOT be advanced. "Immediately" (A) is possible if truly complete, but the SOP gives 3 days for document collection. Paralegal review (B) adds an unnecessary step. Welcome call (D) confuses intake\'s timeline with the CM\'s.',
-    f: '\u274c "Immediately" (A) ignores that documents may still be pending. Waiting for paralegal review (B) adds an extra step not required by the SOP. Waiting for the welcome call (D) confuses intake\'s timeline with the case manager\'s 48-hour welcome checklist \u2014 those are parallel processes, not sequential gates. The standard: within 3 business days, all fields populated, no blanks.'
-  },
-  'q17': {
-    t: '\u2705 The Intake SOP \u00a79: "Intake does NOT provide legal advice." "Never promise outcomes, timelines, or settlement amounts." The standard redirect: "That\'s a great question \u2014 I\'ll make sure the attorney addresses that with you." Option C uses the exact redirect language, then transitions back to the interview. Option A quotes case values. Option B hedges but still implies value. Option D adds optimism about injuries.',
-    f: '\u274c "Your case could be worth at least that" (A) is a case valuation by a non-attorney. "Between us, cases like yours usually settle well" (B) is the same violation with a "between us" wrapper. "Your injuries sound serious, so be optimistic" (D) implicitly evaluates the case. Any comment about case value \u2014 however hedged \u2014 crosses the communication boundary. Redirect. Every time.'
-  },
-  'q18': {
-    t: '\u2705 As a remote intake specialist, document collection is digital. Email or the secure upload portal \u2014 not personal text messages (A), not in-person office visits (C). Option B gives two options (email or upload portal), and confirms the dual-upload commitment. Deferring to the case manager (D) delays document collection unnecessarily.',
-    f: '\u274c Personal phone numbers (A) are never appropriate for receiving client documents \u2014 it creates a security issue. In-person visits (C) don\'t apply to a remote specialist. Deferring to the case manager (D) delays collection of time-sensitive evidence. Collect photos at intake through secure channels, and dual-upload immediately.'
-  },
-  'q19': {
-    t: '\u2705 The CasePeer documentation standard requires: WHO you contacted (name, phone), WHAT was discussed (specifics), WHAT WAS DECIDED, and NEXT STEPS (with tasks). Option D hits every element: contact info, incident details, insurance with unknowns noted, injuries, prior injury check, seatbelt documentation, referral source, outstanding items, and tasks. Options A, B, and C are all vague summaries that tell the next person nothing.',
-    f: '\u274c "Collected info. Case looks good" (A) is the textbook bad CasePeer note. "Got most of the info" (B) doesn\'t specify what was collected or what\'s missing. "All details in the intake form" (C) forces the next person to go find the form. If someone reads your note 6 months later, they should know exactly what happened.'
-  },
-  'q20': {
-    t: '\u2705 The Intake SOP: "All fields must be populated \u2014 no blank insurance, no blank UM/UIM, no blank property damage." And: "Incomplete files must NOT be advanced to Intake Review." Three blank required fields = incomplete file = do not advance. Follow up with the client. "Note to the paralegal" (B) delegates intake\'s responsibility. "N/A" (C) is a workaround that masks gaps. "90% is acceptable" (D) is a standard that doesn\'t exist.',
-    f: '\u274c Advancing with blanks (B) pushes intake\'s work downstream. "N/A" (C) creates a false record \u2014 if the client has insurance, UM/UIM is never truly "N/A." "90% completion" (D) is not a standard. Every blank field creates a downstream risk: blank UM/UIM = missed coverage, blank PD = stalled claim, blank referral = lost marketing data.'
-  },
-  'q21': {
-    t: '\u2705 Keisha is emotional, her phone is dying, and she needs to feel heard. Option B does three critical things: (1) acknowledges her emotions and her son\'s safety, (2) addresses the practical constraint FIRST (backup contact info in case of disconnect), and (3) sets expectations ("at whatever pace works for you"). Getting backup contact info before the phone dies is the smart operational move.',
-    f: '\u274c Skipping personal info (A) means if the call drops, you can\'t reach Keisha. Rushing to SSN (C) with no empathy confirms her fear that she\'s just a case number. Telling her to plug in her phone (D) dismisses the constraint. Empathy first, then operational priority (backup contact), then set expectations.'
-  },
-  'q22': {
-    t: '\u2705 Handle incomplete insurance information WITHOUT leaving blank fields. Enter what you know (State Farm). Note what\'s pending (policy # pending, UM/UIM unknown, at-fault carrier unknown). Create follow-up tasks. Every field has an entry, even if it\'s "unknown \u2014 pending verification." Skipping (A), leaving blanks (B), or pushing the client away (C) all fail.',
-    f: '\u274c Skipping insurance entirely (A) leaves critical fields blank. Entering only "State Farm" with blank everything else (B) violates the no-blanks standard. Telling Keisha to call State Farm and call back (C) adds friction \u2014 her phone is at 12%. Capture what you know, document what\'s pending, create follow-up tasks.'
-  },
-  'q23': {
-    t: '\u2705 This answer hits every element: (1) Status: "Intake." (2) SOL: July 18, 2028, calendared NOW with named owner. (3) Minor in vehicle: flagged for attorney review. (4) Prior right shoulder PT: documented verbatim, flagged as red flag. (5) Seatbelt: confirmed wearing, documented for SB 68. (6) Referral: cousin (client referral) for marketing tracking. (7) All fields populated with follow-up tasks for pending items.',
-    f: '\u274c "Intake Review" status (B) skips the intake stage. Ignoring the minor (C) could mean a child\'s claim goes unnoticed. Dismissing prior PT (C) contradicts the SOP\'s mandatory prior injury documentation. Skipping referral (D) violates the required field standard \u2014 "my cousin used your firm" IS the referral source. Document all of them.'
-  },
-  'q24': {
-    t: '\u2705 Keisha is remote, phone dying. DocuSign for retainer, medical authorization, and police report authorization. Email or upload portal for photos and insurance card. Clear follow-up commitment (48 hours). This respects her time while ensuring all documents are tracked. Physical mail (A) adds delay. Deferring to CM (B) wastes the current conversation. In-person (D) is impossible for a remote client.',
-    f: '\u274c Physical mail (A) adds 7+ days of delay. Deferring to the CM (B) wastes the current conversation \u2014 Keisha is on the phone NOW. In-person signing (D) is impossible for a remote client. Document collection starts at intake using digital tools: DocuSign, email, secure upload portal.'
-  },
-  'q25': {
-    t: '\u2705 Complete post-call checklist: (1) SOL first \u2014 July 18, 2028, named owner. (2) Templates: #01 (LOR At-Fault, pending carrier info), #03 (Welcome Letter), #43 (Fee Agreement via DocuSign), #44 (HIPAA via DocuSign), #65 (Accident Report Request). (3) Tasks: follow up insurance card (48h), follow up unsigned docs (48h), request police report, flag minor for attorney, flag prior shoulder injury. (4) Stay in "Intake" until all fields populated, advance within 3 business days of retainer.',
-    f: '\u274c Only the welcome letter and immediate advancement (A) skips LOR, fee agreement, HIPAA, police report request, and all follow-up tasks. All 14 templates (C) includes irrelevant ones and a single vague task. "SOL on Monday" (D) violates same-day rule. "No follow-up tasks" (D) relies on hope \u2014 hope is not a system. Create tasks. Track everything.'
-  }
-};
+var FEEDBACK = {} /* CUTOVER: feedback text is served per-answer by the engine, never shipped to the client up front */;
 
 // ═══════════════════════════════════════════════
 // ANSWER HANDLER
 // ═══════════════════════════════════════════════
-function answer(qId, choice, isCorrect) {
+window.answerUI = function answerUI(qId, choice, isCorrect) {
   if (qDone[qId]) return;
   qDone[qId] = true;
   var cfg = Q_CONFIG[qId];
@@ -1071,8 +881,8 @@ function answer(qId, choice, isCorrect) {
   var btns = block.querySelectorAll('.option-btn');
   btns.forEach(function(b){ b.classList.add('disabled'); });
   var clickedBtn = document.getElementById(qId + '-' + choice);
-  var correctBtn = document.getElementById(qId + '-' + cfg.correct);
-  if (choice === cfg.correct) {
+  var correctBtn = document.getElementById(qId + '-' + (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || ''));
+  if (choice === (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || '')) {
     clickedBtn.classList.add('correct');
     block.classList.add('answered');
     if (!cfg.isBonus) {
@@ -1099,8 +909,8 @@ function answer(qId, choice, isCorrect) {
   }
   var fbData = FEEDBACK[qId];
   if (fbData) {
-    fb.innerHTML = (choice === cfg.correct) ? fbData.t : fbData.f;
-    fb.className = 'feedback-box ' + (choice === cfg.correct ? 'correct' : 'incorrect') + ' show';
+    fb.innerHTML = (choice === (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || '')) ? fbData.t : fbData.f;
+    fb.className = 'feedback-box ' + (choice === (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || '') ? 'correct' : 'incorrect') + ' show';
   }
   var totalQs = Object.keys(Q_CONFIG).length;
   var answeredCount = Object.keys(qDone).length;
@@ -1139,6 +949,8 @@ function answer(qId, choice, isCorrect) {
 // NAVIGATION
 // ═══════════════════════════════════════════════
 function goToSection(idx) {
+  if (idx === 9 && !window._iri2Passed) { showToast("⚠️ 80% required for certificate", false); return; }
+  
   currentSection = idx;
   document.querySelectorAll('.section-card').forEach(function(c){ c.classList.remove('active'); });
   document.getElementById('section-' + idx).classList.add('active');
@@ -1210,8 +1022,8 @@ function buildResults() {
     var questionText = qText ? qText.textContent : 'Question ' + (idx+1);
     var isAnswered = !!qDone[qId];
     var wasCorrect = isAnswered && block.classList.contains('answered');
-    var correctLetter = cfg.correct.toUpperCase();
-    var correctBtn2 = document.getElementById(qId + '-' + cfg.correct);
+    var correctLetter = (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || '').toUpperCase();
+    var correctBtn2 = document.getElementById(qId + '-' + (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || ''));
     var correctText = correctBtn2 ? correctBtn2.querySelector('.opt-text').textContent : '';
     var userAnswer = '(not answered)', userLetter = '';
     if (isAnswered) {
@@ -1288,7 +1100,7 @@ function submitScoreAndBuildCert() {
   setTimeout(function() { launchConfetti(); playTaDa(); mascotReact('complete'); }, 350);
   if (TRACKER_URL) {
     var payload = {
-      employeeName: name, moduleId: 'ir-i-2',
+      employeeName: name, moduleId: 'ir-i-2-intake-interview',
       moduleName: 'Intake Interview & CasePeer Setup',
       score: baseScore, maxScore: 200, bonusScore: bonusPoints,
       maxStreak: maxStreak,
@@ -1521,5 +1333,67 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 goToSection(0);
 </script>
+
+
+
+<script>
+/* ── go() / startQuiz() — quiz entry point (Harrell ruling 2026-09-03) ── */
+async function go(screen) {
+  if (screen === 'quiz') {
+    var _ni = document.getElementById('trainee-name-input');
+    var _name = (_ni && _ni.value.trim()) || '';
+    if (!_name) {
+      if (typeof showToast === 'function') showToast('⚠️ Please enter your name before starting the quiz', false);
+      else alert('Please enter your name before starting the quiz.');
+      return;
+    }
+    // Bug-2 fix: await attempt start before making questions interactive
+    await window.GLGQuiz.beginAttempt(_name);
+    goToSection(7);
+  }
+}
+
+function startQuiz() { go('quiz'); }
+
+/* ── GLG MODULE CONFIG — wires api-quiz-engine.js to module-ir-i-2.html ── */
+window.GLG_MODULE_CONFIG = {
+  moduleId: 'ir-i-2-intake-interview',
+  onBankLoaded: function(bank) {
+    var basemax = document.getElementById('basemax');
+    var gate    = document.getElementById('gate');
+    if (basemax) basemax.textContent = bank.base_max;
+    if (gate)    gate.textContent    = bank.pass_pct;
+    for (var i = 1; i <= 6; i++) {
+      var nextEl = document.getElementById('s' + i + '-next');
+      if (nextEl) nextEl.style.display = 'flex';
+    }
+  },
+  onStartQuiz: function() {
+    if (typeof audioCtx !== 'undefined' && audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume().catch(function(){});
+    }
+  },
+  onAnswered: function(r) {
+    baseScore   = r.base_score;
+    bonusPoints = r.bonus_score;
+    streakCount = r.streak;
+    maxStreak   = Math.max(maxStreak || 0, r.maxStreak || 0);
+    var ts = document.getElementById('total-score');
+    if (ts) ts.textContent = r.base_score;
+    var bs = document.getElementById('bonus-score');
+    if (bs) bs.textContent = r.bonus_score;
+    if (typeof updateStreak  === 'function') updateStreak(r.correct);
+    if (typeof mascotReact   === 'function') mascotReact(r.correct ? 'correct' : 'incorrect');
+  },
+  onComplete: function(r) {
+    window._iri2Passed = r.passed;
+    baseScore   = r.base_score;
+    bonusPoints = r.bonus_score;
+    goToSection(8);   // results is now section-8 after port
+    if (typeof buildResults === 'function') buildResults();
+  }
+};
+</script>
+<script src="api-quiz-engine.js"></script>
 </body>
 </html>

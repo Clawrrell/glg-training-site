@@ -5,7 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
   <title>IR-R-3 - Client First Impressions &amp; Escalation | Gunn Law Group</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <style>
+:root {
+    --navy: #141c2c;
+    --gold: #dcb161;
+    --gold-lt: #f0d89a;
+}
+
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
     body{font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;color:#333;font-size:16px;line-height:1.6;-webkit-text-size-adjust:100%;overflow-x:hidden;}
@@ -163,6 +170,159 @@
     .option-btn.correct{animation:correctPulse 0.6s ease-out;}
     .option-btn.incorrect{animation:incorrectShake 0.4s ease-out;}
   </style>
+
+<style>
+/* ── GLG QUIZ ENGINE — question type styles (2026-09-02) ──────────────────
+     All classes rendered by api-quiz-engine.js. Tokens: navy #141c2c, gold #C5975B.
+     Sourced from engine.html stylesheet + Harrell Part 8c spec. */
+
+  /* Question card */
+  .q { background:#fff; border:1px solid #e2e5ea; border-radius:10px;
+       padding:20px; margin:16px 0; box-shadow:0 1px 6px rgba(20,28,44,.06); }
+  .q-num { font-size:12px; letter-spacing:.06em; color:#C5975B; font-weight:700;
+            text-transform:uppercase; margin-bottom:8px; }
+  .q-text { font-weight:600; margin:8px 0 16px; font-size:1rem; line-height:1.55;
+             color:#141c2c; }
+
+  /* MC option buttons */
+  button.opt { display:block; width:100%; text-align:left; padding:13px 15px; margin:7px 0;
+    border:1px solid #d8dbe3; border-radius:8px; background:#fafbfd; cursor:pointer;
+    font-size:15px; font-family:var(--font-b); color:#222; line-height:1.45;
+    transition:background .12s, border-color .12s; }
+  button.opt:hover:not(.locked) { background:#eef4ff; border-color:#141c2c; }
+  button.opt.correct { background:#d4edda; border-color:#10774A; }
+  button.opt.incorrect { background:#f8d7da; border-color:#870101; }
+  button.opt.locked { cursor:default; opacity:.85; }
+
+  /* Fill-in-the-blank */
+  .fill-stem { font-weight:600; margin:8px 0 14px; line-height:2.2; }
+  input.blank { display:inline-block; min-height:44px; min-width:120px; padding:8px 10px;
+    margin:2px 4px; border:1px solid #ccd; border-radius:8px; background:#fafbfd;
+    font-size:16px; font-family:var(--font-b); vertical-align:middle;
+    box-sizing:border-box; max-width:100%; }
+  input.blank:focus { outline:2px solid #141c2c; background:#fff; }
+  input.blank.correct { background:#d4edda; border-color:#10774A; }
+  input.blank.incorrect { background:#f8d7da; border-color:#870101; }
+  input.blank.locked { opacity:.85; }
+  button.submit-fill { min-height:44px; padding:11px 20px; margin-top:12px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-fill.locked { opacity:.5; cursor:default; }
+
+  /* Markup */
+  .markup-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .markup-passage { margin:0 0 10px; border:1px solid #e2e5ea; border-radius:8px; overflow:hidden; }
+  button.span { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:11px 13px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:16px; font-family:var(--font-b);
+    color:#222; line-height:1.5; overflow-wrap:break-word; }
+  button.span:last-child { border-bottom:0; }
+  button.span:hover:not(.locked) { background:#eef4ff; }
+  button.span.selected { background:#fff3cd; box-shadow:inset 4px 0 0 #b8860b; font-weight:600; }
+  button.span.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.span.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.span.locked { cursor:default; opacity:.9; }
+  button.submit-markup { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-markup.locked { opacity:.5; cursor:default; }
+  .markup-count { font-size:13px; color:#555; margin-top:8px; }
+
+  /* Sort rows with up/down controls */
+  .sort-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .sort-list { margin:0 0 12px; border:1px solid #e2e5ea; border-radius:8px;
+               overflow:hidden; background:#fff; }
+  .sort-row { display:flex; align-items:stretch; border-bottom:1px solid #eef0f3;
+              background:#fff; }
+  .sort-row:last-child { border-bottom:0; }
+  .sort-pos { flex:0 0 34px; display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700; color:#C5975B; background:#f5f5f0; }
+  .sort-text { flex:1 1 auto; padding:11px 12px; font-size:15px; line-height:1.45;
+    display:flex; align-items:center; overflow-wrap:break-word; min-width:0; }
+  .sort-moves { flex:0 0 auto; display:flex; align-items:center; gap:4px; padding:4px 6px; }
+  button.sort-move { min-height:44px; min-width:44px; border:1px solid #ccd; border-radius:8px;
+    background:#fafbfd; cursor:pointer; font-size:15px; color:#141c2c;
+    font-family:var(--font-b); }
+  button.sort-move:hover:not(:disabled) { background:#eef4ff; }
+  button.sort-move:disabled { opacity:.35; cursor:default; }
+  .sort-row.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  .sort-row.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  .sort-row.locked .sort-text { opacity:.9; }
+  button.submit-sort { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-sort.locked { opacity:.5; cursor:default; }
+
+  /* Match chips + slot rows */
+  .match-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .match-tray { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px; padding:10px;
+    border:1px dashed #ccd; border-radius:8px; background:#fafbfd; }
+  button.chip { min-height:44px; padding:10px 16px; border:1px solid #ccd; border-radius:22px;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b); color:#222;
+    max-width:100%; overflow-wrap:break-word; text-align:left; }
+  button.chip:hover:not(.locked) { background:#eef4ff; }
+  button.chip.selected { background:#141c2c; color:#fff; border-color:#141c2c; font-weight:600; }
+  button.chip.placed { opacity:.35; }
+  button.chip.locked { cursor:default; }
+  .match-slots { border:1px solid #e2e5ea; border-radius:8px; overflow:hidden;
+                 background:#fff; margin-bottom:12px; }
+  button.slot { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:10px 14px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b);
+    color:#222; line-height:1.45; overflow-wrap:break-word; }
+  button.slot:last-child { border-bottom:0; }
+  button.slot:hover:not(.locked) { background:#eef4ff; }
+  button.slot.armed { box-shadow:inset 4px 0 0 #C5975B; background:#fffdf5; }
+  .slot-label { font-weight:600; display:block; }
+  .slot-fill { display:block; font-size:14px; margin-top:3px; color:#C5975B; font-weight:600; }
+  .slot-fill.empty { color:#8a8f98; font-weight:400; font-style:italic; }
+  button.slot.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.slot.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.slot.locked { cursor:default; opacity:.9; }
+  button.submit-match { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-match.locked { opacity:.5; cursor:default; }
+  .match-count { font-size:13px; color:#555; margin-top:8px; }
+  .match-credit { font-size:13px; font-weight:600; color:#8a6d1f; margin-top:6px; }
+
+  /* Feedback */
+  .fb { margin-top:12px; padding:12px 14px; border-radius:8px; font-size:14px; display:none; }
+  .fb.show { display:block; }
+  .fb.ok { background:#d4edda; border-left:4px solid #10774A; }
+  .fb.no { background:#f8d7da; border-left:4px solid #870101; }
+  .fb.neutral { background:#eef0f6; border-left:4px solid #6c757d; color:#333; } /* self_assessment: no verdict */
+
+  /* Branching nodes */
+  .branch-scenario { border-left:4px solid #C5975B; padding-left:12px; margin:14px 0; }
+  .branch-turn { font-size:12px; letter-spacing:.06em; color:#8a6d1f; font-weight:700;
+                 text-transform:uppercase; }
+  .branch-instruction { font-weight:600; margin:6px 0 10px; color:#141c2c; }
+  .branch-consequence { margin-top:10px; padding:10px 12px; border-left:4px solid #141c2c;
+    background:#eef2f7; border-radius:0 8px 8px 0; font-size:13px; color:#33415c; display:none; }
+  .branch-consequence.show { display:block; }
+
+  /* Pagination — one question at a time (Harrell Part 8b) */
+  .q-base { display: none !important; }
+  .q-base.q-active { display: block !important; }
+  .q-nav { display:flex; justify-content:space-between; align-items:center;
+            margin-top:20px; padding-top:16px; border-top:1px solid #e8e6e0; }
+  .q-nav-btn { min-height:44px; padding:10px 22px; border-radius:8px;
+                font-size:15px; cursor:pointer; font-family:var(--font-b);
+                font-weight:600; transition:background .12s; }
+  .q-nav-btn.next { background:#141c2c; color:#C5975B; border:2px solid #141c2c; }
+  .q-nav-btn.next:hover { background:#1e2a40; }
+  .q-nav-btn.back { background:#fff; color:#141c2c; border:2px solid #c8c5be; }
+  .q-nav-btn.back:hover { background:#f5f5f0; }
+  .q-pg-spacer { display:inline-block; min-width:40px; }
+  #q-progress { font-size:12px; color:#C5975B; font-weight:600;
+                letter-spacing:.5px; text-transform:uppercase; }
+
+
+</style>
+
+<!-- CUTOVER: server-side grading. Answer keys are not in this file. -->
+    <link rel="stylesheet" href="boss-challenge.css">
 </head>
 <body>
 
@@ -198,8 +358,9 @@
   <button class="nav-pill" id="nav-4" onclick="goToSection(4)">5. De-Escalation</button>
   <button class="nav-pill" id="nav-5" onclick="goToSection(5)">6. Recovery &amp; Triggers</button>
   <button class="nav-pill" id="nav-6" onclick="goToSection(6)">7. Boss</button>
-  <button class="nav-pill" id="nav-7" onclick="goToSection(7)">8. Results</button>
-  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">9. Certificate</button>
+  <button class="nav-pill" id="nav-7" onclick="startQuiz()">8. Quiz</button>
+  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">9. Results</button>
+  <button class="nav-pill" id="nav-9" onclick="goToSection(9)">10. Feedback</button>
 </nav>
 
 <div class="points-toast" id="points-toast"></div>
@@ -278,56 +439,12 @@
     <div class="callout callout-danger"><strong>Safety Before Content:</strong> When a client is emotionally activated — angry, scared, feeling betrayed — their mind is managing a threat, not processing information. Your first responsibility is to restore their sense that you are on their side. Until that safety is established, nothing you say will land.</div>
 
     <!-- Q1 -->
-    <div class="question-block" id="q1-block">
-      <div class="q-num">Question 1 of 20 · 10 pts</div>
-      <div class="q-text">A client walks into the lobby looking nervous — wringing hands, avoiding eye contact, speaking in short fragments. Beyond the standard greeting, what does the first-impression ecosystem require?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q1','a',false)" id="q1-a"><span class="opt-letter">A</span><span class="opt-text">Just give the standard greeting, offer a seat — the nervousness is not your problem to solve</span></button>
-        <button class="option-btn" onclick="answer('q1','b',false)" id="q1-b"><span class="opt-letter">B</span><span class="opt-text">Ask directly: "Is everything okay? You seem really nervous. What's wrong?"</span></button>
-        <button class="option-btn" onclick="answer('q1','c',true)" id="q1-c"><span class="opt-letter">C</span><span class="opt-text">Deliver the standard greeting warmly, lean forward with genuine eye contact, use a calm and steady pace, offer water and an estimated wait time. Follow through: if you say "5 minutes," check back in 4. The goal is to make them feel safe before anything else.</span></button>
-        <button class="option-btn" onclick="answer('q1','d',false)" id="q1-d"><span class="opt-letter">D</span><span class="opt-text">Walk them directly to their paralegal's office to minimize their wait time and reduce their anxiety</span></button>
-      </div>
-      <div class="feedback-box" id="q1-fb"></div>
-    </div>
 
     <!-- Q2 -->
-    <div class="question-block" id="q2-block">
-      <div class="q-num">Question 2 of 20 · 10 pts</div>
-      <div class="q-text">A caller sounds calm on the surface but has gone silent after you ask how you can help — long pauses, clipped one-word responses, flat tone. Based on advanced emotional reading, what is happening and what should you do?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q2','a',false)" id="q2-a"><span class="opt-letter">A</span><span class="opt-text">They're probably distracted — ask them to call back when they have a moment to focus</span></button>
-        <button class="option-btn" onclick="answer('q2','b',true)" id="q2-b"><span class="opt-letter">B</span><span class="opt-text">The silence signals withdrawal — the caller may feel unheard or unsafe. Lower your pace, use warmth: "I'm here to help — take your time." Give them space to share. Don't push content or rush to route them.</span></button>
-        <button class="option-btn" onclick="answer('q2','c',false)" id="q2-c"><span class="opt-letter">C</span><span class="opt-text">They're being difficult on purpose — transfer to the supervisor so someone with authority can handle them</span></button>
-        <button class="option-btn" onclick="answer('q2','d',false)" id="q2-d"><span class="opt-letter">D</span><span class="opt-text">They're fine — some callers are just quiet. Proceed with standard routing questions.</span></button>
-      </div>
-      <div class="feedback-box" id="q2-fb"></div>
-    </div>
 
     <!-- Q3 -->
-    <div class="question-block" id="q3-block">
-      <div class="q-num">Question 3 of 20 · 10 pts</div>
-      <div class="q-text">An existing client arrived 10 minutes early for their appointment. It's now 20 minutes past the scheduled time. You gave a "5-minute" estimate 15 minutes ago. The client's body language has shifted — arms crossed, no eye contact, foot tapping. What does the first-impression ecosystem require?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q3','a',false)" id="q3-a"><span class="opt-letter">A</span><span class="opt-text">Let them wait — the paralegal will come out eventually, and interrupting their work would be worse</span></button>
-        <button class="option-btn" onclick="answer('q3','b',false)" id="q3-b"><span class="opt-letter">B</span><span class="opt-text">Walk over and say "They'll be right with you" — brief, professional, and back to the desk</span></button>
-        <button class="option-btn" onclick="answer('q3','c',false)" id="q3-c"><span class="opt-letter">C</span><span class="opt-text">Transfer them to a different paralegal who has time right now — someone should see them</span></button>
-        <button class="option-btn" onclick="answer('q3','d',true)" id="q3-d"><span class="opt-letter">D</span><span class="opt-text">Approach immediately: "I'm sorry — I told you 5 minutes and it's been much longer. Let me check on exactly when they'll be ready." Then follow up with the paralegal. If it's going to be longer, communicate a realistic time and offer water. Acknowledge the broken promise.</span></button>
-      </div>
-      <div class="feedback-box" id="q3-fb"></div>
-    </div>
 
     <!-- Q4 — CARRY-FORWARD from IR-R-1 -->
-    <div class="question-block" id="q4-block">
-      <div class="q-num">Question 4 of 20 · 10 pts · Carry-Forward (IR-R-1)</div>
-      <div class="q-text">While you're managing an upset walk-in client, an existing client calls and says: "I just need a yes or no — did my case settle?" You recognize the name. What do you do?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q4','a',true)" id="q4-a"><span class="opt-letter">A</span><span class="opt-text">"I want to make sure you get the most accurate information from the person working your case directly. Let me get your case manager to call you back today. Can I confirm the best number?" Then relay the message within 15 minutes to the named case manager.</span></button>
-        <button class="option-btn" onclick="answer('q4','b',false)" id="q4-b"><span class="opt-letter">B</span><span class="opt-text">Look it up in CasePeer to give them accurate information — it's a simple yes/no question</span></button>
-        <button class="option-btn" onclick="answer('q4','c',false)" id="q4-c"><span class="opt-letter">C</span><span class="opt-text">It's a simple yes or no — answer quickly so you can focus on the upset walk-in</span></button>
-        <button class="option-btn" onclick="answer('q4','d',false)" id="q4-d"><span class="opt-letter">D</span><span class="opt-text">"I'm not allowed to discuss cases." [ends the call]</span></button>
-      </div>
-      <div class="feedback-box" id="q4-fb"></div>
-    </div>
 
     <div class="section-score" id="s1-score" style="display:none;"><div class="score-display" id="s1-score-val"></div><div class="score-label">Section 2 Score</div></div>
     <div class="btn-group" id="s1-next"><button class="btn btn-primary btn-block" onclick="goToSection(2)">Next: The 3-Tier Complaint System &rarr;</button></div>
@@ -369,56 +486,12 @@
     <div class="callout callout-info"><strong>Reception's Role in the 8-Step Response Protocol:</strong> Steps 1 and 2 are your direct responsibility. Step 1: Receive &amp; Document immediately (CasePeer within 1 hour). Step 2: Route by Tier. Steps 3-8 (acknowledge, investigate, resolve, document, follow-up, report) are handled by the assigned CM, attorney, or Harrell — depending on the tier.</div>
 
     <!-- Q5 -->
-    <div class="question-block" id="q5-block">
-      <div class="q-num">Question 5 of 20 · 10 pts</div>
-      <div class="q-text">A client calls and says: "I haven't heard from my case manager in almost a month. Nobody returns my calls. I just want to know what's going on with my case." How do you classify this complaint and where does it route?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q5','a',false)" id="q5-a"><span class="opt-letter">A</span><span class="opt-text">Tier 2 — the client is questioning case strategy, which requires attorney involvement</span></button>
-        <button class="option-btn" onclick="answer('q5','b',true)" id="q5-b"><span class="opt-letter">B</span><span class="opt-text">Tier 1 — this is a service/communication issue. The case manager handles it directly. Same-day acknowledgment, 48-hour resolution plan. Document in CasePeer and route to the assigned CM.</span></button>
-        <button class="option-btn" onclick="answer('q5','c',false)" id="q5-c"><span class="opt-letter">C</span><span class="opt-text">Tier 3 — a month of no contact is a serious escalation requiring immediate Harrell notification</span></button>
-        <button class="option-btn" onclick="answer('q5','d',false)" id="q5-d"><span class="opt-letter">D</span><span class="opt-text">Not a complaint — this is just a status check. Route normally to the case manager without classification.</span></button>
-      </div>
-      <div class="feedback-box" id="q5-fb"></div>
-    </div>
 
     <!-- Q6 -->
-    <div class="question-block" id="q6-block">
-      <div class="q-num">Question 6 of 20 · 10 pts</div>
-      <div class="q-text">A client calls and says: "I got the settlement breakdown and this doesn't make sense. I was expecting way more than this. I think the fee is wrong — I want to talk to the attorney about it." How do you classify and route this complaint?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q6','a',false)" id="q6-a"><span class="opt-letter">A</span><span class="opt-text">Tier 1 — this is a communication issue about the fee structure that the case manager can explain</span></button>
-        <button class="option-btn" onclick="answer('q6','b',false)" id="q6-b"><span class="opt-letter">B</span><span class="opt-text">Tier 3 — any fee dispute is automatically a serious escalation requiring immediate Harrell notification</span></button>
-        <button class="option-btn" onclick="answer('q6','c',true)" id="q6-c"><span class="opt-letter">C</span><span class="opt-text">Tier 2 — fee structure questions and billing disputes require attorney involvement. Same-day acknowledgment, 48-hour attorney consultation, 72-hour resolution plan. Route to the assigned attorney and document.</span></button>
-        <button class="option-btn" onclick="answer('q6','d',false)" id="q6-d"><span class="opt-letter">D</span><span class="opt-text">Not reception's problem — transfer to accounting without classification</span></button>
-      </div>
-      <div class="feedback-box" id="q6-fb"></div>
-    </div>
 
     <!-- Q7 -->
-    <div class="question-block" id="q7-block">
-      <div class="q-num">Question 7 of 20 · 10 pts</div>
-      <div class="q-text">A caller says: "I'm done with this firm. I've contacted the Georgia Bar and I'm filing a complaint today. I also left you a one-star Google review this morning." Which tier, and what is the critical timeline?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q7','a',false)" id="q7-a"><span class="opt-letter">A</span><span class="opt-text">Tier 2 — attorney involvement required, 72-hour resolution plan</span></button>
-        <button class="option-btn" onclick="answer('q7','b',false)" id="q7-b"><span class="opt-letter">B</span><span class="opt-text">Tier 1 — the case manager should handle the communication breakdown that led to this</span></button>
-        <button class="option-btn" onclick="answer('q7','c',false)" id="q7-c"><span class="opt-letter">C</span><span class="opt-text">Tier 3 — escalate to the attorney within 24 hours with a resolution plan</span></button>
-        <button class="option-btn" onclick="answer('q7','d',true)" id="q7-d"><span class="opt-letter">D</span><span class="opt-text">Tier 3 — immediate. Harrell must be notified within 2 hours. Bar complaint threat + negative review posted = two separate 2-hour triggers. Same-day attorney response required, 24-hour resolution plan. Complete incident report.</span></button>
-      </div>
-      <div class="feedback-box" id="q7-fb"></div>
-    </div>
 
     <!-- Q8 -->
-    <div class="question-block" id="q8-block">
-      <div class="q-num">Question 8 of 20 · 10 pts · Confidence Check</div>
-      <div class="q-text">Before answering, rate your confidence on tier classification (1-5 in your head). Now: A client calls and says: "I've been trying to reach someone about my medical records request for two weeks. Nobody calls me back. I just need to know what's happening." You acknowledge and ask if there's anything else. They sigh and say: "No, just... please have someone call me today." What tier is this?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q8','a',true)" id="q8-a"><span class="opt-letter">A</span><span class="opt-text">Tier 1 — communication issue. The client is frustrated but their complaint is about service delivery (unreturned calls about medical records). No attorney involvement needed. CM handles directly with same-day acknowledgment and 48-hour resolution plan.</span></button>
-        <button class="option-btn" onclick="answer('q8','b',false)" id="q8-b"><span class="opt-letter">B</span><span class="opt-text">Tier 2 — two weeks of unanswered calls about medical records automatically escalates to attorney involvement</span></button>
-        <button class="option-btn" onclick="answer('q8','c',false)" id="q8-c"><span class="opt-letter">C</span><span class="opt-text">Tier 3 — any complaint about being ignored for two weeks is a serious escalation</span></button>
-        <button class="option-btn" onclick="answer('q8','d',false)" id="q8-d"><span class="opt-letter">D</span><span class="opt-text">Not classifiable until you know more — ask detailed questions about the medical records before routing</span></button>
-      </div>
-      <div class="feedback-box" id="q8-fb"></div>
-    </div>
 
     <div class="section-score" id="s2-score" style="display:none;"><div class="score-display" id="s2-score-val"></div><div class="score-label">Section 3 Score</div></div>
     <div class="btn-group" id="s2-next"><button class="btn btn-primary btn-block" onclick="goToSection(3)">Next: Escalation Protocols &amp; Chain of Command &rarr;</button></div>
@@ -455,56 +528,12 @@
     <div class="callout callout-warn"><strong>Handle at the Lowest Appropriate Level:</strong> A client who demands "the boss" doesn't automatically get routed to Harrell. Assess the complaint tier first. Tier 1 goes to the CM supervisor. Tier 2 goes to the attorney. Only Tier 3 goes directly to Harrell. The chain of command exists to make sure the RIGHT person handles each issue — not to give the loudest caller the highest authority.</div>
 
     <!-- Q9 -->
-    <div class="question-block" id="q9-block">
-      <div class="q-num">Question 9 of 20 · 10 pts</div>
-      <div class="q-text">A client calls at 10:00 AM and says: "Your firm screwed up my case. The insurance adjuster told me my claim was denied because your office didn't send the paperwork on time. This is unacceptable." What is the correct escalation path?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q9','a',false)" id="q9-a"><span class="opt-letter">A</span><span class="opt-text">Transfer directly to Harrell — this sounds like malpractice and needs immediate managing attorney attention</span></button>
-        <button class="option-btn" onclick="answer('q9','b',true)" id="q9-b"><span class="opt-letter">B</span><span class="opt-text">Document immediately in CasePeer (Step 1), classify as Tier 2 (concern about case handling requiring attorney involvement), and route to the assigned attorney within 1 hour (Step 2). The adjuster's claim about missed paperwork needs attorney investigation before determining if it rises to Tier 3.</span></button>
-        <button class="option-btn" onclick="answer('q9','c',false)" id="q9-c"><span class="opt-letter">C</span><span class="opt-text">Route to the case manager first — they should explain what happened with the paperwork before involving the attorney</span></button>
-        <button class="option-btn" onclick="answer('q9','d',false)" id="q9-d"><span class="opt-letter">D</span><span class="opt-text">Call the insurance adjuster yourself to verify their claim before routing anywhere</span></button>
-      </div>
-      <div class="feedback-box" id="q9-fb"></div>
-    </div>
 
     <!-- Q10 -->
-    <div class="question-block" id="q10-block">
-      <div class="q-num">Question 10 of 20 · 10 pts</div>
-      <div class="q-text">Which of the following situations does NOT trigger an automatic Tier 3 / 2-hour Harrell notification?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q10','a',false)" id="q10-a"><span class="opt-letter">A</span><span class="opt-text">A client says "I'm calling the Bar on you people"</span></button>
-        <button class="option-btn" onclick="answer('q10','b',false)" id="q10-b"><span class="opt-letter">B</span><span class="opt-text">A client posts a negative Google review while on the phone with you</span></button>
-        <button class="option-btn" onclick="answer('q10','c',false)" id="q10-c"><span class="opt-letter">C</span><span class="opt-text">A client says "I think you mishandled my settlement money"</span></button>
-        <button class="option-btn" onclick="answer('q10','d',true)" id="q10-d"><span class="opt-letter">D</span><span class="opt-text">A client says "I'm frustrated that nobody has called me back in a week"</span></button>
-      </div>
-      <div class="feedback-box" id="q10-fb"></div>
-    </div>
 
     <!-- Q11 -->
-    <div class="question-block" id="q11-block">
-      <div class="q-num">Question 11 of 20 · 10 pts</div>
-      <div class="q-text">A frustrated client says: "I don't want to talk to my case manager anymore. I don't want to talk to the paralegal. I want to talk to Harrell. Put me through right now." Harrell is available. What is the correct escalation decision?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q11','a',true)" id="q11-a"><span class="opt-letter">A</span><span class="opt-text">Assess the complaint tier first. If Tier 1 (communication), route to the CM supervisor — not directly to Harrell. If Tier 2 (case strategy/fees), route to the assigned attorney. Only Tier 3 (bar threats, malpractice) goes directly to Harrell. Validate their frustration while routing to the right level: "I hear how frustrated you are. Let me get you to the person who can address this directly."</span></button>
-        <button class="option-btn" onclick="answer('q11','b',false)" id="q11-b"><span class="opt-letter">B</span><span class="opt-text">Transfer to Harrell immediately — the client has the right to speak with the managing attorney whenever they want</span></button>
-        <button class="option-btn" onclick="answer('q11','c',false)" id="q11-c"><span class="opt-letter">C</span><span class="opt-text">Transfer to the case manager anyway — clients don't get to bypass the chain of command under any circumstances</span></button>
-        <button class="option-btn" onclick="answer('q11','d',false)" id="q11-d"><span class="opt-letter">D</span><span class="opt-text">Tell them Harrell is unavailable to avoid the confrontation</span></button>
-      </div>
-      <div class="feedback-box" id="q11-fb"></div>
-    </div>
 
     <!-- Q12 — CARRY-FORWARD from IR-R-2 -->
-    <div class="question-block" id="q12-block">
-      <div class="q-num">Question 12 of 20 · 10 pts · Carry-Forward (IR-R-2)</div>
-      <div class="q-text">After handling a Tier 2 complaint at 3:30 PM, you've routed the caller to the assigned attorney. Per the 8-Step Response Protocol, what documentation must you — the receptionist — complete?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q12','a',false)" id="q12-a"><span class="opt-letter">A</span><span class="opt-text">Log it in the front desk message book with the caller's name and complaint summary</span></button>
-        <button class="option-btn" onclick="answer('q12','b',false)" id="q12-b"><span class="opt-letter">B</span><span class="opt-text">Send a group email to the whole office explaining what happened so everyone is aware</span></button>
-        <button class="option-btn" onclick="answer('q12','c',true)" id="q12-c"><span class="opt-letter">C</span><span class="opt-text">Create a CasePeer entry within 1 hour: date, time, what the client said (their specific words), their tone and emotion level, your preliminary tier assessment (Tier 2), and who you routed it to. Step 1 of the 8-Step Protocol: "Receive &amp; Document Immediately."</span></button>
-        <button class="option-btn" onclick="answer('q12','d',false)" id="q12-d"><span class="opt-letter">D</span><span class="opt-text">Verbally tell the attorney what happened — they'll handle all documentation for Tier 2 themselves</span></button>
-      </div>
-      <div class="feedback-box" id="q12-fb"></div>
-    </div>
 
     <div class="section-score" id="s3-score" style="display:none;"><div class="score-display" id="s3-score-val"></div><div class="score-label">Section 4 Score</div></div>
     <div class="btn-group" id="s3-next"><button class="btn btn-primary btn-block" onclick="goToSection(4)">Next: Advanced De-Escalation Techniques &rarr;</button></div>
@@ -547,56 +576,12 @@
     </div>
 
     <!-- Q13 -->
-    <div class="question-block" id="q13-block">
-      <div class="q-num">Question 13 of 20 · 10 pts</div>
-      <div class="q-text">A client calls screaming: "Three months! THREE MONTHS and nobody has told me anything about my case! I found out from the INSURANCE COMPANY that there was a problem with my claim!" Which advanced de-escalation technique should you use FIRST?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q13','a',false)" id="q13-a"><span class="opt-letter">A</span><span class="opt-text">Mirror their words back: "So you're saying it's been three months with no update from us?" to show you're listening</span></button>
-        <button class="option-btn" onclick="answer('q13','b',true)" id="q13-b"><span class="opt-letter">B</span><span class="opt-text">Label the emotion: "It sounds like you feel completely left in the dark about your own case — and finding out from the insurance company must have been really upsetting." Then pause. Let the label land. Wait for them to confirm, correct, or expand before doing anything else.</span></button>
-        <button class="option-btn" onclick="answer('q13','c',false)" id="q13-c"><span class="opt-letter">C</span><span class="opt-text">Immediately route to the supervisor — this is too heated for reception to handle</span></button>
-        <button class="option-btn" onclick="answer('q13','d',false)" id="q13-d"><span class="opt-letter">D</span><span class="opt-text">Apologize quickly: "I'm so sorry about that. Let me get your case manager on the phone right now."</span></button>
-      </div>
-      <div class="feedback-box" id="q13-fb"></div>
-    </div>
 
     <!-- Q14 -->
-    <div class="question-block" id="q14-block">
-      <div class="q-num">Question 14 of 20 · 10 pts</div>
-      <div class="q-text">A caller is speaking rapidly, voice rising: "I've called three times this week. THREE TIMES. Nobody calls me back. I need to know about my medical records!" You label: "It sounds like you're frustrated that no one has gotten back to you." The caller responds: "I'm not frustrated — I'm SCARED. My surgery is in four days and nobody has confirmed the records were sent." What does this tell you, and what do you do?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q14','a',true)" id="q14-a"><span class="opt-letter">A</span><span class="opt-text">The label worked — the correction gave you the real concern (fear about surgery, not just anger about callbacks). Acknowledge the real emotion: "I hear you — that's a lot of pressure with surgery in four days. Let me get this to your case manager right now as urgent so they can confirm those records today." Route immediately as priority.</span></button>
-        <button class="option-btn" onclick="answer('q14','b',false)" id="q14-b"><span class="opt-letter">B</span><span class="opt-text">You mislabeled — apologize for getting it wrong and try a new label before routing</span></button>
-        <button class="option-btn" onclick="answer('q14','c',false)" id="q14-c"><span class="opt-letter">C</span><span class="opt-text">The correction means labeling doesn't work with this caller — skip the technique and just route immediately</span></button>
-        <button class="option-btn" onclick="answer('q14','d',false)" id="q14-d"><span class="opt-letter">D</span><span class="opt-text">"The medical records are a case-specific question I can't answer. Your case manager will need to address that."</span></button>
-      </div>
-      <div class="feedback-box" id="q14-fb"></div>
-    </div>
 
     <!-- Q15 -->
-    <div class="question-block" id="q15-block">
-      <div class="q-num">Question 15 of 20 · 10 pts</div>
-      <div class="q-text">A client says: "I don't think this firm cares about my case. You people are just collecting fees and ignoring me." What is the advanced de-escalation response using the ally frame?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q15','a',false)" id="q15-a"><span class="opt-letter">A</span><span class="opt-text">"That's not true — we work very hard on every case. Let me transfer you to someone who can explain what we've been doing."</span></button>
-        <button class="option-btn" onclick="answer('q15','b',false)" id="q15-b"><span class="opt-letter">B</span><span class="opt-text">"I'm sorry you feel that way. Let me have your case manager call you back today."</span></button>
-        <button class="option-btn" onclick="answer('q15','c',false)" id="q15-c"><span class="opt-letter">C</span><span class="opt-text">"I understand. Would you like to speak with the attorney?"</span></button>
-        <button class="option-btn" onclick="answer('q15','d',true)" id="q15-d"><span class="opt-letter">D</span><span class="opt-text">Lower your voice: "I can hear that you feel like you haven't gotten the attention your case deserves — and you have every right to expect better communication. We're not on opposite sides here — your case matters to us. Let me get the right person on the line to address this with you directly." Route to supervisor or assigned attorney.</span></button>
-      </div>
-      <div class="feedback-box" id="q15-fb"></div>
-    </div>
 
     <!-- Q16 -->
-    <div class="question-block" id="q16-block">
-      <div class="q-num">Question 16 of 20 · 10 pts</div>
-      <div class="q-text">During a de-escalation call, you've labeled the emotion and the caller has calmed slightly. But now they're asking pointed questions about their case — "Has the insurance company made an offer?" "Is my case even moving forward?" You know you can't share case information. But the caller is still fragile — a cold "I can't tell you that" could re-escalate them. How do you maintain the de-escalation while enforcing role boundaries?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q16','a',false)" id="q16-a"><span class="opt-letter">A</span><span class="opt-text">Share what you can to keep them calm: "I believe things are moving along, but let me get your case manager to confirm the details."</span></button>
-        <button class="option-btn" onclick="answer('q16','b',false)" id="q16-b"><span class="opt-letter">B</span><span class="opt-text">"I'm not authorized to discuss case details. Your case manager will call you back."</span></button>
-        <button class="option-btn" onclick="answer('q16','c',true)" id="q16-c"><span class="opt-letter">C</span><span class="opt-text">"Those are exactly the right questions — and you deserve specific, accurate answers. I'm going to get your case manager on the line so they can walk you through where everything stands. You shouldn't have to wonder." Validate the questions as reasonable, redirect warmly, and maintain the boundary without making the caller feel shut down.</span></button>
-        <button class="option-btn" onclick="answer('q16','d',false)" id="q16-d"><span class="opt-letter">D</span><span class="opt-text">"Let me pull up your file and see what I can find out for you." [opens CasePeer]</span></button>
-      </div>
-      <div class="feedback-box" id="q16-fb"></div>
-    </div>
 
     <div class="section-score" id="s4-score" style="display:none;"><div class="score-display" id="s4-score-val"></div><div class="score-label">Section 5 Score</div></div>
     <div class="btn-group" id="s4-next"><button class="btn btn-primary btn-block" onclick="goToSection(5)">Next: Recovery, Documentation &amp; the 2-Hour Rule &rarr;</button></div>
@@ -641,56 +626,12 @@
     </div>
 
     <!-- Q17 -->
-    <div class="question-block" id="q17-block">
-      <div class="q-num">Question 17 of 20 · 10 pts</div>
-      <div class="q-text">The firm resolved a Tier 2 complaint for a client — the communication gap was fixed, regular calls were scheduled, and the client expressed satisfaction. What post-resolution actions does the Recovery protocol recommend for Tier 2/3 complaints?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q17','a',true)" id="q17-a"><span class="opt-letter">A</span><span class="opt-text">Handwritten note from Harrell, priority scheduling for future needs, proactive check-ins at case milestones, and additional communication touchpoints to rebuild trust. The recovery strategy turns resolved complaints into a loyalty opportunity.</span></button>
-        <button class="option-btn" onclick="answer('q17','b',false)" id="q17-b"><span class="opt-letter">B</span><span class="opt-text">Send a generic "thank you for your patience" email and close the complaint</span></button>
-        <button class="option-btn" onclick="answer('q17','c',false)" id="q17-c"><span class="opt-letter">C</span><span class="opt-text">Nothing further — the complaint was resolved, time to move on to other cases</span></button>
-        <button class="option-btn" onclick="answer('q17','d',false)" id="q17-d"><span class="opt-letter">D</span><span class="opt-text">Offer a fee discount to compensate for the poor experience</span></button>
-      </div>
-      <div class="feedback-box" id="q17-fb"></div>
-    </div>
 
     <!-- Q18 -->
-    <div class="question-block" id="q18-block">
-      <div class="q-num">Question 18 of 20 · 10 pts</div>
-      <div class="q-text">Same-day acknowledgment applies to which complaint tier(s)?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q18','a',false)" id="q18-a"><span class="opt-letter">A</span><span class="opt-text">Tier 1 only — Tier 2 and 3 have different acknowledgment windows</span></button>
-        <button class="option-btn" onclick="answer('q18','b',false)" id="q18-b"><span class="opt-letter">B</span><span class="opt-text">Tier 3 only — serious escalations get priority acknowledgment</span></button>
-        <button class="option-btn" onclick="answer('q18','c',false)" id="q18-c"><span class="opt-letter">C</span><span class="opt-text">Tier 1 and Tier 2 only — Tier 3 has a separate 2-hour acknowledgment window</span></button>
-        <button class="option-btn" onclick="answer('q18','d',true)" id="q18-d"><span class="opt-letter">D</span><span class="opt-text">All three tiers — every complaint gets same-day acknowledgment. The differences are in resolution plan timing: 48 hours for Tier 1 and 2, 24 hours for Tier 3, plus Harrell notification within 2 hours for Tier 3.</span></button>
-      </div>
-      <div class="feedback-box" id="q18-fb"></div>
-    </div>
 
     <!-- Q19 -->
-    <div class="question-block" id="q19-block">
-      <div class="q-num">Question 19 of 20 · 10 pts</div>
-      <div class="q-text">A client calls and says, very calmly: "I've retained another attorney. I'd like my entire case file transferred to their office by Friday. I'd also like an itemized accounting of all costs charged to my case." How do you handle this?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q19','a',false)" id="q19-a"><span class="opt-letter">A</span><span class="opt-text">Tier 1 — the client is calm, so this is just a routine service request</span></button>
-        <button class="option-btn" onclick="answer('q19','b',false)" id="q19-b"><span class="opt-letter">B</span><span class="opt-text">Tier 2 — case file transfer is a case strategy issue requiring attorney involvement</span></button>
-        <button class="option-btn" onclick="answer('q19','c',true)" id="q19-c"><span class="opt-letter">C</span><span class="opt-text">Tier 3 — "Demands for case file transfer" is an explicit 2-hour trigger regardless of the caller's tone. Notify Harrell within 2 hours with complete details. This isn't about emotional state — it's about the nature of the request.</span></button>
-        <button class="option-btn" onclick="answer('q19','d',false)" id="q19-d"><span class="opt-letter">D</span><span class="opt-text">Not a complaint — this is just a procedural request. Process it without escalation.</span></button>
-      </div>
-      <div class="feedback-box" id="q19-fb"></div>
-    </div>
 
     <!-- Q20 — CARRY-FORWARD IR-R-1 + IR-R-2 -->
-    <div class="question-block" id="q20-block">
-      <div class="q-num">Question 20 of 20 · 10 pts · Carry-Forward (IR-R-1 + IR-R-2)</div>
-      <div class="q-text">After completing all modules in the IR-R track so far, which statement BEST captures the fundamental principle connecting greeting standards (IR-R-1), documentation practices (IR-R-2), and complaint escalation (IR-R-3)?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q20','a',false)" id="q20-a"><span class="opt-letter">A</span><span class="opt-text">"Answer fast, route fast, document fast — speed is the primary measure of reception quality"</span></button>
-        <button class="option-btn" onclick="answer('q20','b',true)" id="q20-b"><span class="opt-letter">B</span><span class="opt-text">"If the receptionist were replaced today, would every call, every greeting, every complaint classification, and every escalation deliver the identical result tomorrow?" The consistency standard applies to everything: the greeting is systematized, documentation follows a named-person protocol, and complaint tiers route to defined levels regardless of who's at the desk.</span></button>
-        <button class="option-btn" onclick="answer('q20','c',false)" id="q20-c"><span class="opt-letter">C</span><span class="opt-text">"Follow the SOP exactly — the rules exist for legal compliance and nothing more"</span></button>
-        <button class="option-btn" onclick="answer('q20','d',false)" id="q20-d"><span class="opt-letter">D</span><span class="opt-text">"Be warm and empathetic — the human touch is more important than following specific procedures"</span></button>
-      </div>
-      <div class="feedback-box" id="q20-fb"></div>
-    </div>
 
     <div class="section-score" id="s5-score" style="display:none;"><div class="score-display" id="s5-score-val"></div><div class="score-label">Section 6 Score</div></div>
     <div class="btn-group" id="s5-next"><button class="btn btn-primary btn-block" onclick="goToSection(6)">Next: Boss Challenge — The Sandra Mitchell Crisis &rarr;</button></div>
@@ -723,85 +664,55 @@
       </div>
       <div class="case-detail"><span class="case-key">Client</span><span class="case-val">Sandra Mitchell (calling for husband David Mitchell)</span></div>
       <div class="case-detail"><span class="case-key">Case Type</span><span class="case-val">Commercial truck accident — 6 months in</span></div>
-      <div class="case-detail"><span class="case-key">Assigned CM</span><span class="case-val">Marisol Okonkwo (Lead Pre-Lit Paralegal)</span></div>
-      <div class="case-detail"><span class="case-key">Staff Status</span><span class="case-val">Marisol — in a client meeting. Adriauna — in office. Attorney Gunn — in office.</span></div>
+      <div class="case-detail"><span class="case-key">Assigned CM</span><span class="case-val">Lead Pre-Lit Paralegal</span></div>
+      <div class="case-detail"><span class="case-key">Staff Status</span><span class="case-val">Assigned CM — in a client meeting. Adriauna — in office. Attorney Gunn — in office.</span></div>
       <div class="case-detail"><span class="case-key">What Happens</span><span class="case-val">Three calls from the same client, each one escalating. Handle each correctly.</span></div>
     </div>
 
     <!-- BOSS Q21 -->
-    <div class="question-block" id="q21-block">
-      <div class="q-num">Boss Task 1 of 5 · 10 Bonus pts · The First Call</div>
-      <div class="q-text">2:15 PM — Sandra calls. Her voice is tight but controlled: "Hi, this is Sandra Mitchell. My husband David is a client. I've been trying to reach his case manager Marisol for over a week. She hasn't returned any of my calls." How do you start this interaction?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q21','a',true)" id="q21-a"><span class="opt-letter">A</span><span class="opt-text">Label the emotion: "Mrs. Mitchell, it sounds like you're worried about the lack of communication — and I want to make sure we address that right now." Collect: best callback number, confirm David Mitchell's case. Log detail: CM unreachable for 1+ week. Classify: Tier 1 (service/communication). Route: Marisol or her supervisor if unavailable. Document immediately.</span></button>
-        <button class="option-btn" onclick="answer('q21','b',false)" id="q21-b"><span class="opt-letter">B</span><span class="opt-text">"I apologize for the inconvenience. Let me transfer you to Marisol's line." [transfers without labeling, classifying, or documenting]</span></button>
-        <button class="option-btn" onclick="answer('q21','c',false)" id="q21-c"><span class="opt-letter">C</span><span class="opt-text">"I'm sorry to hear that. Can I have Marisol call you back?" [takes basic message without tier classification]</span></button>
-        <button class="option-btn" onclick="answer('q21','d',false)" id="q21-d"><span class="opt-letter">D</span><span class="opt-text">"That's unacceptable — let me get the attorney for you right away." [over-escalates a Tier 1 complaint]</span></button>
-      </div>
-      <div class="feedback-box" id="q21-fb"></div>
-    </div>
 
     <!-- BOSS Q22 -->
-    <div class="question-block" id="q22-block">
-      <div class="q-num">Boss Task 2 of 5 · 10 Bonus pts · The Escalation</div>
-      <div class="q-text">2:22 PM — You've routed Sandra's message to Marisol as urgent. But Sandra calls back 7 minutes later, more agitated: "Marisol STILL hasn't called me back. My husband's deposition is in two days and we have no idea what to prepare for. I want to talk to whoever is in charge of his case." What has changed?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q22','a',false)" id="q22-a"><span class="opt-letter">A</span><span class="opt-text">Nothing — still Tier 1. She just needs to wait for Marisol to call back.</span></button>
-        <button class="option-btn" onclick="answer('q22','b',false)" id="q22-b"><span class="opt-letter">B</span><span class="opt-text">Tier 3 — the deposition concern makes this a legal emergency requiring immediate Harrell notification</span></button>
-        <button class="option-btn" onclick="answer('q22','c',false)" id="q22-c"><span class="opt-letter">C</span><span class="opt-text">Transfer to any available paralegal — someone needs to deal with this right now</span></button>
-        <button class="option-btn" onclick="answer('q22','d',true)" id="q22-d"><span class="opt-letter">D</span><span class="opt-text">The complaint has escalated. The deposition preparation concern elevates this to Tier 2 — questions about case strategy now require attorney involvement. Label: "I can hear how stressful this is, especially with the deposition coming up. I'm going to get you to someone who can address the preparation directly." Route to the assigned attorney (or Adriauna). Document the escalation: Tier 1 → Tier 2 with new information.</span></button>
-      </div>
-      <div class="feedback-box" id="q22-fb"></div>
-    </div>
 
     <!-- BOSS Q23 -->
-    <div class="question-block" id="q23-block">
-      <div class="q-num">Boss Task 3 of 5 · 10 Bonus pts · The Crisis</div>
-      <div class="q-text">2:30 PM — The attorney spoke with Sandra briefly, but she calls back a third time. Now she's in tears: "Nobody has prepared my husband for his deposition. The other side's lawyer is going to destroy him. I'm going to call the State Bar because this is negligence. And I've already posted about this on Google." What tier is this NOW, and what is the critical timeline?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q23','a',false)" id="q23-a"><span class="opt-letter">A</span><span class="opt-text">Still Tier 2 — she's just venting. The attorney already spoke with her.</span></button>
-        <button class="option-btn" onclick="answer('q23','b',true)" id="q23-b"><span class="opt-letter">B</span><span class="opt-text">Tier 3 — immediate. Two 2-hour triggers fired: bar complaint threat + negative Google review posted. Notify Harrell within 2 hours with complete details. Same-day attorney response. 24-hour resolution plan. Complete incident report. This is no longer about communication — it's a reputational and ethical escalation.</span></button>
-        <button class="option-btn" onclick="answer('q23','c',false)" id="q23-c"><span class="opt-letter">C</span><span class="opt-text">Tier 3, but since the attorney already spoke with her, just document it and move on — no need to notify Harrell</span></button>
-        <button class="option-btn" onclick="answer('q23','d',false)" id="q23-d"><span class="opt-letter">D</span><span class="opt-text">This is beyond reception's scope — hang up and let the attorney handle everything</span></button>
-      </div>
-      <div class="feedback-box" id="q23-fb"></div>
-    </div>
 
     <!-- BOSS Q24 -->
-    <div class="question-block" id="q24-block">
-      <div class="q-num">Boss Task 4 of 5 · 10 Bonus pts · The New Caller</div>
-      <div class="q-text">2:40 PM — You've notified Harrell about the Mitchell situation. While documenting the complete incident report, a new caller comes in: "Hi, I'm calling about a fender-bender I had last week. My neighbor said I should call you guys." What do you do?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q24','a',false)" id="q24-a"><span class="opt-letter">A</span><span class="opt-text">Tell them you're dealing with an emergency and ask them to call back in an hour</span></button>
-        <button class="option-btn" onclick="answer('q24','b',false)" id="q24-b"><span class="opt-letter">B</span><span class="opt-text">Take their info quickly but skip the standard greeting — you're in crisis mode</span></button>
-        <button class="option-btn" onclick="answer('q24','c',true)" id="q24-c"><span class="opt-letter">C</span><span class="opt-text">This is a new potential client. Regardless of the Mitchell crisis, this caller gets the full GLG treatment: standard greeting, warmth and reassurance, collect all intake info (name, phone, email, accident details, injuries, existing attorney), and transfer to Priya in intake. The Mitchell documentation can wait 10 minutes — a potential client on the line cannot.</span></button>
-        <button class="option-btn" onclick="answer('q24','d',false)" id="q24-d"><span class="opt-letter">D</span><span class="opt-text">Transfer directly to intake without collecting any information — speed matters more right now</span></button>
-      </div>
-      <div class="feedback-box" id="q24-fb"></div>
-    </div>
 
     <!-- BOSS Q25 -->
-    <div class="question-block" id="q25-block">
-      <div class="q-num">Boss Task 5 of 5 · 10 Bonus pts · The Aftermath</div>
-      <div class="q-text">3:00 PM — The Mitchell situation is being handled by Harrell and the attorney. You've completed your incident documentation. Your colleague asks: "What happened with that lady who kept calling?" What is the appropriate response, and what recovery actions should you be aware of for a resolved Tier 3 complaint?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q25','a',false)" id="q25-a"><span class="opt-letter">A</span><span class="opt-text">Tell them the full story — they need to know what happened in case Sandra calls again</span></button>
-        <button class="option-btn" onclick="answer('q25','b',false)" id="q25-b"><span class="opt-letter">B</span><span class="opt-text">"It's been handled by Harrell" — don't share any details whatsoever, including routing instructions</span></button>
-        <button class="option-btn" onclick="answer('q25','c',false)" id="q25-c"><span class="opt-letter">C</span><span class="opt-text">Use this as a teaching moment — explain the full complaint tier system to your colleague so they learn the process</span></button>
-        <button class="option-btn" onclick="answer('q25','d',true)" id="q25-d"><span class="opt-letter">D</span><span class="opt-text">Share only what's operationally necessary: "The Mitchell matter has been escalated to Harrell — if Sandra or anyone related to the case calls, route directly to Harrell or the assigned attorney. Don't take a message — transfer immediately." Regarding recovery: once resolved, Tier 3 recovery includes a handwritten note from Harrell, priority scheduling, proactive check-ins, and additional communication touchpoints. But recovery decisions are Harrell's — your job was to classify, escalate, and document correctly.</span></button>
-      </div>
-      <div class="feedback-box" id="q25-fb"></div>
-    </div>
 
     <div class="section-score" id="s6-score" style="display:none;"><div class="score-display" id="s6-score-val"></div><div class="score-label">Boss Challenge Bonus Points</div></div>
-    <div class="btn-group" id="s6-next"><button class="btn btn-primary btn-block" onclick="showResults()">See Results &amp; Score &rarr;</button></div>
+    <div class="btn-group" id="s6-next"><div style="margin-bottom:1rem;">
+      <label for="trainee-name-input" style="display:block;font-size:0.85rem;font-weight:600;color:#141c2c;margin-bottom:0.4rem;">Your Name — required to start</label>
+      <input type="text" id="trainee-name-input" placeholder="Enter your full name" autocomplete="name" style="width:100%;padding:0.5rem 0.75rem;border:1.5px solid #cbd5e1;border-radius:6px;font-size:0.9rem;box-sizing:border-box;">
+    </div>
+    <button class="btn btn-primary btn-block" onclick="startQuiz()">Take the Quiz &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 7 — QUIZ (api-quiz-engine.js)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-7">
+  <div class="section-header">
+    <div class="section-num">Knowledge Check</div>
+    <h2>Module Assessment</h2>
+    <div class="section-subhead">Answer each question. One attempt — wrong answer reveals the correct answer and unlocks Next.</div>
+  </div>
+  <div class="section-body">
+    <div style="font-family:system-ui,sans-serif;font-size:13px;color:#33415c;padding:8px 0 12px;border-bottom:1px solid #e8eaf0;margin-bottom:16px;">
+      Base: <b id="base">0</b> / <b id="basemax">—</b>
+      &nbsp;·&nbsp; Bonus: <b id="bonus">0</b>
+      &nbsp;·&nbsp; Pass gate: <b id="gate">80</b>%
+      &nbsp;·&nbsp; <span id="q-progress" style="color:#dcb161;font-weight:700;"></span>
+    </div>
+    <div id="questions"></div>
+    <div id="result" style="background:#fff;border:2px solid #0b2545;border-radius:10px;padding:18px;margin:18px 0;display:none;"></div>
   </div>
 </div>
 
 <!-- ══════════════════════════════════════════
      SECTION 7 — RESULTS
 ════════════════════════════════════════════ -->
-<div class="section-card" id="section-7">
+<div class="section-card" id="section-8">
   <div id="results-header-wrap"></div>
   <div class="section-body">
     <div id="results-body"></div>
@@ -824,7 +735,7 @@
 <!-- ══════════════════════════════════════════
      SECTION 8 — FEEDBACK & CERTIFICATE
 ════════════════════════════════════════════ -->
-<div class="section-card" id="section-8">
+<div class="section-card" id="section-9">
   <div class="section-header">
     <div class="section-num">Section 9 · Feedback &amp; Certificate</div>
     <h2>Module Feedback &amp; Completion Certificate</h2>
@@ -893,7 +804,7 @@ var soundEnabled = false;
 var _audioKeepalive = null;
 
 var TRACKER_URL = 'https://script.google.com/macros/s/AKfycbzHJZ0C3BqnLatfq7RIiUP5KQdgYoXTJlozd8ZGZiwIf2bdVmvnPMo3JLm0dA5gQhJyxA/exec';
-var TOTAL_SECTIONS = 9;
+var TOTAL_SECTIONS = 10;
 var PASS_THRESHOLD = 160;
 var BASE_MAX = 200;
 
@@ -901,31 +812,31 @@ var BASE_MAX = 200;
 // QUESTION CONFIG
 // ═══════════════════════════════════════════════
 var Q_CONFIG = {
-  'q1':  {section:1, pts:10, isBonus:false, correct:'c'},
-  'q2':  {section:1, pts:10, isBonus:false, correct:'b'},
-  'q3':  {section:1, pts:10, isBonus:false, correct:'d'},
-  'q4':  {section:1, pts:10, isBonus:false, correct:'a'},
-  'q5':  {section:2, pts:10, isBonus:false, correct:'b'},
-  'q6':  {section:2, pts:10, isBonus:false, correct:'c'},
-  'q7':  {section:2, pts:10, isBonus:false, correct:'d'},
-  'q8':  {section:2, pts:10, isBonus:false, correct:'a'},
-  'q9':  {section:3, pts:10, isBonus:false, correct:'b'},
-  'q10': {section:3, pts:10, isBonus:false, correct:'d'},
-  'q11': {section:3, pts:10, isBonus:false, correct:'a'},
-  'q12': {section:3, pts:10, isBonus:false, correct:'c'},
-  'q13': {section:4, pts:10, isBonus:false, correct:'b'},
-  'q14': {section:4, pts:10, isBonus:false, correct:'a'},
-  'q15': {section:4, pts:10, isBonus:false, correct:'d'},
-  'q16': {section:4, pts:10, isBonus:false, correct:'c'},
-  'q17': {section:5, pts:10, isBonus:false, correct:'a'},
-  'q18': {section:5, pts:10, isBonus:false, correct:'d'},
-  'q19': {section:5, pts:10, isBonus:false, correct:'c'},
-  'q20': {section:5, pts:10, isBonus:false, correct:'b'},
-  'q21': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'a'},
-  'q22': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'d'},
-  'q23': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'b'},
-  'q24': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'c'},
-  'q25': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'d'}
+  'q1':  {section:1, pts:10, isBonus:false},
+  'q2':  {section:1, pts:10, isBonus:false},
+  'q3':  {section:1, pts:10, isBonus:false},
+  'q4':  {section:1, pts:10, isBonus:false},
+  'q5':  {section:2, pts:10, isBonus:false},
+  'q6':  {section:2, pts:10, isBonus:false},
+  'q7':  {section:2, pts:10, isBonus:false},
+  'q8':  {section:2, pts:10, isBonus:false},
+  'q9':  {section:3, pts:10, isBonus:false},
+  'q10': {section:3, pts:10, isBonus:false},
+  'q11': {section:3, pts:10, isBonus:false},
+  'q12': {section:3, pts:10, isBonus:false},
+  'q13': {section:4, pts:10, isBonus:false},
+  'q14': {section:4, pts:10, isBonus:false},
+  'q15': {section:4, pts:10, isBonus:false},
+  'q16': {section:4, pts:10, isBonus:false},
+  'q17': {section:5, pts:10, isBonus:false},
+  'q18': {section:5, pts:10, isBonus:false},
+  'q19': {section:5, pts:10, isBonus:false},
+  'q20': {section:5, pts:10, isBonus:false},
+  'q21': {section:6, pts:0,  isBonus:true,  bonusPts:10},
+  'q22': {section:6, pts:0,  isBonus:true,  bonusPts:10},
+  'q23': {section:6, pts:0,  isBonus:true,  bonusPts:10},
+  'q24': {section:6, pts:0,  isBonus:true,  bonusPts:10},
+  'q25': {section:6, pts:0,  isBonus:true,  bonusPts:10}
 };
 
 var SECTION_QUESTIONS = {
@@ -940,113 +851,12 @@ var SECTION_QUESTIONS = {
 // ═══════════════════════════════════════════════
 // FEEDBACK TEXT
 // ═══════════════════════════════════════════════
-var FEEDBACK = {
-  'q1': {
-    t: '✅ The first-impression ecosystem goes beyond words. A nervous client needs safety — and safety comes from body language (lean forward, genuine eye contact), vocal tone (calm, steady pace), hospitality (offer water), and follow-through (if you say "5 minutes," check back in 4). Option A delivers a technically correct greeting but ignores the client\'s emotional state. Option B ("Is everything okay?") is too direct and can feel invasive — you\'re reading the emotion, not interrogating it. Option D bypasses the paralegal\'s workflow and reception boundaries.',
-    f: '❌ The standard greeting (A) is necessary but not sufficient. A nervous client who hears correct words but sees a receptionist typing, not making eye contact, and sitting behind a desk without warmth will not feel safe. Asking "What\'s wrong?" (B) can feel intrusive. Walking them back uninvited (D) exceeds your role. The first-impression ecosystem is about making the client feel safe through environment, body language, hospitality, and follow-through — before any substantive interaction begins.'
-  },
-  'q2': {
-    t: '✅ Silence — clipped responses, flat tone, long pauses — is withdrawal, not calm. It means the caller has gone internal and is not saying what they actually think. Pushing content or rushing to route will backfire. The correct response lowers pace, offers warmth ("I\'m here to help — take your time"), and creates space. Option A dismisses a concerning signal as distraction. Option C assumes bad intent. Option D normalizes a warning sign. Withdrawal is one of the two critical signals that safety has broken down.',
-    f: '❌ Withdrawal (silence, clipped answers, flat tone) and aggression (threats, accusations) are the two signals that a caller\'s sense of safety has broken down. The response to both is the same: increase care, reduce pressure, and wait until the caller is genuinely back in the conversation. Dismissing it as distraction (A), attributing it to personality (D), or escalating authority (C) all fail to address the root cause — the caller doesn\'t feel safe.'
-  },
-  'q3': {
-    t: '✅ You made a promise ("5 minutes"), broke it (15 minutes and counting), and the client\'s body language shows deteriorating trust. The first-impression ecosystem requires you to approach proactively, acknowledge the broken promise specifically ("I told you 5 minutes and it\'s been much longer"), give a realistic updated timeline, and offer hospitality. Option A lets the client stew in frustration. Option B gives a vague update without acknowledging the broken promise. Option C reroutes without the paralegal\'s direction.',
-    f: '❌ A broken time promise is worse than a long wait with accurate expectations. "They\'ll be right with you" (B) without acknowledging you said "5 minutes" 15 minutes ago insults the client — they know you know. Letting them wait (A) or rerouting them (C) both avoid the real issue: you need to own the broken promise, give a realistic update, and demonstrate that their time matters to the firm. Follow-through is part of the first-impression ecosystem.'
-  },
-  'q4': {
-    t: '✅ Carry-forward from IR-R-1: The Khalil Incident Rule. Reception NEVER provides case-specific information — not even a simple yes/no. "Did my case settle?" sounds harmless, but the answer could be wrong, incomplete, or create expectations the case manager hasn\'t prepared the client for. The Phone Script language works perfectly: "I want to make sure you get the most accurate information from the person working your case directly." Then collect callback info and relay within 15 minutes to the named case manager.',
-    f: '❌ There is no exception for "simple" case questions. Even a yes/no answer about settlement status can cause harm: What if you\'re wrong? What if it settled for less than expected? What if no one has told the client yet? Looking it up in CasePeer (B) violates role boundaries — reception does not access CasePeer for callers. Answering quickly to focus on the walk-in (C) prioritizes your convenience over the client\'s protection. A cold refusal (D) enforces the boundary but destroys the relationship. The standard language from IR-R-1 handles it warmly.'
-  },
-  'q5': {
-    t: '✅ "Nobody returns my calls" + "I want to know what\'s going on" = Tier 1. The client\'s complaint is about service delivery — unreturned calls and lack of communication. This doesn\'t involve case strategy, legal judgment, or any of the 2-hour triggers. The case manager handles it directly with same-day acknowledgment and a 48-hour resolution plan. Option A over-classifies — the client is asking about communication, not questioning legal strategy. Option C massively over-escalates. Option D dismisses a legitimate complaint as a routine status check.',
-    f: '❌ Tier classification is about the nature of the complaint, not the caller\'s tone. "Haven\'t heard from my case manager in a month" is a service/communication issue (Tier 1) — the fix is better communication, which the CM handles directly. It\'s not a case strategy question (Tier 2) unless the client is questioning legal decisions. And it\'s not Tier 3 unless the client makes a specific threat (bar complaint, malpractice, etc.). Dismissing it as "not a complaint" (D) is the worst option — every expression of dissatisfaction about service gets classified and documented.'
-  },
-  'q6': {
-    t: '✅ Fee disputes and billing questions are explicitly Tier 2 — they require attorney involvement because fee structures implicate GA Bar Rule 1.5 and require legal authority to explain or adjust. The case manager cannot authorize fee changes or address legal questions about the contingency agreement. Same-day acknowledgment, 48-hour attorney consultation, 72-hour resolution plan. Option A under-classifies — a CM explaining fees could inadvertently create legal issues. Option B over-classifies — fee disputes become Tier 3 only if the client threatens the Bar or demands case file transfer.',
-    f: '❌ Fee disputes are squarely Tier 2 because they involve "fee structure questions or billing disputes" — one of the explicit Tier 2 examples in the Complaint Escalation SOP. The CM can\'t resolve this because fee explanations require legal authority. But it\'s not automatically Tier 3 (B) unless the client threatens a bar complaint, alleges fund mishandling, or demands a case file transfer. And "transfer to accounting" (D) doesn\'t exist in the GLG escalation chain — complaints route through the tier system, not around it.'
-  },
-  'q7': {
-    t: '✅ Two separate 2-hour triggers in one call: (1) "I\'ve contacted the Georgia Bar and I\'m filing a complaint" = bar complaint threat, and (2) "I left you a one-star Google review" = negative review posted. Both are explicit Tier 3 triggers. Harrell must be notified within 2 hours with complete details. The 24-hour timeline is for the resolution plan, not the notification. Option A under-classifies with a wrong timeline. Option B drastically under-classifies. Option C gets the tier right but the critical timeline wrong — 2-hour Harrell notification, not 24-hour escalation.',
-    f: '❌ The 2-hour trigger list is specific and non-negotiable. Bar complaint threats AND negative Google reviews are both on that list — independently. When two triggers fire in the same call, it reinforces the Tier 3 classification but doesn\'t create a "Tier 4." The critical timeline is Harrell notification within 2 hours (not 24 hours as in Option C). Same-day attorney response and 24-hour resolution plan follow. Classifying this as Tier 1 (B) or Tier 2 (A) would leave the managing attorney uninformed about active threats to the firm\'s reputation and licensure.'
-  },
-  'q8': {
-    t: '✅ Confidence check: This is Tier 1. The client is frustrated about unreturned calls about medical records — a service/communication issue. They asked politely for a same-day callback. There are no mentions of bar complaints, malpractice, hiring another attorney, or any other 2-hour trigger. The emotional tone (sighing, frustration) doesn\'t change the tier — classification is about the nature of the complaint, not the caller\'s volume. Two weeks of unanswered calls is a serious service failure but still Tier 1: CM handles directly.',
-    f: '❌ Tier classification is based on the NATURE of the complaint, not its duration or emotional intensity. Two weeks of unreturned calls is a serious service failure — but the fix is still better communication, which is what Tier 1 addresses. It only escalates to Tier 2 if the client raises case strategy concerns, or to Tier 3 if they mention the Bar, malpractice, or another 2-hour trigger. "Not classifiable" (D) is never correct — every complaint gets a tier classification immediately.'
-  },
-  'q9': {
-    t: '✅ The client is alleging that the firm missed a deadline — a concern about case handling and professional judgment. That\'s Tier 2: attorney involvement required. Document in CasePeer immediately (Step 1 — receive and document within 1 hour), then route to the assigned attorney within 1 hour (Step 2 — route by tier). The attorney investigates whether the paperwork was actually missed and whether this rises to Tier 3. Option A jumps to Harrell without investigation — the adjuster\'s claim may be wrong. Option C sends it to the CM, but case handling concerns require attorney authority. Option D has you calling the adjuster — that\'s beyond reception\'s role.',
-    f: '❌ The client is raising a concern about case handling — "your office didn\'t send the paperwork on time" — which is a Tier 2 issue requiring attorney investigation and involvement. You don\'t transfer directly to Harrell (A) because the claim hasn\'t been verified — the adjuster could be wrong, or there could be a miscommunication. The CM can\'t resolve this (C) because it involves potential case-handling failure, which requires legal authority to investigate and respond. And you absolutely do not call the insurance adjuster yourself (D) — that exceeds reception\'s role in every way.'
-  },
-  'q10': {
-    t: '✅ "I\'m frustrated that nobody has called me back in a week" is a Tier 1 service/communication issue — frustrating but not a 2-hour trigger. Compare to the other three: "I\'m calling the Bar" (A) = bar complaint threat = Tier 3 trigger. Posting a negative Google review (B) = negative review posted = Tier 3 trigger. "You mishandled my settlement money" (C) = allegations of fund mishandling = Tier 3 trigger. Unreturned calls, even over a week, remain Tier 1 unless the client explicitly escalates to Tier 2/3 territory.',
-    f: '❌ The 2-hour trigger list is specific: bar complaints, malpractice, negative reviews, fund mishandling, case file transfer demands, media threats, public figures. "Nobody called me back" is frustrating and deserves immediate attention — but it\'s a Tier 1 communication issue, not a Tier 3 escalation. The distinction matters because Tier 3 mobilizes Harrell, the attorney, and a 24-hour resolution plan. Over-classifying routine complaints would overwhelm the escalation system and dilute its effectiveness for genuine crises.'
-  },
-  'q11': {
-    t: '✅ A client demanding "Harrell" doesn\'t automatically get Harrell. The chain of command exists to route complaints to the right level — the person with the authority and information to actually resolve the issue. Tier 1 → CM supervisor. Tier 2 → assigned attorney. Tier 3 → Harrell. You validate their frustration ("I hear how frustrated you are") while routing to the appropriate level. Option B gives every frustrated client direct access to the managing attorney — that undermines the system. Option C dismisses the client\'s frustration by forcing them back to the person they\'re complaining about. Option D lies.',
-    f: '❌ Routing every frustrated client directly to Harrell (B) would overwhelm the managing attorney with Tier 1 issues that the CM supervisor can resolve. But forcing them back to the same case manager they\'re frustrated with (C) ignores the legitimate complaint. And lying about Harrell\'s availability (D) destroys trust if discovered. The correct approach: assess the tier, validate the frustration, and route to the person who has the authority to resolve it. The chain of command serves the client by getting them the right help, not just the highest authority.'
-  },
-  'q12': {
-    t: '✅ Carry-forward from IR-R-2: CasePeer documentation. Step 1 of the 8-Step Response Protocol: "Any staff member who receives a complaint logs it in CasePeer within 1 hour." Required fields: date, time, what was said (the client\'s specific words), the client\'s tone/emotion level, preliminary tier assessment, and escalation path. A front desk message book (A) isn\'t CasePeer. A group email (B) broadcasts private complaint information unnecessarily. Verbal reporting (D) violates the documentation principle: "If it\'s not in CasePeer, it didn\'t happen."',
-    f: '❌ The documentation standard is explicit: CasePeer entry within 1 hour of receiving the complaint. Not a message book (A) — that\'s not searchable, trackable, or connected to the client\'s case file. Not a group email (B) — complaint details go to the assigned handler, not the entire office. Not verbal (D) — verbal reports don\'t create records. The phrase from the SOP: "If it\'s not in CasePeer, it didn\'t happen." This documentation protects the firm, the client, and you.'
-  },
-  'q13': {
-    t: '✅ Emotion labeling is the FIRST technique. Before routing, before apologizing, before mirroring — name what you observe. "It sounds like you feel completely left in the dark" describes the emotion. "Finding out from the insurance company must have been really upsetting" validates the specific source of their pain. Then pause — count silently to five. Let it land. The caller will confirm, correct, or expand. All three outcomes de-escalate. Option A (mirroring) is useful but comes after labeling. Option C skips the de-escalation entirely. Option D apologizes without labeling — the caller doesn\'t feel heard, just processed.',
-    f: '❌ Mirroring (A — repeating their words back) is a useful technique but it comes AFTER labeling. The caller needs to feel emotionally acknowledged before anything else. Routing immediately (C) passes an unmanaged crisis to the next person — they\'ll hit the supervisor still at full intensity. Apologizing quickly (D) sounds responsive but skips the critical step: the caller doesn\'t feel HEARD. "I\'m sorry" is evaluative — it says you\'ve already processed the situation. Labeling says you\'re still listening. That difference changes the entire trajectory of the call.'
-  },
-  'q14': {
-    t: '✅ The label "worked" — even though the caller corrected it. That\'s the point. When you labeled "frustrated," the caller corrected to "scared." That correction IS the value of labeling: you now know the real concern is fear about surgery and medical records, not just anger about unreturned calls. Acknowledge the corrected emotion ("That\'s a lot of pressure with surgery in four days"), then route urgently. Option B treats the correction as a mistake — it wasn\'t. Option C abandons the technique that just gave you critical information. Option D applies the Khalil Rule rigidly when the caller needs urgent compassionate routing, not a cold boundary.',
-    f: '❌ A corrected label is a successful label. The caller gave you their real emotion (fear, not frustration) and their real concern (surgery in four days, not just unreturned calls). That\'s better information than you had before. You don\'t need to apologize for "mislabeling" (B) — you need to acknowledge the corrected emotion and act on the new information. Abandoning labeling (C) throws away a tool that just proved it works. And while the Khalil Rule applies to "Did my case settle?" questions, a scared client with surgery in four days needs urgent compassionate routing (D), not a wall.'
-  },
-  'q15': {
-    t: '✅ The ally frame. When a client says "you people don\'t care," they\'re operating on the assumption that the firm\'s interests and their interests are in conflict. Your job is to collapse that assumption. Option D does three things in sequence: (1) labels the emotion ("you feel like you haven\'t gotten the attention your case deserves"), (2) validates it ("you have every right to expect better"), and (3) restores the ally frame ("We\'re not on opposite sides here — your case matters to us"). Then routes to the right person. Option A defends ("That\'s not true!") — which confirms the adversarial frame. Option B ("I\'m sorry you feel that way") is dismissive. Option C ("I understand") skips the label entirely.',
-    f: '❌ Defending the firm (A — "That\'s not true, we work very hard") confirms the adversarial frame the client just set. Now it\'s you vs. them. "I\'m sorry you feel that way" (B) is one of the most dismissive phrases in the English language — it implies the feeling is the problem, not the service. "I understand" (C) without labeling is an evaluative phrase that asserts you\'ve already processed the situation. The ally frame collapses the adversarial assumption by explicitly stating shared interest: "We\'re not on opposite sides here." Label first, validate second, ally frame third, route fourth.'
-  },
-  'q16': {
-    t: '✅ The tightrope: the caller is asking case-specific questions ("Has there been an offer?") that you cannot answer per the Khalil Rule. But they\'re still emotionally fragile from the de-escalation. A cold "I\'m not authorized" (B) could re-escalate them. The solution: validate the questions as reasonable ("Those are exactly the right questions"), affirm their right to answers ("you deserve specific, accurate answers"), and redirect warmly to the person who CAN answer. Option A hedges with "I believe things are moving along" — that\'s still case information and could be wrong. Option D opens CasePeer — explicit violation.',
-    f: '❌ The challenge here is maintaining the de-escalation while enforcing role boundaries. "I believe things are moving along" (A) is case information — even hedged, it could be wrong and creates the Khalil Incident scenario. "I\'m not authorized" (B) is technically correct but tonally cold — it can undo the de-escalation you just built. Opening CasePeer (D) is an explicit role violation. The solution validates the question itself ("Those are exactly the right questions"), which keeps the caller feeling heard, while redirecting to the person who has the authority and information to answer properly.'
-  },
-  'q17': {
-    t: '✅ The Recovery protocol for Tier 2/3 complaints goes beyond resolution: handwritten note from Harrell, priority scheduling, proactive check-ins at case milestones, and additional communication touchpoints. The premise: "a client whose complaint is handled well becomes more loyal than a client who never had a problem." Option B (generic email) is impersonal. Option C (moving on) misses the loyalty opportunity entirely. Option D (fee discount) isn\'t in the protocol and could create legal complications.',
-    f: '❌ Complaint resolution is not the finish line — it\'s the starting point for recovery. A generic email (B) doesn\'t rebuild trust — it signals minimal effort. Moving on (C) wastes the most powerful loyalty-building opportunity the firm has. Fee discounts (D) aren\'t in the protocol and could implicate the contingency fee agreement. The Recovery protocol invests in the relationship AFTER the fix: Harrell\'s personal attention, priority treatment, proactive outreach. That\'s what turns "they screwed up" into "when something went wrong, they actually fixed it."'
-  },
-  'q18': {
-    t: '✅ Same-day acknowledgment applies to ALL three tiers. Every complaint — whether Tier 1, 2, or 3 — gets acknowledged the same day (or by 9:00 AM next morning if received after 4:00 PM). The tiers differ in resolution plan timing (48 hours for Tier 1-2, 24 hours for Tier 3) and Harrell involvement (not required for Tier 1, written report for Tier 2, 2-hour notification for Tier 3). The 2-hour window for Tier 3 is the Harrell NOTIFICATION timeline, not the acknowledgment timeline.',
-    f: '❌ The acknowledgment timeline is universal: same day, every tier. The tiers create different resolution and notification timelines, not different acknowledgment standards. Option A (Tier 1 only), B (Tier 3 only), and C (Tier 1-2 only) all incorrectly limit same-day acknowledgment. The 2-hour window (referenced in C) is for Harrell notification in Tier 3 cases — not for client acknowledgment. No complaint goes unacknowledged for more than 24 hours, regardless of tier.'
-  },
-  'q19': {
-    t: '✅ "I\'d like my entire case file transferred" is an explicit 2-hour trigger — listed directly in the Client Complaint Escalation SOP under "Demands for case file transfer or attorney withdrawal." The caller\'s calm tone is irrelevant to the classification. Tier 3 triggers fire based on the NATURE of the request, not the emotional state of the caller. A calm client requesting a case file transfer is just as much a Tier 3 as an angry one. Notify Harrell within 2 hours.',
-    f: '❌ This is one of the most important lessons in the tier system: triggers are based on the nature of the request, not the caller\'s tone. The calm demeanor (A — "the client is calm so it\'s routine") is a trap. A client who has already retained another attorney and is requesting a full case file transfer has made a decision that threatens the client relationship and implicates ethical obligations. Calling it Tier 2 (B) or "just a procedural request" (D) leaves Harrell uninformed about an active case termination — which he must know about within 2 hours.'
-  },
-  'q20': {
-    t: '✅ Carry-forward synthesis: The consistency standard from the Reception SOP — "If the receptionist were replaced today, would the client experience be identical tomorrow?" — is the throughline connecting all three IR-R modules. IR-R-1 systematized the greeting and call routing. IR-R-2 systematized documentation and CasePeer practices. IR-R-3 systematized complaint classification and escalation. The system works regardless of who fills the role. Option A reduces everything to speed. Option C reduces it to compliance. Option D reduces it to personality.',
-    f: '❌ Speed (A) matters but isn\'t the primary measure — you can be fast and still route wrong, document poorly, or classify incorrectly. Legal compliance (C) is a floor, not a ceiling — the system exists for client experience and firm protection, not just regulatory checkbox. Warmth and empathy (D) are essential but insufficient without systematic procedures — a warm receptionist who can\'t classify a Tier 3 complaint will let threats go unescalated. The consistency standard integrates all of these: warm, fast, compliant, AND systematized so it works regardless of who\'s at the desk.'
-  },
-  'q21': {
-    t: '✅ First call, first impression. Sandra is tight but controlled — she\'s upset about unreturned calls. The correct sequence: (1) Label the emotion to show you hear her, (2) Collect details to classify properly, (3) Classify as Tier 1 (service/communication — CM unreachable), (4) Route to Marisol or her supervisor, (5) Document immediately. Option B transfers without doing anything — no labeling, no classification, no documentation. Option C takes a basic message without tier classification. Option D over-escalates a Tier 1 to attorney level.',
-    f: '❌ Transferring without context (B) means Marisol gets an angry call with no warning and no documentation. Basic message-taking without classification (C) fails the 8-Step Protocol — every complaint gets a tier. Over-escalating to the attorney (D) for a Tier 1 communication issue wastes attorney time and undermines the chain of command. The correct approach labels, classifies, routes to the right level, and documents — in that order.'
-  },
-  'q22': {
-    t: '✅ Sandra\'s second call introduces new information: deposition preparation. "My husband\'s deposition is in two days and we have no idea what to prepare for" is a concern about case strategy and expectations — that\'s Tier 2 territory, requiring attorney involvement. Label the heightened emotion ("I can hear how stressful this is"), route to the assigned attorney or Adriauna, and document the tier escalation: Tier 1 → Tier 2 with the new deposition concern. Option A ignores new information. Option B over-escalates. Option C bypasses the chain of command.',
-    f: '❌ "Still Tier 1" (A) ignores that Sandra has introduced a new concern — deposition preparation is about case strategy, not just communication gaps. That\'s Tier 2. But it\'s not Tier 3 (B) — there are no 2-hour triggers yet (no bar threat, no malpractice mention, no review posted). Transferring to "any available paralegal" (C) bypasses the assigned team and chain of command. The tier system allows complaints to escalate as new information emerges — document the change and route accordingly.'
-  },
-  'q23': {
-    t: '✅ Two 2-hour triggers just fired in one sentence: (1) "I\'m going to call the State Bar because this is negligence" = bar complaint threat + malpractice mention, and (2) "I\'ve already posted about this on Google" = negative review posted. This is now Tier 3 — immediate. Harrell must be notified within 2 hours with complete details. The fact that the attorney already spoke with her (A) doesn\'t exempt you from the trigger protocol. And Tier 3 always requires Harrell notification (C) — "just document it" is insufficient.',
-    f: '❌ "Still Tier 2" (A) ignores two explicit 2-hour triggers that just fired. The prior attorney conversation doesn\'t immunize the complaint from re-classification — new triggers means new tier. "Just document it" without Harrell notification (C) violates the Tier 3 protocol entirely. And hanging up (D) abandons a client in crisis — even when a call is beyond reception\'s scope, you acknowledge, transfer to the managing attorney, and document. You never just hang up.'
-  },
-  'q24': {
-    t: '✅ A new potential client on the line gets the full GLG treatment — regardless of what\'s happening in the background. The standard greeting, warmth, all intake info collected (name, phone, email, accident details, injuries, existing attorney), and transfer to Priya in intake. The Mitchell documentation can wait 10 minutes. Option A turns away a potential client and revenue. Option B skips the greeting that builds trust. Option D transfers without info — if the call drops, the firm can\'t follow up.',
-    f: '❌ Asking a potential client to call back (A) may lose them forever — they\'ll call the next firm on their list. Skipping the greeting (B) undermines the 30-second trust window that IR-R-1 established. Transferring without collecting info (D) means if the call drops, there\'s no way to follow up. The Mitchell crisis is being handled by Harrell and the attorney — your documentation can wait. A live potential client on the phone cannot. The consistency standard applies especially under pressure.'
-  },
-  'q25': {
-    t: '✅ Two parts. (1) Information sharing: share only what\'s operationally necessary — routing instructions in case Sandra calls again. Don\'t share full complaint details with colleagues who don\'t need them. (2) Recovery awareness: you should know the Tier 3 recovery protocol (handwritten note, priority scheduling, proactive check-ins, additional touchpoints), but the recovery decisions are Harrell\'s, not yours. Your job was to classify correctly (Tier 1 → 2 → 3), escalate within timeline (2-hour notification), and document completely.',
-    f: '❌ Telling the full story (A) broadcasts complaint details beyond who needs to know. Sharing zero details (B) leaves your colleague unable to route correctly if Sandra calls back — that\'s an operational gap. Using it as a training session (C) is well-intentioned but not the moment — the case is still active and sensitive. The correct balance: routing instructions for operational coverage, awareness of recovery protocols, but recognition that recovery decisions belong to Harrell and the attorney, not reception.'
-  }
-};
+var FEEDBACK = {} /* CUTOVER: feedback text is served per-answer by the engine, never shipped to the client up front */;
 
 // ═══════════════════════════════════════════════
 // ANSWER HANDLER
 // ═══════════════════════════════════════════════
-function answer(qId, choice, isCorrect) {
+window.answerUI = function answerUI(qId, choice, isCorrect) {
   if (qDone[qId]) return;
   qDone[qId] = true;
 
@@ -1058,9 +868,9 @@ function answer(qId, choice, isCorrect) {
   btns.forEach(function(b){ b.classList.add('disabled'); });
 
   var clickedBtn = document.getElementById(qId + '-' + choice);
-  var correctBtn = document.getElementById(qId + '-' + cfg.correct);
+  var correctBtn = document.getElementById(qId + '-' + (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || ''));
 
-  if (choice === cfg.correct) {
+  if (choice === (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || '')) {
     clickedBtn.classList.add('correct');
     block.classList.add('answered');
     if (!cfg.isBonus) {
@@ -1088,8 +898,8 @@ function answer(qId, choice, isCorrect) {
 
   var fbData = FEEDBACK[qId];
   if (fbData) {
-    fb.innerHTML = (choice === cfg.correct) ? fbData.t : fbData.f;
-    fb.className = 'feedback-box ' + (choice === cfg.correct ? 'correct' : 'incorrect') + ' show';
+    fb.innerHTML = (choice === (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || '')) ? fbData.t : fbData.f;
+    fb.className = 'feedback-box ' + (choice === (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || '') ? 'correct' : 'incorrect') + ' show';
   }
 
   var totalQs = Object.keys(Q_CONFIG).length;
@@ -1125,6 +935,8 @@ function answer(qId, choice, isCorrect) {
 // NAVIGATION
 // ═══════════════════════════════════════════════
 function goToSection(idx) {
+  if (idx === 9 && !window._irr3Passed) { showToast("⚠️ 80% required for certificate", false); return; }
+  
   currentSection = idx;
   document.querySelectorAll('.section-card').forEach(function(c){ c.classList.remove('active'); });
   document.getElementById('section-' + idx).classList.add('active');
@@ -1210,8 +1022,8 @@ function buildResults() {
     var questionText = qText ? qText.textContent : 'Question ' + (idx+1);
     var isAnswered = !!qDone[qId];
     var wasCorrect = isAnswered && block.classList.contains('answered');
-    var correctLetter = cfg.correct.toUpperCase();
-    var correctBtn = document.getElementById(qId + '-' + cfg.correct);
+    var correctLetter = (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || '').toUpperCase();
+    var correctBtn = document.getElementById(qId + '-' + (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || ''));
     var correctText = correctBtn ? correctBtn.querySelector('.opt-text').textContent : '';
     var userAnswer = '(not answered)', userLetter = '';
     if (isAnswered) {
@@ -1301,7 +1113,7 @@ function submitScoreAndBuildCert() {
   if (TRACKER_URL) {
     var payload = {
       employeeName: name,
-      moduleId: 'ir-r-3',
+      moduleId: 'ir-r-3-client-impressions-escalation',
       moduleName: 'Client First Impressions & Escalation',
       score: baseScore, maxScore: 200, bonusScore: bonusPoints,
       maxStreak: maxStreak,
@@ -1382,5 +1194,67 @@ document.addEventListener('DOMContentLoaded', function() {
 
 goToSection(0);
 </script>
+
+
+
+<script>
+/* ── go() / startQuiz() — quiz entry point (Harrell ruling 2026-09-03) ── */
+async function go(screen) {
+  if (screen === 'quiz') {
+    var _ni = document.getElementById('trainee-name-input');
+    var _name = (_ni && _ni.value.trim()) || '';
+    if (!_name) {
+      if (typeof showToast === 'function') showToast('⚠️ Please enter your name before starting the quiz', false);
+      else alert('Please enter your name before starting the quiz.');
+      return;
+    }
+    // Bug-2 fix: await attempt start before making questions interactive
+    await window.GLGQuiz.beginAttempt(_name);
+    goToSection(7);
+  }
+}
+
+function startQuiz() { go('quiz'); }
+
+/* ── GLG MODULE CONFIG — wires api-quiz-engine.js to module-ir-r-3.html ── */
+window.GLG_MODULE_CONFIG = {
+  moduleId: 'ir-r-3-client-impressions-escalation',
+  onBankLoaded: function(bank) {
+    var basemax = document.getElementById('basemax');
+    var gate    = document.getElementById('gate');
+    if (basemax) basemax.textContent = bank.base_max;
+    if (gate)    gate.textContent    = bank.pass_pct;
+    for (var i = 1; i <= 6; i++) {
+      var nextEl = document.getElementById('s' + i + '-next');
+      if (nextEl) nextEl.style.display = 'flex';
+    }
+  },
+  onStartQuiz: function() {
+    if (typeof audioCtx !== 'undefined' && audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume().catch(function(){});
+    }
+  },
+  onAnswered: function(r) {
+    baseScore   = r.base_score;
+    bonusPoints = r.bonus_score;
+    streakCount = r.streak;
+    maxStreak   = Math.max(maxStreak || 0, r.maxStreak || 0);
+    var ts = document.getElementById('total-score');
+    if (ts) ts.textContent = r.base_score;
+    var bs = document.getElementById('bonus-score');
+    if (bs) bs.textContent = r.bonus_score;
+    if (typeof updateStreak  === 'function') updateStreak(r.correct);
+    if (typeof mascotReact   === 'function') mascotReact(r.correct ? 'correct' : 'incorrect');
+  },
+  onComplete: function(r) {
+    window._irr3Passed = r.passed;
+    baseScore   = r.base_score;
+    bonusPoints = r.bonus_score;
+    goToSection(8);   // results is now section-8 after port
+    if (typeof buildResults === 'function') buildResults();
+  }
+};
+</script>
+<script src="api-quiz-engine.js"></script>
 </body>
 </html>
