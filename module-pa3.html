@@ -12,7 +12,14 @@ ga-bar-rules-resources-memo.md, georgia-hb1344-memo.md -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
   <title>PA-3 — Negotiation Authority &amp; Strategy | Gunn Law Group</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <style>
+:root {
+    --navy: #141c2c;
+    --gold: #dcb161;
+    --gold-lt: #f0d89a;
+}
+
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
     body{font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;color:#333;font-size:16px;line-height:1.6;-webkit-text-size-adjust:100%;overflow-x:hidden;}
@@ -194,6 +201,159 @@ ga-bar-rules-resources-memo.md, georgia-hb1344-memo.md -->
       header{background:#141C2C!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
     }
   </style>
+
+<style>
+/* ── GLG QUIZ ENGINE — question type styles (2026-09-02) ──────────────────
+     All classes rendered by api-quiz-engine.js. Tokens: navy #141c2c, gold #C5975B.
+     Sourced from engine.html stylesheet + Harrell Part 8c spec. */
+
+  /* Question card */
+  .q { background:#fff; border:1px solid #e2e5ea; border-radius:10px;
+       padding:20px; margin:16px 0; box-shadow:0 1px 6px rgba(20,28,44,.06); }
+  .q-num { font-size:12px; letter-spacing:.06em; color:#C5975B; font-weight:700;
+            text-transform:uppercase; margin-bottom:8px; }
+  .q-text { font-weight:600; margin:8px 0 16px; font-size:1rem; line-height:1.55;
+             color:#141c2c; }
+
+  /* MC option buttons */
+  button.opt { display:block; width:100%; text-align:left; padding:13px 15px; margin:7px 0;
+    border:1px solid #d8dbe3; border-radius:8px; background:#fafbfd; cursor:pointer;
+    font-size:15px; font-family:var(--font-b); color:#222; line-height:1.45;
+    transition:background .12s, border-color .12s; }
+  button.opt:hover:not(.locked) { background:#eef4ff; border-color:#141c2c; }
+  button.opt.correct { background:#d4edda; border-color:#10774A; }
+  button.opt.incorrect { background:#f8d7da; border-color:#870101; }
+  button.opt.locked { cursor:default; opacity:.85; }
+
+  /* Fill-in-the-blank */
+  .fill-stem { font-weight:600; margin:8px 0 14px; line-height:2.2; }
+  input.blank { display:inline-block; min-height:44px; min-width:120px; padding:8px 10px;
+    margin:2px 4px; border:1px solid #ccd; border-radius:8px; background:#fafbfd;
+    font-size:16px; font-family:var(--font-b); vertical-align:middle;
+    box-sizing:border-box; max-width:100%; }
+  input.blank:focus { outline:2px solid #141c2c; background:#fff; }
+  input.blank.correct { background:#d4edda; border-color:#10774A; }
+  input.blank.incorrect { background:#f8d7da; border-color:#870101; }
+  input.blank.locked { opacity:.85; }
+  button.submit-fill { min-height:44px; padding:11px 20px; margin-top:12px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-fill.locked { opacity:.5; cursor:default; }
+
+  /* Markup */
+  .markup-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .markup-passage { margin:0 0 10px; border:1px solid #e2e5ea; border-radius:8px; overflow:hidden; }
+  button.span { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:11px 13px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:16px; font-family:var(--font-b);
+    color:#222; line-height:1.5; overflow-wrap:break-word; }
+  button.span:last-child { border-bottom:0; }
+  button.span:hover:not(.locked) { background:#eef4ff; }
+  button.span.selected { background:#fff3cd; box-shadow:inset 4px 0 0 #b8860b; font-weight:600; }
+  button.span.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.span.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.span.locked { cursor:default; opacity:.9; }
+  button.submit-markup { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-markup.locked { opacity:.5; cursor:default; }
+  .markup-count { font-size:13px; color:#555; margin-top:8px; }
+
+  /* Sort rows with up/down controls */
+  .sort-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .sort-list { margin:0 0 12px; border:1px solid #e2e5ea; border-radius:8px;
+               overflow:hidden; background:#fff; }
+  .sort-row { display:flex; align-items:stretch; border-bottom:1px solid #eef0f3;
+              background:#fff; }
+  .sort-row:last-child { border-bottom:0; }
+  .sort-pos { flex:0 0 34px; display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700; color:#C5975B; background:#f5f5f0; }
+  .sort-text { flex:1 1 auto; padding:11px 12px; font-size:15px; line-height:1.45;
+    display:flex; align-items:center; overflow-wrap:break-word; min-width:0; }
+  .sort-moves { flex:0 0 auto; display:flex; align-items:center; gap:4px; padding:4px 6px; }
+  button.sort-move { min-height:44px; min-width:44px; border:1px solid #ccd; border-radius:8px;
+    background:#fafbfd; cursor:pointer; font-size:15px; color:#141c2c;
+    font-family:var(--font-b); }
+  button.sort-move:hover:not(:disabled) { background:#eef4ff; }
+  button.sort-move:disabled { opacity:.35; cursor:default; }
+  .sort-row.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  .sort-row.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  .sort-row.locked .sort-text { opacity:.9; }
+  button.submit-sort { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-sort.locked { opacity:.5; cursor:default; }
+
+  /* Match chips + slot rows */
+  .match-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .match-tray { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px; padding:10px;
+    border:1px dashed #ccd; border-radius:8px; background:#fafbfd; }
+  button.chip { min-height:44px; padding:10px 16px; border:1px solid #ccd; border-radius:22px;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b); color:#222;
+    max-width:100%; overflow-wrap:break-word; text-align:left; }
+  button.chip:hover:not(.locked) { background:#eef4ff; }
+  button.chip.selected { background:#141c2c; color:#fff; border-color:#141c2c; font-weight:600; }
+  button.chip.placed { opacity:.35; }
+  button.chip.locked { cursor:default; }
+  .match-slots { border:1px solid #e2e5ea; border-radius:8px; overflow:hidden;
+                 background:#fff; margin-bottom:12px; }
+  button.slot { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:10px 14px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b);
+    color:#222; line-height:1.45; overflow-wrap:break-word; }
+  button.slot:last-child { border-bottom:0; }
+  button.slot:hover:not(.locked) { background:#eef4ff; }
+  button.slot.armed { box-shadow:inset 4px 0 0 #C5975B; background:#fffdf5; }
+  .slot-label { font-weight:600; display:block; }
+  .slot-fill { display:block; font-size:14px; margin-top:3px; color:#C5975B; font-weight:600; }
+  .slot-fill.empty { color:#8a8f98; font-weight:400; font-style:italic; }
+  button.slot.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.slot.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.slot.locked { cursor:default; opacity:.9; }
+  button.submit-match { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-match.locked { opacity:.5; cursor:default; }
+  .match-count { font-size:13px; color:#555; margin-top:8px; }
+  .match-credit { font-size:13px; font-weight:600; color:#8a6d1f; margin-top:6px; }
+
+  /* Feedback */
+  .fb { margin-top:12px; padding:12px 14px; border-radius:8px; font-size:14px; display:none; }
+  .fb.show { display:block; }
+  .fb.ok { background:#d4edda; border-left:4px solid #10774A; }
+  .fb.no { background:#f8d7da; border-left:4px solid #870101; }
+  .fb.neutral { background:#eef0f6; border-left:4px solid #6c757d; color:#333; } /* self_assessment: no verdict */
+
+  /* Branching nodes */
+  .branch-scenario { border-left:4px solid #C5975B; padding-left:12px; margin:14px 0; }
+  .branch-turn { font-size:12px; letter-spacing:.06em; color:#8a6d1f; font-weight:700;
+                 text-transform:uppercase; }
+  .branch-instruction { font-weight:600; margin:6px 0 10px; color:#141c2c; }
+  .branch-consequence { margin-top:10px; padding:10px 12px; border-left:4px solid #141c2c;
+    background:#eef2f7; border-radius:0 8px 8px 0; font-size:13px; color:#33415c; display:none; }
+  .branch-consequence.show { display:block; }
+
+  /* Pagination — one question at a time (Harrell Part 8b) */
+  .q-base { display: none !important; }
+  .q-base.q-active { display: block !important; }
+  .q-nav { display:flex; justify-content:space-between; align-items:center;
+            margin-top:20px; padding-top:16px; border-top:1px solid #e8e6e0; }
+  .q-nav-btn { min-height:44px; padding:10px 22px; border-radius:8px;
+                font-size:15px; cursor:pointer; font-family:var(--font-b);
+                font-weight:600; transition:background .12s; }
+  .q-nav-btn.next { background:#141c2c; color:#C5975B; border:2px solid #141c2c; }
+  .q-nav-btn.next:hover { background:#1e2a40; }
+  .q-nav-btn.back { background:#fff; color:#141c2c; border:2px solid #c8c5be; }
+  .q-nav-btn.back:hover { background:#f5f5f0; }
+  .q-pg-spacer { display:inline-block; min-width:40px; }
+  #q-progress { font-size:12px; color:#C5975B; font-weight:600;
+                letter-spacing:.5px; text-transform:uppercase; }
+
+
+</style>
+
+<!-- CUTOVER: server-side grading. Answer keys are not in this file. -->
+    <link rel="stylesheet" href="boss-challenge.css">
 </head>
 <body>
 
@@ -229,8 +389,9 @@ ga-bar-rules-resources-memo.md, georgia-hb1344-memo.md -->
   <button class="nav-pill" id="nav-4" onclick="goToSection(4)">5. Frameworks</button>
   <button class="nav-pill" id="nav-5" onclick="goToSection(5)">6. Ethics</button>
   <button class="nav-pill" id="nav-6" onclick="goToSection(6)">7. Boss</button>
-  <button class="nav-pill" id="nav-7" onclick="goToSection(7)">8. Results</button>
-  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">9. Certificate</button>
+  <button class="nav-pill" id="nav-7" onclick="startQuiz()">8. Quiz</button>
+  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">9. Results</button>
+  <button class="nav-pill" id="nav-9" onclick="goToSection(9)">10. Feedback</button>
 </nav>
 
 <div class="points-toast" id="points-toast"></div>
@@ -308,53 +469,9 @@ ga-bar-rules-resources-memo.md, georgia-hb1344-memo.md -->
     </div>
     <div class="callout callout-danger"><strong>Staff Failure Mode (Banned by Structure):</strong> No first offer call until the attorney has set facts-for/against, true floor, pseudo-floor, increments, and walk-away trigger on the pre-negotiation worksheet. The CM executes the sheet; the attorney sets it. A CM negotiating without the sheet is improvising with the client\u2019s money.</div>
 
-    <div class="question-block" id="q1-block">
-      <div class="q-num">Question 1 of 20 &middot; 10 pts</div>
-      <div class="q-text">Your CM Zainab is about to make her first call to an adjuster who has responded to a demand. You have not yet completed the pre-negotiation worksheet for this case. What should happen?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q1','a',true)" id="q1-a"><span class="opt-letter">A</span><span class="opt-text">The call does not happen. No first offer call occurs until the attorney completes the pre-negotiation worksheet with facts-for/against, true floor, pseudo-floor, concession increments, and walk-away trigger. A CM negotiating without the worksheet is improvising with the client\u2019s money. Reschedule the call after you set the parameters.</span></button>
-        <button class="option-btn" onclick="answer('q1','b',false)" id="q1-b"><span class="opt-letter">B</span><span class="opt-text">Zainab can proceed with the call to gather the adjuster\u2019s initial position, as long as she does not make any counter-offers or commitments until the worksheet is complete.</span></button>
-        <button class="option-btn" onclick="answer('q1','c',false)" id="q1-c"><span class="opt-letter">C</span><span class="opt-text">Zainab should use the demand amount as her ceiling and counter at no less than 75% of the demand, which is standard practice when the worksheet has not been finalized.</span></button>
-        <button class="option-btn" onclick="answer('q1','d',false)" id="q1-d"><span class="opt-letter">D</span><span class="opt-text">Set verbal authority parameters over the phone with Zainab while she is on hold, then have her proceed with the call and document the worksheet after the negotiation concludes.</span></button>
-      </div>
-      <div class="feedback-box" id="q1-fb"></div>
-    </div>
 
-    <div class="question-block" id="q2-block">
-      <div class="q-num">Question 2 of 20 &middot; 10 pts</div>
-      <div class="q-text">On the pre-negotiation worksheet for a $95,000 demand, you set the true floor at $65,000 and the pseudo-floor at $72,000. What is the strategic purpose of the $7,000 gap between these numbers?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q2','a',false)" id="q2-a"><span class="opt-letter">A</span><span class="opt-text">The $7,000 gap is the maximum amount the CM is authorized to concede beyond the pseudo-floor without requiring attorney approval for each additional reduction.</span></button>
-        <button class="option-btn" onclick="answer('q2','b',false)" id="q2-b"><span class="opt-letter">B</span><span class="opt-text">The gap exists to account for estimated litigation expenses that would reduce the net recovery if the case does not settle at the pseudo-floor level.</span></button>
-        <button class="option-btn" onclick="answer('q2','c',false)" id="q2-c"><span class="opt-letter">C</span><span class="opt-text">The pseudo-floor is a backup position revealed to the adjuster only if they discover through their own analysis that the true floor is lower than the original stated number.</span></button>
-        <button class="option-btn" onclick="answer('q2','d',true)" id="q2-d"><span class="opt-letter">D</span><span class="opt-text">The pseudo-floor is stated to the adjuster as your minimum, but it is not the true walk-away number. It motivates the counterparty toward their real top. If the adjuster reaches $72,000, you still have $7,000 of room above your actual walk-away. The true floor is never revealed &mdash; it exists only on the worksheet.</span></button>
-      </div>
-      <div class="feedback-box" id="q2-fb"></div>
-    </div>
 
-    <div class="question-block" id="q3-block">
-      <div class="q-num">Question 3 of 20 &middot; 10 pts</div>
-      <div class="q-text">A case has $48,000 in specials, clear liability, and $100K policy limits. You are completing the pre-negotiation worksheet. Which approach correctly identifies the factors for setting the true floor?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q3','a',false)" id="q3-a"><span class="opt-letter">A</span><span class="opt-text">The true floor should equal specials times 1.5 &mdash; in this case $72,000. The multiplier method provides an objective baseline that removes subjective judgment from the floor calculation.</span></button>
-        <button class="option-btn" onclick="answer('q3','b',true)" id="q3-b"><span class="opt-letter">B</span><span class="opt-text">The true floor requires multiple inputs: litigation costs and timeline if settlement is rejected, case value based on injury category and multiplier range capped by available coverage, the client\u2019s financial needs and ability to wait, the best alternative to negotiated agreement (what the case is worth in litigation minus costs), and estimated lien reductions affecting net-to-client. The floor is a calculated number derived from these factors, not an instinct.</span></button>
-        <button class="option-btn" onclick="answer('q3','c',false)" id="q3-c"><span class="opt-letter">C</span><span class="opt-text">Set the floor at 80% of available coverage. In this case, $80,000. The policy limit is the primary driver because no settlement can exceed available coverage regardless of case value.</span></button>
-        <button class="option-btn" onclick="answer('q3','d',false)" id="q3-d"><span class="opt-letter">D</span><span class="opt-text">The true floor should be whatever the client says their minimum acceptable amount is. The client\u2019s stated needs are the only factor that matters because settlement authority ultimately belongs to the client.</span></button>
-      </div>
-      <div class="feedback-box" id="q3-fb"></div>
-    </div>
 
-    <div class="question-block" id="q4-block">
-      <div class="q-num">Question 4 of 20 &middot; 10 pts</div>
-      <div class="q-text">Your CM Zainab reports that an adjuster wants to discuss a demand response on a complex surgical case. Zainab has the completed pre-negotiation worksheet. Under what circumstances should the attorney handle the call directly instead of Zainab?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q4','a',false)" id="q4-a"><span class="opt-letter">A</span><span class="opt-text">Only when the adjuster specifically requests to speak with the attorney &mdash; CMs are trained to handle all routine adjuster communications within their worksheet parameters.</span></button>
-        <button class="option-btn" onclick="answer('q4','b',false)" id="q4-b"><span class="opt-letter">B</span><span class="opt-text">Whenever the case value exceeds $50,000 &mdash; per the Pre-Lit Head Attorney SOP, all cases above this threshold require direct attorney involvement in every negotiation call.</span></button>
-        <button class="option-btn" onclick="answer('q4','c',true)" id="q4-c"><span class="opt-letter">C</span><span class="opt-text">When the adjuster\u2019s best offer is less than 50% of the demand, when liability is denied entirely, after 3 or more rounds with no meaningful movement, when bad faith indicators are present, when the statute of limitations is within 6 months, when there is a policy limits dispute, or when the situation requires legal judgment beyond executing the worksheet. These are the escalation triggers that require attorney-level decision-making.</span></button>
-        <button class="option-btn" onclick="answer('q4','d',false)" id="q4-d"><span class="opt-letter">D</span><span class="opt-text">The attorney should handle the initial call on every case to establish authority and credibility with the adjuster, then delegate subsequent negotiation rounds to the CM for execution within the worksheet.</span></button>
-      </div>
-      <div class="feedback-box" id="q4-fb"></div>
-    </div>
 
     <div class="section-score" id="s1-score" style="display:none;"><div class="score-display" id="s1-score-val"></div><div class="score-label">Section 2 Score</div></div>
     <div class="btn-group" id="s1-next"><button class="btn btn-primary btn-block" onclick="goToSection(2)">Next: Strategic Accept/Counter/Reject &rarr;</button></div>
@@ -407,53 +524,9 @@ ga-bar-rules-resources-memo.md, georgia-hb1344-memo.md -->
     </div>
     <div class="callout callout-warn"><strong>Staff Failure Mode (Banned by Structure):</strong> Holding firm without a plan. Refusing to move below a number sometimes pulls the adjuster up &mdash; and sometimes burns months. Hold firm ONLY when the gap is material AND the client can afford to wait. Otherwise the specials test governs: take it or file. No zombie negotiations.</div>
 
-    <div class="question-block" id="q5-block">
-      <div class="q-num">Question 5 of 20 &middot; 10 pts</div>
-      <div class="q-text">An adjuster offers $18,000 on a case where the demand was $75,000 and documented specials total $32,000. You apply the specials test. What is the correct classification of this offer?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q5','a',false)" id="q5-a"><span class="opt-letter">A</span><span class="opt-text">This is a reasonable opening position at 24% of demand. Counter per the 50% rule and continue standard negotiation &mdash; most cases settle after 3-4 rounds of offers.</span></button>
-        <button class="option-btn" onclick="answer('q5','b',true)" id="q5-b"><span class="opt-letter">B</span><span class="opt-text">The offer fails the specials test &mdash; $18,000 does not clear $32,000 in documented out-of-pocket losses. This is a litigation signal, not a negotiation starting point. But verify first: confirm the adjuster has the complete demand package and all medical records. Sometimes a lowball reflects an information gap, not a posture. Ask the adjuster how they arrived at their number.</span></button>
-        <button class="option-btn" onclick="answer('q5','c',false)" id="q5-c"><span class="opt-letter">C</span><span class="opt-text">Reject the offer outright and file suit immediately &mdash; an offer this far below specials demonstrates the carrier has no intention of negotiating in good faith on this claim.</span></button>
-        <button class="option-btn" onclick="answer('q5','d',false)" id="q5-d"><span class="opt-letter">D</span><span class="opt-text">Accept the offer if the client has financial urgency and cannot wait for litigation &mdash; the specials test is an aspirational guideline, not a binding constraint on the attorney\u2019s settlement authority.</span></button>
-      </div>
-      <div class="feedback-box" id="q5-fb"></div>
-    </div>
 
-    <div class="question-block" id="q6-block">
-      <div class="q-num">Question 6 of 20 &middot; Unscored Calibration</div>
-      <div class="q-text"><em>(This is a self-assessment &mdash; no points awarded or deducted. All answers reveal the same teaching content.)</em><br><br>You are about to complete a pre-negotiation worksheet on a complex surgical case with multiple coverage sources. On a scale of 1&ndash;5, how confident are you that you can set true floor, pseudo-floor, concession increments, and walk-away triggers that would produce a better outcome than ad hoc negotiation?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q6','a',true)" id="q6-a"><span class="opt-letter">A</span><span class="opt-text">1&ndash;2 &mdash; Not confident. I understand the concepts but have not applied them to a live case with competing variables.</span></button>
-        <button class="option-btn" onclick="answer('q6','b',true)" id="q6-b"><span class="opt-letter">B</span><span class="opt-text">3 &mdash; Somewhat confident. I could complete the worksheet but would want attorney review of my floor and increment calculations.</span></button>
-        <button class="option-btn" onclick="answer('q6','c',true)" id="q6-c"><span class="opt-letter">C</span><span class="opt-text">4 &mdash; Fairly confident. I can calculate the components and would adjust based on case-specific risk factors.</span></button>
-        <button class="option-btn" onclick="answer('q6','d',true)" id="q6-d"><span class="opt-letter">D</span><span class="opt-text">5 &mdash; Fully confident. I can design the complete worksheet for any case type and set authority parameters that optimize outcome.</span></button>
-      </div>
-      <div class="feedback-box" id="q6-fb"></div>
-    </div>
 
-    <div class="question-block" id="q7-block">
-      <div class="q-num">Question 7 of 20 &middot; 10 pts</div>
-      <div class="q-text">You sent a $120,000 demand. The adjuster\u2019s first counter-offer is $40,000. Under the 50% rule for counter-offers, what is the minimum amount your counter-offer should be?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q7','a',true)" id="q7-a"><span class="opt-letter">A</span><span class="opt-text">$80,000. The gap is $80,000 ($120K minus $40K). Never come down more than 50% of the gap. 50% of $80,000 is $40,000. Your minimum counter is $120,000 minus $40,000 = $80,000. This ensures you are not conceding ground faster than the adjuster.</span></button>
-        <button class="option-btn" onclick="answer('q7','b',false)" id="q7-b"><span class="opt-letter">B</span><span class="opt-text">$60,000 &mdash; split the difference between the demand and the offer ($120K + $40K = $160K / 2 = $80K, then subtract $20K for good faith). This demonstrates willingness to negotiate.</span></button>
-        <button class="option-btn" onclick="answer('q7','c',false)" id="q7-c"><span class="opt-letter">C</span><span class="opt-text">$95,000 &mdash; drop only $25,000 from the demand to signal strength in early rounds. Conservative counters prevent the adjuster from anchoring too low.</span></button>
-        <button class="option-btn" onclick="answer('q7','d',false)" id="q7-d"><span class="opt-letter">D</span><span class="opt-text">$70,000 &mdash; the midpoint between your demand and the offer ($120K + $40K) / 2 = $80K, minus $10K to create room for the adjuster to feel like they won something.</span></button>
-      </div>
-      <div class="feedback-box" id="q7-fb"></div>
-    </div>
 
-    <div class="question-block" id="q8-block">
-      <div class="q-num">Question 8 of 20 &middot; 10 pts</div>
-      <div class="q-text">Your CM has been negotiating with an adjuster for three weeks. The adjuster\u2019s second offer is $52,000 (up from $38,000) on a case with a true floor of $60,000 and pseudo-floor of $68,000. The adjuster has not moved in 10 days. Your CM asks: should she hold firm or make another concession?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q8','a',false)" id="q8-a"><span class="opt-letter">A</span><span class="opt-text">Always hold firm at the pseudo-floor &mdash; any concession below the pseudo-floor signals weakness and undermines the entire negotiation strategy established on the worksheet.</span></button>
-        <button class="option-btn" onclick="answer('q8','b',false)" id="q8-b"><span class="opt-letter">B</span><span class="opt-text">Make a small concession immediately to keep momentum alive &mdash; a stalled negotiation is worse than a concession because the adjuster will move to their next file.</span></button>
-        <button class="option-btn" onclick="answer('q8','c',false)" id="q8-c"><span class="opt-letter">C</span><span class="opt-text">Accept the $52,000 &mdash; it is close enough to the floor, the client likely needs the money, and three weeks of negotiation is sufficient effort on a single case.</span></button>
-        <button class="option-btn" onclick="answer('q8','d',true)" id="q8-d"><span class="opt-letter">D</span><span class="opt-text">Assess strategically. Holding firm works ONLY when the gap is material AND the client can afford to wait. The gap here ($16K to true floor) is material. But check: does the adjuster\u2019s $52K clear specials? If yes, test whether a small, final concession moves them. If no, the specials test governs: take it or file. Never allow zombie negotiations where both sides repeat the same numbers indefinitely.</span></button>
-      </div>
-      <div class="feedback-box" id="q8-fb"></div>
-    </div>
 
     <div class="section-score" id="s2-score" style="display:none;"><div class="score-display" id="s2-score-val"></div><div class="score-label">Section 3 Score</div></div>
     <div class="btn-group" id="s2-next"><button class="btn btn-primary btn-block" onclick="goToSection(3)">Next: Bad Faith Identification &amp; Statutory Leverage &rarr;</button></div>
@@ -507,53 +580,9 @@ ga-bar-rules-resources-memo.md, georgia-hb1344-memo.md -->
     </div>
     <div class="callout callout-danger"><strong>Precision Matters:</strong> Cite the correct statute for the correct purpose. &sect; 33-3-28 compels limits disclosure (60-day response). &sect; 33-4-6 creates penalty exposure for refusal to pay (60-day demand). Confusing the two or citing non-existent provisions destroys your credibility with adjusters who know the statutes better than many attorneys.</div>
 
-    <div class="question-block" id="q9-block">
-      <div class="q-num">Question 9 of 20 &middot; 10 pts</div>
-      <div class="q-text">An adjuster has been sitting on a complete demand package for 45 days with no substantive response. Your CM has called twice and emailed once, documenting each attempt in CasePeer. What is the attorney\u2019s next step?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q9','a',false)" id="q9-a"><span class="opt-letter">A</span><span class="opt-text">Wait another 14 days &mdash; adjusters carry heavy caseloads, and 45 days is within normal processing time for complex claims with large specials totals.</span></button>
-        <button class="option-btn" onclick="answer('q9','b',false)" id="q9-b"><span class="opt-letter">B</span><span class="opt-text">Have the CM make one more phone call &mdash; the standard escalation protocol requires a minimum of three phone attempts before the attorney takes any action.</span></button>
-        <button class="option-btn" onclick="answer('q9','c',true)" id="q9-c"><span class="opt-letter">C</span><span class="opt-text">This is past two follow-up cycles and constitutes potential bad faith through delay. Send a written demand from the attorney with a defined deadline: "If I do not receive a substantive response within 7 days, I will need to escalate this to filing suit." Document the entire contact timeline for a potential bad faith claim under O.C.G.A. § 33-4-6. Verify that the § 33-3-28 limits disclosure request was sent and answered — if not, send it now to establish the coverage ceiling before escalating.</span></button>
-        <button class="option-btn" onclick="answer('q9','d',false)" id="q9-d"><span class="opt-letter">D</span><span class="opt-text">File suit immediately &mdash; 45 days of silence on a complete demand package constitutes per se bad faith under Georgia law and no further communication attempts are required.</span></button>
-      </div>
-      <div class="feedback-box" id="q9-fb"></div>
-    </div>
 
-    <div class="question-block" id="q10-block">
-      <div class="q-num">Question 10 of 20 &middot; 10 pts</div>
-      <div class="q-text">During a negotiation on a motor vehicle claim, the adjuster refuses to disclose the policy limits, saying "that’s proprietary information." Your CM asks what tool is available to compel disclosure. What is the correct answer?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q10','a',true)" id="q10-a"><span class="opt-letter">A</span><span class="opt-text">Send a written request under O.C.G.A. § 33-3-28. The insurer must disclose the insurer name, insured name, and policy limits within 60 days of receiving the written request. This is not optional — it is a statutory obligation enacted in 2021 (SB 426). The written request creates a documented record and a 60-day clock.</span></button>
-        <button class="option-btn" onclick="answer('q10','b',false)" id="q10-b"><span class="opt-letter">B</span><span class="opt-text">File a complaint with the Georgia Insurance Commissioner requesting an investigation into the carrier’s refusal to disclose limits. The Commissioner will compel disclosure through regulatory action, which typically takes 60–90 days.</span></button>
-        <button class="option-btn" onclick="answer('q10','c',false)" id="q10-c"><span class="opt-letter">C</span><span class="opt-text">There is no statutory mechanism to compel limits disclosure in Georgia. The attorney must estimate limits based on the vehicle type, defendant’s occupation, and neighborhood, then demand accordingly.</span></button>
-        <button class="option-btn" onclick="answer('q10','d',false)" id="q10-d"><span class="opt-letter">D</span><span class="opt-text">File a motion with the court to compel discovery of the insurance policy. This requires filing suit first — limits disclosure is only available through formal litigation discovery, not during pre-litigation negotiation.</span></button>
-      </div>
-      <div class="feedback-box" id="q10-fb"></div>
-    </div>
 
-    <div class="question-block" id="q11-block">
-      <div class="q-num">Question 11 of 20 &middot; 10 pts</div>
-      <div class="q-text">Over the past six months, you notice a pattern with one insurance carrier: their adjusters consistently offer 30&ndash;40% of documented specials across multiple cases, refuse to explain their valuation methodology, and take 25&ndash;35 days to respond to demands. How do you assess this pattern?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q11','a',false)" id="q11-a"><span class="opt-letter">A</span><span class="opt-text">This is normal aggressive adjusting &mdash; most carriers use internal valuation software that produces systematically low initial offers as a starting position for negotiation.</span></button>
-        <button class="option-btn" onclick="answer('q11','b',false)" id="q11-b"><span class="opt-letter">B</span><span class="opt-text">Each case should be evaluated independently. Cross-case pattern analysis is not relevant to individual claim negotiations and could constitute improper generalization about the carrier.</span></button>
-        <button class="option-btn" onclick="answer('q11','c',false)" id="q11-c"><span class="opt-letter">C</span><span class="opt-text">File a complaint with the Georgia Insurance Commissioner immediately &mdash; a pattern of undervaluation across multiple files is a regulatory violation requiring Commissioner intervention.</span></button>
-        <button class="option-btn" onclick="answer('q11','d',true)" id="q11-d"><span class="opt-letter">D</span><span class="opt-text">This pattern &mdash; systematic undervaluation, refusal to justify positions, and consistent delay &mdash; may constitute a corporate bad faith claims handling practice. Document each instance: date, offer as percentage of specials, response time, refusal to explain methodology. Individual lowball offers may be defensible business judgment, but a documented pattern across multiple files suggests a corporate practice, not case-by-case evaluation. Present the pattern to the managing attorney for strategic assessment.</span></button>
-      </div>
-      <div class="feedback-box" id="q11-fb"></div>
-    </div>
 
-    <div class="question-block" id="q12-block">
-      <div class="q-num">Question 12 of 20 &middot; 10 pts</div>
-      <div class="q-text">You are preparing a formal bad faith demand under O.C.G.A. § 33-4-6. The insurer has made a lowball offer of $12,000 on a case with $47,000 in specials and clear liability. What elements must the demand include to trigger the 60-day statutory clock?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q12','a',false)" id="q12-a"><span class="opt-letter">A</span><span class="opt-text">A general letter stating dissatisfaction with the offer and requesting the adjuster "do better" within a reasonable time.</span></button>
-        <button class="option-btn" onclick="answer('q12','b',true)" id="q12-b"><span class="opt-letter">B</span><span class="opt-text">A written demand identifying the specific claim, stating the amount owed with supporting documentation (specials breakdown, liability basis), and providing a clear basis for the claim. The demand must be specific enough that the insurer can evaluate and pay it — vague demands do not trigger the 60-day clock under § 33-4-6.</span></button>
-        <button class="option-btn" onclick="answer('q12','c',false)" id="q12-c"><span class="opt-letter">C</span><span class="opt-text">A demand letter is not required — O.C.G.A. § 33-4-6 penalties are triggered automatically whenever an insurer fails to pay a valid claim, regardless of whether the claimant sends a formal demand.</span></button>
-        <button class="option-btn" onclick="answer('q12','d',false)" id="q12-d"><span class="opt-letter">D</span><span class="opt-text">A demand sent by certified mail with a 30-day deadline (half the 60-day statutory period) threatening immediate litigation if no response. The shorter deadline creates urgency and the certified mail creates proof of receipt.</span></button>
-      </div>
-      <div class="feedback-box" id="q12-fb"></div>
-    </div>
 
     <div class="section-score" id="s3-score" style="display:none;"><div class="score-display" id="s3-score-val"></div><div class="score-label">Section 4 Score</div></div>
     <div class="btn-group" id="s3-next"><button class="btn btn-primary btn-block" onclick="goToSection(4)">Next: Advanced Frameworks &amp; Client Counseling &rarr;</button></div>
@@ -608,53 +637,9 @@ ga-bar-rules-resources-memo.md, georgia-hb1344-memo.md -->
     </div>
     <div class="callout callout-warn"><strong>Written Acceptance Required:</strong> No settlement without written client acceptance. Documented text, email confirmation, or signed memo in CasePeer &mdash; every time. "Client said yes on the phone" is how the worst outcome happens: a settled case the client disputes.</div>
 
-    <div class="question-block" id="q13-block">
-      <div class="q-num">Question 13 of 20 &middot; 10 pts</div>
-      <div class="q-text">You are about to make a counter-offer to an adjuster on a case where your target settlement is $85,000. Which concession strategy signals to the adjuster that you are approaching your floor while maintaining negotiating power?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q13','a',false)" id="q13-a"><span class="opt-letter">A</span><span class="opt-text">Make equal concessions of $10,000 in each round until you reach your target. Equal increments demonstrate consistency and fairness, which builds trust with the adjuster.</span></button>
-        <button class="option-btn" onclick="answer('q13','b',false)" id="q13-b"><span class="opt-letter">B</span><span class="opt-text">Make one large concession early to signal flexibility, then hold firm at your target. A big early move shows you are negotiating in good faith and establishes credibility.</span></button>
-        <button class="option-btn" onclick="answer('q13','c',true)" id="q13-c"><span class="opt-letter">C</span><span class="opt-text">Move in decreasing increments &mdash; each concession smaller than the last. For example: $20K, then $10K, then $5K, then $2,500. End on a specific, odd number ($84,750 rather than $85,000). Decreasing increments signal you are reaching your limit. The specific number signals disciplined calculation. At the final step, offer a non-monetary concession rather than more money to communicate "I have nothing left to give on price."</span></button>
-        <button class="option-btn" onclick="answer('q13','d',false)" id="q13-d"><span class="opt-letter">D</span><span class="opt-text">Never reveal your concession pattern &mdash; make random-sized concessions to prevent the adjuster from predicting your floor. Unpredictability is the strongest negotiation posture.</span></button>
-      </div>
-      <div class="feedback-box" id="q13-fb"></div>
-    </div>
 
-    <div class="question-block" id="q14-block">
-      <div class="q-num">Question 14 of 20 &middot; 10 pts</div>
-      <div class="q-text">Your client has accepted a settlement offer of $92,000. Attorney fees at 33.3% = $30,636. Estimated case expenses = $2,100. Medical specials total $55,000 but you expect lien reductions to bring provider payments to approximately $30,000. What net-to-client figure do you quote the client before they sign?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q14','a',false)" id="q14-a"><span class="opt-letter">A</span><span class="opt-text">$29,264 &mdash; the calculation using the expected reductions ($92K minus $30,636 minus $2,100 minus $30,000). Give the client this exact figure so the number is precise.</span></button>
-        <button class="option-btn" onclick="answer('q14','b',true)" id="q14-b"><span class="opt-letter">B</span><span class="opt-text">Quote "at least $26,000," and tell the client explicitly that it is a conservative floor, not a prediction. The estimate using expected reductions is approximately $29,264 &mdash; but at the time of this call, lien and bill reductions are NOT final. You cannot guarantee the $30,000 provider figure, so you do not quote a number that depends on it. You quote the floor you can stand behind if reductions come in worse than expected: the $3,264 difference is the margin for that uncertainty. If reductions land as expected the client receives $29,264+, and you have promised only what you could control.</span></button>
-        <button class="option-btn" onclick="answer('q14','c',false)" id="q14-c"><span class="opt-letter">C</span><span class="opt-text">$37,000 &mdash; assume full lien elimination to give the client the most optimistic projection. An enthusiastic client is more likely to sign documents quickly and refer friends to the firm.</span></button>
-        <button class="option-btn" onclick="answer('q14','d',false)" id="q14-d"><span class="opt-letter">D</span><span class="opt-text">Do not quote a specific number until all lien reductions are finalized. Tell the client: "We will have your exact net once we finish negotiating with your providers." This avoids the risk of under-delivering.</span></button>
-      </div>
-      <div class="feedback-box" id="q14-fb"></div>
-    </div>
 
-    <div class="question-block" id="q15-block">
-      <div class="q-num">Question 15 of 20 &middot; 10 pts</div>
-      <div class="q-text">A client calls, upset about a settlement offer of $65,000 that she considers insultingly low. She wants to reject it immediately without hearing your analysis. "Just tell them no." How do you handle this settlement counseling conversation?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q15','a',true)" id="q15-a"><span class="opt-letter">A</span><span class="opt-text">First, establish safety: "We are on the same team. I want the best outcome for you." Then present structured options: Accept at $65K (here is the net after fees and expenses). Counter at a specific amount (here is why and the likely range). Proceed to litigation (here is the timeline, increased fee percentage, and expected outcome). Work through each option with real numbers so the decision is informed, not reactive. You are required to communicate ALL offers &mdash; you cannot reject on her behalf without her informed decision.</span></button>
-        <button class="option-btn" onclick="answer('q15','b',false)" id="q15-b"><span class="opt-letter">B</span><span class="opt-text">Respect her decision and reject the offer. The client has ultimate settlement authority. If she says reject, reject. Call the adjuster and communicate the rejection immediately.</span></button>
-        <button class="option-btn" onclick="answer('q15','c',false)" id="q15-c"><span class="opt-letter">C</span><span class="opt-text">Tell her the offer is reasonable and she should accept it &mdash; an upset client making a reactive decision will regret rejecting a fair offer, and your job is to prevent that mistake.</span></button>
-        <button class="option-btn" onclick="answer('q15','d',false)" id="q15-d"><span class="opt-letter">D</span><span class="opt-text">Schedule a follow-up call for later in the week when she has calmed down. Emotional clients should not make settlement decisions, so table the discussion until she can evaluate the numbers objectively.</span></button>
-      </div>
-      <div class="feedback-box" id="q15-fb"></div>
-    </div>
 
-    <div class="question-block" id="q16-block">
-      <div class="q-num">Question 16 of 20 &middot; 10 pts</div>
-      <div class="q-text">You have presented a settlement breakdown to your client. He says: "Yeah, that sounds fine. Whatever you think." Is this sufficient to proceed with finalizing the settlement?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q16','a',false)" id="q16-a"><span class="opt-letter">A</span><span class="opt-text">Yes &mdash; the client has expressed consent. Document the verbal agreement in CasePeer and proceed with preparing the release documents for signature.</span></button>
-        <button class="option-btn" onclick="answer('q16','b',false)" id="q16-b"><span class="opt-letter">B</span><span class="opt-text">Yes, as long as you follow up with a confirming email. The verbal "that sounds fine" is sufficient consent if documented promptly in writing by the attorney.</span></button>
-        <button class="option-btn" onclick="answer('q16','c',false)" id="q16-c"><span class="opt-letter">C</span><span class="opt-text">Proceed, but note the client\u2019s lack of enthusiasm in the file. A tepid acceptance is still acceptance, and delaying to seek stronger affirmation risks the adjuster withdrawing the offer.</span></button>
-        <button class="option-btn" onclick="answer('q16','d',true)" id="q16-d"><span class="opt-letter">D</span><span class="opt-text">No. A vague "yeah, whatever you think" is not a confirmed decision. Obtain three separate confirmations: (1) "The gross settlement is $[amount] &mdash; does that match your understanding?" (2) "Your net take-home after all deductions is $[amount] &mdash; are you clear on that number?" (3) "Are you comfortable moving forward and getting your money released?" Wait for three clear affirmatives. Then obtain written acceptance &mdash; text, email, or signed memo in CasePeer. Verbal agreement alone is how disputed settlements happen.</span></button>
-      </div>
-      <div class="feedback-box" id="q16-fb"></div>
-    </div>
 
     <div class="section-score" id="s4-score" style="display:none;"><div class="score-display" id="s4-score-val"></div><div class="score-label">Section 5 Score</div></div>
     <div class="btn-group" id="s4-next"><button class="btn btn-primary btn-block" onclick="goToSection(5)">Next: Ethical Boundaries &amp; Authority Delegation &rarr;</button></div>
@@ -711,53 +696,9 @@ ga-bar-rules-resources-memo.md, georgia-hb1344-memo.md -->
     </div>
     <div class="callout callout-info"><strong>Puffing vs. Misrepresentation:</strong> Stating your client\u2019s negotiation position ("My client will not accept less than $120,000") when the client has authorized $85,000 is legitimate puffing &mdash; advocating a position. Fabricating material facts (inventing medical records, citing non-existent expert opinions, claiming non-existent coverage) is misrepresentation &mdash; an ethics violation. The line is between POSITION and FACT.</div>
 
-    <div class="question-block" id="q17-block">
-      <div class="q-num">Question 17 of 20 &middot; 10 pts</div>
-      <div class="q-text">An adjuster calls with an offer of $8,500 on a case you demanded at $75,000. You consider this offer insulting and a waste of the client\u2019s time to even discuss. Do you need to communicate this offer to the client?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q17','a',true)" id="q17-a"><span class="opt-letter">A</span><span class="opt-text">Yes. GA Bar Rule 1.4 requires that ALL settlement offers be communicated to the client promptly &mdash; even offers the attorney considers inadequate. The attorney\u2019s job is to communicate the offer WITH context and recommendation ("I recommend rejecting this and here is why"), not to filter which offers the client hears. This is the number one source of bar complaints in PI practice. Communicate within 24 hours and document in CasePeer.</span></button>
-        <button class="option-btn" onclick="answer('q17','b',false)" id="q17-b"><span class="opt-letter">B</span><span class="opt-text">No. An offer that represents 11% of the demand is not a legitimate settlement offer &mdash; it is a negotiation tactic. Communicating it would alarm the client unnecessarily and undermine their confidence in the case. Counter at $65,000 and inform the client only if the adjuster reaches a reasonable range.</span></button>
-        <button class="option-btn" onclick="answer('q17','c',false)" id="q17-c"><span class="opt-letter">C</span><span class="opt-text">Only if the client has specifically requested to be informed of every offer. Most clients prefer to be contacted only when there is a meaningful offer worth discussing, and attorney discretion on communication frequency is protected by Rule 1.4\u2019s reasonableness standard.</span></button>
-        <button class="option-btn" onclick="answer('q17','d',false)" id="q17-d"><span class="opt-letter">D</span><span class="opt-text">No &mdash; communicate the offer only if you are unable to negotiate a higher amount within 30 days. If you can improve the offer through continued negotiation, the initial lowball becomes irrelevant and does not need to be reported to the client.</span></button>
-      </div>
-      <div class="feedback-box" id="q17-fb"></div>
-    </div>
 
-    <div class="question-block" id="q18-block">
-      <div class="q-num">Question 18 of 20 &middot; 10 pts</div>
-      <div class="q-text">Your CM Zainab has been negotiating with an adjuster and they have reached a number both sides seem comfortable with &mdash; $72,000. Zainab asks if she can "accept" the offer on behalf of the client to lock it in before the adjuster\u2019s authority expires. What is the correct analysis?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q18','a',false)" id="q18-a"><span class="opt-letter">A</span><span class="opt-text">Zainab can accept if the $72,000 falls within the pre-negotiation worksheet\u2019s acceptable range. The worksheet authorizes the CM to close within defined parameters without real-time attorney involvement.</span></button>
-        <button class="option-btn" onclick="answer('q18','b',false)" id="q18-b"><span class="opt-letter">B</span><span class="opt-text">Zainab can verbally agree to the $72,000 to hold the adjuster\u2019s commitment, as long as she adds a qualifier that the agreement is "subject to attorney review and client approval." This preserves the number without technically accepting.</span></button>
-        <button class="option-btn" onclick="answer('q18','c',true)" id="q18-c"><span class="opt-letter">C</span><span class="opt-text">CMs are NOT authorized to accept settlement offers without attorney consultation. Under Georgia law, the decision to accept a settlement is a legal decision that constitutes the practice of law. A CM who exercises independent judgment on whether to accept a settlement amount is practicing law without a license. Zainab documents the offer, presents it to the attorney, and the attorney makes the accept/counter/reject recommendation to the client. Time pressure from the adjuster does not change this requirement.</span></button>
-        <button class="option-btn" onclick="answer('q18','d',false)" id="q18-d"><span class="opt-letter">D</span><span class="opt-text">Zainab can accept with the client\u2019s verbal permission. If Zainab calls the client, explains the offer, and the client says "take it," Zainab can communicate acceptance to the adjuster. The attorney does not need to be involved as long as the client consents directly.</span></button>
-      </div>
-      <div class="feedback-box" id="q18-fb"></div>
-    </div>
 
-    <div class="question-block" id="q19-block">
-      <div class="q-num">Question 19 of 20 &middot; 10 pts</div>
-      <div class="q-text">During a negotiation call, you tell the adjuster: "My client will accept nothing less than $120,000." You know your client has privately authorized you to accept $85,000. Is this statement ethical?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q19','a',false)" id="q19-a"><span class="opt-letter">A</span><span class="opt-text">No &mdash; this is a material misrepresentation of your client\u2019s position. You are stating a fact about your client\u2019s authorization that is false. The Rules of Professional Conduct prohibit false statements to third parties.</span></button>
-        <button class="option-btn" onclick="answer('q19','b',true)" id="q19-b"><span class="opt-letter">B</span><span class="opt-text">Yes &mdash; this is legitimate negotiation posture, not misrepresentation. Stating your client\u2019s negotiation position is advocating a position, which is distinct from making a false statement of material fact. However, there IS a line: you cannot fabricate material facts such as medical records, expert opinions, witnesses, or coverage amounts. The distinction is between POSITION (ethical) and FACT (unethical when false).</span></button>
-        <button class="option-btn" onclick="answer('q19','c',false)" id="q19-c"><span class="opt-letter">C</span><span class="opt-text">Yes, but only if the client has specifically authorized you to misstate their floor during negotiations. Without express client permission to use deceptive posturing, the statement would violate both Rule 1.4 (client communication) and Rule 4.1 (truthfulness).</span></button>
-        <button class="option-btn" onclick="answer('q19','d',false)" id="q19-d"><span class="opt-letter">D</span><span class="opt-text">No &mdash; while common in practice, Georgia\u2019s Rules of Professional Conduct hold attorneys to a higher standard than commercial negotiators. Any statement about settlement authority must be literally true to comply with Rule 4.1.</span></button>
-      </div>
-      <div class="feedback-box" id="q19-fb"></div>
-    </div>
 
-    <div class="question-block" id="q20-block">
-      <div class="q-num">Question 20 of 20 &middot; 10 pts</div>
-      <div class="q-text">A client is deciding whether to accept a $100,000 pre-litigation settlement offer or reject it and proceed to litigation. She asks: "Will the fee change if we go to trial?" How do you handle this fee discussion under GA Bar Rule 1.5?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q20','a',false)" id="q20-a"><span class="opt-letter">A</span><span class="opt-text">Avoid discussing specific fee percentages during settlement counseling. Tell her: "The fee is in your agreement &mdash; I would recommend reviewing it." Detailed fee discussions during settlement can create the impression of self-interested advice.</span></button>
-        <button class="option-btn" onclick="answer('q20','b',false)" id="q20-b"><span class="opt-letter">B</span><span class="opt-text">Tell her the fee does not change. The fee percentage is set at the time of signing and remains constant regardless of whether the case settles or goes to trial.</span></button>
-        <button class="option-btn" onclick="answer('q20','c',false)" id="q20-c"><span class="opt-letter">C</span><span class="opt-text">Disclose only the percentage change (33.3% to 40%) but do not calculate the dollar impact. Providing dollar comparisons could be seen as pressuring the client to accept the current offer rather than pursuing her legal rights.</span></button>
-        <button class="option-btn" onclick="answer('q20','d',true)" id="q20-d"><span class="opt-letter">D</span><span class="opt-text">Explain clearly: the pre-litigation fee is 33.3%, and it increases to 40% once suit is filed. On a $100,000 recovery, that is a $6,700 difference ($33,300 vs. $40,000). Additionally, litigation adds expenses &mdash; depositions, expert witnesses, court costs &mdash; that reduce the net further. The client must understand that rejecting this offer and proceeding to litigation materially changes the economics. Present both paths with real numbers so her decision is informed. Rule 1.5 requires fees to be reasonable AND transparently explained.</span></button>
-      </div>
-      <div class="feedback-box" id="q20-fb"></div>
-    </div>
 
     <div class="section-score" id="s5-score" style="display:none;"><div class="score-display" id="s5-score-val"></div><div class="score-label">Section 6 Score</div></div>
     <div class="btn-group" id="s5-next"><button class="btn btn-primary btn-block" onclick="goToSection(6)">Next: Boss Challenge &mdash; The Vasquez Negotiation &rarr;</button></div>
@@ -803,83 +744,53 @@ ga-bar-rules-resources-memo.md, georgia-hb1344-memo.md -->
 
     <!-- ROUND 1 -->
     <div class="info-block"><h4>&#x1F4DE; Round 1 &mdash; The First Offer</h4><p>The adjuster calls with the initial response: <strong>"We have reviewed the demand and are prepared to offer $62,000 to resolve this claim."</strong></p></div>
-    <div class="question-block" id="q21-block">
-      <div class="q-num">Boss Task 1 of 5 &middot; 10 bonus pts</div>
-      <div class="q-text">The adjuster offers $62,000 on a case with $168,000 in documented specials and a $425,000 demand. How do you classify and respond to this offer?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q21','a',false)" id="q21-a"><span class="opt-letter">A</span><span class="opt-text">Counter at $350,000 per the 50% rule &mdash; the gap is $363K, 50% is $181.5K, so your minimum counter is $425K minus $181.5K = $243,500. Round up to $350K to maintain an aggressive anchor.</span></button>
-        <button class="option-btn" onclick="answer('q21','b',false)" id="q21-b"><span class="opt-letter">B</span><span class="opt-text">Accept the offer as a negotiation starting point and counter at $295,000. The adjuster is signaling willingness to engage, and a reasonable counter demonstrates good faith.</span></button>
-        <button class="option-btn" onclick="answer('q21','c',true)" id="q21-c"><span class="opt-letter">C</span><span class="opt-text">Apply the specials test first: $62,000 does not clear $168,000 in documented out-of-pocket losses. This is a litigation signal. But before moving to file, verify: "How did you arrive at $62,000? I want to understand your evaluation." This calibrated question forces them to justify their position or reveal an information gap. If they have the complete file and still offer below specials, this case is heading to litigation &mdash; communicate that plainly.</span></button>
-        <button class="option-btn" onclick="answer('q21','d',false)" id="q21-d"><span class="opt-letter">D</span><span class="opt-text">Reject the offer outright and file suit immediately. An offer at 37% of specials on a clear-liability surgical case is per se bad faith and no further negotiation is warranted.</span></button>
-      </div>
-      <div class="feedback-box" id="q21-fb"></div>
-    </div>
 
     <!-- ROUND 2 -->
     <div class="info-block"><h4>&#x1F4DE; Round 2 &mdash; The Conditional Offer</h4><p>After your counter and the calibrated question, the adjuster moves to $95,000 but adds a condition: <strong>"This offer is contingent on your client releasing all claims, including the separate UM/UIM claim under her own policy."</strong></p></div>
-    <div class="question-block" id="q22-block">
-      <div class="q-num">Boss Task 2 of 5 &middot; 10 bonus pts</div>
-      <div class="q-text">The adjuster offers $95,000 but conditions it on your client releasing her separate UM/UIM claim. How do you handle this conditional offer?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q22','a',false)" id="q22-a"><span class="opt-letter">A</span><span class="opt-text">Accept the condition &mdash; the UM claim is against a different carrier, but releasing it simplifies the case and shows good faith toward settlement. The $95K is meaningful progress from $62K.</span></button>
-        <button class="option-btn" onclick="answer('q22','b',true)" id="q22-b"><span class="opt-letter">B</span><span class="opt-text">Reject the condition. The UM/UIM claim is under a separate policy with separate coverage &mdash; it is the client\u2019s independent right of recovery. Conditioning the liability settlement on releasing the UM claim is an attempt to extinguish a separate coverage source that belongs to the client. Respond: "The UM claim is under a separate policy with separate coverage. We will resolve the liability claim on its merits. The UM claim is not part of this negotiation." The $95K still fails the specials test.</span></button>
-        <button class="option-btn" onclick="answer('q22','c',false)" id="q22-c"><span class="opt-letter">C</span><span class="opt-text">Accept the condition if the UM policy limits are less than $25,000. Releasing a small UM claim in exchange for progressing the larger liability settlement is a reasonable trade-off that serves the client\u2019s overall financial interest.</span></button>
-        <button class="option-btn" onclick="answer('q22','d',false)" id="q22-d"><span class="opt-letter">D</span><span class="opt-text">Counter-condition: you will release the UM claim if the liability settlement reaches $200,000 or more. This gives the adjuster a clear target and creates mutual incentive to close the gap.</span></button>
-      </div>
-      <div class="feedback-box" id="q22-fb"></div>
-    </div>
 
     <!-- ROUND 3 -->
     <div class="info-block"><h4>&#x1F4F5; Round 3 &mdash; The Silence</h4><p>After you rejected the UM condition and countered, the adjuster went silent. <strong>22 days have passed.</strong> No returned calls. No email responses. Your CM has documented two phone attempts and one email follow-up.</p></div>
-    <div class="question-block" id="q23-block">
-      <div class="q-num">Boss Task 3 of 5 &middot; 10 bonus pts</div>
-      <div class="q-text">The adjuster has gone silent for 22 days after you rejected her conditional offer. What is your strategic response?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q23','a',true)" id="q23-a"><span class="opt-letter">A</span><span class="opt-text">The 14-day escalation threshold has passed. Send a written attorney letter with a defined deadline: "I am following up on the demand we sent regarding the Vasquez claim. I need a substantive response within 7 days. If I do not hear back, I will escalate to filing suit." Document the full contact timeline in CasePeer for potential bad faith. Assess whether the silence is strategic (pressuring you to accept $95K) or operational (adjuster reassignment). Check whether § 33-3-28 limits request was sent. The written demand creates a documented record regardless of the adjuster\u2019s reason for silence.</span></button>
-        <button class="option-btn" onclick="answer('q23','b',false)" id="q23-b"><span class="opt-letter">B</span><span class="opt-text">Wait another 14 days before escalating &mdash; the 22-day silence may indicate the adjuster is seeking supervisor authority for a higher offer. Premature escalation could interrupt an internal approval process working in your favor.</span></button>
-        <button class="option-btn" onclick="answer('q23','c',false)" id="q23-c"><span class="opt-letter">C</span><span class="opt-text">File suit immediately. The adjuster\u2019s silence after a rejected conditional offer demonstrates bad faith, and further negotiation is unlikely to produce a reasonable result.</span></button>
-        <button class="option-btn" onclick="answer('q23','d',false)" id="q23-d"><span class="opt-letter">D</span><span class="opt-text">Have Zainab make one more call and send another email. The standard before attorney escalation is three complete contact cycles (call + email each), and only two have been completed.</span></button>
-      </div>
-      <div class="feedback-box" id="q23-fb"></div>
-    </div>
 
     <!-- ROUND 4 -->
     <div class="info-block"><h4>&#x1F4DE; Round 4 &mdash; The "Final" Offer</h4><p>Your letter worked. The adjuster called back within 5 days: <strong>"I have reviewed this file thoroughly and I am authorized to offer $140,000. This is my final authority on this claim."</strong> She adds: <strong>"I am under pressure to close my open files by end of quarter."</strong></p></div>
-    <div class="question-block" id="q24-block">
-      <div class="q-num">Boss Task 4 of 5 &middot; 10 bonus pts</div>
-      <div class="q-text">The adjuster offers $140,000 as her "final authority" and mentions she is under file-closure pressure. How do you read and respond to this information using the three-layer analysis?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q24','a',false)" id="q24-a"><span class="opt-letter">A</span><span class="opt-text">Accept the $140,000 &mdash; it represents meaningful progress from $62K, the adjuster has stated it is her final authority, and the file-closure pressure means pushing further risks losing the offer entirely.</span></button>
-        <button class="option-btn" onclick="answer('q24','b',false)" id="q24-b"><span class="opt-letter">B</span><span class="opt-text">Reject immediately and file suit. At $140,000 on a $425,000 demand with $168,000 in specials, the adjuster is still below specials. The specials test governs: file and litigate.</span></button>
-        <button class="option-btn" onclick="answer('q24','c',false)" id="q24-c"><span class="opt-letter">C</span><span class="opt-text">Counter at $310,000 (your pseudo-floor) and wait. The adjuster\u2019s file-closure pressure is irrelevant to your negotiation strategy &mdash; extrinsic factors on their side are their problem, not yours.</span></button>
-        <button class="option-btn" onclick="answer('q24','d',true)" id="q24-d"><span class="opt-letter">D</span><span class="opt-text">Read the three layers. Economic: $140K still does not clear $168K in specials &mdash; the specials test is not satisfied. Emotional: label the pressure &mdash; "It sounds like you are under pressure to close this file." This opens dialogue without conceding. Extrinsic: she revealed a constraint &mdash; file-closure pressure means she is NOT at her ceiling, she is at her current authority limit. Ask: "Is there anything on your end that would prevent getting to [a higher number]?" This probes whether supervisor approval could unlock more. Her "final authority" may not be the carrier\u2019s final authority.</span></button>
-      </div>
-      <div class="feedback-box" id="q24-fb"></div>
-    </div>
 
     <!-- ROUND 5 -->
     <div class="info-block"><h4>&#x1F4F1; Round 5 &mdash; The Client Call</h4><p>Renata calls you: <strong>"I am tired of waiting. I want to accept the $140,000. I need the money for my daughter\u2019s college tuition. Please just take it."</strong></p></div>
-    <div class="question-block" id="q25-block">
-      <div class="q-num">Boss Task 5 of 5 &middot; 10 bonus pts</div>
-      <div class="q-text">Your client Renata wants to accept $140,000. The case is worth substantially more based on your pre-negotiation worksheet (true floor: $280,000). How do you counsel her?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q25','a',false)" id="q25-a"><span class="opt-letter">A</span><span class="opt-text">Accept the $140,000 immediately. The client has ultimate settlement authority, and her stated wish to accept overrides the attorney\u2019s assessment of case value. File the acceptance today.</span></button>
-        <button class="option-btn" onclick="answer('q25','b',false)" id="q25-b"><span class="opt-letter">B</span><span class="opt-text">Refuse to accept the $140,000. Tell Renata: "This case is worth at least $280,000 and I will not let you leave money on the table." The attorney\u2019s duty is to protect the client from bad decisions, even if the client disagrees.</span></button>
-        <button class="option-btn" onclick="answer('q25','c',true)" id="q25-c"><span class="opt-letter">C</span><span class="opt-text">Acknowledge her frustration first: "I understand \u2014 this has been a long process and you need the money." Then present all options with real numbers: (1) Accept $140K \u2014 net after fees (33.3% = $46,620), expenses (~$3,200), and estimated provider payments (~$85,000) = approximately $5,180. (2) Counter at $310K \u2014 potential for significantly higher recovery. (3) Litigate \u2014 higher potential but 40% fee, longer timeline. Walk through each path so her decision is informed, not reactive. The decision is hers \u2014 but your obligation is to ensure it is made with full information. Document with three confirmations if she chooses to accept.</span></button>
-        <button class="option-btn" onclick="answer('q25','d',false)" id="q25-d"><span class="opt-letter">D</span><span class="opt-text">Tell Renata you need 48 hours before communicating any decision to the adjuster. Use that time to file suit as a protective measure, which shifts leverage and may produce a higher offer before Renata can formally accept the $140,000.</span></button>
-      </div>
-      <div class="feedback-box" id="q25-fb"></div>
-    </div>
 
     <div class="section-score" id="s6-score" style="display:none;"><div class="score-display" id="s6-score-val"></div><div class="score-label">Boss Challenge Bonus</div></div>
-    <div class="btn-group" id="s6-next"><button class="btn btn-primary btn-block" onclick="goToSection(7)">View Results \u2192</button></div>
+    <div class="btn-group" id="s6-next"><div style="margin-bottom:1rem;">
+      <label for="trainee-name-input" style="display:block;font-size:0.85rem;font-weight:600;color:#141c2c;margin-bottom:0.4rem;">Your Name — required to start</label>
+      <input type="text" id="trainee-name-input" placeholder="Enter your full name" autocomplete="name" style="width:100%;padding:0.5rem 0.75rem;border:1.5px solid #cbd5e1;border-radius:6px;font-size:0.9rem;box-sizing:border-box;">
+    </div>
+    <button class="btn btn-primary btn-block" onclick="startQuiz()">Take the Quiz \u2192</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 7 — QUIZ (api-quiz-engine.js)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-7">
+  <div class="section-header">
+    <div class="section-num">Knowledge Check</div>
+    <h2>Module Assessment</h2>
+    <div class="section-subhead">Answer each question. One attempt — wrong answer reveals the correct answer and unlocks Next.</div>
+  </div>
+  <div class="section-body">
+    <div style="font-family:system-ui,sans-serif;font-size:13px;color:#33415c;padding:8px 0 12px;border-bottom:1px solid #e8eaf0;margin-bottom:16px;">
+      Base: <b id="base">0</b> / <b id="basemax">—</b>
+      &nbsp;·&nbsp; Bonus: <b id="bonus">0</b>
+      &nbsp;·&nbsp; Pass gate: <b id="gate">80</b>%
+      &nbsp;·&nbsp; <span id="q-progress" style="color:#dcb161;font-weight:700;"></span>
+    </div>
+    <div id="questions"></div>
+    <div id="result" style="background:#fff;border:2px solid #0b2545;border-radius:10px;padding:18px;margin:18px 0;display:none;"></div>
   </div>
 </div>
 
 <!-- \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
      SECTION 7 \u2014 RESULTS
 \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550 -->
-<div class="section-card" id="section-7">
+<div class="section-card" id="section-8">
   <div id="results-content">
     <div class="section-body text-center">
       <p style="color:#888;margin-top:40px;">Complete all sections to see your results.</p>
@@ -890,7 +801,7 @@ ga-bar-rules-resources-memo.md, georgia-hb1344-memo.md -->
 <!-- \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
      SECTION 8 \u2014 FEEDBACK & CERTIFICATE
 \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550 -->
-<div class="section-card" id="section-8">
+<div class="section-card" id="section-9">
   <div class="section-header">
     <div class="section-num">Feedback &amp; Certificate</div>
     <h2>Module Feedback</h2>
@@ -898,7 +809,7 @@ ga-bar-rules-resources-memo.md, georgia-hb1344-memo.md -->
   <div class="section-body">
     <div class="name-input-wrap">
       <label for="employee-name">Your Full Name (for certificate):</label>
-      <input type="text" id="employee-name" class="name-input" placeholder="Enter your full name" value="Adriauna Gunn">
+      <input type="text" id="employee-name" class="name-input" placeholder="Enter your full name" value="">
     </div>
     <div class="fb-question">
       <label for="fb-clarity">How clear were the negotiation authority concepts?</label>
@@ -924,7 +835,7 @@ ga-bar-rules-resources-memo.md, georgia-hb1344-memo.md -->
         <div class="cert-title">Certificate of Completion</div>
         <div class="cert-subtitle">Pre-Lit Attorney Training Program</div>
         <div class="cert-presents">This certifies that</div>
-        <div class="cert-name" id="certNameDisplay">Adriauna Gunn</div>
+        <div class="cert-name" id="certNameDisplay">[Your Name]</div>
         <div class="cert-for">has successfully completed</div>
         <div class="cert-module">PA-3 \u2014 Negotiation Authority &amp; Strategy</div>
         <div class="cert-seal">\u2696\uFE0F</div>
@@ -947,71 +858,45 @@ ga-bar-rules-resources-memo.md, georgia-hb1344-memo.md -->
 <script>
 var baseScore=0,bonusPoints=0,qDone={},firstAttemptStillAvailable={},sectionScores={},streakCount=0,maxStreak=0,questionsFirstTry=0,incorrectCount=0,totalQuestionsAnswered=0,milestonesTriggered={},moduleStartTime=Date.now(),audioCtx=null,soundEnabled=false,_audioKeepalive=null;
 var TRACKER_URL='https://script.google.com/macros/s/AKfycbzHJZ0C3BqnLatfq7RIiUP5KQdgYoXTJlozd8ZGZiwIf2bdVmvnPMo3JLm0dA5gQhJyxA/exec';
-var TOTAL_SECTIONS=9,PASS_THRESHOLD=162/*85% of 190 — Harrell ruling Aug 17 2026 (Option C)*/,BASE_MAX=190;
+var TOTAL_SECTIONS=10,PASS_THRESHOLD=152/*80% of 190 — Harrell ruling Aug 22 2026 msg 47296, REVERSES Aug 17 Option C (85%)*/,BASE_MAX=190;
 
 var Q_CONFIG={
-  'q1':{section:1,pts:10,isBonus:false,correct:'a'},
-  'q2':{section:1,pts:10,isBonus:false,correct:'d'},
-  'q3':{section:1,pts:10,isBonus:false,correct:'b'},
-  'q4':{section:1,pts:10,isBonus:false,correct:'c'},
-  'q5':{section:2,pts:10,isBonus:false,correct:'b'},
-  'q6':{section:2,pts:0,isBonus:false,correct:'a'},
-  'q7':{section:2,pts:10,isBonus:false,correct:'a'},
-  'q8':{section:2,pts:10,isBonus:false,correct:'d'},
-  'q9':{section:3,pts:10,isBonus:false,correct:'c'},
-  'q10':{section:3,pts:10,isBonus:false,correct:'a'},
-  'q11':{section:3,pts:10,isBonus:false,correct:'d'},
-  'q12':{section:3,pts:10,isBonus:false,correct:'b'},
-  'q13':{section:4,pts:10,isBonus:false,correct:'c'},
-  'q14':{section:4,pts:10,isBonus:false,correct:'b'},
-  'q15':{section:4,pts:10,isBonus:false,correct:'a'},
-  'q16':{section:4,pts:10,isBonus:false,correct:'d'},
-  'q17':{section:5,pts:10,isBonus:false,correct:'a'},
-  'q18':{section:5,pts:10,isBonus:false,correct:'c'},
-  'q19':{section:5,pts:10,isBonus:false,correct:'b'},
-  'q20':{section:5,pts:10,isBonus:false,correct:'d'},
-  'q21':{section:6,pts:0,isBonus:true,bonusPts:10,correct:'c'},
-  'q22':{section:6,pts:0,isBonus:true,bonusPts:10,correct:'b'},
-  'q23':{section:6,pts:0,isBonus:true,bonusPts:10,correct:'a'},
-  'q24':{section:6,pts:0,isBonus:true,bonusPts:10,correct:'d'},
-  'q25':{section:6,pts:0,isBonus:true,bonusPts:10,correct:'c'}
+  'q1':{section:1,pts:10,isBonus:false},
+  'q2':{section:1,pts:10,isBonus:false},
+  'q3':{section:1,pts:10,isBonus:false},
+  'q4':{section:1,pts:10,isBonus:false},
+  'q5':{section:2,pts:10,isBonus:false},
+  'q6':{section:2,pts:0,isBonus:false},
+  'q7':{section:2,pts:10,isBonus:false},
+  'q8':{section:2,pts:10,isBonus:false},
+  'q9':{section:3,pts:10,isBonus:false},
+  'q10':{section:3,pts:10,isBonus:false},
+  'q11':{section:3,pts:10,isBonus:false},
+  'q12':{section:3,pts:10,isBonus:false},
+  'q13':{section:4,pts:10,isBonus:false},
+  'q14':{section:4,pts:10,isBonus:false},
+  'q15':{section:4,pts:10,isBonus:false},
+  'q16':{section:4,pts:10,isBonus:false},
+  'q17':{section:5,pts:10,isBonus:false},
+  'q18':{section:5,pts:10,isBonus:false},
+  'q19':{section:5,pts:10,isBonus:false},
+  'q20':{section:5,pts:10,isBonus:false},
+  'q21':{section:6,pts:0,isBonus:true,bonusPts:10},
+  'q22':{section:6,pts:0,isBonus:true,bonusPts:10},
+  'q23':{section:6,pts:0,isBonus:true,bonusPts:10},
+  'q24':{section:6,pts:0,isBonus:true,bonusPts:10},
+  'q25':{section:6,pts:0,isBonus:true,bonusPts:10}
 };
 
 var SECTION_QUESTIONS={1:['q1','q2','q3','q4'],2:['q5','q6','q7','q8'],3:['q9','q10','q11','q12'],4:['q13','q14','q15','q16'],5:['q17','q18','q19','q20'],6:['q21','q22','q23','q24','q25']};
 
-var FEEDBACK={
-  'q1':{t:'\u2705 Correct. Per GLG SOP, no first offer call happens until the attorney completes the pre-negotiation worksheet. The worksheet contains facts-for/against, true floor, pseudo-floor, concession increments, and walk-away trigger. A CM negotiating without the worksheet is improvising with the client\'s money. Option B sounds reasonable but still puts the CM on a live call without authority parameters \u2014 any information gathered could anchor the negotiation before the attorney designs the strategy. Options C and D skip the structured process entirely.',f:'\u274C The call must not happen. Per GLG SOP Section 12: "No first offer call until the attorney has set facts-for/against, true floor, pseudo-floor, increments, and walk-away trigger on the pre-negotiation worksheet." A CM negotiating without the worksheet is improvising with the client\'s money. Even gathering information (B) puts the CM in a live negotiation without authority parameters.'},
-  'q2':{t:'\u2705 The pseudo-floor is strategic misdirection. You state $72,000 as your minimum to the adjuster, but your true walk-away is $65,000. If the adjuster reaches $72K, you have $7K of room above your actual floor. The true floor is never revealed \u2014 it exists only on the worksheet. This is not CM authority (A), not a litigation cost buffer (B), and not a backup revealed if discovered (C).',f:'\u274C The pseudo-floor is the stated low communicated to the adjuster \u2014 but it is NOT the true walk-away number. The true floor ($65K) stays on the worksheet; the pseudo-floor ($72K) is what the adjuster hears. The gap gives you $7K of room above your actual walk-away. This is a strategic misdirection tool, not a CM authority limit or cost buffer.'},
-  'q3':{t:'\u2705 The true floor requires multiple inputs: litigation costs if rejected, case value (specials \u00D7 injury-appropriate multiplier capped by coverage), client\'s financial needs and timeline, BATNA (litigation value minus costs), and estimated lien reductions affecting net-to-client. A single-factor approach (specials \u00D7 1.5, 80% of coverage, or client\'s stated minimum) omits critical variables that determine whether the floor is realistic.',f:'\u274C Setting the true floor requires multiple inputs, not a single factor. Option A (specials \u00D7 1.5) ignores coverage limits, litigation costs, and client needs. Option C (80% of coverage) ignores case value analysis. Option D (client\'s stated minimum) may produce a floor with no analytical basis. The floor is a calculated number derived from ALL relevant factors.'},
-  'q4':{t:'\u2705 Per GLG SOP Section 10, the attorney handles the call directly when: offer is less than 50% of demand, liability denied entirely, 3+ rounds with no movement, bad faith indicators present, SOL within 6 months, policy limits dispute, or any situation requiring legal judgment beyond worksheet execution. These are the escalation triggers. The CM executes the worksheet; the attorney handles what requires legal analysis.',f:'\u274C The correct answer identifies all seven escalation triggers from GLG SOP Section 10. Option A (adjuster request only) is too narrow. Option B ($50K threshold) does not exist in the SOP. Option D (attorney on initial call) is wasteful and does not match the delegation model where CMs execute within parameters and attorneys handle escalation triggers.'},
-  'q5':{t:'\u2705 The specials test is the first-pass filter: does the offer clear documented out-of-pocket losses? $18K does not clear $32K \u2014 this is a litigation signal. But the SOP adds a critical verification step: confirm the adjuster has the complete file. Sometimes a lowball reflects an information gap (incomplete records, missing demand pages), not a posture. Ask: "How did you arrive at that number?" This calibrated question forces them to justify or reveal the gap.',f:'\u274C The specials test classifies this offer as a litigation signal \u2014 $18K does not cover $32K in documented out-of-pocket losses. But option C (file immediately) skips the verification step: confirm the adjuster has the complete file first. Option A treats this as a normal opening. Option D treats the specials test as optional. It is not \u2014 it is the first-pass filter for every offer.'},
-  'q6':{t:'\u1F4CB Pre-Negotiation Worksheet Design \u2014 Key Components:<br><br>1. <strong>Facts For/Against</strong> \u2014 every favorable and unfavorable fact documented before the call<br>2. <strong>True Floor</strong> \u2014 calculated from litigation costs, case value, client needs, BATNA, and lien reductions<br>3. <strong>Pseudo-Floor</strong> \u2014 stated minimum (higher than true floor) to motivate the counterparty<br>4. <strong>Concession Increments</strong> \u2014 pre-planned, decreasing movements<br>5. <strong>Walk-Away Trigger</strong> \u2014 the specific condition that ends negotiation<br>6. <strong>CM Authority Scope</strong> \u2014 what the CM can decide without the attorney<br><br>The worksheet transforms negotiation from improvisation to execution. Every component must be completed before the first call.',f:'\u1F4CB Same worksheet breakdown for all confidence levels. The worksheet has seven components, and every one must be completed before the CM picks up the phone. The pre-set discipline principle: the negotiation is decided before the phone rings.'},
-  'q7':{t:'\u2705 Gap = $120K - $40K = $80K. The 50% rule: never come down more than 50% of the gap. 50% of $80K = $40K. Minimum counter = $120K - $40K = $80,000. Option B ($60K) comes down $60K = 75% of the gap \u2014 too much. Option C ($95K) is valid but the question asks for the MINIMUM, which is $80K. Option D ($70K) comes down $50K = 62.5% \u2014 still violates the rule.',f:'\u274C Apply the 50% rule: Gap = $120K - $40K = $80K. 50% of $80K = $40K. Your minimum counter = $120K - $40K = $80,000. Any counter below $80K means you conceded more than 50% of the gap \u2014 giving ground faster than the adjuster. Option B ($60K) concedes 75%. Option D ($70K) concedes 62.5%. Both violate the rule.'},
-  'q8':{t:'\u2705 Strategic assessment before deciding. Holding firm works ONLY when (1) the gap is material AND (2) the client can afford to wait. The specials test governs: if the adjuster\'s $52K clears specials, test whether a small concession produces movement. If it does not clear specials, file suit. No zombie negotiations. Option A (always hold) ignores client circumstances. Option B (concede immediately) lacks analysis. Option C (accept $52K) may leave significant money on the table.',f:'\u274C The correct approach requires strategic assessment, not a default position. Holding firm (A) without checking whether the client can wait may burn months. Immediate concession (B) without analysis gives ground unnecessarily. Accepting $52K (C) without checking whether it clears specials may leave money on the table. The specials test and client circumstances together drive the decision.'},
-  'q9':{t:'\u2705 After 45 days with no substantive response, this is past two follow-up cycles. The attorney\'s escalation protocol: send a written demand with a 7-day deadline, document the full contact timeline for potential bad faith, and verify the § 33-3-28 limits disclosure was sent. The written demand creates the documented record. Option A (wait more) enables further delay. Option B (one more call) is insufficient at 45 days. Option D (file immediately) skips the written deadline step that strengthens the bad faith record.',f:'\u274C At 45 days with no response, the attorney must escalate \u2014 not wait more (A) or make another call (B). The escalation protocol: written demand with a defined 7-day deadline, documented contact timeline, § 33-4-6 assessment. Filing immediately (D) skips the written deadline step that documents the pattern for a potential bad faith claim.'},
-  'q10':{t:'\u2705 O.C.G.A. \u00A7 33-3-28 (SB 426, 2021) gives claimants and their attorneys the right to request policy limits disclosure in writing. The insurer must respond within 60 days with the insurer name, insured name, and coverage limits. This is a statutory right, not optional. Options B (Commissioner complaint), C (no mechanism exists), and D (litigation required) are all wrong.',f:'\u274C O.C.G.A. \u00A7 33-3-28 provides a direct statutory right to demand limits disclosure. The insurer must respond within 60 days. Option B (Commissioner complaint) is unnecessary. Option C is wrong \u2014 the statute exists since 2021. Option D is wrong \u2014 limits disclosure does not require filing suit.'},
-  'q11':{t:'\u2705 A documented pattern across multiple files \u2014 systematic undervaluation, refusal to explain methodology, and consistent delay \u2014 may constitute a corporate bad faith claims handling practice. Document each instance for strategic assessment. Option A normalizes the pattern. Option B ignores cross-case evidence. Option C (Commissioner complaint) may be premature without full documentation. The managing attorney needs the documented pattern to decide the strategic response.',f:'\u274C Cross-case pattern analysis IS relevant to bad faith assessment. Option A normalizes a pattern that may be actionable. Option B treats each case in isolation, missing the bigger picture. Option C jumps to a Commissioner complaint before building the documentation. Document the pattern \u2014 dates, offer percentages, response times, refusals \u2014 and present to the managing attorney.'},
-  'q12':{t:'\u2705 A \u00A7 33-4-6 bad faith demand must be specific: identify the claim, state the amount with supporting documentation (specials breakdown, liability basis), and provide enough detail for the insurer to evaluate and pay. Vague demands do not trigger the 60-day clock. Option A (vague dissatisfaction) fails. Option C is wrong \u2014 the demand IS required. Option D adds no statutory weight beyond the 60-day clock.',f:'\u274C A \u00A7 33-4-6 demand must identify the claim, state the amount with documentation, and provide a clear basis. Option A does not trigger the statutory clock. Option C is wrong \u2014 the demand is required. Option D creates urgency but the 30-day deadline has no statutory basis.'},
-  'q13':{t:'\u2705 Decreasing-increment bargaining: each concession smaller than the last signals you are approaching your limit. The odd, specific final number ($84,750 vs. $85,000) signals disciplined calculation. At the final step, offer a non-monetary concession instead of more money \u2014 "I have nothing left to give on price." Option A (equal increments) gives no signal about approaching a limit. Option B (one big move) destroys leverage early. Option D (random) creates unpredictability but communicates nothing.',f:'\u274C The decreasing-increment strategy is deliberate signal design. Equal increments (A) tell the adjuster you have unlimited room. A big early concession (B) signals desperation. Random concessions (D) communicate nothing. Decreasing increments ($20K, $10K, $5K, $2,500) signal convergence on your floor. The specific, odd final number shows rigorous calculation.'},
-  'q14':{t:'\u2705 Correct. At the time of this call, lien and bill reductions are NOT final \u2014 the $30,000 provider figure is an expectation, not a settled amount. So you quote a conservative floor you can stand behind ($26,000) and you tell the client it IS a floor, not a prediction. The $3,264 gap is the margin for reduction uncertainty. Option A is not dishonest \u2014 it is the arithmetic on an estimate \u2014 but it states an exact net you cannot yet guarantee. Option C ($37K assuming full lien elimination) over-promises: if reductions do not materialize the client receives less than quoted. Option D (no number) leaves the client without enough information for an informed decision; the client is entitled to a number, just not to a false one. Accuracy about what is KNOWN is the standard.',f:'\u274C Reductions are not final at the time of quoting, so the number you give must be one you can stand behind. Quote a conservative floor ("at least $26,000") and say plainly that it is a floor, not a prediction. Option A ($29,264) is honest arithmetic on an ESTIMATE, but it asserts an exact net that depends on unconfirmed reductions. Option C ($37K) over-promises by assuming full lien elimination. Option D (no number at all) denies the client information needed for informed consent.'},
-  'q15':{t:'\u2705 Settlement counseling requires structure, not compliance or dismissal. First: establish safety ("We are on the same team"). Then: present structured options with real numbers \u2014 accept (net), counter (strategy), litigate (timeline, fee change, expected outcome). GA Bar Rule 1.4 requires communicating ALL offers \u2014 you cannot reject on her behalf without her informed decision. Option B (just reject) skips counseling. Option C (tell her to accept) substitutes your judgment for hers. Option D (delay) leaves the client without the information she needs.',f:'\u274C Option B (respect her decision and reject) skips the counseling obligation \u2014 the client is making a reactive decision without information. Option C (tell her it\'s reasonable) substitutes attorney judgment for client autonomy. Option D (delay for calm) withholds information the client needs now. The correct approach presents all options with real numbers so the decision is informed.'},
-  'q16':{t:'\u2705 "Yeah, whatever you think" is not a confirmed decision. The three-confirmation protocol requires three separate affirmatives: gross amount, net take-home, and willingness to proceed. Then written acceptance \u2014 text, email, or signed memo in CasePeer. A vague verbal agreement is how disputed settlements happen. Options A, B, and C all treat an ambiguous statement as sufficient consent \u2014 it is not.',f:'\u274C A vague "yeah, whatever you think" is not a documented commitment. It is a polite response, not an informed decision. The three-confirmation protocol requires three separate clear affirmatives on specific numbers, followed by written documentation. Without this, the settlement is vulnerable to client disputes after disbursement.'},
-  'q17':{t:'\u2705 GA Bar Rule 1.4 is absolute: ALL settlement offers must be communicated to the client promptly, even offers the attorney considers inadequate. This is the number one source of bar complaints in PI practice. The attorney communicates the offer WITH context and recommendation \u2014 not in place of the offer. Communicate within 24 hours and document in CasePeer. Options B, C, and D all create scenarios where the client does not hear about an offer \u2014 each is a Rule 1.4 violation.',f:'\u274C Rule 1.4 requires communicating ALL offers \u2014 the word "all" has no exceptions for offers the attorney considers insulting. Option B filters offers based on attorney judgment. Option C conditions communication on client preference. Option D delays communication based on negotiation progress. Each creates a Rule 1.4 violation and potential bar complaint.'},
-  'q18':{t:'\u2705 CMs are NOT authorized to accept settlement offers without attorney consultation. The decision to accept or reject a settlement is a legal decision constituting the practice of law. A CM who exercises independent judgment on settlement acceptance is practicing law without a license (UPL). Zainab documents the offer, presents it to the attorney, and the attorney makes the recommendation to the client. Time pressure from the adjuster does not change this requirement. Option A misreads worksheet authority. Option B creates a pseudo-acceptance. Option D bypasses the attorney entirely.',f:'\u274C Settlement acceptance is a legal decision that constitutes the practice of law. A CM cannot accept \u2014 even within worksheet parameters (A), even with a qualifying phrase (B), even with direct client verbal permission (D). The attorney must be consulted. Zainab documents and presents; the attorney decides and counsels the client.'},
-  'q19':{t:'\u2705 Stating your negotiation position is legitimate puffing \u2014 advocating a position, not making a false statement of material fact. The distinction is between POSITION ("my client won\'t accept less than $120K") and FACT (fabricated records, non-existent experts, false coverage). Position advocacy is an accepted part of adversarial negotiation. Option A confuses position with fact. Options C and D misstate the ethical standard.',f:'\u274C This IS legitimate negotiation posture (puffing), not misrepresentation. Option A confuses advocating a position with making a false factual statement. Option C invents a client-authorization requirement that does not exist. Option D misapplies Rule 4.1 \u2014 the rule prohibits false statements of MATERIAL FACT, not negotiation positions about settlement authority.'},
-  'q20':{t:'\u2705 The fee change from 33.3% to 40% is a material consideration in every accept/reject/litigate decision. On $100K, the difference is $6,700 \u2014 plus litigation expenses. Rule 1.5 requires fees to be reasonable AND transparently explained. The client must understand that rejecting the offer and litigating changes the economics materially. Option A avoids the discussion. Option B is factually wrong. Option C withholds the dollar impact that makes the information meaningful.',f:'\u274C The fee discussion is material to the settlement decision. Option A avoids it \u2014 the client cannot make an informed decision without understanding fee implications. Option B is factually wrong \u2014 the fee does change. Option C discloses percentages without dollar impact, which fails to convey the actual effect on net-to-client. Full transparency with real numbers is required.'},
-  'q21':{t:'\u2705 Apply the specials test first: $62K does not clear $168K in documented specials. But before filing, verify with a calibrated question: "How did you arrive at $62,000?" This forces them to justify or reveal an information gap. If the file is complete and they still offer below specials, this case is heading to litigation. Option A jumps to the 50% rule without checking the specials test first. Option B accepts a sub-specials offer as a starting point. Option D files without verification.',f:'\u274C The specials test is the FIRST filter before any counter-offer strategy. $62K does not clear $168K in specials \u2014 this is a litigation signal. But verify first with a calibrated question. Option A applies the 50% rule without running the specials test. Option B treats a sub-specials offer as normal. Option D files without the verification step that strengthens the record.'},
-  'q22':{t:'\u2705 The UM/UIM claim is under a separate policy with separate coverage. Conditioning the liability settlement on releasing the UM claim attempts to extinguish the client\'s independent right of recovery. Reject the condition and negotiate the liability claim on its merits. The $95K still fails the specials test ($168K). Option A gives away the client\'s separate coverage. Option C trades away the UM claim for dollar thresholds. Option D counter-conditions rather than rejecting the improper linkage.',f:'\u274C The UM claim is a separate right under a separate policy. Conditioning the liability settlement on releasing it is improper \u2014 the adjuster is trying to extinguish the client\'s independent recovery source. Option A surrenders the claim. Option C trades it for a threshold. Option D counter-conditions instead of rejecting the linkage entirely. Reject the condition; negotiate liability on its merits.'},
-  'q23':{t:'\u2705 The 14-day escalation threshold has passed. The attorney sends a written letter with a 7-day deadline, documents the full contact timeline for potential bad faith, assesses § 33-4-6 bad faith exposure, and creates the documented record regardless of the adjuster\'s reason for silence. Option B (wait more) enables further delay. Option C (file immediately) skips the written deadline that strengthens the bad faith record. Option D invents a "three cycle" requirement that does not exist in the SOP.',f:'\u274C At 22 days past the last substantive contact, the attorney must escalate with a written deadline. Option B optimistically assumes the silence is productive. Option C files without the written demand that strengthens the bad faith record. Option D invents a minimum contact cycle requirement. The SOP triggers attorney escalation at 14 days with no response.'},
-  'q24':{t:'\u2705 Three-layer analysis. Economic: $140K does not clear $168K specials \u2014 specials test not satisfied. Emotional: label the pressure ("It sounds like you are under pressure to close this file") \u2014 opens dialogue without conceding. Extrinsic: file-closure pressure means she is at her authority limit, NOT the carrier\'s ceiling. Ask whether supervisor approval could unlock more. Her "final authority" is her limit \u2014 not necessarily the carrier\'s limit. Option A accepts below specials. Option B files without exploring the extrinsic layer. Option C ignores the intelligence she provided.',f:'\u274C The three-layer analysis extracts strategic intelligence from the adjuster\'s disclosure. Option A accepts below specials. Option B files without exploring whether higher authority exists. Option C counters without processing the extrinsic information she revealed. The adjuster\'s file-closure pressure means she is at HER authority ceiling \u2014 not the carrier\'s ceiling. Probe for supervisor authority.'},
-  'q25':{t:'\u2705 The attorney\'s obligation is to ensure an informed decision \u2014 not to accept reflexively (A) or refuse the client\'s authority (B). Acknowledge frustration first: "I understand." Then present all paths with real numbers: Accept $140K \u2014 after fees, expenses, and providers, net is approximately $5,180 (fee: $46,620 + expenses: ~$3,200 + providers: ~$85,000). Counter at $310K for better outcome. Litigate for highest potential but longer timeline and 40% fee. The decision is hers \u2014 but it must be informed. Document with three confirmations if she accepts. Option D (file suit secretly) violates client autonomy.',f:'\u274C Option A accepts without counseling \u2014 the client may not realize the net-to-client on $140K after fees and medical payments. Option B overrides client autonomy. Option D files suit without client authorization. The correct approach: acknowledge frustration, present all options with real numbers, and let the client make an informed decision. The three-confirmation protocol applies if she chooses to accept.'}
-};
+var FEEDBACK={} /* CUTOVER: feedback text is served per-answer by the engine, never shipped to the client up front */;
 
-function answer(qId,choice,isCorrect){
+window.answerUI = function answerUI(qId,choice,isCorrect){
   if(qDone[qId])return;
   var cfg=Q_CONFIG[qId],block=document.getElementById(qId+'-block'),fb=document.getElementById(qId+'-fb');
   block.querySelectorAll('.option-btn').forEach(function(b){b.classList.add('disabled');});
-  var clickedBtn=document.getElementById(qId+'-'+choice),correctBtn=document.getElementById(qId+'-'+cfg.correct);
+  var clickedBtn=document.getElementById(qId+'-'+choice),correctBtn=document.getElementById(qId+'-'+(cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || ''));
   if(isCorrect){
     clickedBtn.classList.add('correct');block.classList.add('answered');qDone[qId]=true;
     if(!cfg.isBonus){baseScore+=cfg.pts;sectionScores[cfg.section]=(sectionScores[cfg.section]||0)+cfg.pts;
@@ -1126,5 +1011,68 @@ function renderBadges(badges,container){if(!badges.length){container.innerHTML='
 document.addEventListener('DOMContentLoaded',function(){if(localStorage.getItem('glg_sound')==='1'){soundEnabled=true;var b=document.getElementById('soundToggle');if(b)b.textContent='\uD83D\uDD0A';}function iac(){ensureAudioCtx();document.removeEventListener('click',iac);document.removeEventListener('touchstart',iac);document.removeEventListener('touchend',iac);}document.addEventListener('click',iac);document.addEventListener('touchstart',iac);document.addEventListener('touchend',iac);function rag(){if(audioCtx&&audioCtx.state==='suspended')audioCtx.resume();}document.addEventListener('touchstart',rag,true);document.addEventListener('touchend',rag,true);document.addEventListener('click',rag,true);initMascot();});
 goToSection(0);
 </script>
+
+
+
+<script>
+/* ── go() / startQuiz() — quiz entry point (Harrell ruling 2026-09-03) ── */
+async function go(screen) {
+  if (screen === 'quiz') {
+    // Bug-2 fix: await attempt start before making questions interactive
+    await window.GLGQuiz.beginAttempt(); // uses per-session random ID
+    goToSection(7);
+  }
+}
+
+function startQuiz() {
+  var _ni = document.getElementById('trainee-name-input');
+  var _name = (_ni && _ni.value.trim()) || '';
+  if (!_name) {
+    if (typeof showToast === 'function') showToast('\u26a0\ufe0f Please enter your name before starting the quiz', false);
+    else alert('Please enter your name before starting the quiz.');
+    return;
+  }
+ go('quiz'); }
+
+/* ── GLG MODULE CONFIG — wires api-quiz-engine.js to module-pa3.html ── */
+window.GLG_MODULE_CONFIG = {
+  moduleId: 'pa3',
+  onBankLoaded: function(bank) {
+    var basemax = document.getElementById('basemax');
+    var gate    = document.getElementById('gate');
+    if (basemax) basemax.textContent = bank.base_max;
+    if (gate)    gate.textContent    = bank.pass_pct;
+    for (var i = 1; i <= 6; i++) {
+      var nextEl = document.getElementById('s' + i + '-next');
+      if (nextEl) nextEl.style.display = 'flex';
+    }
+  },
+  onStartQuiz: function() {
+    if (typeof audioCtx !== 'undefined' && audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume().catch(function(){});
+    }
+  },
+  onAnswered: function(r) {
+    baseScore   = r.base_score;
+    bonusPoints = r.bonus_score;
+    streakCount = r.streak;
+    maxStreak   = Math.max(maxStreak || 0, r.maxStreak || 0);
+    var ts = document.getElementById('total-score');
+    if (ts) ts.textContent = r.base_score;
+    var bs = document.getElementById('bonus-score');
+    if (bs) bs.textContent = r.bonus_score;
+    if (typeof updateStreak  === 'function') updateStreak(r.correct);
+    if (typeof mascotReact   === 'function') mascotReact(r.correct ? 'correct' : 'incorrect');
+  },
+  onComplete: function(r) {
+    window._pa3Passed = r.passed;
+    baseScore   = r.base_score;
+    bonusPoints = r.bonus_score;
+    goToSection(8);   // results is now section-8 after port
+    if (typeof buildResults === 'function') buildResults();
+  }
+};
+</script>
+<script src="api-quiz-engine.js"></script>
 </body>
 </html>

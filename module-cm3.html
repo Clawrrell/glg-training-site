@@ -21,7 +21,12 @@ Nothing tested that isn't taught in-module. -->
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
   <title>CM-3 — Demand Package Preparation | Gunn Law Group</title>
   <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root {
+    --navy: #141c2c;
+    --gold: #dcb161;
+    --gold-lt: #f0d89a;
+  }
+      *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
     body{font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;color:#333;font-size:16px;line-height:1.6;-webkit-text-size-adjust:100%;overflow-x:hidden;}
 
@@ -116,11 +121,7 @@ Nothing tested that isn't taught in-module. -->
     .case-val .flag-warn{display:inline-block;background:#f39c12;color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;margin-left:6px;}
     .case-val .flag-ok{display:inline-block;background:#10774A;color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;margin-left:6px;}
 
-    /* ── BOSS CHALLENGE ── */
-    .boss-header{background:linear-gradient(135deg,#870101 0%,#5a0000 100%);color:#fff;border-radius:12px;padding:24px;margin-bottom:20px;text-align:center;}
-    .boss-header .boss-icon{font-size:40px;margin-bottom:10px;}
-    .boss-header h3{font-size:clamp(17px,4.5vw,22px);font-weight:800;margin-bottom:8px;}
-    .boss-header p{font-size:14px;opacity:.9;line-height:1.5;}
+    
 
     /* ── RESULTS ── */
     .results-header{padding:28px 20px;text-align:center;color:#fff;}
@@ -240,6 +241,178 @@ Nothing tested that isn't taught in-module. -->
     .option-btn.correct{animation:correctPulse 0.6s ease-out;}
     .option-btn.incorrect{animation:incorrectShake 0.4s ease-out;}
   </style>
+
+<style>
+/* ── GLG QUIZ ENGINE — question type styles (2026-09-02) ──────────────────
+     All classes rendered by api-quiz-engine.js. Tokens: navy #141c2c, gold #C5975B.
+     Sourced from engine.html stylesheet + Harrell Part 8c spec. */
+
+  /* Question card */
+  .q { background:#fff; border:1px solid #e2e5ea; border-radius:10px;
+       padding:20px; margin:16px 0; box-shadow:0 1px 6px rgba(20,28,44,.06); }
+  .q-num { font-size:12px; letter-spacing:.06em; color:#C5975B; font-weight:700;
+            text-transform:uppercase; margin-bottom:8px; }
+  .q-text { font-weight:600; margin:8px 0 16px; font-size:1rem; line-height:1.55;
+             color:#141c2c; }
+
+  /* MC option buttons */
+  button.opt { display:block; width:100%; text-align:left; padding:13px 15px; margin:7px 0;
+    border:1px solid #d8dbe3; border-radius:8px; background:#fafbfd; cursor:pointer;
+    font-size:15px; font-family:var(--font-b); color:#222; line-height:1.45;
+    transition:background .12s, border-color .12s; }
+  button.opt:hover:not(.locked) { background:#eef4ff; border-color:#141c2c; }
+  button.opt.correct { background:#d4edda; border-color:#10774A; }
+  button.opt.incorrect { background:#f8d7da; border-color:#870101; }
+  button.opt.locked { cursor:default; opacity:.85; }
+
+  /* Fill-in-the-blank */
+  .fill-stem { font-weight:600; margin:8px 0 14px; line-height:2.2; }
+  input.blank { display:inline-block; min-height:44px; min-width:120px; padding:8px 10px;
+    margin:2px 4px; border:1px solid #ccd; border-radius:8px; background:#fafbfd;
+    font-size:16px; font-family:var(--font-b); vertical-align:middle;
+    box-sizing:border-box; max-width:100%; }
+  input.blank:focus { outline:2px solid #141c2c; background:#fff; }
+  input.blank.correct { background:#d4edda; border-color:#10774A; }
+  input.blank.incorrect { background:#f8d7da; border-color:#870101; }
+  input.blank.locked { opacity:.85; }
+  button.submit-fill { min-height:44px; padding:11px 20px; margin-top:12px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-fill.locked { opacity:.5; cursor:default; }
+
+  /* Markup */
+  .markup-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .markup-passage { margin:0 0 10px; border:1px solid #e2e5ea; border-radius:8px; overflow:hidden; }
+  button.span { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:11px 13px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:16px; font-family:var(--font-b);
+    color:#222; line-height:1.5; overflow-wrap:break-word; }
+  button.span:last-child { border-bottom:0; }
+  button.span:hover:not(.locked) { background:#eef4ff; }
+  button.span.selected { background:#fff3cd; box-shadow:inset 4px 0 0 #b8860b; font-weight:600; }
+  button.span.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.span.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.span.locked { cursor:default; opacity:.9; }
+  button.submit-markup { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-markup.locked { opacity:.5; cursor:default; }
+  .markup-count { font-size:13px; color:#555; margin-top:8px; }
+
+  /* Sort rows with up/down controls */
+  .sort-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .sort-list { margin:0 0 12px; border:1px solid #e2e5ea; border-radius:8px;
+               overflow:hidden; background:#fff; }
+  .sort-row { display:flex; align-items:stretch; border-bottom:1px solid #eef0f3;
+              background:#fff; }
+  .sort-row:last-child { border-bottom:0; }
+  .sort-pos { flex:0 0 34px; display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700; color:#C5975B; background:#f5f5f0; }
+  .sort-text { flex:1 1 auto; padding:11px 12px; font-size:15px; line-height:1.45;
+    display:flex; align-items:center; overflow-wrap:break-word; min-width:0; }
+  .sort-moves { flex:0 0 auto; display:flex; align-items:center; gap:4px; padding:4px 6px; }
+  button.sort-move { min-height:44px; min-width:44px; border:1px solid #ccd; border-radius:8px;
+    background:#fafbfd; cursor:pointer; font-size:15px; color:#141c2c;
+    font-family:var(--font-b); }
+  button.sort-move:hover:not(:disabled) { background:#eef4ff; }
+  button.sort-move:disabled { opacity:.35; cursor:default; }
+  .sort-row.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  .sort-row.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  .sort-row.locked .sort-text { opacity:.9; }
+  button.submit-sort { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-sort.locked { opacity:.5; cursor:default; }
+
+  /* Match chips + slot rows */
+  .match-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .match-tray { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px; padding:10px;
+    border:1px dashed #ccd; border-radius:8px; background:#fafbfd; }
+  button.chip { min-height:44px; padding:10px 16px; border:1px solid #ccd; border-radius:22px;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b); color:#222;
+    max-width:100%; overflow-wrap:break-word; text-align:left; }
+  button.chip:hover:not(.locked) { background:#eef4ff; }
+  button.chip.selected { background:#141c2c; color:#fff; border-color:#141c2c; font-weight:600; }
+  button.chip.placed { opacity:.35; }
+  button.chip.locked { cursor:default; }
+  .match-slots { border:1px solid #e2e5ea; border-radius:8px; overflow:hidden;
+                 background:#fff; margin-bottom:12px; }
+  button.slot { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:10px 14px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b);
+    color:#222; line-height:1.45; overflow-wrap:break-word; }
+  button.slot:last-child { border-bottom:0; }
+  button.slot:hover:not(.locked) { background:#eef4ff; }
+  button.slot.armed { box-shadow:inset 4px 0 0 #C5975B; background:#fffdf5; }
+  .slot-label { font-weight:600; display:block; }
+  .slot-fill { display:block; font-size:14px; margin-top:3px; color:#C5975B; font-weight:600; }
+  .slot-fill.empty { color:#8a8f98; font-weight:400; font-style:italic; }
+  button.slot.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.slot.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.slot.locked { cursor:default; opacity:.9; }
+  button.submit-match { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-match.locked { opacity:.5; cursor:default; }
+  .match-count { font-size:13px; color:#555; margin-top:8px; }
+  .match-credit { font-size:13px; font-weight:600; color:#8a6d1f; margin-top:6px; }
+
+  /* Feedback */
+  .fb { margin-top:12px; padding:12px 14px; border-radius:8px; font-size:14px; display:none; }
+  .fb.show { display:block; }
+  .fb.ok { background:#d4edda; border-left:4px solid #10774A; }
+  .fb.no { background:#f8d7da; border-left:4px solid #870101; }
+  .fb.neutral { background:#eef0f6; border-left:4px solid #6c757d; color:#333; } /* self_assessment: no verdict */
+
+  /* Branching nodes */
+  .branch-scenario { border-left:4px solid #C5975B; padding-left:12px; margin:14px 0; }
+  .branch-turn { font-size:12px; letter-spacing:.06em; color:#8a6d1f; font-weight:700;
+                 text-transform:uppercase; }
+  .branch-instruction { font-weight:600; margin:6px 0 10px; color:#141c2c; }
+  .branch-consequence { margin-top:10px; padding:10px 12px; border-left:4px solid #141c2c;
+    background:#eef2f7; border-radius:0 8px 8px 0; font-size:13px; color:#33415c; display:none; }
+  .branch-consequence.show { display:block; }
+
+  /* Pagination — one question at a time (Harrell Part 8b) */
+  .q-base { display: none !important; }
+  .q-base.q-active { display: block !important; }
+  .q-nav { display:flex; justify-content:space-between; align-items:center;
+            margin-top:20px; padding-top:16px; border-top:1px solid #e8e6e0; }
+  .q-nav-btn { min-height:44px; padding:10px 22px; border-radius:8px;
+                font-size:15px; cursor:pointer; font-family:var(--font-b);
+                font-weight:600; transition:background .12s; }
+  .q-nav-btn.next { background:#141c2c; color:#C5975B; border:2px solid #141c2c; }
+  .q-nav-btn.next:hover { background:#1e2a40; }
+  .q-nav-btn.back { background:#fff; color:#141c2c; border:2px solid #c8c5be; }
+  .q-nav-btn.back:hover { background:#f5f5f0; }
+  .q-pg-spacer { display:inline-block; min-width:40px; }
+  #q-progress { font-size:12px; color:#C5975B; font-weight:600;
+                letter-spacing:.5px; text-transform:uppercase; }
+
+
+</style>
+
+<!-- CUTOVER: server-side grading. Answer keys are not in this file. -->
+
+<style id="glg-match-css">
+.glg-match-pool{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0;}
+.glg-chip{background:#eef2f7;border:2px solid #c7d2e0;border-radius:999px;padding:8px 14px;
+  font-size:14px;cursor:pointer;user-select:none;transition:.15s;}
+.glg-chip:hover{border-color:#10774A;}
+.glg-chip.sel{border-color:#f39c12;background:#fff6e5;box-shadow:0 0 0 3px rgba(243,156,18,.25);}
+.glg-chip.used{opacity:.35;pointer-events:none;}
+.glg-slots{display:flex;flex-direction:column;gap:10px;margin:14px 0;}
+.glg-slot-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.glg-slot-prompt{flex:1 1 260px;font-size:14px;line-height:1.5;}
+.glg-slot{flex:0 1 240px;min-height:42px;border:2px dashed #b9c4d2;border-radius:10px;
+  padding:9px 12px;font-size:14px;color:#8a94a3;cursor:pointer;transition:.15s;}
+.glg-slot.filled{border-style:solid;border-color:#10774A;background:#f2fbf6;color:#143;}
+.glg-slot.locked{cursor:default;}
+.glg-match-actions{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="boss-challenge.css">
 </head>
 <body>
 
@@ -294,8 +467,9 @@ Nothing tested that isn't taught in-module. -->
   <button class="nav-pill" id="nav-4" onclick="goToSection(4)">5. Quality</button>
   <button class="nav-pill" id="nav-5" onclick="goToSection(5)">6. Errors</button>
   <button class="nav-pill" id="nav-6" onclick="goToSection(6)">7. Boss</button>
-  <button class="nav-pill" id="nav-7" onclick="goToSection(7)">8. Results</button>
-  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">9. Feedback</button>
+  <button class="nav-pill" id="nav-7" onclick="startQuiz()">8. Quiz</button>
+  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">9. Results</button>
+  <button class="nav-pill" id="nav-9" onclick="goToSection(9)">10. Feedback</button>
 </nav>
 
 <!-- Points Toast -->
@@ -328,7 +502,7 @@ Nothing tested that isn't taught in-module. -->
         <li>The demand narrative: six-component structure, tone, and what it actually argues</li>
         <li>Quality checklist: what the CM verifies before submitting to the attorney</li>
         <li>Demand templates: #08, #09, #24, and #32 — when each one applies</li>
-        <li>Timeline: the 30-day post-MMI window, the 45-day follow-up clock, and what lateness costs</li>
+        <li>Timeline: the 7-day demand clock from records-complete, the 30-day first follow-up and 45-day escalation clocks, and what lateness costs</li>
         <li>Attorney vs. CM roles: CM assembles and preflights; attorney reviews, approves, and authorizes sending</li>
         <li>Common errors that weaken demands or anchor value too low</li>
         <li>CasePeer status transitions: Pending Demand → Demand Writing → Demand Prepped → Demanded</li>
@@ -364,7 +538,7 @@ Nothing tested that isn't taught in-module. -->
       </ol>
     </div>
     <div class="callout callout-info"><strong>Inline Primer — Total Billed Amounts:</strong> Medical bills in the demand must reflect the gross amount billed by the provider — not the amount paid by health insurance, not the adjusted/negotiated rate, not the client's out-of-pocket. Example: Hospital bills $48,000. Health insurance pays $18,000 and writes off $22,000. The demand shows <strong>$48,000</strong>. This is the starting anchor. If health insurance has a subrogation claim, that is handled in the post-settlement phase — not in the demand.</div>
-    <div class="callout callout-warn"><strong>Inline Primer — O.C.G.A. § 9-11-67.1 (the STATUTORY list — separate from the six components above):</strong><br><br>This statute governs a pre-suit time-limited offer to settle a claim for personal injury, bodily injury, or death <strong>arising from a motor vehicle collision</strong>, made before all named defendants have answered or are in default, and prepared by or with the assistance of an attorney. It does not apply to every demand GLG sends — check the case type first.<br><br>Subsection (b)(1) states these are the material terms, <strong>and that they are the ONLY material terms</strong>. There are <strong>seven</strong>, lettered (A)–(G):<br><br><strong>(A)</strong> A date by which the offer must be accepted — <strong>not less than 30 days</strong> from receipt of the offer sent by certified mail or statutory overnight delivery, return receipt requested.<br><strong>(B)</strong> Amount of monetary payment.<br><strong>(C)</strong> The party or parties the claimant will release if the offer is accepted.<br><strong>(D)</strong> For any type of release, whether the release is <strong>full or limited</strong>, and an itemization of what the claimant will provide to each releasee.<br><strong>(E)</strong> The claims to be released.<br><strong>(F)</strong> A date by which payment must be delivered — <strong>not less than 40 days</strong> from receipt of the offer.<br><strong>(G)</strong> A requirement that, to settle, the recipient provide a <strong>statement under oath</strong> as to whether all liability and casualty coverage that provides or may provide coverage has been disclosed, and a date for delivery of that statement — <strong>not less than 40 days</strong> from receipt. This term may be waived by the offeror.<br><br><strong>Any other term is an immaterial term</strong> under subsection (c) — the recipient varying from it does not defeat acceptance. No party may require another to waive or modify the application of this Code section.<br><br><strong>⚠️ Note what is NOT on this list:</strong> "all records and bills attached" and "a statement that the offer expires" are <strong>not</strong> statutory material terms. They are good practice — attaching supporting material is how the adjuster evaluates the claim — but do not confuse them with the statute's requirements. Equally, the six drafting components above (Facts of Loss, Additional Heat, and so on) appear <strong>nowhere</strong> in this statute.<br><br><strong>Escalate to the attorney of record for any time-limited demand. The CM does not make the compliance call.</strong></div>
+    <div class="callout callout-warn"><strong>Inline Primer — O.C.G.A. § 9-11-67.1 (the STATUTORY list — separate from the six components above):</strong><br><br>This statute governs a pre-suit time-limited offer to settle a claim for personal injury, bodily injury, or death <strong>arising from a motor vehicle collision</strong>, made before all named defendants have answered or are in default, and prepared by or with the assistance of an attorney. It does not apply to every demand GLG sends — check the case type first.<br><br><strong>Version currency:</strong> the operative text is the <strong>2024 amendment — SB 83 (2024), Act 415</strong>, effective <strong>2024-04-22</strong>. If you are working from a pre-2024 form or checklist, it is out of date.<br><br>Subsection (b)(1) states these are the material terms, <strong>and that they are the ONLY material terms</strong>. There are <strong>seven</strong>, lettered (A)–(G):<br><br><strong>(A)</strong> A date by which the offer must be accepted — <strong>not less than 30 days</strong> from receipt of the offer sent by certified mail or statutory overnight delivery, return receipt requested.<br><strong>(B)</strong> Amount of monetary payment.<br><strong>(C)</strong> The party or parties the claimant will release if the offer is accepted.<br><strong>(D)</strong> For any type of release, whether the release is <strong>full or limited</strong>, and an itemization of what the claimant will provide to each releasee.<br><strong>(E)</strong> The claims to be released.<br><strong>(F)</strong> A date by which payment must be delivered — <strong>not less than 40 days</strong> from receipt of the offer.<br><strong>(G)</strong> A requirement that, to settle, the recipient provide a <strong>statement under oath</strong> as to whether all liability and casualty coverage that provides or may provide coverage has been disclosed, and a date for delivery of that statement — <strong>not less than 40 days</strong> from receipt. This term may be waived by the offeror.<br><br><strong>Any other term is an immaterial term</strong> under subsection (c) — the recipient varying from it does not defeat acceptance. No party may require another to waive or modify the application of this Code section.<br><br><strong>⚠️ Note what is NOT on this list:</strong> "all records and bills attached" and "a statement that the offer expires" are <strong>not</strong> statutory material terms. They are good practice — attaching supporting material is how the adjuster evaluates the claim — but do not confuse them with the statute's requirements. Equally, the six drafting components above (Facts of Loss, Additional Heat, and so on) appear <strong>nowhere</strong> in this statute.<br><br><strong>Escalate to the attorney of record for any time-limited demand. The CM does not make the compliance call.</strong></div>
     <div class="info-block">
       <h4>📎 Supporting Documents Required in Every Package</h4>
       <table class="stat-table">
@@ -378,53 +552,9 @@ Nothing tested that isn't taught in-module. -->
       </table>
     </div>
 
-    <div class="question-block" id="q1-block">
-      <div class="q-num">Question 1 of 20 &middot; 10 pts</div>
-      <div class="q-text">A CM is beginning to assemble the demand package for a rear-end collision case. Per GLG's demand preparation standards, which answer correctly identifies all required components of a complete demand package?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q1','a',false)" id="q1-a"><span class="opt-letter">A</span><span class="opt-text">Medical records, medical bills, and the demand narrative — the three core documents</span></button>
-        <button class="option-btn" onclick="answer('q1','b',false)" id="q1-b"><span class="opt-letter">B</span><span class="opt-text">Police report, medical records, demand narrative, and the client's intake paperwork</span></button>
-        <button class="option-btn" onclick="answer('q1','c',false)" id="q1-c"><span class="opt-letter">C</span><span class="opt-text">Medical records, police report, demand narrative, and the CasePeer treatment timeline printout — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken</span></button>
-        <button class="option-btn" onclick="answer('q1','d',true)" id="q1-d"><span class="opt-letter">D</span><span class="opt-text">Facts of Loss (police report, photos, witnesses), Determination of Liability and Causation, Bodily Injuries and Pain &amp; Suffering, Summary of Expenses using total billed amounts, Additional Heat, and Demand for Payment with Conditions — all six components, fully supported by records and bills from every treating provider. These six are GLG's drafting structure; if this becomes a pre-suit time-limited offer, the material terms required by O.C.G.A. § 9-11-67.1 must be satisfied separately.</span></button>
-      </div>
-      <div class="feedback-box" id="q1-fb"></div>
-    </div>
 
-    <div class="question-block" id="q2-block">
-      <div class="q-num">Question 2 of 20 &middot; 10 pts &middot; Total Billed Amounts</div>
-      <div class="q-text">The demand package includes $42,000 in total medical charges. The client's health insurance (Anthem, fully insured) paid $18,000 to providers and wrote off $14,000. The client paid $2,400 in copays. What dollar amount should appear in the Medical Expenses section of the demand?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q2','a',false)" id="q2-a"><span class="opt-letter">A</span><span class="opt-text">$18,000 — the amount health insurance actually paid (the real cost to the system)</span></button>
-        <button class="option-btn" onclick="answer('q2','b',false)" id="q2-b"><span class="opt-letter">B</span><span class="opt-text">$20,400 — the outstanding balance plus client copays</span></button>
-        <button class="option-btn" onclick="answer('q2','c',true)" id="q2-c"><span class="opt-letter">C</span><span class="opt-text">$42,000 — the total amount billed by the providers, regardless of what health insurance paid, wrote off, or adjusted</span></button>
-        <button class="option-btn" onclick="answer('q2','d',false)" id="q2-d"><span class="opt-letter">D</span><span class="opt-text">$24,000 — the estimated amount the client would have owed without any health insurance coverage, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity</span></button>
-      </div>
-      <div class="feedback-box" id="q2-fb"></div>
-    </div>
 
-    <div class="question-block" id="q3-block">
-      <div class="q-num">Question 3 of 20 &middot; 10 pts &middot; Record Completeness</div>
-      <div class="q-text">A client treated with two providers: a chiropractor (18 sessions, $12,000 billed) and an orthopedic specialist (3 visits, MRI review, $8,700 billed). The CM can't locate the orthopedic chart notes — only the billing statements. Which records must be included in the demand package?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q3','a',false)" id="q3-a"><span class="opt-letter">A</span><span class="opt-text">Only the orthopedic records — specialist records carry more weight; chiropractic bills are expected and don't need full documentation — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage</span></button>
-        <button class="option-btn" onclick="answer('q3','b',false)" id="q3-b"><span class="opt-letter">B</span><span class="opt-text">Only records from providers who documented objective findings (MRI, orthopedic assessment) — subjective chiropractic notes add little</span></button>
-        <button class="option-btn" onclick="answer('q3','c',true)" id="q3-c"><span class="opt-letter">C</span><span class="opt-text">Full chart notes and billing from both providers — every provider who treated accident-related injuries must be represented. Billing statements without chart notes are insufficient; the CM must obtain the complete orthopedic records before the package is ready</span></button>
-        <button class="option-btn" onclick="answer('q3','d',false)" id="q3-d"><span class="opt-letter">D</span><span class="opt-text">Send the package now with a note that orthopedic records are pending — the adjuster can request them if needed</span></button>
-      </div>
-      <div class="feedback-box" id="q3-fb"></div>
-    </div>
 
-    <div class="question-block" id="q4-block">
-      <div class="q-num">Question 4 of 20 &middot; 10 pts &middot; Lost Wages Documentation</div>
-      <div class="q-text">The client is a restaurant manager who missed 8 weeks of work at $1,400/week due to her injuries. She has verbally confirmed these numbers to the CM. What documentation is required to include lost wages in the demand?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q4','a',true)" id="q4-a"><span class="opt-letter">A</span><span class="opt-text">Written employer verification confirming the client's salary or hourly rate, the weeks missed, and the inability to work — supported by pay stubs or W-2. The verbal report starts the process; written documentation from the employer closes it.</span></button>
-        <button class="option-btn" onclick="answer('q4','b',false)" id="q4-b"><span class="opt-letter">B</span><span class="opt-text">A CasePeer note documenting the client's verbal report — verbal attestation from the client is sufficient for the demand</span></button>
-        <button class="option-btn" onclick="answer('q4','c',false)" id="q4-c"><span class="opt-letter">C</span><span class="opt-text">The client's own written statement — a signed declaration is sufficient if employer documentation is unavailable</span></button>
-        <button class="option-btn" onclick="answer('q4','d',false)" id="q4-d"><span class="opt-letter">D</span><span class="opt-text">Lost wages documentation is optional — include the figures in the narrative but formally document only if the adjuster specifically requests it, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
-      </div>
-      <div class="feedback-box" id="q4-fb"></div>
-    </div>
 
     <div class="section-score" id="s1-score" style="display:none;"><div class="score-display" id="s1-score-val"></div><div class="score-label">Section 2 Score</div></div>
     <div class="btn-group" id="s1-next"><button class="btn btn-primary btn-block" onclick="goToSection(2)">Next: The Demand Narrative — Structure, Tone &amp; Argument &rarr;</button></div>
@@ -447,7 +577,7 @@ Nothing tested that isn't taught in-module. -->
       <p style="margin-top:8px;"><strong>Tone:</strong> Measured, professional, and confident — not emotional, not threatening. The narrative reads like a brief, not a complaint letter. It leads with facts and arguments, not with the client's feelings.</p>
     </div>
     <div class="info-block">
-      <h4>🦎 The Reptile-Informed Demand Sequence</h4>
+      <h4>🎯 The GLG Demand Sequence</h4>
       <p>GLG's demand narratives follow the safety-rule framework. The sequence activates the adjuster's awareness that their insured broke a safety rule — and that paying is how the community enforces those rules.</p>
       <ol style="margin-top:8px;padding-left:18px;">
         <li style="margin-bottom:5px;"><strong>Safety Rule Violation</strong> — identify the specific rule the defendant broke (e.g., "A driver must maintain a safe following distance to prevent rear-end collisions"). State the violation plainly.</li>
@@ -460,53 +590,9 @@ Nothing tested that isn't taught in-module. -->
     <div class="callout callout-info"><strong>Inline Primer — Mechanism of Wreck + Mechanism of Harm (MIST cases):</strong> In soft-tissue/MIST cases, the adjuster's strategy is to minimize impact severity ("it was just a fender-bender") to minimize injury severity. The demand narrative must counter this by explaining: (1) Mechanism of Wreck — how even a moderate-speed impact transmits significant force through the vehicle frame directly to the occupant's body; (2) Mechanism of Harm — step by step, what that force does inside the body: it straightens the cervical spine's natural curve, snaps the head in whiplash motion, tears ligaments and fascia, and compresses discs. These explanations must come from the treating physician — never from the CM's own characterization.</div>
     <div class="callout callout-warn"><strong>What the Narrative Must NOT Do:</strong> It cannot quote dollar amounts the CM thinks the case is worth — value belongs to the attorney. It cannot characterize client credibility — that is attorney judgment. It cannot speculate about future treatment beyond what the treating physician documented. Every fact in the narrative must be sourced to a document in the package.</div>
 
-    <div class="question-block" id="q5-block">
-      <div class="q-num">Question 5 of 20 &middot; 10 pts</div>
-      <div class="q-text">The demand narrative for a rear-end collision case should open with which of the following sequences — and why?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q5','a',false)" id="q5-a"><span class="opt-letter">A</span><span class="opt-text">Damages first — list the medical bills and lost wages total in the opening paragraph. Lead with the money to immediately anchor the adjuster's evaluation.</span></button>
-        <button class="option-btn" onclick="answer('q5','b',true)" id="q5-b"><span class="opt-letter">B</span><span class="opt-text">Safety rule violation first — identify what specific rule the defendant broke and why it protects everyone on the road. Then causation (how the violation produced the specific injuries). Then the full injury and damages picture. This Reptile sequence makes the adjuster evaluate the case as a community safety enforcement matter — not just a damages claim.</span></button>
-        <button class="option-btn" onclick="answer('q5','c',false)" id="q5-c"><span class="opt-letter">C</span><span class="opt-text">Chronological order — accident, then medical treatment, then bills. Present facts in the order they happened for the clearest narrative.</span></button>
-        <button class="option-btn" onclick="answer('q5','d',false)" id="q5-d"><span class="opt-letter">D</span><span class="opt-text">The narrative should be objective and neutral — lead with facts only, no argumentative framing. Credibility with the adjuster comes from appearing unbiased. — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value</span></button>
-      </div>
-      <div class="feedback-box" id="q5-fb"></div>
-    </div>
 
-    <div class="question-block" id="q6-block">
-      <div class="q-num">Question 6 of 20 &middot; 10 pts &middot; Calibration Check</div>
-      <div class="q-text">Before you build your first demand narrative, assess your current understanding. On a scale of 1–5, how confident are you that you can describe the tone, section sequence, and persuasive purpose of a GLG demand narrative? Select any answer to reveal the complete framework.</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q6','a',true)" id="q6-a"><span class="opt-letter">A</span><span class="opt-text">1–2 — Not confident. I've seen demand letters but couldn't explain the required sequence or what each section argues.</span></button>
-        <button class="option-btn" onclick="answer('q6','b',true)" id="q6-b"><span class="opt-letter">B</span><span class="opt-text">3 — Somewhat confident. I understand demands are persuasive, but I'm fuzzy on the specific section structure.</span></button>
-        <button class="option-btn" onclick="answer('q6','c',true)" id="q6-c"><span class="opt-letter">C</span><span class="opt-text">4 — Fairly confident. I know the content areas but haven't mapped them against the Reptile sequence before.</span></button>
-        <button class="option-btn" onclick="answer('q6','d',true)" id="q6-d"><span class="opt-letter">D</span><span class="opt-text">5 — Fully confident. I can describe every section, its tone, and why the Reptile sequence works without guidance.</span></button>
-      </div>
-      <div class="feedback-box" id="q6-fb"></div>
-    </div>
 
-    <div class="question-block" id="q7-block">
-      <div class="q-num">Question 7 of 20 &middot; 10 pts &middot; Additional Heat</div>
-      <div class="q-text">The demand narrative includes an "Additional Heat" section. Which answer correctly describes what Additional Heat contains — and why it is included?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q7','a',false)" id="q7-a"><span class="opt-letter">A</span><span class="opt-text">A summary of the client's treatment volume — the sheer number of appointments and sessions is the "heat" that demonstrates injury severity</span></button>
-        <button class="option-btn" onclick="answer('q7','b',false)" id="q7-b"><span class="opt-letter">B</span><span class="opt-text">A list of every GLG contact with the adjuster — demonstrating the firm's diligence and readiness to litigate if needed</span></button>
-        <button class="option-btn" onclick="answer('q7','c',false)" id="q7-c"><span class="opt-letter">C</span><span class="opt-text">The statutory citation for O.C.G.A. § 9-11-67.1 and the certified mail tracking number — the legal compliance elements that give the demand its enforceable deadline — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken</span></button>
-        <button class="option-btn" onclick="answer('q7','d',true)" id="q7-d"><span class="opt-letter">D</span><span class="opt-text">Punitive factors (reckless conduct, prior violations, aggravating circumstances), Georgia verdict and settlement data from Case-Metrix for comparable injuries, and before/after affidavits documenting how the client's life changed. Additional Heat pushes demand value above the raw medical bills by showing the adjuster what a jury would hear — and what comparable juries have awarded.</span></button>
-      </div>
-      <div class="feedback-box" id="q7-fb"></div>
-    </div>
 
-    <div class="question-block" id="q8-block">
-      <div class="q-num">Question 8 of 20 &middot; 10 pts &middot; MIST Case Narrative</div>
-      <div class="q-text">A client's case involves a rear-end collision at approximately 10 mph. The client has cervical and lumbar soft tissue injuries and completed 4 months of chiropractic treatment. The adjuster will designate this a MIST (Minor Impact Soft Tissue) case and attempt to minimize the value. Per GLG's demand standards, what must the demand narrative specifically address to counter the MIST designation?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q8','a',false)" id="q8-a"><span class="opt-letter">A</span><span class="opt-text">Nothing special — soft tissue cases follow the same narrative formula as surgical cases; the MIST defense is a negotiation tactic handled at the settlement stage, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity</span></button>
-        <button class="option-btn" onclick="answer('q8','b',false)" id="q8-b"><span class="opt-letter">B</span><span class="opt-text">The narrative should minimize any reference to the impact speed and focus on the treatment volume and total bill amount to avoid giving the adjuster ammunition</span></button>
-        <button class="option-btn" onclick="answer('q8','c',true)" id="q8-c"><span class="opt-letter">C</span><span class="opt-text">The demand must address both the Mechanism of Wreck (how 10 mph force transmits through the vehicle frame to reach the occupant's body without dissipating — sourced from the treating physician) and the Mechanism of Harm (step by step: straightening of the cervical curve, whiplash snap, ligament microtrauma, disc compression) — sourced from the treating physician's documented findings. These two explanations dismantle the "minor impact" argument before the adjuster can make it.</span></button>
-        <button class="option-btn" onclick="answer('q8','d',false)" id="q8-d"><span class="opt-letter">D</span><span class="opt-text">Include a disclaimer in the narrative acknowledging the impact was moderate — appearing credible preempts the MIST argument and builds adjuster trust</span></button>
-      </div>
-      <div class="feedback-box" id="q8-fb"></div>
-    </div>
 
     <div class="section-score" id="s2-score" style="display:none;"><div class="score-display" id="s2-score-val"></div><div class="score-label">Section 3 Score</div></div>
     <div class="btn-group" id="s2-next"><button class="btn btn-primary btn-block" onclick="goToSection(3)">Next: Templates &amp; Timeline — #08, #09, #24, #32 &rarr;</button></div>
@@ -539,60 +625,17 @@ Nothing tested that isn't taught in-module. -->
         <tr><th>Milestone</th><th>Deadline / Rule</th><th>Consequence of Missing</th></tr>
         <tr class="stat-ok"><td class="stat-num">Client reaches MMI</td><td>Target: demand within 30 days of MMI (maximum medical improvement — treating physician confirms no further improvement expected)</td><td>Demand understates total damages; adjuster prices as a disorganized file</td></tr>
         <tr class="stat-warn"><td class="stat-num">Day 30 post-MMI</td><td>Demand should be out or escalate to attorney for extension authorization</td><td>Leverage lost; adjuster's reserve hasn't been set yet; urgency signal weakens</td></tr>
-        <tr class="stat-void"><td class="stat-num">Day 45 post-Demanded</td><td>If no adjuster response in 45 days, follow-up action required immediately. No exceptions. No waiting.</td><td>Adjuster prices delay as low urgency; negotiating position weakens without a live clock</td></tr>
+        <tr class="stat-void"><td class="stat-num">Day 30 post-Demanded</td><td><strong>First follow-up — mandatory.</strong> If no adjuster response by Day 30, the CM contacts the adjuster and logs the contact. This is the first action, not a courtesy call.</td><td>Silence at 30 days is the earliest reliable signal the demand is not being worked</td></tr>
+        <tr class="stat-void"><td class="stat-num">Day 45 post-Demanded</td><td><strong>Escalation threshold — STALE DEMAND.</strong> If still no response at 45 days, the matter escalates to the attorney of record. Day 45 is not the first follow-up; the Day 30 contact should already be logged.</td><td>Adjuster prices delay as low urgency; negotiating position weakens without a live clock</td></tr>
         <tr><td class="stat-num">Demand sent too early</td><td>Never send demand before client reaches MMI — future treatment bills will arrive after the demand and weaken the anchor</td><td>Demand understates total damages; impossible to add bills post-demand credibly</td></tr>
       </table>
     </div>
     <div class="callout callout-info"><strong>Inline Primer — MMI (Maximum Medical Improvement):</strong> MMI is the point at which the treating physician certifies that the client has recovered as much as medically possible. It does not mean the client is fully recovered — it means no further significant improvement is expected. A demand sent before MMI is premature: future treatment, future bills, and the full extent of permanent injury are not yet documented. The demand anchor is only as high as the documented damages at the time it is sent.</div>
     <div class="callout callout-danger"><strong>Template #32 Authorization Rule:</strong> A CM may never prepare or send Template #32 (Holt demand) without explicit written attorney authorization — on every case, every time. The Holt demand creates specific legal obligations and deadlines. A defective Holt, or a Holt sent without authorization, is a malpractice risk. "The attorney will approve it later" is not authorization.</div>
 
-    <div class="question-block" id="q9-block">
-      <div class="q-num">Question 9 of 20 &middot; 10 pts &middot; Template Identification</div>
-      <div class="q-text">CasePeer has two primary demand-stage content templates: Template #08 and Template #09. Which answer correctly matches each template to its purpose?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q9','a',true)" id="q9-a"><span class="opt-letter">A</span><span class="opt-text">#08 = Demand Package Letter (the cover/transmittal letter sent to the adjuster enclosing all demand materials); #09 = Demand Narrative (the substantive legal argument document containing all six demand components)</span></button>
-        <button class="option-btn" onclick="answer('q9','b',false)" id="q9-b"><span class="opt-letter">B</span><span class="opt-text">#08 = Demand Narrative (the substantive letter arguing liability, causation, and damages); #09 = Demand Cover Letter (the transmittal document enclosing the package) — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage</span></button>
-        <button class="option-btn" onclick="answer('q9','c',false)" id="q9-c"><span class="opt-letter">C</span><span class="opt-text">#08 = Authorization Letter (sent to medical providers authorizing release of records); #09 = Demand Letter (the substantive argument sent to the adjuster)</span></button>
-        <button class="option-btn" onclick="answer('q9','d',false)" id="q9-d"><span class="opt-letter">D</span><span class="opt-text">Both #08 and #09 are demand narrative templates — #08 for pre-litigation demands, #09 for cases approaching policy limits</span></button>
-      </div>
-      <div class="feedback-box" id="q9-fb"></div>
-    </div>
 
-    <div class="question-block" id="q10-block">
-      <div class="q-num">Question 10 of 20 &middot; 10 pts &middot; The 45-Day Clock — Generation Activity</div>
-      <div class="q-text">The 45-day follow-up clock is a mandatory GLG deadline. Before reading the options — think through the answer: exactly when does this clock start, and what triggers the follow-up obligation? Then select the complete correct answer below.</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q10','a',true)" id="q10-a"><span class="opt-letter">A</span><span class="opt-text">The 45-day clock starts the day the demand is sent — when CasePeer status advances to 'Demanded.' If the adjuster has not responded within 45 days of the demand being sent, a follow-up action is required immediately. No waiting. No judgment call. The clock is the trigger.</span></button>
-        <button class="option-btn" onclick="answer('q10','b',false)" id="q10-b"><span class="opt-letter">B</span><span class="opt-text">The 45-day clock starts when the file reaches 'Demand Writing' status — measuring elapsed time since the CM began assembling the package</span></button>
-        <button class="option-btn" onclick="answer('q10','c',false)" id="q10-c"><span class="opt-letter">C</span><span class="opt-text">The 45-day clock starts when the client reaches MMI — measuring elapsed time between treatment completion and when the demand should go out, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
-        <button class="option-btn" onclick="answer('q10','d',false)" id="q10-d"><span class="opt-letter">D</span><span class="opt-text">There is no fixed 45-day clock — the CM uses judgment to follow up based on the specific adjuster's known response time patterns</span></button>
-      </div>
-      <div class="feedback-box" id="q10-fb"></div>
-    </div>
 
-    <div class="question-block" id="q11-block">
-      <div class="q-num">Question 11 of 20 &middot; 10 pts &middot; Limits-Exceeded Scenario</div>
-      <div class="q-text">A client has a disc herniation with a surgical recommendation. Total documented medical bills are $186,000. The at-fault carrier (Nationwide) has a $100,000 BI policy limit. The CM is building the demand package. Which template action is appropriate at the demand stage — and who authorizes it?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q11','a',false)" id="q11-a"><span class="opt-letter">A</span><span class="opt-text">Template #09 only — build the standard demand narrative for the full $186,000; the policy limits issue is a settlement-stage concern handled after the demand is sent</span></button>
-        <button class="option-btn" onclick="answer('q11','b',true)" id="q11-b"><span class="opt-letter">B</span><span class="opt-text">Template #24 (Policy Limits Demand) is appropriate in addition to #08 and #09 — when documented damages clearly exceed policy limits, the demand formally puts the carrier on notice that payment of limits is required. The CM prepares this on the attorney's direction. The attorney decides whether #24 alone or #24 + #32 (Holt) is the right approach.</span></button>
-        <button class="option-btn" onclick="answer('q11','c',false)" id="q11-c"><span class="opt-letter">C</span><span class="opt-text">Template #32 (Holt demand) immediately and automatically — when damages exceed limits, the Holt demand is the mandatory demand-stage template that replaces the standard demand — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value</span></button>
-        <button class="option-btn" onclick="answer('q11','d',false)" id="q11-d"><span class="opt-letter">D</span><span class="opt-text">Skip the demand and escalate directly to the litigation team — when limits are clearly exceeded, a demand serves no purpose and filing should begin immediately</span></button>
-      </div>
-      <div class="feedback-box" id="q11-fb"></div>
-    </div>
 
-    <div class="question-block" id="q12-block">
-      <div class="q-num">Question 12 of 20 &middot; 10 pts &middot; Timing Assessment</div>
-      <div class="q-text">A client was discharged by her treating physician on March 15 with MMI confirmed. It is now May 3 — 49 days since discharge. The file is in 'Demand Writing' status. The CM has all records and bills. How should the CM characterize the status of this file?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q12','a',false)" id="q12-a"><span class="opt-letter">A</span><span class="opt-text">On schedule — there is no fixed deadline for when demands must go out, only general guidelines</span></button>
-        <button class="option-btn" onclick="answer('q12','b',false)" id="q12-b"><span class="opt-letter">B</span><span class="opt-text">Slightly behind but acceptable — adjusters rarely evaluate demand timing, so 49 days is not materially different from 30 days</span></button>
-        <button class="option-btn" onclick="answer('q12','c',true)" id="q12-c"><span class="opt-letter">C</span><span class="opt-text">This file is past GLG's 30-day post-MMI demand window. The CM must complete and submit the package to the attorney for expedited review immediately. Every day past the window reduces the urgency signal to the adjuster and weakens the opening anchor.</span></button>
-        <button class="option-btn" onclick="answer('q12','d',false)" id="q12-d"><span class="opt-letter">D</span><span class="opt-text">Ahead of schedule — demands should go out no earlier than 60 days after MMI to allow for late-arriving bills and final provider notes — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken</span></button>
-      </div>
-      <div class="feedback-box" id="q12-fb"></div>
-    </div>
 
     <div class="section-score" id="s3-score" style="display:none;"><div class="score-display" id="s3-score-val"></div><div class="score-label">Section 4 Score</div></div>
     <div class="btn-group" id="s3-next"><button class="btn btn-primary btn-block" onclick="goToSection(4)">Next: Quality Checklist &amp; Attorney vs. CM Roles &rarr;</button></div>
@@ -636,53 +679,9 @@ Nothing tested that isn't taught in-module. -->
     </div>
     <div class="callout callout-warn"><strong>Demand Prepped ≠ Demand Sent:</strong> Advancing CasePeer status to 'Demand Prepped' means the CM has completed assembly and the package is ready for attorney review — not that it has been sent. The attorney reviews, approves, and then either sends the demand or explicitly authorizes the CM to send. 'Demanded' status is set only after the demand has actually been transmitted to the adjuster.</div>
 
-    <div class="question-block" id="q13-block">
-      <div class="q-num">Question 13 of 20 &middot; 10 pts &middot; Checklist Completeness</div>
-      <div class="q-text">A CM is ready to submit a demand package for attorney review. Before advancing CasePeer status to 'Demand Prepped,' which checklist correctly captures everything the CM must verify?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q13','a',true)" id="q13-a"><span class="opt-letter">A</span><span class="opt-text">All medical records present (full chart notes, every provider); all medical bills itemized and totaled using total billed amounts; police report included; photos/video attached (if applicable); lost wages documentation included (if applicable); demand narrative complete with all six components and proofread; CasePeer status advanced to 'Demand Prepped'</span></button>
-        <button class="option-btn" onclick="answer('q13','b',false)" id="q13-b"><span class="opt-letter">B</span><span class="opt-text">Demand narrative reviewed; medical bills totaled; demand letter signed by attorney</span></button>
-        <button class="option-btn" onclick="answer('q13','c',false)" id="q13-c"><span class="opt-letter">C</span><span class="opt-text">Medical records and bills present; demand narrative complete; attorney approval obtained and documented in CasePeer, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage</span></button>
-        <button class="option-btn" onclick="answer('q13','d',false)" id="q13-d"><span class="opt-letter">D</span><span class="opt-text">Records, bills, and police report present; demand letter signed; client has reviewed and approved the demand amount</span></button>
-      </div>
-      <div class="feedback-box" id="q13-fb"></div>
-    </div>
 
-    <div class="question-block" id="q14-block">
-      <div class="q-num">Question 14 of 20 &middot; 10 pts &middot; Authorization to Send</div>
-      <div class="q-text">A CM has assembled the demand package, completed the quality checklist, and advanced CasePeer to 'Demand Prepped.' The attorney has reviewed and approved the package. Who sends the demand to the adjuster — and what specifically authorizes that action?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q14','a',true)" id="q14-a"><span class="opt-letter">A</span><span class="opt-text">The attorney sends the demand, or explicitly authorizes the CM to send on the firm's behalf — and that authorization is documented in CasePeer. 'Demand Prepped' means ready for attorney action, not cleared for CM transmission. The CM cannot send without the explicit send authorization.</span></button>
-        <button class="option-btn" onclick="answer('q14','b',false)" id="q14-b"><span class="opt-letter">B</span><span class="opt-text">The CM sends it immediately — attorney approval at 'Demand Prepped' is implicit authorization to send — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage</span></button>
-        <button class="option-btn" onclick="answer('q14','c',false)" id="q14-c"><span class="opt-letter">C</span><span class="opt-text">CasePeer automatically delivers the demand to the adjuster once the status is advanced to 'Demanded'</span></button>
-        <button class="option-btn" onclick="answer('q14','d',false)" id="q14-d"><span class="opt-letter">D</span><span class="opt-text">The client must review and sign off on the demand letter before it can be transmitted to the adjuster</span></button>
-      </div>
-      <div class="feedback-box" id="q14-fb"></div>
-    </div>
 
-    <div class="question-block" id="q15-block">
-      <div class="q-num">Question 15 of 20 &middot; 10 pts &middot; CasePeer Status Flow</div>
-      <div class="q-text">Map the four CasePeer status stages for the demand preparation workflow in the correct sequence from start to finish:</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q15','a',false)" id="q15-a"><span class="opt-letter">A</span><span class="opt-text">Demand Writing → Pending Demand → Demand Prepped → Demanded, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
-        <button class="option-btn" onclick="answer('q15','b',false)" id="q15-b"><span class="opt-letter">B</span><span class="opt-text">Pending Demand → Demand Prepped → Demand Writing → Demanded</span></button>
-        <button class="option-btn" onclick="answer('q15','c',true)" id="q15-c"><span class="opt-letter">C</span><span class="opt-text">Pending Demand → Demand Writing → Demand Prepped → Demanded</span></button>
-        <button class="option-btn" onclick="answer('q15','d',false)" id="q15-d"><span class="opt-letter">D</span><span class="opt-text">Demand Writing → Demand Prepped → Pending Demand → Demanded</span></button>
-      </div>
-      <div class="feedback-box" id="q15-fb"></div>
-    </div>
 
-    <div class="question-block" id="q16-block">
-      <div class="q-num">Question 16 of 20 &middot; 10 pts &middot; Attorney Revision Feedback</div>
-      <div class="q-text">The attorney reviews the demand narrative and finds a 6-week treatment gap that is not addressed in the demand. The attorney returns the package with a note: "This gap will be used against us — explain it before we send." What is the correct CM action?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q16','a',false)" id="q16-a"><span class="opt-letter">A</span><span class="opt-text">Resubmit without changes — treatment gaps are a negotiation issue handled during settlement, not in the demand narrative</span></button>
-        <button class="option-btn" onclick="answer('q16','b',true)" id="q16-b"><span class="opt-letter">B</span><span class="opt-text">Revise Template #09 to address the gap proactively: document the reason for the gap (e.g., work obligation, insurance authorization delay, client's financial situation), reference any physician documentation confirming the injury persisted, and never leave a gap unexplained. Update CasePeer status back to 'Demand Writing.' Resubmit when the revision is complete.</span></button>
-        <button class="option-btn" onclick="answer('q16','c',false)" id="q16-c"><span class="opt-letter">C</span><span class="opt-text">Ask the client to get additional treatment to fill the gap before the demand goes out — a gap in treatment history is best closed with actual treatment — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
-        <button class="option-btn" onclick="answer('q16','d',false)" id="q16-d"><span class="opt-letter">D</span><span class="opt-text">Remove the treatment records that show the gap — the adjuster doesn't need the records that reveal the break in treatment</span></button>
-      </div>
-      <div class="feedback-box" id="q16-fb"></div>
-    </div>
 
     <div class="section-score" id="s4-score" style="display:none;"><div class="score-display" id="s4-score-val"></div><div class="score-label">Section 5 Score</div></div>
     <div class="btn-group" id="s4-next"><button class="btn btn-primary btn-block" onclick="goToSection(5)">Next: Common Errors &amp; CasePeer Status Transitions &rarr;</button></div>
@@ -717,58 +716,14 @@ Nothing tested that isn't taught in-module. -->
         <tr><td class="stat-num">Pending Demand</td><td>Case enters demand preparation stage after MMI</td><td>Begin record gathering; confirm all providers have been billed; request any outstanding records</td></tr>
         <tr><td class="stat-num">Demand Writing</td><td>CM begins drafting Template #09 and assembling the package</td><td>Draft narrative; assemble all records, bills, police report, photos, lost wages docs</td></tr>
         <tr class="stat-ok"><td class="stat-num">Demand Prepped</td><td>CM has completed quality checklist — all items present, narrative complete</td><td>Submit package to attorney for review and approval</td></tr>
-        <tr class="stat-ok"><td class="stat-num">Demanded</td><td>Attorney sends demand — certified mail tracking confirmed; or attorney explicitly authorizes CM transmission with tracking documented in CasePeer</td><td>Log certified mail tracking number; note date sent; start 45-day follow-up clock</td></tr>
+        <tr class="stat-ok"><td class="stat-num">Demanded</td><td>Attorney sends demand — certified mail tracking confirmed; or attorney explicitly authorizes CM transmission with tracking documented in CasePeer</td><td>Log certified mail tracking number; note date sent; start follow-up clocks (Day 30 first follow-up, Day 45 escalation)</td></tr>
       </table>
     </div>
-    <div class="callout callout-warn"><strong>The 45-Day Clock Starts at Demanded:</strong> The moment the status advances to 'Demanded' and the certified mail tracking number is logged, the 45-day clock begins. The CM is responsible for monitoring this clock and triggering follow-up before Day 45 passes. This is a logged deadline — not a mental note.</div>
+    <div class="callout callout-warn"><strong>The Follow-Up Clocks Start at Demanded:</strong> The moment the status advances to 'Demanded' and the certified mail tracking number is logged, the clocks begin. <strong>Day 30 — first follow-up</strong> if no adjuster response; the CM makes contact and logs it. <strong>Day 45 — escalation</strong>; no response by then is a STALE DEMAND and goes to the attorney of record. Day 45 is not when you first pick up the phone. Both are logged deadlines — not mental notes.</div>
 
-    <div class="question-block" id="q17-block">
-      <div class="q-num">Question 17 of 20 &middot; 10 pts &middot; Timing Error</div>
-      <div class="q-text">Which of the following represents the most damaging timing error in demand preparation — the error that most directly limits the firm's ability to recover the full value of the case?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q17','a',false)" id="q17-a"><span class="opt-letter">A</span><span class="opt-text">Sending the demand on a Friday — adjusters don't process Friday mail until Monday, effectively losing 3 days of response time</span></button>
-        <button class="option-btn" onclick="answer('q17','b',false)" id="q17-b"><span class="opt-letter">B</span><span class="opt-text">Waiting more than 90 days after MMI to send — demand lateness signals a disorganized file but doesn't directly limit recoverable damages</span></button>
-        <button class="option-btn" onclick="answer('q17','c',false)" id="q17-c"><span class="opt-letter">C</span><span class="opt-text">Sending the demand without lost wages documentation — adjusters require all documents before evaluating the file and will return the package — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken</span></button>
-        <button class="option-btn" onclick="answer('q17','d',true)" id="q17-d"><span class="opt-letter">D</span><span class="opt-text">Sending the demand before the client reaches MMI — the client is still treating, future bills will arrive after the demand is set, and the anchor is permanently lower than the total damages. Post-demand bills cannot be credibly added to a demand already in the adjuster's hands.</span></button>
-      </div>
-      <div class="feedback-box" id="q17-fb"></div>
-    </div>
 
-    <div class="question-block" id="q18-block">
-      <div class="q-num">Question 18 of 20 &middot; 10 pts &middot; Consequence Story — Incomplete Records</div>
-      <div class="q-text">A CM sends a demand package to State Farm without the orthopedic records and MRI ($21,000 in specials). Only the chiropractic records and bills ($14,200) are included. State Farm responds with an offer of $19,500. What has gone wrong — and what is the long-term consequence?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q18','a',false)" id="q18-a"><span class="opt-letter">A</span><span class="opt-text">Nothing critical — the adjuster will ask for missing records if they want them. The negotiation can still recover to a fair number once the orthopedic records are provided., which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value</span></button>
-        <button class="option-btn" onclick="answer('q18','b',true)" id="q18-b"><span class="opt-letter">B</span><span class="opt-text">The demand was anchored to incomplete specials. State Farm evaluated the file at $14,200 in documented damages and offered $19,500 (137% of what they saw). That $19,500 is now the established starting point in the adjuster's case notes. Recovering from a low anchor is harder than never setting one — the case file is now annotated with a first offer that understates true case value, and the adjuster's reserve has been set accordingly.</span></button>
-        <button class="option-btn" onclick="answer('q18','c',false)" id="q18-c"><span class="opt-letter">C</span><span class="opt-text">The CM should send the missing records immediately with a letter asking State Farm to revise their offer — adjusters routinely reconsider when additional records arrive</span></button>
-        <button class="option-btn" onclick="answer('q18','d',false)" id="q18-d"><span class="opt-letter">D</span><span class="opt-text">The $19,500 offer is actually reasonable for a chiropractic-only case; the orthopedic records should be held back to strengthen the counter-offer</span></button>
-      </div>
-      <div class="feedback-box" id="q18-fb"></div>
-    </div>
 
-    <div class="question-block" id="q19-block">
-      <div class="q-num">Question 19 of 20 &middot; 10 pts &middot; Status Transition Trigger</div>
-      <div class="q-text">What is the specific trigger for advancing the CasePeer status from 'Demand Prepped' to 'Demanded' — and what must be logged at that moment?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q19','a',false)" id="q19-a"><span class="opt-letter">A</span><span class="opt-text">The CM verifies the quality checklist is complete and advances the status — signaling the package is ready for the adjuster</span></button>
-        <button class="option-btn" onclick="answer('q19','b',true)" id="q19-b"><span class="opt-letter">B</span><span class="opt-text">The attorney sends the demand (or explicitly authorizes CM transmission) with confirmed certified mail delivery. The CM logs: the certified mail tracking number, the date sent, and the attorney who authorized transmission. This triggers the 45-day follow-up clock. Without the tracking number logged, there is no documented evidence the demand was sent.</span></button>
-        <button class="option-btn" onclick="answer('q19','c',false)" id="q19-c"><span class="opt-letter">C</span><span class="opt-text">The adjuster calls or emails to confirm receipt of the demand package</span></button>
-        <button class="option-btn" onclick="answer('q19','d',false)" id="q19-d"><span class="opt-letter">D</span><span class="opt-text">The CM advances the status manually after the attorney gives verbal approval — verbal authorization is sufficient documentation — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken</span></button>
-      </div>
-      <div class="feedback-box" id="q19-fb"></div>
-    </div>
 
-    <div class="question-block" id="q20-block">
-      <div class="q-num">Question 20 of 20 &middot; 10 pts &middot; Narrative Quality — Synthesis</div>
-      <div class="q-text">A CM builds a demand for a client with: L4-L5 disc herniation (MRI confirmed), surgical recommendation, $78,000 in medical bills, $24,000 in lost wages, clear liability (defendant cited). The demand narrative the CM submits reads: "Our client, Ms. Johnson, sustained significant injuries in this accident and incurred $78,000 in medical expenses and $24,000 in lost wages. We demand $175,000 to resolve this matter." What is fundamentally wrong — and what should the CM do differently?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q20','a',false)" id="q20-a"><span class="opt-letter">A</span><span class="opt-text">The demand amount is too low — for a surgical case with $102,000 in documented damages, the demand should be closer to $300,000</span></button>
-        <button class="option-btn" onclick="answer('q20','b',false)" id="q20-b"><span class="opt-letter">B</span><span class="opt-text">The narrative is acceptable for a first draft — the attorney will add the legal argument components, liability analysis, and injury narrative before sending</span></button>
-        <button class="option-btn" onclick="answer('q20','c',false)" id="q20-c"><span class="opt-letter">C</span><span class="opt-text">The demand amount is correct but the narrative should remove the dollar figures — adjusters calculate their own valuations from the records, so stating the demand amount in the narrative is premature, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity</span></button>
-        <button class="option-btn" onclick="answer('q20','d',true)" id="q20-d"><span class="opt-letter">D</span><span class="opt-text">The narrative fails GLG's six-component drafting structure. It has no Facts of Loss (no police report reference, no liability analysis), no Determination of Liability and Causation connecting the defendant's breach to the specific injuries, no Bodily Injuries and Pain &amp; Suffering narrative (no treatment timeline, no MRI findings, no surgical recommendation, no lived experience), and no Additional Heat. It reads as an invoice — two sentences and a dollar demand. The CM must build all six components before submitting for attorney review. Fixing the structure is a drafting matter only — it does not address whether any time-limited offer would satisfy O.C.G.A. § 9-11-67.1, which is a separate check by the attorney.</span></button>
-      </div>
-      <div class="feedback-box" id="q20-fb"></div>
-    </div>
 
     <div class="section-score" id="s5-score" style="display:none;"><div class="score-display" id="s5-score-val"></div><div class="score-label">Section 6 Score</div></div>
     <div class="btn-group" id="s5-next"><button class="btn btn-primary btn-block" onclick="goToSection(6)">Next: Boss Challenge — The Marcus Rivera Case &rarr;</button></div>
@@ -815,81 +770,51 @@ Nothing tested that isn't taught in-module. -->
     </div>
 
     <!-- BOSS TASK 1 -->
-    <div class="question-block" id="q21-block">
-      <div class="q-num">Boss Task 1 of 5 &middot; 10 Bonus pts &middot; Package Completeness Audit</div>
-      <div class="q-text">Before the CM can advance CasePeer to 'Demand Prepped,' conduct a completeness audit of the Marcus Rivera file. Which answer correctly identifies both what is present and what, if anything, is still required?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q21','a',false)" id="q21-a"><span class="opt-letter">A</span><span class="opt-text">The file is complete: all medical records, all bills, police report, dashcam footage, employer letter, pay stubs, and MMI documentation are in hand. Advance to Demand Prepped immediately. — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
-        <button class="option-btn" onclick="answer('q21','b',false)" id="q21-b"><span class="opt-letter">B</span><span class="opt-text">The 2-week treatment gap makes this file unready — the CM must get additional treatment records to bridge the gap before the demand can be assembled</span></button>
-        <button class="option-btn" onclick="answer('q21','c',false)" id="q21-c"><span class="opt-letter">C</span><span class="opt-text">The file is missing the ERISA subrogation payoff letter — that must be obtained and included in the demand package before it can go to the adjuster</span></button>
-        <button class="option-btn" onclick="answer('q21','d',true)" id="q21-d"><span class="opt-letter">D</span><span class="opt-text">The supporting documents appear complete (records, bills, police report, dashcam, employer docs, MMI letter). However, Template #09 (Demand Narrative) must still be drafted and reviewed — including: all six demand components, the treatment gap explanation (supervisor letter + physician continuity note), the Reptile-informed safety rule (defendant's red light violation = community safety rule breach), and the limits-exceeded analysis for Template #24 discussion with attorney. Package is NOT ready for Demand Prepped until the narrative is complete and the attorney has decided on #24 or #32 deployment.</span></button>
-      </div>
-      <div class="feedback-box" id="q21-fb"></div>
-    </div>
 
     <div class="callout callout-info"><strong>ERISA in Demand Packages:</strong> The ERISA subrogation claim (Aetna, $26,000 estimated) does NOT belong in the demand package. Subrogation is handled post-settlement, not in the demand. The demand uses total billed amounts ($81,000). ERISA status is noted in the CasePeer file for post-settlement reference — not addressed in the demand letter.</div>
 
     <!-- BOSS TASK 2 -->
-    <div class="question-block" id="q22-block">
-      <div class="q-num">Boss Task 2 of 5 &middot; 10 Bonus pts &middot; Reptile Safety Rule &amp; Demand Narrative Opening</div>
-      <div class="q-text">Draft the Reptile safety rule for the Marcus Rivera case — the specific rule the defendant violated — and select the answer that correctly frames the demand narrative's opening argument.</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q22','a',true)" id="q22-a"><span class="opt-letter">A</span><span class="opt-text">"A driver approaching an intersection controlled by a traffic signal must obey the signal and stop on red — without exception — to prevent T-bone collisions that can cause catastrophic injury to any person lawfully crossing the intersection." The narrative then shows: (1) the defendant's documented red light violation (police citation + dashcam); (2) the mechanism — how a T-bone impact at intersection speed transmits force to the occupant's lumbar spine, shoulder, and chest (treating physician); (3) the resulting injuries (disc herniation, rotator cuff, fractured ribs); (4) the treatment, functional limitations, and life impact; (5) Additional Heat — verdict data for comparable intersection T-bone cases with disc herniation + shoulder injury.</span></button>
-        <button class="option-btn" onclick="answer('q22','b',false)" id="q22-b"><span class="opt-letter">B</span><span class="opt-text">"On [date], the defendant caused a serious collision by failing to yield the right of way to our client, Marcus Rivera, who was lawfully operating his vehicle through the intersection." The narrative leads with the accident facts, then the injuries, then the bills. — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken</span></button>
-        <button class="option-btn" onclick="answer('q22','c',false)" id="q22-c"><span class="opt-letter">C</span><span class="opt-text">"Marcus Rivera, a 44-year-old construction supervisor and father, was seriously injured when the defendant ran a red light and struck his vehicle." The narrative leads with client credentialing, then injuries, then damages.</span></button>
-        <button class="option-btn" onclick="answer('q22','d',false)" id="q22-d"><span class="opt-letter">D</span><span class="opt-text">"The defendant violated Georgia traffic law by running a red light, resulting in a collision that caused Mr. Rivera $81,000 in medical expenses and $35,200 in lost wages." The narrative leads with the legal violation and then the financial damages.</span></button>
-      </div>
-      <div class="feedback-box" id="q22-fb"></div>
-    </div>
 
     <!-- BOSS TASK 3 -->
-    <div class="question-block" id="q23-block">
-      <div class="q-num">Boss Task 3 of 5 &middot; 10 Bonus pts &middot; Template Routing</div>
-      <div class="q-text">Walk through every template the CM generates for the Marcus Rivera demand package — and identify each template's correct purpose and recipient. Which answer captures the complete template suite?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q23','a',false)" id="q23-a"><span class="opt-letter">A</span><span class="opt-text">Template #09 (Demand Narrative) → Allstate · All records and bills attached · No cover letter needed since Allstate's adjuster was pre-notified by phone</span></button>
-        <button class="option-btn" onclick="answer('q23','b',false)" id="q23-b"><span class="opt-letter">B</span><span class="opt-text">Template #09 only — the narrative is the demand. Cover letters are optional administrative documents. #24 is used at settlement if limits don't cover the case.</span></button>
-        <button class="option-btn" onclick="answer('q23','c',true)" id="q23-c"><span class="opt-letter">C</span><span class="opt-text">Template #08 (Demand Package Letter) → Allstate: the cover letter enclosing all demand materials · Template #09 (Demand Narrative) enclosed in the package with all six components · Template #24 (Policy Limits Demand) → Allstate: damages ($116,200) clearly exceed $100,000 BI limits; attorney decides #24 alone or #24 + #32. If attorney authorizes #32 (Holt), it requires: specific dollar amount ($100,000), 30-day window, certified mail, records attached, expiration statement, and explicit attorney authorization in CasePeer.</span></button>
-        <button class="option-btn" onclick="answer('q23','d',false)" id="q23-d"><span class="opt-letter">D</span><span class="opt-text">Template #08 + #09 + #32 — limits are exceeded, so the Holt demand replaces the standard demand and the CM should prepare #32 immediately before attorney review</span></button>
-      </div>
-      <div class="feedback-box" id="q23-fb"></div>
-    </div>
 
     <!-- BOSS TASK 4 -->
-    <div class="question-block" id="q24-block">
-      <div class="q-num">Boss Task 4 of 5 &middot; 10 Bonus pts &middot; CasePeer Documentation &amp; Status Flow</div>
-      <div class="q-text">Walk through every required CasePeer action and log entry the CM must complete — from 'Demand Writing' through 'Demanded' — for the Marcus Rivera file. Which answer captures complete documentation?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q24','a',false)" id="q24-a"><span class="opt-letter">A</span><span class="opt-text">Complete the narrative, advance to Demand Prepped, get attorney approval, send the demand, advance to Demanded. Log the date sent.</span></button>
-        <button class="option-btn" onclick="answer('q24','b',false)" id="q24-b"><span class="opt-letter">B</span><span class="opt-text">Complete narrative, advance to Demand Prepped, attorney approval logged, demand sent via certified mail, log tracking number, advance to Demanded. No other actions required until adjuster responds.</span></button>
-        <button class="option-btn" onclick="answer('q24','c',false)" id="q24-c"><span class="opt-letter">C</span><span class="opt-text">Complete narrative, advance to Demand Prepped, attorney reviews, send demand, advance to Demanded. The ERISA note is unnecessary at the demand stage — handle at settlement.</span></button>
-        <button class="option-btn" onclick="answer('q24','d',true)" id="q24-d"><span class="opt-letter">D</span><span class="opt-text">Demand Writing: CM completes Template #09 (all six components, treatment gap explained), runs seven-item quality checklist (records ✓, bills $81K total billed ✓, police report ✓, dashcam ✓, employer docs $35,200 ✓, lost wages ✓, narrative complete ✓). Advance to Demand Prepped. Attorney reviews and approves: documents approval in CasePeer. Attorney decides Template #24 (policy limits) and/or #32 (Holt). If #32: log authorization in CasePeer before prep. Send via certified mail. Log tracking number + send date. Advance to Demanded. 45-day clock starts; log Day 45 follow-up deadline in CasePeer task calendar. Flag ERISA subrogation ($26,000 est. Aetna self-funded) for lien negotiation phase: Made Whole Doctrine does NOT apply.</span></button>
-      </div>
-      <div class="feedback-box" id="q24-fb"></div>
-    </div>
 
     <!-- BOSS TASK 5 -->
-    <div class="question-block" id="q25-block">
-      <div class="q-num">Boss Task 5 of 5 &middot; 10 Bonus pts &middot; The Treatment Gap — Narrative Handling</div>
-      <div class="q-text">Marcus Rivera has a 2-week gap in PT/chiropractic treatment (weeks 6–7 of his recovery). The gap is documented: a supervisor letter confirms he was required at a mandatory jobsite inspection that week; the treating physician's notes confirm the injury remained active through the gap. The attorney's note says: "Address this in the narrative — don't let Allstate find it before we explain it." Which approach correctly handles the gap in Template #09?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q25','a',false)" id="q25-a"><span class="opt-letter">A</span><span class="opt-text">Omit the gap from the narrative entirely — the adjuster is reviewing medical records, not a treatment calendar, and the gap may go unnoticed</span></button>
-        <button class="option-btn" onclick="answer('q25','b',true)" id="q25-b"><span class="opt-letter">B</span><span class="opt-text">Address the gap proactively in the Bodily Injuries section: "During weeks 6 and 7 of Mr. Rivera's recovery, treatment was temporarily interrupted due to mandatory occupational obligations (see Exhibit: Supervisor Attestation Letter, dated [date]). His treating physician documented that the cervical and lumbar symptoms persisted continuously through this period (see Exhibit: Dr. [Name] Progress Notes, [date range]). This interruption reflects the economic reality of an injured worker attempting to maintain employment — not improvement or resolution of injury." Document the gap, explain it with sourced evidence, and frame it as credibility-building, not a liability.</span></button>
-        <button class="option-btn" onclick="answer('q25','c',false)" id="q25-c"><span class="opt-letter">C</span><span class="opt-text">Mention the gap briefly with a one-line explanation: "There was a brief interruption in treatment due to work obligations." Short acknowledgment is sufficient — lengthy explanations draw more attention to the issue.</span></button>
-        <button class="option-btn" onclick="answer('q25','d',false)" id="q25-d"><span class="opt-letter">D</span><span class="opt-text">Ask Marcus to get a retroactive physician note stating his injuries were continuous — this documentation can be added to the package and renders the gap explanation unnecessary</span></button>
-      </div>
-      <div class="feedback-box" id="q25-fb"></div>
-    </div>
 
     <div class="section-score" id="s6-score" style="display:none;"><div class="score-display" id="s6-score-val"></div><div class="score-label">Boss Challenge Bonus Points</div></div>
-    <div class="btn-group" id="s6-next"><button class="btn btn-primary btn-block" onclick="showResults()">See Results &amp; Score &rarr;</button></div>
+    <div class="btn-group" id="s6-next"><div style="margin-bottom:1rem;">
+      <label for="trainee-name-input" style="display:block;font-size:0.85rem;font-weight:600;color:#141c2c;margin-bottom:0.4rem;">Your Name — required to start</label>
+      <input type="text" id="trainee-name-input" placeholder="Enter your full name" autocomplete="name" style="width:100%;padding:0.5rem 0.75rem;border:1.5px solid #cbd5e1;border-radius:6px;font-size:0.9rem;box-sizing:border-box;">
+    </div>
+    <button class="btn btn-primary btn-block" onclick="startQuiz()">Take the Quiz &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 7 — QUIZ (api-quiz-engine.js)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-7">
+  <div class="section-header">
+    <div class="section-num">Knowledge Check</div>
+    <h2>Module Assessment</h2>
+    <div class="section-subhead">Answer each question. One attempt — wrong answer reveals the correct answer and unlocks Next.</div>
+  </div>
+  <div class="section-body">
+    <div style="font-family:system-ui,sans-serif;font-size:13px;color:#33415c;padding:8px 0 12px;border-bottom:1px solid #e8eaf0;margin-bottom:16px;">
+      Base: <b id="base">0</b> / <b id="basemax">—</b>
+      &nbsp;·&nbsp; Bonus: <b id="bonus">0</b>
+      &nbsp;·&nbsp; Pass gate: <b id="gate">80</b>%
+      &nbsp;·&nbsp; <span id="q-progress" style="color:#dcb161;font-weight:700;"></span>
+    </div>
+    <div id="questions"></div>
+    <div id="result" style="background:#fff;border:2px solid #0b2545;border-radius:10px;padding:18px;margin:18px 0;display:none;"></div>
   </div>
 </div>
 
 <!-- ══════════════════════════════════════════
      SECTION 7 — RESULTS
 ════════════════════════════════════════════ -->
-<div class="section-card" id="section-7">
+<div class="section-card" id="section-8">
   <div id="results-header-wrap"></div>
   <div class="section-body">
     <div id="results-body"></div>
@@ -912,7 +837,7 @@ Nothing tested that isn't taught in-module. -->
 <!-- ══════════════════════════════════════════
      SECTION 8 — FEEDBACK & CERTIFICATE
 ════════════════════════════════════════════ -->
-<div class="section-card" id="section-8">
+<div class="section-card" id="section-9">
   <div class="section-header">
     <div class="section-num">Section 9 · Feedback &amp; Certificate</div>
     <h2>Module Feedback &amp; Completion Certificate</h2>
@@ -1019,7 +944,7 @@ var soundEnabled = false;
 var _audioKeepalive = null;
 
 var TRACKER_URL = 'https://script.google.com/macros/s/AKfycbzHJZ0C3BqnLatfq7RIiUP5KQdgYoXTJlozd8ZGZiwIf2bdVmvnPMo3JLm0dA5gQhJyxA/exec';
-var TOTAL_SECTIONS = 9;
+var TOTAL_SECTIONS = 10;
 var PASS_THRESHOLD = 152; // 80% of 190 true achievable base (q6 unscored calibration) — Harrell ruling Aug 17 2026 (Option C)
 var BASE_MAX = 190;
 
@@ -1027,31 +952,31 @@ var BASE_MAX = 190;
 // QUESTION CONFIG
 // ═══════════════════════════════════════════════
 var Q_CONFIG = {
-  'q1':  {section:1, pts:10, isBonus:false, correct:'d'},
-  'q2':  {section:1, pts:10, isBonus:false, correct:'c'},
-  'q3':  {section:1, pts:10, isBonus:false, correct:'c'},
-  'q4':  {section:1, pts:10, isBonus:false, correct:'a'},
-  'q5':  {section:2, pts:10, isBonus:false, correct:'b'},
-  'q6':  {section:2, pts:0, isBonus:false, correct:'a'},
-  'q7':  {section:2, pts:10, isBonus:false, correct:'d'},
-  'q8':  {section:2, pts:10, isBonus:false, correct:'c'},
-  'q9':  {section:3, pts:10, isBonus:false, correct:'a'},
-  'q10': {section:3, pts:10, isBonus:false, correct:'a'},
-  'q11': {section:3, pts:10, isBonus:false, correct:'b'},
-  'q12': {section:3, pts:10, isBonus:false, correct:'c'},
-  'q13': {section:4, pts:10, isBonus:false, correct:'a'},
-  'q14': {section:4, pts:10, isBonus:false, correct:'a'},
-  'q15': {section:4, pts:10, isBonus:false, correct:'c'},
-  'q16': {section:4, pts:10, isBonus:false, correct:'b'},
-  'q17': {section:5, pts:10, isBonus:false, correct:'d'},
-  'q18': {section:5, pts:10, isBonus:false, correct:'b'},
-  'q19': {section:5, pts:10, isBonus:false, correct:'b'},
-  'q20': {section:5, pts:10, isBonus:false, correct:'d'},
-  'q21': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'d'},
-  'q22': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'a'},
-  'q23': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'c'},
-  'q24': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'d'},
-  'q25': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'b'}
+  'q1':  {section:1, pts:10, isBonus:false},
+  'q2':  {section:1, pts:10, isBonus:false},
+  'q3':  {section:1, pts:10, isBonus:false},
+  'q4':  {section:1, pts:10, isBonus:false},
+  'q5':  {section:2, pts:10, isBonus:false},
+  'q6':  {section:2, pts:0, isBonus:false},
+  'q7':  {section:2, pts:10, isBonus:false},
+  'q8':  {section:2, pts:10, isBonus:false},
+  'q9':  {section:3, pts:10, isBonus:false},
+  'q10': {section:3, pts:10, isBonus:false},
+  'q11': {section:3, pts:10, isBonus:false},
+  'q12': {section:3, pts:10, isBonus:false},
+  'q13': {section:4, pts:10, isBonus:false},
+  'q14': {section:4, pts:10, isBonus:false},
+  'q15': {section:4, pts:10, isBonus:false},
+  'q16': {section:4, pts:10, isBonus:false},
+  'q17': {section:5, pts:10, isBonus:false},
+  'q18': {section:5, pts:10, isBonus:false},
+  'q19': {section:5, pts:10, isBonus:false},
+  'q20': {section:5, pts:10, isBonus:false},
+  'q21': {section:6, pts:0,  isBonus:true,  bonusPts:10},
+  'q22': {section:6, pts:0,  isBonus:true,  bonusPts:10},
+  'q23': {section:6, pts:0,  isBonus:true,  bonusPts:10},
+  'q24': {section:6, pts:0,  isBonus:true,  bonusPts:10},
+  'q25': {section:6, pts:0,  isBonus:true,  bonusPts:10}
 };
 
 var SECTION_QUESTIONS = {
@@ -1066,113 +991,12 @@ var SECTION_QUESTIONS = {
 // ═══════════════════════════════════════════════
 // FEEDBACK TEXT
 // ═══════════════════════════════════════════════
-var FEEDBACK = {
-  'q1': {
-    t: '✅ Per GLG\'s Six-Component Demand Structure, every demand letter must contain all six components: (1) Facts of Loss — police report, photos, witnesses; (2) Determination of Liability and Causation — torts analysis connecting breach to injury; (3) Bodily Injuries and Pain &amp; Suffering — full treatment timeline and lived impact; (4) Summary of Expenses — total billed amounts from every provider; (5) Additional Heat — verdict data, punitive factors, before/after affidavits; (6) Demand for Payment with Conditions. A demand missing any component is an invoice — not a legal argument — and will be returned for revision.<br><br>⚠️ <strong>Do not confuse these six with the statute.</strong> These six are GLG\'s drafting and persuasion structure — <em>how you write</em> the demand. O.C.G.A. § 9-11-67.1 separately sets the material terms the law requires for a pre-suit time-limited offer in a motor vehicle case. Completing all six components does NOT make a demand statutorily compliant. Both are checked, separately, and the compliance call belongs to the attorney.',
-    f: '❌ Options A, B, and C all describe subsets of required documents but miss the complete six-component structure. A demand is not just a collection of records and bills with a cover letter — it is a legal argument organized around all six required components. A demand missing the torts analysis (component 2), the bodily injuries narrative (component 3), or the Additional Heat section (component 5) tells the adjuster the firm doesn\'t know how to argue the case. The correct answer identifies all six required components and the supporting documentation.'
-  },
-  'q2': {
-    t: '✅ Per GLG\'s demand preparation standards: medical expenses in the demand must reflect the total amount billed by the provider — not what health insurance paid, not the adjusted rate, not the client\'s out-of-pocket. The demand shows $42,000 because that is the gross billing amount. Health insurance\'s $18,000 payment and $14,000 write-off are irrelevant to the demand. The health insurance subrogation claim is handled post-settlement. Option A ($18,000 paid) and Option B ($20,400 outstanding) both understate the demand. Option D ($24,000) is speculative. The demand anchor is the total billed amount — full stop.',
-    f: '❌ Medical expenses in the demand are always stated as the total billed amount — $42,000. Option A ($18,000) reflects only what health insurance paid — a fraction of the billed amount. Option B ($20,400) reflects outstanding balance — not the demand standard. Option D ($24,000) is a counterfactual estimate with no basis in actual billing. The purpose of the total billed amount is to set the highest defensible anchor for the demand. Health insurance adjustments and subrogation are post-settlement matters.'
-  },
-  'q3': {
-    t: '✅ Every provider who treated accident-related injuries must be represented with full chart notes AND billing statements. Billing statements without chart notes are insufficient — they show what was charged but not what was found, treated, or documented. The adjuster evaluates injury severity from chart notes, MRI reports, and physician assessments. The CM cannot proceed to Demand Prepped with billing statements only; obtaining the complete orthopedic chart notes is a required step. Sending the package with a "records pending" note (Option D) anchors the demand to incomplete specials and cannot be undone.',
-    f: '❌ All providers with accident-related treatment must be represented with full chart notes — not just billing statements, not just the "most important" provider. Options A and B both apply incorrect triage logic: every provider\'s records contribute to the injury narrative and the damages total. Option D (send with pending note) is the most dangerous error — it anchors the adjuster\'s evaluation to incomplete specials, and the low anchor is set before the missing records arrive.'
-  },
-  'q4': {
-    t: '✅ Lost wages require written employer verification — a letter from the employer confirming the client\'s salary or hourly rate, the specific weeks or days missed, and that the absence was due to inability to work (not a voluntary absence). This is supported by pay stubs or W-2 documentation. The client\'s verbal report is the starting point — it tells the CM what to request. But verbal attestation alone (Option B) or a client-signed declaration (Option C) are insufficient because they are self-serving and easily challenged by the adjuster. Option D (document only if requested) would cause lost wages to be excluded from the demand entirely — a significant under-statement of specials.',
-    f: '❌ Lost wages require employer-generated documentation, not client attestation. Option B (CasePeer note of verbal report) has no evidentiary weight — the adjuster will dismiss it. Option C (client\'s own signed statement) is a self-serving declaration that the adjuster will challenge without employer corroboration. Option D entirely omits lost wages from the demand until the adjuster asks — this is an under-statement of damages that cannot be corrected after the demand is sent. Employer verification + pay stubs is the required standard.'
-  },
-  'q5': {
-    t: '✅ The safety-rule demand sequence leads with the safety rule violation — not with dollars, not with the accident story. This sequence forces the adjuster to evaluate the case as a community safety enforcement matter before they ever open the medical records. The sequence: (1) Safety rule violation → (2) Causation chain (mechanism of wreck + mechanism of harm) → (3) Bodily injuries and life impact → (4) Damages → (5) Additional Heat. Option A (lead with money) anchors the adjuster to raw specials before they understand the safety rule context. Option C (chronological) is a narrative story, not a legal argument. Option D (objective/neutral) eliminates persuasive framing entirely — a neutral demand is an invoice.',
-    f: '❌ The demand narrative is a legal argument, not a neutral presentation of facts. Option A (lead with dollars) anchors the adjuster before they understand the liability context — they evaluate the case as an invoice, not a rule violation. Option C (chronological) tells a story but doesn\'t argue anything — it doesn\'t make the adjuster feel the safety rule pressure. Option D (objective/neutral) destroys persuasive value entirely. The Reptile sequence leads with the rule, then the mechanism, then the damages — so the adjuster is already convinced of liability before they see the bill total.'
-  },
-  'q6': {
-    t: '📋 GLG Demand Narrative — Complete Structure:<br><br><strong>Tone:</strong> Measured, professional, confident — reads like a brief, not a complaint letter. Facts sourced to documents. No speculative characterizations.<br><br><strong>Sequence:</strong><br>1. <strong>Safety Rule Violation</strong> — the specific rule the defendant broke, stated plainly and broadly (applies to all drivers, protects the whole community)<br>2. <strong>Causation Chain</strong> — mechanism of wreck (force physics) + mechanism of harm (what force does inside the body) — from treating physician<br>3. <strong>Bodily Injuries and Life Impact</strong> — full timeline, objective findings, functional limitations, daily impact, psychological harm<br>4. <strong>Damages</strong> — total billed specials, lost wages, pain and suffering, future care<br>5. <strong>Additional Heat</strong> — verdict tables (Case-Metrix), punitive factors, before/after affidavits<br>6. <strong>Demand for Payment with Conditions</strong> — specific dollar amount and the conditions attached to it<br><br>The demand is the anchor. The anchor is only as high as the argument supporting it.<br><br>⚠️ This sequence is a <strong>writing structure</strong>. If the demand is a pre-suit time-limited offer in a motor vehicle case, the material terms required by O.C.G.A. § 9-11-67.1 are a <strong>separate statutory checklist</strong> — satisfying this structure does not satisfy the statute. Route every time-limited demand to the attorney of record.',
-    f: '📋 Same complete demand narrative framework revealed for all confidence levels. The goal is to identify any gap between your confidence and your actual working knowledge of the sequence, tone, and purpose of each section. Every element of the answer text above is fair game in a demand review with the attorney.'
-  },
-  'q7': {
-    t: '✅ Additional Heat (Component 5 of the six-component demand structure) contains three specific types of material: (1) Punitive factors — reckless conduct, prior violations, aggravating circumstances that push value above medical bills; (2) Georgia verdict and settlement data from Case-Metrix — what juries have awarded for comparable injuries in comparable counties; (3) Before/after affidavits — the client\'s own testimony about life before versus life after the injury. Together these tell the adjuster: we know what juries do with cases like this, and we can document why this client\'s case is worth more than the bills. Option A (treatment volume) is Component 3, not Additional Heat. Option C (legal citations) is Component 6. Neither belongs in the Additional Heat section.',
-    f: '❌ Additional Heat is not treatment volume (that\'s Component 3 — Bodily Injuries section), not GLG\'s contact record, and not the statutory citation (that\'s Component 6 — Demand for Payment). Additional Heat is specifically: punitive factors, Case-Metrix Georgia verdict data for comparable injuries, and before/after affidavits. Without Additional Heat, the demand argument stops at the medical bills — and the adjuster calculates their offer as a multiple of specials only. Additional Heat is the evidence that a jury would award significantly more.'
-  },
-  'q8': {
-    t: '✅ MIST (Minor Impact Soft Tissue) cases are the most common PI case type — and the most aggressively defended. The defense strategy is always the same: minimize the impact speed, therefore minimize the injury, therefore minimize the value. The demand narrative must preemptively address this with both (1) Mechanism of Wreck — how 10 mph force travels through the vehicle frame and reaches the occupant\'s body without dissipating (physics, not speculation — sourced from the treating physician or a qualified expert); and (2) Mechanism of Harm — step by step inside the body: cervical curve straightens, head snaps in whiplash motion, ligaments stretch beyond elastic limit, disc compression occurs. These explanations must be physician-sourced. A MIST demand that ignores these mechanisms gives the adjuster the low-impact argument they need.',
-    f: '❌ MIST cases require explicit mechanism narrative — the demand cannot be the same as a high-impact case. Option A (same formula) ignores the MIST defense entirely. Option B (minimize impact reference) is the worst approach — the CM would be helping the defense build their argument by omitting the physics explanation. Option D (include a disclaimer about moderate impact) is counter-productive — it validates the MIST framing instead of dismantling it. The mechanism of wreck + mechanism of harm framework is the specific tool built for MIST cases.'
-  },
-  'q9': {
-    t: '✅ Template #08 (Demand_Package_Letter) is the cover/transmittal letter — it introduces the demand, identifies the case and client, states that the enclosed materials constitute the firm\'s demand, and directs the adjuster to contact the attorney or CM with any questions. Template #09 (Demand_Narrative) is the substantive argument document — all six demand components, the primary persuasive content. Both are required for every demand. Option B reverses their roles — a common error that causes CMs to label the wrong document in CasePeer. Options C and D misidentify both templates entirely.',
-    f: '❌ Template #08 = Demand Package Letter (cover/transmittal). Template #09 = Demand Narrative (the substantive legal argument). Option B reverses them. This reversal matters: the wrong template gets attached to the wrong CasePeer task, creating tracking errors and potentially sending the narrative without the cover (or vice versa). Know which number is which — and verify every time.'
-  },
-  'q10': {
-    t: '✅ The 45-day follow-up clock starts the moment the demand is sent — when CasePeer advances to Demanded status and the certified mail tracking number is logged. From that moment, the CM has 45 days to receive an adjuster response before follow-up action is mandatory. The clock is logged in CasePeer — it is not a mental note. Option B incorrectly starts the clock at Demand Writing (when the CM is assembling, not when the demand has been sent). Option C misidentifies the clock as measuring time between MMI and demand (that is the 30-day post-MMI window, a separate deadline). Option D (no fixed clock) is a process violation — the 45-day clock is mandatory.',
-    f: '❌ The 45-day clock starts when the demand is SENT — Demanded status in CasePeer with certified mail tracking logged. Not when writing begins (B), not when MMI occurs (C). Option D (no fixed clock) is the most dangerous answer: without a documented clock, the follow-up obligation is invisible and will be missed. The 45 days is a specific, logged, mandatory deadline — not a guideline.'
-  },
-  'q11': {
-    t: '✅ When documented damages clearly exceed the at-fault carrier\'s BI policy limits, Template #24 (Policy_Limits_Demand) is appropriate in addition to Templates #08 and #09. Template #24 formally puts the carrier on notice that the full policy limit is required — creating bad faith exposure if they fail to pay limits when a reasonable evaluation would demand it. The attorney decides whether #24 alone is sufficient or whether #32 (Holt demand) is also appropriate to create a time-limited enforcement mechanism. The CM prepares on attorney direction. Option C (automatic #32) is wrong — Template #32 always requires explicit attorney authorization and is never automatic. Option D (skip demand, file immediately) wastes the demand-stage leverage and bad faith opportunity.',
-    f: '❌ When limits are clearly exceeded, Template #24 (Policy Limits Demand) is the appropriate demand-stage addition — not #32 alone, not skipping demand altogether. Option A (standard demand only) ignores the limits-exceeded situation and misses the bad faith opportunity. Option C (automatic Holt demand) violates the authorization rule — #32 requires explicit attorney authorization every time, never automatically triggers. Option D skips demand entirely — a strategic error that eliminates the opportunity to set up bad faith exposure pre-litigation.'
-  },
-  'q12': {
-    t: '✅ GLG\'s demand timeline standard: demand should go out within 30 days of MMI. This file is 49 days post-MMI and still in Demand Writing. That is 19 days past the standard window. Every additional day reduces the urgency signal to the adjuster and gives no new value to the firm. The CM must complete the package and submit for expedited attorney review immediately. Option A (no deadline) is wrong — the 30-day window is a firm standard. Option B (adjusters don\'t evaluate timing) is incorrect — experienced adjusters absolutely note when demands arrive weeks after MMI and price the file accordingly. Option D (60 days minimum) is the opposite of GLG\'s standard.',
-    f: '❌ GLG\'s standard is: demand within 30 days of MMI. At 49 days, this file is 19 days past the window. Option A treats the 30-day window as a suggestion — it is not. Option B assumes adjusters don\'t evaluate demand timing — they do, and experienced adjusters price late demands as disorganized files. Option D (60 days minimum) inverts the standard entirely. The correct response is to treat this as an overdue file and move immediately.'
-  },
-  'q13': {
-    t: '✅ The complete pre-submission quality checklist has seven items: (1) All medical records present — full chart notes, every accident-related provider; (2) All medical bills itemized and totaled using total billed amounts; (3) Police report included; (4) Photos/video attached (if applicable); (5) Lost wages documentation included (if applicable); (6) Demand narrative (Template #09) complete with all six components, proofread; (7) CasePeer advanced to Demand Prepped. Options A, C, and D each omit required checklist items. Option B\'s reference to "attorney signed" is premature — attorney review occurs after Demand Prepped is set. Option D incorrectly includes client approval of the demand amount — clients do not approve the demand dollar amount, the attorney sets it.',
-    f: '❌ The complete checklist has seven items — all are required before advancing to Demand Prepped. Option B is missing records, police report, photos, and lost wages docs. Option C stops at three items and incorrectly places attorney approval before Demand Prepped (attorney review comes after). Option D adds client approval of the demand amount — clients do not approve the demand dollar; the attorney sets it. Missing any checklist item when submitting to the attorney wastes review time and delays the demand.'
-  },
-  'q14': {
-    t: '✅ Demand Prepped means the package is complete and ready for attorney review — it does NOT mean the CM is authorized to send. The attorney must review the package, approve it, and then either (a) send the demand themselves, or (b) explicitly authorize the CM to send on the firm\'s behalf — and that authorization must be documented in CasePeer. Option B\'s assumption that Demand Prepped status implies send authorization is a process violation. Option C (automatic CasePeer delivery) is not how CasePeer works. Option D (client must sign off on the demand letter) is incorrect — clients do not review or approve the demand document.',
-    f: '❌ Demand Prepped ≠ send authorization. The CM cannot send the demand without explicit attorney authorization. Option B\'s assumption that approval is implied by the Demand Prepped status is a process violation that bypasses the attorney\'s essential review role. Option C misunderstands CasePeer — it does not auto-deliver demands. Option D incorrectly involves the client in the demand letter approval process — clients do not review the demand, the attorney does.'
-  },
-  'q15': {
-    t: '✅ The correct CasePeer status sequence for demand preparation: Pending Demand → Demand Writing → Demand Prepped → Demanded. (1) Pending Demand: case enters demand prep stage post-MMI, waiting for CM to begin; (2) Demand Writing: CM actively assembling records, drafting narrative; (3) Demand Prepped: quality checklist complete, submitted to attorney for review; (4) Demanded: attorney sends, certified mail tracked, 45-day clock starts. Options A, B, and D all swap at least two stages — these mistakes cause CasePeer reporting errors and missed follow-up obligations.',
-    f: '❌ The correct sequence is: Pending Demand → Demand Writing → Demand Prepped → Demanded. Options A (Demand Writing first), B (Demand Prepped before Demand Writing), and D (Demand Writing first, Pending Demand third) all represent incorrect orderings that would cause CasePeer tracking errors and incorrect deadline calculations.'
-  },
-  'q16': {
-    t: '✅ An unexplained treatment gap is one of the five demand errors. The attorney\'s instruction is correct: explain the gap before the adjuster finds it, because proactive explanation is credibility-building while defensive explanation (after the adjuster raises it) looks like a cover-up. The correct process: revise Template #09 to address the gap with evidence (reason, physician continuity documentation), update CasePeer status back to Demand Writing, and resubmit when the revision is complete. Option A (resubmit unchanged) ignores the attorney\'s correction entirely. Option C (get more treatment) is logistically problematic and medically inappropriate. Option D (remove records showing the gap) is falsification of evidence — never acceptable.',
-    f: '❌ Unexplained treatment gaps are a demand weakness the adjuster WILL find — addressing them proactively in the narrative is required. Option A ignores the attorney\'s correction. Option C (get more treatment to close the gap) is logistically and medically inappropriate — the client is at MMI. Option D (remove records showing the gap) is document falsification — it destroys the demand\'s credibility entirely if discovered and creates serious legal exposure for the firm and the CM.'
-  },
-  'q17': {
-    t: '✅ Sending the demand before MMI is the most damaging timing error because it permanently limits recoverable damages. Once the demand anchor is set, future bills that arrive after the demand cannot be credibly incorporated into the existing demand. The adjuster has already evaluated the file and set their reserve. The low anchor is established and the negotiation will proceed from a suppressed baseline. Options A (Friday timing) and B (90-day delay) both cost time but do not permanently limit damages. Option C (missing lost wages docs) is a checklist error that can be corrected before submission — not a timing error.',
-    f: '❌ The most damaging timing error is sending before MMI — because it permanently sets an anchor based on incomplete damages. Options A (Friday timing) and B (90-day delay) cost leverage and signal disorganization but do not permanently cap recoverable damages. Option C (missing lost wages docs) is a quality error, not a timing error, and can be corrected before the demand is sent. Pre-MMI demand cannot be corrected after it is sent — the anchor is set.'
-  },
-  'q18': {
-    t: '✅ The incomplete records created a low anchor that now lives in the adjuster\'s case notes. State Farm evaluated $14,200 in documented specials and offered 137% of those specials ($19,500). That offer makes internal sense given what the adjuster received. Now that the orthopedic records arrive ($21,000 more in specials), the adjuster must revise their internal evaluation — but their starting point is already documented. Recovering from a low anchor requires convincing the adjuster their first evaluation was wrong — a significantly harder task than getting the anchor right initially. Option A (adjusters will ask for records) is wrong — adjusters evaluate what they receive and set reserves accordingly, not what might arrive later.',
-    f: '❌ The low anchor is the consequence. Option A assumes adjusters will automatically request missing records — they evaluate what they receive and make offers accordingly. Option C (follow up with records immediately) is the correct next step, but it doesn\'t reverse the harm: the adjuster\'s reserve is already set, their supervisor has been briefed on the $19,500 figure, and their case notes show a first offer that anchored low. Option D (hold records back as leverage) is the opposite of correct — withholding records from the initial demand always produces a lower first offer.'
-  },
-  'q19': {
-    t: '✅ Demanded status is triggered by: the attorney sending the demand (or explicitly authorizing CM transmission), confirmed certified mail delivery, and the certified mail tracking number logged in CasePeer along with the send date and authorizing attorney. This documentation is not optional — it is the evidence that the demand was actually sent and the 45-day clock has started. Without the tracking number, there is no proof the demand went out, and the 45-day follow-up obligation is invisible. Option A (CM advances manually after quality check) is Demand Prepped, not Demanded. Option C (adjuster calls to confirm) is not the trigger — the trigger is the sending event, not receipt confirmation. Option D (verbal authorization) is insufficient — authorization must be documented.',
-    f: '❌ The Demanded status requires three documented elements: (1) the attorney sends or explicitly authorizes CM transmission; (2) certified mail confirmed; (3) tracking number + send date logged in CasePeer. Option A describes the Demand Prepped transition, not Demanded. Option C waits for the adjuster\'s confirmation — that could take weeks and the 45-day clock would be unmeasured. Option D (verbal authorization only) is insufficient — attorney authorization for sending must be documented in CasePeer.'
-  },
-  'q20': {
-    t: '✅ The CM\'s two-sentence draft fails every element of the six-component drafting structure. It has: no Facts of Loss (no police report reference, no liability analysis), no Determination of Liability and Causation (no torts analysis connecting the defendant\'s conduct to the L4-L5 herniation and surgical recommendation), no Bodily Injuries and Pain &amp; Suffering narrative (no treatment timeline, no MRI description, no surgical recommendation discussion, no lived experience of pain and limitation), no Additional Heat (no Case-Metrix data, no punitive factors, no before/after affidavit). It reads as an invoice — two sentences and a number. The CM must build all six components from the records in the file before submitting for attorney review. Option B (attorney adds the components) is a process violation — the CM is responsible for the draft, the attorney reviews it.<br><br>⚠️ <strong>Scope of this fix:</strong> rebuilding the six components cures a <em>drafting</em> defect only. It says nothing about whether a time-limited offer here would satisfy O.C.G.A. § 9-11-67.1 — that is a separate statutory check, and it is the attorney\'s call, not the CM\'s.',
-    f: '❌ The demand is structurally deficient — it is an invoice with two sentences. Option A addresses only the demand amount — the structural problems are far more fundamental. Option C (remove dollar figures) is also wrong — the demand amount is required in Component 6. Option B (attorney adds the components) inverts the roles: the CM drafts the narrative, the attorney reviews and approves. A CM who submits a two-sentence draft has not done the CM\'s job.'
-  },
-  'q21': {
-    t: '✅ The supporting documents for Marcus Rivera appear complete: records from all three providers, bills totaling $81,000, police report, dashcam footage, employer letter, pay stubs, and MMI documentation are all referenced in the case file. However, Template #09 (Demand Narrative) still needs to be drafted — and it must address all six components including the treatment gap (supervisor letter + physician continuity note), the Reptile safety rule framing (red light = specific community safety rule), and the limits-exceeded analysis for attorney decision on Template #24. The ERISA subrogation claim is NOT part of the demand package — it is a post-settlement matter. Advance to Demand Prepped only after the narrative is complete.',
-    f: '❌ Option A (complete, advance immediately) is wrong — Template #09 (Demand Narrative) still needs to be drafted. Option C (ERISA payoff letter required) is wrong — ERISA subrogation is a post-settlement matter, not included in the demand. Option B (gap requires more treatment) is wrong — the gap is documented with a supervisor letter and physician continuity notes, which is the correct approach. The gap should be explained in the narrative, not closed with additional treatment.'
-  },
-  'q22': {
-    t: '✅ The Reptile safety rule for this case: "A driver approaching an intersection controlled by a traffic signal must obey the signal and stop on red — without exception — to prevent T-bone collisions that can cause catastrophic injury to any person lawfully crossing the intersection." This rule is: (a) simple and clear; (b) universally applicable — every driver must follow it; (c) something every juror and adjuster relies on personally. The narrative then connects the rule violation to the specific mechanism: T-bone impact force at intersection speed → force to lumbar spine → disc herniation; force to shoulder → rotator cuff tear; blunt trauma → rib fractures. Then full injury narrative, damages, Additional Heat with T-bone intersection verdict data. Options B, C, and D all lead with fact recitation rather than safety rule framing.',
-    f: '❌ Options B, C, and D all open with accident facts rather than the safety rule. Option B (failed to yield right of way) is a legal conclusion, not a Reptile safety rule — it doesn\'t activate community safety awareness. Option C (client credentialing) is valuable but belongs later in the narrative, after the safety rule argument is established. Option D (legal violation + dollar damages) leads with money — the adjuster sees a bill before they feel the rule violation. The Reptile sequence always leads with the rule: state it, then show it was violated, then show the community harm.'
-  },
-  'q23': {
-    t: '✅ The complete template suite for Marcus Rivera: Template #08 (Demand Package Letter) → to Allstate as the cover/transmittal enclosing all materials; Template #09 (Demand Narrative) → enclosed in the package, all six components including gap explanation; Template #24 (Policy Limits Demand) → to Allstate, because documented damages ($116,200) clearly exceed the $100,000 BI limit — CM prepares on attorney direction. Attorney then decides whether #32 (Holt) is also appropriate. If #32 authorized: must have specific dollar amount ($100,000 policy limit), 30-day response window, certified mail, all records attached, explicit expiration statement, and attorney authorization documented in CasePeer. Option A skips #08 and ignores the limits-exceeded issue. Option B omits #24. Option D assumes #32 replaces the standard demand — it does not.',
-    f: '❌ The complete suite for a limits-exceeded case is #08 + #09 + #24, with attorney deciding on #32. Option A skips the cover letter (#08) and the limits demand (#24). Option B omits #24 — the policy limits demand is required when damages clearly exceed limits. Option D assumes #32 automatically replaces the standard demand — it does not. #32 requires explicit attorney authorization and operates alongside #08 and #09, not in place of them.'
-  },
-  'q24': {
-    t: '✅ Complete documentation requires: (1) Demand Writing stage: narrative drafted with all six components, treatment gap addressed, quality checklist verified (all seven items); (2) Demand Prepped: attorney review + approval documented in CasePeer; (3) Attorney decides on #24 and/or #32 — if #32, authorization must be documented before prep; (4) Demand sent via certified mail — tracking number, send date, and authorizing attorney logged; (5) Demanded status set; (6) 45-day follow-up deadline logged in CasePeer task calendar; (7) ERISA note flagged for lien negotiation phase: Aetna is self-funded ERISA, Made Whole Doctrine does not apply. The ERISA flag at this stage is a handoff note — it ensures the lien negotiation phase doesn\'t misapply Georgia\'s Made Whole Doctrine to a federal ERISA plan.',
-    f: '❌ Complete documentation requires all seven elements including the ERISA handoff flag. Options A, C, and B all omit the ERISA note — without it, the lien negotiation phase may send a Made Whole challenge letter (Template 26) to an ERISA plan where it doesn\'t apply, costing the client money and exposing the firm to a dispute with Aetna. Options C and B also transition incorrectly — Option C goes directly to Closed, bypassing Lien Negotiations; Option B delays the status change until #109 returns, which is the settlement stage sequence, not the demand stage sequence.'
-  },
-  'q25': {
-    t: '✅ Treatment gaps must be addressed proactively — in the narrative, with evidence, before the adjuster finds them. The correct approach: name the gap, explain the reason (mandatory jobsite inspection = documented work obligation), cite the source (supervisor letter), and establish continuity of injury through the gap (physician\'s own notes confirming symptoms persisted). This framing makes the gap a credibility builder — it shows Marcus was a worker who tried to maintain employment despite real injury, not someone who healed and then resumed treatment for financial reasons. Option C (brief one-line mention) is insufficient — it acknowledges the gap without rebutting the defense implication. Option D (retroactive physician note) describes creating a document that wasn\'t generated at the time of treatment — this is document fabrication.',
-    f: '❌ Option A (omit the gap) is the most dangerous approach — the adjuster WILL find the 2-week break in treatment records, and an unexplained gap is always read as improvement or non-compliance. Option C (one-line mention) is insufficient — it confirms the gap without rebutting its implication. Option D (retroactive physician note) is document fabrication — asking a physician to document a position they didn\'t document at the time of treatment is unethical and potentially fraudulent. The correct approach is proactive, evidence-sourced explanation in the narrative.'
-  }
-};
+var FEEDBACK = {} /* CUTOVER: feedback text is served per-answer by the engine, never shipped to the client up front */;
 
 // ═══════════════════════════════════════════════
 // ANSWER HANDLER
 // ═══════════════════════════════════════════════
-function answer(qId, choice, isCorrect) {
+window.answerUI = function answerUI(qId, choice, isCorrect) {
   if (qDone[qId]) return;
 
   var cfg = Q_CONFIG[qId];
@@ -1183,7 +1007,7 @@ function answer(qId, choice, isCorrect) {
   btns.forEach(function(b){ b.classList.add('disabled'); });
 
   var clickedBtn = document.getElementById(qId + '-' + choice);
-  var correctBtn = document.getElementById(qId + '-' + cfg.correct);
+  var correctBtn = document.getElementById(qId + '-' + (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || ''));
 
   if (isCorrect) {
     clickedBtn.classList.add('correct');
@@ -1279,7 +1103,7 @@ function checkSectionComplete(sectionIdx) {
 // NAVIGATION
 // ═══════════════════════════════════════════════
 function goToSection(idx) {
-  if (idx === 8 && !window._cm3Passed) {
+  if (idx === 9 && !window._cm3Passed) {
     showToast('⚠️ 80% required for certificate', false);
     return;
   }
@@ -1392,8 +1216,8 @@ function buildResults() {
     var questionText = qText ? qText.textContent : 'Question ' + (idx+1);
     var isAnswered = !!qDone[qId];
     var wasCorrect = isAnswered && block.classList.contains('answered');
-    var correctLetter = cfg.correct.toUpperCase();
-    var correctBtn = document.getElementById(qId + '-' + cfg.correct);
+    var correctLetter = (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || '').toUpperCase();
+    var correctBtn = document.getElementById(qId + '-' + (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || ''));
     var correctText = correctBtn ? correctBtn.querySelector('.opt-text').textContent : '';
     var userAnswer = '(not answered)';
     var userLetter = '';
@@ -1458,7 +1282,7 @@ function buildResults() {
     + '</div>'
     + '<div class="callout ' + (pass ? 'callout-success' : 'callout-warn') + '">'
     + (pass
-        ? '<strong>✅ Gate Passed.</strong> You have demonstrated competency in demand package components, the six-component demand structure, Reptile-informed narrative sequence, CasePeer demand templates (#08, #09, #24, #32), the post-MMI demand timeline, the 45-day follow-up clock, quality checklist standards, attorney vs. CM role delineation, and the five demand errors. You are cleared to progress in the CM track.'
+        ? '<strong>✅ Gate Passed.</strong> You have demonstrated competency in demand package components, the six-component demand structure, GLG safety-rule demand sequence, GLG demand templates, the post-MMI demand timeline, the Day 30 first follow-up and Day 45 escalation clocks, quality checklist standards, attorney vs. CM role delineation, and the five demand errors. You are cleared to progress in the CM track.'
         : '<strong>⚠️ Gate Not Cleared.</strong> You need 152/190 (80%) to pass. Review the sections where you missed questions — the feedback explains exactly what to remember. Retake when ready.')
     + '</div>'
     + buttonsHtml;
@@ -1899,5 +1723,164 @@ document.addEventListener('DOMContentLoaded', function() {
 
 goToSection(0);
 </script>
+
+
+
+<script id="glg-match-js">
+/* GLG match widget — server-graded.
+   Holds NO answer key. Collects slotId -> chipId and hands it to the existing
+   window.answer() shim, which is the only path to the engine. */
+(function () {
+  var state = {};   // qid -> {sel: chipId|null, placed: {slotId: chipId}, locked: bool}
+
+  function st(qid) {
+    if (!state[qid]) state[qid] = { sel: null, placed: {}, locked: false };
+    return state[qid];
+  }
+  function q(sel, root) { return (root || document).querySelector(sel); }
+  function all(sel, root) { return [].slice.call((root || document).querySelectorAll(sel)); }
+
+  window.glgChip = function (qid, chipId) {
+    var s = st(qid); if (s.locked) return;
+    var root = q('[data-glg-match="' + qid + '"]'); if (!root) return;
+    s.sel = (s.sel === chipId) ? null : chipId;
+    all('.glg-chip', root).forEach(function (c) {
+      c.classList.toggle('sel', c.getAttribute('data-chip') === s.sel);
+    });
+  };
+
+  window.glgSlot = function (qid, slotId) {
+    var s = st(qid); if (s.locked) return;
+    var root = q('[data-glg-match="' + qid + '"]'); if (!root) return;
+    var slotEl = q('[data-slot="' + slotId + '"]', root);
+
+    // Tapping a filled slot with nothing selected clears it.
+    if (!s.sel) {
+      if (s.placed[slotId]) {
+        var freed = s.placed[slotId];
+        delete s.placed[slotId];
+        slotEl.textContent = slotEl.getAttribute('data-empty');
+        slotEl.classList.remove('filled');
+        var fc = q('[data-chip="' + freed + '"]', root);
+        if (fc) fc.classList.remove('used');
+        sync(qid);
+      }
+      return;
+    }
+    // Moving a chip that is already placed elsewhere: vacate the old slot.
+    Object.keys(s.placed).forEach(function (k) {
+      if (s.placed[k] === s.sel) {
+        delete s.placed[k];
+        var old = q('[data-slot="' + k + '"]', root);
+        if (old) { old.textContent = old.getAttribute('data-empty'); old.classList.remove('filled'); }
+      }
+    });
+    // Displacing an occupant returns it to the pool.
+    if (s.placed[slotId]) {
+      var prev = q('[data-chip="' + s.placed[slotId] + '"]', root);
+      if (prev) prev.classList.remove('used');
+    }
+    s.placed[slotId] = s.sel;
+    var chipEl = q('[data-chip="' + s.sel + '"]', root);
+    slotEl.textContent = chipEl ? chipEl.textContent : s.sel;
+    slotEl.classList.add('filled');
+    all('.glg-chip', root).forEach(function (c) {
+      var id = c.getAttribute('data-chip');
+      c.classList.toggle('used', Object.keys(s.placed).some(function (k) { return s.placed[k] === id; }));
+      c.classList.remove('sel');
+    });
+    s.sel = null;
+    sync(qid);
+  };
+
+  function sync(qid) {
+    var root = q('[data-glg-match="' + qid + '"]'); if (!root) return;
+    var btn = q('.glg-match-submit', root); if (!btn) return;
+    var total = all('.glg-slot', root).length;
+    var done = Object.keys(st(qid).placed).length;
+    btn.disabled = done !== total;
+    btn.textContent = done === total ? 'Submit Answer' : 'Fill all ' + total + ' slots (' + done + '/' + total + ')';
+  }
+
+  window.glgMatchSubmit = function (qid) {
+    var s = st(qid); if (s.locked) return;
+    var root = q('[data-glg-match="' + qid + '"]'); if (!root) return;
+    if (Object.keys(s.placed).length !== all('.glg-slot', root).length) return;
+    s.locked = true;
+    all('.glg-slot', root).forEach(function (e) { e.classList.add('locked'); });
+    all('.glg-chip', root).forEach(function (e) { e.classList.add('used'); });
+    var btn = q('.glg-match-submit', root);
+    if (btn) { btn.disabled = true; btn.textContent = 'Submitted'; }
+    // ONE submit path: the same shim every other question uses.
+    if (typeof window.answer === 'function') window.answer(qid, s.placed);
+  };
+
+  window.glgMatchInit = function () { all('[data-glg-match]').forEach(function (r) { sync(r.getAttribute('data-glg-match')); }); };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', window.glgMatchInit);
+  else window.glgMatchInit();
+})();
+</script>
+
+<script>
+/* ── go() / startQuiz() — required by section-6 "See Results" button (Harrell ruling 2026-09-03) ── */
+async function go(screen) {
+  if (screen === 'quiz') {
+    var _ni = document.getElementById('trainee-name-input');
+    var _name = (_ni && _ni.value.trim()) || '';
+    if (!_name) {
+      if (typeof showToast === 'function') showToast('⚠️ Please enter your name before starting the quiz', false);
+      else alert('Please enter your name before starting the quiz.');
+      return;
+    }
+    // Bug-2 fix: await attempt start before making questions interactive
+    await window.GLGQuiz.beginAttempt(_name);
+    goToSection(7);
+  }
+}
+
+function startQuiz() { go('quiz'); }
+
+/* ── GLG MODULE CONFIG — wires api-quiz-engine.js to module-cm3.html ── */
+window.GLG_MODULE_CONFIG = {
+  moduleId: 'cm3',
+  onBankLoaded: function(bank) {
+    var basemax = document.getElementById('basemax');
+    var gate    = document.getElementById('gate');
+    if (basemax) basemax.textContent = bank.base_max;
+    if (gate)    gate.textContent    = bank.pass_pct;
+    /* Show teaching-section nav buttons (no question gate after port) */
+    for (var i = 1; i <= 6; i++) {
+      var nextEl = document.getElementById('s' + i + '-next');
+      if (nextEl) nextEl.style.display = 'flex';
+    }
+  },
+  onStartQuiz: function() {
+    /* Prime audio context only */
+    if (typeof audioCtx !== 'undefined' && audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume().catch(function(){});
+    }
+  },
+  onAnswered: function(r) {
+    baseScore  = r.base_score;
+    bonusPoints = r.bonus_score;
+    streakCount = r.streak;
+    maxStreak   = Math.max(maxStreak || 0, r.maxStreak || 0);
+    var ts = document.getElementById('total-score');
+    if (ts) ts.textContent = r.base_score;
+    var bs = document.getElementById('bonus-score');
+    if (bs) bs.textContent = r.bonus_score;
+    if (typeof updateStreak  === 'function') updateStreak(r.correct);
+    if (typeof mascotReact   === 'function') mascotReact(r.correct ? 'correct' : 'incorrect');
+  },
+  onComplete: function(r) {
+    window._cm3Passed = r.passed;
+    baseScore   = r.base_score;
+    bonusPoints = r.bonus_score;
+    goToSection(8);   // results is now section-8
+    if (typeof buildResults === 'function') buildResults();
+  }
+};
+</script>
+<script src="api-quiz-engine.js"></script>
 </body>
 </html>

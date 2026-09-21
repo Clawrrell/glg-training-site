@@ -9,7 +9,14 @@ Service of Process — complete escalation ladder, diligence standards, trucking
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
   <title>LIT-3 — Service of Process | Gunn Law Group</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <style>
+:root {
+    --navy: #141c2c;
+    --gold: #dcb161;
+    --gold-lt: #f0d89a;
+}
+
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
     body{font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;color:#333;font-size:16px;line-height:1.6;-webkit-text-size-adjust:100%;overflow-x:hidden;}
@@ -105,11 +112,7 @@ Service of Process — complete escalation ladder, diligence standards, trucking
     .case-val .flag-warn{display:inline-block;background:#f39c12;color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;margin-left:6px;}
     .case-val .flag-ok{display:inline-block;background:#10774A;color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;margin-left:6px;}
 
-    /* ── BOSS CHALLENGE ── */
-    .boss-header{background:linear-gradient(135deg,#870101 0%,#5a0000 100%);color:#fff;border-radius:12px;padding:24px;margin-bottom:20px;text-align:center;}
-    .boss-header .boss-icon{font-size:40px;margin-bottom:10px;}
-    .boss-header h3{font-size:clamp(17px,4.5vw,22px);font-weight:800;margin-bottom:8px;}
-    .boss-header p{font-size:14px;opacity:.9;line-height:1.5;}
+    
 
     /* ── RESULTS ── */
     .results-header{padding:28px 20px;text-align:center;color:#fff;}
@@ -229,6 +232,159 @@ Service of Process — complete escalation ladder, diligence standards, trucking
     .option-btn.correct{animation:correctPulse 0.6s ease-out;}
     .option-btn.incorrect{animation:incorrectShake 0.4s ease-out;}
   </style>
+
+<style>
+/* ── GLG QUIZ ENGINE — question type styles (2026-09-02) ──────────────────
+     All classes rendered by api-quiz-engine.js. Tokens: navy #141c2c, gold #C5975B.
+     Sourced from engine.html stylesheet + Harrell Part 8c spec. */
+
+  /* Question card */
+  .q { background:#fff; border:1px solid #e2e5ea; border-radius:10px;
+       padding:20px; margin:16px 0; box-shadow:0 1px 6px rgba(20,28,44,.06); }
+  .q-num { font-size:12px; letter-spacing:.06em; color:#C5975B; font-weight:700;
+            text-transform:uppercase; margin-bottom:8px; }
+  .q-text { font-weight:600; margin:8px 0 16px; font-size:1rem; line-height:1.55;
+             color:#141c2c; }
+
+  /* MC option buttons */
+  button.opt { display:block; width:100%; text-align:left; padding:13px 15px; margin:7px 0;
+    border:1px solid #d8dbe3; border-radius:8px; background:#fafbfd; cursor:pointer;
+    font-size:15px; font-family:var(--font-b); color:#222; line-height:1.45;
+    transition:background .12s, border-color .12s; }
+  button.opt:hover:not(.locked) { background:#eef4ff; border-color:#141c2c; }
+  button.opt.correct { background:#d4edda; border-color:#10774A; }
+  button.opt.incorrect { background:#f8d7da; border-color:#870101; }
+  button.opt.locked { cursor:default; opacity:.85; }
+
+  /* Fill-in-the-blank */
+  .fill-stem { font-weight:600; margin:8px 0 14px; line-height:2.2; }
+  input.blank { display:inline-block; min-height:44px; min-width:120px; padding:8px 10px;
+    margin:2px 4px; border:1px solid #ccd; border-radius:8px; background:#fafbfd;
+    font-size:16px; font-family:var(--font-b); vertical-align:middle;
+    box-sizing:border-box; max-width:100%; }
+  input.blank:focus { outline:2px solid #141c2c; background:#fff; }
+  input.blank.correct { background:#d4edda; border-color:#10774A; }
+  input.blank.incorrect { background:#f8d7da; border-color:#870101; }
+  input.blank.locked { opacity:.85; }
+  button.submit-fill { min-height:44px; padding:11px 20px; margin-top:12px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-fill.locked { opacity:.5; cursor:default; }
+
+  /* Markup */
+  .markup-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .markup-passage { margin:0 0 10px; border:1px solid #e2e5ea; border-radius:8px; overflow:hidden; }
+  button.span { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:11px 13px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:16px; font-family:var(--font-b);
+    color:#222; line-height:1.5; overflow-wrap:break-word; }
+  button.span:last-child { border-bottom:0; }
+  button.span:hover:not(.locked) { background:#eef4ff; }
+  button.span.selected { background:#fff3cd; box-shadow:inset 4px 0 0 #b8860b; font-weight:600; }
+  button.span.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.span.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.span.locked { cursor:default; opacity:.9; }
+  button.submit-markup { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-markup.locked { opacity:.5; cursor:default; }
+  .markup-count { font-size:13px; color:#555; margin-top:8px; }
+
+  /* Sort rows with up/down controls */
+  .sort-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .sort-list { margin:0 0 12px; border:1px solid #e2e5ea; border-radius:8px;
+               overflow:hidden; background:#fff; }
+  .sort-row { display:flex; align-items:stretch; border-bottom:1px solid #eef0f3;
+              background:#fff; }
+  .sort-row:last-child { border-bottom:0; }
+  .sort-pos { flex:0 0 34px; display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700; color:#C5975B; background:#f5f5f0; }
+  .sort-text { flex:1 1 auto; padding:11px 12px; font-size:15px; line-height:1.45;
+    display:flex; align-items:center; overflow-wrap:break-word; min-width:0; }
+  .sort-moves { flex:0 0 auto; display:flex; align-items:center; gap:4px; padding:4px 6px; }
+  button.sort-move { min-height:44px; min-width:44px; border:1px solid #ccd; border-radius:8px;
+    background:#fafbfd; cursor:pointer; font-size:15px; color:#141c2c;
+    font-family:var(--font-b); }
+  button.sort-move:hover:not(:disabled) { background:#eef4ff; }
+  button.sort-move:disabled { opacity:.35; cursor:default; }
+  .sort-row.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  .sort-row.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  .sort-row.locked .sort-text { opacity:.9; }
+  button.submit-sort { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-sort.locked { opacity:.5; cursor:default; }
+
+  /* Match chips + slot rows */
+  .match-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .match-tray { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px; padding:10px;
+    border:1px dashed #ccd; border-radius:8px; background:#fafbfd; }
+  button.chip { min-height:44px; padding:10px 16px; border:1px solid #ccd; border-radius:22px;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b); color:#222;
+    max-width:100%; overflow-wrap:break-word; text-align:left; }
+  button.chip:hover:not(.locked) { background:#eef4ff; }
+  button.chip.selected { background:#141c2c; color:#fff; border-color:#141c2c; font-weight:600; }
+  button.chip.placed { opacity:.35; }
+  button.chip.locked { cursor:default; }
+  .match-slots { border:1px solid #e2e5ea; border-radius:8px; overflow:hidden;
+                 background:#fff; margin-bottom:12px; }
+  button.slot { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:10px 14px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b);
+    color:#222; line-height:1.45; overflow-wrap:break-word; }
+  button.slot:last-child { border-bottom:0; }
+  button.slot:hover:not(.locked) { background:#eef4ff; }
+  button.slot.armed { box-shadow:inset 4px 0 0 #C5975B; background:#fffdf5; }
+  .slot-label { font-weight:600; display:block; }
+  .slot-fill { display:block; font-size:14px; margin-top:3px; color:#C5975B; font-weight:600; }
+  .slot-fill.empty { color:#8a8f98; font-weight:400; font-style:italic; }
+  button.slot.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.slot.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.slot.locked { cursor:default; opacity:.9; }
+  button.submit-match { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-match.locked { opacity:.5; cursor:default; }
+  .match-count { font-size:13px; color:#555; margin-top:8px; }
+  .match-credit { font-size:13px; font-weight:600; color:#8a6d1f; margin-top:6px; }
+
+  /* Feedback */
+  .fb { margin-top:12px; padding:12px 14px; border-radius:8px; font-size:14px; display:none; }
+  .fb.show { display:block; }
+  .fb.ok { background:#d4edda; border-left:4px solid #10774A; }
+  .fb.no { background:#f8d7da; border-left:4px solid #870101; }
+  .fb.neutral { background:#eef0f6; border-left:4px solid #6c757d; color:#333; } /* self_assessment: no verdict */
+
+  /* Branching nodes */
+  .branch-scenario { border-left:4px solid #C5975B; padding-left:12px; margin:14px 0; }
+  .branch-turn { font-size:12px; letter-spacing:.06em; color:#8a6d1f; font-weight:700;
+                 text-transform:uppercase; }
+  .branch-instruction { font-weight:600; margin:6px 0 10px; color:#141c2c; }
+  .branch-consequence { margin-top:10px; padding:10px 12px; border-left:4px solid #141c2c;
+    background:#eef2f7; border-radius:0 8px 8px 0; font-size:13px; color:#33415c; display:none; }
+  .branch-consequence.show { display:block; }
+
+  /* Pagination — one question at a time (Harrell Part 8b) */
+  .q-base { display: none !important; }
+  .q-base.q-active { display: block !important; }
+  .q-nav { display:flex; justify-content:space-between; align-items:center;
+            margin-top:20px; padding-top:16px; border-top:1px solid #e8e6e0; }
+  .q-nav-btn { min-height:44px; padding:10px 22px; border-radius:8px;
+                font-size:15px; cursor:pointer; font-family:var(--font-b);
+                font-weight:600; transition:background .12s; }
+  .q-nav-btn.next { background:#141c2c; color:#C5975B; border:2px solid #141c2c; }
+  .q-nav-btn.next:hover { background:#1e2a40; }
+  .q-nav-btn.back { background:#fff; color:#141c2c; border:2px solid #c8c5be; }
+  .q-nav-btn.back:hover { background:#f5f5f0; }
+  .q-pg-spacer { display:inline-block; min-width:40px; }
+  #q-progress { font-size:12px; color:#C5975B; font-weight:600;
+                letter-spacing:.5px; text-transform:uppercase; }
+
+
+</style>
+
+<!-- CUTOVER: server-side grading. Answer keys are not in this file. -->
+    <link rel="stylesheet" href="boss-challenge.css">
 </head>
 <body>
 
@@ -283,8 +439,9 @@ Service of Process — complete escalation ladder, diligence standards, trucking
   <button class="nav-pill" id="nav-4" onclick="goToSection(4)">5. Trucking</button>
   <button class="nav-pill" id="nav-5" onclick="goToSection(5)">6. Post-SOL</button>
   <button class="nav-pill" id="nav-6" onclick="goToSection(6)">7. Boss</button>
-  <button class="nav-pill" id="nav-7" onclick="goToSection(7)">8. Results</button>
-  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">9. Feedback</button>
+  <button class="nav-pill" id="nav-7" onclick="startQuiz()">8. Quiz</button>
+  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">9. Results</button>
+  <button class="nav-pill" id="nav-9" onclick="goToSection(9)">10. Feedback</button>
 </nav>
 
 <!-- Points Toast -->
@@ -383,56 +540,12 @@ Service of Process — complete escalation ladder, diligence standards, trucking
     <div class="callout callout-warn"><strong>Federal Court Removal:</strong> If a case filed in Georgia state court is removed to federal court, Georgia's diligence standard — not Federal Rule 4(m)'s 90-day window — governs whether service relates back. Georgia courts have interpreted their service statute as "integral parts of the state statute of limitations," making it substantive law under Erie. (<em>Wilson v. Hearos, LLC</em>, 128 F.4th 1254 (11th Cir. 2025))</div>
 
     <!-- Q1 -->
-    <div class="question-block" id="q1-block">
-      <div class="q-num">Question 1 of 20 · 10 pts</div>
-      <div class="q-text">Under O.C.G.A. § 9-11-4(c), the 5-day relation-back clock begins when:</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q1','a',false)" id="q1-a"><span class="opt-letter">A</span><span class="opt-text">The complaint is filed with the court clerk</span></button>
-        <button class="option-btn" onclick="answer('q1','b',true)" id="q1-b"><span class="opt-letter">B</span><span class="opt-text">The person making service (sheriff or process server) receives the summons and complaint</span></button>
-        <button class="option-btn" onclick="answer('q1','c',false)" id="q1-c"><span class="opt-letter">C</span><span class="opt-text">The attorney signs the complaint and authorizes filing</span></button>
-        <button class="option-btn" onclick="answer('q1','d',false)" id="q1-d"><span class="opt-letter">D</span><span class="opt-text">The defendant's last known address is confirmed through skip trace</span></button>
-      </div>
-      <div class="feedback-box" id="q1-fb"></div>
-    </div>
 
     <!-- Q2 -->
-    <div class="question-block" id="q2-block">
-      <div class="q-num">Question 2 of 20 · 10 pts</div>
-      <div class="q-text">A process server personally served the defendant on Day 3 after receiving the summons. However, the proof of service (return) was not filed with the court until Day 12 — 7 business days after the service date, exceeding the 5-business-day deadline in O.C.G.A. § 9-11-4(h). What is the status of service?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q2','a',false)" id="q2-a"><span class="opt-letter">A</span><span class="opt-text">Service is invalidated — the proof of service must be filed within 5 business days or service must be re-attempted</span></button>
-        <button class="option-btn" onclick="answer('q2','b',false)" id="q2-b"><span class="opt-letter">B</span><span class="opt-text">Service is valid but the relation-back is lost — it dates from the late filing, not the original complaint</span></button>
-        <button class="option-btn" onclick="answer('q2','c',true)" id="q2-c"><span class="opt-letter">C</span><span class="opt-text">Service is still valid — filing proof is separate from performing service; late proof does not invalidate timely service</span></button>
-        <button class="option-btn" onclick="answer('q2','d',false)" id="q2-d"><span class="opt-letter">D</span><span class="opt-text">Service is valid only if the defendant has not yet filed an answer objecting to the late proof</span></button>
-      </div>
-      <div class="feedback-box" id="q2-fb"></div>
-    </div>
 
     <!-- Q3 -->
-    <div class="question-block" id="q3-block">
-      <div class="q-num">Question 3 of 20 · 10 pts</div>
-      <div class="q-text">A complaint is filed at 9:00 AM. The clerk returns the stamped complaint and summons at 2:30 PM. The paralegal has a full calendar for the rest of the day but plans to send the summons to the process server first thing tomorrow morning. Is this acceptable?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q3','a',true)" id="q3-a"><span class="opt-letter">A</span><span class="opt-text">No — the standard requires same-day initiation. The summons must go to the process server the same day the stamped complaint is returned, regardless of the paralegal's other commitments</span></button>
-        <button class="option-btn" onclick="answer('q3','b',false)" id="q3-b"><span class="opt-letter">B</span><span class="opt-text">Yes — as long as the process server receives the summons within 5 calendar days of the filing date, same-day is aspirational but not mandatory</span></button>
-        <button class="option-btn" onclick="answer('q3','c',false)" id="q3-c"><span class="opt-letter">C</span><span class="opt-text">Yes — "same day" in the SOP refers to the same business day, and a morning delivery the next day still counts as same business day if sent before 10:00 AM</span></button>
-        <button class="option-btn" onclick="answer('q3','d',false)" id="q3-d"><span class="opt-letter">D</span><span class="opt-text">It depends on how close the SOL is — if there is more than 30 days until the SOL runs, next-day initiation is acceptable</span></button>
-      </div>
-      <div class="feedback-box" id="q3-fb"></div>
-    </div>
 
     <!-- Q4 -->
-    <div class="question-block" id="q4-block">
-      <div class="q-num">Question 4 of 20 · 10 pts</div>
-      <div class="q-text">On the day service is initiated, which of the following must be documented in CasePeer?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q4','a',false)" id="q4-a"><span class="opt-letter">A</span><span class="opt-text">Date complaint filed, attorney name, estimated service completion date, and the defendant's insurance policy number</span></button>
-        <button class="option-btn" onclick="answer('q4','b',false)" id="q4-b"><span class="opt-letter">B</span><span class="opt-text">Date complaint filed, process server company name, and a copy of the complaint uploaded as an attachment</span></button>
-        <button class="option-btn" onclick="answer('q4','c',false)" id="q4-c"><span class="opt-letter">C</span><span class="opt-text">Only the date the complaint was filed and the CasePeer status change to "Service Initiated" — additional details are logged when service is completed</span></button>
-        <button class="option-btn" onclick="answer('q4','d',true)" id="q4-d"><span class="opt-letter">D</span><span class="opt-text">Date complaint filed, date summons issued, date summons delivered to process server, process server name/company and tracking number, and defendant address(es) for service</span></button>
-      </div>
-      <div class="feedback-box" id="q4-fb"></div>
-    </div>
 
     <div class="section-score" id="s1-score" style="display:none;"><div class="score-display" id="s1-score-val"></div><div class="score-label">Section 2 Score</div></div>
     <div class="btn-group" id="s1-next"><button class="btn btn-primary btn-block" onclick="goToSection(2)">Next: The Two-Tier Diligence Standard &rarr;</button></div>
@@ -482,56 +595,12 @@ Service of Process — complete escalation ladder, diligence standards, trucking
     </div>
 
     <!-- Q5 -->
-    <div class="question-block" id="q5-block">
-      <div class="q-num">Question 5 of 20 · 10 pts</div>
-      <div class="q-text">The statute of limitations has expired. The defendant has not been served. Three months after filing, the paralegal realizes there is a service problem. No motion or answer has been filed by the defendant. Under current Georgia law, what triggers the escalation from Tier 1 (reasonable diligence) to Tier 2 (greatest possible diligence)?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q5','a',false)" id="q5-a"><span class="opt-letter">A</span><span class="opt-text">The plaintiff's awareness that service has not been perfected — once you know there's a problem, the heightened standard applies immediately</span></button>
-        <button class="option-btn" onclick="answer('q5','b',false)" id="q5-b"><span class="opt-letter">B</span><span class="opt-text">The passage of 90 days from the filing date without successful service — the heightened standard automatically activates at the 90-day mark</span></button>
-        <button class="option-btn" onclick="answer('q5','c',false)" id="q5-c"><span class="opt-letter">C</span><span class="opt-text">The managing attorney's escalation review at the Day 90 checkpoint — the managing attorney's involvement triggers Tier 2 for the court's analysis</span></button>
-        <button class="option-btn" onclick="answer('q5','d',true)" id="q5-d"><span class="opt-letter">D</span><span class="opt-text">The defendant raises the issue of defective service in a court filing — an answer or motion challenging service; until then, Tier 1 (reasonable diligence) applies</span></button>
-      </div>
-      <div class="feedback-box" id="q5-fb"></div>
-    </div>
 
     <!-- Q6 -->
-    <div class="question-block" id="q6-block">
-      <div class="q-num">Question 6 of 20 · 10 pts</div>
-      <div class="q-text">A defendant's attorney files a motion to dismiss arguing that the plaintiff failed to exercise diligence in perfecting service after the SOL expired. The court will evaluate the plaintiff's service efforts. Which of the following would the court consider SUFFICIENT diligence?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q6','a',false)" id="q6-a"><span class="opt-letter">A</span><span class="opt-text">An affidavit from the paralegal stating "diligent efforts were made to serve the defendant at multiple addresses over several months"</span></button>
-        <button class="option-btn" onclick="answer('q6','b',true)" id="q6-b"><span class="opt-letter">B</span><span class="opt-text">A documented log showing multiple service attempts at varied times and locations, use of multiple skip trace databases, escalation through legal channels, and continuous effort with no gaps longer than 14 days</span></button>
-        <button class="option-btn" onclick="answer('q6','c',false)" id="q6-c"><span class="opt-letter">C</span><span class="opt-text">Evidence that the process server made two attempts at the defendant's primary residence, both during business hours on weekdays, before the paralegal concluded the defendant was evading service</span></button>
-        <button class="option-btn" onclick="answer('q6','d',false)" id="q6-d"><span class="opt-letter">D</span><span class="opt-text">A motion filed with the court requesting additional time to serve the defendant, along with a statement that the paralegal intends to try again</span></button>
-      </div>
-      <div class="feedback-box" id="q6-fb"></div>
-    </div>
 
     <!-- Q7 -->
-    <div class="question-block" id="q7-block">
-      <div class="q-num">Question 7 of 20 · 10 pts</div>
-      <div class="q-text">A personal injury case was filed in Georgia state court. Before service was perfected, the defendant removed the case to federal court. The plaintiff eventually served the defendant 117 days after the SOL expired. The defendant argues Federal Rule 4(m)'s 90-day window applies. Which service standard governs?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q7','a',true)" id="q7-a"><span class="opt-letter">A</span><span class="opt-text">Georgia's diligence standard — the 11th Circuit held in Wilson v. Hearos that Georgia's service statute is substantive under Erie and applies in federal diversity cases, not Federal Rule 4(m)</span></button>
-        <button class="option-btn" onclick="answer('q7','b',false)" id="q7-b"><span class="opt-letter">B</span><span class="opt-text">Federal Rule 4(m)'s 90-day window — once in federal court, federal procedural rules control all service requirements regardless of the underlying state claim</span></button>
-        <button class="option-btn" onclick="answer('q7','c',false)" id="q7-c"><span class="opt-letter">C</span><span class="opt-text">Whichever standard is more favorable to the plaintiff — federal courts apply the rule that preserves the plaintiff's case when state and federal standards conflict</span></button>
-        <button class="option-btn" onclick="answer('q7','d',false)" id="q7-d"><span class="opt-letter">D</span><span class="opt-text">A hybrid standard where Federal Rule 4(m) provides the time limit but Georgia law determines the diligence analysis within that window</span></button>
-      </div>
-      <div class="feedback-box" id="q7-fb"></div>
-    </div>
 
     <!-- Q8 -->
-    <div class="question-block" id="q8-block">
-      <div class="q-num">Question 8 of 20 · 10 pts · Calibration Check</div>
-      <div class="q-text">A paralegal filed a renewal action under O.C.G.A. § 9-2-61(a). After filing, the paralegal sent the summons to the process server, who made one attempt at the defendant's residence. The defendant was not home. The process server returned the summons as "unable to serve." The paralegal did nothing further for 14 months. The defendant moved to dismiss. What is the likely outcome?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q8','a',false)" id="q8-a"><span class="opt-letter">A</span><span class="opt-text">The case survives — renewal actions under § 9-2-61(a) reset the diligence clock and a single attempt is sufficient to show good faith effort</span></button>
-        <button class="option-btn" onclick="answer('q8','b',false)" id="q8-b"><span class="opt-letter">B</span><span class="opt-text">The case survives — the defendant's non-presence at the residence shifts the burden to the defendant to provide a valid address for service</span></button>
-        <button class="option-btn" onclick="answer('q8','c',true)" id="q8-c"><span class="opt-letter">C</span><span class="opt-text">Case dismissed — one attempt followed by 14 months of inactivity demonstrates zero diligence regardless of whether it's an original or renewal action; Long v. Bellamy is directly on point</span></button>
-        <button class="option-btn" onclick="answer('q8','d',false)" id="q8-d"><span class="opt-letter">D</span><span class="opt-text">The case survives because renewal actions are evaluated under a relaxed diligence standard where only the first 30 days of effort after filing are examined</span></button>
-      </div>
-      <div class="feedback-box" id="q8-fb"></div>
-    </div>
 
     <div class="section-score" id="s2-score" style="display:none;"><div class="score-display" id="s2-score-val"></div><div class="score-label">Section 3 Score</div></div>
     <div class="btn-group" id="s2-next"><button class="btn btn-primary btn-block" onclick="goToSection(3)">Next: The Escalation Ladder &rarr;</button></div>
@@ -637,56 +706,12 @@ Service of Process — complete escalation ladder, diligence standards, trucking
     </div>
 
     <!-- Q9 -->
-    <div class="question-block" id="q9-block">
-      <div class="q-num">Question 9 of 20 · 10 pts</div>
-      <div class="q-text">A process server has made 3 attempts at a defendant's primary residence at varied times (6:30 AM, 8:00 PM, Saturday 9:00 AM). No one has answered the door, though a car was in the driveway on the evening attempt. It is Day 12 since filing. What is the correct next step in the escalation ladder?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q9','a',false)" id="q9-a"><span class="opt-letter">A</span><span class="opt-text">File a motion for service by publication — three failed attempts at varied times demonstrates that the defendant is evading service and cannot be located</span></button>
-        <button class="option-btn" onclick="answer('q9','b',true)" id="q9-b"><span class="opt-letter">B</span><span class="opt-text">Attempt substituted service — leave the summons and complaint with a person of suitable age and discretion who resides at the defendant's dwelling, per O.C.G.A. § 9-11-4(e)(7)</span></button>
-        <button class="option-btn" onclick="answer('q9','c',false)" id="q9-c"><span class="opt-letter">C</span><span class="opt-text">Serve the Georgia Secretary of State as the defendant's agent for service — after 3 failed attempts the SOS becomes the statutory agent for any defendant</span></button>
-        <button class="option-btn" onclick="answer('q9','d',false)" id="q9-d"><span class="opt-letter">D</span><span class="opt-text">Wait 30 more days and continue making personal service attempts at the same residence before considering any escalation options</span></button>
-      </div>
-      <div class="feedback-box" id="q9-fb"></div>
-    </div>
 
     <!-- Q10 -->
-    <div class="question-block" id="q10-block">
-      <div class="q-num">Question 10 of 20 · 10 pts</div>
-      <div class="q-text">The defendant is a Georgia LLC. The registered agent listed with the Secretary of State cannot be found at the registered address. Personal service on the registered agent has failed. Which escalation step applies to entity defendants in this situation?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q10','a',true)" id="q10-a"><span class="opt-letter">A</span><span class="opt-text">Serve the Georgia Secretary of State — when the registered agent of an LLC cannot be found with reasonable diligence, the SOS becomes the statutory agent for service under O.C.G.A. § 14-11-209</span></button>
-        <button class="option-btn" onclick="answer('q10','b',false)" id="q10-b"><span class="opt-letter">B</span><span class="opt-text">File a motion for service by publication immediately — an entity whose registered agent cannot be located is effectively unlocatable</span></button>
-        <button class="option-btn" onclick="answer('q10','c',false)" id="q10-c"><span class="opt-letter">C</span><span class="opt-text">File a motion with the court to compel the LLC to designate a new registered agent within 30 days or face default judgment</span></button>
-        <button class="option-btn" onclick="answer('q10','d',false)" id="q10-d"><span class="opt-letter">D</span><span class="opt-text">Serve any employee of the LLC at any location where the LLC conducts business — Georgia law treats any employee as an implied agent for service when the RA is unavailable</span></button>
-      </div>
-      <div class="feedback-box" id="q10-fb"></div>
-    </div>
 
     <!-- Q11 -->
-    <div class="question-block" id="q11-block">
-      <div class="q-num">Question 11 of 20 · 10 pts</div>
-      <div class="q-text">The litigation team has exhausted all service methods for an individual defendant — personal service, substituted service, skip traces, PI surveillance, workplace attempts, and motion for alternative service (denied by the court). The attorney is considering service by publication. What critical limitation must be evaluated before proceeding?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q11','a',false)" id="q11-a"><span class="opt-letter">A</span><span class="opt-text">Publication requires approval from the Georgia Bar Association, which adds 60-90 days to the process and may be denied</span></button>
-        <button class="option-btn" onclick="answer('q11','b',false)" id="q11-b"><span class="opt-letter">B</span><span class="opt-text">Publication costs exceed $5,000 per defendant, so the attorney must assess whether the case value justifies the expense</span></button>
-        <button class="option-btn" onclick="answer('q11','c',false)" id="q11-c"><span class="opt-letter">C</span><span class="opt-text">Publication can only be used once per case — if the defendant appears and then disappears again, no further publication is available</span></button>
-        <button class="option-btn" onclick="answer('q11','d',true)" id="q11-d"><span class="opt-letter">D</span><span class="opt-text">Whether the three <em>Melton</em> elements can be proven — publication generally does not confer personal jurisdiction in a tort action, but it CAN support a money judgment if the defendant is a resident present in the jurisdiction, has actual knowledge of the pending suit, and is willfully concealing himself. Element 2 (actual knowledge) is the hard one and must be documented</span></button>
-      </div>
-      <div class="feedback-box" id="q11-fb"></div>
-    </div>
 
     <!-- Q12 -->
-    <div class="question-block" id="q12-block">
-      <div class="q-num">Question 12 of 20 · NOT SCORED — under review</div>
-      <div class="q-text">Before the court will grant a motion for alternative service (Step 5), what must the plaintiff file with the motion?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q12','a',false)" id="q12-a"><span class="opt-letter">A</span><span class="opt-text">A sworn statement from the attorney that the case has merit and the defendant is deliberately evading service</span></button>
-        <button class="option-btn" onclick="answer('q12','b',false)" id="q12-b"><span class="opt-letter">B</span><span class="opt-text">A copy of the insurance policy proving the defendant has coverage that would satisfy a judgment</span></button>
-        <button class="option-btn" onclick="answer('q12','c',true)" id="q12-c"><span class="opt-letter">C</span><span class="opt-text">A documented failed-attempt log with every prior attempt (dates, methods, results), an Affidavit of Diligent Search detailing all search methods used, and a proposed alternative method with an argument why it is reasonably calculated to give actual notice</span></button>
-        <button class="option-btn" onclick="answer('q12','d',false)" id="q12-d"><span class="opt-letter">D</span><span class="opt-text">Only a brief motion stating that standard methods have been exhausted — the court assumes diligence if the case has been pending for more than 90 days</span></button>
-      </div>
-      <div class="feedback-box" id="q12-fb"></div>
-    </div>
 
     <div class="section-score" id="s3-score" style="display:none;"><div class="score-display" id="s3-score-val"></div><div class="score-label">Section 4 Score</div></div>
     <div class="btn-group" id="s3-next"><button class="btn btn-primary btn-block" onclick="goToSection(4)">Next: Trucking Case Service Chains &rarr;</button></div>
@@ -745,56 +770,12 @@ Service of Process — complete escalation ladder, diligence standards, trucking
     <div class="callout callout-warn"><strong>Registered Agent = Owner:</strong> If the entity's registered agent is also an individual defendant (common in small trucking companies), service attempts at that address count for <strong>both Track A and Track B</strong>. Flag this immediately — if personal service on the owner/RA fails, it accelerates SOS service for the entity.</div>
 
     <!-- Q13 -->
-    <div class="question-block" id="q13-block">
-      <div class="q-num">Question 13 of 20 · 10 pts</div>
-      <div class="q-text">A trucking case has three defendants: the driver (GA resident), the carrier (GA LLC), and the company owner (GA resident). The complaint was filed on Day 0. On Day 3, intelligence gathering is complete. How should service tracks be structured?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q13','a',false)" id="q13-a"><span class="opt-letter">A</span><span class="opt-text">Start with the driver (easiest to locate), then serve the carrier once the driver confirms employment, then serve the owner last based on information gathered from the carrier's response</span></button>
-        <button class="option-btn" onclick="answer('q13','b',false)" id="q13-b"><span class="opt-letter">B</span><span class="opt-text">Serve the carrier first (Track B) since entity service through the registered agent or BOC-3 agent is most reliable, then use information from the carrier's response to locate the driver and owner</span></button>
-        <button class="option-btn" onclick="answer('q13','c',true)" id="q13-c"><span class="opt-letter">C</span><span class="opt-text">Launch ALL tracks simultaneously on Day 3 — Track A for the driver and owner (personal service at varied times), Track B for the carrier (registered agent + BOC-3 agent + certified mail, all in parallel)</span></button>
-        <button class="option-btn" onclick="answer('q13','d',false)" id="q13-d"><span class="opt-letter">D</span><span class="opt-text">Focus all resources on the carrier defendant first since the carrier's insurance will cover all parties, making individual defendant service optional</span></button>
-      </div>
-      <div class="feedback-box" id="q13-fb"></div>
-    </div>
 
     <!-- Q14 -->
-    <div class="question-block" id="q14-block">
-      <div class="q-num">Question 14 of 20 · 10 pts</div>
-      <div class="q-text">You are conducting Phase 1 intelligence gathering for a motor carrier defendant. FMCSA SAFER shows the carrier has a BOC-3 process agent designated for Georgia. What is the significance of this finding?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q14','a',false)" id="q14-a"><span class="opt-letter">A</span><span class="opt-text">It means the carrier has consented to jurisdiction in Georgia and cannot contest personal jurisdiction if served through any method</span></button>
-        <button class="option-btn" onclick="answer('q14','b',true)" id="q14-b"><span class="opt-letter">B</span><span class="opt-text">The BOC-3 agent is often the fastest entity service path — queue for Day 3 service. This is a separate track from the registered agent and runs in parallel</span></button>
-        <button class="option-btn" onclick="answer('q14','c',false)" id="q14-c"><span class="opt-letter">C</span><span class="opt-text">The BOC-3 agent replaces the registered agent — you should serve the BOC-3 agent INSTEAD of the registered agent, not both</span></button>
-        <button class="option-btn" onclick="answer('q14','d',false)" id="q14-d"><span class="opt-letter">D</span><span class="opt-text">It is only useful if the registered agent has already been served unsuccessfully — BOC-3 service is an escalation step, not a first-wave option</span></button>
-      </div>
-      <div class="feedback-box" id="q14-fb"></div>
-    </div>
 
     <!-- Q15 -->
-    <div class="question-block" id="q15-block">
-      <div class="q-num">Question 15 of 20 · 10 pts</div>
-      <div class="q-text">The driver defendant is an out-of-state resident (Tennessee). Under the Nonresident Motorist Act, O.C.G.A. § 40-12-1, which three requirements must ALL be met for valid service?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q15','a',true)" id="q15-a"><span class="opt-letter">A</span><span class="opt-text">Serve the GA Secretary of State with summons and complaint, send certified mail (return receipt requested) to defendant's out-of-state address, and file an affidavit of compliance with the court</span></button>
-        <button class="option-btn" onclick="answer('q15','b',false)" id="q15-b"><span class="opt-letter">B</span><span class="opt-text">File a motion with the court requesting permission to serve out of state, hire a process server in Tennessee to personally serve the defendant, and file proof of service from the Tennessee server</span></button>
-        <button class="option-btn" onclick="answer('q15','c',false)" id="q15-c"><span class="opt-letter">C</span><span class="opt-text">Serve the GA Secretary of State, publish notice in the defendant's home county newspaper in Tennessee for 4 weeks, and file proof of publication with the Georgia court</span></button>
-        <button class="option-btn" onclick="answer('q15','d',false)" id="q15-d"><span class="opt-letter">D</span><span class="opt-text">Send certified mail to the defendant's Tennessee address, obtain a signed return receipt, and file the return receipt as proof of service — no Secretary of State involvement required for nonresidents</span></button>
-      </div>
-      <div class="feedback-box" id="q15-fb"></div>
-    </div>
 
     <!-- Q16 -->
-    <div class="question-block" id="q16-block">
-      <div class="q-num">Question 16 of 20 · 10 pts</div>
-      <div class="q-text">A small trucking company's registered agent address (listed with the GA Secretary of State) is the same as the home address of the company owner, who is also a named defendant. What is the service implication?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q16','a',false)" id="q16-a"><span class="opt-letter">A</span><span class="opt-text">The company is considered a sole proprietorship for service purposes and only Track A (individual service) is needed — Track B is unnecessary</span></button>
-        <button class="option-btn" onclick="answer('q16','b',false)" id="q16-b"><span class="opt-letter">B</span><span class="opt-text">You must serve the owner as an individual first, then serve the owner again separately in their capacity as registered agent — two distinct service events are required</span></button>
-        <button class="option-btn" onclick="answer('q16','c',false)" id="q16-c"><span class="opt-letter">C</span><span class="opt-text">Only Track B (entity service) is needed — serving the registered agent at their address automatically covers the individual defendant service requirement</span></button>
-        <button class="option-btn" onclick="answer('q16','d',true)" id="q16-d"><span class="opt-letter">D</span><span class="opt-text">Personal service attempts at that address count for both Track A (individual) and Track B (entity registered agent). If RA service fails at this address, it accelerates Secretary of State service for the entity</span></button>
-      </div>
-      <div class="feedback-box" id="q16-fb"></div>
-    </div>
 
     <div class="section-score" id="s4-score" style="display:none;"><div class="score-display" id="s4-score-val"></div><div class="score-label">Section 5 Score</div></div>
     <div class="btn-group" id="s4-next"><button class="btn btn-primary btn-block" onclick="goToSection(5)">Next: Post-SOL Protocol, Renewal &amp; Documentation &rarr;</button></div>
@@ -858,56 +839,12 @@ Service of Process — complete escalation ladder, diligence standards, trucking
     <div class="callout callout-warn"><strong>Renewal ≠ Immunity.</strong> While the renewal resets the diligence clock, the team must still demonstrate diligence from the renewal filing date forward. <em>Long v. Bellamy</em> (296 Ga. App. 263) dismissed a case where the plaintiff refiled under § 9-2-61(a) but then did nothing for over a year. The reset only helps if the team actually uses it.</div>
 
     <!-- Q17 -->
-    <div class="question-block" id="q17-block">
-      <div class="q-num">Question 17 of 20 · 10 pts</div>
-      <div class="q-text">The statute of limitations expired 10 days ago. The defendant has not been served. The paralegal discovers the service gap during a Monday file review. What is the correct FIRST action?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q17','a',true)" id="q17-a"><span class="opt-letter">A</span><span class="opt-text">Alert the case attorney AND the managing attorney immediately — post-SOL service failure is a crisis requiring immediate attorney involvement</span></button>
-        <button class="option-btn" onclick="answer('q17','b',false)" id="q17-b"><span class="opt-letter">B</span><span class="opt-text">Run a second skip trace and attempt service at any new addresses before alerting the attorney — the paralegal should try to fix the problem first</span></button>
-        <button class="option-btn" onclick="answer('q17','c',false)" id="q17-c"><span class="opt-letter">C</span><span class="opt-text">File a motion for extension of time to serve the defendant — courts routinely grant 90-day extensions when the SOL has recently expired</span></button>
-        <button class="option-btn" onclick="answer('q17','d',false)" id="q17-d"><span class="opt-letter">D</span><span class="opt-text">Update the CasePeer status to "Service — Escalation" and add a note documenting the SOL expiration — the 14-day documentation rule requires a CasePeer entry before any other action</span></button>
-      </div>
-      <div class="feedback-box" id="q17-fb"></div>
-    </div>
 
     <!-- Q18 -->
-    <div class="question-block" id="q18-block">
-      <div class="q-num">Question 18 of 20 · 10 pts</div>
-      <div class="q-text">The attorney is considering a voluntary dismissal and renewal action under O.C.G.A. § 9-2-61(a) because service has stalled and the diligence record has concerning gaps. What is the primary strategic benefit of a renewal?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q18','a',false)" id="q18-a"><span class="opt-letter">A</span><span class="opt-text">It extends the statute of limitations by an additional 2 years from the renewal filing date, giving the team substantially more time to locate the defendant</span></button>
-        <button class="option-btn" onclick="answer('q18','b',true)" id="q18-b"><span class="opt-letter">B</span><span class="opt-text">It resets the diligence clock — per Robinson v. Boyd, diligence in the renewed action is measured from the time of the renewal filing; any delays in the original action cannot be used as a defense</span></button>
-        <button class="option-btn" onclick="answer('q18','c',false)" id="q18-c"><span class="opt-letter">C</span><span class="opt-text">It shifts the burden of proof on diligence from the plaintiff to the defendant — in a renewal action, the defendant must prove the plaintiff was NOT diligent rather than the plaintiff proving diligence</span></button>
-        <button class="option-btn" onclick="answer('q18','d',false)" id="q18-d"><span class="opt-letter">D</span><span class="opt-text">It automatically applies the Tier 1 (reasonable diligence) standard regardless of whether the defendant has already raised a service defense in the original action</span></button>
-      </div>
-      <div class="feedback-box" id="q18-fb"></div>
-    </div>
 
     <!-- Q19 -->
-    <div class="question-block" id="q19-block">
-      <div class="q-num">Question 19 of 20 · 10 pts</div>
-      <div class="q-text">A case is at Day 65 after filing. All standard service methods have been exhausted. The team is preparing a motion for service by publication. What CasePeer status should this case be in?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q19','a',false)" id="q19-a"><span class="opt-letter">A</span><span class="opt-text">SERVICE PENDING — because the case is still in active service efforts and publication is just another method</span></button>
-        <button class="option-btn" onclick="answer('q19','b',false)" id="q19-b"><span class="opt-letter">B</span><span class="opt-text">SERVICE FAILED — ESCALATING — because the team is still moving through the escalation ladder</span></button>
-        <button class="option-btn" onclick="answer('q19','c',true)" id="q19-c"><span class="opt-letter">C</span><span class="opt-text">SERVICE — PUBLICATION REVIEW — all methods have been exhausted and the team is evaluating the last-resort option</span></button>
-        <button class="option-btn" onclick="answer('q19','d',false)" id="q19-d"><span class="opt-letter">D</span><span class="opt-text">SERVICE COMPLETED — because preparing the publication motion constitutes service initiation for publication purposes</span></button>
-      </div>
-      <div class="feedback-box" id="q19-fb"></div>
-    </div>
 
     <!-- Q20 -->
-    <div class="question-block" id="q20-block">
-      <div class="q-num">Question 20 of 20 · 10 pts</div>
-      <div class="q-text">Before filing a motion for service by publication (Step 6 — last resort), who must approve the decision to proceed?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q20','a',false)" id="q20-a"><span class="opt-letter">A</span><span class="opt-text">The litigation paralegal — after compiling the Affidavit of Diligent Search, the paralegal has the authority to file the publication motion</span></button>
-        <button class="option-btn" onclick="answer('q20','b',false)" id="q20-b"><span class="opt-letter">B</span><span class="opt-text">The case attorney alone — publication is a standard escalation step that does not require additional approval beyond the assigned attorney</span></button>
-        <button class="option-btn" onclick="answer('q20','c',false)" id="q20-c"><span class="opt-letter">C</span><span class="opt-text">The Georgia Bar Association — all service by publication requires Bar approval before the motion can be filed with the court</span></button>
-        <button class="option-btn" onclick="answer('q20','d',true)" id="q20-d"><span class="opt-letter">D</span><span class="opt-text">Both the case attorney AND the Managing Attorney — publication is a dual-approval gate because it does not confer personal jurisdiction unless the three <em>Melton</em> elements are documented, and without personal jurisdiction no money judgment may be recovered</span></button>
-      </div>
-      <div class="feedback-box" id="q20-fb"></div>
-    </div>
 
     <div class="section-score" id="s5-score" style="display:none;"><div class="score-display" id="s5-score-val"></div><div class="score-label">Section 6 Score</div></div>
     <div class="btn-group" id="s5-next"><button class="btn btn-primary btn-block" onclick="goToSection(6)">Next: Boss Challenge — Multi-Defendant Trucking Case &rarr;</button></div>
@@ -948,79 +885,49 @@ Service of Process — complete escalation ladder, diligence standards, trucking
     </div>
 
     <!-- Q21 Boss -->
-    <div class="question-block" id="q21-block">
-      <div class="q-num">Boss Question 1 of 5 · 10 Bonus pts</div>
-      <div class="q-text">It is Day 3. Process server packets are ready. For Dawson Trucking, LLC (entity defendant), which service methods should launch TODAY?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q21','a',false)" id="q21-a"><span class="opt-letter">A</span><span class="opt-text">Serve the BOC-3 agent (National Registered Agents) first; if that fails by Day 14, then serve the registered agent Robert Dawson at the Mill Creek address</span></button>
-        <button class="option-btn" onclick="answer('q21','b',false)" id="q21-b"><span class="opt-letter">B</span><span class="opt-text">Serve the registered agent Robert Dawson at 418 Mill Creek Rd only — since the BOC-3 agent is a commercial service in Atlanta, it is a backup for Day 14 escalation</span></button>
-        <button class="option-btn" onclick="answer('q21','c',true)" id="q21-c"><span class="opt-letter">C</span><span class="opt-text">Launch ALL entity service methods simultaneously: serve the BOC-3 agent at the Atlanta office, serve Robert Dawson as registered agent at 418 Mill Creek Rd using varied-time protocol (this also counts for Track A), AND send certified mail to the principal office — all on Day 3</span></button>
-        <button class="option-btn" onclick="answer('q21','d',false)" id="q21-d"><span class="opt-letter">D</span><span class="opt-text">File Secretary of State service immediately since the registered agent and the owner are the same person — this avoids the complication of dual-track service at a single address</span></button>
-      </div>
-      <div class="feedback-box" id="q21-fb"></div>
-    </div>
 
     <!-- Q22 Boss -->
-    <div class="question-block" id="q22-block">
-      <div class="q-num">Boss Question 2 of 5 · 10 Bonus pts</div>
-      <div class="q-text">It is Day 10. The process server has made 3 attempts at 418 Mill Creek Rd (6:15 AM, 7:45 PM, Sunday 9:30 AM). No answer at the door. A pickup truck was in the driveway on the evening attempt. Lights were visible inside on the Sunday attempt. Robert Dawson has NOT been personally served — either as an individual (Track A) or as registered agent for Dawson Trucking (Track B). What should happen next?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q22','a',true)" id="q22-a"><span class="opt-letter">A</span><span class="opt-text">Attempt substituted service at 418 Mill Creek Rd under O.C.G.A. § 9-11-4(e)(7) — confirming first that the address is Dawson's actual dwelling and that the person served actually resides there, per <em>Bible v. Bible</em>. Simultaneously, begin preparing SOS service materials for Dawson Trucking, LLC — since RA service has failed, SOS service for the entity should be ready to file by Day 14</span></button>
-        <button class="option-btn" onclick="answer('q22','b',false)" id="q22-b"><span class="opt-letter">B</span><span class="opt-text">File a motion for service by publication for Robert Dawson — three failed attempts at varied times with evidence of evasion (truck in driveway, lights on) justifies going directly to publication</span></button>
-        <button class="option-btn" onclick="answer('q22','c',false)" id="q22-c"><span class="opt-letter">C</span><span class="opt-text">Send a waiver of service by mail to Robert Dawson and wait 30 days for a response before taking any other action — the waiver is the next step after failed personal service</span></button>
-        <button class="option-btn" onclick="answer('q22','d',false)" id="q22-d"><span class="opt-letter">D</span><span class="opt-text">Continue personal service attempts at 418 Mill Creek Rd for another 30 days — three attempts is not enough to escalate when there is evidence the defendant is at the address</span></button>
-      </div>
-      <div class="feedback-box" id="q22-fb"></div>
-    </div>
 
     <!-- Q23 Boss -->
-    <div class="question-block" id="q23-block">
-      <div class="q-num">Boss Question 3 of 5 · 10 Bonus pts</div>
-      <div class="q-text">Travis Henley (nonresident driver, Tennessee) was served via the Nonresident Motorist Act: the SOS was served on Day 3, and certified mail was sent to 2201 Brainerd Rd, Apt 4C, Chattanooga, TN 37411. The certified mail came back "Unclaimed — No Forwarding Address." What must happen?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q23','a',false)" id="q23-a"><span class="opt-letter">A</span><span class="opt-text">NMA service is complete regardless — the statute only requires that certified mail be SENT, not received; the unclaimed return does not affect the validity of service</span></button>
-        <button class="option-btn" onclick="answer('q23','b',true)" id="q23-b"><span class="opt-letter">B</span><span class="opt-text">Run a second skip trace using a different primary database (e.g., TLO if Phase 1 used LexisNexis) to find an updated address, then send certified mail to any new addresses found. The NMA service via SOS remains effective, but the certified mail component needs a valid address</span></button>
-        <button class="option-btn" onclick="answer('q23','c',false)" id="q23-c"><span class="opt-letter">C</span><span class="opt-text">File a motion for service by publication in Tennessee — the certified mail failure means Henley cannot be located and publication in his home state is the only remaining option</span></button>
-        <button class="option-btn" onclick="answer('q23','d',false)" id="q23-d"><span class="opt-letter">D</span><span class="opt-text">Dismiss the claims against Henley without prejudice and focus resources on Dawson — a nonresident driver who cannot be reached by mail is not worth pursuing</span></button>
-      </div>
-      <div class="feedback-box" id="q23-fb"></div>
-    </div>
 
     <!-- Q24 Boss -->
-    <div class="question-block" id="q24-block">
-      <div class="q-num">Boss Question 4 of 5 · 10 Bonus pts</div>
-      <div class="q-text">It is now August 5, 2026 — the 2-year SOL expired 3 days ago on August 2. The BOC-3 agent was served successfully for Dawson Trucking on Day 5 (entity served ✓). Travis Henley's NMA service via SOS is on file but the certified mail issue is pending a second skip trace. Robert Dawson (individual) is still unserved. Dawson's attorney has NOT yet filed anything with the court. Which diligence standard currently applies to Robert Dawson's service, and why?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q24','a',false)" id="q24-a"><span class="opt-letter">A</span><span class="opt-text">Tier 2 (greatest possible diligence) — because the paralegal and attorney are now aware that the SOL has expired and service remains unperfected</span></button>
-        <button class="option-btn" onclick="answer('q24','b',false)" id="q24-b"><span class="opt-letter">B</span><span class="opt-text">No diligence standard applies yet — the SOL has only been expired for 3 days, and courts allow a reasonable grace period before any diligence analysis begins</span></button>
-        <button class="option-btn" onclick="answer('q24','c',false)" id="q24-c"><span class="opt-letter">C</span><span class="opt-text">Tier 2 (greatest possible diligence) — because Dawson Trucking has already been served, Robert Dawson is constructively aware of the lawsuit and the heightened standard automatically applies</span></button>
-        <button class="option-btn" onclick="answer('q24','d',true)" id="q24-d"><span class="opt-letter">D</span><span class="opt-text">Tier 1 (reasonable diligence) — because Robert Dawson has not yet raised the issue of defective service in a court filing; per Van Omen v. Lopresti, Tier 2 is triggered only by the defendant's responsive pleading, not by the plaintiff's awareness</span></button>
-      </div>
-      <div class="feedback-box" id="q24-fb"></div>
-    </div>
 
     <!-- Q25 Boss -->
-    <div class="question-block" id="q25-block">
-      <div class="q-num">Boss Question 5 of 5 · 10 Bonus pts</div>
-      <div class="q-text">It is Day 65. Robert Dawson is still unserved despite substituted service attempts, a second skip trace, PI surveillance (2 stakeout sessions), and workplace service attempts. The attorney is considering service by publication as the last resort. Before filing the publication motion, what critical viability question must be answered?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q25','a',true)" id="q25-a"><span class="opt-letter">A</span><span class="opt-text">Can the three <em>Melton</em> elements be documented — is Dawson a Georgia resident actually present in the jurisdiction, can we prove he has actual knowledge of the pending suit, and is he willfully concealing himself? Without all three, publication will not support a money judgment against him personally. Does he have coverage that responds regardless? Both the case attorney AND Managing Attorney must approve</span></button>
-        <button class="option-btn" onclick="answer('q25','b',false)" id="q25-b"><span class="opt-letter">B</span><span class="opt-text">Whether the county newspaper has availability to run the publication within the next 30 days — if the newspaper's schedule is full, the motion should be delayed until space is confirmed</span></button>
-        <button class="option-btn" onclick="answer('q25','c',false)" id="q25-c"><span class="opt-letter">C</span><span class="opt-text">Whether Dawson Trucking's insurance policy covers Robert Dawson as an additional insured — if so, publication is unnecessary because Dawson Trucking has already been served and the same judgment will cover both defendants</span></button>
-        <button class="option-btn" onclick="answer('q25','d',false)" id="q25-d"><span class="opt-letter">D</span><span class="opt-text">Whether the Affidavit of Diligent Search is complete — the viability assessment happens after the affidavit is filed, not before</span></button>
-      </div>
-      <div class="feedback-box" id="q25-fb"></div>
-    </div>
 
     <div class="section-score" id="s6-score" style="display:none;"><div class="score-display" id="s6-score-val"></div><div class="score-label">Boss Challenge Score</div></div>
-    <div class="btn-group" id="s6-next"><button class="btn btn-primary btn-block" onclick="showResults()">View Results &rarr;</button></div>
+    <div class="btn-group" id="s6-next"><div style="margin-bottom:1rem;">
+      <label for="trainee-name-input" style="display:block;font-size:0.85rem;font-weight:600;color:#141c2c;margin-bottom:0.4rem;">Your Name — required to start</label>
+      <input type="text" id="trainee-name-input" placeholder="Enter your full name" autocomplete="name" style="width:100%;padding:0.5rem 0.75rem;border:1.5px solid #cbd5e1;border-radius:6px;font-size:0.9rem;box-sizing:border-box;">
+    </div>
+    <button class="btn btn-primary btn-block" onclick="startQuiz()">Take the Quiz &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 7 — QUIZ (api-quiz-engine.js)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-7">
+  <div class="section-header">
+    <div class="section-num">Knowledge Check</div>
+    <h2>Module Assessment</h2>
+    <div class="section-subhead">Answer each question. One attempt — wrong answer reveals the correct answer and unlocks Next.</div>
+  </div>
+  <div class="section-body">
+    <div style="font-family:system-ui,sans-serif;font-size:13px;color:#33415c;padding:8px 0 12px;border-bottom:1px solid #e8eaf0;margin-bottom:16px;">
+      Base: <b id="base">0</b> / <b id="basemax">—</b>
+      &nbsp;·&nbsp; Bonus: <b id="bonus">0</b>
+      &nbsp;·&nbsp; Pass gate: <b id="gate">80</b>%
+      &nbsp;·&nbsp; <span id="q-progress" style="color:#dcb161;font-weight:700;"></span>
+    </div>
+    <div id="questions"></div>
+    <div id="result" style="background:#fff;border:2px solid #0b2545;border-radius:10px;padding:18px;margin:18px 0;display:none;"></div>
   </div>
 </div>
 
 <!-- ══════════════════════════════════════════
      SECTION 7 — RESULTS
 ════════════════════════════════════════════ -->
-<div class="section-card" id="section-7">
+<div class="section-card" id="section-8">
   <div class="section-header">
     <div class="section-num">Section 8 · Results</div>
     <h2>Assessment Results</h2>
@@ -1068,7 +975,7 @@ Service of Process — complete escalation ladder, diligence standards, trucking
 <!-- ══════════════════════════════════════════
      SECTION 8 — FEEDBACK & CERTIFICATE
 ════════════════════════════════════════════ -->
-<div class="section-card" id="section-8">
+<div class="section-card" id="section-9">
   <div class="section-header">
     <div class="section-num">Section 9 · Feedback</div>
     <h2>Module Feedback</h2>
@@ -1129,8 +1036,8 @@ Service of Process — complete escalation ladder, diligence standards, trucking
 // LIT-3 CONFIGURATION
 // ═══════════════════════════════════════════════
 var BASE_MAX = 190;   /* 19 scored questions x 10; q12 unscored pending attorney review 2026-08-06 */
-var PASS_THRESHOLD = 162;  /* 85% of 190, rounded up */
-var TOTAL_SECTIONS = 9;
+var PASS_THRESHOLD = 152;  /* 85% of 190, rounded up */
+var TOTAL_SECTIONS = 10;
 var TRACKER_URL = 'https://script.google.com/macros/s/AKfycbzHJZ0C3BqnLatfq7RIiUP5KQdgYoXTJlozd8ZGZiwIf2bdVmvnPMo3JLm0dA5gQhJyxA/exec';
 var MODULE_ID = 'lit3';
 var MODULE_NAME = 'LIT-3 Service of Process';
@@ -1154,31 +1061,31 @@ var soundEnabled = false;
 
 // ── Q_CONFIG ──
 var Q_CONFIG = {
-  q1:  {section:1, pts:10, isBonus:false, correct:'b'},
-  q2:  {section:1, pts:10, isBonus:false, correct:'c'},
-  q3:  {section:1, pts:10, isBonus:false, correct:'a'},
-  q4:  {section:1, pts:10, isBonus:false, correct:'d'},
-  q5:  {section:2, pts:10, isBonus:false, correct:'d'},
-  q6:  {section:2, pts:10, isBonus:false, correct:'b'},
-  q7:  {section:2, pts:10, isBonus:false, correct:'a'},
-  q8:  {section:2, pts:10, isBonus:false, correct:'c'},
-  q9:  {section:3, pts:10, isBonus:false, correct:'b'},
-  q10: {section:3, pts:10, isBonus:false, correct:'a'},
-  q11: {section:3, pts:10, isBonus:false, correct:'d'},
-  q12: {section:3, pts:0,  isBonus:false, correct:'c'}   /* pts zeroed 2026-08-06 per Harrell: legal conflict under attorney review */,
-  q13: {section:4, pts:10, isBonus:false, correct:'c'},
-  q14: {section:4, pts:10, isBonus:false, correct:'b'},
-  q15: {section:4, pts:10, isBonus:false, correct:'a'},
-  q16: {section:4, pts:10, isBonus:false, correct:'d'},
-  q17: {section:5, pts:10, isBonus:false, correct:'a'},
-  q18: {section:5, pts:10, isBonus:false, correct:'b'},
-  q19: {section:5, pts:10, isBonus:false, correct:'c'},
-  q20: {section:5, pts:10, isBonus:false, correct:'d'},
-  q21: {section:6, pts:0, bonusPts:10, isBonus:true, correct:'c'},
-  q22: {section:6, pts:0, bonusPts:10, isBonus:true, correct:'a'},
-  q23: {section:6, pts:0, bonusPts:10, isBonus:true, correct:'b'},
-  q24: {section:6, pts:0, bonusPts:10, isBonus:true, correct:'d'},
-  q25: {section:6, pts:0, bonusPts:10, isBonus:true, correct:'a'}
+  q1:  {section:1, pts:10, isBonus:false},
+  q2:  {section:1, pts:10, isBonus:false},
+  q3:  {section:1, pts:10, isBonus:false},
+  q4:  {section:1, pts:10, isBonus:false},
+  q5:  {section:2, pts:10, isBonus:false},
+  q6:  {section:2, pts:10, isBonus:false},
+  q7:  {section:2, pts:10, isBonus:false},
+  q8:  {section:2, pts:10, isBonus:false},
+  q9:  {section:3, pts:10, isBonus:false},
+  q10: {section:3, pts:10, isBonus:false},
+  q11: {section:3, pts:10, isBonus:false},
+  q12: {section:3, pts:0,  isBonus:false}   /* pts zeroed 2026-08-06 per Harrell: legal conflict under attorney review */,
+  q13: {section:4, pts:10, isBonus:false},
+  q14: {section:4, pts:10, isBonus:false},
+  q15: {section:4, pts:10, isBonus:false},
+  q16: {section:4, pts:10, isBonus:false},
+  q17: {section:5, pts:10, isBonus:false},
+  q18: {section:5, pts:10, isBonus:false},
+  q19: {section:5, pts:10, isBonus:false},
+  q20: {section:5, pts:10, isBonus:false},
+  q21: {section:6, pts:0, bonusPts:10, isBonus:true},
+  q22: {section:6, pts:0, bonusPts:10, isBonus:true},
+  q23: {section:6, pts:0, bonusPts:10, isBonus:true},
+  q24: {section:6, pts:0, bonusPts:10, isBonus:true},
+  q25: {section:6, pts:0, bonusPts:10, isBonus:true}
 };
 
 // ── SECTION_QUESTIONS ──
@@ -1192,108 +1099,7 @@ var SECTION_QUESTIONS = {
 };
 
 // ── FEEDBACK ──
-var FEEDBACK = {
-  q1:{
-    t:'✅ Correct. The 5-day clock starts when the person making service — the sheriff or process server — receives the summons and complaint. Not when the complaint is filed, not when the attorney signs it. Giles v. State Farm (330 Ga. App. 314 (2014) (en banc)) clarified this distinction, overruling prior cases that measured from the filing date.',
-    f:'❌ The 5-day clock does not start at filing. Under O.C.G.A. § 9-11-4(c), the clock starts when the person making service receives the summons and complaint. In practice, when the clerk delivers same-day, these dates coincide — but the legal trigger is receipt by the server. Giles v. State Farm clarified this.'
-  },
-  q2:{
-    t:'✅ Correct. Filing proof of service (the return) is a separate administrative requirement from actually performing service. O.C.G.A. § 9-11-4(h) requires proof be filed within 5 business days of service, but failure to file proof on time does not invalidate the service itself. The defendant was served on Day 3 — that service is valid regardless of when the return was filed.',
-    f:'❌ Late filing of proof does not invalidate timely service. The service itself — the act of delivering the summons and complaint to the defendant — was completed on Day 3, within the 5-day window. Filing proof of service is a separate administrative step under O.C.G.A. § 9-11-4(h). Late proof may cause procedural complications but does not undo valid service.'
-  },
-  q3:{
-    t:'✅ Correct. Same-day initiation is a mandatory standard, not aspirational. The performance target is 100% same-day initiation — the summons goes to the process server the same day the clerk returns the stamped complaint. A full calendar is not an exception. This maximizes the chance of service within the 5-day relation-back window.',
-    f:'❌ Same-day initiation is not optional or aspirational. The SOP requires 100% compliance: the summons goes to the process server the same day the stamped complaint is returned. Waiting until tomorrow — even "first thing" — costs a day from the 5-day window and violates the standard. Every hour counts when the SOL is approaching.'
-  },
-  q4:{
-    t:'✅ Correct. All five data points must be logged in CasePeer on the day service is initiated: date complaint filed, date summons issued by clerk, date summons delivered to the process server (this starts the 5-day clock), process server name/company and tracking number, and defendant address(es) for service. This documentation forms the foundation for any future diligence showing.',
-    f:'❌ CasePeer documentation at initiation requires ALL five fields: date filed, date summons issued, date delivered to server, server name/tracking number, and defendant addresses. Partial documentation (status change only, or missing the delivery date) creates gaps in the service timeline that a defendant\'s attorney can exploit. Same-day, complete documentation is the standard.'
-  },
-  q5:{
-    t:'✅ Correct. Van Omen v. Lopresti (357 Ga. App. 9 (2020)) settled this question definitively: Tier 2 (greatest possible diligence) is triggered ONLY when the defendant raises the service defense in a court filing — an answer or motion. The plaintiff\'s own awareness of a service problem does NOT trigger the heightened standard. This overruled the competing "awareness" line of cases.',
-    f:'❌ Awareness alone does NOT trigger Tier 2. This is settled law. Van Omen v. Lopresti (2020) resolved a conflict in prior case law and held that "greatest possible diligence" applies only after the defendant raises the service issue in a court filing. Until then, Tier 1 (reasonable diligence) governs. If you\'ve been told awareness triggers Tier 2, that is overruled law.'
-  },
-  q6:{
-    t:'✅ Correct. Courts evaluate diligence based on specific, documented evidence: multiple attempts at varied times and locations, use of multiple search databases, escalation through legal channels (substituted service, SOS service for entities), and continuous effort with no unexplained gaps longer than 14 days. Conclusory statements are insufficient — the court wants dates, times, addresses, and results.',
-    f:'❌ Conclusory affidavits ("diligent efforts were made") are specifically what courts reject. Giles v. State Farm, Neely v. Jones, and Kelley v. Lymon all dismissed cases where the plaintiff\'s service efforts lacked specific dates, multiple methods, and continuous effort. Courts want a chronological log with no unexplained gaps — not a summary conclusion.'
-  },
-  q7:{
-    t:'✅ Correct. Wilson v. Hearos, LLC (128 F.4th 1254 (11th Cir. 2025)) held that Georgia\'s service-of-process statute is substantive under Erie because Georgia courts treat it as "integral parts of the state statute of limitations." Federal courts in diversity must apply Georgia\'s diligence standard — not Federal Rule 4(m)\'s 90-day window.',
-    f:'❌ Federal Rule 4(m) does NOT control when a case originates under Georgia law and is in federal court on diversity. The 11th Circuit in Wilson v. Hearos explicitly held that Georgia\'s diligence standard is substantive under Erie. In that case, 117 days of delay after SOL + 41 days after defendant raised the defense = insufficient under Georgia\'s standard.'
-  },
-  q8:{
-    t:'✅ Correct. Long v. Bellamy (296 Ga. App. 263 (2009)) is directly on point: over a year without service after a renewal filing = dismissed. While § 9-2-61(a) resets the diligence clock (per Robinson v. Boyd), the team must still demonstrate diligence FROM the renewal filing date. One attempt followed by 14 months of nothing is zero diligence regardless of whether it\'s an original or renewal action.',
-    f:'❌ Renewal actions reset the diligence clock but do NOT eliminate the diligence requirement. Robinson v. Boyd establishes that diligence is measured from the renewal filing — but Long v. Bellamy shows that a renewal followed by inactivity is just as fatal as an original filing followed by inactivity. One attempt + 14 months of nothing = dismissal.'
-  },
-  q9:{
-    t:'✅ Correct. After personal service fails with 3 attempts at varied times, the next escalation step is substituted service under O.C.G.A. § 9-11-4(e)(7). The summons and complaint are left with a person of suitable age and discretion who also resides at the defendant\'s dwelling. This is Step 1 on the escalation ladder — not publication (Step 6) or SOS service (Step 4, entity only).',
-    f:'❌ Publication (Step 6) is the LAST resort, not the step after 3 failed personal service attempts. Secretary of State service (Step 4) applies only to entity defendants, not individuals. The correct next step after failed personal service is Step 1: substituted service on a co-resident of suitable age and discretion at the defendant\'s dwelling, per O.C.G.A. § 9-11-4(e)(7).'
-  },
-  q10:{
-    t:'✅ Correct. When a Georgia LLC\'s registered agent cannot be found with reasonable diligence at the registered address, the Secretary of State becomes the statutory agent for service under O.C.G.A. § 14-11-209. For corporations, the authority is O.C.G.A. § 14-2-504. This is a critical escalation path for entity defendants.',
-    f:'❌ SOS service for entities is not "any employee at any location" — it requires filing with the Secretary of State when the registered agent cannot be found. Publication is premature at this stage — SOS service is a standard escalation step (Step 4) specifically designed for entity defendants whose registered agents are unavailable. The statutory authority is O.C.G.A. § 14-11-209 for LLCs.'
-  },
-  q11:{
-    t:'✅ Correct. The general rule is that publication does not confer personal jurisdiction in a Georgia tort action (Henderson v. James, 350 Ga. App. 361 (2019); Southeastern Sec. Ins. Co. v. Lowe, 242 Ga. App. 535 (2000)) — BUT Melton v. Johnson, 242 Ga. 400 (1978), still good law, creates a narrow exception. Publication CAN support an in personam money judgment where the defendant (1) is a Georgia resident actually present in the jurisdiction, (2) has actual knowledge a suit is pending, and (3) willfully conceals himself to frustrate personal service. Element 2 is the one that kills cases — evading a process server is NOT the same as knowing a lawsuit exists. Build that record early with certified mail return receipt requested; a refused or unclaimed receipt is affirmative evidence of knowledge.',
-    f:'❌ The critical limitation is not cost, bar approval, or one-time use — it is jurisdictional. As a general rule publication does not confer personal jurisdiction in a Georgia tort action, and without it no money judgment may be recovered (Henderson v. James, 350 Ga. App. 361 (2019)). But that general rule has a live exception: under Melton v. Johnson, 242 Ga. 400 (1978), publication CAN support an in personam money judgment if the defendant is a Georgia resident actually present in the jurisdiction, has actual knowledge a suit is pending, and is willfully concealing himself. The real question is whether all three elements can be documented — element 2 especially, since evading a process server is not the same as knowing a lawsuit exists.'
-  },
-  q12:{
-    t:'✅ Correct. A motion for alternative service requires three components: (1) a complete documented failed-attempt log showing every prior attempt with dates, methods, and results; (2) an Affidavit of Diligent Search detailing all search methods used (skip trace, USPS, DMV, tax assessor, voter registration, court index, employer, social media); and (3) a proposed alternative method with an argument that it is reasonably calculated to give actual notice.',
-    f:'❌ The court does not assume diligence based on case age. A motion for alternative service must include the complete paper trail: every failed attempt documented, the Affidavit of Diligent Search proving all reasonable search avenues have been exhausted, and a specific proposed alternative method with reasoning. Without these three elements, the court will deny the motion.'
-  },
-  q13:{
-    t:'✅ Correct. The core principle of the service chain decision tree: ALL applicable tracks launch simultaneously on Day 3. Track A for the driver and owner (personal service with varied-time protocol), Track B for the carrier (registered agent + BOC-3 agent + certified mail — all three in parallel). Never run serial tracks. Every defendant gets simultaneous, type-appropriate service.',
-    f:'❌ Sequential service is exactly what the parallel architecture prohibits. The decision tree mandates that ALL tracks launch simultaneously on Day 3. You do not serve the driver first and wait for information, you do not start with the carrier and work down. Every defendant type gets its own track, and all tracks run in parallel from Day 3.'
-  },
-  q14:{
-    t:'✅ Correct. The BOC-3 process agent designated for Georgia (identified through FMCSA SAFER, per 49 CFR § 366) is often the fastest entity service path. It is a SEPARATE track from the registered agent — both run in parallel, not sequentially. Queue BOC-3 service for Day 3 alongside all other entity service methods.',
-    f:'❌ The BOC-3 agent does not replace the registered agent — both are served in parallel. And BOC-3 service is a first-wave option (Day 3), not an escalation step. The FMCSA SAFER lookup identifies the BOC-3 agent during Phase 1 intelligence gathering so service can launch on Day 3 alongside all other methods.'
-  },
-  q15:{
-    t:'✅ Correct. The Nonresident Motorist Act (O.C.G.A. § 40-12-1) requires ALL three: (1) serve the GA Secretary of State with summons and complaint, (2) send certified mail with return receipt to the defendant\'s out-of-state address, and (3) file an affidavit of compliance with the court. Missing any one element means service is incomplete.',
-    f:'❌ The NMA requires all three steps — SOS service, certified mail, and affidavit of compliance. Certified mail alone (without SOS) is not NMA service. Publication in the defendant\'s home state is not part of the NMA process. And filing a motion with a Georgia court to serve out of state is a different procedural mechanism — the NMA provides a statutory alternative.'
-  },
-  q16:{
-    t:'✅ Correct. When the registered agent and the individual defendant are the same person at the same address, personal service attempts count for both Track A (individual) and Track B (entity RA). This is flagged immediately because it means that if personal service fails at this address, RA service has also failed — which accelerates the timeline for Secretary of State service on the entity.',
-    f:'❌ The entity is not a sole proprietorship just because the RA is the owner — it is still a separate LLC requiring separate service. You do not need two distinct service events at the same address; the same personal service attempts count for both tracks. But both tracks still apply — and if service fails at this address, it triggers SOS service for the entity immediately.'
-  },
-  q17:{
-    t:'✅ Correct. Post-SOL service failure is a crisis. The paralegal\'s FIRST action is to alert the case attorney AND the managing attorney immediately. Not to fix it first, not to file motions, not to update CasePeer status. Attorney notification is the first step because post-SOL service failure carries malpractice risk that requires immediate attorney awareness and direction.',
-    f:'❌ The paralegal should NOT try to fix the problem before alerting the attorney. Post-SOL service failure is a crisis — not a routine follow-up. The SOP mandates immediate notification of both the case attorney and the managing attorney. Attempting to fix it first delays the crisis response and keeps attorneys uninformed about a malpractice exposure.'
-  },
-  q18:{
-    t:'✅ Correct. The primary strategic benefit of a renewal action under O.C.G.A. § 9-2-61(a) is that it resets the diligence clock. Per Robinson v. Boyd (288 Ga. 53 (2010)), "diligence in perfecting service of process in an action properly refiled under O.C.G.A. § 9-2-61(a) must be measured from the time of filing the renewed suit" — any delay in service in the original action is not available as a defense.',
-    f:'❌ The renewal does not extend the SOL by 2 years, does not shift the burden of proof, and does not lock in Tier 1. Its specific benefit is resetting the diligence clock: per Robinson v. Boyd, diligence in the renewed action is measured from the renewal filing. Gaps and delays from the original action cannot be cited against the plaintiff in the renewal.'
-  },
-  q19:{
-    t:'✅ Correct. When all standard methods have been exhausted and the team is evaluating publication, the CasePeer status should be "SERVICE — PUBLICATION REVIEW." This status category indicates that the case is at the last-resort stage and signals to reviewing attorneys that a case viability assessment and dual approval are required.',
-    f:'❌ The CasePeer status categories are specific and sequential. "SERVICE PENDING" is for active attempts. "SERVICE FAILED — ESCALATING" is for moving through the ladder. "SERVICE — PUBLICATION REVIEW" is the correct status when all methods are exhausted and publication is being evaluated. "SERVICE COMPLETED" means service was successful — not that a motion is being prepared.'
-  },
-  q20:{
-    t:'✅ Correct. Service by publication requires dual approval — both the case attorney AND the Managing Attorney must sign off. This is a pre-approval gate because publication does not confer personal jurisdiction in a tort action unless the three Melton elements are documented (resident present in the jurisdiction + actual knowledge of the suit + willful concealment). Without personal jurisdiction no money judgment may be recovered. The Managing Attorney must confirm the Melton analysis and that the Affidavit of Diligent Search is gap-free before anything is filed. The paralegal does not have authority to file a publication motion, and the case attorney alone is insufficient.',
-    f:'❌ Publication is not a standard escalation step and cannot be filed by the paralegal or the case attorney alone. It requires dual approval — case attorney AND Managing Attorney — because publication does not confer personal jurisdiction in a tort action unless the three Melton elements are documented, and the Managing Attorney must confirm both that analysis and that the Affidavit of Diligent Search is gap-free before anything is filed. Bar Association approval is not required.'
-  },
-  q21:{
-    t:'✅ Correct. For Dawson Trucking, ALL entity service methods launch on Day 3 in parallel: serve the BOC-3 agent (National Registered Agents) at the Atlanta office, serve Robert Dawson as registered agent at 418 Mill Creek Rd using the varied-time protocol (which also counts for Track A individual service), AND send certified mail to the principal office. No sequential approach — all simultaneously.',
-    f:'❌ Entity service methods run in parallel, not sequentially. The BOC-3 agent, the registered agent, and certified mail all launch on Day 3. Since Robert Dawson is both the RA and an individual defendant, personal service attempts at 418 Mill Creek Rd count for both Track A and Track B. SOS service is not the first step — it is the escalation when RA service fails.'
-  },
-  q22:{
-    t:'✅ Correct. After 3 failed personal service attempts at varied times with evidence the defendant may be home (truck, lights), the next step is substituted service on a household co-resident under O.C.G.A. § 9-11-4(e)(7). Simultaneously, since RA service for Dawson Trucking has also failed at this address, begin preparing SOS service materials for the entity — this should be ready to file by Day 14.',
-    f:'❌ Publication (Step 6) is the LAST resort — you cannot skip from 3 failed personal attempts to publication. The escalation ladder requires substituted service (Step 1) first. And waiting 30 days for more personal attempts wastes time when evidence suggests the defendant is dodging. Act now: substituted service on a co-resident, and prepare SOS service for the entity since RA service has failed.'
-  },
-  q23:{
-    t:'✅ Correct. The NMA service via SOS remains effective — but the certified mail component needs a valid address. The correct action is to run a second skip trace using a different primary database (TLO if Phase 1 used LexisNexis) to find an updated address, then send certified mail to any new addresses found. The SOS service is already on file, so the focus is on the mail delivery requirement.',
-    f:'❌ NMA service is NOT automatically complete when mail comes back unclaimed. While the SOS filing remains effective, the certified mail component is a requirement of the NMA. The correct response is a second skip trace (different database) to find an updated address, then send certified mail to the new address. Publication in Tennessee is not the next step — a second skip trace is.'
-  },
-  q24:{
-    t:'✅ Correct. Tier 1 (reasonable diligence) applies because Robert Dawson has not yet raised the issue of defective service in a court filing. Per Van Omen v. Lopresti (2020), Tier 2 (greatest possible diligence) is triggered ONLY by the defendant\'s responsive pleading — not by the plaintiff\'s awareness that the SOL has expired, and not by service being completed on a co-defendant.',
-    f:'❌ This is the critical legal distinction. The plaintiff\'s awareness that the SOL has expired does NOT trigger Tier 2. Van Omen v. Lopresti settled this: greatest possible diligence applies only after the defendant raises the service defense in a court filing. Robert Dawson has not filed anything. Tier 1 (reasonable diligence) applies regardless of what the team knows or what has happened with other defendants.'
-  },
-  q25:{
-    t:'✅ Correct. The viability question is the Melton analysis. Publication generally does not confer personal jurisdiction in a tort action, so the money judgment depends on proving all three Melton elements: Dawson is a Georgia resident actually present in the jurisdiction, he has ACTUAL KNOWLEDGE that the suit is pending, and he is willfully concealing himself to frustrate service. Note the trap in these facts — the truck in the driveway and lights on prove concealment (element 3) but say nothing about element 2. Actual knowledge has to be built separately: certified mail return receipt requested, an ignored waiver request, or insurer/defense-counsel correspondence acknowledging the suit. Also ask whether coverage responds regardless. Both the case attorney AND Managing Attorney must approve.',
-    f:'❌ Newspaper availability and affidavit completion are procedural steps — they are not the viability question. The critical evaluation is jurisdictional: publication generally does not confer personal jurisdiction, so a money judgment depends on proving all three Melton elements — resident present in the jurisdiction, actual knowledge of the pending suit, and willful concealment. Note the trap in these facts: the truck in the driveway and the lights on go to concealment, not to knowledge. Actual knowledge must be built separately via certified mail return receipt requested, an ignored waiver request, or insurer correspondence acknowledging the suit.'
-  }
-};
+var FEEDBACK = {} /* CUTOVER: feedback text is served per-answer by the engine, never shipped to the client up front */;
 
 // ── INIT firstAttemptStillAvailable ──
 Object.keys(Q_CONFIG).forEach(function(k){ firstAttemptStillAvailable[k] = true; });
@@ -1301,13 +1107,13 @@ Object.keys(Q_CONFIG).forEach(function(k){ firstAttemptStillAvailable[k] = true;
 // ═══════════════════════════════════════════════
 // ANSWER HANDLER
 // ═══════════════════════════════════════════════
-function answer(qId, letter, isCorrect) {
+window.answerUI = function answerUI(qId, letter, isCorrect) {
   if (qDone[qId]) return;
 
   var cfg = Q_CONFIG[qId];
   var block = document.getElementById(qId + '-block');
   var clickedBtn = document.getElementById(qId + '-' + letter);
-  var correctBtn = document.getElementById(qId + '-' + cfg.correct);
+  var correctBtn = document.getElementById(qId + '-' + (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || ''));
   var fb = document.getElementById(qId + '-fb');
 
   block.querySelectorAll('.option-btn').forEach(function(b){ b.classList.add('disabled'); });
@@ -1403,7 +1209,7 @@ function checkSectionComplete(sectionIdx) {
 // NAVIGATION
 // ═══════════════════════════════════════════════
 function goToSection(idx) {
-  if (idx === 8 && !window._lit3Passed) {
+  if (idx === 9 && !window._lit3Passed) {
     showToast('⚠️ 85% required for certificate', false);
     return;
   }
@@ -1514,8 +1320,8 @@ function buildResults() {
     var questionText = qText ? qText.textContent : 'Question ' + (idx+1);
     var isAnswered = !!qDone[qId];
     var wasCorrect = isAnswered && block.classList.contains('answered');
-    var correctLetter = cfg.correct.toUpperCase();
-    var correctBtn = document.getElementById(qId + '-' + cfg.correct);
+    var correctLetter = (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || '').toUpperCase();
+    var correctBtn = document.getElementById(qId + '-' + (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || ''));
     var correctText = correctBtn ? correctBtn.querySelector('.opt-text').textContent : '';
     var userAnswer = '(not answered)'; var userLetter = '';
     if (isAnswered) {
@@ -1767,5 +1573,67 @@ document.addEventListener('DOMContentLoaded', function() {
 
 goToSection(0);
 </script>
+
+
+
+<script>
+/* ── go() / startQuiz() — quiz entry point (Harrell ruling 2026-09-03) ── */
+async function go(screen) {
+  if (screen === 'quiz') {
+    var _ni = document.getElementById('trainee-name-input');
+    var _name = (_ni && _ni.value.trim()) || '';
+    if (!_name) {
+      if (typeof showToast === 'function') showToast('⚠️ Please enter your name before starting the quiz', false);
+      else alert('Please enter your name before starting the quiz.');
+      return;
+    }
+    // Bug-2 fix: await attempt start before making questions interactive
+    await window.GLGQuiz.beginAttempt(_name);
+    goToSection(7);
+  }
+}
+
+function startQuiz() { go('quiz'); }
+
+/* ── GLG MODULE CONFIG — wires api-quiz-engine.js to module-lit3.html ── */
+window.GLG_MODULE_CONFIG = {
+  moduleId: 'lit3',
+  onBankLoaded: function(bank) {
+    var basemax = document.getElementById('basemax');
+    var gate    = document.getElementById('gate');
+    if (basemax) basemax.textContent = bank.base_max;
+    if (gate)    gate.textContent    = bank.pass_pct;
+    for (var i = 1; i <= 6; i++) {
+      var nextEl = document.getElementById('s' + i + '-next');
+      if (nextEl) nextEl.style.display = 'flex';
+    }
+  },
+  onStartQuiz: function() {
+    if (typeof audioCtx !== 'undefined' && audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume().catch(function(){});
+    }
+  },
+  onAnswered: function(r) {
+    baseScore   = r.base_score;
+    bonusPoints = r.bonus_score;
+    streakCount = r.streak;
+    maxStreak   = Math.max(maxStreak || 0, r.maxStreak || 0);
+    var ts = document.getElementById('total-score');
+    if (ts) ts.textContent = r.base_score;
+    var bs = document.getElementById('bonus-score');
+    if (bs) bs.textContent = r.bonus_score;
+    if (typeof updateStreak  === 'function') updateStreak(r.correct);
+    if (typeof mascotReact   === 'function') mascotReact(r.correct ? 'correct' : 'incorrect');
+  },
+  onComplete: function(r) {
+    window._lit3Passed = r.passed;
+    baseScore   = r.base_score;
+    bonusPoints = r.bonus_score;
+    goToSection(8);   // results is now section-8 after port
+    if (typeof buildResults === 'function') buildResults();
+  }
+};
+</script>
+<script src="api-quiz-engine.js"></script>
 </body>
 </html>

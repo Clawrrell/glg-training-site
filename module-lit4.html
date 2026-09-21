@@ -5,7 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
   <title>LIT-4 — Depositions &amp; Trial Prep | Gunn Law Group</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <style>
+:root {
+    --navy: #141c2c;
+    --gold: #dcb161;
+    --gold-lt: #f0d89a;
+}
+
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
     body{font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;color:#333;font-size:16px;line-height:1.6;-webkit-text-size-adjust:100%;overflow-x:hidden;}
@@ -101,11 +108,7 @@
     .case-val .flag-warn{display:inline-block;background:#f39c12;color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;margin-left:6px;}
     .case-val .flag-ok{display:inline-block;background:#10774A;color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;margin-left:6px;}
 
-    /* ── BOSS CHALLENGE ── */
-    .boss-header{background:linear-gradient(135deg,#870101 0%,#5a0000 100%);color:#fff;border-radius:12px;padding:24px;margin-bottom:20px;text-align:center;}
-    .boss-header .boss-icon{font-size:40px;margin-bottom:10px;}
-    .boss-header h3{font-size:clamp(17px,4.5vw,22px);font-weight:800;margin-bottom:8px;}
-    .boss-header p{font-size:14px;opacity:.9;line-height:1.5;}
+    
 
     /* ── RESULTS ── */
     .results-header{padding:28px 20px;text-align:center;color:#fff;}
@@ -225,6 +228,159 @@
     .option-btn.correct{animation:correctPulse 0.6s ease-out;}
     .option-btn.incorrect{animation:incorrectShake 0.4s ease-out;}
   </style>
+
+<style>
+/* ── GLG QUIZ ENGINE — question type styles (2026-09-02) ──────────────────
+     All classes rendered by api-quiz-engine.js. Tokens: navy #141c2c, gold #C5975B.
+     Sourced from engine.html stylesheet + Harrell Part 8c spec. */
+
+  /* Question card */
+  .q { background:#fff; border:1px solid #e2e5ea; border-radius:10px;
+       padding:20px; margin:16px 0; box-shadow:0 1px 6px rgba(20,28,44,.06); }
+  .q-num { font-size:12px; letter-spacing:.06em; color:#C5975B; font-weight:700;
+            text-transform:uppercase; margin-bottom:8px; }
+  .q-text { font-weight:600; margin:8px 0 16px; font-size:1rem; line-height:1.55;
+             color:#141c2c; }
+
+  /* MC option buttons */
+  button.opt { display:block; width:100%; text-align:left; padding:13px 15px; margin:7px 0;
+    border:1px solid #d8dbe3; border-radius:8px; background:#fafbfd; cursor:pointer;
+    font-size:15px; font-family:var(--font-b); color:#222; line-height:1.45;
+    transition:background .12s, border-color .12s; }
+  button.opt:hover:not(.locked) { background:#eef4ff; border-color:#141c2c; }
+  button.opt.correct { background:#d4edda; border-color:#10774A; }
+  button.opt.incorrect { background:#f8d7da; border-color:#870101; }
+  button.opt.locked { cursor:default; opacity:.85; }
+
+  /* Fill-in-the-blank */
+  .fill-stem { font-weight:600; margin:8px 0 14px; line-height:2.2; }
+  input.blank { display:inline-block; min-height:44px; min-width:120px; padding:8px 10px;
+    margin:2px 4px; border:1px solid #ccd; border-radius:8px; background:#fafbfd;
+    font-size:16px; font-family:var(--font-b); vertical-align:middle;
+    box-sizing:border-box; max-width:100%; }
+  input.blank:focus { outline:2px solid #141c2c; background:#fff; }
+  input.blank.correct { background:#d4edda; border-color:#10774A; }
+  input.blank.incorrect { background:#f8d7da; border-color:#870101; }
+  input.blank.locked { opacity:.85; }
+  button.submit-fill { min-height:44px; padding:11px 20px; margin-top:12px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-fill.locked { opacity:.5; cursor:default; }
+
+  /* Markup */
+  .markup-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .markup-passage { margin:0 0 10px; border:1px solid #e2e5ea; border-radius:8px; overflow:hidden; }
+  button.span { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:11px 13px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:16px; font-family:var(--font-b);
+    color:#222; line-height:1.5; overflow-wrap:break-word; }
+  button.span:last-child { border-bottom:0; }
+  button.span:hover:not(.locked) { background:#eef4ff; }
+  button.span.selected { background:#fff3cd; box-shadow:inset 4px 0 0 #b8860b; font-weight:600; }
+  button.span.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.span.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.span.locked { cursor:default; opacity:.9; }
+  button.submit-markup { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-markup.locked { opacity:.5; cursor:default; }
+  .markup-count { font-size:13px; color:#555; margin-top:8px; }
+
+  /* Sort rows with up/down controls */
+  .sort-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .sort-list { margin:0 0 12px; border:1px solid #e2e5ea; border-radius:8px;
+               overflow:hidden; background:#fff; }
+  .sort-row { display:flex; align-items:stretch; border-bottom:1px solid #eef0f3;
+              background:#fff; }
+  .sort-row:last-child { border-bottom:0; }
+  .sort-pos { flex:0 0 34px; display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700; color:#C5975B; background:#f5f5f0; }
+  .sort-text { flex:1 1 auto; padding:11px 12px; font-size:15px; line-height:1.45;
+    display:flex; align-items:center; overflow-wrap:break-word; min-width:0; }
+  .sort-moves { flex:0 0 auto; display:flex; align-items:center; gap:4px; padding:4px 6px; }
+  button.sort-move { min-height:44px; min-width:44px; border:1px solid #ccd; border-radius:8px;
+    background:#fafbfd; cursor:pointer; font-size:15px; color:#141c2c;
+    font-family:var(--font-b); }
+  button.sort-move:hover:not(:disabled) { background:#eef4ff; }
+  button.sort-move:disabled { opacity:.35; cursor:default; }
+  .sort-row.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  .sort-row.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  .sort-row.locked .sort-text { opacity:.9; }
+  button.submit-sort { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-sort.locked { opacity:.5; cursor:default; }
+
+  /* Match chips + slot rows */
+  .match-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .match-tray { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px; padding:10px;
+    border:1px dashed #ccd; border-radius:8px; background:#fafbfd; }
+  button.chip { min-height:44px; padding:10px 16px; border:1px solid #ccd; border-radius:22px;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b); color:#222;
+    max-width:100%; overflow-wrap:break-word; text-align:left; }
+  button.chip:hover:not(.locked) { background:#eef4ff; }
+  button.chip.selected { background:#141c2c; color:#fff; border-color:#141c2c; font-weight:600; }
+  button.chip.placed { opacity:.35; }
+  button.chip.locked { cursor:default; }
+  .match-slots { border:1px solid #e2e5ea; border-radius:8px; overflow:hidden;
+                 background:#fff; margin-bottom:12px; }
+  button.slot { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:10px 14px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b);
+    color:#222; line-height:1.45; overflow-wrap:break-word; }
+  button.slot:last-child { border-bottom:0; }
+  button.slot:hover:not(.locked) { background:#eef4ff; }
+  button.slot.armed { box-shadow:inset 4px 0 0 #C5975B; background:#fffdf5; }
+  .slot-label { font-weight:600; display:block; }
+  .slot-fill { display:block; font-size:14px; margin-top:3px; color:#C5975B; font-weight:600; }
+  .slot-fill.empty { color:#8a8f98; font-weight:400; font-style:italic; }
+  button.slot.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.slot.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.slot.locked { cursor:default; opacity:.9; }
+  button.submit-match { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-match.locked { opacity:.5; cursor:default; }
+  .match-count { font-size:13px; color:#555; margin-top:8px; }
+  .match-credit { font-size:13px; font-weight:600; color:#8a6d1f; margin-top:6px; }
+
+  /* Feedback */
+  .fb { margin-top:12px; padding:12px 14px; border-radius:8px; font-size:14px; display:none; }
+  .fb.show { display:block; }
+  .fb.ok { background:#d4edda; border-left:4px solid #10774A; }
+  .fb.no { background:#f8d7da; border-left:4px solid #870101; }
+  .fb.neutral { background:#eef0f6; border-left:4px solid #6c757d; color:#333; } /* self_assessment: no verdict */
+
+  /* Branching nodes */
+  .branch-scenario { border-left:4px solid #C5975B; padding-left:12px; margin:14px 0; }
+  .branch-turn { font-size:12px; letter-spacing:.06em; color:#8a6d1f; font-weight:700;
+                 text-transform:uppercase; }
+  .branch-instruction { font-weight:600; margin:6px 0 10px; color:#141c2c; }
+  .branch-consequence { margin-top:10px; padding:10px 12px; border-left:4px solid #141c2c;
+    background:#eef2f7; border-radius:0 8px 8px 0; font-size:13px; color:#33415c; display:none; }
+  .branch-consequence.show { display:block; }
+
+  /* Pagination — one question at a time (Harrell Part 8b) */
+  .q-base { display: none !important; }
+  .q-base.q-active { display: block !important; }
+  .q-nav { display:flex; justify-content:space-between; align-items:center;
+            margin-top:20px; padding-top:16px; border-top:1px solid #e8e6e0; }
+  .q-nav-btn { min-height:44px; padding:10px 22px; border-radius:8px;
+                font-size:15px; cursor:pointer; font-family:var(--font-b);
+                font-weight:600; transition:background .12s; }
+  .q-nav-btn.next { background:#141c2c; color:#C5975B; border:2px solid #141c2c; }
+  .q-nav-btn.next:hover { background:#1e2a40; }
+  .q-nav-btn.back { background:#fff; color:#141c2c; border:2px solid #c8c5be; }
+  .q-nav-btn.back:hover { background:#f5f5f0; }
+  .q-pg-spacer { display:inline-block; min-width:40px; }
+  #q-progress { font-size:12px; color:#C5975B; font-weight:600;
+                letter-spacing:.5px; text-transform:uppercase; }
+
+
+</style>
+
+<!-- CUTOVER: server-side grading. Answer keys are not in this file. -->
+    <link rel="stylesheet" href="boss-challenge.css">
 </head>
 <body>
 
@@ -279,8 +435,9 @@
   <button class="nav-pill" id="nav-4" onclick="goToSection(4)">5. Transcripts</button>
   <button class="nav-pill" id="nav-5" onclick="goToSection(5)">6. Trial Prep</button>
   <button class="nav-pill" id="nav-6" onclick="goToSection(6)">7. Boss</button>
-  <button class="nav-pill" id="nav-7" onclick="goToSection(7)">8. Results</button>
-  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">9. Feedback</button>
+  <button class="nav-pill" id="nav-7" onclick="startQuiz()">8. Quiz</button>
+  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">9. Results</button>
+  <button class="nav-pill" id="nav-9" onclick="goToSection(9)">10. Feedback</button>
 </nav>
 
 <main>
@@ -346,53 +503,9 @@
     </div>
     <div class="callout callout-danger"><strong>Ethics line:</strong> Staff preparing a client for deposition logistics (what to wear, where to go, what to bring) = appropriate. Staff telling a client how to answer questions = unauthorized practice of law. The distinction is absolute.</div>
 
-    <div class="question-block" id="q1-block">
-      <div class="q-num">Question 1 of 20 · 10 pts</div>
-      <div class="q-text">Defense counsel has noticed your client's deposition for next Tuesday. Which of the following is a staff responsibility in preparing for this deposition?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q1','a',false)" id="q1-a"><span class="opt-letter">A</span><span class="opt-text">Reviewing likely deposition questions with the client and suggesting answers</span></button>
-        <button class="option-btn" onclick="answer('q1','b',true)" id="q1-b"><span class="opt-letter">B</span><span class="opt-text">Confirming the location, coordinating with the client on arrival time, and preparing exhibit copies</span></button>
-        <button class="option-btn" onclick="answer('q1','c',false)" id="q1-c"><span class="opt-letter">C</span><span class="opt-text">Deciding whether the client should invoke the Fifth Amendment on specific questions, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
-        <button class="option-btn" onclick="answer('q1','d',false)" id="q1-d"><span class="opt-letter">D</span><span class="opt-text">Drafting the attorney's objection strategy for the deposition</span></button>
-      </div>
-      <div class="feedback-box" id="q1-fb"></div>
-    </div>
 
-    <div class="question-block" id="q2-block">
-      <div class="q-num">Question 2 of 20 · 10 pts</div>
-      <div class="q-text">Your attorney wants to depose the defendant who rear-ended your client. What document initiates this process under Georgia law?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q2','a',false)" id="q2-a"><span class="opt-letter">A</span><span class="opt-text">A subpoena duces tecum served on the defendant's attorney</span></button>
-        <button class="option-btn" onclick="answer('q2','b',false)" id="q2-b"><span class="opt-letter">B</span><span class="opt-text">A motion to compel filed with the court requesting the deposition</span></button>
-        <button class="option-btn" onclick="answer('q2','c',false)" id="q2-c"><span class="opt-letter">C</span><span class="opt-text">A discovery request under O.C.G.A. § 9-11-33 sent to opposing counsel — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value</span></button>
-        <button class="option-btn" onclick="answer('q2','d',true)" id="q2-d"><span class="opt-letter">D</span><span class="opt-text">A Notice of Deposition served on all parties under O.C.G.A. § 9-11-30</span></button>
-      </div>
-      <div class="feedback-box" id="q2-fb"></div>
-    </div>
 
-    <div class="question-block" id="q3-block">
-      <div class="q-num">Question 3 of 20 · 10 pts · LIT-2 Retrieval Callback</div>
-      <div class="q-text">You are preparing for a treating physician deposition. The doctor's office says they need a copy of the HIPAA authorization before they will confirm scheduling. You check CasePeer and the authorization expired two months ago. What is your first action?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q3','a',true)" id="q3-a"><span class="opt-letter">A</span><span class="opt-text">Get an updated HIPAA authorization signed by the client immediately, then send to the doctor's office</span></button>
-        <button class="option-btn" onclick="answer('q3','b',false)" id="q3-b"><span class="opt-letter">B</span><span class="opt-text">Proceed with scheduling — the original authorization covers all treatment-related matters — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken</span></button>
-        <button class="option-btn" onclick="answer('q3','c',false)" id="q3-c"><span class="opt-letter">C</span><span class="opt-text">Subpoena the doctor to appear — a subpoena overrides HIPAA requirements</span></button>
-        <button class="option-btn" onclick="answer('q3','d',false)" id="q3-d"><span class="opt-letter">D</span><span class="opt-text">Have the attorney call the doctor's office to waive the HIPAA requirement</span></button>
-      </div>
-      <div class="feedback-box" id="q3-fb"></div>
-    </div>
 
-    <div class="question-block" id="q4-block">
-      <div class="q-num">Question 4 of 20 · 10 pts · Consequence Story</div>
-      <div class="q-text">A staff member tells the client before their deposition: "When they ask about the gap in treatment, just say you were in too much pain to drive." The client repeats this verbatim at the deposition. Defense counsel asks a follow-up and the client's story falls apart. What went wrong?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q4','a',false)" id="q4-a"><span class="opt-letter">A</span><span class="opt-text">The staff member should have provided a more detailed prepared answer</span></button>
-        <button class="option-btn" onclick="answer('q4','b',false)" id="q4-b"><span class="opt-letter">B</span><span class="opt-text">The client should have been coached on follow-up questions as well</span></button>
-        <button class="option-btn" onclick="answer('q4','c',true)" id="q4-c"><span class="opt-letter">C</span><span class="opt-text">The staff member crossed the bright line — coaching testimony is the attorney's role and constitutes unauthorized practice of law</span></button>
-        <button class="option-btn" onclick="answer('q4','d',false)" id="q4-d"><span class="opt-letter">D</span><span class="opt-text">Nothing — the staff member was just trying to help the client feel prepared, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity</span></button>
-      </div>
-      <div class="feedback-box" id="q4-fb"></div>
-    </div>
 
     <div class="section-score" id="s1-score" style="display:none;"><div class="score-display" id="s1-score-val"></div><div class="score-label">Section 2 Score</div></div>
     <div class="btn-group" id="s1-next"><button class="btn btn-primary btn-block" onclick="goToSection(2)">Next: Scheduling &amp; Notice Requirements &rarr;</button></div>
@@ -435,53 +548,9 @@
     </div>
     <div class="callout callout-warn"><strong>Witness fees:</strong> Under O.C.G.A. § 24-13-27, a subpoenaed witness is entitled to a witness fee ($25/day) plus mileage. Failure to tender the fee with the subpoena can be grounds to quash. Always include the check with the subpoena.</div>
 
-    <div class="question-block" id="q5-block">
-      <div class="q-num">Question 5 of 20 · 10 pts</div>
-      <div class="q-text">Your attorney wants to depose the client's treating orthopedic surgeon, Dr. Patel. Dr. Patel is not a party to the case. What must you serve in addition to a Notice of Deposition?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q5','a',false)" id="q5-a"><span class="opt-letter">A</span><span class="opt-text">Nothing additional — a Notice of Deposition is sufficient for any deponent</span></button>
-        <button class="option-btn" onclick="answer('q5','b',false)" id="q5-b"><span class="opt-letter">B</span><span class="opt-text">A motion to compel filed with the court requesting Dr. Patel's testimony</span></button>
-        <button class="option-btn" onclick="answer('q5','c',false)" id="q5-c"><span class="opt-letter">C</span><span class="opt-text">A HIPAA authorization signed by the client permitting Dr. Patel to testify</span></button>
-        <button class="option-btn" onclick="answer('q5','d',true)" id="q5-d"><span class="opt-letter">D</span><span class="opt-text">A subpoena under O.C.G.A. § 9-11-45 with witness fee and mileage</span></button>
-      </div>
-      <div class="feedback-box" id="q5-fb"></div>
-    </div>
 
-    <div class="question-block" id="q6-block">
-      <div class="q-num">Question 6 of 20 · 10 pts</div>
-      <div class="q-text">You are preparing a Notice of Deposition for the defendant. The attorney wants the deposition in 6 business days. Is this sufficient notice under Georgia law?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q6','a',true)" id="q6-a"><span class="opt-letter">A</span><span class="opt-text">No — courts generally require at least 10 business days for reasonable notice</span></button>
-        <button class="option-btn" onclick="answer('q6','b',false)" id="q6-b"><span class="opt-letter">B</span><span class="opt-text">Yes — 5 business days is the statutory minimum in Georgia</span></button>
-        <button class="option-btn" onclick="answer('q6','c',false)" id="q6-c"><span class="opt-letter">C</span><span class="opt-text">Yes — any written notice is sufficient regardless of timing</span></button>
-        <button class="option-btn" onclick="answer('q6','d',false)" id="q6-d"><span class="opt-letter">D</span><span class="opt-text">No — Georgia requires exactly 30 calendar days' notice for all depositions — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage</span></button>
-      </div>
-      <div class="feedback-box" id="q6-fb"></div>
-    </div>
 
-    <div class="question-block" id="q7-block">
-      <div class="q-num">Question 7 of 20 · 10 pts</div>
-      <div class="q-text">The attorney wants the defendant to bring specific documents to the deposition — cell phone records from the day of the accident and employment records. What type of subpoena do you need to prepare?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q7','a',false)" id="q7-a"><span class="opt-letter">A</span><span class="opt-text">A standard subpoena — document requests are implied in any deposition notice</span></button>
-        <button class="option-btn" onclick="answer('q7','b',true)" id="q7-b"><span class="opt-letter">B</span><span class="opt-text">A subpoena duces tecum — which compels both appearance and production of specified documents</span></button>
-        <button class="option-btn" onclick="answer('q7','c',false)" id="q7-c"><span class="opt-letter">C</span><span class="opt-text">A motion to produce — document production at depositions requires a separate court order</span></button>
-        <button class="option-btn" onclick="answer('q7','d',false)" id="q7-d"><span class="opt-letter">D</span><span class="opt-text">An interrogatory requesting the documents — depositions cannot compel document production, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
-      </div>
-      <div class="feedback-box" id="q7-fb"></div>
-    </div>
 
-    <div class="question-block" id="q8-block">
-      <div class="q-num">Question 8 of 20 · 10 pts · Consequence Story</div>
-      <div class="q-text">Staff sends a Notice of Deposition to opposing counsel for the defense IME doctor but does NOT serve a subpoena on the doctor. The deposition date arrives. The IME doctor does not appear. What happened and whose failure was it?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q8','a',false)" id="q8-a"><span class="opt-letter">A</span><span class="opt-text">The IME doctor violated the Notice and should be held in contempt of court</span></button>
-        <button class="option-btn" onclick="answer('q8','b',false)" id="q8-b"><span class="opt-letter">B</span><span class="opt-text">Opposing counsel was responsible for producing the IME doctor since they retained the expert</span></button>
-        <button class="option-btn" onclick="answer('q8','c',true)" id="q8-c"><span class="opt-letter">C</span><span class="opt-text">Staff failed to serve a subpoena — a Notice has no compulsory power over non-parties like the IME doctor</span></button>
-        <button class="option-btn" onclick="answer('q8','d',false)" id="q8-d"><span class="opt-letter">D</span><span class="opt-text">The court reporter should have confirmed attendance with all deponents before the scheduled date — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value</span></button>
-      </div>
-      <div class="feedback-box" id="q8-fb"></div>
-    </div>
 
     <div class="section-score" id="s2-score" style="display:none;"><div class="score-display" id="s2-score-val"></div><div class="score-label">Section 3 Score</div></div>
     <div class="btn-group" id="s2-next"><button class="btn btn-primary btn-block" onclick="goToSection(3)">Next: Client Preparation — Staff vs. Attorney &rarr;</button></div>
@@ -523,53 +592,9 @@
     </div>
     <div class="callout callout-info"><strong>From Essential Lawyering Skills:</strong> Client preparation should use "inquiring mode" — help the client express their own truth, not recite a script. The attorney's prep session creates space for the client to practice saying what actually happened, in their own words. Staff's job is to make sure that prep session happens and the client is physically ready.</div>
 
-    <div class="question-block" id="q9-block">
-      <div class="q-num">Question 9 of 20 · 10 pts</div>
-      <div class="q-text">Your client's deposition is scheduled for Monday. It is now Thursday afternoon. The attorney has not yet scheduled a prep session with the client. What should you do?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q9','a',true)" id="q9-a"><span class="opt-letter">A</span><span class="opt-text">Flag the attorney immediately — the minimum 2-business-day prep session window is about to close</span></button>
-        <button class="option-btn" onclick="answer('q9','b',false)" id="q9-b"><span class="opt-letter">B</span><span class="opt-text">Prepare the client yourself using the deposition outline from similar cases</span></button>
-        <button class="option-btn" onclick="answer('q9','c',false)" id="q9-c"><span class="opt-letter">C</span><span class="opt-text">Wait until Friday — the attorney may be planning a weekend session</span></button>
-        <button class="option-btn" onclick="answer('q9','d',false)" id="q9-d"><span class="opt-letter">D</span><span class="opt-text">Send the client a list of likely deposition questions to review on their own — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken</span></button>
-      </div>
-      <div class="feedback-box" id="q9-fb"></div>
-    </div>
 
-    <div class="question-block" id="q10-block">
-      <div class="q-num">Question 10 of 20 · 10 pts</div>
-      <div class="q-text">The client asks you: "What should I say when they ask about the gap in my treatment?" Which response stays on the correct side of the staff/attorney line?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q10','a',false)" id="q10-a"><span class="opt-letter">A</span><span class="opt-text">"Just say you were in too much pain to drive to appointments"</span></button>
-        <button class="option-btn" onclick="answer('q10','b',false)" id="q10-b"><span class="opt-letter">B</span><span class="opt-text">"Tell them your doctor said you didn't need to come back until the pain worsened", which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity</span></button>
-        <button class="option-btn" onclick="answer('q10','c',false)" id="q10-c"><span class="opt-letter">C</span><span class="opt-text">"Don't worry about that — it's a weak point the defense won't push hard on"</span></button>
-        <button class="option-btn" onclick="answer('q10','d',true)" id="q10-d"><span class="opt-letter">D</span><span class="opt-text">"That's a great question for Mr. Gunn — write it down and bring it to your prep session Thursday"</span></button>
-      </div>
-      <div class="feedback-box" id="q10-fb"></div>
-    </div>
 
-    <div class="question-block" id="q11-block">
-      <div class="q-num">Question 11 of 20 · 10 pts</div>
-      <div class="q-text">On the morning of the deposition, the client calls and says: "I'm really nervous. Can you tell me what to expect?" Which of the following is appropriate for staff to share?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q11','a',false)" id="q11-a"><span class="opt-letter">A</span><span class="opt-text">Walk the client through the questions the defense attorney is likely to ask based on the case file — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage</span></button>
-        <button class="option-btn" onclick="answer('q11','b',true)" id="q11-b"><span class="opt-letter">B</span><span class="opt-text">Explain the general format — a court reporter will be present, the attorney will ask questions, your attorney will be there, and you can take breaks</span></button>
-        <button class="option-btn" onclick="answer('q11','c',false)" id="q11-c"><span class="opt-letter">C</span><span class="opt-text">Reassure them that depositions are easy because most defense attorneys don't ask tough questions</span></button>
-        <button class="option-btn" onclick="answer('q11','d',false)" id="q11-d"><span class="opt-letter">D</span><span class="opt-text">Tell the client to answer as briefly as possible and never volunteer information</span></button>
-      </div>
-      <div class="feedback-box" id="q11-fb"></div>
-    </div>
 
-    <div class="question-block" id="q12-block">
-      <div class="q-num">Question 12 of 20 · 10 pts · Calibration Check</div>
-      <div class="q-text">On a scale of 1–4, how confident are you that you could manage the full pre-deposition logistics process — scheduling, notice, court reporter, exhibits, client coordination — from start to finish without guidance?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q12','a',true)" id="q12-a"><span class="opt-letter">A</span><span class="opt-text">1–2 — Not confident. I understand the concepts but would need step-by-step help.</span></button>
-        <button class="option-btn" onclick="answer('q12','b',true)" id="q12-b"><span class="opt-letter">B</span><span class="opt-text">3 — Somewhat confident. I could handle most of it but might miss details.</span></button>
-        <button class="option-btn" onclick="answer('q12','c',true)" id="q12-c"><span class="opt-letter">C</span><span class="opt-text">4 — Fairly confident. I could manage the process and know where to find answers for edge cases.</span></button>
-        <button class="option-btn" onclick="answer('q12','d',true)" id="q12-d"><span class="opt-letter">D</span><span class="opt-text">5 — Fully confident. I could run the entire deposition logistics process independently.</span></button>
-      </div>
-      <div class="feedback-box" id="q12-fb"></div>
-    </div>
 
     <div class="section-score" id="s3-score" style="display:none;"><div class="score-display" id="s3-score-val"></div><div class="score-label">Section 4 Score</div></div>
     <div class="btn-group" id="s3-next"><button class="btn btn-primary btn-block" onclick="goToSection(4)">Next: Transcripts &amp; Errata Sheets &rarr;</button></div>
@@ -606,53 +631,9 @@
     </div>
     <div class="callout callout-danger"><strong>The 30-day trap:</strong> If the 30-day review period expires without a signature, the transcript stands as written. Missing this deadline means the client cannot correct errors — including errors that could hurt the case at trial. Calendar this deadline the INSTANT you receive the transcript.</div>
 
-    <div class="question-block" id="q13-block">
-      <div class="q-num">Question 13 of 20 · 10 pts</div>
-      <div class="q-text">You receive the transcript from your client's deposition. The court reporter delivers it on March 1. By what date must the client have reviewed and signed (or submitted an errata sheet for) the transcript?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q13','a',false)" id="q13-a"><span class="opt-letter">A</span><span class="opt-text">March 15 — 14 days is the standard review window</span></button>
-        <button class="option-btn" onclick="answer('q13','b',false)" id="q13-b"><span class="opt-letter">B</span><span class="opt-text">April 15 — 45 days from receipt</span></button>
-        <button class="option-btn" onclick="answer('q13','c',true)" id="q13-c"><span class="opt-letter">C</span><span class="opt-text">March 31 — 30 days from transcript delivery under O.C.G.A. § 9-11-30(e)</span></button>
-        <button class="option-btn" onclick="answer('q13','d',false)" id="q13-d"><span class="opt-letter">D</span><span class="opt-text">No deadline — the deponent can submit corrections at any time before trial</span></button>
-      </div>
-      <div class="feedback-box" id="q13-fb"></div>
-    </div>
 
-    <div class="question-block" id="q14-block">
-      <div class="q-num">Question 14 of 20 · 10 pts</div>
-      <div class="q-text">While reviewing the transcript, the client notices that the court reporter typed "I was going 55 mph" when the client actually said "I was going 35 mph." This is a critical error. What is the correct way to address this?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q14','a',true)" id="q14-a"><span class="opt-letter">A</span><span class="opt-text">Note the correction on the errata sheet with the page, line, original text, corrected text, and reason ("transcription error")</span></button>
-        <button class="option-btn" onclick="answer('q14','b',false)" id="q14-b"><span class="opt-letter">B</span><span class="opt-text">Contact the court reporter and ask them to revise the original transcript directly, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
-        <button class="option-btn" onclick="answer('q14','c',false)" id="q14-c"><span class="opt-letter">C</span><span class="opt-text">File a motion to strike the deposition and schedule a new one</span></button>
-        <button class="option-btn" onclick="answer('q14','d',false)" id="q14-d"><span class="opt-letter">D</span><span class="opt-text">Leave it — the attorney can explain the error at trial during redirect examination</span></button>
-      </div>
-      <div class="feedback-box" id="q14-fb"></div>
-    </div>
 
-    <div class="question-block" id="q15-block">
-      <div class="q-num">Question 15 of 20 · 10 pts</div>
-      <div class="q-text">The attorney reviews the defendant's deposition transcript and identifies three admissions that support your client's case. What should staff do with these identified excerpts?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q15','a',false)" id="q15-a"><span class="opt-letter">A</span><span class="opt-text">Nothing — the attorney will remember them when trial preparation begins</span></button>
-        <button class="option-btn" onclick="answer('q15','b',false)" id="q15-b"><span class="opt-letter">B</span><span class="opt-text">Send the excerpts to the client so they know what the defendant admitted — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value</span></button>
-        <button class="option-btn" onclick="answer('q15','c',false)" id="q15-c"><span class="opt-letter">C</span><span class="opt-text">File a motion for summary judgment based on the defendant's admissions</span></button>
-        <button class="option-btn" onclick="answer('q15','d',true)" id="q15-d"><span class="opt-letter">D</span><span class="opt-text">Create a deposition digest — tab and index the key admissions with page/line references for trial prep and upload to CasePeer</span></button>
-      </div>
-      <div class="feedback-box" id="q15-fb"></div>
-    </div>
 
-    <div class="question-block" id="q16-block">
-      <div class="q-num">Question 16 of 20 · 10 pts · Consequence Story</div>
-      <div class="q-text">Staff receives the client's deposition transcript on June 1 but does not calendar the 30-day deadline. On July 15, the attorney discovers a critical error: the transcript says the client "never saw a doctor after the accident" when the client actually said "I never saw THAT doctor after the accident." The errata window has closed. What is the consequence?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q16','a',false)" id="q16-a"><span class="opt-letter">A</span><span class="opt-text">No consequence — the attorney can correct the record at trial through redirect</span></button>
-        <button class="option-btn" onclick="answer('q16','b',true)" id="q16-b"><span class="opt-letter">B</span><span class="opt-text">The transcript stands as written — defense will use the uncorrected version to argue the client never sought treatment, and correcting it now requires the attorney to explain why the deadline was missed</span></button>
-        <button class="option-btn" onclick="answer('q16','c',false)" id="q16-c"><span class="opt-letter">C</span><span class="opt-text">The court reporter is liable for the error and must issue a corrected transcript</span></button>
-        <button class="option-btn" onclick="answer('q16','d',false)" id="q16-d"><span class="opt-letter">D</span><span class="opt-text">The client can file a new errata sheet at any time — the 30-day window is a guideline, not a hard deadline — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken</span></button>
-      </div>
-      <div class="feedback-box" id="q16-fb"></div>
-    </div>
 
     <div class="section-score" id="s4-score" style="display:none;"><div class="score-display" id="s4-score-val"></div><div class="score-label">Section 5 Score</div></div>
     <div class="btn-group" id="s4-next"><button class="btn btn-primary btn-block" onclick="goToSection(5)">Next: Trial Preparation Timeline &amp; Logistics &rarr;</button></div>
@@ -705,53 +686,9 @@
     <div class="callout callout-info"><strong>From Injury Case Playbook:</strong> "The ratio of preparation to performance can easily reach 15 or 20 to 1. It might take 10 hours to prepare for a half-hour counseling session with a client." (Essential Lawyering Skills §2.2.6). Trial is the ultimate expression of this principle — 90 days of staff preparation for 3–5 days of trial.</div>
     <div class="callout callout-danger"><strong>Post-trial procedures:</strong> After verdict or mistrial: (1) Collect all exhibits from the courtroom, (2) Preserve the record for appeal — ensure court reporter files the transcript, (3) Update CasePeer to Post-Trial status, (4) Calendar any post-trial motion deadlines (new trial motion = 30 days under O.C.G.A. § 5-5-40).</div>
 
-    <div class="question-block" id="q17-block">
-      <div class="q-num">Question 17 of 20 · 10 pts</div>
-      <div class="q-text">A case has been set for trial. The trial date is 85 days away. What should staff do FIRST?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q17','a',false)" id="q17-a"><span class="opt-letter">A</span><span class="opt-text">Begin serving subpoenas on all witnesses immediately</span></button>
-        <button class="option-btn" onclick="answer('q17','b',false)" id="q17-b"><span class="opt-letter">B</span><span class="opt-text">Schedule the client's final prep session with the attorney</span></button>
-        <button class="option-btn" onclick="answer('q17','c',true)" id="q17-c"><span class="opt-letter">C</span><span class="opt-text">Update CasePeer status to Trial Prep, create the trial prep folder, and begin exhibit compilation</span></button>
-        <button class="option-btn" onclick="answer('q17','d',false)" id="q17-d"><span class="opt-letter">D</span><span class="opt-text">File the pre-trial motions and jury charge requests with the court, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity</span></button>
-      </div>
-      <div class="feedback-box" id="q17-fb"></div>
-    </div>
 
-    <div class="question-block" id="q18-block">
-      <div class="q-num">Question 18 of 20 · 10 pts</div>
-      <div class="q-text">It is 12 days before trial. You call the treating physician's office to confirm their appearance. They say: "Dr. Patel is presenting at a conference that week and cannot attend." What is the consequence of this discovery at this stage?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q18','a',false)" id="q18-a"><span class="opt-letter">A</span><span class="opt-text">No issue — the physician's deposition transcript can be read into the record instead</span></button>
-        <button class="option-btn" onclick="answer('q18','b',false)" id="q18-b"><span class="opt-letter">B</span><span class="opt-text">The conference is irrelevant — the subpoena compels attendance regardless of scheduling conflicts — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage</span></button>
-        <button class="option-btn" onclick="answer('q18','c',false)" id="q18-c"><span class="opt-letter">C</span><span class="opt-text">This is expected — treating physicians never attend trial in person</span></button>
-        <button class="option-btn" onclick="answer('q18','d',true)" id="q18-d"><span class="opt-letter">D</span><span class="opt-text">This is a crisis — the 75-day timeline exists precisely to catch availability conflicts early, and now the attorney must scramble for alternatives like a video deposition or continuance</span></button>
-      </div>
-      <div class="feedback-box" id="q18-fb"></div>
-    </div>
 
-    <div class="question-block" id="q19-block">
-      <div class="q-num">Question 19 of 20 · 10 pts</div>
-      <div class="q-text">How many complete sets of the exhibit binder should staff prepare for trial?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q19','a',true)" id="q19-a"><span class="opt-letter">A</span><span class="opt-text">At least three — attorney's working copy, judge's copy, and opposing counsel's copy (a fourth witness stand copy is best practice)</span></button>
-        <button class="option-btn" onclick="answer('q19','b',false)" id="q19-b"><span class="opt-letter">B</span><span class="opt-text">One — the attorney's working copy is sufficient; the court provides copies to the judge</span></button>
-        <button class="option-btn" onclick="answer('q19','c',false)" id="q19-c"><span class="opt-letter">C</span><span class="opt-text">Two — one for the attorney and one for the court; opposing counsel brings their own exhibits, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
-        <button class="option-btn" onclick="answer('q19','d',false)" id="q19-d"><span class="opt-letter">D</span><span class="opt-text">Five — one for each juror panel member plus the attorney</span></button>
-      </div>
-      <div class="feedback-box" id="q19-fb"></div>
-    </div>
 
-    <div class="question-block" id="q20-block">
-      <div class="q-num">Question 20 of 20 · 10 pts</div>
-      <div class="q-text">Trial ended yesterday with a defense verdict. The attorney is considering post-trial motions. Under O.C.G.A. § 5-5-40, what is the deadline to file a motion for new trial, and what should staff do immediately?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q20','a',false)" id="q20-a"><span class="opt-letter">A</span><span class="opt-text">10 days — file the motion immediately without waiting for the attorney's analysis</span></button>
-        <button class="option-btn" onclick="answer('q20','b',true)" id="q20-b"><span class="opt-letter">B</span><span class="opt-text">30 days — calendar the deadline immediately, update CasePeer to Post-Trial, and ensure the court reporter files the trial transcript</span></button>
-        <button class="option-btn" onclick="answer('q20','c',false)" id="q20-c"><span class="opt-letter">C</span><span class="opt-text">60 days — there is no urgency; the attorney has two months to decide on post-trial strategy — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value</span></button>
-        <button class="option-btn" onclick="answer('q20','d',false)" id="q20-d"><span class="opt-letter">D</span><span class="opt-text">No deadline — motions for new trial can be filed at any time before the appeal deadline</span></button>
-      </div>
-      <div class="feedback-box" id="q20-fb"></div>
-    </div>
 
     <div class="section-score" id="s5-score" style="display:none;"><div class="score-display" id="s5-score-val"></div><div class="score-label">Section 6 Score</div></div>
     <div class="btn-group" id="s5-next"><button class="btn btn-primary btn-block" onclick="goToSection(6)">Next: Boss Challenge — Marcus Jefferson Trial Prep &rarr;</button></div>
@@ -796,75 +733,45 @@
       <div class="case-detail"><span class="case-key">Witnesses Subpoenaed</span><span class="case-val">0 of 5 identified witnesses <span class="flag">NONE</span></span></div>
     </div>
 
-    <div class="question-block" id="q21-block">
-      <div class="q-num">Boss Question 1 of 5 · 10 bonus pts</div>
-      <div class="q-text">Looking at the case file, identify the single most time-critical issue that must be addressed TODAY — before anything else.</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q21','a',false)" id="q21-a"><span class="opt-letter">A</span><span class="opt-text">Start building the exhibit binder — it is overdue and the 60-day window has passed — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken</span></button>
-        <button class="option-btn" onclick="answer('q21','b',false)" id="q21-b"><span class="opt-letter">B</span><span class="opt-text">Update CasePeer status from Mediation to Trial Prep</span></button>
-        <button class="option-btn" onclick="answer('q21','c',false)" id="q21-c"><span class="opt-letter">C</span><span class="opt-text">Begin serving subpoenas on all five witnesses</span></button>
-        <button class="option-btn" onclick="answer('q21','d',true)" id="q21-d"><span class="opt-letter">D</span><span class="opt-text">Get Marcus in to review and sign (or submit errata for) his deposition transcript — the 30-day window is closing and once it expires, the transcript stands as written</span></button>
-      </div>
-      <div class="feedback-box" id="q21-fb"></div>
-    </div>
 
-    <div class="question-block" id="q22-block">
-      <div class="q-num">Boss Question 2 of 5 · 10 bonus pts</div>
-      <div class="q-text">Dr. Anand (treating surgeon) has not been deposed. Trial is in 42 days. The attorney decides a deposition is critical for trial. What must staff arrange to make this happen, given the compressed timeline?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q22','a',true)" id="q22-a"><span class="opt-letter">A</span><span class="opt-text">Immediately contact Dr. Anand's office for availability, serve a Notice of Deposition on all parties AND a subpoena with witness fee on Dr. Anand, book a court reporter, and ensure current HIPAA authorization is on file</span></button>
-        <button class="option-btn" onclick="answer('q22','b',false)" id="q22-b"><span class="opt-letter">B</span><span class="opt-text">Send a Notice of Deposition to opposing counsel — the Notice alone is sufficient since Dr. Anand is our client's doctor, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity</span></button>
-        <button class="option-btn" onclick="answer('q22','c',false)" id="q22-c"><span class="opt-letter">C</span><span class="opt-text">Skip the deposition — use Dr. Anand's medical records and operative notes as exhibits instead</span></button>
-        <button class="option-btn" onclick="answer('q22','d',false)" id="q22-d"><span class="opt-letter">D</span><span class="opt-text">File a motion requesting the court to order Dr. Anand to appear for deposition</span></button>
-      </div>
-      <div class="feedback-box" id="q22-fb"></div>
-    </div>
 
-    <div class="question-block" id="q23-block">
-      <div class="q-num">Boss Question 3 of 5 · 10 bonus pts</div>
-      <div class="q-text">You are building Marcus's exhibit binder. The attorney has identified 52 potential exhibits. Using the GLG exhibit organization standard, which tab would contain the deposition excerpts where defendant driver James Polk admitted he was looking at his phone at the time of impact?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q23','a',false)" id="q23-a"><span class="opt-letter">A</span><span class="opt-text">Tab 2 — Police/accident report</span></button>
-        <button class="option-btn" onclick="answer('q23','b',false)" id="q23-b"><span class="opt-letter">B</span><span class="opt-text">Tab 6 — Expert reports</span></button>
-        <button class="option-btn" onclick="answer('q23','c',true)" id="q23-c"><span class="opt-letter">C</span><span class="opt-text">Tab 7 — Deposition excerpts (key admissions, digested and tabbed)</span></button>
-        <button class="option-btn" onclick="answer('q23','d',false)" id="q23-d"><span class="opt-letter">D</span><span class="opt-text">Tab 5 — Photographs</span></button>
-      </div>
-      <div class="feedback-box" id="q23-fb"></div>
-    </div>
 
-    <div class="question-block" id="q24-block">
-      <div class="q-num">Boss Question 4 of 5 · 10 bonus pts</div>
-      <div class="q-text">It is now 14 days before trial. You call the defense IME doctor, Dr. Brennan, to confirm her trial appearance. She says she was never subpoenaed and has no intention of appearing. But the attorney needs to cross-examine her at trial using Ball's "Fracking" method. What is the immediate action?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q24','a',false)" id="q24-a"><span class="opt-letter">A</span><span class="opt-text">Notify the attorney that Dr. Brennan won't appear — it's too late to serve a subpoena now</span></button>
-        <button class="option-btn" onclick="answer('q24','b',true)" id="q24-b"><span class="opt-letter">B</span><span class="opt-text">Serve an emergency subpoena with witness fee immediately — 14 days is tight but potentially sufficient if personal service can be achieved quickly</span></button>
-        <button class="option-btn" onclick="answer('q24','c',false)" id="q24-c"><span class="opt-letter">C</span><span class="opt-text">Ask opposing counsel to produce Dr. Brennan — they retained her as their expert</span></button>
-        <button class="option-btn" onclick="answer('q24','d',false)" id="q24-d"><span class="opt-letter">D</span><span class="opt-text">Cancel the cross-examination plan — the attorney can impeach Dr. Brennan through her written report alone</span></button>
-      </div>
-      <div class="feedback-box" id="q24-fb"></div>
-    </div>
 
-    <div class="question-block" id="q25-block">
-      <div class="q-num">Boss Question 5 of 5 · 10 bonus pts</div>
-      <div class="q-text">Trial day arrives. Marcus asks you in the hallway: "What do I need to do in there?" As staff, what is the correct response?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q25','a',false)" id="q25-a"><span class="opt-letter">A</span><span class="opt-text">"The defense is going to try to say the accident was minor — make sure you describe the force of the impact in detail"</span></button>
-        <button class="option-btn" onclick="answer('q25','b',false)" id="q25-b"><span class="opt-letter">B</span><span class="opt-text">"Remember what we talked about — emphasize the pain levels and how the accident changed your daily life"</span></button>
-        <button class="option-btn" onclick="answer('q25','c',true)" id="q25-c"><span class="opt-letter">C</span><span class="opt-text">"Mr. Gunn will walk you through everything before we go in. For now — phone off, sit at the table with us, water is there if you need it. You're going to do great."</span></button>
-        <button class="option-btn" onclick="answer('q25','d',false)" id="q25-d"><span class="opt-letter">D</span><span class="opt-text">"Don't worry about the defense IME doctor — our attorney already knows how to destroy her credibility"</span></button>
-      </div>
-      <div class="feedback-box" id="q25-fb"></div>
-    </div>
 
     <div class="section-score" id="s6-score" style="display:none;"><div class="score-display" id="s6-score-val"></div><div class="score-label">Section 7 — Boss Challenge Score</div></div>
-    <div class="btn-group" id="s6-next"><button class="btn btn-primary btn-block" onclick="showResults()">See Results &rarr;</button></div>
+    <div class="btn-group" id="s6-next"><div style="margin-bottom:1rem;">
+      <label for="trainee-name-input" style="display:block;font-size:0.85rem;font-weight:600;color:#141c2c;margin-bottom:0.4rem;">Your Name — required to start</label>
+      <input type="text" id="trainee-name-input" placeholder="Enter your full name" autocomplete="name" style="width:100%;padding:0.5rem 0.75rem;border:1.5px solid #cbd5e1;border-radius:6px;font-size:0.9rem;box-sizing:border-box;">
+    </div>
+    <button class="btn btn-primary btn-block" onclick="startQuiz()">Take the Quiz &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 7 — QUIZ (api-quiz-engine.js)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-7">
+  <div class="section-header">
+    <div class="section-num">Knowledge Check</div>
+    <h2>Module Assessment</h2>
+    <div class="section-subhead">Answer each question. One attempt — wrong answer reveals the correct answer and unlocks Next.</div>
+  </div>
+  <div class="section-body">
+    <div style="font-family:system-ui,sans-serif;font-size:13px;color:#33415c;padding:8px 0 12px;border-bottom:1px solid #e8eaf0;margin-bottom:16px;">
+      Base: <b id="base">0</b> / <b id="basemax">—</b>
+      &nbsp;·&nbsp; Bonus: <b id="bonus">0</b>
+      &nbsp;·&nbsp; Pass gate: <b id="gate">80</b>%
+      &nbsp;·&nbsp; <span id="q-progress" style="color:#dcb161;font-weight:700;"></span>
+    </div>
+    <div id="questions"></div>
+    <div id="result" style="background:#fff;border:2px solid #0b2545;border-radius:10px;padding:18px;margin:18px 0;display:none;"></div>
   </div>
 </div>
 
 <!-- ══════════════════════════════════════════
      SECTION 7 — RESULTS
 ════════════════════════════════════════════ -->
-<div class="section-card" id="section-7">
+<div class="section-card" id="section-8">
   <div class="section-header">
     <div class="section-num">Section 8 · Results</div>
     <h2>Your LIT-4 Assessment Results</h2>
@@ -910,7 +817,7 @@
 <!-- ══════════════════════════════════════════
      SECTION 8 — FEEDBACK
 ════════════════════════════════════════════ -->
-<div class="section-card" id="section-8">
+<div class="section-card" id="section-9">
   <div class="section-header">
     <div class="section-num">Section 9 · Feedback</div>
     <h2>Module Feedback</h2>
@@ -968,7 +875,7 @@
 
 var PASS_THRESHOLD = 152; // POINTS (was question-units 16). 80% of 190 true achievable base (q12 unscored calibration) — Harrell ruling Aug 17 2026 (Option C)
 var BASE_MAX = 190;
-var TOTAL_SECTIONS = 9;
+var TOTAL_SECTIONS = 10;
 var TRACKER_URL = 'https://script.google.com/macros/s/AKfycbzHJZ0C3BqnLatfq7RIiUP5KQdgYoXTJlozd8ZGZiwIf2bdVmvnPMo3JLm0dA5gQhJyxA/exec';
 
 var baseScore = 0;
@@ -994,31 +901,31 @@ var milestonesTriggered = {};
 // QUESTION CONFIG
 // ═══════════════════════════════════════════════
 var Q_CONFIG = {
-  'q1':  { correct:'b', pts:10, section:1, isBonus:false },
-  'q2':  { correct:'d', pts:10, section:1, isBonus:false },
-  'q3':  { correct:'a', pts:10, section:1, isBonus:false },
-  'q4':  { correct:'c', pts:10, section:1, isBonus:false },
-  'q5':  { correct:'d', pts:10, section:2, isBonus:false },
-  'q6':  { correct:'a', pts:10, section:2, isBonus:false },
-  'q7':  { correct:'b', pts:10, section:2, isBonus:false },
-  'q8':  { correct:'c', pts:10, section:2, isBonus:false },
-  'q9':  { correct:'a', pts:10, section:3, isBonus:false },
-  'q10': { correct:'d', pts:10, section:3, isBonus:false },
-  'q11': { correct:'b', pts:10, section:3, isBonus:false },
-  'q12': { correct:'a', pts:0, section:3, isBonus:false },
-  'q13': { correct:'c', pts:10, section:4, isBonus:false },
-  'q14': { correct:'a', pts:10, section:4, isBonus:false },
-  'q15': { correct:'d', pts:10, section:4, isBonus:false },
-  'q16': { correct:'b', pts:10, section:4, isBonus:false },
-  'q17': { correct:'c', pts:10, section:5, isBonus:false },
-  'q18': { correct:'d', pts:10, section:5, isBonus:false },
-  'q19': { correct:'a', pts:10, section:5, isBonus:false },
-  'q20': { correct:'b', pts:10, section:5, isBonus:false },
-  'q21': { correct:'d', pts:0, section:6, isBonus:true, bonusPts:10 },
-  'q22': { correct:'a', pts:0, section:6, isBonus:true, bonusPts:10 },
-  'q23': { correct:'c', pts:0, section:6, isBonus:true, bonusPts:10 },
-  'q24': { correct:'b', pts:0, section:6, isBonus:true, bonusPts:10 },
-  'q25': { correct:'c', pts:0, section:6, isBonus:true, bonusPts:10 }
+  'q1':  {pts:10, section:1, isBonus:false },
+  'q2':  {pts:10, section:1, isBonus:false },
+  'q3':  {pts:10, section:1, isBonus:false },
+  'q4':  {pts:10, section:1, isBonus:false },
+  'q5':  {pts:10, section:2, isBonus:false },
+  'q6':  {pts:10, section:2, isBonus:false },
+  'q7':  {pts:10, section:2, isBonus:false },
+  'q8':  {pts:10, section:2, isBonus:false },
+  'q9':  {pts:10, section:3, isBonus:false },
+  'q10': {pts:10, section:3, isBonus:false },
+  'q11': {pts:10, section:3, isBonus:false },
+  'q12': {pts:0, section:3, isBonus:false },
+  'q13': {pts:10, section:4, isBonus:false },
+  'q14': {pts:10, section:4, isBonus:false },
+  'q15': {pts:10, section:4, isBonus:false },
+  'q16': {pts:10, section:4, isBonus:false },
+  'q17': {pts:10, section:5, isBonus:false },
+  'q18': {pts:10, section:5, isBonus:false },
+  'q19': {pts:10, section:5, isBonus:false },
+  'q20': {pts:10, section:5, isBonus:false },
+  'q21': {pts:0, section:6, isBonus:true, bonusPts:10 },
+  'q22': {pts:0, section:6, isBonus:true, bonusPts:10 },
+  'q23': {pts:0, section:6, isBonus:true, bonusPts:10 },
+  'q24': {pts:0, section:6, isBonus:true, bonusPts:10 },
+  'q25': {pts:0, section:6, isBonus:true, bonusPts:10 }
 };
 
 var SECTION_QUESTIONS = {
@@ -1033,113 +940,12 @@ var SECTION_QUESTIONS = {
 // ═══════════════════════════════════════════════
 // FEEDBACK STRINGS (all backtick template literals — E9 mandatory)
 // ═══════════════════════════════════════════════
-var FEEDBACK = {
-  'q1': {
-    t: `✅ Staff handles scheduling, logistics, and exhibit preparation — never testimony coaching. Confirming location, coordinating arrival time, and preparing exhibit copies are core staff responsibilities. Reviewing likely questions and suggesting answers crosses the bright line into unauthorized practice of law. The attorney conducts testimony preparation in the prep session.`,
-    f: `❌ Reviewing questions and suggesting answers, Fifth Amendment strategy, and objection drafting are all attorney responsibilities. Staff's role in a plaintiff deposition is logistics: location, timing, exhibit copies, court reporter confirmation, CasePeer updates. The bright line between staff logistics and attorney testimony prep is absolute.`
-  },
-  'q2': {
-    t: `✅ Under O.C.G.A. § 9-11-30(b)(1), depositions are initiated by serving a Notice of Deposition on all parties. The Notice must state the deponent's name, date, time, and location. For a party defendant, the Notice served on their attorney is sufficient — no subpoena is needed because parties are already subject to the court's jurisdiction.`,
-    f: `❌ A Notice of Deposition under O.C.G.A. § 9-11-30 is the correct initiating document. A subpoena duces tecum is for compelling document production (and is for non-parties). A motion to compel is used when a party refuses to comply. O.C.G.A. § 9-11-33 governs interrogatories, not depositions.`
-  },
-  'q3': {
-    t: `✅ HIPAA authorizations expire. When a doctor's office requires a current authorization, the first action is to get an updated one signed by the client. This is an LIT-2 callback — document management discipline requires checking authorization status before every provider interaction. A subpoena does not override HIPAA, and an attorney call cannot waive federal privacy requirements.`,
-    f: `❌ Expired HIPAA authorizations must be renewed — there is no workaround. The original authorization does not cover future matters indefinitely. Subpoenas do not override HIPAA requirements (they run in parallel). An attorney cannot waive a federal privacy protection on behalf of a medical provider. Get a new authorization signed by the client — that is always the first step.`
-  },
-  'q4': {
-    t: `✅ The staff member crossed the absolute bright line between logistics and testimony coaching. Telling a client what to say — regardless of intent — constitutes unauthorized practice of law and damages the case when the coached answer falls apart under cross-examination. The defense will argue the testimony was fabricated. The attorney's prep session exists precisely for this purpose: helping the client express their own truth in their own words.`,
-    f: `❌ Providing a more detailed script or coaching follow-ups would make the problem worse, not better. The fundamental error was coaching testimony at all. Staff must never tell a client how to answer substantive questions. That is the attorney's exclusive responsibility during the prep session. Good intentions do not change the legal and ethical violation.`
-  },
-  'q5': {
-    t: `✅ Non-party witnesses — including treating physicians — require a subpoena under O.C.G.A. § 9-11-45 in addition to the Notice of Deposition. A Notice alone has no compulsory power over someone who is not a party to the case. The subpoena must include the statutory witness fee ($25/day) and mileage under O.C.G.A. § 24-13-27. Failure to tender the fee with the subpoena can be grounds to quash.`,
-    f: `❌ A Notice of Deposition is NOT sufficient for non-parties. Dr. Patel is not a party to the lawsuit — the Notice has no compulsory power over her. A motion to compel is for parties who refuse discovery, not for scheduling non-party witnesses. A HIPAA authorization permits access to records but does not compel testimony. The answer is a subpoena with witness fee and mileage.`
-  },
-  'q6': {
-    t: `✅ Georgia requires "reasonable notice in writing" under O.C.G.A. § 9-11-30(b)(1), and courts generally consider 10 business days the minimum for reasonableness. Six business days is likely insufficient and could result in the deposition being quashed or rescheduled on motion by opposing counsel. Flag this to the attorney and suggest adjusting the date.`,
-    f: `❌ There is no statutory minimum of 5 business days — the standard is "reasonable notice," which courts generally interpret as at least 10 business days. Conversely, 30 calendar days is not required — that would be the standard for depositions on written questions. Six business days is likely too short and risks the deposition being challenged.`
-  },
-  'q7': {
-    t: `✅ A subpoena duces tecum ("bring with you") compels both the witness's appearance AND the production of specified documents. It is the correct tool when the attorney needs a deponent to bring specific records (cell phone records, employment records, etc.) to the deposition. The documents must be specifically described in the subpoena.`,
-    f: `❌ A standard subpoena compels appearance only — it does not automatically include document production. Document production at depositions does not require a separate court order or motion; the subpoena duces tecum handles both. Interrogatories are a separate discovery tool entirely. The subpoena duces tecum is the correct instrument.`
-  },
-  'q8': {
-    t: `✅ The IME doctor is a non-party. A Notice of Deposition served on opposing counsel has no compulsory power over non-parties. Staff needed to serve a subpoena directly on Dr. Brennan under O.C.G.A. § 9-11-45 with witness fee and mileage. This is a staff failure — the scheduling checklist requires a subpoena for every non-party deponent. Opposing counsel has no obligation to produce their expert for your deposition.`,
-    f: `❌ The IME doctor cannot be held in contempt because no subpoena was served — the Notice has no power over non-parties. Opposing counsel is not required to produce their expert; the deposing party must serve the subpoena. The court reporter has no role in confirming attendance. This was a staff process failure: non-party = subpoena required, always.`
-  },
-  'q9': {
-    t: `✅ The minimum standard is a 2-business-day buffer between the attorney prep session and the deposition. If the deposition is Monday, the prep session must happen by Thursday at the latest. It is now Thursday afternoon — the window is about to close. Flag the attorney immediately. Waiting, prepping the client yourself, or sending questions are all wrong: waiting risks missing the window, and the other options cross the staff/attorney line.`,
-    f: `❌ Preparing the client using case file materials or sending likely questions crosses into testimony coaching — that is the attorney's exclusive role. Waiting assumes the attorney will remember — but the staff's job is to ensure the prep session happens. The correct action is to flag the attorney immediately so the prep session can be scheduled before the 2-business-day minimum expires.`
-  },
-  'q10': {
-    t: `✅ This is the model response for staying on the correct side of the line. Redirecting the client's substantive question to the attorney, with a specific suggestion to write it down, is both helpful and appropriate. The client gets a better answer from the attorney, and you avoid crossing into testimony coaching. Every other option coaches the client on what to say — which is the attorney's job.`,
-    f: `❌ Telling the client what to say about the treatment gap, minimizing the defense's likely approach, or suggesting specific testimony are all testimony coaching — the attorney's exclusive domain. The correct response redirects the client to the attorney: "That's a great question for Mr. Gunn — write it down and bring it to your prep session." Helpful, appropriate, and on the right side of the line.`
-  },
-  'q11': {
-    t: `✅ Explaining the general format of a deposition is logistics — appropriate for staff. A court reporter will be present, the attorney will ask questions, your attorney will be there, you can take breaks if you need them. This calms the client's nerves without coaching testimony. Walking through likely questions, minimizing the process, or coaching answer strategy are all on the attorney's side of the line.`,
-    f: `❌ Walking through likely questions is testimony coaching. Reassuring the client that depositions are "easy" is both inaccurate and harmful — it lowers the client's guard. Instructing the client to answer briefly and avoid volunteering information is substantive testimony strategy — that is the attorney's instruction to give during the prep session, not staff's. The general format explanation is the correct staff response.`
-  },
-  'q12': {
-    t: `📋 Complete pre-deposition logistics checklist: (1) Confirm deponent availability. (2) Book court reporter (real-time/rough draft if needed). (3) Reserve conference room or virtual platform. (4) Book videographer if videographed. (5) Prepare and serve Notice of Deposition on all parties (10+ business days). (6) If non-party: serve subpoena with witness fee + mileage. (7) Calendar deposition with 7-day and 1-day reminders. (8) Compile exhibit set for attorney review 3+ business days before. (9) If client deposition: schedule attorney prep session 2+ business days before, send client logistics brief. (10) Update CasePeer. Whatever your confidence level — the checklist is the safety net.`,
-    f: `📋 Complete pre-deposition logistics checklist: (1) Confirm availability. (2) Book court reporter. (3) Reserve location. (4) Book videographer if needed. (5) Serve Notice on all parties (10+ business days). (6) Non-party = subpoena + witness fee. (7) Calendar with reminders. (8) Compile exhibits for attorney review. (9) Client depo = schedule prep session. (10) Update CasePeer. Confidence is valuable — but the checklist catches what confidence misses.`
-  },
-  'q13': {
-    t: `✅ Under O.C.G.A. § 9-11-30(e), when the deponent requests to review the transcript, they have 30 days from the date the transcript is delivered to sign it or submit an errata sheet. Transcript delivered March 1 → deadline March 31. If not signed within 30 days, it may be used as if signed. This deadline must be calendared the INSTANT the transcript is received — missing it means the transcript stands as written, errors and all.`,
-    f: `❌ The review window is 30 days from transcript delivery — not 14 days, not 45 days, and not unlimited. O.C.G.A. § 9-11-30(e) is specific: 30 days. Transcript delivered March 1 = deadline March 31. After that, the transcript is treated as if signed. Calendar this immediately upon receipt — there is no second chance.`
-  },
-  'q14': {
-    t: `✅ The errata sheet is the formal mechanism for transcript corrections. Note the page number, line number, original text ("55 mph"), corrected text ("35 mph"), and the reason ("transcription error — court reporter misheard the number"). This creates a record that the correction is about accuracy, not changing testimony. The court reporter does not revise originals. Motions to strike are for legal challenges, not typos. And leaving a critical error uncorrected is malpractice-adjacent.`,
-    f: `❌ The court reporter does not revise original transcripts — the errata sheet exists precisely for this purpose. Filing a motion to strike the entire deposition is extreme and inappropriate for a transcription error. Leaving the error and hoping to explain it at trial is dangerous — the defense will use the uncorrected "55 mph" aggressively. The errata sheet with page, line, correction, and reason is the correct and only tool.`
-  },
-  'q15': {
-    t: `✅ Creating a deposition digest — tabbing and indexing key admissions with page and line references — is critical trial prep work. This becomes Tab 7 in the exhibit binder and gives the attorney instant access to impeachment material during trial. The attorney won't "just remember" 200 pages of transcript. The client should not receive deposition excerpts. And filing a motion for summary judgment is the attorney's strategic decision, not a staff action.`,
-    f: `❌ "The attorney will remember" is never an acceptable plan — that is precisely why deposition digests exist. Sending deposition excerpts to the client is inappropriate — it could influence their recollection. Filing a summary judgment motion is a legal strategy decision, not a staff task. The correct answer is to create a deposition digest with page/line references, organize it under Tab 7, and upload to CasePeer.`
-  },
-  'q16': {
-    t: `✅ The 30-day window closed on July 1. The transcript now stands as written — "never saw a doctor after the accident" instead of "never saw THAT doctor." Defense will use this to argue the client abandoned treatment. The attorney now faces an uphill battle to explain the discrepancy at trial, where the uncorrected transcript is the official record. This was preventable: calendar the 30-day deadline the INSTANT the transcript arrives. That one CasePeer reminder would have saved this case from impeachment material.`,
-    f: `❌ The attorney cannot simply "correct the record at trial" — the uncorrected transcript IS the record. The court reporter is not liable for using the transcript as signed (or unsigned after 30 days). The 30-day window under O.C.G.A. § 9-11-30(e) is a hard deadline, not a guideline. Once it passes, the transcript stands. Defense will hammer "never saw a doctor" in closing argument. Calendar the deadline instantly upon receipt — no exceptions.`
-  },
-  'q17': {
-    t: `✅ At 85 days out, the first action in the 90-day timeline is: update CasePeer status to Trial Prep, create the trial prep folder, and begin exhibit compilation. Subpoenas come at the 45-day mark. Client prep sessions happen at 14 days. Pre-trial motions are at 30 days. The 90-day mark is about establishing the infrastructure — status, folder, exhibits. Everything else builds from there.`,
-    f: `❌ Subpoenas are served at the 45-day mark, not 85 days out. Client prep sessions happen at 14 days before trial. Pre-trial motions are the attorney's domain at the 30-day mark. At 85 days, the correct first action is the 90-day checkpoint: CasePeer status update, trial prep folder creation, and exhibit compilation. Infrastructure first, then execution.`
-  },
-  'q18': {
-    t: `✅ This is exactly the crisis the 75-day timeline was designed to prevent. At 75 days, staff should have confirmed expert availability and identified scheduling conflicts. Discovering a conflict at 12 days leaves almost no room: the attorney must now scramble to arrange a preservation deposition for trial (video), request a continuance from the court, or find an alternative witness. Each option is worse than having caught this 60 days earlier. This is a staff process failure.`,
-    f: `❌ While a deposition transcript CAN be read into the record, it is significantly less effective than live testimony — especially for a treating surgeon describing surgical findings. The subpoena does not automatically override all scheduling conflicts — courts will consider reasonableness. And treating physicians absolutely can and do testify at trial in person when properly coordinated. The 75-day availability check exists to prevent exactly this 12-day crisis.`
-  },
-  'q19': {
-    t: `✅ The GLG standard requires at least three complete sets: the attorney's working copy, the judge's copy, and opposing counsel's copy. A fourth "witness stand" copy is best practice for letting witnesses reference exhibits during examination without disrupting the attorney's or judge's set. One or two copies is insufficient — the judge and opposing counsel each need their own complete set during trial.`,
-    f: `❌ One copy is grossly insufficient — the judge and opposing counsel both need their own complete sets. Two copies still leaves opposing counsel without access. Five copies for jurors is unnecessary at the exhibit binder stage (individual exhibits may be shown to jurors, but the full binder is for the attorney, judge, and opposing counsel). The standard is at least three sets, with a fourth witness stand copy as best practice.`
-  },
-  'q20': {
-    t: `✅ Under O.C.G.A. § 5-5-40, a motion for new trial must be filed within 30 days of the entry of judgment. Staff's immediate actions: (1) calendar the 30-day deadline, (2) update CasePeer to Post-Trial status, (3) ensure the court reporter files the trial transcript (essential for any post-trial motion or appeal). The attorney decides whether to file — staff ensures the deadline is tracked and the record is preserved.`,
-    f: `❌ The deadline is 30 days under O.C.G.A. § 5-5-40 — not 10 days, not 60 days, and not unlimited. Staff should not file the motion without the attorney's analysis and decision. But staff MUST calendar the deadline immediately and ensure the transcript is being prepared. Missing this deadline means losing the right to challenge the verdict. Calendar it the moment the verdict comes in.`
-  },
-  'q21': {
-    t: `✅ The deposition transcript 30-day review window is closing — this is the single most time-critical issue because once the deadline passes, it cannot be recovered. CasePeer status updates, exhibit binders, and subpoenas are all important and overdue, but none of them have an expiring statutory deadline. Get Marcus in TODAY to review and sign (or submit errata for) his transcript. Everything else can be done tomorrow; this cannot.`,
-    f: `❌ The CasePeer update, exhibit binder, and subpoenas are all overdue and important — but none has an expiring statutory deadline. The 30-day transcript review window under O.C.G.A. § 9-11-30(e) is the only item with a hard, non-recoverable deadline. Once it closes, Marcus cannot correct any errors in his own testimony. Triage by deadline severity: transcript review first, then everything else.`
-  },
-  'q22': {
-    t: `✅ Complete checklist for a compressed-timeline treating physician deposition: (1) Contact Dr. Anand's office immediately for available dates, (2) Serve Notice of Deposition on ALL parties (10+ business days — tight but doable in 42 days), (3) Serve subpoena with witness fee and mileage on Dr. Anand (non-party = subpoena required), (4) Book court reporter, (5) Confirm current HIPAA authorization is on file (LIT-2 callback — check expiration). A Notice alone is insufficient for a non-party. Skipping the deposition loses critical surgical testimony. A court motion adds unnecessary delay.`,
-    f: `❌ A Notice alone is NOT sufficient for a non-party witness — Dr. Anand requires a subpoena regardless of being "our" doctor. Skipping the deposition loses the opportunity for live surgical testimony and leaves the attorney relying only on records. A court motion adds delay the timeline cannot absorb. The correct answer addresses all requirements: availability, Notice, subpoena with fee, court reporter, and HIPAA authorization.`
-  },
-  'q23': {
-    t: `✅ Tab 7 in the GLG exhibit organization standard is designated for deposition excerpts — specifically key admissions that have been digested and tabbed with page/line references. James Polk's admission about looking at his phone at impact is exactly the type of critical admission that belongs in Tab 7, indexed and ready for the attorney to reference during cross-examination or closing argument.`,
-    f: `❌ Tab 2 is for police/accident reports. Tab 5 is for photographs. Tab 6 is for expert reports. Deposition excerpts — particularly key admissions like the defendant admitting he was on his phone — belong in Tab 7: Deposition excerpts, digested and tabbed with page and line references. Knowing the exhibit organization standard means the attorney can find any piece of evidence instantly during trial.`
-  },
-  'q24': {
-    t: `✅ 14 days is tight but not impossible. Serve an emergency subpoena with witness fee immediately. The 45-day subpoena window in the timeline is a best practice, not a statutory requirement — subpoenas can be served at any time before trial as long as they provide reasonable notice. The staff failure was not serving the subpoena during the 45-day window. But the fix now is to serve immediately, not to give up. Asking opposing counsel to produce their expert is not how it works — you must subpoena the witness yourself.`,
-    f: `❌ Telling the attorney "it's too late" is giving up prematurely — 14 days is tight but potentially workable for personal service. Opposing counsel has no obligation to produce their expert for your cross-examination. Canceling the cross-examination plan surrenders a critical tool for impeaching the defense's medical evidence. Ball's Fracking method requires live cross-examination — a written report alone is insufficient. Serve the emergency subpoena and get it done.`
-  },
-  'q25': {
-    t: `✅ This response stays perfectly on the staff side of the line: logistics (phone off, seating, water) and reassurance ("you're going to do great") while directing all substantive guidance to the attorney ("Mr. Gunn will walk you through everything"). No testimony coaching, no strategy discussion, no case commentary. The client is calmed and redirected appropriately. This is the model for every staff-client trial day interaction.`,
-    f: `❌ Reminding the client to emphasize pain levels, instructing them about describing the impact, or commenting on the defense expert's credibility are all testimony coaching — the attorney's exclusive domain, especially on trial day. The correct response handles logistics (phone, seating, water), provides reassurance, and defers all substantive guidance to the attorney. On trial day, the staff/attorney line is more important than ever.`
-  }
-};
+var FEEDBACK = {} /* CUTOVER: feedback text is served per-answer by the engine, never shipped to the client up front */;
 
 // ═══════════════════════════════════════════════
 // ANSWER HANDLER
 // ═══════════════════════════════════════════════
-function answer(qId, choice, isCorrect) {
+window.answerUI = function answerUI(qId, choice, isCorrect) {
   if (qDone[qId]) return;
 
   var cfg = Q_CONFIG[qId];
@@ -1150,7 +956,7 @@ function answer(qId, choice, isCorrect) {
   btns.forEach(function(b){ b.classList.add('disabled'); });
 
   var clickedBtn = document.getElementById(qId + '-' + choice);
-  var correctBtn = document.getElementById(qId + '-' + cfg.correct);
+  var correctBtn = document.getElementById(qId + '-' + (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || ''));
 
   if (isCorrect) {
     clickedBtn.classList.add('correct');
@@ -1246,7 +1052,7 @@ function checkSectionComplete(sectionIdx) {
 // NAVIGATION
 // ═══════════════════════════════════════════════
 function goToSection(idx) {
-  if (idx === 8 && !window._lit4Passed) {
+  if (idx === 9 && !window._lit4Passed) {
     showToast('⚠️ 80% required for certificate', false);
     return;
   }
@@ -1366,8 +1172,8 @@ function buildResults() {
     var questionText = qText ? qText.textContent : 'Question ' + (idx+1);
     var isAnswered = !!qDone[qId];
     var wasCorrect = isAnswered && block.classList.contains('answered');
-    var correctLetter = cfg.correct.toUpperCase();
-    var correctBtn = document.getElementById(qId + '-' + cfg.correct);
+    var correctLetter = (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || '').toUpperCase();
+    var correctBtn = document.getElementById(qId + '-' + (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || ''));
     var correctText = correctBtn ? correctBtn.querySelector('.opt-text').textContent : '';
     var userAnswer = '(not answered)';
     var userLetter = '';
@@ -1889,5 +1695,67 @@ document.addEventListener('DOMContentLoaded', function() {
 // Init
 goToSection(0);
 </script>
+
+
+
+<script>
+/* ── go() / startQuiz() — quiz entry point (Harrell ruling 2026-09-03) ── */
+async function go(screen) {
+  if (screen === 'quiz') {
+    var _ni = document.getElementById('trainee-name-input');
+    var _name = (_ni && _ni.value.trim()) || '';
+    if (!_name) {
+      if (typeof showToast === 'function') showToast('⚠️ Please enter your name before starting the quiz', false);
+      else alert('Please enter your name before starting the quiz.');
+      return;
+    }
+    // Bug-2 fix: await attempt start before making questions interactive
+    await window.GLGQuiz.beginAttempt(_name);
+    goToSection(7);
+  }
+}
+
+function startQuiz() { go('quiz'); }
+
+/* ── GLG MODULE CONFIG — wires api-quiz-engine.js to module-lit4.html ── */
+window.GLG_MODULE_CONFIG = {
+  moduleId: 'lit4',
+  onBankLoaded: function(bank) {
+    var basemax = document.getElementById('basemax');
+    var gate    = document.getElementById('gate');
+    if (basemax) basemax.textContent = bank.base_max;
+    if (gate)    gate.textContent    = bank.pass_pct;
+    for (var i = 1; i <= 6; i++) {
+      var nextEl = document.getElementById('s' + i + '-next');
+      if (nextEl) nextEl.style.display = 'flex';
+    }
+  },
+  onStartQuiz: function() {
+    if (typeof audioCtx !== 'undefined' && audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume().catch(function(){});
+    }
+  },
+  onAnswered: function(r) {
+    baseScore   = r.base_score;
+    bonusPoints = r.bonus_score;
+    streakCount = r.streak;
+    maxStreak   = Math.max(maxStreak || 0, r.maxStreak || 0);
+    var ts = document.getElementById('total-score');
+    if (ts) ts.textContent = r.base_score;
+    var bs = document.getElementById('bonus-score');
+    if (bs) bs.textContent = r.bonus_score;
+    if (typeof updateStreak  === 'function') updateStreak(r.correct);
+    if (typeof mascotReact   === 'function') mascotReact(r.correct ? 'correct' : 'incorrect');
+  },
+  onComplete: function(r) {
+    window._lit4Passed = r.passed;
+    baseScore   = r.base_score;
+    bonusPoints = r.bonus_score;
+    goToSection(8);   // results is now section-8 after port
+    if (typeof buildResults === 'function') buildResults();
+  }
+};
+</script>
+<script src="api-quiz-engine.js"></script>
 </body>
 </html>

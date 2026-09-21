@@ -10,7 +10,12 @@ No external track assumptions. Case Drop & Decline procedures fully contained wi
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
   <title>CM-5 — Case Drop &amp; Decline Procedures | Gunn Law Group</title>
   <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root {
+    --navy: #141c2c;
+    --gold: #dcb161;
+    --gold-lt: #f0d89a;
+  }
+      *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
     body{font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;color:#333;font-size:16px;line-height:1.6;-webkit-text-size-adjust:100%;overflow-x:hidden;}
 
@@ -105,11 +110,7 @@ No external track assumptions. Case Drop & Decline procedures fully contained wi
     .case-val .flag-warn{display:inline-block;background:#f39c12;color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;margin-left:6px;}
     .case-val .flag-ok{display:inline-block;background:#10774A;color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;margin-left:6px;}
 
-    /* ── BOSS CHALLENGE ── */
-    .boss-header{background:linear-gradient(135deg,#870101 0%,#5a0000 100%);color:#fff;border-radius:12px;padding:24px;margin-bottom:20px;text-align:center;}
-    .boss-header .boss-icon{font-size:40px;margin-bottom:10px;}
-    .boss-header h3{font-size:clamp(17px,4.5vw,22px);font-weight:800;margin-bottom:8px;}
-    .boss-header p{font-size:14px;opacity:.9;line-height:1.5;}
+    
 
     /* ── RESULTS ── */
     .results-header{padding:28px 20px;text-align:center;color:#fff;}
@@ -229,6 +230,161 @@ No external track assumptions. Case Drop & Decline procedures fully contained wi
     .option-btn.correct{animation:correctPulse 0.6s ease-out;}
     .option-btn.incorrect{animation:incorrectShake 0.4s ease-out;}
   </style>
+
+<style>
+/* ── GLG QUIZ ENGINE — question type styles (2026-09-02) ──────────────────
+     All classes rendered by api-quiz-engine.js. Tokens: navy #141c2c, gold #C5975B.
+     Sourced from engine.html stylesheet + Harrell Part 8c spec. */
+
+  /* Question card */
+  .q { background:#fff; border:1px solid #e2e5ea; border-radius:10px;
+       padding:20px; margin:16px 0; box-shadow:0 1px 6px rgba(20,28,44,.06); }
+  .q-num { font-size:12px; letter-spacing:.06em; color:#C5975B; font-weight:700;
+            text-transform:uppercase; margin-bottom:8px; }
+  .q-text { font-weight:600; margin:8px 0 16px; font-size:1rem; line-height:1.55;
+             color:#141c2c; }
+
+  /* MC option buttons */
+  button.opt { display:block; width:100%; text-align:left; padding:13px 15px; margin:7px 0;
+    border:1px solid #d8dbe3; border-radius:8px; background:#fafbfd; cursor:pointer;
+    font-size:15px; font-family:var(--font-b); color:#222; line-height:1.45;
+    transition:background .12s, border-color .12s; }
+  button.opt:hover:not(.locked) { background:#eef4ff; border-color:#141c2c; }
+  button.opt.correct { background:#d4edda; border-color:#10774A; }
+  button.opt.incorrect { background:#f8d7da; border-color:#870101; }
+  button.opt.locked { cursor:default; opacity:.85; }
+
+  /* Fill-in-the-blank */
+  .fill-stem { font-weight:600; margin:8px 0 14px; line-height:2.2; }
+  input.blank { display:inline-block; min-height:44px; min-width:120px; padding:8px 10px;
+    margin:2px 4px; border:1px solid #ccd; border-radius:8px; background:#fafbfd;
+    font-size:16px; font-family:var(--font-b); vertical-align:middle;
+    box-sizing:border-box; max-width:100%; }
+  input.blank:focus { outline:2px solid #141c2c; background:#fff; }
+  input.blank.correct { background:#d4edda; border-color:#10774A; }
+  input.blank.incorrect { background:#f8d7da; border-color:#870101; }
+  input.blank.locked { opacity:.85; }
+  button.submit-fill { min-height:44px; padding:11px 20px; margin-top:12px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-fill.locked { opacity:.5; cursor:default; }
+
+  /* Markup */
+  .markup-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .markup-passage { margin:0 0 10px; border:1px solid #e2e5ea; border-radius:8px; overflow:hidden; }
+  button.span { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:11px 13px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:16px; font-family:var(--font-b);
+    color:#222; line-height:1.5; overflow-wrap:break-word; }
+  button.span:last-child { border-bottom:0; }
+  button.span:hover:not(.locked) { background:#eef4ff; }
+  button.span.selected { background:#fff3cd; box-shadow:inset 4px 0 0 #b8860b; font-weight:600; }
+  button.span.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.span.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.span.locked { cursor:default; opacity:.9; }
+  button.submit-markup { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-markup.locked { opacity:.5; cursor:default; }
+  .markup-count { font-size:13px; color:#555; margin-top:8px; }
+
+  /* Sort rows with up/down controls */
+  .sort-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .sort-list { margin:0 0 12px; border:1px solid #e2e5ea; border-radius:8px;
+               overflow:hidden; background:#fff; }
+  .sort-row { display:flex; align-items:stretch; border-bottom:1px solid #eef0f3;
+              background:#fff; }
+  .sort-row:last-child { border-bottom:0; }
+  .sort-pos { flex:0 0 34px; display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700; color:#C5975B; background:#f5f5f0; }
+  .sort-text { flex:1 1 auto; padding:11px 12px; font-size:15px; line-height:1.45;
+    display:flex; align-items:center; overflow-wrap:break-word; min-width:0; }
+  .sort-moves { flex:0 0 auto; display:flex; align-items:center; gap:4px; padding:4px 6px; }
+  button.sort-move { min-height:44px; min-width:44px; border:1px solid #ccd; border-radius:8px;
+    background:#fafbfd; cursor:pointer; font-size:15px; color:#141c2c;
+    font-family:var(--font-b); }
+  button.sort-move:hover:not(:disabled) { background:#eef4ff; }
+  button.sort-move:disabled { opacity:.35; cursor:default; }
+  .sort-row.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  .sort-row.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  .sort-row.locked .sort-text { opacity:.9; }
+  button.submit-sort { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-sort.locked { opacity:.5; cursor:default; }
+
+  /* Match chips + slot rows */
+  .match-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .match-tray { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px; padding:10px;
+    border:1px dashed #ccd; border-radius:8px; background:#fafbfd; }
+  button.chip { min-height:44px; padding:10px 16px; border:1px solid #ccd; border-radius:22px;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b); color:#222;
+    max-width:100%; overflow-wrap:break-word; text-align:left; }
+  button.chip:hover:not(.locked) { background:#eef4ff; }
+  button.chip.selected { background:#141c2c; color:#fff; border-color:#141c2c; font-weight:600; }
+  button.chip.placed { opacity:.35; }
+  button.chip.locked { cursor:default; }
+  .match-slots { border:1px solid #e2e5ea; border-radius:8px; overflow:hidden;
+                 background:#fff; margin-bottom:12px; }
+  button.slot { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:10px 14px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b);
+    color:#222; line-height:1.45; overflow-wrap:break-word; }
+  button.slot:last-child { border-bottom:0; }
+  button.slot:hover:not(.locked) { background:#eef4ff; }
+  button.slot.armed { box-shadow:inset 4px 0 0 #C5975B; background:#fffdf5; }
+  .slot-label { font-weight:600; display:block; }
+  .slot-fill { display:block; font-size:14px; margin-top:3px; color:#C5975B; font-weight:600; }
+  .slot-fill.empty { color:#8a8f98; font-weight:400; font-style:italic; }
+  button.slot.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.slot.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.slot.locked { cursor:default; opacity:.9; }
+  button.submit-match { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-match.locked { opacity:.5; cursor:default; }
+  .match-count { font-size:13px; color:#555; margin-top:8px; }
+  .match-credit { font-size:13px; font-weight:600; color:#8a6d1f; margin-top:6px; }
+
+  /* Feedback */
+  .fb { margin-top:12px; padding:12px 14px; border-radius:8px; font-size:14px; display:none; }
+  .fb.show { display:block; }
+  .fb.ok { background:#d4edda; border-left:4px solid #10774A; }
+  .fb.no { background:#f8d7da; border-left:4px solid #870101; }
+  .fb.neutral { background:#eef0f6; border-left:4px solid #6c757d; color:#333; } /* self_assessment: no verdict */
+
+  /* Branching nodes */
+  .branch-scenario { border-left:4px solid #C5975B; padding-left:12px; margin:14px 0; }
+  .branch-turn { font-size:12px; letter-spacing:.06em; color:#8a6d1f; font-weight:700;
+                 text-transform:uppercase; }
+  .branch-instruction { font-weight:600; margin:6px 0 10px; color:#141c2c; }
+  .branch-consequence { margin-top:10px; padding:10px 12px; border-left:4px solid #141c2c;
+    background:#eef2f7; border-radius:0 8px 8px 0; font-size:13px; color:#33415c; display:none; }
+  .branch-consequence.show { display:block; }
+
+  /* Pagination — one question at a time (Harrell Part 8b) */
+  .q-base { display: none !important; }
+  .q-base.q-active { display: block !important; }
+  .q-nav { display:flex; justify-content:space-between; align-items:center;
+            margin-top:20px; padding-top:16px; border-top:1px solid #e8e6e0; }
+  .q-nav-btn { min-height:44px; padding:10px 22px; border-radius:8px;
+                font-size:15px; cursor:pointer; font-family:var(--font-b);
+                font-weight:600; transition:background .12s; }
+  .q-nav-btn.next { background:#141c2c; color:#C5975B; border:2px solid #141c2c; }
+  .q-nav-btn.next:hover { background:#1e2a40; }
+  .q-nav-btn.back { background:#fff; color:#141c2c; border:2px solid #c8c5be; }
+  .q-nav-btn.back:hover { background:#f5f5f0; }
+  .q-pg-spacer { display:inline-block; min-width:40px; }
+  #q-progress { font-size:12px; color:#C5975B; font-weight:600;
+                letter-spacing:.5px; text-transform:uppercase; }
+
+
+</style>
+
+<!-- CUTOVER: server-side grading. Answer keys are not in this file. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="boss-challenge.css">
 </head>
 <body>
 
@@ -283,8 +439,9 @@ No external track assumptions. Case Drop & Decline procedures fully contained wi
   <button class="nav-pill" id="nav-4" onclick="goToSection(4)">5. Ethics/Finance</button>
   <button class="nav-pill" id="nav-5" onclick="goToSection(5)">6. Special Cases</button>
   <button class="nav-pill" id="nav-6" onclick="goToSection(6)">7. Boss</button>
-  <button class="nav-pill" id="nav-7" onclick="goToSection(7)">8. Results</button>
-  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">9. Feedback</button>
+  <button class="nav-pill" id="nav-7" onclick="startQuiz()">8. Quiz</button>
+  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">9. Results</button>
+  <button class="nav-pill" id="nav-9" onclick="goToSection(9)">10. Feedback</button>
 </nav>
 
 <!-- Points Toast -->
@@ -363,53 +520,9 @@ No external track assumptions. Case Drop & Decline procedures fully contained wi
     <div class="callout callout-danger"><strong>The Hold Period Protects GLG.</strong> The 14 days creates a documented record that the client was given a final, reasonable opportunity to respond before withdrawal. Without this record, GLG cannot demonstrate it met its professional obligations under the Rules of Professional Conduct. No shortcuts.</div>
     <div class="callout callout-warn"><strong>Verbal Policy = No Policy.</strong> Attorney verbal approval for a drop is the start of the process — not the end of it. Until CasePeer shows Pending Drop and the hold is logged, the drop has not been initiated from a documentation standpoint.</div>
 
-    <div class="question-block" id="q1-block">
-      <div class="q-num">Question 1 of 20 &middot; 10 pts</div>
-      <div class="q-text">A client has missed 7 straight medical appointments over 14 weeks and has not returned 6 documented CM outreach calls. The attorney reviewed the file and believes the case is no longer viable. What is the correct FIRST procedural step?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q1','a',false)" id="q1-a"><span class="opt-letter">A</span><span class="opt-text">Close the case in CasePeer and send Template #29 immediately — prolonged non-compliance is a self-executing drop trigger</span></button>
-        <button class="option-btn" onclick="answer('q1','b',false)" id="q1-b"><span class="opt-letter">B</span><span class="opt-text">Call the client one more time, document it, then wait 30 days before escalating</span></button>
-        <button class="option-btn" onclick="answer('q1','c',true)" id="q1-c"><span class="opt-letter">C</span><span class="opt-text">Obtain written attorney authorization for the drop, then move CasePeer status to Pending Drop to begin the 14-day hold</span></button>
-        <button class="option-btn" onclick="answer('q1','d',false)" id="q1-d"><span class="opt-letter">D</span><span class="opt-text">Transfer the file to another CM to make one final re-engagement attempt before escalating</span></button>
-      </div>
-      <div class="feedback-box" id="q1-fb"></div>
-    </div>
 
-    <div class="question-block" id="q2-block">
-      <div class="q-num">Question 2 of 20 &middot; 10 pts</div>
-      <div class="q-text">Attorney authorization to drop has been received. CasePeer has been moved to "Pending Drop." The 14-day hold has begun. What is the purpose of this hold period?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q2','a',false)" id="q2-a"><span class="opt-letter">A</span><span class="opt-text">It is a mandatory Georgia Bar cooling-off period required before any attorney withdrawal</span></button>
-        <button class="option-btn" onclick="answer('q2','b',false)" id="q2-b"><span class="opt-letter">B</span><span class="opt-text">It allows the insurance adjuster to be formally notified of the potential case withdrawal before the client is contacted</span></button>
-        <button class="option-btn" onclick="answer('q2','c',false)" id="q2-c"><span class="opt-letter">C</span><span class="opt-text">It is a waiting period required for trust account reconciliation to complete before the drop letter can go out</span></button>
-        <button class="option-btn" onclick="answer('q2','d',true)" id="q2-d"><span class="opt-letter">D</span><span class="opt-text">It gives the client a documented final opportunity to respond and re-engage before formal withdrawal is executed</span></button>
-      </div>
-      <div class="feedback-box" id="q2-fb"></div>
-    </div>
 
-    <div class="question-block" id="q3-block">
-      <div class="q-num">Question 3 of 20 &middot; 10 pts &middot; Coverage Exhaustion Trigger</div>
-      <div class="q-text">A client's BI policy limit is $15,000. Medical bills are at $14,200. The case has 10 months left on the SOL. The attorney is considering dropping for coverage exhaustion. Before executing any drop process, what must happen first?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q3','a',true)" id="q3-a"><span class="opt-letter">A</span><span class="opt-text">Verify all available coverage sources — including the client's own UM/UIM policy and any other applicable insurance — before the attorney finalizes the drop decision</span></button>
-        <button class="option-btn" onclick="answer('q3','b',false)" id="q3-b"><span class="opt-letter">B</span><span class="opt-text">Negotiate the medical bills down below $15,000 so the case can settle within coverage before dropping</span></button>
-        <button class="option-btn" onclick="answer('q3','c',false)" id="q3-c"><span class="opt-letter">C</span><span class="opt-text">Send Template #29 immediately — coverage near-exhaustion triggers an automatic expedited drop</span></button>
-        <button class="option-btn" onclick="answer('q3','d',false)" id="q3-d"><span class="opt-letter">D</span><span class="opt-text">File suit to pursue the defendant personally for the shortfall before concluding that coverage is exhausted — which represents the conventional method used across Georgia personal injury law firms</span></button>
-      </div>
-      <div class="feedback-box" id="q3-fb"></div>
-    </div>
 
-    <div class="question-block" id="q4-block">
-      <div class="q-num">Question 4 of 20 &middot; 10 pts &middot; Client-Requested Drop</div>
-      <div class="q-text">A client calls and says: "I want to drop my case — I just want to move on." The CM's correct immediate response is:</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q4','a',false)" id="q4-a"><span class="opt-letter">A</span><span class="opt-text">Accept the client's request verbally, begin the Pending Drop process, and schedule Template #29 for day 15 — this approach aligns with the documented procedures and established expectations at GLG</span></button>
-        <button class="option-btn" onclick="answer('q4','b',true)" id="q4-b"><span class="opt-letter">B</span><span class="opt-text">Transfer the call to the attorney — client-requested drops require attorney involvement before any paperwork or CasePeer changes occur</span></button>
-        <button class="option-btn" onclick="answer('q4','c',false)" id="q4-c"><span class="opt-letter">C</span><span class="opt-text">Generate and email Template #29 while the client is still on the phone to confirm their request in writing</span></button>
-        <button class="option-btn" onclick="answer('q4','d',false)" id="q4-d"><span class="opt-letter">D</span><span class="opt-text">Advise the client they are contractually obligated to continue the case through resolution</span></button>
-      </div>
-      <div class="feedback-box" id="q4-fb"></div>
-    </div>
 
     <div class="section-score" id="s1-score" style="display:none;"><div class="score-display" id="s1-score-val"></div><div class="score-label">Section 2 Score</div></div>
     <div class="btn-group" id="s1-next"><button class="btn btn-primary btn-block" onclick="goToSection(2)">Next: Templates #29 &amp; #30 — Drop Letter vs. Declined Case Letter &rarr;</button></div>
@@ -447,53 +560,9 @@ No external track assumptions. Case Drop & Decline procedures fully contained wi
     <div class="callout callout-info"><strong>Inline Primer — Why Timing Matters for #29.</strong> Template #29 cannot go out during the hold period. It goes out AFTER the hold expires with no client re-engagement. Sending it too early eliminates the legal benefit of the hold — the hold only protects GLG if the client had a genuine, documented opportunity to respond.</div>
     <div class="callout callout-warn"><strong>Declined Cases at Intake Need #30 Too.</strong> Even when no representation was formed, the prospective client needs written confirmation that GLG is not representing them. Without Template #30, a person who consulted with GLG might reasonably believe they have an attorney — and miss the SOL waiting for advice that was never coming.</div>
 
-    <div class="question-block" id="q5-block">
-      <div class="q-num">Question 5 of 20 &middot; 10 pts</div>
-      <div class="q-text">Template #29 (Case Drop Letter) is generated at which point in the process?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q5','a',false)" id="q5-a"><span class="opt-letter">A</span><span class="opt-text">On the same day the attorney provides verbal authorization to drop the case</span></button>
-        <button class="option-btn" onclick="answer('q5','b',false)" id="q5-b"><span class="opt-letter">B</span><span class="opt-text">After the trust account is reconciled and the client's file has been copied and packaged for transfer — as outlined in the documented best practices for personal injury case management teams</span></button>
-        <button class="option-btn" onclick="answer('q5','c',true)" id="q5-c"><span class="opt-letter">C</span><span class="opt-text">After the 14-day hold period expires with no client response or re-engagement, and the attorney confirms to proceed</span></button>
-        <button class="option-btn" onclick="answer('q5','d',false)" id="q5-d"><span class="opt-letter">D</span><span class="opt-text">On the day CasePeer status changes to Pending Drop — the letter begins the hold period</span></button>
-      </div>
-      <div class="feedback-box" id="q5-fb"></div>
-    </div>
 
-    <div class="question-block" id="q6-block">
-      <div class="q-num">Question 6 of 20 &middot; 10 pts</div>
-      <div class="q-text">What is the key difference between Template #29 (Case Drop Letter) and Template #30 (Declined Case Letter)?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q6','a',true)" id="q6-a"><span class="opt-letter">A</span><span class="opt-text">Template #30 is sent at intake to decline a case before any representation begins; Template #29 is sent when an existing client relationship is being ended after representation has already begun</span></button>
-        <button class="option-btn" onclick="answer('q6','b',false)" id="q6-b"><span class="opt-letter">B</span><span class="opt-text">Template #30 requires bar association filing within 10 business days; Template #29 does not require any external reporting</span></button>
-        <button class="option-btn" onclick="answer('q6','c',false)" id="q6-c"><span class="opt-letter">C</span><span class="opt-text">Template #30 is for clients who have been with GLG over 6 months; Template #29 is for newer clients dropped in the first 6 months — this approach aligns with the documented procedures and established expectations at GLG</span></button>
-        <button class="option-btn" onclick="answer('q6','d',false)" id="q6-d"><span class="opt-letter">D</span><span class="opt-text">Template #30 is only used for cases where the client had a prior relationship with GLG on another matter</span></button>
-      </div>
-      <div class="feedback-box" id="q6-fb"></div>
-    </div>
 
-    <div class="question-block" id="q7-block">
-      <div class="q-num">Question 7 of 20 &middot; 10 pts</div>
-      <div class="q-text">During a 14-day hold period (CasePeer: Pending Drop), what is the CM's minimum required communication obligation to the client?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q7','a',false)" id="q7-a"><span class="opt-letter">A</span><span class="opt-text">No communication is required during the hold period — communication only resumes after the drop is executed — consistent with the firm's operational guidelines and training documentation standards</span></button>
-        <button class="option-btn" onclick="answer('q7','b',false)" id="q7-b"><span class="opt-letter">B</span><span class="opt-text">Only written communication is permitted during the hold — phone calls are not an approved contact method</span></button>
-        <button class="option-btn" onclick="answer('q7','c',false)" id="q7-c"><span class="opt-letter">C</span><span class="opt-text">Daily contact attempts for all 14 days to maximize documentation of due diligence</span></button>
-        <button class="option-btn" onclick="answer('q7','d',true)" id="q7-d"><span class="opt-letter">D</span><span class="opt-text">At least one documented outreach attempt, clearly communicating why the case is at risk and what the client must do to keep it open, with the attempt logged in CasePeer</span></button>
-      </div>
-      <div class="feedback-box" id="q7-fb"></div>
-    </div>
 
-    <div class="question-block" id="q8-block">
-      <div class="q-num">Question 8 of 20 &middot; 10 pts &middot; Calibration Check — Drop Trigger Categories</div>
-      <div class="q-text">A lawsuit has been filed. The client refuses to sit for their deposition, fails to respond to attorney instructions, and does not appear at a scheduled mediation. Which drop trigger category does this fall under?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q8','a',false)" id="q8-a"><span class="opt-letter">A</span><span class="opt-text">Coverage exhaustion — the case cannot proceed without the client's cooperation — consistent with the firm's operational guidelines and training documentation standards</span></button>
-        <button class="option-btn" onclick="answer('q8','b',false)" id="q8-b"><span class="opt-letter">B</span><span class="opt-text">Client request — refusal to cooperate implies the client wants to end the case</span></button>
-        <button class="option-btn" onclick="answer('q8','c',false)" id="q8-c"><span class="opt-letter">C</span><span class="opt-text">Liability issues — the client's behavior undermines the merits of the case</span></button>
-        <button class="option-btn" onclick="answer('q8','d',true)" id="q8-d"><span class="opt-letter">D</span><span class="opt-text">Non-compliance — the client's failure to participate in the litigation process they initiated is a form of case non-compliance</span></button>
-      </div>
-      <div class="feedback-box" id="q8-fb"></div>
-    </div>
 
     <div class="section-score" id="s2-score" style="display:none;"><div class="score-display" id="s2-score-val"></div><div class="score-label">Section 3 Score</div></div>
     <div class="btn-group" id="s2-next"><button class="btn btn-primary btn-block" onclick="goToSection(3)">Next: CasePeer Status Flow &amp; Documentation Requirements &rarr;</button></div>
@@ -531,53 +600,9 @@ No external track assumptions. Case Drop & Decline procedures fully contained wi
     </div>
     <div class="callout callout-danger"><strong>Dropped ≠ Closed.</strong> "Dropped" means the attorney-client relationship has ended. "Closed" certifies that the financial obligations are also resolved. A case is never moved to Closed while trust funds remain, lien notifications haven't been sent, or financial reconciliation is incomplete.</div>
 
-    <div class="question-block" id="q9-block">
-      <div class="q-num">Question 9 of 20 &middot; 10 pts</div>
-      <div class="q-text">What is the correct CasePeer status sequence when dropping a pre-litigation case for non-compliance?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q9','a',false)" id="q9-a"><span class="opt-letter">A</span><span class="opt-text">Active → Pending Drop → Closed (Dropped status is for litigated cases only)</span></button>
-        <button class="option-btn" onclick="answer('q9','b',false)" id="q9-b"><span class="opt-letter">B</span><span class="opt-text">Active → Dropped → Closed (the hold period is implied by attorney authorization) — reflecting established PI firm procedures for this type of scenario and client situation</span></button>
-        <button class="option-btn" onclick="answer('q9','c',true)" id="q9-c"><span class="opt-letter">C</span><span class="opt-text">Active → Pending Drop → Dropped → Closed (all four stages in sequence; no skipping)</span></button>
-        <button class="option-btn" onclick="answer('q9','d',false)" id="q9-d"><span class="opt-letter">D</span><span class="opt-text">Active → Suspended → Dropped → Closed (Suspended captures the hold period)</span></button>
-      </div>
-      <div class="feedback-box" id="q9-fb"></div>
-    </div>
 
-    <div class="question-block" id="q10-block">
-      <div class="q-num">Question 10 of 20 &middot; 10 pts &middot; Documentation Requirements</div>
-      <div class="q-text">A case drop has been executed. CasePeer is now in Dropped status. Which of the following represents the complete required documentation in the file?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q10','a',true)" id="q10-a"><span class="opt-letter">A</span><span class="opt-text">The specific reason for drop, the attorney who authorized it (by name), the date authorization was given, and the complete outreach log from the hold period</span></button>
-        <button class="option-btn" onclick="answer('q10','b',false)" id="q10-b"><span class="opt-letter">B</span><span class="opt-text">Template #29, a note saying "client did not respond," and the CasePeer status change log</span></button>
-        <button class="option-btn" onclick="answer('q10','c',false)" id="q10-c"><span class="opt-letter">C</span><span class="opt-text">A copy of Template #29 sent to the client — the letter itself is the documentation</span></button>
-        <button class="option-btn" onclick="answer('q10','d',false)" id="q10-d"><span class="opt-letter">D</span><span class="opt-text">The client's signed acknowledgment of the drop — required before CasePeer status can change to Dropped — reflecting established PI firm procedures for this type of scenario and client situation</span></button>
-      </div>
-      <div class="feedback-box" id="q10-fb"></div>
-    </div>
 
-    <div class="question-block" id="q11-block">
-      <div class="q-num">Question 11 of 20 &middot; 10 pts</div>
-      <div class="q-text">What is the primary function of the case drop audit trail GLG maintains in CasePeer?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q11','a',false)" id="q11-a"><span class="opt-letter">A</span><span class="opt-text">It triggers automatic notification to the state bar when a withdrawal occurs</span></button>
-        <button class="option-btn" onclick="answer('q11','b',false)" id="q11-b"><span class="opt-letter">B</span><span class="opt-text">It authorizes the accounting team to close the trust account and remit any balance to operating funds — which represents the conventional method used across Georgia personal injury law firms</span></button>
-        <button class="option-btn" onclick="answer('q11','c',false)" id="q11-c"><span class="opt-letter">C</span><span class="opt-text">It initiates the malpractice insurance premium adjustment associated with the dropped case</span></button>
-        <button class="option-btn" onclick="answer('q11','d',true)" id="q11-d"><span class="opt-letter">D</span><span class="opt-text">It creates a defensible record that GLG followed proper withdrawal procedures and met its professional obligations to the client before terminating representation</span></button>
-      </div>
-      <div class="feedback-box" id="q11-fb"></div>
-    </div>
 
-    <div class="question-block" id="q12-block">
-      <div class="q-num">Question 12 of 20 &middot; 10 pts</div>
-      <div class="q-text">A case is showing "Dropped" status in CasePeer. Template #29 was sent and confirmed delivered. What must happen before the file can be moved to "Closed"?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q12','a',false)" id="q12-a"><span class="opt-letter">A</span><span class="opt-text">The client must sign a release acknowledging receipt of the drop letter and waiving malpractice claims</span></button>
-        <button class="option-btn" onclick="answer('q12','b',true)" id="q12-b"><span class="opt-letter">B</span><span class="opt-text">The trust account must be reconciled and any client balance returned, and outstanding lien notifications must be documented — all financial obligations addressed</span></button>
-        <button class="option-btn" onclick="answer('q12','c',false)" id="q12-c"><span class="opt-letter">C</span><span class="opt-text">A 30-day appeal period must expire, giving the client time to dispute the drop before the file is sealed — which represents the conventional method used across Georgia personal injury law firms</span></button>
-        <button class="option-btn" onclick="answer('q12','d',false)" id="q12-d"><span class="opt-letter">D</span><span class="opt-text">The file must be physically sent to an outside records storage vendor and a confirmation number logged</span></button>
-      </div>
-      <div class="feedback-box" id="q12-fb"></div>
-    </div>
 
     <div class="section-score" id="s3-score" style="display:none;"><div class="score-display" id="s3-score-val"></div><div class="score-label">Section 4 Score</div></div>
     <div class="btn-group" id="s3-next"><button class="btn btn-primary btn-block" onclick="goToSection(4)">Next: Ethical Obligations &amp; Financial Closeout &rarr;</button></div>
@@ -613,53 +638,9 @@ No external track assumptions. Case Drop & Decline procedures fully contained wi
     </div>
     <div class="callout callout-danger"><strong>Trust Funds Are Never GLG's Money.</strong> On a dropped case with a trust balance, GLG cannot: retain the funds as a fee, apply them to internal costs without client authorization, hold them pending a malpractice threat, or delay return without cause. Mishandling trust funds on a dropped case is a bar rules violation.</div>
 
-    <div class="question-block" id="q13-block">
-      <div class="q-num">Question 13 of 20 &middot; 10 pts</div>
-      <div class="q-text">When dropping a case, GLG's ethical obligation under the Rules of Professional Conduct requires which of the following?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q13','a',false)" id="q13-a"><span class="opt-letter">A</span><span class="opt-text">Bar association consent to the withdrawal and a 30-day notice to the opposing insurer</span></button>
-        <button class="option-btn" onclick="answer('q13','b',true)" id="q13-b"><span class="opt-letter">B</span><span class="opt-text">Reasonable notice to the client, steps to protect the client's interests during the transition period, and facilitation of file transfer if the client requests it</span></button>
-        <button class="option-btn" onclick="answer('q13','c',false)" id="q13-c"><span class="opt-letter">C</span><span class="opt-text">Client's written consent to the withdrawal before any action can be taken</span></button>
-        <button class="option-btn" onclick="answer('q13','d',false)" id="q13-d"><span class="opt-letter">D</span><span class="opt-text">No specific obligations — clients who cause the drop through non-compliance have waived their withdrawal protection rights — following the standard workflow that experienced case managers and legal assistants follow</span></button>
-      </div>
-      <div class="feedback-box" id="q13-fb"></div>
-    </div>
 
-    <div class="question-block" id="q14-block">
-      <div class="q-num">Question 14 of 20 &middot; 10 pts &middot; File Transfer Rights</div>
-      <div class="q-text">A client whose case was dropped three months ago calls requesting her complete file. What is GLG's obligation?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q14','a',false)" id="q14-a"><span class="opt-letter">A</span><span class="opt-text">GLG is not required to transfer files for dropped cases — the client triggered the drop and forfeited her file transfer rights — as outlined in the documented best practices for personal injury case management teams</span></button>
-        <button class="option-btn" onclick="answer('q14','b',true)" id="q14-b"><span class="opt-letter">B</span><span class="opt-text">Provide the complete file within a reasonable time — GLG may retain copies for its own records but must provide the client's file upon request</span></button>
-        <button class="option-btn" onclick="answer('q14','c',false)" id="q14-c"><span class="opt-letter">C</span><span class="opt-text">Charge the client a $500 file retrieval and processing fee before transferring any records</span></button>
-        <button class="option-btn" onclick="answer('q14','d',false)" id="q14-d"><span class="opt-letter">D</span><span class="opt-text">Provide medical records only — attorney work product is not transferable to a former client under any circumstances</span></button>
-      </div>
-      <div class="feedback-box" id="q14-fb"></div>
-    </div>
 
-    <div class="question-block" id="q15-block">
-      <div class="q-num">Question 15 of 20 &middot; 10 pts &middot; Trust Account on Drop</div>
-      <div class="q-text">A dropped case has a $420 trust account balance remaining from a previously deposited litigation cost retainer. No settlement occurred. What is the correct disposition of the $420?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q15','a',false)" id="q15-a"><span class="opt-letter">A</span><span class="opt-text">Transfer the $420 to the operating account — unused retainer deposits are forfeited to the firm when a case is dropped — following the standard workflow that experienced case managers and legal assistants follow</span></button>
-        <button class="option-btn" onclick="answer('q15','b',false)" id="q15-b"><span class="opt-letter">B</span><span class="opt-text">Apply the $420 to outstanding GLG administrative costs incurred on the file before remitting any balance</span></button>
-        <button class="option-btn" onclick="answer('q15','c',false)" id="q15-c"><span class="opt-letter">C</span><span class="opt-text">Hold the $420 in trust until the client signs a release confirming no malpractice or bar complaint will be filed</span></button>
-        <button class="option-btn" onclick="answer('q15','d',true)" id="q15-d"><span class="opt-letter">D</span><span class="opt-text">Return the $420 to the client — trust funds always belong to the client and must be remitted regardless of the reason for the drop</span></button>
-      </div>
-      <div class="feedback-box" id="q15-fb"></div>
-    </div>
 
-    <div class="question-block" id="q16-block">
-      <div class="q-num">Question 16 of 20 &middot; 10 pts &middot; Lien Notification on Drop</div>
-      <div class="q-text">A case is being dropped. There is a $5,100 outstanding medical lien from Northside Orthopedics. No settlement occurred. What must GLG document in the file and communicate to the client?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q16','a',false)" id="q16-a"><span class="opt-letter">A</span><span class="opt-text">GLG must pay the $5,100 lien from firm funds to protect the client from post-drop collection actions</span></button>
-        <button class="option-btn" onclick="answer('q16','b',false)" id="q16-b"><span class="opt-letter">B</span><span class="opt-text">The $5,100 lien is automatically extinguished when the case is dropped without a settlement — no notification needed</span></button>
-        <button class="option-btn" onclick="answer('q16','c',true)" id="q16-c"><span class="opt-letter">C</span><span class="opt-text">The lien remains the client's obligation; GLG must notify the client in writing that the $5,100 Northside Orthopedics lien exists and is now the client's responsibility to resolve, and document that notification in the file</span></button>
-        <button class="option-btn" onclick="answer('q16','d',false)" id="q16-d"><span class="opt-letter">D</span><span class="opt-text">GLG must negotiate the lien down on the client's behalf before executing the drop, since the lien existed during the representation — following the standard workflow that experienced case managers and legal assistants follow</span></button>
-      </div>
-      <div class="feedback-box" id="q16-fb"></div>
-    </div>
 
     <div class="section-score" id="s4-score" style="display:none;"><div class="score-display" id="s4-score-val"></div><div class="score-label">Section 5 Score</div></div>
     <div class="btn-group" id="s4-next"><button class="btn btn-primary btn-block" onclick="goToSection(5)">Next: Special Situations &amp; Declined Cases at Intake &rarr;</button></div>
@@ -689,53 +670,9 @@ No external track assumptions. Case Drop & Decline procedures fully contained wi
     <div class="callout callout-danger"><strong>Legal Threat = CM Silence.</strong> Any communication the CM sends after a client threatens a bar complaint or lawsuit can be used against GLG. Even a conciliatory response — "I understand your frustration" — is inadvisable without attorney review. Forward the communication. Stop responding. Document everything.</div>
     <div class="callout callout-info"><strong>Intake Decline — Common Reasons Requiring Template #30:</strong> Statute of limitations already expired · Case type GLG does not handle · Conflict of interest discovered · Insufficient liability · Government immunity issues (GTCA applies) · Case already represented by another attorney.</div>
 
-    <div class="question-block" id="q17-block">
-      <div class="q-num">Question 17 of 20 &middot; 10 pts</div>
-      <div class="q-text">A client in Pending Drop status sends a text message: "If you drop my case I am going to report you to the bar AND file a lawsuit against your firm." What is the CM's correct response?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q17','a',true)" id="q17-a"><span class="opt-letter">A</span><span class="opt-text">Do not engage with the threat; immediately forward the communication to the supervising attorney and document it in CasePeer — all further contact with this client must go through the attorney</span></button>
-        <button class="option-btn" onclick="answer('q17','b',false)" id="q17-b"><span class="opt-letter">B</span><span class="opt-text">Call the client and negotiate a resolution to keep the case active and avoid the complaint</span></button>
-        <button class="option-btn" onclick="answer('q17','c',false)" id="q17-c"><span class="opt-letter">C</span><span class="opt-text">Cancel the pending drop — a threatened bar complaint invalidates the attorney's drop authorization</span></button>
-        <button class="option-btn" onclick="answer('q17','d',false)" id="q17-d"><span class="opt-letter">D</span><span class="opt-text">Respond to the client's text with a clear explanation of why the drop is justified and what the client's options are — this approach aligns with the documented procedures and established expectations at GLG</span></button>
-      </div>
-      <div class="feedback-box" id="q17-fb"></div>
-    </div>
 
-    <div class="question-block" id="q18-block">
-      <div class="q-num">Question 18 of 20 &middot; 10 pts &middot; Unresponsive Client — Delivery Method</div>
-      <div class="q-text">A client has not responded to 7 documented outreach attempts over 50 days. The 14-day hold has expired. The attorney confirms: proceed with the drop. What is the correct method for delivering Template #29?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q18','a',false)" id="q18-a"><span class="opt-letter">A</span><span class="opt-text">Email only — since the client has been unresponsive, a physical letter would also go unanswered and wastes resources — consistent with the firm's operational guidelines and training documentation standards</span></button>
-        <button class="option-btn" onclick="answer('q18','b',false)" id="q18-b"><span class="opt-letter">B</span><span class="opt-text">Post Template #29 to the client portal and update CasePeer — portal delivery constitutes formal service</span></button>
-        <button class="option-btn" onclick="answer('q18','c',true)" id="q18-c"><span class="opt-letter">C</span><span class="opt-text">Send via certified mail return receipt to the client's last known address AND via email; document both attempts in CasePeer including the certified mail tracking number</span></button>
-        <button class="option-btn" onclick="answer('q18','d',false)" id="q18-d"><span class="opt-letter">D</span><span class="opt-text">No letter is required — CasePeer status change from Pending Drop to Dropped is the formal notice mechanism</span></button>
-      </div>
-      <div class="feedback-box" id="q18-fb"></div>
-    </div>
 
-    <div class="question-block" id="q19-block">
-      <div class="q-num">Question 19 of 20 &middot; 10 pts &middot; Attorney-Initiated Drop</div>
-      <div class="q-text">The lead attorney has decided to drop a case after a re-investigation revealed significant contributory negligence by the client. The client has been fully compliant with treatment and has not been non-compliant in any way. What is the correct sequence?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q19','a',true)" id="q19-a"><span class="opt-letter">A</span><span class="opt-text">Attorney documents the liability finding and authorizes the drop; CM moves to Pending Drop; 14-day hold runs; Template #29 goes out after the hold with language reflecting a change in case assessment — no privileged strategy details disclosed</span></button>
-        <button class="option-btn" onclick="answer('q19','b',false)" id="q19-b"><span class="opt-letter">B</span><span class="opt-text">Generate Template #29 immediately — liability determinations are self-executing drop triggers that bypass the hold period</span></button>
-        <button class="option-btn" onclick="answer('q19','c',false)" id="q19-c"><span class="opt-letter">C</span><span class="opt-text">Transfer the case to litigation for a second opinion before dropping — liability questions must be resolved at the litigation level, not pre-lit — this approach aligns with the documented procedures and established expectations at GLG — this approach aligns with the documented procedures and established expectations at GLG</span></button>
-        <button class="option-btn" onclick="answer('q19','d',false)" id="q19-d"><span class="opt-letter">D</span><span class="opt-text">Skip the hold period — when the client has been compliant, the hold period serves no purpose since there is nothing for the client to correct</span></button>
-      </div>
-      <div class="feedback-box" id="q19-fb"></div>
-    </div>
 
-    <div class="question-block" id="q20-block">
-      <div class="q-num">Question 20 of 20 &middot; 10 pts &middot; Declined Case at Intake</div>
-      <div class="q-text">A prospective client calls with a potential car accident case. The intake specialist determines that the two-year Georgia statute of limitations expired three weeks ago. GLG cannot represent them. What is the correct action?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q20','a',false)" id="q20-a"><span class="opt-letter">A</span><span class="opt-text">Refer the prospective client to another firm verbally — no paperwork is needed since no representation was ever formed</span></button>
-        <button class="option-btn" onclick="answer('q20','b',true)" id="q20-b"><span class="opt-letter">B</span><span class="opt-text">Generate Template #30 (Declined Case Letter) and document the specific reason for declination (SOL expired) in CasePeer — the prospective client needs written confirmation that GLG will not represent them</span></button>
-        <button class="option-btn" onclick="answer('q20','c',false)" id="q20-c"><span class="opt-letter">C</span><span class="opt-text">Have an attorney call back to confirm the SOL calculation before issuing any decline — intake cannot make legal determinations — as outlined in the documented best practices for personal injury case management teams</span></button>
-        <button class="option-btn" onclick="answer('q20','d',false)" id="q20-d"><span class="opt-letter">D</span><span class="opt-text">Accept the case provisionally and assign a CM while an attorney researches whether any SOL tolling exceptions apply</span></button>
-      </div>
-      <div class="feedback-box" id="q20-fb"></div>
-    </div>
 
     <div class="section-score" id="s5-score" style="display:none;"><div class="score-display" id="s5-score-val"></div><div class="score-label">Section 6 Score</div></div>
     <div class="btn-group" id="s5-next"><button class="btn btn-primary btn-block" onclick="goToSection(6)">Final Challenge: Boss Level — Marcus Webb &rarr;</button></div>
@@ -778,75 +715,45 @@ No external track assumptions. Case Drop & Decline procedures fully contained wi
 
     <div class="callout callout-danger"><strong>Boss Scoring:</strong> Each question is worth 10 bonus points. Bonus points appear on your certificate but do not count toward the 160-pt pass gate. First correct attempt earns full bonus. Wrong answer = 0 for that question.</div>
 
-    <div class="question-block" id="q21-block">
-      <div class="q-num">Boss Question 1 of 5 &middot; 10 Bonus Points</div>
-      <div class="q-text">The attorney just authorized the Marcus Webb drop. CasePeer currently shows "Active." What is the CM's immediate first action?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q21','a',false)" id="q21-a"><span class="opt-letter">A</span><span class="opt-text">Generate and send Template #29 to Marcus Webb — attorney authorization is the trigger for the drop letter — consistent with the firm's operational guidelines and training documentation standards</span></button>
-        <button class="option-btn" onclick="answer('q21','b',true)" id="q21-b"><span class="opt-letter">B</span><span class="opt-text">Move CasePeer to "Pending Drop" and begin the 14-day hold — the hold period starts with the status change, not the letter</span></button>
-        <button class="option-btn" onclick="answer('q21','c',false)" id="q21-c"><span class="opt-letter">C</span><span class="opt-text">Reconcile the $215 trust balance first — financial closeout must occur before any status changes</span></button>
-        <button class="option-btn" onclick="answer('q21','d',false)" id="q21-d"><span class="opt-letter">D</span><span class="opt-text">Notify Advanced Medical Group that the $3,800 lien will not be resolved through GLG</span></button>
-      </div>
-      <div class="feedback-box" id="q21-fb"></div>
-    </div>
 
-    <div class="question-block" id="q22-block">
-      <div class="q-num">Boss Question 2 of 5 &middot; 10 Bonus Points</div>
-      <div class="q-text">During drop preparation, the CM discovers that Marcus Webb has UM coverage on his personal auto policy that was never evaluated. The drop has already been authorized. What must happen before taking any further steps on the drop?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q22','a',true)" id="q22-a"><span class="opt-letter">A</span><span class="opt-text">Escalate immediately to the authorizing attorney — a viable UM claim could change the drop decision entirely, and the attorney must know before the drop process continues</span></button>
-        <button class="option-btn" onclick="answer('q22','b',false)" id="q22-b"><span class="opt-letter">B</span><span class="opt-text">The UM claim is irrelevant — the attorney already authorized the drop and non-compliance is a sufficient basis regardless of other coverage — as outlined in the documented best practices for personal injury case management teams</span></button>
-        <button class="option-btn" onclick="answer('q22','c',false)" id="q22-c"><span class="opt-letter">C</span><span class="opt-text">Proceed with the drop but note the UM claim in Template #29 so Webb can pursue it independently</span></button>
-        <button class="option-btn" onclick="answer('q22','d',false)" id="q22-d"><span class="opt-letter">D</span><span class="opt-text">Contact the UM carrier directly to evaluate the claim before the hold period starts</span></button>
-      </div>
-      <div class="feedback-box" id="q22-fb"></div>
-    </div>
 
-    <div class="question-block" id="q23-block">
-      <div class="q-num">Boss Question 3 of 5 &middot; 10 Bonus Points</div>
-      <div class="q-text">During the hold period, Marcus Webb sends a text: "My new lawyer says you committed malpractice by not pursuing my UM claim." What is the CM's response?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q23','a',true)" id="q23-a"><span class="opt-letter">A</span><span class="opt-text">Forward the text to the supervising attorney immediately; do not respond to Webb at all — document the text in CasePeer with the exact time and content</span></button>
-        <button class="option-btn" onclick="answer('q23','b',false)" id="q23-b"><span class="opt-letter">B</span><span class="opt-text">Reply: "We are reviewing your concern and will get back to you shortly."</span></button>
-        <button class="option-btn" onclick="answer('q23','c',false)" id="q23-c"><span class="opt-letter">C</span><span class="opt-text">Respond with a detailed explanation of the UM claim history and why the drop is still appropriate — reflecting established PI firm procedures for this type of scenario and client situation</span></button>
-        <button class="option-btn" onclick="answer('q23','d',false)" id="q23-d"><span class="opt-letter">D</span><span class="opt-text">Cancel the drop and re-open the case to address the UM claim allegation before proceeding</span></button>
-      </div>
-      <div class="feedback-box" id="q23-fb"></div>
-    </div>
 
-    <div class="question-block" id="q24-block">
-      <div class="q-num">Boss Question 4 of 5 &middot; 10 Bonus Points</div>
-      <div class="q-text">The 14-day hold expires. Marcus Webb has not responded. The attorney confirms: proceed with the drop. Template #29 is sent via certified mail and email. What are the next two required steps — in order?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q24','a',false)" id="q24-a"><span class="opt-letter">A</span><span class="opt-text">Hold the $215 trust balance pending resolution of the malpractice threat before disbursing any funds to Webb</span></button>
-        <button class="option-btn" onclick="answer('q24','b',false)" id="q24-b"><span class="opt-letter">B</span><span class="opt-text">Move CasePeer to "Closed" immediately — Template #29 delivery completes the drop process</span></button>
-        <button class="option-btn" onclick="answer('q24','c',false)" id="q24-c"><span class="opt-letter">C</span><span class="opt-text">Move to "Closed" immediately since no settlement occurred; notify Advanced Medical Group that the lien is no longer GLG's concern — this approach aligns with the documented procedures and established expectations at GLG</span></button>
-        <button class="option-btn" onclick="answer('q24','d',true)" id="q24-d"><span class="opt-letter">D</span><span class="opt-text">Move CasePeer from Pending Drop to "Dropped"; then return the $215 trust balance to Marcus Webb — the trust balance must be remitted before the file moves to Closed</span></button>
-      </div>
-      <div class="feedback-box" id="q24-fb"></div>
-    </div>
 
-    <div class="question-block" id="q25-block">
-      <div class="q-num">Boss Question 5 of 5 &middot; 10 Bonus Points</div>
-      <div class="q-text">The Marcus Webb file is now "Dropped" in CasePeer. The $215 trust balance has been returned. When can this file be moved to "Closed"?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q25','a',false)" id="q25-a"><span class="opt-letter">A</span><span class="opt-text">Immediately — the trust balance return is the final step; the file is now complete</span></button>
-        <button class="option-btn" onclick="answer('q25','b',false)" id="q25-b"><span class="opt-letter">B</span><span class="opt-text">Only after Marcus Webb signs a written release confirming he received Template #29 and the trust balance check</span></button>
-        <button class="option-btn" onclick="answer('q25','c',true)" id="q25-c"><span class="opt-letter">C</span><span class="opt-text">After the Advanced Medical Group lien notification has been sent to Marcus Webb in writing and documented in CasePeer — lien notification is the final required closeout step</span></button>
-        <button class="option-btn" onclick="answer('q25','d',false)" id="q25-d"><span class="opt-letter">D</span><span class="opt-text">After a 90-day waiting period from the drop date to allow any malpractice claims to be filed before closing the file — as outlined in the documented best practices for personal injury case management teams</span></button>
-      </div>
-      <div class="feedback-box" id="q25-fb"></div>
-    </div>
 
     <div class="section-score" id="s6-score" style="display:none;"><div class="score-display" id="s6-score-val"></div><div class="score-label">Boss Challenge Complete</div></div>
-    <div class="btn-group" id="s6-next"><button class="btn btn-primary btn-block" onclick="showResults()">View Results &amp; Score &rarr;</button></div>
+    <div class="btn-group" id="s6-next"><div style="margin-bottom:1rem;">
+      <label for="trainee-name-input" style="display:block;font-size:0.85rem;font-weight:600;color:#141c2c;margin-bottom:0.4rem;">Your Name — required to start</label>
+      <input type="text" id="trainee-name-input" placeholder="Enter your full name" autocomplete="name" style="width:100%;padding:0.5rem 0.75rem;border:1.5px solid #cbd5e1;border-radius:6px;font-size:0.9rem;box-sizing:border-box;">
+    </div>
+    <button class="btn btn-primary btn-block" onclick="startQuiz()">Take the Quiz &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 7 — QUIZ (api-quiz-engine.js)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-7">
+  <div class="section-header">
+    <div class="section-num">Knowledge Check</div>
+    <h2>Module Assessment</h2>
+    <div class="section-subhead">Answer each question. One attempt — wrong answer reveals the correct answer and unlocks Next.</div>
+  </div>
+  <div class="section-body">
+    <div style="font-family:system-ui,sans-serif;font-size:13px;color:#33415c;padding:8px 0 12px;border-bottom:1px solid #e8eaf0;margin-bottom:16px;">
+      Base: <b id="base">0</b> / <b id="basemax">—</b>
+      &nbsp;·&nbsp; Bonus: <b id="bonus">0</b>
+      &nbsp;·&nbsp; Pass gate: <b id="gate">80</b>%
+      &nbsp;·&nbsp; <span id="q-progress" style="color:#dcb161;font-weight:700;"></span>
+    </div>
+    <div id="questions"></div>
+    <div id="result" style="background:#fff;border:2px solid #0b2545;border-radius:10px;padding:18px;margin:18px 0;display:none;"></div>
   </div>
 </div>
 
 <!-- ══════════════════════════════════════════
      SECTION 7 — RESULTS
 ════════════════════════════════════════════ -->
-<div class="section-card" id="section-7">
+<div class="section-card" id="section-8">
   <div id="results-header-wrap"></div>
   <div class="section-body">
     <div id="results-body"></div>
@@ -872,7 +779,7 @@ No external track assumptions. Case Drop & Decline procedures fully contained wi
 <!-- ══════════════════════════════════════════
      SECTION 8 — FEEDBACK + CERTIFICATE
 ════════════════════════════════════════════ -->
-<div class="section-card" id="section-8">
+<div class="section-card" id="section-9">
   <div class="section-header">
     <div class="section-num">Section 9 · Certificate &amp; Feedback</div>
     <h2>Module Complete — Feedback &amp; Certificate</h2>
@@ -957,7 +864,7 @@ No external track assumptions. Case Drop & Decline procedures fully contained wi
 // ═══════════════════════════════════════════════
 var BASE_MAX = 200;
 var PASS_THRESHOLD = 160;
-var TOTAL_SECTIONS = 9;
+var TOTAL_SECTIONS = 10;
 var TRACKER_URL = 'https://script.google.com/macros/s/AKfycbzHJZ0C3BqnLatfq7RIiUP5KQdgYoXTJlozd8ZGZiwIf2bdVmvnPMo3JLm0dA5gQhJyxA/exec';
 var MODULE_ID = 'cm5';
 var MODULE_NAME = 'CM-5 Case Drop & Decline Procedures';
@@ -981,31 +888,31 @@ var soundEnabled = false;
 
 // ── Q_CONFIG ──
 var Q_CONFIG = {
-  q1:  {section:1, pts:10, isBonus:false, correct:'c'},
-  q2:  {section:1, pts:10, isBonus:false, correct:'d'},
-  q3:  {section:1, pts:10, isBonus:false, correct:'a'},
-  q4:  {section:1, pts:10, isBonus:false, correct:'b'},
-  q5:  {section:2, pts:10, isBonus:false, correct:'c'},
-  q6:  {section:2, pts:10, isBonus:false, correct:'a'},
-  q7:  {section:2, pts:10, isBonus:false, correct:'d'},
-  q8:  {section:2, pts:10, isBonus:false, correct:'d'},
-  q9:  {section:3, pts:10, isBonus:false, correct:'c'},
-  q10: {section:3, pts:10, isBonus:false, correct:'a'},
-  q11: {section:3, pts:10, isBonus:false, correct:'d'},
-  q12: {section:3, pts:10, isBonus:false, correct:'b'},
-  q13: {section:4, pts:10, isBonus:false, correct:'b'},
-  q14: {section:4, pts:10, isBonus:false, correct:'b'},
-  q15: {section:4, pts:10, isBonus:false, correct:'d'},
-  q16: {section:4, pts:10, isBonus:false, correct:'c'},
-  q17: {section:5, pts:10, isBonus:false, correct:'a'},
-  q18: {section:5, pts:10, isBonus:false, correct:'c'},
-  q19: {section:5, pts:10, isBonus:false, correct:'a'},
-  q20: {section:5, pts:10, isBonus:false, correct:'b'},
-  q21: {section:6, pts:0, bonusPts:10, isBonus:true, correct:'b'},
-  q22: {section:6, pts:0, bonusPts:10, isBonus:true, correct:'a'},
-  q23: {section:6, pts:0, bonusPts:10, isBonus:true, correct:'a'},
-  q24: {section:6, pts:0, bonusPts:10, isBonus:true, correct:'d'},
-  q25: {section:6, pts:0, bonusPts:10, isBonus:true, correct:'c'}
+  q1:  {section:1, pts:10, isBonus:false},
+  q2:  {section:1, pts:10, isBonus:false},
+  q3:  {section:1, pts:10, isBonus:false},
+  q4:  {section:1, pts:10, isBonus:false},
+  q5:  {section:2, pts:10, isBonus:false},
+  q6:  {section:2, pts:10, isBonus:false},
+  q7:  {section:2, pts:10, isBonus:false},
+  q8:  {section:2, pts:10, isBonus:false},
+  q9:  {section:3, pts:10, isBonus:false},
+  q10: {section:3, pts:10, isBonus:false},
+  q11: {section:3, pts:10, isBonus:false},
+  q12: {section:3, pts:10, isBonus:false},
+  q13: {section:4, pts:10, isBonus:false},
+  q14: {section:4, pts:10, isBonus:false},
+  q15: {section:4, pts:10, isBonus:false},
+  q16: {section:4, pts:10, isBonus:false},
+  q17: {section:5, pts:10, isBonus:false},
+  q18: {section:5, pts:10, isBonus:false},
+  q19: {section:5, pts:10, isBonus:false},
+  q20: {section:5, pts:10, isBonus:false},
+  q21: {section:6, pts:0, bonusPts:10, isBonus:true},
+  q22: {section:6, pts:0, bonusPts:10, isBonus:true},
+  q23: {section:6, pts:0, bonusPts:10, isBonus:true},
+  q24: {section:6, pts:0, bonusPts:10, isBonus:true},
+  q25: {section:6, pts:0, bonusPts:10, isBonus:true}
 };
 
 // ── SECTION_QUESTIONS ──
@@ -1019,107 +926,7 @@ var SECTION_QUESTIONS = {
 };
 
 // ── FEEDBACK ──
-var FEEDBACK = {
-  q1:{
-    t:'✅ Correct. Attorney authorization is the required first gate for any case drop — verbal policy is not policy. No paperwork, no status changes, and no client communication can happen without that authorization. Once received, CasePeer moves to Pending Drop to start the 14-day hold clock.',
-    f:'❌ Case drops are never self-executing. Even documented non-compliance requires attorney sign-off before any action is taken. The CM\'s role at this stage is to escalate with a clear summary of the outreach record — then wait for authorization before touching CasePeer or generating any document.'
-  },
-  q2:{
-    t:'✅ Correct. The 14-day hold is an ethical safeguard, not an administrative delay. It creates a documented record that GLG gave the client a genuine, final opportunity to respond before withdrawing. Without this record, GLG cannot demonstrate it met its professional obligations if the client later challenges the withdrawal.',
-    f:'❌ The hold period is not mandated by the bar, does not wait for trust account completion, and does not involve the insurer. Its specific purpose is to give the client a documented final window to re-engage — and to create the record that this opportunity was provided. The hold protects GLG as much as it protects the client.'
-  },
-  q3:{
-    t:'✅ Correct. Coverage exhaustion is a potential trigger — but it requires verification that no other coverage sources exist before the attorney finalizes the drop decision. Dropping a case with an untouched UM/UIM claim is a serious error that can expose GLG to a malpractice allegation. Always check all available coverage first.',
-    f:'❌ Coverage exhaustion is not a self-executing trigger. GLG\'s obligation is to exhaust every avenue of potential recovery before concluding coverage is truly insufficient. The most common oversight: the client\'s own auto policy carrying UM/UIM coverage that was never checked. One phone call to the client\'s insurer can change the entire analysis.'
-  },
-  q4:{
-    t:'✅ Correct. Client-requested drops are never CM-executable without attorney involvement. The client needs to understand the legal consequences of ending the representation — outstanding liens, any lost claims, SOL impact on anything unresolved. The attorney ensures the client has that understanding before any paperwork moves.',
-    f:'❌ Even when the client is the one requesting the drop, the attorney must be involved before CasePeer changes or any document is generated. A client who decides impulsively to drop may not understand what they\'re giving up. The attorney protects both the client and the firm by ensuring the decision is informed.'
-  },
-  q5:{
-    t:'✅ Correct. Template #29 cannot go out before the hold period concludes. The hold is meaningless as an ethics protection if the drop letter is sent while it is still in progress. The sequence is: authorization → Pending Drop → hold runs → no response → attorney confirms → #29 goes out.',
-    f:'❌ Template #29 is the formal termination of the representation. Sending it early — on the day of authorization or during the hold — eliminates the protection the hold period creates. The hold only protects GLG if the client had a genuine, documented opportunity to respond during it.'
-  },
-  q6:{
-    t:'✅ Correct. The distinction is about the relationship status at the time the document is generated. Template #29 ends an existing representation. Template #30 declines a potential one before it begins. Using #30 for an existing client, or #29 for an intake decline, creates a documentation error with potential ethics implications.',
-    f:'❌ The key distinction is not how long the client has been with GLG — it is whether a representation ever existed. Template #29 is for existing clients. Template #30 is for prospective clients at intake — before any attorney-client relationship was formed. They are never interchangeable.'
-  },
-  q7:{
-    t:'✅ Correct. The hold period requires affirmative outreach — at least one documented attempt to reach the client, clearly communicating the risk and what they can do to keep the case open. That attempt must be logged in CasePeer. The hold is not a passive waiting period.',
-    f:'❌ The hold period is not a communication blackout — it requires outreach. A hold that passes with zero contact attempts is not a proper hold. The purpose is to give the client a genuine opportunity to respond, which requires that the client actually be informed of the risk during the hold period.'
-  },
-  q8:{
-    t:'✅ Correct. Non-compliance includes any client behavior that prevents GLG from representing them effectively. This is not limited to missed medical appointments. Refusal to sit for a deposition, failure to follow attorney instructions, and non-appearance at mediation in a litigated case are all forms of case non-compliance.',
-    f:'❌ Discovery non-cooperation is squarely in the non-compliance category. The drop trigger categories focus on why the firm can no longer effectively represent the client — not just on whether the client showed up to treatment. A client who refuses to participate in their own litigation is non-compliant regardless of their treatment record.'
-  },
-  q9:{
-    t:'✅ Correct. The four-stage sequence — Active → Pending Drop → Dropped → Closed — is non-negotiable. Pending Drop is not optional; it is how GLG documents the hold period. A case that skips from Active to Dropped has no documented hold, which means no documented ethical compliance.',
-    f:'❌ The full required sequence is Active → Pending Drop → Dropped → Closed. "Pending Drop" is not a shortcut label — it is the status that starts the clock on the 14-day hold. Cases cannot jump from Active to Dropped without that intermediate step. There is no "Suspended" status in the GLG drop process.'
-  },
-  q10:{
-    t:'✅ Correct. Template #29 alone is not documentation — it is one element of a complete record. The file must show: why the drop happened (specific facts, not generic labels), who authorized it (attorney name), when it was authorized, and what outreach occurred during the hold. Missing any element creates an audit trail gap.',
-    f:'❌ Template #29 is necessary but not sufficient. The drop documentation must stand up to scrutiny if the client later challenges the withdrawal. That requires: the specific reason, the named attorney who approved, the date, and the complete log of every contact attempt during the hold. "Client did not respond" is not documentation — it is a conclusion without a record.'
-  },
-  q11:{
-    t:'✅ Correct. The audit trail is an ethics compliance record. It demonstrates that GLG gave proper notice, conducted an appropriate hold, and protected the client\'s interests during transition. If a client later files a bar complaint alleging improper withdrawal, the audit trail is what GLG points to as its defense.',
-    f:'❌ The audit trail is not an administrative trigger for external notifications or insurance adjustments. Its core function is to create a record that GLG met its professional obligations. Without it, GLG cannot defend itself against a claim that it abandoned the client or failed to give proper notice.'
-  },
-  q12:{
-    t:'✅ Correct. "Dropped" and "Closed" are two distinct statuses for a reason. Dropped = representation ended. Closed = file is complete and no financial obligations remain open. The transition from Dropped to Closed requires: trust balance returned, lien notification documented. Both must be done before Closed.',
-    f:'❌ Client signature is not required to move from Dropped to Closed. The financial closeout is what gates the Closed status — trust reconciliation and lien notification. A client who refuses to sign anything cannot hold a file indefinitely in Dropped status; GLG\'s obligation is documentation, not client consent to every step.'
-  },
-  q13:{
-    t:'✅ Correct. The three ethical obligations on withdrawal track the Rules of Professional Conduct: (1) reasonable notice — satisfied by the hold period and Template #29; (2) protect client interests during transition — includes informing about deadlines and advising to seek new counsel; (3) facilitate file transfer on request. All three apply regardless of why the case is being dropped.',
-    f:'❌ Bar consent is not required for withdrawal, and client written consent to the withdrawal is not required. These obligations reflect the professional conduct rules: give notice, protect interests during the transition, and provide the file. These apply even when the client caused the drop through their own behavior.'
-  },
-  q14:{
-    t:'✅ Correct. Former clients have the right to their complete file. GLG may retain copies for its own records but must provide the client\'s documents when requested. Withholding a former client\'s file — for any reason — is a potential ethics violation. There are no exceptions based on the reason for the drop.',
-    f:'❌ GLG cannot withhold a former client\'s file or impose punitive retrieval fees. The file belongs to the client. While attorney work product has some protection under specific state rules, the baseline obligation is clear: provide the file when requested. The client\'s right to their records does not disappear because the case was dropped.'
-  },
-  q15:{
-    t:'✅ Correct. Trust funds are the client\'s money, held by GLG in a fiduciary capacity. On a dropped case, those funds must be returned to the client. There are no exceptions: not for pending disputes, not for cost reimbursements without authorization, and certainly not for a malpractice threat. Mishandling trust funds is a bar rules violation.',
-    f:'❌ Trust account funds are never forfeit to the firm on a case drop. GLG holds them in trust — as a fiduciary. Retaining them, applying them to firm costs without authorization, or conditioning their return on client cooperation are all violations of the trust account rules. Return the funds. Period.'
-  },
-  q16:{
-    t:'✅ Correct. Medical liens do not disappear when a case is dropped without settlement. The client\'s obligation to the provider continues. GLG\'s duty is to notify — in writing, specifically, with the lien amount and provider name — that this obligation exists and is now the client\'s responsibility. That notification is documented in CasePeer.',
-    f:'❌ GLG does not pay client liens from firm funds, and liens are not extinguished by a case drop. The lien was created between the client and the provider — GLG\'s role ends with the representation. But the obligation to notify the client in writing is non-negotiable. A client who faces a lien enforcement action they didn\'t know about after a drop will blame GLG for the surprise.'
-  },
-  q17:{
-    t:'✅ Correct. A legal threat — bar complaint, lawsuit, or malpractice allegation — immediately changes the risk profile of every subsequent communication. The CM\'s response is zero communication and immediate escalation to the supervising attorney. Even a conciliatory response from the CM can create problems. Document it, forward it, stop responding.',
-    f:'❌ A legal threat is not a CM-handled situation under any circumstances. Even "I understand your frustration" can be used against GLG if the matter is escalated. The attorney manages all communications from the moment a legal threat has been made. The CM\'s only actions are: document the threat in CasePeer with exact date and content, and notify the attorney immediately.'
-  },
-  q18:{
-    t:'✅ Correct. With an unresponsive client, GLG needs a delivery record that will withstand scrutiny. Certified mail return receipt creates a legally documented delivery record. Email supplements it. Both are documented in CasePeer — date sent, tracking number for certified mail, email address used. This dual-channel approach protects GLG if the client later claims they never received the drop letter.',
-    f:'❌ Email alone is insufficient documentation when a client is unresponsive and a dispute is possible. Certified mail return receipt creates the delivery record that proves the letter was sent and what happened when it arrived. The CM documents both attempts — certified mail tracking number plus the email confirmation — before moving forward.'
-  },
-  q19:{
-    t:'✅ Correct. Attorney-initiated drops follow the same process as any other drop — the hold period applies regardless of the reason. The 14-day hold gives the client an opportunity to respond even when the drop is based on liability concerns. Template #29 language should reflect a change in case assessment without disclosing privileged litigation strategy.',
-    f:'❌ Liability findings do not bypass the 14-day hold. The same ethics obligations apply: the client is owed reasonable notice and an opportunity to respond regardless of why the attorney is withdrawing. The content of Template #29 changes — the reason cited is the case assessment change — but the process is identical.'  },
-  q20:{
-    t:'✅ Correct. Even when no representation was ever formed, a prospective client deserves written confirmation that GLG will not be representing them. Template #30 accomplishes this and protects both parties. Without it, a person who consulted with GLG might believe they have an attorney — and miss critical deadlines waiting for help that is not coming.',
-    f:'❌ Declined cases require documentation even though no representation existed. Template #30 gives the prospective client certainty: GLG is not their lawyer, and they need to find other counsel immediately. The SOL issue here is time-sensitive — without written notice, the client may not act quickly enough.'
-  },
-  q21:{
-    t:'✅ Correct. The status change to Pending Drop is the first mechanical step after authorization. It starts the 14-day hold clock. No letter goes out yet. No trust reconciliation happens yet. No lien notifications yet. The status change is the trigger for everything that follows in sequence.',
-    f:'❌ The correct first step is the CasePeer status change to Pending Drop — not the letter, not the financial steps. The status change starts the clock. Template #29 cannot go out until after the hold runs. Trust and lien steps come even later. Process order matters: status → hold → letter → financial closeout → Closed.'
-  },
-  q22:{
-    t:'✅ Correct. A viable UM claim changes the analysis entirely. The attorney who approved the drop may not have known about this coverage — and proceeding with a drop while a potentially significant UM claim sits unevaluated exposes GLG to a malpractice allegation. This must go back to the attorney immediately before the drop continues.',
-    f:'❌ A UM claim that was never evaluated is not irrelevant to a drop decision. It is potentially the most important discovery made during drop preparation. Proceeding with the drop without surfacing this to the attorney is the scenario that becomes a malpractice claim. Escalate first. Always.'
-  },
-  q23:{
-    t:'✅ Correct. A legal threat — even via text, even during a pending drop — eliminates the CM\'s authorization to communicate with that client. Forward the text to the attorney with the exact time and content documented in CasePeer. Zero response to the client. The attorney manages all contact from this point forward.',
-    f:'❌ Any response from the CM after a legal threat has been made — even "we are reviewing this" — can create problems. It is not the CM\'s role to address legal threats or malpractice allegations. The attorney takes over all communication the moment a threat is documented. Escalate and stop responding.'
-  },
-  q24:{
-    t:'✅ Correct. After Template #29 goes out and the hold is confirmed expired: (1) CasePeer moves to Dropped — the representation is formally ended; (2) the $215 trust balance is returned to Marcus Webb — trust funds belong to the client regardless of any dispute. These two steps must happen before the file can move to Closed.',
-    f:'❌ The file cannot move directly to Closed after Template #29 delivery. Dropped → Closed requires financial closeout: trust balance returned and lien notification documented. And the trust balance cannot be held pending a malpractice threat — trust funds are the client\'s regardless of any dispute. Return the money, then close the file after lien notification.'
-  },
-  q25:{
-    t:'✅ Correct. The Closed status certifies that the file is complete — not just that the representation ended. For Marcus Webb, that means: Template #29 delivered and documented ✓, trust balance returned ✓, AND the Advanced Medical Group lien notification sent to Webb in writing and documented in CasePeer. All three must be done before Closed.',
-    f:'❌ Client signature is not required to close a dropped case. The Closed status gates on financial completion — not client agreement. With the trust balance returned, the remaining step is lien notification: a written communication to Marcus Webb documenting that the $3,800 Advanced Medical Group lien exists and is now his responsibility. Once that is documented, the file closes.'
-  }
-};
+var FEEDBACK = {} /* CUTOVER: feedback text is served per-answer by the engine, never shipped to the client up front */;
 
 // ── INIT firstAttemptStillAvailable ──
 Object.keys(Q_CONFIG).forEach(function(k){ firstAttemptStillAvailable[k] = true; });
@@ -1127,13 +934,13 @@ Object.keys(Q_CONFIG).forEach(function(k){ firstAttemptStillAvailable[k] = true;
 // ═══════════════════════════════════════════════
 // ANSWER HANDLER
 // ═══════════════════════════════════════════════
-function answer(qId, letter, isCorrect) {
+window.answerUI = function answerUI(qId, letter, isCorrect) {
   if (qDone[qId]) return;
 
   var cfg = Q_CONFIG[qId];
   var block = document.getElementById(qId + '-block');
   var clickedBtn = document.getElementById(qId + '-' + letter);
-  var correctBtn = document.getElementById(qId + '-' + cfg.correct);
+  var correctBtn = document.getElementById(qId + '-' + (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || ''));
   var fb = document.getElementById(qId + '-fb');
 
   block.querySelectorAll('.option-btn').forEach(function(b){ b.classList.add('disabled'); });
@@ -1229,7 +1036,7 @@ function checkSectionComplete(sectionIdx) {
 // NAVIGATION
 // ═══════════════════════════════════════════════
 function goToSection(idx) {
-  if (idx === 8 && !window._cm5Passed) {
+  if (idx === 9 && !window._cm5Passed) {
     showToast('⚠️ 80% required for certificate', false);
     return;
   }
@@ -1340,8 +1147,8 @@ function buildResults() {
     var questionText = qText ? qText.textContent : 'Question ' + (idx+1);
     var isAnswered = !!qDone[qId];
     var wasCorrect = isAnswered && block.classList.contains('answered');
-    var correctLetter = cfg.correct.toUpperCase();
-    var correctBtn = document.getElementById(qId + '-' + cfg.correct);
+    var correctLetter = (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || '').toUpperCase();
+    var correctBtn = document.getElementById(qId + '-' + (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || ''));
     var correctText = correctBtn ? correctBtn.querySelector('.opt-text').textContent : '';
     var userAnswer = '(not answered)'; var userLetter = '';
     if (isAnswered) {
@@ -1603,5 +1410,69 @@ document.addEventListener('DOMContentLoaded', function() {
 
 goToSection(0);
 </script>
+
+
+
+<script>
+/* ── go() / startQuiz() — required by section-6 "See Results" button (Harrell ruling 2026-09-03) ── */
+async function go(screen) {
+  if (screen === 'quiz') {
+    var _ni = document.getElementById('trainee-name-input');
+    var _name = (_ni && _ni.value.trim()) || '';
+    if (!_name) {
+      if (typeof showToast === 'function') showToast('⚠️ Please enter your name before starting the quiz', false);
+      else alert('Please enter your name before starting the quiz.');
+      return;
+    }
+    // Bug-2 fix: await attempt start before making questions interactive
+    await window.GLGQuiz.beginAttempt(_name);
+    goToSection(7);
+  }
+}
+
+function startQuiz() { go('quiz'); }
+
+/* ── GLG MODULE CONFIG — wires api-quiz-engine.js to module-cm5.html ── */
+window.GLG_MODULE_CONFIG = {
+  moduleId: 'cm5',
+  onBankLoaded: function(bank) {
+    var basemax = document.getElementById('basemax');
+    var gate    = document.getElementById('gate');
+    if (basemax) basemax.textContent = bank.base_max;
+    if (gate)    gate.textContent    = bank.pass_pct;
+    /* Show teaching-section nav buttons (no question gate after port) */
+    for (var i = 1; i <= 6; i++) {
+      var nextEl = document.getElementById('s' + i + '-next');
+      if (nextEl) nextEl.style.display = 'flex';
+    }
+  },
+  onStartQuiz: function() {
+    /* Prime audio context only */
+    if (typeof audioCtx !== 'undefined' && audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume().catch(function(){});
+    }
+  },
+  onAnswered: function(r) {
+    baseScore  = r.base_score;
+    bonusPoints = r.bonus_score;
+    streakCount = r.streak;
+    maxStreak   = Math.max(maxStreak || 0, r.maxStreak || 0);
+    var ts = document.getElementById('total-score');
+    if (ts) ts.textContent = r.base_score;
+    var bs = document.getElementById('bonus-score');
+    if (bs) bs.textContent = r.bonus_score;
+    if (typeof updateStreak  === 'function') updateStreak(r.correct);
+    if (typeof mascotReact   === 'function') mascotReact(r.correct ? 'correct' : 'incorrect');
+  },
+  onComplete: function(r) {
+    window._cm5Passed = r.passed;
+    baseScore   = r.base_score;
+    bonusPoints = r.bonus_score;
+    goToSection(8);   // results is now section-8
+    if (typeof buildResults === 'function') buildResults();
+  }
+};
+</script>
+<script src="api-quiz-engine.js"></script>
 </body>
 </html>

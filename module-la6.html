@@ -6,6 +6,7 @@
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
   <title>LA-6 / LIT-6 / CM-11 — HB 1344 Compliance | Gunn Law Group</title>
   <style>
+    :root { --navy: #141c2c; --gold: #C5975B; }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
     body{font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;color:#333;font-size:16px;line-height:1.6;-webkit-text-size-adjust:100%;overflow-x:hidden;}
@@ -101,11 +102,7 @@
     .case-val .flag-warn{display:inline-block;background:#f39c12;color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;margin-left:6px;}
     .case-val .flag-ok{display:inline-block;background:#10774A;color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;margin-left:6px;}
 
-    /* ── BOSS CHALLENGE ── */
-    .boss-header{background:linear-gradient(135deg,#870101 0%,#5a0000 100%);color:#fff;border-radius:12px;padding:24px;margin-bottom:20px;text-align:center;}
-    .boss-header .boss-icon{font-size:40px;margin-bottom:10px;}
-    .boss-header h3{font-size:clamp(17px,4.5vw,22px);font-weight:800;margin-bottom:8px;}
-    .boss-header p{font-size:14px;opacity:.9;line-height:1.5;}
+    
 
     /* ── RESULTS ── */
     .results-header{padding:28px 20px;text-align:center;color:#fff;}
@@ -225,6 +222,9 @@
     .option-btn.correct{animation:correctPulse 0.6s ease-out;}
     .option-btn.incorrect{animation:incorrectShake 0.4s ease-out;}
   </style>
+<!-- CUTOVER: server-side grading. Answer keys are not in this file. -->
+    <link rel="stylesheet" href="boss-challenge.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -358,10 +358,10 @@
       <div class="q-num">Question 1 of 20 &middot; 10 pts</div>
       <div class="q-text">What is the full name and primary purpose of Georgia HB 1344?</div>
       <div class="options">
-        <button class="option-btn" onclick="answer('q1','a',false)" id="q1-a"><span class="opt-letter">A</span><span class="opt-text">Georgia Insurance Reform Act — eliminates insurance fraud entirely and caps all claim payouts</span></button>
-        <button class="option-btn" onclick="answer('q1','b',true)" id="q1-b"><span class="opt-letter">B</span><span class="opt-text">Insurance Affordability Claims Integrity Act — reforms Georgia's insurance regulatory framework focusing on fraud prevention, claims processing improvements, and enhanced consumer protections</span></button>
-        <button class="option-btn" onclick="answer('q1','c',false)" id="q1-c"><span class="opt-letter">C</span><span class="opt-text">Insurance Transparency &amp; Accountability Act — caps insurance premiums and eliminates deductibles for all policyholders — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage</span></button>
-        <button class="option-btn" onclick="answer('q1','d',false)" id="q1-d"><span class="opt-letter">D</span><span class="opt-text">Consumer Protection Insurance Act — reduces attorney involvement in all insurance claims</span></button>
+        <button class="option-btn" onclick="answer('q1','a')" id="q1-a"><span class="opt-letter">A</span><span class="opt-text">Georgia Insurance Reform Act — eliminates insurance fraud entirely and caps all claim payouts</span></button>
+        <button class="option-btn" onclick="answer('q1','b')" id="q1-b"><span class="opt-letter">B</span><span class="opt-text">Insurance Affordability Claims Integrity Act — reforms Georgia's insurance regulatory framework focusing on fraud prevention, claims processing improvements, and enhanced consumer protections</span></button>
+        <button class="option-btn" onclick="answer('q1','c')" id="q1-c"><span class="opt-letter">C</span><span class="opt-text">Insurance Transparency &amp; Accountability Act — caps insurance premiums and eliminates deductibles for all policyholders</span></button>
+        <button class="option-btn" onclick="answer('q1','d')" id="q1-d"><span class="opt-letter">D</span><span class="opt-text">Consumer Protection Insurance Act — reduces attorney involvement in all insurance claims</span></button>
       </div>
       <div class="feedback-box" id="q1-fb"></div>
     </div>
@@ -370,10 +370,10 @@
       <div class="q-num">Question 2 of 20 &middot; 10 pts</div>
       <div class="q-text">HB 1344 strengthens the Insurance Commissioner's authority in which key area?</div>
       <div class="options">
-        <button class="option-btn" onclick="answer('q2','a',false)" id="q2-a"><span class="opt-letter">A</span><span class="opt-text">Setting attorney fee limits for all personal injury cases in Georgia</span></button>
-        <button class="option-btn" onclick="answer('q2','b',false)" id="q2-b"><span class="opt-letter">B</span><span class="opt-text">Approving all settlement agreements above $100,000 before disbursement</span></button>
-        <button class="option-btn" onclick="answer('q2','c',false)" id="q2-c"><span class="opt-letter">C</span><span class="opt-text">Requiring pre-approval of all insurance claims before any processing can begin, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
-        <button class="option-btn" onclick="answer('q2','d',true)" id="q2-d"><span class="opt-letter">D</span><span class="opt-text">Employing prosecuting attorneys specifically for insurance fraud cases and expanding investigative authority</span></button>
+        <button class="option-btn" onclick="answer('q2','a')" id="q2-a"><span class="opt-letter">A</span><span class="opt-text">Setting attorney fee limits for all personal injury cases in Georgia</span></button>
+        <button class="option-btn" onclick="answer('q2','b')" id="q2-b"><span class="opt-letter">B</span><span class="opt-text">Approving all settlement agreements above $100,000 before disbursement</span></button>
+        <button class="option-btn" onclick="answer('q2','c')" id="q2-c"><span class="opt-letter">C</span><span class="opt-text">Requiring pre-approval of all insurance claims before any processing can begin, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
+        <button class="option-btn" onclick="answer('q2','d')" id="q2-d"><span class="opt-letter">D</span><span class="opt-text">Employing prosecuting attorneys specifically for insurance fraud cases and expanding investigative authority</span></button>
       </div>
       <div class="feedback-box" id="q2-fb"></div>
     </div>
@@ -382,10 +382,10 @@
       <div class="q-num">Question 3 of 20 &middot; 10 pts</div>
       <div class="q-text">Under Georgia law, which statement about state sovereign immunity is correct?</div>
       <div class="options">
-        <button class="option-btn" onclick="answer('q3','a',true)" id="q3-a"><span class="opt-letter">A</span><span class="opt-text">The state waives sovereign immunity for torts of state officers/employees acting within the scope of official duties, and shall be liable like a private entity under like circumstances</span></button>
-        <button class="option-btn" onclick="answer('q3','b',false)" id="q3-b"><span class="opt-letter">B</span><span class="opt-text">Sovereign immunity is completely eliminated for all government claims in Georgia — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value</span></button>
-        <button class="option-btn" onclick="answer('q3','c',false)" id="q3-c"><span class="opt-letter">C</span><span class="opt-text">Sovereign immunity only applies when the state officer is acting off duty</span></button>
-        <button class="option-btn" onclick="answer('q3','d',false)" id="q3-d"><span class="opt-letter">D</span><span class="opt-text">Georgia has never waived sovereign immunity for state officers or employees under any statute</span></button>
+        <button class="option-btn" onclick="answer('q3','a')" id="q3-a"><span class="opt-letter">A</span><span class="opt-text">The state waives sovereign immunity for torts of state officers/employees acting within the scope of official duties, and shall be liable like a private entity under like circumstances</span></button>
+        <button class="option-btn" onclick="answer('q3','b')" id="q3-b"><span class="opt-letter">B</span><span class="opt-text">Sovereign immunity is completely eliminated for all government claims in Georgia</span></button>
+        <button class="option-btn" onclick="answer('q3','c')" id="q3-c"><span class="opt-letter">C</span><span class="opt-text">Sovereign immunity only applies when the state officer is acting off duty</span></button>
+        <button class="option-btn" onclick="answer('q3','d')" id="q3-d"><span class="opt-letter">D</span><span class="opt-text">Georgia has never waived sovereign immunity for state officers or employees under any statute</span></button>
       </div>
       <div class="feedback-box" id="q3-fb"></div>
     </div>
@@ -394,10 +394,10 @@
       <div class="q-num">Question 4 of 20 &middot; 10 pts</div>
       <div class="q-text">HB 1344 is most directly relevant to GLG's personal injury practice because it changes:</div>
       <div class="options">
-        <button class="option-btn" onclick="answer('q4','a',false)" id="q4-a"><span class="opt-letter">A</span><span class="opt-text">The statute of limitations for all personal injury claims in Georgia — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken</span></button>
-        <button class="option-btn" onclick="answer('q4','b',false)" id="q4-b"><span class="opt-letter">B</span><span class="opt-text">Attorney fee structures for contingency cases statewide</span></button>
-        <button class="option-btn" onclick="answer('q4','c',true)" id="q4-c"><span class="opt-letter">C</span><span class="opt-text">Insurance fraud detection, claims processing timelines, adjuster interaction protocols, and the regulatory environment for insurers operating in Georgia</span></button>
-        <button class="option-btn" onclick="answer('q4','d',false)" id="q4-d"><span class="opt-letter">D</span><span class="opt-text">The court filing requirements for all civil litigation in Georgia</span></button>
+        <button class="option-btn" onclick="answer('q4','a')" id="q4-a"><span class="opt-letter">A</span><span class="opt-text">The statute of limitations for all personal injury claims in Georgia</span></button>
+        <button class="option-btn" onclick="answer('q4','b')" id="q4-b"><span class="opt-letter">B</span><span class="opt-text">Attorney fee structures for contingency cases statewide</span></button>
+        <button class="option-btn" onclick="answer('q4','c')" id="q4-c"><span class="opt-letter">C</span><span class="opt-text">Insurance fraud detection, claims processing timelines, adjuster interaction protocols, and the regulatory environment for insurers operating in Georgia</span></button>
+        <button class="option-btn" onclick="answer('q4','d')" id="q4-d"><span class="opt-letter">D</span><span class="opt-text">The court filing requirements for all civil litigation in Georgia</span></button>
       </div>
       <div class="feedback-box" id="q4-fb"></div>
     </div>
@@ -450,10 +450,10 @@
       <div class="q-num">Question 5 of 20 &middot; 10 pts</div>
       <div class="q-text">Under HB 1344's mandatory fraud reporting provisions, who is required to report suspected insurance fraud to the Commissioner?</div>
       <div class="options">
-        <button class="option-btn" onclick="answer('q5','a',false)" id="q5-a"><span class="opt-letter">A</span><span class="opt-text">Only licensed insurance adjusters who directly handle claims</span></button>
-        <button class="option-btn" onclick="answer('q5','b',false)" id="q5-b"><span class="opt-letter">B</span><span class="opt-text">Only the insurance company's legal department after completing an internal investigation, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity</span></button>
-        <button class="option-btn" onclick="answer('q5','c',true)" id="q5-c"><span class="opt-letter">C</span><span class="opt-text">Any insurer, agent, or other person licensed under this title, or an employee thereof, who has knowledge of or believes a fraudulent insurance act has occurred</span></button>
-        <button class="option-btn" onclick="answer('q5','d',false)" id="q5-d"><span class="opt-letter">D</span><span class="opt-text">Only law enforcement officers who observe fraud during an active criminal investigation</span></button>
+        <button class="option-btn" onclick="answer('q5','a')" id="q5-a"><span class="opt-letter">A</span><span class="opt-text">Only licensed insurance adjusters who directly handle claims</span></button>
+        <button class="option-btn" onclick="answer('q5','b')" id="q5-b"><span class="opt-letter">B</span><span class="opt-text">Only the insurance company's legal department after completing an internal investigation, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity</span></button>
+        <button class="option-btn" onclick="answer('q5','c')" id="q5-c"><span class="opt-letter">C</span><span class="opt-text">Any insurer, agent, or other person licensed under this title, or an employee thereof, who has knowledge of or believes a fraudulent insurance act has occurred</span></button>
+        <button class="option-btn" onclick="answer('q5','d')" id="q5-d"><span class="opt-letter">D</span><span class="opt-text">Only law enforcement officers who observe fraud during an active criminal investigation</span></button>
       </div>
       <div class="feedback-box" id="q5-fb"></div>
     </div>
@@ -462,10 +462,10 @@
       <div class="q-num">Question 6 of 20 &middot; 10 pts</div>
       <div class="q-text">If an insurer reports suspected fraud to the Commissioner under HB 1344, what is the timeline requirement for the prosecuting attorney?</div>
       <div class="options">
-        <button class="option-btn" onclick="answer('q6','a',false)" id="q6-a"><span class="opt-letter">A</span><span class="opt-text">The prosecuting attorney must file criminal charges within 30 days of the report</span></button>
-        <button class="option-btn" onclick="answer('q6','b',true)" id="q6-b"><span class="opt-letter">B</span><span class="opt-text">The prosecuting attorney must begin prosecution within 90 days or inform the Commissioner of the reasons for the delay</span></button>
-        <button class="option-btn" onclick="answer('q6','c',false)" id="q6-c"><span class="opt-letter">C</span><span class="opt-text">There is no timeline — the prosecutor has complete discretion on when to act</span></button>
-        <button class="option-btn" onclick="answer('q6','d',false)" id="q6-d"><span class="opt-letter">D</span><span class="opt-text">The prosecuting attorney must complete the entire trial within 180 days of the report — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage</span></button>
+        <button class="option-btn" onclick="answer('q6','a')" id="q6-a"><span class="opt-letter">A</span><span class="opt-text">The prosecuting attorney must file criminal charges within 30 days of the report</span></button>
+        <button class="option-btn" onclick="answer('q6','b')" id="q6-b"><span class="opt-letter">B</span><span class="opt-text">The prosecuting attorney must begin prosecution within 90 days or inform the Commissioner of the reasons for the delay</span></button>
+        <button class="option-btn" onclick="answer('q6','c')" id="q6-c"><span class="opt-letter">C</span><span class="opt-text">There is no timeline — the prosecutor has complete discretion on when to act</span></button>
+        <button class="option-btn" onclick="answer('q6','d')" id="q6-d"><span class="opt-letter">D</span><span class="opt-text">The prosecuting attorney must complete the entire trial within 180 days of the report</span></button>
       </div>
       <div class="feedback-box" id="q6-fb"></div>
     </div>
@@ -474,10 +474,10 @@
       <div class="q-num">Question 7 of 20 &middot; 10 pts</div>
       <div class="q-text">HB 1344 includes strict prohibitions on the solicitation, release, or sale of what type of information?</div>
       <div class="options">
-        <button class="option-btn" onclick="answer('q7','a',false)" id="q7-a"><span class="opt-letter">A</span><span class="opt-text">Medical records from hospitals and physician practices</span></button>
-        <button class="option-btn" onclick="answer('q7','b',false)" id="q7-b"><span class="opt-letter">B</span><span class="opt-text">Attorney-client privileged communications in PI cases</span></button>
-        <button class="option-btn" onclick="answer('q7','c',false)" id="q7-c"><span class="opt-letter">C</span><span class="opt-text">Insurance policy limits and coverage details shared during negotiations, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
-        <button class="option-btn" onclick="answer('q7','d',true)" id="q7-d"><span class="opt-letter">D</span><span class="opt-text">Automobile accident information — it is illegal to solicit, release, or sell this data outside authorized channels</span></button>
+        <button class="option-btn" onclick="answer('q7','a')" id="q7-a"><span class="opt-letter">A</span><span class="opt-text">Medical records from hospitals and physician practices</span></button>
+        <button class="option-btn" onclick="answer('q7','b')" id="q7-b"><span class="opt-letter">B</span><span class="opt-text">Attorney-client privileged communications in PI cases</span></button>
+        <button class="option-btn" onclick="answer('q7','c')" id="q7-c"><span class="opt-letter">C</span><span class="opt-text">Insurance policy limits and coverage details shared during negotiations, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
+        <button class="option-btn" onclick="answer('q7','d')" id="q7-d"><span class="opt-letter">D</span><span class="opt-text">Automobile accident information — it is illegal to solicit, release, or sell this data outside authorized channels</span></button>
       </div>
       <div class="feedback-box" id="q7-fb"></div>
     </div>
@@ -486,10 +486,10 @@
       <div class="q-num">Question 8 of 20 &middot; 10 pts</div>
       <div class="q-text">HB 1344 establishes a Special Insurance Fraud Fund. What is this fund's purpose?</div>
       <div class="options">
-        <button class="option-btn" onclick="answer('q8','a',true)" id="q8-a"><span class="opt-letter">A</span><span class="opt-text">Dedicated funding for investigation and prosecution of insurance fraud in Georgia</span></button>
-        <button class="option-btn" onclick="answer('q8','b',false)" id="q8-b"><span class="opt-letter">B</span><span class="opt-text">A victim compensation fund for people who were defrauded by insurance companies — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value</span></button>
-        <button class="option-btn" onclick="answer('q8','c',false)" id="q8-c"><span class="opt-letter">C</span><span class="opt-text">A fund to subsidize insurance premiums for low-income Georgia residents</span></button>
-        <button class="option-btn" onclick="answer('q8','d',false)" id="q8-d"><span class="opt-letter">D</span><span class="opt-text">A reserve fund to cover unpaid insurance claims during insurer insolvency</span></button>
+        <button class="option-btn" onclick="answer('q8','a')" id="q8-a"><span class="opt-letter">A</span><span class="opt-text">Dedicated funding for investigation and prosecution of insurance fraud in Georgia</span></button>
+        <button class="option-btn" onclick="answer('q8','b')" id="q8-b"><span class="opt-letter">B</span><span class="opt-text">A victim compensation fund for people who were defrauded by insurance companies</span></button>
+        <button class="option-btn" onclick="answer('q8','c')" id="q8-c"><span class="opt-letter">C</span><span class="opt-text">A fund to subsidize insurance premiums for low-income Georgia residents</span></button>
+        <button class="option-btn" onclick="answer('q8','d')" id="q8-d"><span class="opt-letter">D</span><span class="opt-text">A reserve fund to cover unpaid insurance claims during insurer insolvency</span></button>
       </div>
       <div class="feedback-box" id="q8-fb"></div>
     </div>
@@ -535,10 +535,10 @@
       <div class="q-num">Question 9 of 20 &middot; 10 pts</div>
       <div class="q-text">Under HB 1344's catastrophic event provisions, what specific protection applies after natural disasters?</div>
       <div class="options">
-        <button class="option-btn" onclick="answer('q9','a',false)" id="q9-a"><span class="opt-letter">A</span><span class="opt-text">Insurance companies are exempt from claims processing for 120 days after a declared disaster — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken</span></button>
-        <button class="option-btn" onclick="answer('q9','b',false)" id="q9-b"><span class="opt-letter">B</span><span class="opt-text">All premiums are automatically refunded for the disaster period</span></button>
-        <button class="option-btn" onclick="answer('q9','c',false)" id="q9-c"><span class="opt-letter">C</span><span class="opt-text">Policyholders cannot file new claims for 60 days after a catastrophic event</span></button>
-        <button class="option-btn" onclick="answer('q9','d',true)" id="q9-d"><span class="opt-letter">D</span><span class="opt-text">Specific provisions require timely claims processing after catastrophic events, preventing insurers from delaying disaster-related claims</span></button>
+        <button class="option-btn" onclick="answer('q9','a')" id="q9-a"><span class="opt-letter">A</span><span class="opt-text">Insurance companies are exempt from claims processing for 120 days after a declared disaster</span></button>
+        <button class="option-btn" onclick="answer('q9','b')" id="q9-b"><span class="opt-letter">B</span><span class="opt-text">All premiums are automatically refunded for the disaster period</span></button>
+        <button class="option-btn" onclick="answer('q9','c')" id="q9-c"><span class="opt-letter">C</span><span class="opt-text">Policyholders cannot file new claims for 60 days after a catastrophic event</span></button>
+        <button class="option-btn" onclick="answer('q9','d')" id="q9-d"><span class="opt-letter">D</span><span class="opt-text">Specific provisions require timely claims processing after catastrophic events, preventing insurers from delaying disaster-related claims</span></button>
       </div>
       <div class="feedback-box" id="q9-fb"></div>
     </div>
@@ -547,10 +547,10 @@
       <div class="q-num">Question 10 of 20 &middot; 10 pts</div>
       <div class="q-text">HB 1344 includes a homeowner protection provision related to aerial/satellite imagery. What does it require?</div>
       <div class="options">
-        <button class="option-btn" onclick="answer('q10','a',true)" id="q10-a"><span class="opt-letter">A</span><span class="opt-text">Homeowners must be given a 60-day correction period for issues identified through aerial or satellite imagery before adverse action can be taken</span></button>
-        <button class="option-btn" onclick="answer('q10','b',false)" id="q10-b"><span class="opt-letter">B</span><span class="opt-text">Insurance companies must obtain written homeowner consent before using aerial imagery for underwriting, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity</span></button>
-        <button class="option-btn" onclick="answer('q10','c',false)" id="q10-c"><span class="opt-letter">C</span><span class="opt-text">Satellite imagery cannot be used to investigate insurance claims under any circumstances</span></button>
-        <button class="option-btn" onclick="answer('q10','d',false)" id="q10-d"><span class="opt-letter">D</span><span class="opt-text">Homeowners can demand that insurers delete all aerial imagery of their property within 30 days</span></button>
+        <button class="option-btn" onclick="answer('q10','a')" id="q10-a"><span class="opt-letter">A</span><span class="opt-text">Homeowners must be given a 60-day correction period for issues identified through aerial or satellite imagery before adverse action can be taken</span></button>
+        <button class="option-btn" onclick="answer('q10','b')" id="q10-b"><span class="opt-letter">B</span><span class="opt-text">Insurance companies must obtain written homeowner consent before using aerial imagery for underwriting, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity</span></button>
+        <button class="option-btn" onclick="answer('q10','c')" id="q10-c"><span class="opt-letter">C</span><span class="opt-text">Satellite imagery cannot be used to investigate insurance claims under any circumstances</span></button>
+        <button class="option-btn" onclick="answer('q10','d')" id="q10-d"><span class="opt-letter">D</span><span class="opt-text">Homeowners can demand that insurers delete all aerial imagery of their property within 30 days</span></button>
       </div>
       <div class="feedback-box" id="q10-fb"></div>
     </div>
@@ -559,22 +559,22 @@
       <div class="q-num">Question 11 of 20 &middot; 10 pts</div>
       <div class="q-text">What change did HB 1344 make regarding penalties for driving without minimum insurance coverage?</div>
       <div class="options">
-        <button class="option-btn" onclick="answer('q11','a',false)" id="q11-a"><span class="opt-letter">A</span><span class="opt-text">Criminal imprisonment for first-time offenders driving without insurance</span></button>
-        <button class="option-btn" onclick="answer('q11','b',true)" id="q11-b"><span class="opt-letter">B</span><span class="opt-text">Higher monetary penalties — strengthening enforcement of Georgia's existing minimum coverage requirements</span></button>
-        <button class="option-btn" onclick="answer('q11','c',false)" id="q11-c"><span class="opt-letter">C</span><span class="opt-text">No changes — motor vehicle insurance penalties were not addressed in HB 1344</span></button>
-        <button class="option-btn" onclick="answer('q11','d',false)" id="q11-d"><span class="opt-letter">D</span><span class="opt-text">Insurance companies must now provide free coverage to drivers who cannot afford premiums — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage</span></button>
+        <button class="option-btn" onclick="answer('q11','a')" id="q11-a"><span class="opt-letter">A</span><span class="opt-text">Criminal imprisonment for first-time offenders driving without insurance</span></button>
+        <button class="option-btn" onclick="answer('q11','b')" id="q11-b"><span class="opt-letter">B</span><span class="opt-text">Higher monetary penalties — strengthening enforcement of Georgia's existing minimum coverage requirements</span></button>
+        <button class="option-btn" onclick="answer('q11','c')" id="q11-c"><span class="opt-letter">C</span><span class="opt-text">No changes — motor vehicle insurance penalties were not addressed in HB 1344</span></button>
+        <button class="option-btn" onclick="answer('q11','d')" id="q11-d"><span class="opt-letter">D</span><span class="opt-text">Insurance companies must now provide free coverage to drivers who cannot afford premiums</span></button>
       </div>
       <div class="feedback-box" id="q11-fb"></div>
     </div>
 
     <div class="question-block" id="q12-block">
-      <div class="q-num">Question 12 of 20 &middot; 10 pts &middot; Calibration Check</div>
-      <div class="q-text">On a scale of 1–4, how well do you understand HB 1344's impact on the insurance claims process and how it affects your daily work at GLG? Select your answer to reveal a comprehensive summary of practical implications.</div>
+      <div class="q-num">Question 12 of 20 &middot; Unscored Calibration</div>
+      <div class="q-note" style="font-size:13px;opacity:.75;margin-bottom:8px">(This is a self-assessment — no points awarded or deducted. All answers reveal the same teaching content.)</div><div class="q-text">On a scale of 1–4, how well do you understand HB 1344's impact on the insurance claims process and how it affects your daily work at GLG? Select your answer to reveal a comprehensive summary of practical implications.</div>
       <div class="options">
-        <button class="option-btn" onclick="answer('q12','a',true)" id="q12-a"><span class="opt-letter">A</span><span class="opt-text">1–2 — Not confident. I understand there's a new law but I'm unclear on how it changes what I do day to day.</span></button>
-        <button class="option-btn" onclick="answer('q12','b',true)" id="q12-b"><span class="opt-letter">B</span><span class="opt-text">3 — Somewhat confident. I get the general framework but would need to look up specifics before acting on it.</span></button>
-        <button class="option-btn" onclick="answer('q12','c',true)" id="q12-c"><span class="opt-letter">C</span><span class="opt-text">4 — Fairly confident. I understand the key provisions and can identify when HB 1344 applies to a case.</span></button>
-        <button class="option-btn" onclick="answer('q12','d',true)" id="q12-d"><span class="opt-letter">D</span><span class="opt-text">5 — Fully confident. I can explain HB 1344's provisions, apply them to active cases, and identify compliance requirements without guidance.</span></button>
+        <button class="option-btn" onclick="answer('q12','a')" id="q12-a"><span class="opt-letter">A</span><span class="opt-text">1–2 — Not confident. I understand there's a new law but I'm unclear on how it changes what I do day to day.</span></button>
+        <button class="option-btn" onclick="answer('q12','b')" id="q12-b"><span class="opt-letter">B</span><span class="opt-text">3 — Somewhat confident. I get the general framework but would need to look up specifics before acting on it.</span></button>
+        <button class="option-btn" onclick="answer('q12','c')" id="q12-c"><span class="opt-letter">C</span><span class="opt-text">4 — Fairly confident. I understand the key provisions and can identify when HB 1344 applies to a case.</span></button>
+        <button class="option-btn" onclick="answer('q12','d')" id="q12-d"><span class="opt-letter">D</span><span class="opt-text">5 — Fully confident. I can explain HB 1344's provisions, apply them to active cases, and identify compliance requirements without guidance.</span></button>
       </div>
       <div class="feedback-box" id="q12-fb"></div>
     </div>
@@ -631,10 +631,10 @@
       <div class="q-num">Question 13 of 20 &middot; 10 pts</div>
       <div class="q-text">Under HB 1344's enhanced fraud detection environment, how should GLG adjust case evaluation protocols during PITT review?</div>
       <div class="options">
-        <button class="option-btn" onclick="answer('q13','a',false)" id="q13-a"><span class="opt-letter">A</span><span class="opt-text">Only accept cases where there is zero possibility of fraud being alleged by the insurer</span></button>
-        <button class="option-btn" onclick="answer('q13','b',false)" id="q13-b"><span class="opt-letter">B</span><span class="opt-text">Decline all motor vehicle accident cases until HB 1344 implementing regulations are finalized, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
-        <button class="option-btn" onclick="answer('q13','c',true)" id="q13-c"><span class="opt-letter">C</span><span class="opt-text">Incorporate HB 1344 provisions into PITT analysis — specifically accounting for enhanced fraud detection and how it affects insurer behavior, claims processing timelines, and adjuster interaction protocols</span></button>
-        <button class="option-btn" onclick="answer('q13','d',false)" id="q13-d"><span class="opt-letter">D</span><span class="opt-text">No changes needed — HB 1344 only affects insurance companies, not law firms</span></button>
+        <button class="option-btn" onclick="answer('q13','a')" id="q13-a"><span class="opt-letter">A</span><span class="opt-text">Only accept cases where there is zero possibility of fraud being alleged by the insurer</span></button>
+        <button class="option-btn" onclick="answer('q13','b')" id="q13-b"><span class="opt-letter">B</span><span class="opt-text">Decline all motor vehicle accident cases until HB 1344 implementing regulations are finalized, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
+        <button class="option-btn" onclick="answer('q13','c')" id="q13-c"><span class="opt-letter">C</span><span class="opt-text">Incorporate HB 1344 provisions into PITT analysis — specifically accounting for enhanced fraud detection and how it affects insurer behavior, claims processing timelines, and adjuster interaction protocols</span></button>
+        <button class="option-btn" onclick="answer('q13','d')" id="q13-d"><span class="opt-letter">D</span><span class="opt-text">No changes needed — HB 1344 only affects insurance companies, not law firms</span></button>
       </div>
       <div class="feedback-box" id="q13-fb"></div>
     </div>
@@ -643,10 +643,10 @@
       <div class="q-num">Question 14 of 20 &middot; 10 pts</div>
       <div class="q-text">How does HB 1344's enhanced regulatory environment change the way GLG staff interact with insurance adjusters?</div>
       <div class="options">
-        <button class="option-btn" onclick="answer('q14','a',false)" id="q14-a"><span class="opt-letter">A</span><span class="opt-text">Adjusters are now prohibited from communicating directly with plaintiff attorneys</span></button>
-        <button class="option-btn" onclick="answer('q14','b',false)" id="q14-b"><span class="opt-letter">B</span><span class="opt-text">All adjuster communications must be pre-approved by the Insurance Commissioner</span></button>
-        <button class="option-btn" onclick="answer('q14','c',false)" id="q14-c"><span class="opt-letter">C</span><span class="opt-text">Adjusters have fewer obligations and can process claims more slowly under the new framework — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value</span></button>
-        <button class="option-btn" onclick="answer('q14','d',true)" id="q14-d"><span class="opt-letter">D</span><span class="opt-text">Adjusters operate under new regulatory pressures including fraud reporting obligations, timing requirements, and enhanced scrutiny — staff should understand these pressures affect adjuster behavior and negotiation posture</span></button>
+        <button class="option-btn" onclick="answer('q14','a')" id="q14-a"><span class="opt-letter">A</span><span class="opt-text">Adjusters are now prohibited from communicating directly with plaintiff attorneys</span></button>
+        <button class="option-btn" onclick="answer('q14','b')" id="q14-b"><span class="opt-letter">B</span><span class="opt-text">All adjuster communications must be pre-approved by the Insurance Commissioner</span></button>
+        <button class="option-btn" onclick="answer('q14','c')" id="q14-c"><span class="opt-letter">C</span><span class="opt-text">Adjusters have fewer obligations and can process claims more slowly under the new framework</span></button>
+        <button class="option-btn" onclick="answer('q14','d')" id="q14-d"><span class="opt-letter">D</span><span class="opt-text">Adjusters operate under new regulatory pressures including fraud reporting obligations, timing requirements, and enhanced scrutiny — staff should understand these pressures affect adjuster behavior and negotiation posture</span></button>
       </div>
       <div class="feedback-box" id="q14-fb"></div>
     </div>
@@ -655,10 +655,10 @@
       <div class="q-num">Question 15 of 20 &middot; 10 pts</div>
       <div class="q-text">HB 1344 impacts GLG's settlement negotiation strategy. What is the most significant strategic consideration?</div>
       <div class="options">
-        <button class="option-btn" onclick="answer('q15','a',true)" id="q15-a"><span class="opt-letter">A</span><span class="opt-text">Insurance companies face new regulatory pressures that may motivate faster settlements to avoid fraud scrutiny complications, while enhanced documentation requirements can strengthen demand packages</span></button>
-        <button class="option-btn" onclick="answer('q15','b',false)" id="q15-b"><span class="opt-letter">B</span><span class="opt-text">Settlement values automatically increase by 20% under HB 1344's consumer protection provisions</span></button>
-        <button class="option-btn" onclick="answer('q15','c',false)" id="q15-c"><span class="opt-letter">C</span><span class="opt-text">Attorneys must now get pre-approval from the Insurance Commissioner before accepting any settlement — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken</span></button>
-        <button class="option-btn" onclick="answer('q15','d',false)" id="q15-d"><span class="opt-letter">D</span><span class="opt-text">HB 1344 eliminates the ability to negotiate settlements — all PI cases must now proceed to trial</span></button>
+        <button class="option-btn" onclick="answer('q15','a')" id="q15-a"><span class="opt-letter">A</span><span class="opt-text">Insurance companies face new regulatory pressures that may motivate faster settlements to avoid fraud scrutiny complications, while enhanced documentation requirements can strengthen demand packages</span></button>
+        <button class="option-btn" onclick="answer('q15','b')" id="q15-b"><span class="opt-letter">B</span><span class="opt-text">Settlement values automatically increase by 20% under HB 1344's consumer protection provisions</span></button>
+        <button class="option-btn" onclick="answer('q15','c')" id="q15-c"><span class="opt-letter">C</span><span class="opt-text">Attorneys must now get pre-approval from the Insurance Commissioner before accepting any settlement</span></button>
+        <button class="option-btn" onclick="answer('q15','d')" id="q15-d"><span class="opt-letter">D</span><span class="opt-text">HB 1344 eliminates the ability to negotiate settlements — all PI cases must now proceed to trial</span></button>
       </div>
       <div class="feedback-box" id="q15-fb"></div>
     </div>
@@ -667,10 +667,10 @@
       <div class="q-num">Question 16 of 20 &middot; 10 pts</div>
       <div class="q-text">What is the correct understanding of HB 1344's provisions regarding uninsured motorist (UM) coverage?</div>
       <div class="options">
-        <button class="option-btn" onclick="answer('q16','a',false)" id="q16-a"><span class="opt-letter">A</span><span class="opt-text">UM coverage is now mandatory at $100,000/$300,000 minimums for all Georgia drivers</span></button>
-        <button class="option-btn" onclick="answer('q16','b',true)" id="q16-b"><span class="opt-letter">B</span><span class="opt-text">HB 1344 enhances UM protections and clarifications, strengthening enforcement of existing coverage requirements — GLG staff should verify UM coverage carefully as the regulatory framework has changed</span></button>
-        <button class="option-btn" onclick="answer('q16','c',false)" id="q16-c"><span class="opt-letter">C</span><span class="opt-text">UM coverage has been eliminated under HB 1344 in favor of a state-run compensation fund, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity</span></button>
-        <button class="option-btn" onclick="answer('q16','d',false)" id="q16-d"><span class="opt-letter">D</span><span class="opt-text">UM coverage now only applies to commercial vehicles, not personal auto policies</span></button>
+        <button class="option-btn" onclick="answer('q16','a')" id="q16-a"><span class="opt-letter">A</span><span class="opt-text">UM coverage is now mandatory at $100,000/$300,000 minimums for all Georgia drivers</span></button>
+        <button class="option-btn" onclick="answer('q16','b')" id="q16-b"><span class="opt-letter">B</span><span class="opt-text">HB 1344 enhances UM protections and clarifications, strengthening enforcement of existing coverage requirements — GLG staff should verify UM coverage carefully as the regulatory framework has changed</span></button>
+        <button class="option-btn" onclick="answer('q16','c')" id="q16-c"><span class="opt-letter">C</span><span class="opt-text">UM coverage has been eliminated under HB 1344 in favor of a state-run compensation fund, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity</span></button>
+        <button class="option-btn" onclick="answer('q16','d')" id="q16-d"><span class="opt-letter">D</span><span class="opt-text">UM coverage now only applies to commercial vehicles, not personal auto policies</span></button>
       </div>
       <div class="feedback-box" id="q16-fb"></div>
     </div>
@@ -727,10 +727,10 @@
       <div class="q-num">Question 17 of 20 &middot; 10 pts</div>
       <div class="q-text">Under HB 1344's enhanced documentation requirements, what standard must GLG staff follow for case documentation?</div>
       <div class="options">
-        <button class="option-btn" onclick="answer('q17','a',false)" id="q17-a"><span class="opt-letter">A</span><span class="opt-text">Documentation requirements have not changed — only insurance companies have new obligations</span></button>
-        <button class="option-btn" onclick="answer('q17','b',false)" id="q17-b"><span class="opt-letter">B</span><span class="opt-text">All case documentation must now be submitted to the Insurance Commissioner for review within 10 business days of case opening — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage</span></button>
-        <button class="option-btn" onclick="answer('q17','c',true)" id="q17-c"><span class="opt-letter">C</span><span class="opt-text">Case documentation must be strengthened to withstand heightened regulatory scrutiny — complete records of all communications, treatment verification, and evidence preservation are now critical</span></button>
-        <button class="option-btn" onclick="answer('q17','d',false)" id="q17-d"><span class="opt-letter">D</span><span class="opt-text">Documentation is now entirely digital — paper files are prohibited under HB 1344</span></button>
+        <button class="option-btn" onclick="answer('q17','a')" id="q17-a"><span class="opt-letter">A</span><span class="opt-text">Documentation requirements have not changed — only insurance companies have new obligations</span></button>
+        <button class="option-btn" onclick="answer('q17','b')" id="q17-b"><span class="opt-letter">B</span><span class="opt-text">All case documentation must now be submitted to the Insurance Commissioner for review within 10 business days of case opening</span></button>
+        <button class="option-btn" onclick="answer('q17','c')" id="q17-c"><span class="opt-letter">C</span><span class="opt-text">Case documentation must be strengthened to withstand heightened regulatory scrutiny — complete records of all communications, treatment verification, and evidence preservation are now critical</span></button>
+        <button class="option-btn" onclick="answer('q17','d')" id="q17-d"><span class="opt-letter">D</span><span class="opt-text">Documentation is now entirely digital — paper files are prohibited under HB 1344</span></button>
       </div>
       <div class="feedback-box" id="q17-fb"></div>
     </div>
@@ -739,10 +739,10 @@
       <div class="q-num">Question 18 of 20 &middot; 10 pts</div>
       <div class="q-text">HB 1344's prohibition on solicitation of automobile accident information directly affects which GLG process?</div>
       <div class="options">
-        <button class="option-btn" onclick="answer('q18','a',false)" id="q18-a"><span class="opt-letter">A</span><span class="opt-text">The firm's advertising and marketing campaigns for PI services, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
-        <button class="option-btn" onclick="answer('q18','b',true)" id="q18-b"><span class="opt-letter">B</span><span class="opt-text">Client intake and initial case handling — staff must ensure no unauthorized third parties have solicited accident information, and must document any suspicious contacts clients report</span></button>
-        <button class="option-btn" onclick="answer('q18','c',false)" id="q18-c"><span class="opt-letter">C</span><span class="opt-text">The firm's billing and invoicing procedures for settled cases</span></button>
-        <button class="option-btn" onclick="answer('q18','d',false)" id="q18-d"><span class="opt-letter">D</span><span class="opt-text">The firm's relationship with expert witnesses and consultants</span></button>
+        <button class="option-btn" onclick="answer('q18','a')" id="q18-a"><span class="opt-letter">A</span><span class="opt-text">The firm's advertising and marketing campaigns for PI services, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
+        <button class="option-btn" onclick="answer('q18','b')" id="q18-b"><span class="opt-letter">B</span><span class="opt-text">Client intake and initial case handling — staff must ensure no unauthorized third parties have solicited accident information, and must document any suspicious contacts clients report</span></button>
+        <button class="option-btn" onclick="answer('q18','c')" id="q18-c"><span class="opt-letter">C</span><span class="opt-text">The firm's billing and invoicing procedures for settled cases</span></button>
+        <button class="option-btn" onclick="answer('q18','d')" id="q18-d"><span class="opt-letter">D</span><span class="opt-text">The firm's relationship with expert witnesses and consultants</span></button>
       </div>
       <div class="feedback-box" id="q18-fb"></div>
     </div>
@@ -751,10 +751,10 @@
       <div class="q-num">Question 19 of 20 &middot; 10 pts</div>
       <div class="q-text">How should CasePeer protocols be updated to reflect HB 1344 compliance?</div>
       <div class="options">
-        <button class="option-btn" onclick="answer('q19','a',false)" id="q19-a"><span class="opt-letter">A</span><span class="opt-text">No CasePeer updates are needed — HB 1344 is purely a regulatory matter for insurance companies — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value</span></button>
-        <button class="option-btn" onclick="answer('q19','b',false)" id="q19-b"><span class="opt-letter">B</span><span class="opt-text">Add a single "HB 1344 Compliant" checkbox to each case file</span></button>
-        <button class="option-btn" onclick="answer('q19','c',false)" id="q19-c"><span class="opt-letter">C</span><span class="opt-text">Remove all fraud-related flags from case files to avoid triggering insurer scrutiny</span></button>
-        <button class="option-btn" onclick="answer('q19','d',true)" id="q19-d"><span class="opt-letter">D</span><span class="opt-text">Add tracking fields for HB 1344 compliance: fraud review awareness flags, solicitation contact logs, insurer timing compliance monitoring, and enhanced scrutiny alerts tied to case evaluation</span></button>
+        <button class="option-btn" onclick="answer('q19','a')" id="q19-a"><span class="opt-letter">A</span><span class="opt-text">No CasePeer updates are needed — HB 1344 is purely a regulatory matter for insurance companies</span></button>
+        <button class="option-btn" onclick="answer('q19','b')" id="q19-b"><span class="opt-letter">B</span><span class="opt-text">Add a single "HB 1344 Compliant" checkbox to each case file</span></button>
+        <button class="option-btn" onclick="answer('q19','c')" id="q19-c"><span class="opt-letter">C</span><span class="opt-text">Remove all fraud-related flags from case files to avoid triggering insurer scrutiny</span></button>
+        <button class="option-btn" onclick="answer('q19','d')" id="q19-d"><span class="opt-letter">D</span><span class="opt-text">Add tracking fields for HB 1344 compliance: fraud review awareness flags, solicitation contact logs, insurer timing compliance monitoring, and enhanced scrutiny alerts tied to case evaluation</span></button>
       </div>
       <div class="feedback-box" id="q19-fb"></div>
     </div>
@@ -763,10 +763,10 @@
       <div class="q-num">Question 20 of 20 &middot; 10 pts · Consequence Story</div>
       <div class="q-text">A client calls worried because someone contacted them offering to "help with their insurance claim" and asking for accident details. Under HB 1344, what should the CM do?</div>
       <div class="options">
-        <button class="option-btn" onclick="answer('q20','a',true)" id="q20-a"><span class="opt-letter">A</span><span class="opt-text">Document the contact in CasePeer immediately, advise the client not to share accident information with unauthorized parties, note the potential HB 1344 violation, and report to the supervising attorney for determination of next steps</span></button>
-        <button class="option-btn" onclick="answer('q20','b',false)" id="q20-b"><span class="opt-letter">B</span><span class="opt-text">Tell the client it is normal for insurance adjusters to reach out and they should cooperate fully — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken</span></button>
-        <button class="option-btn" onclick="answer('q20','c',false)" id="q20-c"><span class="opt-letter">C</span><span class="opt-text">File a police report immediately without consulting the supervising attorney first</span></button>
-        <button class="option-btn" onclick="answer('q20','d',false)" id="q20-d"><span class="opt-letter">D</span><span class="opt-text">Ignore it — HB 1344 only applies to insurance company employees, not third-party contacts</span></button>
+        <button class="option-btn" onclick="answer('q20','a')" id="q20-a"><span class="opt-letter">A</span><span class="opt-text">Document the contact in CasePeer immediately, advise the client not to share accident information with unauthorized parties, note the potential HB 1344 violation, and report to the supervising attorney for determination of next steps</span></button>
+        <button class="option-btn" onclick="answer('q20','b')" id="q20-b"><span class="opt-letter">B</span><span class="opt-text">Tell the client it is normal for insurance adjusters to reach out and they should cooperate fully</span></button>
+        <button class="option-btn" onclick="answer('q20','c')" id="q20-c"><span class="opt-letter">C</span><span class="opt-text">File a police report immediately without consulting the supervising attorney first</span></button>
+        <button class="option-btn" onclick="answer('q20','d')" id="q20-d"><span class="opt-letter">D</span><span class="opt-text">Ignore it — HB 1344 only applies to insurance company employees, not third-party contacts</span></button>
       </div>
       <div class="feedback-box" id="q20-fb"></div>
     </div>
@@ -814,10 +814,10 @@
       <div class="q-num">Boss Task 1 &middot; Question 21 &middot; Bonus 10 pts &middot; Provision Identification</div>
       <div class="q-text">Based on the Marcus Thompson case file, which answer correctly identifies ALL applicable HB 1344 provisions?</div>
       <div class="options">
-        <button class="option-btn" onclick="answer('q21','a',false)" id="q21-a"><span class="opt-letter">A</span><span class="opt-text">Only the motor vehicle insurance provisions apply because this is a car accident — other HB 1344 provisions are irrelevant to PI cases</span></button>
-        <button class="option-btn" onclick="answer('q21','b',true)" id="q21-b"><span class="opt-letter">B</span><span class="opt-text">Multiple provisions apply: (1) Enhanced fraud detection — Progressive may flag the case under new reporting obligations; (2) Automobile accident information prohibition — the third-party solicitation is a potential violation; (3) Motor vehicle insurance penalties — the uninsured defendant faces increased penalties; (4) Claims processing timing — Progressive must comply with timely processing requirements; (5) UM coverage enhancements apply to Marcus's own coverage</span></button>
-        <button class="option-btn" onclick="answer('q21','c',false)" id="q21-c"><span class="opt-letter">C</span><span class="opt-text">No HB 1344 provisions apply because the defendant was uninsured, which takes the case outside the insurance regulatory framework entirely</span></button>
-        <button class="option-btn" onclick="answer('q21','d',false)" id="q21-d"><span class="opt-letter">D</span><span class="opt-text">Only the fraud reporting provisions apply because Progressive mentioned "fraud review" — other provisions are for the Commissioner, not law firms, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value</span></button>
+        <button class="option-btn" onclick="answer('q21','a')" id="q21-a"><span class="opt-letter">A</span><span class="opt-text">Only the motor vehicle insurance provisions apply because this is a car accident — other HB 1344 provisions are irrelevant to PI cases</span></button>
+        <button class="option-btn" onclick="answer('q21','b')" id="q21-b"><span class="opt-letter">B</span><span class="opt-text">Multiple provisions apply: (1) Enhanced fraud detection — Progressive may flag the case under new reporting obligations; (2) Automobile accident information prohibition — the third-party solicitation is a potential violation; (3) Motor vehicle insurance penalties — the uninsured defendant faces increased penalties; (4) Claims processing timing — Progressive must comply with timely processing requirements; (5) UM coverage enhancements apply to Marcus's own coverage</span></button>
+        <button class="option-btn" onclick="answer('q21','c')" id="q21-c"><span class="opt-letter">C</span><span class="opt-text">No HB 1344 provisions apply because the defendant was uninsured, which takes the case outside the insurance regulatory framework entirely</span></button>
+        <button class="option-btn" onclick="answer('q21','d')" id="q21-d"><span class="opt-letter">D</span><span class="opt-text">Only the fraud reporting provisions apply because Progressive mentioned "fraud review" — other provisions are for the Commissioner, not law firms</span></button>
       </div>
       <div class="feedback-box" id="q21-fb"></div>
     </div>
@@ -826,10 +826,10 @@
       <div class="q-num">Boss Task 2 &middot; Question 22 &middot; Bonus 10 pts &middot; Solicitation Response</div>
       <div class="q-text">The unknown third-party contact who solicited Marcus's accident information represents a potential violation of HB 1344's information prohibition. What should GLG do?</div>
       <div class="options">
-        <button class="option-btn" onclick="answer('q22','a',false)" id="q22-a"><span class="opt-letter">A</span><span class="opt-text">Contact the third party directly and demand they cease and desist — GLG has authority to enforce HB 1344</span></button>
-        <button class="option-btn" onclick="answer('q22','b',false)" id="q22-b"><span class="opt-letter">B</span><span class="opt-text">Advise Marcus to cooperate with the third party in case they are a legitimate insurance representative handling the claim</span></button>
-        <button class="option-btn" onclick="answer('q22','c',false)" id="q22-c"><span class="opt-letter">C</span><span class="opt-text">File a formal complaint with the police department within 24 hours — this is a criminal matter requiring immediate law enforcement action — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken</span></button>
-        <button class="option-btn" onclick="answer('q22','d',true)" id="q22-d"><span class="opt-letter">D</span><span class="opt-text">Document the contact in CasePeer (date, time, what was said, contact information if available), advise Marcus not to share information with anyone other than GLG, report to the supervising attorney for determination of whether to notify the Insurance Commissioner, and send Marcus a written advisory about HB 1344's accident information protections</span></button>
+        <button class="option-btn" onclick="answer('q22','a')" id="q22-a"><span class="opt-letter">A</span><span class="opt-text">Contact the third party directly and demand they cease and desist — GLG has authority to enforce HB 1344</span></button>
+        <button class="option-btn" onclick="answer('q22','b')" id="q22-b"><span class="opt-letter">B</span><span class="opt-text">Advise Marcus to cooperate with the third party in case they are a legitimate insurance representative handling the claim</span></button>
+        <button class="option-btn" onclick="answer('q22','c')" id="q22-c"><span class="opt-letter">C</span><span class="opt-text">File a formal complaint with the police department within 24 hours — this is a criminal matter requiring immediate law enforcement action</span></button>
+        <button class="option-btn" onclick="answer('q22','d')" id="q22-d"><span class="opt-letter">D</span><span class="opt-text">Document the contact in CasePeer (date, time, what was said, contact information if available), advise Marcus not to share information with anyone other than GLG, report to the supervising attorney for determination of whether to notify the Insurance Commissioner, and send Marcus a written advisory about HB 1344's accident information protections</span></button>
       </div>
       <div class="feedback-box" id="q22-fb"></div>
     </div>
@@ -838,10 +838,10 @@
       <div class="q-num">Boss Task 3 &middot; Question 23 &middot; Bonus 10 pts &middot; Adjuster Delay Response</div>
       <div class="q-text">Progressive's adjuster Sarah Chen cites "enhanced fraud review under HB 1344" as the reason for a 4-month delay in processing Marcus's UM claim. No specific fraud allegation has been made. What is the correct response?</div>
       <div class="options">
-        <button class="option-btn" onclick="answer('q23','a',true)" id="q23-a"><span class="opt-letter">A</span><span class="opt-text">HB 1344's fraud provisions do not give insurers unlimited delay authority. Document the delay, send a formal demand citing HB 1344's timely processing provisions, and escalate to the supervising attorney. The enhanced fraud framework targets actual fraud — not blanket delay justification for legitimate claims.</span></button>
-        <button class="option-btn" onclick="answer('q23','b',false)" id="q23-b"><span class="opt-letter">B</span><span class="opt-text">Accept the delay — HB 1344 gives insurers unlimited time for fraud review and GLG has no legal basis to challenge it</span></button>
-        <button class="option-btn" onclick="answer('q23','c',false)" id="q23-c"><span class="opt-letter">C</span><span class="opt-text">File a bad faith lawsuit immediately without attempting to resolve the delay through communication with Progressive</span></button>
-        <button class="option-btn" onclick="answer('q23','d',false)" id="q23-d"><span class="opt-letter">D</span><span class="opt-text">Advise Marcus to contact Progressive's fraud department directly to speed up the review process</span></button>
+        <button class="option-btn" onclick="answer('q23','a')" id="q23-a"><span class="opt-letter">A</span><span class="opt-text">HB 1344's fraud provisions do not give insurers unlimited delay authority. Document the delay, send a formal demand citing HB 1344's timely processing provisions, and escalate to the supervising attorney. The enhanced fraud framework targets actual fraud — not blanket delay justification for legitimate claims.</span></button>
+        <button class="option-btn" onclick="answer('q23','b')" id="q23-b"><span class="opt-letter">B</span><span class="opt-text">Accept the delay — HB 1344 gives insurers unlimited time for fraud review and GLG has no legal basis to challenge it</span></button>
+        <button class="option-btn" onclick="answer('q23','c')" id="q23-c"><span class="opt-letter">C</span><span class="opt-text">File a bad faith lawsuit immediately without attempting to resolve the delay through communication with Progressive</span></button>
+        <button class="option-btn" onclick="answer('q23','d')" id="q23-d"><span class="opt-letter">D</span><span class="opt-text">Advise Marcus to contact Progressive's fraud department directly to speed up the review process</span></button>
       </div>
       <div class="feedback-box" id="q23-fb"></div>
     </div>
@@ -850,10 +850,10 @@
       <div class="q-num">Boss Task 4 &middot; Question 24 &middot; Bonus 10 pts &middot; Coverage &amp; Strategy</div>
       <div class="q-text">Marcus's case involves an uninsured commercial truck driver (Rodriguez, FastTrack Logistics). Under HB 1344's motor vehicle insurance provisions, what are the coverage and strategic implications?</div>
       <div class="options">
-        <button class="option-btn" onclick="answer('q24','a',false)" id="q24-a"><span class="opt-letter">A</span><span class="opt-text">The uninsured driver faces no additional consequences because HB 1344 only applies to passenger vehicles, not commercial trucks</span></button>
-        <button class="option-btn" onclick="answer('q24','b',false)" id="q24-b"><span class="opt-letter">B</span><span class="opt-text">GLG should not pursue the case because uninsured defendant cases are not viable under the new regulatory framework</span></button>
-        <button class="option-btn" onclick="answer('q24','c',true)" id="q24-c"><span class="opt-letter">C</span><span class="opt-text">The defendant faces higher monetary penalties under HB 1344. For strategy: (1) document the uninsured status to strengthen the UM claim narrative; (2) investigate whether FastTrack Logistics has commercial coverage; (3) verify Marcus's UM coverage under the enhanced protections framework; (4) determine whether the employer violated insurance requirements</span></button>
-        <button class="option-btn" onclick="answer('q24','d',false)" id="q24-d"><span class="opt-letter">D</span><span class="opt-text">HB 1344 eliminates UM coverage for accidents involving commercial vehicles — Marcus must sue Rodriguez personally</span></button>
+        <button class="option-btn" onclick="answer('q24','a')" id="q24-a"><span class="opt-letter">A</span><span class="opt-text">The uninsured driver faces no additional consequences because HB 1344 only applies to passenger vehicles, not commercial trucks</span></button>
+        <button class="option-btn" onclick="answer('q24','b')" id="q24-b"><span class="opt-letter">B</span><span class="opt-text">GLG should not pursue the case because uninsured defendant cases are not viable under the new regulatory framework</span></button>
+        <button class="option-btn" onclick="answer('q24','c')" id="q24-c"><span class="opt-letter">C</span><span class="opt-text">The defendant faces higher monetary penalties under HB 1344. For strategy: (1) document the uninsured status to strengthen the UM claim narrative; (2) investigate whether FastTrack Logistics has commercial coverage; (3) verify Marcus's UM coverage under the enhanced protections framework; (4) determine whether the employer violated insurance requirements</span></button>
+        <button class="option-btn" onclick="answer('q24','d')" id="q24-d"><span class="opt-letter">D</span><span class="opt-text">HB 1344 eliminates UM coverage for accidents involving commercial vehicles — Marcus must sue Rodriguez personally</span></button>
       </div>
       <div class="feedback-box" id="q24-fb"></div>
     </div>
@@ -862,16 +862,20 @@
       <div class="q-num">Boss Task 5 &middot; Question 25 &middot; Bonus 10 pts &middot; Client Communication</div>
       <div class="q-text">Marcus asks his CM: "My friend says this new law means insurance companies will try to accuse me of fraud. Should I be worried?" What is the correct response?</div>
       <div class="options">
-        <button class="option-btn" onclick="answer('q25','a',false)" id="q25-a"><span class="opt-letter">A</span><span class="opt-text">"Yes, you should be very worried — HB 1344 makes it much harder to win PI cases and insurance companies will use fraud accusations against every claimant."</span></button>
-        <button class="option-btn" onclick="answer('q25','b',false)" id="q25-b"><span class="opt-letter">B</span><span class="opt-text">"Don't worry about it at all — HB 1344 doesn't apply to your case and has no impact on how your claim will be handled."</span></button>
-        <button class="option-btn" onclick="answer('q25','c',true)" id="q25-c"><span class="opt-letter">C</span><span class="opt-text">Acknowledge his concern, then explain: "HB 1344 enhances fraud detection to catch actual fraudulent claims — it protects legitimate claimants like you. Our job is to document your case thoroughly so your claim is airtight. The law actually helps honest claimants because it pressures insurers to process claims properly and within required timelines. We handle the compliance — you focus on your treatment."</span></button>
-        <button class="option-btn" onclick="answer('q25','d',false)" id="q25-d"><span class="opt-letter">D</span><span class="opt-text">"I can't discuss legal matters with you — you'll need to schedule a separate consultation with the attorney to discuss HB 1344."</span></button>
+        <button class="option-btn" onclick="answer('q25','a')" id="q25-a"><span class="opt-letter">A</span><span class="opt-text">"Yes, you should be very worried — HB 1344 makes it much harder to win PI cases and insurance companies will use fraud accusations against every claimant."</span></button>
+        <button class="option-btn" onclick="answer('q25','b')" id="q25-b"><span class="opt-letter">B</span><span class="opt-text">"Don't worry about it at all — HB 1344 doesn't apply to your case and has no impact on how your claim will be handled."</span></button>
+        <button class="option-btn" onclick="answer('q25','c')" id="q25-c"><span class="opt-letter">C</span><span class="opt-text">Acknowledge his concern, then explain: "HB 1344 enhances fraud detection to catch actual fraudulent claims — it protects legitimate claimants like you. Our job is to document your case thoroughly so your claim is airtight. The law actually helps honest claimants because it pressures insurers to process claims properly and within required timelines. We handle the compliance — you focus on your treatment."</span></button>
+        <button class="option-btn" onclick="answer('q25','d')" id="q25-d"><span class="opt-letter">D</span><span class="opt-text">"I can't discuss legal matters with you — you'll need to schedule a separate consultation with the attorney to discuss HB 1344."</span></button>
       </div>
       <div class="feedback-box" id="q25-fb"></div>
     </div>
 
     <div class="section-score" id="s6-score" style="display:none;"><div class="score-display" id="s6-score-val"></div><div class="score-label">Boss Challenge Bonus Score</div></div>
-    <div class="btn-group" id="s6-next"><button class="btn btn-primary btn-block" onclick="showResults()">See Results &rarr;</button></div>
+    <div class="btn-group" id="s6-next"><div style="margin-bottom:1rem;">
+      <label for="trainee-name-input" style="display:block;font-size:0.85rem;font-weight:600;color:#141c2c;margin-bottom:0.4rem;">Your Name — required to start</label>
+      <input type="text" id="trainee-name-input" placeholder="Enter your full name" autocomplete="name" style="width:100%;padding:0.5rem 0.75rem;border:1.5px solid #cbd5e1;border-radius:6px;font-size:0.9rem;box-sizing:border-box;">
+    </div>
+    <button class="btn btn-primary btn-block" onclick="requireNameThenResults()">See Results &rarr;</button></div>
   </div>
 </div>
 
@@ -1026,31 +1030,31 @@ var milestonesTriggered = {};
 // Sections 1-5 = base pts (10 each); Section 6 = boss bonus only
 // ═══════════════════════════════════════════════
 var Q_CONFIG = {
-  'q1':  {section:1, pts:10, isBonus:false, correct:'b'},
-  'q2':  {section:1, pts:10, isBonus:false, correct:'d'},
-  'q3':  {section:1, pts:10, isBonus:false, correct:'a'},
-  'q4':  {section:1, pts:10, isBonus:false, correct:'c'},
-  'q5':  {section:2, pts:10, isBonus:false, correct:'c'},
-  'q6':  {section:2, pts:10, isBonus:false, correct:'b'},
-  'q7':  {section:2, pts:10, isBonus:false, correct:'d'},
-  'q8':  {section:2, pts:10, isBonus:false, correct:'a'},
-  'q9':  {section:3, pts:10, isBonus:false, correct:'d'},
-  'q10': {section:3, pts:10, isBonus:false, correct:'a'},
-  'q11': {section:3, pts:10, isBonus:false, correct:'b'},
-  'q12': {section:3, pts:0, isBonus:false, correct:'a'},
-  'q13': {section:4, pts:10, isBonus:false, correct:'c'},
-  'q14': {section:4, pts:10, isBonus:false, correct:'d'},
-  'q15': {section:4, pts:10, isBonus:false, correct:'a'},
-  'q16': {section:4, pts:10, isBonus:false, correct:'b'},
-  'q17': {section:5, pts:10, isBonus:false, correct:'c'},
-  'q18': {section:5, pts:10, isBonus:false, correct:'b'},
-  'q19': {section:5, pts:10, isBonus:false, correct:'d'},
-  'q20': {section:5, pts:10, isBonus:false, correct:'a'},
-  'q21': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'b'},
-  'q22': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'d'},
-  'q23': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'a'},
-  'q24': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'c'},
-  'q25': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'c'}
+  'q1':  {section:1, pts:10, isBonus:false},
+  'q2':  {section:1, pts:10, isBonus:false},
+  'q3':  {section:1, pts:10, isBonus:false},
+  'q4':  {section:1, pts:10, isBonus:false},
+  'q5':  {section:2, pts:10, isBonus:false},
+  'q6':  {section:2, pts:10, isBonus:false},
+  'q7':  {section:2, pts:10, isBonus:false},
+  'q8':  {section:2, pts:10, isBonus:false},
+  'q9':  {section:3, pts:10, isBonus:false},
+  'q10': {section:3, pts:10, isBonus:false},
+  'q11': {section:3, pts:10, isBonus:false},
+  'q12': {section:3, pts:0, isBonus:false},
+  'q13': {section:4, pts:10, isBonus:false},
+  'q14': {section:4, pts:10, isBonus:false},
+  'q15': {section:4, pts:10, isBonus:false},
+  'q16': {section:4, pts:10, isBonus:false},
+  'q17': {section:5, pts:10, isBonus:false},
+  'q18': {section:5, pts:10, isBonus:false},
+  'q19': {section:5, pts:10, isBonus:false},
+  'q20': {section:5, pts:10, isBonus:false},
+  'q21': {section:6, pts:0,  isBonus:true,  bonusPts:10},
+  'q22': {section:6, pts:0,  isBonus:true,  bonusPts:10},
+  'q23': {section:6, pts:0,  isBonus:true,  bonusPts:10},
+  'q24': {section:6, pts:0,  isBonus:true,  bonusPts:10},
+  'q25': {section:6, pts:0,  isBonus:true,  bonusPts:10}
 };
 
 // Section questions map
@@ -1066,113 +1070,12 @@ var SECTION_QUESTIONS = {
 // ═══════════════════════════════════════════════
 // FEEDBACK TEXT (E9: backtick template literals)
 // ═══════════════════════════════════════════════
-var FEEDBACK = {
-  'q1': {
-    t: `✅ Georgia HB 1344 is the "Insurance Affordability Claims Integrity Act." It reforms Georgia's insurance regulatory framework with four pillars: (1) enhanced fraud detection and reporting, (2) claims processing improvements, (3) motor vehicle insurance changes, and (4) expanded regulatory enforcement. Per the strategic memo: "This legislation directly impacts personal injury practice by changing insurance fraud detection, claims processing timelines, adjuster interaction protocols, and the regulatory environment within which insurance companies operate in Georgia."`,
-    f: `❌ HB 1344 is the Insurance Affordability Claims Integrity Act. It does not eliminate fraud entirely, cap premiums, eliminate deductibles, or reduce attorney involvement. Its focus is on fraud prevention, claims processing improvements, and consumer protections — all of which change the environment in which GLG handles PI cases.`
-  },
-  'q2': {
-    t: `✅ HB 1344 gives the Insurance Commissioner expanded authority to employ prosecuting attorneys specifically for insurance fraud cases and enhances investigative authority. Per the memo: "Commissioner can employ prosecuting attorneys specifically for insurance fraud cases." This creates a dedicated fraud prosecution infrastructure — more investigators, more resources, more accountability. It does NOT give the Commissioner authority over attorney fees, settlement approvals, or pre-approval of claims.`,
-    f: `❌ The Commissioner's expanded authority under HB 1344 is specifically about fraud prosecution and investigation — not fee limits, settlement pre-approval, or claims processing pre-authorization. The ability to employ dedicated fraud prosecutors is the key change.`
-  },
-  'q3': {
-    t: `✅ The waiver is in the <strong>Georgia Tort Claims Act, O.C.G.A. &sect; 50-21-23(a), enacted 1992</strong> — NOT in HB 1344. HB 1344 is insurance-regulation legislation and does not create this waiver. The GTCA says: "The state waives its sovereign immunity for the torts of state officers and employees while acting within the scope of their official duties or employment and shall be liable for such torts in the same manner as a private individual or entity would be liable under like circumstances." Critical limitation, § 50-21-24: "The state shall have no liability for losses resulting from conduct on the part of state officers or employees which was not within the scope of their official duties." Procedural gate: the GTCA ante litem notice under § 50-21-26 is <strong>12 months</strong>.`,
-    f: `❌ Georgia does NOT completely eliminate sovereign immunity, and the waiver is not from HB 1344 — it is O.C.G.A. § 50-21-23(a) (GTCA, 1992). The waiver is limited to acts within the scope of official duties. Acts outside the scope of employment remain immune. This is a conditional waiver — not a blanket elimination. It directly matters for GLG cases involving state vehicles, state employees, or government-related accidents.`
-  },
-  'q4': {
-    t: `✅ HB 1344's direct relevance to GLG is that it changes the regulatory environment: insurance fraud detection, claims processing timelines, adjuster interaction protocols, and insurer oversight. Per the strategic memo: "These changes affect case evaluation, negotiation strategies, and client outcome expectations." It does NOT change statutes of limitations, attorney fee structures, or court filing requirements.`,
-    f: `❌ HB 1344 does not change statutes of limitations, attorney fee structures, or court filing requirements. Its impact on GLG is through the regulatory environment — how insurers detect fraud, process claims, interact with claimants, and operate under Commissioner oversight. Understanding this environment is what gives GLG a strategic advantage.`
-  },
-  'q5': {
-    t: `✅ The mandatory reporting obligation under HB 1344 is broad: "Any insurer, agent, or other person licensed under this title, or an employee thereof, having knowledge of or who believes that a fraudulent insurance act is being or has been committed shall send to the Commissioner a report." Key phrase: "knowledge of OR believes" — this is not a certainty standard. A reasonable belief triggers the obligation. Not just adjusters, not just legal departments, not just law enforcement.`,
-    f: `❌ The reporting obligation is NOT limited to adjusters, legal departments, or law enforcement. HB 1344 requires ANY insurer, agent, licensed person, or employee who has knowledge of OR believes fraud is occurring to report. This is a broad, low-threshold obligation — reasonable belief is sufficient.`
-  },
-  'q6': {
-    t: `✅ Per HB 1344: "If prosecution by the prosecuting attorney is not begun within 90 days of the report, the prosecuting attorney shall inform the Commissioner of the reasons for the lack of prosecution." This creates accountability — if a fraud report is filed and nothing happens for 90 days, the prosecutor must explain why. For GLG, this means insurers cannot cite "fraud investigation" as an indefinite delay tactic — there is now a statutory timeline.`,
-    f: `❌ The timeline is 90 days — not 30 days, not 180 days, and it is NOT unlimited. And the requirement is to BEGIN prosecution or EXPLAIN the delay — not to file charges within 30 days or complete a trial within 180 days. The accountability mechanism is the explanation requirement, creating a paper trail of inaction.`
-  },
-  'q7': {
-    t: `✅ HB 1344 creates strict controls on the solicitation, release, or sale of automobile accident information. This is a NEW compliance requirement that directly affects PI practice. Third parties cannot cold-call accident victims to solicit case details. Accident information cannot be sold outside authorized channels. GLG must document and report any suspicious contacts clients describe. This prohibition targets runners, unlicensed solicitors, and data brokers.`,
-    f: `❌ The prohibition is specifically about automobile accident information — not medical records (HIPAA governs those), not attorney-client privileged communications (ethics rules govern those), and not policy limits/coverage details shared during negotiations. HB 1344's information prohibition is about the solicitation, release, or sale of accident information outside authorized channels.`
-  },
-  'q8': {
-    t: `✅ The Special Insurance Fraud Fund provides dedicated funding for investigation and prosecution of insurance fraud in Georgia. Per the memo: "Dedicated funding for fraud investigation and prosecution." This means more investigators, more resources, and more enforcement capacity. It is NOT a victim compensation fund, premium subsidy, or insolvency reserve. For GLG, this means the fraud detection environment is now better-resourced — documentation standards must match.`,
-    f: `❌ The Special Insurance Fraud Fund is specifically for investigation and prosecution — not victim compensation, premium subsidies, or insolvency reserves. This fund gives the Commissioner's office dedicated resources to investigate fraud, which means more active enforcement and a more aggressive regulatory environment.`
-  },
-  'q9': {
-    t: `✅ HB 1344 includes specific provisions requiring timely claims processing after catastrophic events. This prevents insurers from delaying disaster-related claims — a historically significant problem after natural disasters in Georgia. Insurers do NOT get an exemption from processing; the provision requires timely action. For clients with disaster-related injuries, this is a protection GLG can invoke if an insurer delays processing.`,
-    f: `❌ The catastrophic event provision REQUIRES timely processing — it does not exempt insurers from processing or freeze new claims. It also does not automatically refund premiums. The purpose is to prevent insurers from using disasters as an excuse to delay claims processing, which is a consumer protection.`
-  },
-  'q10': {
-    t: `✅ HB 1344 requires insurers to give homeowners a 60-day correction period for issues identified through aerial or satellite imagery before taking adverse action. This means an insurer cannot cancel a homeowner's policy based on a drone photo without giving 60 days to fix the problem. While primarily a homeowner protection, GLG should know this for cases involving homeowner policies and property-related injuries.`,
-    f: `❌ The provision gives homeowners 60 days to CORRECT issues identified through aerial/satellite imagery — it does not require consent for using imagery, ban imagery entirely, or give homeowners the right to demand deletion. The key is the 60-day cure period before adverse action.`
-  },
-  'q11': {
-    t: `✅ HB 1344 increases monetary penalties for driving without minimum insurance coverage and strengthens enforcement mechanisms. Per the memo: "Higher monetary penalties for driving without minimum insurance coverage" and "Strengthened enforcement of basic insurance requirements." This matters for GLG because uninsured defendants face higher consequences — which supports the UM claim narrative and documents the defendant's legal exposure.`,
-    f: `❌ HB 1344 increases monetary penalties — not criminal imprisonment for first-time offenders. Motor vehicle insurance penalties WERE addressed in HB 1344 (it is incorrect to say they were not). Insurance companies are not required to provide free coverage. The change is higher monetary penalties and strengthened enforcement of existing requirements.`
-  },
-  'q12': {
-    t: `📋 Comprehensive HB 1344 practical summary — regardless of your confidence level: HB 1344 affects your daily work in four ways: (1) INTAKE: Ask clients if anyone contacted them about the accident (solicitation check). (2) DOCUMENTATION: Strengthen records — complete communications logs, treatment verification, evidence preservation — because the regulatory scrutiny environment is heightened. (3) ADJUSTER INTERACTION: Adjusters now have fraud reporting obligations and timing pressures — understand these pressures to negotiate more effectively. (4) CASE EVALUATION: Account for enhanced fraud detection in PITT analysis — insurers are more likely to flag cases, so documentation must be airtight. Confidence is earned through practice — use this framework on your next active case.`,
-    f: `📋 Same comprehensive summary for all confidence levels: (1) INTAKE: Solicitation check — ask about third-party contacts. (2) DOCUMENTATION: Heightened scrutiny = stronger records needed. (3) ADJUSTER INTERACTION: New pressures on adjusters = new negotiation dynamics. (4) CASE EVALUATION: HB 1344 provisions must be factored into PITT analysis. The gap between knowing HB 1344 exists and applying it to daily work is where this module bridges.`
-  },
-  'q13': {
-    t: `✅ Per the strategic memo: "Incorporate HB1344 provisions into PITT analysis, particularly regarding fraud detection and how it affects insurance company behavior and settlement patterns." Case evaluation must now account for: enhanced fraud detection (adjusters may flag cases), claims processing timelines (new timing requirements), and adjuster behavior changes (new regulatory pressures). HB 1344 does NOT make cases less viable — it changes the environment in which cases are evaluated.`,
-    f: `❌ HB 1344 does NOT require declining cases, waiting for regulations, or ignoring its provisions. And it definitely affects law firms — the entire regulatory environment has shifted. The correct approach is to incorporate HB 1344 into PITT analysis as a factor that changes insurer behavior, claims timelines, and documentation standards.`
-  },
-  'q14': {
-    t: `✅ Per the strategic memo: "Train staff on new regulatory environment and how it affects adjuster behavior and timelines." Adjusters now operate under fraud reporting obligations (they must report suspected fraud), timing requirements (claims must be processed timely), and enhanced scrutiny from the Commissioner's office. These pressures affect how adjusters behave, what they document, and how they negotiate. Understanding this gives GLG staff a strategic advantage in every adjuster interaction.`,
-    f: `❌ Adjusters are NOT prohibited from communicating with attorneys, do NOT need Commissioner pre-approval for communications, and do NOT have fewer obligations. The opposite is true — they have MORE obligations under HB 1344, including mandatory fraud reporting and timing compliance. Understanding these new pressures is key to effective negotiation.`
-  },
-  'q15': {
-    t: `✅ Per the strategic memo: "Adjust negotiation approaches based on new regulatory pressures on insurance companies." HB 1344 creates a dual dynamic: (1) insurers may settle faster to avoid fraud scrutiny complications and Commissioner attention; (2) enhanced documentation requirements strengthen GLG demand packages when records are thorough. Settlement values do NOT automatically increase, Commissioner pre-approval is NOT required, and cases do NOT have to go to trial. The strategic advantage is in knowing how regulatory pressure changes insurer behavior.`,
-    f: `❌ Settlement values do NOT automatically increase by any percentage under HB 1344. Commissioner pre-approval for settlements does NOT exist. Cases are NOT required to go to trial. HB 1344 changes the negotiation environment — it creates regulatory pressure that can motivate faster settlements while also requiring stronger documentation. Use this strategically, not as a magic multiplier.`
-  },
-  'q16': {
-    t: `✅ HB 1344 enhances UM protections and clarifications while strengthening enforcement of existing coverage requirements. Per the memo: "Enhanced protections and clarifications" for UM coverage. For GLG: verify UM coverage more carefully because the regulatory framework has changed, use increased penalties for uninsured drivers to strengthen the UM claim narrative, and cross-reference with the Injury Case Playbook's Coverage Maximization Audit for every case.`,
-    f: `❌ HB 1344 does NOT set specific UM minimum amounts ($100K/$300K is not in the bill), does NOT eliminate UM coverage, and does NOT limit UM to commercial vehicles only. It enhances existing UM protections and clarifications while strengthening enforcement. GLG staff should verify coverage carefully because the regulatory framework around UM has changed.`
-  },
-  'q17': {
-    t: `✅ Per the strategic memo: "Update case documentation to align with enhanced fraud detection requirements." Under HB 1344's heightened regulatory environment, case documentation must be strengthened — complete records of all communications, treatment verification, evidence preservation. This is not about submitting files to the Commissioner or going digital-only. It is about ensuring every file can withstand heightened scrutiny from insurers who now have more fraud detection tools and reporting obligations.`,
-    f: `❌ Documentation requirements HAVE changed — not directly through HB 1344 mandating law firm documentation, but through the heightened regulatory environment requiring stronger files. Files do NOT need to be submitted to the Commissioner. There is no prohibition on paper files. The standard is practical: make every file strong enough to withstand enhanced insurer scrutiny.`
-  },
-  'q18': {
-    t: `✅ The automobile accident information prohibition directly affects client intake and initial case handling. During intake, CMs must now ask: "Has anyone contacted you about the accident?" If the answer is yes — document it. Who called, when, what was asked, was information shared. This is a potential HB 1344 violation and must be flagged. It does NOT primarily affect advertising/marketing (though firms should ensure compliance), billing, or expert witness relationships.`,
-    f: `❌ The most direct impact is on intake and case handling — specifically the question of whether unauthorized third parties have solicited accident information from the client. While advertising should also comply, the primary operational impact is at intake: asking the solicitation check question, documenting suspicious contacts, and reporting to the supervising attorney.`
-  },
-  'q19': {
-    t: `✅ CasePeer should be updated with specific HB 1344 compliance tracking: fraud review awareness flags (has the insurer flagged this case?), solicitation contact logs (any suspicious third-party contacts reported by the client?), insurer timing compliance monitoring (is the insurer processing within required timelines?), and enhanced scrutiny alerts (does this case show signs of heightened HB 1344-related scrutiny?). A single checkbox is insufficient. Removing fraud flags is counterproductive. "No updates needed" ignores the regulatory change entirely.`,
-    f: `❌ "No updates needed" ignores HB 1344 entirely. A single checkbox provides no actionable data. Removing fraud flags makes cases MORE vulnerable, not less. The correct approach is specific, actionable tracking fields that map to HB 1344's key provisions — fraud awareness, solicitation monitoring, timing compliance, and scrutiny alerts.`
-  },
-  'q20': {
-    t: `✅ The correct response to a suspicious third-party contact: (1) Document in CasePeer immediately — date, time, caller identity, what was said, what information the client shared. (2) Advise the client not to share accident information with anyone other than GLG. (3) Note the potential HB 1344 violation — solicitation of automobile accident information is now restricted. (4) Report to the supervising attorney for determination of next steps, which may include notifying the Insurance Commissioner. Do NOT tell the client to cooperate with unknown callers, file police reports without attorney guidance, or ignore it.`,
-    f: `❌ Unknown callers soliciting accident information is NOT normal and should NOT be ignored. The client should NOT cooperate with unauthorized parties. Police reports should NOT be filed without attorney guidance. HB 1344's solicitation prohibition applies broadly — not just to insurance company employees. Document, advise, flag, and escalate to the supervising attorney.`
-  },
-  'q21': {
-    t: `✅ All five HB 1344 provisions apply: (1) Enhanced fraud detection — Progressive has already invoked "fraud review" under HB 1344, triggering the 90-day accountability timeline. (2) Automobile accident information prohibition — the unknown third-party solicitation is a direct potential violation. (3) Motor vehicle insurance penalties — Rodriguez was uninsured, facing higher penalties under HB 1344. (4) Claims processing timing — Progressive must comply with timely processing requirements; a 4-month delay without specific fraud allegations is not justified. (5) UM coverage enhancements — Marcus's own UM coverage operates under the enhanced protections framework. This is not a single-provision case — it is a full HB 1344 intersection.`,
-    f: `❌ Multiple provisions apply, not just one. The motor vehicle provisions are not the only relevant section. The defendant being uninsured does NOT take the case outside HB 1344 — it actually triggers the increased penalty provisions. And "only fraud provisions apply" ignores the solicitation prohibition, timing requirements, motor vehicle penalties, and UM enhancements. This case touches all four pillars of HB 1344.`
-  },
-  'q22': {
-    t: `✅ The correct response to the solicitation contact: (1) Document in CasePeer — date, time, what was said, contact information if available, what Marcus shared (his policy number). (2) Advise Marcus not to share information with anyone other than GLG going forward. (3) Report to the supervising attorney for determination of whether to notify the Insurance Commissioner — GLG does not enforce HB 1344 directly, but the attorney determines if notification is appropriate. (4) Send Marcus a written advisory about HB 1344's accident information protections. Do NOT contact the third party directly (GLG has no enforcement authority), advise Marcus to cooperate, or file a police report without attorney direction.`,
-    f: `❌ GLG does NOT have authority to enforce HB 1344 — contacting the third party to demand they cease and desist is not GLG's role. Advising Marcus to cooperate with an unknown caller is dangerous. Filing a police report without attorney direction bypasses the proper chain. The correct approach is systematic: document, advise, report to the attorney, and provide the client with written guidance.`
-  },
-  'q23': {
-    t: `✅ HB 1344's fraud provisions do NOT give insurers unlimited delay authority. The Act includes timing requirements for claims processing and a 90-day accountability timeline for fraud prosecution. A 4-month delay with no specific fraud allegation is not a legitimate use of the fraud review framework. The correct response: document every instance of delay with dates and stated reasons, send a formal demand citing HB 1344's timely processing provisions, and escalate to the supervising attorney if Progressive continues to stall. The enhanced fraud framework targets actual fraud — it is not a blanket delay justification for legitimate claims.`,
-    f: `❌ HB 1344 does NOT give insurers unlimited delay authority. Accepting a 4-month delay without pushback fails the client. Filing a bad faith suit without first attempting resolution skips necessary steps. Advising the client to contact the fraud department directly could harm the case. The correct approach is systematic documentation, formal demand citing timing provisions, and attorney escalation.`
-  },
-  'q24': {
-    t: `✅ Under HB 1344, Rodriguez faces higher monetary penalties for driving without minimum coverage — strengthened enforcement. For GLG's case strategy: (1) Document Rodriguez's uninsured status — it strengthens the UM claim narrative by showing the defendant violated Georgia's insurance requirements. (2) Investigate FastTrack Logistics for commercial coverage — the employer may have coverage even if the driver does not. (3) Verify Marcus's UM coverage under HB 1344's enhanced protections framework — the regulatory changes may affect coverage interpretation. (4) Determine whether FastTrack violated employer insurance requirements — potential additional defendant exposure. HB 1344 does NOT eliminate UM coverage or limit it to certain vehicle types.`,
-    f: `❌ HB 1344 applies to all motor vehicles — not just passenger cars. Uninsured defendant cases ARE viable, especially with UM coverage. HB 1344 does NOT eliminate UM coverage for commercial vehicle accidents. The increased penalties and enforcement provisions actually strengthen the claimant's position by documenting the defendant's legal violations.`
-  },
-  'q25': {
-    t: `✅ The correct CM response applies Essential Lawyering Skills principles (inquiring mode, empathy, clear information): (1) Acknowledge Marcus's concern — do not dismiss it. (2) Explain HB 1344 protects legitimate claimants by targeting actual fraud. (3) Reassure that GLG handles documentation and compliance — the client's job is treatment compliance. (4) Note that HB 1344 actually helps honest claimants through timing requirements that pressure insurers to process claims properly. (5) Do NOT alarm the client, dismiss the concern entirely, or refuse to discuss it. Per Essential Lawyering Skills: "The four biggest challenges in counseling are: Creating options, Working out each option precisely, Clarity with the client, A helpful professional affect."`,
-    f: `❌ Alarming the client ("you should be very worried") destroys trust. Dismissing the concern ("doesn't apply to your case") is inaccurate and unhelpful. Refusing to discuss it ("schedule a consultation") fails the CM's communication responsibility. The correct response is balanced: acknowledge, explain, reassure, and redirect the client to their treatment. CMs should be able to explain HB 1344 at a high level without giving legal advice.`
-  }
-};
+var FEEDBACK = {} /* CUTOVER: feedback text is served per-answer by the engine, never shipped to the client up front */;
 
 // ═══════════════════════════════════════════════
 // ANSWER HANDLER
 // ═══════════════════════════════════════════════
-function answer(qId, choice, isCorrect) {
+window.answerUI = function answerUI(qId, choice, isCorrect) {
   if (qDone[qId]) return;
 
   var cfg = Q_CONFIG[qId];
@@ -1183,7 +1086,7 @@ function answer(qId, choice, isCorrect) {
   btns.forEach(function(b){ b.classList.add('disabled'); });
 
   var clickedBtn = document.getElementById(qId + '-' + choice);
-  var correctBtn = document.getElementById(qId + '-' + cfg.correct);
+  var correctBtn = document.getElementById(qId + '-' + (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || ''));
 
   if (isCorrect) {
     clickedBtn.classList.add('correct');
@@ -1399,8 +1302,8 @@ function buildResults() {
     var questionText = qText ? qText.textContent : 'Question ' + (idx+1);
     var isAnswered = !!qDone[qId];
     var wasCorrect = isAnswered && block.classList.contains('answered');
-    var correctLetter = cfg.correct.toUpperCase();
-    var correctBtn = document.getElementById(qId + '-' + cfg.correct);
+    var correctLetter = (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || '').toUpperCase();
+    var correctBtn = document.getElementById(qId + '-' + (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || ''));
     var correctText = correctBtn ? correctBtn.querySelector('.opt-text').textContent : '';
     var userAnswer = '(not answered)';
     var userLetter = '';
@@ -1920,6 +1823,92 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Init
 goToSection(0);
+
+function requireNameThenResults() {
+  var _ni = document.getElementById('trainee-name-input');
+  var _name = (_ni && _ni.value.trim()) || '';
+  if (!_name) {
+    if (typeof showToast === 'function') showToast('\u26a0\ufe0f Please enter your name before seeing results', false);
+    else alert('Please enter your name before seeing results.');
+    return;
+  }
+  showResults();
+}
 </script>
+
+<script>
+/* CUTOVER SHIM — server-side grading. Injected by tools/cutover-shell.py.
+   The answer key is NOT in this file. The verdict comes from the engine.
+   The original handler was renamed answerUI() and is still responsible for all
+   UI, scoring display, streaks and gamification — it is now simply TOLD the
+   verdict instead of being passed it by the markup. */
+(function () {
+  var MODULE_ID = 'la6';
+  var attemptId = null;
+  var startPromise = null;
+
+  function api(path, body) {
+    return fetch('/api/quiz/' + path, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(body)
+    }).then(function (r) {
+      if (!r.ok) return r.text().then(function (t) { throw new Error(t || ('HTTP ' + r.status)); });
+      return r.json();
+    });
+  }
+
+  function learner() {
+    try { return localStorage.getItem('glg_learner') || 'anonymous'; }
+    catch (e) { return 'anonymous'; }
+  }
+
+  function ensureAttempt() {
+    if (attemptId) return Promise.resolve(attemptId);
+    if (!startPromise) {
+      startPromise = api('start', { module: MODULE_ID, learner: learner() })
+        .then(function (d) { attemptId = d.attempt_id; return attemptId; });
+    }
+    return startPromise;
+  }
+
+  /* Grading is remote, so the handler is async. A failure must NOT silently
+     score the question — it surfaces and leaves the question unanswered so the
+     learner can retry, rather than being marked wrong by a network blip. */
+  window.__glgCorrectIds = window.__glgCorrectIds || {};
+  window.answer = function (qId, choice) {
+    return ensureAttempt().then(function (aid) {
+      return api('answer', { attempt_id: aid, qid: qId, choice: choice });
+    }).then(function (d) {
+      window.__glgCorrectId = d.correct_id || null;
+      window.__glgCorrectIds[qId] = d.correct_id || null;
+      if (typeof window.answerUI === 'function') {
+        window.answerUI(qId, choice, d.correct, d);
+      }
+      var fb = document.getElementById(qId + '-fb');
+      if (fb && d.feedback) fb.innerHTML = d.feedback;
+      return d;
+    }).catch(function (err) {
+      var fb = document.getElementById(qId + '-fb');
+      if (fb) {
+        fb.className = 'feedback-box incorrect show';
+        fb.innerHTML = '⚠️ Could not reach the grading server. Your answer was NOT recorded — '
+                     + 'check your connection and try again. (' + (err && err.message ? err.message : err) + ')';
+      }
+      console.error('[glg-cutover] grading failed', err);
+    });
+  };
+
+  /* Authoritative final result. The server owns base_score and passed. */
+  window.glgComplete = function () {
+    return ensureAttempt().then(function (aid) {
+      return api('complete', { attempt_id: aid });
+    });
+  };
+
+  document.addEventListener('DOMContentLoaded', function () { ensureAttempt().catch(function () {}); });
+})();
+</script>
+
 </body>
 </html>

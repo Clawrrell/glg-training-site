@@ -9,11 +9,6 @@ References Loaded: 8 files
   - /glg/canonical-sops/Case_Timeline_Treatment_Progression.md (case lifecycle, CasePeer workflow)
   - /glg/canonical-sops/Client_Communication_SOP_PreLit.md (communication standards)
   - /glg/canonical-sops/CasePeer_Template_Quick_Reference.md ([PLACEHOLDER] resolution)
-  - /glg/books/memos/reptile-mist-memo.md (safety rule framework)
-  - /glg/books/memos/essential-lawyering-memo.md (case evaluation, Four Challenges)
-  - /glg/books/memos/injury-case-playbook-memo.md (PI case strategy)
-  - /glg/books/memos/georgia-hb1344-memo.md (insurance reform)
-  - /glg/books/memos/georgia-tort-claims-act-memo.md (government entity cases)
 Chassis Source: module-a1.html (NH-1 canonical — 11 elements propagated)
 QA Checklist:
   ✅ Title fixed: "NH-12 — PI Case Types | Gunn Law Group"
@@ -377,6 +372,8 @@ button, .btn, .option-btn, [onclick] {
 .screen { display: none; }
 .screen.active { display: block !important; }
 </style>
+<!-- CUTOVER: server-side grading. Answer keys are not in this file. -->
+    <link rel="stylesheet" href="boss-challenge.css">
 </head>
 <body>
 
@@ -1063,7 +1060,11 @@ button, .btn, .option-btn, [onclick] {
       <span class="callout-icon">🎉</span>
       <span>You've learned about all 9 GLG case types! You understand the safety rule approach, case evaluation criteria, and client service considerations for each practice area. Ready to test your knowledge?</span>
     </div>
-    <div class="btn-row">
+        <div class="name-input-wrap" style="margin-bottom:1rem;">
+      <label for="trainee-name-input" style="display:block;font-family:var(--font-b,sans-serif);font-size:0.85rem;font-weight:600;color:var(--navy,#141c2c);margin-bottom:0.4rem;">Your Name — required to start</label>
+      <input type="text" id="trainee-name-input" class="name-input" placeholder="Enter your full name" autocomplete="name">
+    </div>
+<div class="btn-row">
       <button class="btn btn-secondary" onclick="go(8)">← Back</button>
       <button class="btn btn-primary" onclick="startQuiz()">Take the Quiz →</button>
     </div>
@@ -1076,16 +1077,8 @@ button, .btn, .option-btn, [onclick] {
     <div class="section-label" id="quiz-section-label">Question 1 of 12</div>
     <div class="section-title">Knowledge Check</div>
   </div>
-  <div class="content-card">
-    <div class="quiz-progress" id="quizDots"></div>
-    <div class="question-num" id="qNum">Question 1 of 12</div>
-    <div class="question-text" id="qText"></div>
-    <div class="options" id="qOptions"></div>
-    <div class="feedback-box" id="qFeedback"></div>
-    <div class="btn-row">
-      <button class="btn btn-primary" id="qNextBtn" onclick="nextQuestion()" disabled>Next →</button>
-    </div>
-  </div>
+  <div id="questions"></div>
+</div>
 </div>
 
 <!-- ══════════ SCREEN: RESULTS ══════════ -->
@@ -1217,22 +1210,22 @@ var questions = [
     options: [
       "Cars must have insurance",
       "Every driver must follow traffic laws and drive with reasonable care",
-      "Drivers must maintain their vehicles, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity",
+      "Drivers must maintain their vehicles",
       "Speed limits must be obeyed"
     ],
-    correct: 1,
-    explanation: "The universal safety rule for motor vehicle cases is that every driver must follow traffic laws and drive with reasonable care to protect all road users."
+    canon_cite: "glg/books/memos/injury-case-playbook-memo.md#19",
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "What federal regulations strengthen trucking accident cases?",
     options: [
       "DOT regulations",
       "FMCSA (Federal Motor Carrier Safety Administration) rules",
-      "EPA emissions standards — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage",
+      "EPA emissions standards",
       "IRS tax codes"
     ],
-    correct: 1,
-    explanation: "FMCSA regulations govern commercial drivers and create specific safety standards that strengthen safety rule arguments in trucking cases."
+    canon_cite: "glg/books/memos/reptile-mist-memo.md#28",
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "What is a key challenge in motorcycle accident cases?",
@@ -1242,52 +1235,50 @@ var questions = [
       "Bias against motorcyclists",
       "Motorcycles can't be in accidents"
     ],
-    correct: 2,
-    explanation: "Insurance adjusters and juries often assume motorcyclists are reckless. GLG must counter this bias with evidence of the car driver's violation of safety rules."
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "In slip and fall cases, what must be proven regarding the property owner's knowledge?",
     options: [
-      "They must have caused the hazard, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle",
+      "They must have caused the hazard",
       "They had actual or constructive notice of the dangerous condition",
       "They must have posted warnings",
       "They must have insurance"
     ],
-    correct: 1,
-    explanation: "Georgia law requires proving the property owner had actual knowledge or constructive notice (should have known) about the dangerous condition."
+    canon_cite: "glg/GA_PI_Law_Reference_Guide.md:48",
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "Under O.C.G.A. § 9-11-9.1, when must the expert affidavit be filed in Georgia medical malpractice cases?",
     options: [
-      "Within 120 days of the complaint — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value",
+      "Within 120 days of the complaint",
       "At any time before trial",
       "Within 60 days of the complaint",
       "Contemporaneously with the complaint (or within 45 days if the SOL is about to run)"
     ],
-    correct: 3,
-    explanation: "O.C.G.A. § 9-11-9.1 requires the expert affidavit to be filed contemporaneously with the complaint. A 45-day extension applies only when the statute of limitations would run within 10 days of filing, leaving no time to prepare the affidavit first."
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "Georgia dog bite law (O.C.G.A. § 51-2-7) requires what for owner liability?",
     options: [
-      "Strict liability (no fault needed) — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken",
+      "Strict liability (no fault needed)",
       "Homeowner's insurance",
       "Registration of the dog",
       "Vicious propensity or leash law violation"
     ],
-    correct: 3,
-    explanation: "Georgia requires proof of the dog's vicious propensity (prior incidents) or violation of a local leash law for owner liability — it is not a strict liability state."
+    canon_cite: "glg/books/memos/reptile-mist-memo.md#14",
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "In Georgia wrongful death cases, who are the preferred beneficiaries?",
     options: [
-      "Estate only, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity",
+      "Estate only",
       "Siblings",
       "Parents",
       "Spouse and children"
     ],
-    correct: 3,
-    explanation: "Under O.C.G.A. § 51-4-1, spouse and children are the preferred beneficiaries in wrongful death cases, followed by parents, then the estate."
+    canon_cite: "glg/books/memos/injury-case-playbook-memo.md#41",
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "Uber/Lyft insurance coverage depends on what factor?",
@@ -1295,43 +1286,42 @@ var questions = [
       "Time of day",
       "Vehicle type",
       "Driver's status (app off, on, or ride accepted)",
-      "Number of passengers — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage"
+      "Number of passengers"
     ],
-    correct: 2,
-    explanation: "Coverage varies based on driver status: app off (personal insurance only), app on but no ride (limited coverage), ride accepted (full $1M+ coverage)."
+    canon_cite: "glg/canonical-sops/UM_UIM_Coverage_Training_Guide.md:56",
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "What is the highest duty of care in premises liability?",
     options: [
       "Owed to invitees (business visitors)",
-      "Owed to licensees (social guests), but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle",
+      "Owed to licensees (social guests)",
       "Owed to trespassers",
       "Same duty to everyone"
     ],
-    correct: 0,
-    explanation: "Invitees (business visitors) receive the highest duty of care from property owners, including the duty to inspect and discover hazards."
+    canon_cite: "glg/canonical-sops/PI_Case_Strategy_Valuation_Guide.md:287",
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "What type of evidence is critical in inadequate security cases?",
     options: [
       "Weather reports",
-      "Building blueprints — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value",
+      "Building blueprints",
       "Crime statistics and prior incidents at the location",
       "Insurance policies"
     ],
-    correct: 2,
-    explanation: "Crime statistics, prior similar incidents, and security assessments help prove the owner knew or should have known about security risks."
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "According to GLG's case evaluation principles, what should be included in client counseling?",
     options: [
       "Creating options, working out each precisely, explaining clearly, and maintaining empathy",
       "Only the legal issues",
-      "Just the damages calculation — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken",
+      "Just the damages calculation",
       "Only the client's story"
     ],
-    correct: 0,
-    explanation: "The Four Challenges in counseling: create options beyond the obvious, work out each precisely, explain clearly, and maintain professional empathy."
+    canon_cite: "glg/books/memos/injury-case-playbook-memo.md#21",
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "What makes a good safety rule for PI cases?",
@@ -1341,8 +1331,8 @@ var questions = [
       "It only applies to this specific case",
       "It maximizes damages"
     ],
-    correct: 0,
-    explanation: "Safety rules must be simple and clear, applicable broadly to protect everyone (not just this plaintiff), and something jurors themselves rely on every day."
+    canon_cite: "glg/books/memos/injury-case-playbook-memo.md#29",
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   }
 ];
 
@@ -1397,18 +1387,16 @@ function go(screen) {
   window.scrollTo(0, 0);
 }
 
-function startQuiz() {
-  if (!audioCtx) { try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){} }
-  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
-  currentQ = 0;
-  answers = new Array(questions.length).fill(null);
-  score = 0;
-  streakCount = 0; maxStreak = 0;
-  questionsFirstTry = 0; incorrectCount = 0; totalQuestionsAnswered = 0;
-  milestonesTriggered = {};
-  moduleStartTime = Date.now();
-  renderQuizDots();
-  renderQuestion();
+async function startQuiz() {
+  var _ni = document.getElementById('trainee-name-input');
+  var _name = (_ni && _ni.value.trim()) || '';
+  if (!_name) {
+    if (typeof showToast === 'function') showToast('\u26a0\ufe0f Please enter your name before starting the quiz', false);
+    else alert('Please enter your name before starting the quiz.');
+    return;
+  }
+  // Bug-1/2 fix (Sep 10 2026): learner name from cover screen; await before rendering quiz
+  await window.GLGQuiz.beginAttempt(_name);
   go('quiz');
 }
 
@@ -1433,17 +1421,17 @@ function renderQuestion() {
   document.getElementById('qNextBtn').textContent = currentQ < questions.length-1 ? 'Next →' : 'See Results';
 }
 
-function selectOption(idx) {
+window.selectOptionUI = function selectOptionUI(idx, isCorrect, __glgKey, __glgFbHtml) {
   if (answers[currentQ] !== null) return;
   answers[currentQ] = idx;
   var q = questions[currentQ];
-  var isCorrect = idx === q.correct;
+  /* CUTOVER: verdict is supplied by the engine, not computed here. */
   if (isCorrect) score++;
 
   var opts = document.querySelectorAll('.option-btn');
   opts.forEach(function(o,i) {
     o.disabled = true;
-    if (i === q.correct) o.classList.add('correct');
+    if (__glgKey >= 0 && i === __glgKey) o.classList.add('correct');
     else if (i === idx && !isCorrect) o.classList.add('wrong');
   });
 
@@ -1453,7 +1441,7 @@ function selectOption(idx) {
   var fb = document.getElementById('qFeedback');
   fb.style.display = 'block';
   fb.className = 'feedback-box ' + (isCorrect ? 'correct' : 'wrong');
-  fb.innerHTML = (isCorrect ? '✅ <strong>Correct!</strong> ' : '❌ <strong>Incorrect.</strong> ') + q.explanation;
+  fb.innerHTML = (isCorrect ? '✅ <strong>Correct!</strong> ' : '❌ <strong>Incorrect.</strong> ') + (__glgFbHtml || '');
 
   document.getElementById('qNextBtn').disabled = false;
 
@@ -1517,13 +1505,13 @@ function showResults() {
   var letters = ['A','B','C','D'];
   var reviewList = document.getElementById('reviewList');
   var reviewItems = questions.map(function(q, i) {
-    var correct = answers[i] === q.correct;
+    var correct = !!(window.__glgVerdicts || [])[i];
     return '<div class="review-item ' + (correct ? 'correct' : 'wrong') + '" style="opacity:0;transform:translateY(8px);transition:opacity 0.25s ease,transform 0.25s ease;" data-review-idx="' + i + '">'
       + '<div class="ri-q">' + (i+1) + '. ' + q.q + '</div>'
       + '<div class="ri-ans">'
       + (correct ? '✅' : '❌') + ' Your answer: <strong>' + letters[answers[i]] + '. ' + q.options[answers[i]] + '</strong>'
-      + (!correct ? '<br>✅ Correct: <strong>' + letters[q.correct] + '. ' + q.options[q.correct] + '</strong>' : '')
-      + (!correct ? '<br><em style="color:#666;font-size:0.8rem;">' + q.explanation + '</em>' : '')
+      + (!correct && (window.__glgKeyIdx || [])[i] >= 0 ? '<br>✅ Correct: <strong>' + letters[window.__glgKeyIdx[i]] + '. ' + q.options[window.__glgKeyIdx[i]] + '</strong>' : '')
+      + (!correct && (window.__glgFb || [])[i] ? '<br><em style="color:#666;font-size:0.8rem;">' + window.__glgFb[i] + '</em>' : '')
       + '</div></div>';
   }).join('');
   reviewList.innerHTML = reviewItems;
@@ -2001,5 +1989,115 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 </script>
+
+<script>
+/* CUTOVER SHIM (P2-A) — server-side grading. Injected by tools/cutover-shell.py.
+   No answer key in this file. selectOption() posts the choice; the ENGINE returns
+   the verdict and the feedback; the authored handler (renamed selectOptionUI) does
+   every bit of the UI it did before — streak, dots, mascot, score header, progress. */
+(function () {
+  var MODULE_ID = 'a4';
+  var LETTERS = 'abcdefgh';
+  var attemptId = null;
+  var startPromise = null;
+
+  window.__glgVerdicts = window.__glgVerdicts || [];
+  window.__glgKeyIdx   = window.__glgKeyIdx   || [];   /* -1 = engine did not disclose */
+  window.__glgFb       = window.__glgFb       || [];
+
+  function api(path, body) {
+    return fetch('/api/quiz/' + path, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(body)
+    }).then(function (r) {
+      if (!r.ok) return r.text().then(function (t) { throw new Error(t || ('HTTP ' + r.status)); });
+      return r.json();
+    });
+  }
+
+  function learner() {
+    try { return localStorage.getItem('glg_learner') || 'anonymous'; }
+    catch (e) { return 'anonymous'; }
+  }
+
+  function ensureAttempt() {
+    if (attemptId) return Promise.resolve(attemptId);
+    if (!startPromise) {
+      startPromise = api('start', { module: MODULE_ID, learner: learner() })
+        .then(function (d) { attemptId = d.attempt_id; return attemptId; });
+    }
+    return startPromise;
+  }
+
+  function showError(msg) {
+    var fb = document.getElementById('qFeedback');
+    if (!fb) return;
+    fb.style.display = 'block';
+    fb.className = 'feedback-box wrong';
+    fb.innerHTML = '⚠️ <strong>Could not reach the grading server.</strong> Your answer was '
+                 + 'NOT recorded — check your connection and choose again. (' + msg + ')';
+  }
+
+  /* P2-A questions are positional: the Nth object in the array is bank id q(N+1),
+     and option index i is bank option LETTERS[i]. Proven against all 5 banks. */
+  window.selectOption = function (idx) {
+    if (typeof answers !== 'undefined' && answers[currentQ] !== null) return;   /* already scored */
+    if (currentQ === 0) { window.__glgVerdicts = []; window.__glgKeyIdx = []; window.__glgFb = []; }
+    var qi = currentQ;
+    return ensureAttempt().then(function (aid) {
+      return api('answer', { attempt_id: aid, qid: 'q' + (qi + 1), choice: LETTERS[idx] });
+    }).then(function (d) {
+      var keyIdx = (d.correct_id && LETTERS.indexOf(d.correct_id) >= 0)
+                 ? LETTERS.indexOf(d.correct_id) : -1;
+      window.__glgVerdicts[qi] = !!d.correct;
+      window.__glgKeyIdx[qi]   = keyIdx;
+      window.__glgFb[qi]       = d.feedback || '';
+      if (typeof window.selectOptionUI === 'function') {
+        window.selectOptionUI(idx, !!d.correct, keyIdx, d.feedback || '');
+      }
+      /* Authoritative completion once every question has been submitted. */
+      if (typeof answers !== 'undefined' && typeof questions !== 'undefined'
+          && answers.filter(function (a) { return a !== null; }).length === questions.length) {
+        api('complete', { attempt_id: attemptId })
+          .then(function (r) { window.__glgResult = r; })
+          .catch(function (e) { console.error('[glg-cutover] complete failed', e); });
+      }
+      return d;
+    }).catch(function (err) {
+      showError(err && err.message ? err.message : err);
+      console.error('[glg-cutover] grading failed', err);
+    });
+  };
+
+  document.addEventListener('DOMContentLoaded', function () { ensureAttempt().catch(function () {}); });
+})();
+</script>
+
+
+<script>
+/* GLGQuiz configuration — NH-12 PI Case Types */
+window.GLG_MODULE_CONFIG = {
+  moduleId: 'a4',
+  onBankLoaded: function(bank) {
+    var basemax = document.getElementById('basemax');
+    var gate    = document.getElementById('gate');
+    if (basemax) basemax.textContent = bank.base_max;
+    if (gate)    gate.textContent    = bank.pass_pct;
+  },
+  onStartQuiz: function() {
+    if (typeof audioCtx !== 'undefined' && audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume().catch(function(){});
+    }
+  },
+  onAnswered: function(r) {
+    var ts = document.getElementById('total-score');
+    if (ts) ts.textContent = r.base_score;
+    if (typeof updateStreak === 'function') updateStreak(r.correct);
+  }
+};
+</script>
+<script src="api-quiz-engine.js"></script>
+
 </body>
 </html>

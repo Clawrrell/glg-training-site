@@ -269,6 +269,159 @@ main, .main-wrap { width: 100%; max-width: 720px; margin: 0 auto; padding: 1.25r
 @media (min-width: 520px) { .match-row { flex-direction: row; align-items: center; } .match-label { min-width: 160px; flex-shrink: 0; } .match-drop { flex: 1; } }
 button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-highlight-color: rgba(0,0,0,0.07); touch-action: manipulation; -webkit-appearance: none; user-select: none; -webkit-user-select: none; }
 </style>
+
+<style>
+/* ── GLG QUIZ ENGINE — question type styles (2026-09-02) ──────────────────
+     All classes rendered by api-quiz-engine.js. Tokens: navy #141c2c, gold #C5975B.
+     Sourced from engine.html stylesheet + Harrell Part 8c spec. */
+
+  /* Question card */
+  .q { background:#fff; border:1px solid #e2e5ea; border-radius:10px;
+       padding:20px; margin:16px 0; box-shadow:0 1px 6px rgba(20,28,44,.06); }
+  .q-num { font-size:12px; letter-spacing:.06em; color:#C5975B; font-weight:700;
+            text-transform:uppercase; margin-bottom:8px; }
+  .q-text { font-weight:600; margin:8px 0 16px; font-size:1rem; line-height:1.55;
+             color:#141c2c; }
+
+  /* MC option buttons */
+  button.opt { display:block; width:100%; text-align:left; padding:13px 15px; margin:7px 0;
+    border:1px solid #d8dbe3; border-radius:8px; background:#fafbfd; cursor:pointer;
+    font-size:15px; font-family:var(--font-b); color:#222; line-height:1.45;
+    transition:background .12s, border-color .12s; }
+  button.opt:hover:not(.locked) { background:#eef4ff; border-color:#141c2c; }
+  button.opt.correct { background:#d4edda; border-color:#10774A; }
+  button.opt.incorrect { background:#f8d7da; border-color:#870101; }
+  button.opt.locked { cursor:default; opacity:.85; }
+
+  /* Fill-in-the-blank */
+  .fill-stem { font-weight:600; margin:8px 0 14px; line-height:2.2; }
+  input.blank { display:inline-block; min-height:44px; min-width:120px; padding:8px 10px;
+    margin:2px 4px; border:1px solid #ccd; border-radius:8px; background:#fafbfd;
+    font-size:16px; font-family:var(--font-b); vertical-align:middle;
+    box-sizing:border-box; max-width:100%; }
+  input.blank:focus { outline:2px solid #141c2c; background:#fff; }
+  input.blank.correct { background:#d4edda; border-color:#10774A; }
+  input.blank.incorrect { background:#f8d7da; border-color:#870101; }
+  input.blank.locked { opacity:.85; }
+  button.submit-fill { min-height:44px; padding:11px 20px; margin-top:12px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-fill.locked { opacity:.5; cursor:default; }
+
+  /* Markup */
+  .markup-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .markup-passage { margin:0 0 10px; border:1px solid #e2e5ea; border-radius:8px; overflow:hidden; }
+  button.span { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:11px 13px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:16px; font-family:var(--font-b);
+    color:#222; line-height:1.5; overflow-wrap:break-word; }
+  button.span:last-child { border-bottom:0; }
+  button.span:hover:not(.locked) { background:#eef4ff; }
+  button.span.selected { background:#fff3cd; box-shadow:inset 4px 0 0 #b8860b; font-weight:600; }
+  button.span.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.span.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.span.locked { cursor:default; opacity:.9; }
+  button.submit-markup { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-markup.locked { opacity:.5; cursor:default; }
+  .markup-count { font-size:13px; color:#555; margin-top:8px; }
+
+  /* Sort rows with up/down controls */
+  .sort-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .sort-list { margin:0 0 12px; border:1px solid #e2e5ea; border-radius:8px;
+               overflow:hidden; background:#fff; }
+  .sort-row { display:flex; align-items:stretch; border-bottom:1px solid #eef0f3;
+              background:#fff; }
+  .sort-row:last-child { border-bottom:0; }
+  .sort-pos { flex:0 0 34px; display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700; color:#C5975B; background:#f5f5f0; }
+  .sort-text { flex:1 1 auto; padding:11px 12px; font-size:15px; line-height:1.45;
+    display:flex; align-items:center; overflow-wrap:break-word; min-width:0; }
+  .sort-moves { flex:0 0 auto; display:flex; align-items:center; gap:4px; padding:4px 6px; }
+  button.sort-move { min-height:44px; min-width:44px; border:1px solid #ccd; border-radius:8px;
+    background:#fafbfd; cursor:pointer; font-size:15px; color:#141c2c;
+    font-family:var(--font-b); }
+  button.sort-move:hover:not(:disabled) { background:#eef4ff; }
+  button.sort-move:disabled { opacity:.35; cursor:default; }
+  .sort-row.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  .sort-row.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  .sort-row.locked .sort-text { opacity:.9; }
+  button.submit-sort { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-sort.locked { opacity:.5; cursor:default; }
+
+  /* Match chips + slot rows */
+  .match-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .match-tray { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px; padding:10px;
+    border:1px dashed #ccd; border-radius:8px; background:#fafbfd; }
+  button.chip { min-height:44px; padding:10px 16px; border:1px solid #ccd; border-radius:22px;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b); color:#222;
+    max-width:100%; overflow-wrap:break-word; text-align:left; }
+  button.chip:hover:not(.locked) { background:#eef4ff; }
+  button.chip.selected { background:#141c2c; color:#fff; border-color:#141c2c; font-weight:600; }
+  button.chip.placed { opacity:.35; }
+  button.chip.locked { cursor:default; }
+  .match-slots { border:1px solid #e2e5ea; border-radius:8px; overflow:hidden;
+                 background:#fff; margin-bottom:12px; }
+  button.slot { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:10px 14px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b);
+    color:#222; line-height:1.45; overflow-wrap:break-word; }
+  button.slot:last-child { border-bottom:0; }
+  button.slot:hover:not(.locked) { background:#eef4ff; }
+  button.slot.armed { box-shadow:inset 4px 0 0 #C5975B; background:#fffdf5; }
+  .slot-label { font-weight:600; display:block; }
+  .slot-fill { display:block; font-size:14px; margin-top:3px; color:#C5975B; font-weight:600; }
+  .slot-fill.empty { color:#8a8f98; font-weight:400; font-style:italic; }
+  button.slot.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.slot.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.slot.locked { cursor:default; opacity:.9; }
+  button.submit-match { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-match.locked { opacity:.5; cursor:default; }
+  .match-count { font-size:13px; color:#555; margin-top:8px; }
+  .match-credit { font-size:13px; font-weight:600; color:#8a6d1f; margin-top:6px; }
+
+  /* Feedback */
+  .fb { margin-top:12px; padding:12px 14px; border-radius:8px; font-size:14px; display:none; }
+  .fb.show { display:block; }
+  .fb.ok { background:#d4edda; border-left:4px solid #10774A; }
+  .fb.no { background:#f8d7da; border-left:4px solid #870101; }
+  .fb.neutral { background:#eef0f6; border-left:4px solid #6c757d; color:#333; } /* self_assessment: no verdict */
+
+  /* Branching nodes */
+  .branch-scenario { border-left:4px solid #C5975B; padding-left:12px; margin:14px 0; }
+  .branch-turn { font-size:12px; letter-spacing:.06em; color:#8a6d1f; font-weight:700;
+                 text-transform:uppercase; }
+  .branch-instruction { font-weight:600; margin:6px 0 10px; color:#141c2c; }
+  .branch-consequence { margin-top:10px; padding:10px 12px; border-left:4px solid #141c2c;
+    background:#eef2f7; border-radius:0 8px 8px 0; font-size:13px; color:#33415c; display:none; }
+  .branch-consequence.show { display:block; }
+
+  /* Pagination — one question at a time (Harrell Part 8b) */
+  .q-base { display: none !important; }
+  .q-base.q-active { display: block !important; }
+  .q-nav { display:flex; justify-content:space-between; align-items:center;
+            margin-top:20px; padding-top:16px; border-top:1px solid #e8e6e0; }
+  .q-nav-btn { min-height:44px; padding:10px 22px; border-radius:8px;
+                font-size:15px; cursor:pointer; font-family:var(--font-b);
+                font-weight:600; transition:background .12s; }
+  .q-nav-btn.next { background:#141c2c; color:#C5975B; border:2px solid #141c2c; }
+  .q-nav-btn.next:hover { background:#1e2a40; }
+  .q-nav-btn.back { background:#fff; color:#141c2c; border:2px solid #c8c5be; }
+  .q-nav-btn.back:hover { background:#f5f5f0; }
+  .q-pg-spacer { display:inline-block; min-width:40px; }
+  #q-progress { font-size:12px; color:#C5975B; font-weight:600;
+                letter-spacing:.5px; text-transform:uppercase; }
+
+
+</style>
+
+<!-- CUTOVER: server-side grading. Answer keys are not in this file. -->
+    <link rel="stylesheet" href="boss-challenge.css">
 </head>
 <body>
 
@@ -330,11 +483,43 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
   <button class="nav-pill" id="nav-4" onclick="goToSection(4)">5. Comms</button>
   <button class="nav-pill" id="nav-5" onclick="goToSection(5)">6. Treatment</button>
   <button class="nav-pill" id="nav-6" onclick="goToSection(6)">7. Boss</button>
-  <button class="nav-pill" id="nav-7" onclick="goToSection(7)">8. Results</button>
-  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">9. Feedback</button>
+  <div style="margin-bottom:1rem;">
+      <label for="trainee-name-input" style="display:block;font-size:0.85rem;font-weight:600;color:#141c2c;margin-bottom:0.4rem;">Your Name — required to start</label>
+      <input type="text" id="trainee-name-input" placeholder="Enter your full name" autocomplete="name" style="width:100%;padding:0.5rem 0.75rem;border:1.5px solid #cbd5e1;border-radius:6px;font-size:0.9rem;box-sizing:border-box;">
+    </div>
+    <button class="nav-pill" id="nav-7" onclick="startQuiz()">8. Quiz</button>
+  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">9. Results</button>
+  <button class="nav-pill" id="nav-9" onclick="goToSection(9)">10. Feedback</button>
 </nav>
 
 <main>
+
+<!-- ══════════════════════════════════════════
+     SECTION 7 — QUIZ (api-quiz-engine.js)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-7">
+  <div class="section-header">
+    <div class="section-num">Knowledge Check</div>
+    <h2>Module Assessment</h2>
+    <div class="section-subhead">Answer each question. One attempt — wrong answer reveals the correct answer and unlocks Next.</div>
+  </div>
+  <div class="section-body">
+    <div style="margin-bottom:1rem;">
+      <label for="trainee-name-input" style="display:block;font-size:0.85rem;font-weight:600;color:#141c2c;margin-bottom:0.4rem;">Your Name — required to start</label>
+      <input type="text" id="trainee-name-input" placeholder="Enter your full name" autocomplete="name" style="width:100%;padding:0.5rem 0.75rem;border:1.5px solid #cbd5e1;border-radius:6px;font-size:0.9rem;box-sizing:border-box;">
+    </div>
+    <button class="btn btn-green" onclick="startQuiz()" style="margin-bottom:1.5rem;">📝 Take the Quiz →</button>
+    
+    <div style="font-family:system-ui,sans-serif;font-size:13px;color:#33415c;padding:8px 0 12px;border-bottom:1px solid #e8eaf0;margin-bottom:16px;">
+      Base: <b id="base">0</b> / <b id="basemax">—</b>
+      &nbsp;·&nbsp; Bonus: <b id="bonus">0</b>
+      &nbsp;·&nbsp; Pass gate: <b id="gate">80</b>%
+      &nbsp;·&nbsp; <span id="q-progress" style="color:#dcb161;font-weight:700;"></span>
+    </div>
+    <div id="questions"></div>
+    <div id="result" style="background:#fff;border:2px solid #0b2545;border-radius:10px;padding:18px;margin:18px 0;display:none;"></div>
+  </div>
+</div>
 
 <!-- ══════════════════════════════════════════
      SECTION 0 — INTRO / WELCOME
@@ -371,39 +556,6 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
     <h2>Medical Records &amp; Analysis</h2>
   </div>
   <div class="section-body">
-    <div class="question-block" id="q1-block">
-      <div class="q-num">Question 1 of 20 &middot; 10 pts</div>
-      <div class="q-text">A client asks you to explain their MRI results over the phone. The report says &ldquo;L5-S1 disc herniation with moderate foraminal stenosis.&rdquo; What is the correct approach?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q1','a',false)" id="q1-a"><span class="opt-letter">A</span><span class="opt-text">Read the imaging findings directly from the report using the medical terminology, then ask if the client has questions about the specific terms listed.</span></button>
-        <button class="option-btn" onclick="answer('q1','b',false)" id="q1-b"><span class="opt-letter">B</span><span class="opt-text">Tell the client you cannot interpret medical records and refer them to their treating physician for a detailed explanation of MRI findings and prognosis.</span></button>
-        <button class="option-btn" onclick="answer('q1','c',true)" id="q1-c"><span class="opt-letter">C</span><span class="opt-text">Translate the medical jargon into plain language using everyday analogies, connect findings to their symptoms, and confirm understanding &mdash; but never diagnose or predict outcomes.</span></button>
-        <button class="option-btn" onclick="answer('q1','d',false)" id="q1-d"><span class="opt-letter">D</span><span class="opt-text">Email the full MRI report directly to the client with a brief cover note so they can review the medical findings independently and follow up with questions. — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage</span></button>
-      </div>
-      <div class="feedback-box" id="q1-fb"></div>
-    </div>
-    <div class="question-block" id="q2-block">
-      <div class="q-num">Question 2 of 20 &middot; 10 pts</div>
-      <div class="q-text">You notice a pre-lit client has a 3-week gap in chiropractic treatment. No explanation is documented. What must you do?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q2','a',false)" id="q2-a"><span class="opt-letter">A</span><span class="opt-text">Note the gap in CasePeer and continue monitoring &mdash; a single gap under 30 days does not typically impact case value if treatment resumes soon afterward., but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
-        <button class="option-btn" onclick="answer('q2','b',false)" id="q2-b"><span class="opt-letter">B</span><span class="opt-text">Call the client and firmly remind them that missing treatment will reduce their settlement, then schedule their next appointment before ending the call.</span></button>
-        <button class="option-btn" onclick="answer('q2','c',false)" id="q2-c"><span class="opt-letter">C</span><span class="opt-text">Notify the attorney immediately that the case may need to be dropped &mdash; a treatment gap of three weeks suggests the client is not compliant with care.</span></button>
-        <button class="option-btn" onclick="answer('q2','d',true)" id="q2-d"><span class="opt-letter">D</span><span class="opt-text">Document the gap with exact dates in CasePeer, contact the client to determine why treatment stopped, and note their explanation &mdash; adjusters use unexplained gaps at negotiation.</span></button>
-      </div>
-      <div class="feedback-box" id="q2-fb"></div>
-    </div>
-    <div class="question-block" id="q3-block">
-      <div class="q-num">Question 3 of 20 &middot; 10 pts</div>
-      <div class="q-text">Which records establish the critical first link between the accident and the diagnosed injuries &mdash; and why are they irreplaceable in the demand?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q3','a',false)" id="q3-a"><span class="opt-letter">A</span><span class="opt-text">The chiropractor&rsquo;s treatment records, because they document the full course of care and show ongoing symptoms that confirm the injury&rsquo;s severity over time.</span></button>
-        <button class="option-btn" onclick="answer('q3','b',true)" id="q3-b"><span class="opt-letter">B</span><span class="opt-text">ER records from the accident date &mdash; they establish causation by documenting symptoms immediately after impact, before any alternative cause can be argued by the insurer.</span></button>
-        <button class="option-btn" onclick="answer('q3','c',false)" id="q3-c"><span class="opt-letter">C</span><span class="opt-text">The MRI or diagnostic imaging report, because objective structural findings like disc herniations cannot be disputed and carry the most weight with insurance adjusters. — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value</span></button>
-        <button class="option-btn" onclick="answer('q3','d',false)" id="q3-d"><span class="opt-letter">D</span><span class="opt-text">The police report from the scene, because it establishes fault and documents the mechanism of injury &mdash; without it the insurer can deny the claim entirely.</span></button>
-      </div>
-      <div class="feedback-box" id="q3-fb"></div>
-    </div>
     <div class="section-score" id="s1-score" style="display:none;"><div class="score-display" id="s1-score-val"></div><div class="score-label">Section 2 Score</div></div>
     <div class="btn-group" id="s1-next"><button class="btn btn-primary btn-block" onclick="goToSection(2)">Next: Coverage Verification &rarr;</button></div>
   </div>
@@ -414,39 +566,6 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
     <h2>Coverage Verification</h2>
   </div>
   <div class="section-body">
-    <div class="question-block" id="q4-block">
-      <div class="q-num">Question 4 of 20 &middot; 10 pts</div>
-      <div class="q-text">Your client has surgical injuries. The at-fault driver carries only $25K BI limits. What coverage sources must you identify at intake?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q4','a',true)" id="q4-a"><span class="opt-letter">A</span><span class="opt-text">At-fault driver&rsquo;s BI for the liability claim, the client&rsquo;s MedPay for immediate medical bills, and UM/UIM coverage in case liability limits fall short of damages.</span></button>
-        <button class="option-btn" onclick="answer('q4','b',false)" id="q4-b"><span class="opt-letter">B</span><span class="opt-text">Only the at-fault driver&rsquo;s bodily injury coverage &mdash; the client&rsquo;s own insurance policies are not relevant until the liability claim has been fully exhausted first.</span></button>
-        <button class="option-btn" onclick="answer('q4','c',false)" id="q4-c"><span class="opt-letter">C</span><span class="opt-text">The at-fault driver&rsquo;s property damage coverage first, then their bodily injury coverage, since PD claims must be opened before BI claims under Georgia procedures.</span></button>
-        <button class="option-btn" onclick="answer('q4','d',false)" id="q4-d"><span class="opt-letter">D</span><span class="opt-text">File a claim with the client&rsquo;s health insurance to cover surgical costs upfront, then pursue the at-fault driver&rsquo;s BI policy separately for pain and suffering damages.</span></button>
-      </div>
-      <div class="feedback-box" id="q4-fb"></div>
-    </div>
-    <div class="question-block" id="q5-block">
-      <div class="q-num">Question 5 of 20 &middot; 10 pts</div>
-      <div class="q-text">A client signed their retainer at 9:05 AM Monday. The Letter of Representation has not been sent by Wednesday afternoon. What&rsquo;s the problem?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q5','a',false)" id="q5-a"><span class="opt-letter">A</span><span class="opt-text">No immediate problem &mdash; Georgia law provides a 5-business-day window to send the LOR after the retainer is executed, and Wednesday is within that window.</span></button>
-        <button class="option-btn" onclick="answer('q5','b',false)" id="q5-b"><span class="opt-letter">B</span><span class="opt-text">The delay is concerning but manageable &mdash; prioritize sending the LOR by Friday and document the reason for the delay in CasePeer notes for the file.</span></button>
-        <button class="option-btn" onclick="answer('q5','c',true)" id="q5-c"><span class="opt-letter">C</span><span class="opt-text">The LOR should have gone out same-day &mdash; every hour without it is an hour the insurer can contact the client directly or push for a quick lowball settlement.</span></button>
-        <button class="option-btn" onclick="answer('q5','d',false)" id="q5-d"><span class="opt-letter">D</span><span class="opt-text">The paralegal should have sent a preliminary email to the insurer on Monday notifying them of representation while the formal LOR was being prepared and mailed. — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken</span></button>
-      </div>
-      <div class="feedback-box" id="q5-fb"></div>
-    </div>
-    <div class="question-block" id="q6-block">
-      <div class="q-num">Question 6 of 20 &middot; 10 pts</div>
-      <div class="q-text">A client&rsquo;s health insurer paid $15,000 in medical bills. You discover this during case review. When should this subrogation lien have been identified?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q6','a',false)" id="q6-a"><span class="opt-letter">A</span><span class="opt-text">During demand preparation when all medical expenses are compiled &mdash; that is the standard point in the lifecycle where lien identification becomes operationally relevant to the case.</span></button>
-        <button class="option-btn" onclick="answer('q6','b',true)" id="q6-b"><span class="opt-letter">B</span><span class="opt-text">At intake, as soon as the health insurance was identified &mdash; discovering a $15,000 lien at disbursement devastates the client&rsquo;s expected net recovery and creates trust issues.</span></button>
-        <button class="option-btn" onclick="answer('q6','c',false)" id="q6-c"><span class="opt-letter">C</span><span class="opt-text">After settlement when the disbursement statement is being prepared &mdash; subrogation amounts cannot be confirmed until the total settlement figure has been agreed upon by both parties.</span></button>
-        <button class="option-btn" onclick="answer('q6','d',false)" id="q6-d"><span class="opt-letter">D</span><span class="opt-text">During lien negotiation phase once all provider bills and insurance payments are compiled &mdash; running lien numbers before settlement is reached creates unnecessary early-stage complexity.</span></button>
-      </div>
-      <div class="feedback-box" id="q6-fb"></div>
-    </div>
     <div class="section-score" id="s2-score" style="display:none;"><div class="score-display" id="s2-score-val"></div><div class="score-label">Section 3 Score</div></div>
     <div class="btn-group" id="s2-next"><button class="btn btn-primary btn-block" onclick="goToSection(3)">Next: Liens &amp; Post-Settlement &rarr;</button></div>
   </div>
@@ -457,39 +576,6 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
     <h2>Liens &amp; Post-Settlement</h2>
   </div>
   <div class="section-body">
-    <div class="question-block" id="q7-block">
-      <div class="q-num">Question 7 of 20 &middot; 10 pts</div>
-      <div class="q-text">A settlement doesn&rsquo;t fully cover all liens. What reduction approach should GLG use, and what doctrine adds leverage?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q7','a',false)" id="q7-a"><span class="opt-letter">A</span><span class="opt-text">Request each lienholder individually to accept a reduced amount based on the client&rsquo;s financial hardship, supported by a detailed letter explaining the shortfall and requesting leniency., which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity</span></button>
-        <button class="option-btn" onclick="answer('q7','b',false)" id="q7-b"><span class="opt-letter">B</span><span class="opt-text">Pay all liens in the order they were filed, giving priority to the earliest filed &mdash; any remaining shortfall comes from the client&rsquo;s net recovery as a final adjustment.</span></button>
-        <button class="option-btn" onclick="answer('q7','c',false)" id="q7-c"><span class="opt-letter">C</span><span class="opt-text">Negotiate each lien separately starting with the largest one, using the threat of litigation delay as leverage to convince each provider to accept substantially reduced payments.</span></button>
-        <button class="option-btn" onclick="answer('q7','d',true)" id="q7-d"><span class="opt-letter">D</span><span class="opt-text">Apply pro-rata reduction so every provider shares the shortfall proportionally, combined with the Common Fund Doctrine &mdash; the attorney created the recovery fund, so lienholders share costs.</span></button>
-      </div>
-      <div class="feedback-box" id="q7-fb"></div>
-    </div>
-    <div class="question-block" id="q8-block">
-      <div class="q-num">Question 8 of 20 &middot; 10 pts</div>
-      <div class="q-text">A client&rsquo;s ER bill was paid by Medicare. What makes Medicare liens unique, and what is the attorney&rsquo;s obligation?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q8','a',true)" id="q8-a"><span class="opt-letter">A</span><span class="opt-text">Medicare has federal recovery rights with personal attorney liability if ignored &mdash; but procurement cost reductions and disputing unrelated charges are standard negotiation tools. Never disburse first.</span></button>
-        <button class="option-btn" onclick="answer('q8','b',false)" id="q8-b"><span class="opt-letter">B</span><span class="opt-text">Medicare liens are treated identically to private health insurance subrogation claims &mdash; negotiate using the Made Whole Doctrine and standard pro-rata reduction methods without special procedures. — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage</span></button>
-        <button class="option-btn" onclick="answer('q8','c',false)" id="q8-c"><span class="opt-letter">C</span><span class="opt-text">Medicare liens are non-negotiable by federal law and must be paid in full from settlement proceeds before any other deductions, including attorney fees, are calculated from the gross.</span></button>
-        <button class="option-btn" onclick="answer('q8','d',false)" id="q8-d"><span class="opt-letter">D</span><span class="opt-text">Medicare liens expire after 12 months from the date of payment, so if the case timeline extends beyond that window the lien becomes unenforceable and can safely be disregarded.</span></button>
-      </div>
-      <div class="feedback-box" id="q8-fb"></div>
-    </div>
-    <div class="question-block" id="q9-block">
-      <div class="q-num">Question 9 of 20 &middot; 10 pts</div>
-      <div class="q-text">Day 45 post-settlement: a hospital lien is still unresolved because the hospital is non-responsive. What must happen?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q9','a',false)" id="q9-a"><span class="opt-letter">A</span><span class="opt-text">Send one final certified letter giving the hospital 10 days to respond, then proceed to disburse the settlement funds and hold the lien amount in the trust account.</span></button>
-        <button class="option-btn" onclick="answer('q9','b',true)" id="q9-b"><span class="opt-letter">B</span><span class="opt-text">Mandatory attorney review triggers at Day 45 &mdash; the attorney evaluates and decides next steps. The client must have been updated every 14 days throughout the post-settlement process.</span></button>
-        <button class="option-btn" onclick="answer('q9','c',false)" id="q9-c"><span class="opt-letter">C</span><span class="opt-text">File a motion with the court to release settlement funds from escrow, arguing the hospital&rsquo;s non-responsiveness constitutes abandonment of their lien claim under Georgia civil procedures.</span></button>
-        <button class="option-btn" onclick="answer('q9','d',false)" id="q9-d"><span class="opt-letter">D</span><span class="opt-text">Escalate to the Georgia Hospital Lien Registry and request an administrative review of the lien status, which typically resolves non-responsive hospital lien disputes within 30 business days.</span></button>
-      </div>
-      <div class="feedback-box" id="q9-fb"></div>
-    </div>
     <div class="section-score" id="s3-score" style="display:none;"><div class="score-display" id="s3-score-val"></div><div class="score-label">Section 4 Score</div></div>
     <div class="btn-group" id="s3-next"><button class="btn btn-primary btn-block" onclick="goToSection(4)">Next: Client Communication &rarr;</button></div>
   </div>
@@ -500,39 +586,6 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
     <h2>Client Communication</h2>
   </div>
   <div class="section-body">
-    <div class="question-block" id="q10-block">
-      <div class="q-num">Question 10 of 20 &middot; 10 pts</div>
-      <div class="q-text">It&rsquo;s Wednesday. A pre-lit client hasn&rsquo;t been contacted in 17 days. Nothing has changed on their case. What is the correct action?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q10','a',false)" id="q10-a"><span class="opt-letter">A</span><span class="opt-text">Send a brief email update confirming nothing has changed and the case is on track &mdash; email satisfies the contact requirement when there are no substantive new developments to report.</span></button>
-        <button class="option-btn" onclick="answer('q10','b',false)" id="q10-b"><span class="opt-letter">B</span><span class="opt-text">Log a note in CasePeer that the case is progressing normally and schedule the next outreach for end of month when there may be updates worth communicating to the client.</span></button>
-        <button class="option-btn" onclick="answer('q10','c',true)" id="q10-c"><span class="opt-letter">C</span><span class="opt-text">Call the client immediately &mdash; the 14-day standard is non-negotiable even when nothing has changed, because the call also serves as a treatment compliance check and referral opportunity.</span></button>
-        <button class="option-btn" onclick="answer('q10','d',false)" id="q10-d"><span class="opt-letter">D</span><span class="opt-text">Ask your supervising attorney whether a contact is necessary given the lack of developments &mdash; an attorney-approved exception can waive the 14-day requirement for inactive-stage cases., but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
-      </div>
-      <div class="feedback-box" id="q10-fb"></div>
-    </div>
-    <div class="question-block" id="q11-block">
-      <div class="q-num">Question 11 of 20 &middot; 10 pts</div>
-      <div class="q-text">A client says: &ldquo;I stopped going to the chiropractor. I&rsquo;m feeling a lot better.&rdquo; What is the correct response sequence?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q11','a',true)" id="q11-a"><span class="opt-letter">A</span><span class="opt-text">Acknowledge the improvement genuinely, explain the real risk &mdash; stopping early gives the insurer ammunition to reduce the offer &mdash; then escalate to the attorney for sign-off.</span></button>
-        <button class="option-btn" onclick="answer('q11','b',false)" id="q11-b"><span class="opt-letter">B</span><span class="opt-text">Accept the client&rsquo;s decision and update CasePeer to reflect that treatment has been voluntarily concluded &mdash; clients have the right to make their own medical care decisions.</span></button>
-        <button class="option-btn" onclick="answer('q11','c',false)" id="q11-c"><span class="opt-letter">C</span><span class="opt-text">Immediately schedule a follow-up appointment on the client&rsquo;s behalf with their chiropractor and inform the client the appointment has been made so treatment resumes promptly.</span></button>
-        <button class="option-btn" onclick="answer('q11','d',false)" id="q11-d"><span class="opt-letter">D</span><span class="opt-text">Tell the client that feeling better is normal during recovery and does not mean treatment is complete, then firmly instruct them to continue all scheduled appointments without exception.</span></button>
-      </div>
-      <div class="feedback-box" id="q11-fb"></div>
-    </div>
-    <div class="question-block" id="q12-block">
-      <div class="q-num">Question 12 of 20 &middot; 10 pts</div>
-      <div class="q-text">A client calls furious: &ldquo;I&rsquo;ve left three voicemails and nobody called me back!&rdquo; What is the correct FIRST response?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q12','a',false)" id="q12-a"><span class="opt-letter">A</span><span class="opt-text">Pull up their CasePeer file while they are on the phone, confirm the missed calls in the contact history, and provide a detailed status update addressing each concern.</span></button>
-        <button class="option-btn" onclick="answer('q12','b',false)" id="q12-b"><span class="opt-letter">B</span><span class="opt-text">Apologize sincerely for the delay, explain the team has been managing a high volume of cases, and assure the client their case remains an active priority for the firm.</span></button>
-        <button class="option-btn" onclick="answer('q12','c',false)" id="q12-c"><span class="opt-letter">C</span><span class="opt-text">Transfer the call to the supervising attorney since the client&rsquo;s frustration level indicates this requires someone with authority to resolve the complaint and prevent further escalation.</span></button>
-        <button class="option-btn" onclick="answer('q12','d',true)" id="q12-d"><span class="opt-letter">D</span><span class="opt-text">Name the emotion and restore safety: &ldquo;It sounds like you feel completely ignored &mdash; three voicemails without a callback is not acceptable.&rdquo; Then pause and let them respond.</span></button>
-      </div>
-      <div class="feedback-box" id="q12-fb"></div>
-    </div>
     <div class="section-score" id="s4-score" style="display:none;"><div class="score-display" id="s4-score-val"></div><div class="score-label">Section 5 Score</div></div>
     <div class="btn-group" id="s4-next"><button class="btn btn-primary btn-block" onclick="goToSection(5)">Next: Treatment Management &rarr;</button></div>
   </div>
@@ -543,50 +596,6 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
     <h2>Treatment Management</h2>
   </div>
   <div class="section-body">
-    <div class="question-block" id="q13-block">
-      <div class="q-num">Question 13 of 20 &middot; 10 pts</div>
-      <div class="q-text">Before a routine 14-day client check-in call, what must you prepare?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q13','a',false)" id="q13-a"><span class="opt-letter">A</span><span class="opt-text">A script with standard talking points covering the case stage, expected timeline, and a treatment reminder &mdash; use the same format for consistency across every check-in call.</span></button>
-        <button class="option-btn" onclick="answer('q13','b',false)" id="q13-b"><span class="opt-letter">B</span><span class="opt-text">The client&rsquo;s complete case file printed out so you can reference specific documents during the conversation and answer detailed questions the client may raise.</span></button>
-        <button class="option-btn" onclick="answer('q13','c',true)" id="q13-c"><span class="opt-letter">C</span><span class="opt-text">Review CasePeer for appointment dates, open items, and contact history &mdash; then prepare a value delivery item so the call feels genuinely useful, not like an interrogation.</span></button>
-        <button class="option-btn" onclick="answer('q13','d',false)" id="q13-d"><span class="opt-letter">D</span><span class="opt-text">An email pre-sent to the client listing the topics you plan to discuss, so they can prepare questions in advance and the call is more productive for both sides.</span></button>
-      </div>
-      <div class="feedback-box" id="q13-fb"></div>
-    </div>
-    <div class="question-block" id="q14-block">
-      <div class="q-num">Question 14 of 20 &middot; 10 pts</div>
-      <div class="q-text">A client stopped treating because they received a $2,400 bill from their chiropractor and panicked. What is the correct response?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q14','a',true)" id="q14-a"><span class="opt-letter">A</span><span class="opt-text">Explain the LOP means no out-of-pocket costs during treatment, tell the client not to pay that bill, and call the provider today to confirm the LOP and correct the billing.</span></button>
-        <button class="option-btn" onclick="answer('q14','b',false)" id="q14-b"><span class="opt-letter">B</span><span class="opt-text">Advise the client to pay the bill to maintain the provider relationship, and document the payment as a case expense that will be reimbursed from the final settlement proceeds.</span></button>
-        <button class="option-btn" onclick="answer('q14','c',false)" id="q14-c"><span class="opt-letter">C</span><span class="opt-text">Tell the client to ignore the bill entirely &mdash; billing disputes between the firm and providers are routine and always get resolved automatically during the post-settlement lien negotiation phase.</span></button>
-        <button class="option-btn" onclick="answer('q14','d',false)" id="q14-d"><span class="opt-letter">D</span><span class="opt-text">Escalate to the attorney immediately since a billing error this significant may indicate the provider never received or properly acknowledged the original LOP when it was initially sent.</span></button>
-      </div>
-      <div class="feedback-box" id="q14-fb"></div>
-    </div>
-    <div class="question-block" id="q15-block">
-      <div class="q-num">Question 15 of 20 &middot; 10 pts</div>
-      <div class="q-text">A client who stopped treating says &ldquo;I&rsquo;ll try to get back to it.&rdquo; How do you convert this into an actionable commitment?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q15','a',false)" id="q15-a"><span class="opt-letter">A</span><span class="opt-text">Accept the statement positively and encourage them &mdash; expressing willingness to return is a good sign that the treatment gap will likely resolve itself within the next few weeks.</span></button>
-        <button class="option-btn" onclick="answer('q15','b',false)" id="q15-b"><span class="opt-letter">B</span><span class="opt-text">Send a follow-up email after the call summarizing their verbal commitment to resume, creating a written record that documents the client&rsquo;s stated intention to return to treatment. — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value</span></button>
-        <button class="option-btn" onclick="answer('q15','c',false)" id="q15-c"><span class="opt-letter">C</span><span class="opt-text">Schedule the next check-in call for one week out to follow up on whether they actually resumed &mdash; the shorter follow-up window increases real accountability for the commitment.</span></button>
-        <button class="option-btn" onclick="answer('q15','d',true)" id="q15-d"><span class="opt-letter">D</span><span class="opt-text">Get a specific date: &ldquo;Can we say Thursday the 19th?&rdquo; A stated date creates real accountability &mdash; document it in CasePeer and set a follow-up task to confirm attendance.</span></button>
-      </div>
-      <div class="feedback-box" id="q15-fb"></div>
-    </div>
-    <div class="question-block" id="q16-block">
-      <div class="q-num">Question 16 of 20 &middot; 10 pts</div>
-      <div class="q-text">You&rsquo;ve made 3 documented attempts to reach a client over 14 days with no response. What happens now?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q16','a',false)" id="q16-a"><span class="opt-letter">A</span><span class="opt-text">Continue calling every 3 days for another 2 weeks &mdash; persistence demonstrates the firm&rsquo;s commitment and most clients eventually respond when they see consistent documented outreach effort.</span></button>
-        <button class="option-btn" onclick="answer('q16','b',true)" id="q16-b"><span class="opt-letter">B</span><span class="opt-text">Escalate to the attorney within 24-48 hours &mdash; an unreachable client is a blocked task, and the attorney has tools you don&rsquo;t: certified letters and case evaluation authority.</span></button>
-        <button class="option-btn" onclick="answer('q16','c',false)" id="q16-c"><span class="opt-letter">C</span><span class="opt-text">Send a text message since the client may prefer texting over phone calls &mdash; younger clients especially respond better to text outreach than traditional voicemail-based contact attempts.</span></button>
-        <button class="option-btn" onclick="answer('q16','d',false)" id="q16-d"><span class="opt-letter">D</span><span class="opt-text">Close the file in CasePeer as &ldquo;client non-responsive&rdquo; and send a formal case drop letter &mdash; three failed attempts over 14 days satisfies the obligation to maintain contact.</span></button>
-      </div>
-      <div class="feedback-box" id="q16-fb"></div>
-    </div>
     <div class="section-score" id="s5-score" style="display:none;"><div class="score-display" id="s5-score-val"></div><div class="score-label">Section 6 Score</div></div>
     <div class="btn-group" id="s5-next"><button class="btn btn-primary btn-block" onclick="goToSection(6)">Next: Boss Challenge &rarr;</button></div>
   </div>
@@ -617,55 +626,15 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
       <div class="case-detail"><div class="case-key">Insurance</div><div class="case-val">ER bill $8,400 paid by United Healthcare (employer ERISA plan)</div></div>
       <div class="case-detail"><div class="case-key">Today&rsquo;s Call</div><div class="case-val">Teresa called in crying: &ldquo;I want to fire you guys. Nobody ever calls me, my back still hurts, and I don&rsquo;t know what&rsquo;s going on.&rdquo;</div></div>
     </div>
-    <div class="question-block" id="q17-block">
-      <div class="q-num">Boss Challenge &middot; Question 17 &middot; Bonus</div>
-      <div class="q-text">Teresa was hit by a City of Atlanta vehicle. What must you verify FIRST &mdash; before addressing the communication failure, treatment gap, or her emotional state?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q17','a',false)" id="q17-a"><span class="opt-letter">A</span><span class="opt-text">Verify whether the city&rsquo;s insurance carrier has been notified of the claim and whether a claim number has been assigned for the government liability case.</span></button>
-        <button class="option-btn" onclick="answer('q17','b',false)" id="q17-b"><span class="opt-letter">B</span><span class="opt-text">Check whether a police report was filed at the scene &mdash; government vehicle accidents require documented proof that the entity was involved before claims proceed.</span></button>
-        <button class="option-btn" onclick="answer('q17','c',false)" id="q17-c"><span class="opt-letter">C</span><span class="opt-text">Confirm the city employee was acting within the scope of employment at the time of the accident &mdash; personal-use driving shifts liability away from the government entity.</span></button>
-        <button class="option-btn" onclick="answer('q17','d',true)" id="q17-d"><span class="opt-letter">D</span><span class="opt-text">Check the Ante Litem Notice deadline &mdash; City of Atlanta is a government entity with a mandatory 6-month notice requirement that kills the case entirely if missed.</span></button>
-      </div>
-      <div class="feedback-box" id="q17-fb"></div>
+    <div class="section-score" id="s6-score" style="display:none;"><div class="score-display" id="s6-score-val"></div><div class="score-label">Boss Challenge Score</div></div><div style="margin-bottom:1rem;">
+      <label for="trainee-name-input" style="display:block;font-size:0.85rem;font-weight:600;color:#141c2c;margin-bottom:0.4rem;">Your Name — required to start</label>
+      <input type="text" id="trainee-name-input" placeholder="Enter your full name" autocomplete="name" style="width:100%;padding:0.5rem 0.75rem;border:1.5px solid #cbd5e1;border-radius:6px;font-size:0.9rem;box-sizing:border-box;">
     </div>
-    <div class="question-block" id="q18-block">
-      <div class="q-num">Boss Challenge &middot; Question 18 &middot; Bonus</div>
-      <div class="q-text">Teresa is crying and threatening to leave the firm. GLG&rsquo;s last contact was 18 days ago. What is the correct FIRST response?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q18','a',true)" id="q18-a"><span class="opt-letter">A</span><span class="opt-text">Acknowledge the failure and name the emotion: &ldquo;Teresa, 18 days without a call is not our standard. It sounds like you feel your case doesn&rsquo;t matter to us.&rdquo; Then pause.</span></button>
-        <button class="option-btn" onclick="answer('q18','b',false)" id="q18-b"><span class="opt-letter">B</span><span class="opt-text">Immediately provide a detailed case status update to show the firm has been actively working behind the scenes, covering all recent activity on her medical records and claim.</span></button>
-        <button class="option-btn" onclick="answer('q18','c',false)" id="q18-c"><span class="opt-letter">C</span><span class="opt-text">Transfer the call to the supervising attorney because a client threatening to leave the firm is an escalation-level event requiring someone with direct authority to intervene immediately.</span></button>
-        <button class="option-btn" onclick="answer('q18','d',false)" id="q18-d"><span class="opt-letter">D</span><span class="opt-text">Apologize briefly and assure Teresa her case is important, then ask her to hold for a moment while you gather the most current status information from her case file.</span></button>
-      </div>
-      <div class="feedback-box" id="q18-fb"></div>
-    </div>
-    <div class="question-block" id="q19-block">
-      <div class="q-num">Boss Challenge &middot; Question 19 &middot; Bonus</div>
-      <div class="q-text">Teresa stopped treating 10 days ago because &ldquo;I feel a little better.&rdquo; Her MRI shows an L5-S1 disc bulge. Combining medical records and treatment management &mdash; what are the two critical actions?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q19','a',false)" id="q19-a"><span class="opt-letter">A</span><span class="opt-text">Resume treatment scheduling immediately and proceed with the demand &mdash; the MRI provides sufficient objective evidence regardless of whether she continues chiropractic care going forward.</span></button>
-        <button class="option-btn" onclick="answer('q19','b',false)" id="q19-b"><span class="opt-letter">B</span><span class="opt-text">Document the treatment gap in CasePeer with her exact words as a verbatim quote, then schedule a follow-up call in one week to check if she resumed on her own.</span></button>
-        <button class="option-btn" onclick="answer('q19','c',true)" id="q19-c"><span class="opt-letter">C</span><span class="opt-text">Explain that stopping treatment undermines even strong imaging findings &mdash; adjusters argue the injury resolved &mdash; then escalate to the attorney, since treatment stops require attorney sign-off.</span></button>
-        <button class="option-btn" onclick="answer('q19','d',false)" id="q19-d"><span class="opt-letter">D</span><span class="opt-text">Call the chiropractor directly to schedule Teresa&rsquo;s next appointment and inform her of the date &mdash; proactive scheduling removes the client&rsquo;s decision burden and closes the gap faster.</span></button>
-      </div>
-      <div class="feedback-box" id="q19-fb"></div>
-    </div>
-    <div class="question-block" id="q20-block">
-      <div class="q-num">Boss Challenge &middot; Question 20 &middot; Bonus</div>
-      <div class="q-text">Teresa&rsquo;s ER bill of $8,400 was paid by United Healthcare &mdash; an employer-sponsored ERISA plan. At settlement, what can and can&rsquo;t you do regarding that lien?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q20','a',false)" id="q20-a"><span class="opt-letter">A</span><span class="opt-text">Apply Georgia&rsquo;s Made Whole Doctrine to reduce or eliminate the lien &mdash; Teresa hasn&rsquo;t been fully compensated, so the health plan cannot recover before she is made whole.</span></button>
-        <button class="option-btn" onclick="answer('q20','b',true)" id="q20-b"><span class="opt-letter">B</span><span class="opt-text">ERISA preempts Georgia&rsquo;s Made Whole Doctrine, but the lien IS negotiable using Common Fund arguments, pro-rata reduction, and weak Summary Plan Description subrogation language. Know your tools.</span></button>
-        <button class="option-btn" onclick="answer('q20','c',false)" id="q20-c"><span class="opt-letter">C</span><span class="opt-text">ERISA plans cannot be negotiated under any circumstance &mdash; federal law requires full reimbursement of all amounts paid, and the firm must reserve the entire lien from settlement.</span></button>
-        <button class="option-btn" onclick="answer('q20','d',false)" id="q20-d"><span class="opt-letter">D</span><span class="opt-text">Dispute the lien entirely on the grounds that United Healthcare did not provide proper notice of subrogation rights within the 90-day window required by federal ERISA notification rules.</span></button>
-      </div>
-      <div class="feedback-box" id="q20-fb"></div>
-    </div>
-    <div class="section-score" id="s6-score" style="display:none;"><div class="score-display" id="s6-score-val"></div><div class="score-label">Boss Challenge Score</div></div>
+    
     <div class="btn-group" id="s6-next"><button class="btn btn-primary btn-block" onclick="finishModule()">See Results &rarr;</button></div>
   </div>
 </div>
-<div class="section-card" id="section-7">
+<div class="section-card" id="section-8">
   <div id="results-header-wrap"></div>
   <div class="section-body">
     <div id="results-body"></div>
@@ -677,7 +646,7 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
 <!-- ══════════════════════════════════════════
      SECTION 8 — FEEDBACK + CERTIFICATE
 ════════════════════════════════════════════ -->
-<div class="section-card" id="section-8">
+<div class="section-card" id="section-9">
   <div class="section-header">
     <div class="section-num">Section 9 · Feedback &amp; Certificate</div>
     <h2>Module Feedback</h2>
@@ -789,7 +758,7 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
 // CONFIGURATION
 // ═══════════════════════════════════════════════
 var TRACKER_URL = 'https://script.google.com/macros/s/AKfycbzHJZ0C3BqnLatfq7RIiUP5KQdgYoXTJlozd8ZGZiwIf2bdVmvnPMo3JLm0dA5gQhJyxA/exec';
-var TOTAL_SECTIONS = 9;
+var TOTAL_SECTIONS = 10;
 var PASS_THRESHOLD = 128; // 80% of 160 true achievable base — Harrell ruling Aug 17
 var BASE_MAX = 160; // true achievable base: 16 graded x 10 (q17-q20 are bonus-only, pts:0)
 
@@ -826,26 +795,26 @@ var milestonesTriggered = {};
 // QUESTION CONFIG  (section 1-5 = base pts; section 6 = boss/bonus)
 // ═══════════════════════════════════════════════
 var Q_CONFIG = {
-  'q1':  {section:1, pts:10, isBonus:false, correct:'c'},
-  'q2':  {section:1, pts:10, isBonus:false, correct:'d'},
-  'q3':  {section:1, pts:10, isBonus:false, correct:'b'},
-  'q4':  {section:2, pts:10, isBonus:false, correct:'a'},
-  'q5':  {section:2, pts:10, isBonus:false, correct:'c'},
-  'q6':  {section:2, pts:10, isBonus:false, correct:'b'},
-  'q7':  {section:3, pts:10, isBonus:false, correct:'d'},
-  'q8':  {section:3, pts:10, isBonus:false, correct:'a'},
-  'q9':  {section:3, pts:10, isBonus:false, correct:'b'},
-  'q10': {section:4, pts:10, isBonus:false, correct:'c'},
-  'q11': {section:4, pts:10, isBonus:false, correct:'a'},
-  'q12': {section:4, pts:10, isBonus:false, correct:'d'},
-  'q13': {section:5, pts:10, isBonus:false, correct:'c'},
-  'q14': {section:5, pts:10, isBonus:false, correct:'a'},
-  'q15': {section:5, pts:10, isBonus:false, correct:'d'},
-  'q16': {section:5, pts:10, isBonus:false, correct:'b'},
-  'q17': {section:6, pts:0, isBonus:true, bonusPts:15, correct:'d'},
-  'q18': {section:6, pts:0, isBonus:true, bonusPts:15, correct:'a'},
-  'q19': {section:6, pts:0, isBonus:true, bonusPts:10, correct:'c'},
-  'q20': {section:6, pts:0, isBonus:true, bonusPts:10, correct:'b'}
+  'q1':  {section:1, pts:10, isBonus:false},
+  'q2':  {section:1, pts:10, isBonus:false},
+  'q3':  {section:1, pts:10, isBonus:false},
+  'q4':  {section:2, pts:10, isBonus:false},
+  'q5':  {section:2, pts:10, isBonus:false},
+  'q6':  {section:2, pts:10, isBonus:false},
+  'q7':  {section:3, pts:10, isBonus:false},
+  'q8':  {section:3, pts:10, isBonus:false},
+  'q9':  {section:3, pts:10, isBonus:false},
+  'q10': {section:4, pts:10, isBonus:false},
+  'q11': {section:4, pts:10, isBonus:false},
+  'q12': {section:4, pts:10, isBonus:false},
+  'q13': {section:5, pts:10, isBonus:false},
+  'q14': {section:5, pts:10, isBonus:false},
+  'q15': {section:5, pts:10, isBonus:false},
+  'q16': {section:5, pts:10, isBonus:false},
+  'q17': {section:6, pts:0, isBonus:true, bonusPts:15},
+  'q18': {section:6, pts:0, isBonus:true, bonusPts:15},
+  'q19': {section:6, pts:0, isBonus:true, bonusPts:10},
+  'q20': {section:6, pts:0, isBonus:true, bonusPts:10}
 }
 
 // Section questions map (for completion detection)
@@ -861,28 +830,7 @@ var SECTION_QUESTIONS = {
 // ═══════════════════════════════════════════════
 // FEEDBACK TEXT
 // ═══════════════════════════════════════════════
-var FEEDBACK = {
-  'q1': {t:'✅ Correct. Translate medical terminology into plain language. Connect findings to symptoms the client experiences. Never diagnose or predict outcomes — that is the doctor\'s role. Always confirm the client understands before ending the call.',f:'❌ Clients need plain-language explanations, not raw medical reports or referrals elsewhere. Translate the jargon, connect it to symptoms, confirm understanding, and log it in CasePeer. Never diagnose or predict — explain only.'},
-  'q2': {t:'✅ Right. Treatment gaps are case-value killers. Document with exact dates, contact the client to learn why, and note the explanation. Common reasons (transport, billing, scheduling) are fixable — but unexplained gaps give adjusters ammunition.',f:'❌ Treatment gaps must be documented AND explained. Find out why it happened — the reason determines the fix. Just noting it or telling the client to resume without understanding the cause misses the point of case management.'},
-  'q3': {t:'✅ Correct. ER records from the accident date establish causation — symptoms documented immediately after impact. Without them, a defense attorney will argue injuries arose from another cause days or weeks later. The demand needs this anchor.',f:'❌ ER records establish the causation link between accident and injury. Chiro records document treatment but cannot substitute for the initial diagnosis. MRI shows structure but not timing. Police reports show fault but not medical causation.'},
-  'q4': {t:'✅ Complete answer. BI for liability, MedPay for immediate bills, UM/UIM when liability limits fall short. With surgical injuries and $25K limits, the gap will likely trigger UM/UIM. Identify all sources at intake — not after you hit limits.',f:'❌ All three coverage sources must be identified at intake: at-fault driver\'s BI, client\'s MedPay, and UM/UIM. With surgical injuries and low limits, the gap between damages and coverage is predictable. Late identification costs the client money.'},
-  'q5': {t:'✅ LOR goes out same-day. Every hour without it is an hour the insurer has direct access to the client. Three days late means three days of exposure to recorded statements, lowball offers, and direct client contact.',f:'❌ There is no 5-day grace period. The LOR should go out the same day the retainer is signed. Delay = exposure. The insurer can contact the client directly, push for statements, or make lowball offers until the LOR arrives.'},
-  'q6': {t:'✅ Exactly. Health insurance subrogation liens must be identified at intake. Discovering a $15K lien at disbursement devastates the client\'s expected net and creates a trust crisis that could have been entirely prevented with early identification.',f:'❌ Subrogation liens should be identified at intake — not at demand, not at settlement, not at disbursement. Late discovery compresses negotiation time and blindsides the client with a reduced net they never expected.'},
-  'q7': {t:'✅ Pro-rata ensures every provider shares the shortfall proportionally. The Common Fund Doctrine adds leverage: the attorney\'s work created the recovery fund, so lienholders should bear a share of that cost. Both together maximize client net recovery.',f:'❌ GLG uses pro-rata reduction when settlement does not fully cover liens. Calculate available funds ÷ total liens = reduction percentage applied to each. Combine with Common Fund Doctrine for maximum leverage. Individual hardship letters are not the standard.'},
-  'q8': {t:'✅ Medicare has federal teeth — personal attorney liability if the lien is ignored or disbursed around. But it IS negotiable: procurement cost reductions and disputing unrelated charges are legitimate tools. Resolve first, disburse after. Always.',f:'❌ Medicare liens are unique because of federal recovery rights and personal attorney liability. But they are negotiable — not non-negotiable, not identical to private insurance, and they do not expire after 12 months. Handle with care.'},
-  'q9': {t:'✅ Day 45 = mandatory attorney review. The post-settlement SOP targets 90%+ file closure within 45 days. A non-responsive hospital should have been escalated already. Client communication every 14 days is non-negotiable throughout post-settlement.',f:'❌ At Day 45, the attorney must review and decide next steps. You cannot disburse around an unresolved lien, file court motions without attorney direction, or use a non-existent "Georgia Hospital Lien Registry." Escalate to the attorney.'},
-  'q10': {t:'✅ The 14-day standard is non-negotiable. "Nothing has changed" IS the update — silence feels like neglect. The call also serves as a treatment compliance check and a referral opportunity. Phone calls, not emails, are the standard.',f:'❌ Pre-litigation requires client contact every 14 days — even when nothing has changed. Email does not satisfy the standard. Attorney exceptions do not exist. The contact IS the update. Call, log, set the next task.'},
-  'q11': {t:'✅ Perfect sequence: (1) Acknowledge improvement genuinely, (2) Explain the risk — stopping early gives adjusters ammunition, (3) Escalate to the attorney. A client stopping treatment is a case-value decision requiring attorney sign-off.',f:'❌ A client stopping treatment requires acknowledgment, risk explanation, and attorney escalation. You cannot accept it at the paralegal level, schedule appointments unilaterally, or instruct the client to continue without the attorney weighing in.'},
-  'q12': {t:'✅ Name the emotion first: "It sounds like you feel ignored." Acknowledge the failure directly — do not make excuses. Restore safety before delivering content. A client who feels unheard cannot process your case update.',f:'❌ When a client is emotionally activated, they cannot process case information. Name the emotion first, acknowledge the failure, and pause. Jumping to case status, apologizing generically, or transferring the call skips the critical de-escalation step.'},
-  'q13': {t:'✅ Preparation turns a compliance call into a genuine check-in. The value delivery item is key — give the client something useful before asking for anything. Prepared calls feel like support; unprepared calls feel like surveillance.',f:'❌ Pre-call preparation requires reviewing CasePeer for appointments, open items, and history, then preparing something useful to share. Scripts, printed files, and pre-sent emails are not the standard — genuine preparation is.'},
-  'q14': {t:'✅ Billing confusion is one of the most common and most solvable treatment barriers. The LOP means no out-of-pocket costs during treatment. Act immediately: call the provider today, confirm the LOP, correct the billing. Do not let a fixable problem become a gap.',f:'❌ The LOP covers treatment costs — the client should not be paying. Tell them not to pay, call the provider today, and get the billing corrected. Advising payment, ignoring the bill, or just escalating without action all miss the immediate fix.'},
-  'q15': {t:'✅ "I\'ll try" is not a commitment — it is a polite deflection. A specific date stated aloud creates real accountability. Document it in CasePeer and set a follow-up task to confirm attendance. Vague intentions do not protect case value.',f:'❌ Accepting "I\'ll try" means accepting a non-commitment. Convert it to a specific date and time. Document the commitment in CasePeer with a follow-up task. Emails and shorter check-ins are helpful but do not replace the stated date.'},
-  'q16': {t:'✅ Three documented attempts over 14 days = escalation. An unreachable client is a blocked task requiring attorney intervention. The attorney has tools you do not: certified letters, case evaluation authority, and the decision on continued representation.',f:'❌ After 3 documented attempts over 14 days, escalate within 24-48 hours. Do not continue calling indefinitely, send texts as a substitute, or close the file yourself. The attorney decides next steps — not the paralegal.'},
-  'q17': {t:'✅ Government entity = Ante Litem Notice = non-negotiable deadline. Even with months remaining, flag it immediately. Ante Litem deadlines kill cases. Communication gaps and treatment gaps are fixable — a missed Ante Litem is not.',f:'❌ A government entity case ALWAYS triggers the Ante Litem check first. City of Atlanta = Georgia government entity = 6-month notice deadline. Everything else follows. Carrier notification, police reports, and scope-of-employment are secondary.'},
-  'q18': {t:'✅ Pre-empt the accusation: acknowledge the 18-day gap before she raises it again. Name the emotion: "it sounds like you feel your case does not matter." Then pause. A client who feels heard may not need to fire the firm.',f:'❌ When a client threatens to leave, the sequence matters: (1) acknowledge the failure, (2) name the emotion, (3) pause and let them respond. Jumping to updates, transferring the call, or putting her on hold all skip the de-escalation.'},
-  'q19': {t:'✅ Strong imaging means nothing if treatment records show voluntary stoppage. Adjusters use gaps to argue the injury resolved. Both actions required: explain the risk to Teresa AND escalate to the attorney. Treatment stops need attorney sign-off.',f:'❌ The MRI alone is not enough — treatment compliance tells the story the adjuster reads. Stopping early gives them ammunition. You must explain the risk AND escalate. Scheduling appointments or just documenting without escalation is incomplete.'},
-  'q20': {t:'✅ ERISA preempts Made Whole — but ERISA liens ARE negotiable. Common Fund arguments, pro-rata reduction, and weak SPD language are your tools. Knowing what you CANNOT do (Made Whole) is as important as knowing what you CAN.',f:'❌ ERISA plans preempt Georgia\'s Made Whole Doctrine — the standard reduction letter is off the table. But ERISA liens are negotiable through Common Fund, pro-rata, and weak SPD language. They are not non-negotiable, and they do not have a 90-day window.'}
-}
+var FEEDBACK = {} /* CUTOVER: feedback text is served per-answer by the engine, never shipped to the client up front */
 
 // ═══════════════════════════════════════════════
 // RATINGS STATE
@@ -892,7 +840,7 @@ var ratings = {};
 // ═══════════════════════════════════════════════
 // ANSWER HANDLER
 // ═══════════════════════════════════════════════
-function answer(qId, choice, isCorrect) {
+window.answerUI = function answerUI(qId, choice, isCorrect) {
   if (qDone[qId]) return;
 
   var cfg = Q_CONFIG[qId];
@@ -904,7 +852,7 @@ function answer(qId, choice, isCorrect) {
   btns.forEach(function(b){ b.classList.add('disabled'); });
 
   var clickedBtn = document.getElementById(qId + '-' + choice);
-  var correctBtn = document.getElementById(qId + '-' + cfg.correct);
+  var correctBtn = document.getElementById(qId + '-' + (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || ''));
 
   if (isCorrect) {
     clickedBtn.classList.add('correct');
@@ -990,6 +938,8 @@ function checkSectionComplete(sectionIdx) {
 // NAVIGATION
 // ═══════════════════════════════════════════════
 function goToSection(idx) {
+  if (idx === 9 && !window._nh11Passed) { showToast("⚠️ 80% required for certificate", false); return; }
+  
   document.querySelectorAll('.section-card').forEach(function(c){ c.classList.remove('active'); });
   document.querySelectorAll('.nav-pill').forEach(function(p){ p.classList.remove('active'); });
 
@@ -1675,5 +1625,67 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 </script>
+
+
+
+<script>
+/* ── go() / startQuiz() — quiz entry point (Harrell ruling 2026-09-03) ── */
+async function go(screen) {
+  if (screen === 'quiz') {
+    var _ni = document.getElementById('trainee-name-input');
+    var _name = (_ni && _ni.value.trim()) || '';
+    if (!_name) {
+      if (typeof showToast === 'function') showToast('⚠️ Please enter your name before starting the quiz', false);
+      else alert('Please enter your name before starting the quiz.');
+      return;
+    }
+    // Bug-2 fix: await attempt start before making questions interactive
+    await window.GLGQuiz.beginAttempt(_name);
+    goToSection(7);
+  }
+}
+
+function startQuiz() { go('quiz'); }
+
+/* ── GLG MODULE CONFIG — wires api-quiz-engine.js to module-nh11.html ── */
+window.GLG_MODULE_CONFIG = {
+  moduleId: 'nh11',
+  onBankLoaded: function(bank) {
+    var basemax = document.getElementById('basemax');
+    var gate    = document.getElementById('gate');
+    if (basemax) basemax.textContent = bank.base_max;
+    if (gate)    gate.textContent    = bank.pass_pct;
+    for (var i = 1; i <= 6; i++) {
+      var nextEl = document.getElementById('s' + i + '-next');
+      if (nextEl) nextEl.style.display = 'flex';
+    }
+  },
+  onStartQuiz: function() {
+    if (typeof audioCtx !== 'undefined' && audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume().catch(function(){});
+    }
+  },
+  onAnswered: function(r) {
+    baseScore   = r.base_score;
+    bonusPoints = r.bonus_score;
+    streakCount = r.streak;
+    maxStreak   = Math.max(maxStreak || 0, r.maxStreak || 0);
+    var ts = document.getElementById('total-score');
+    if (ts) ts.textContent = r.base_score;
+    var bs = document.getElementById('bonus-score');
+    if (bs) bs.textContent = r.bonus_score;
+    if (typeof updateStreak  === 'function') updateStreak(r.correct);
+    if (typeof mascotReact   === 'function') mascotReact(r.correct ? 'correct' : 'incorrect');
+  },
+  onComplete: function(r) {
+    window._nh11Passed = r.passed;
+    baseScore   = r.base_score;
+    bonusPoints = r.bonus_score;
+    goToSection(8);   // results is now section-8 after port
+    if (typeof buildResults === 'function') buildResults();
+  }
+};
+</script>
+<script src="api-quiz-engine.js"></script>
 </body>
 </html>

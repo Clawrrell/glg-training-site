@@ -6,15 +6,6 @@ Deliverable: NH-2 — PI Law Basics (formerly Module A3)
 Chassis Source: NH-1 (module-a1.html) — all 11 clone elements propagated
 References Loaded: 10 files
   - /glg/GATES/COO-GATES.md
-  - /glg/books/memos/essential-lawyering-memo.md (PI-specific operations, case management)
-  - /glg/books/memos/reptile-mist-memo.md (safety rule framework, case framing)
-  - /glg/books/memos/client-centered-law-firm-memo.md (client experience as product)
-  - /glg/books/memos/e-myth-memo.md (systems thinking)
-  - /glg/books/memos/traction-eos-memo.md (accountability structure)
-  - /glg/books/memos/atomic-habits-memo.md (habit formation)
-  - /glg/books/memos/crucial-conversations-memo.md (client conversations)
-  - /glg/books/memos/radical-candor-memo.md (feedback/communication)
-  - /glg/books/memos/influence-cialdini-memo.md (intake conversion principles)
 Existing Docs Checked: Previous module-a3-pi-basics.html, REFERENCE.md, GLG fee structure
 QA Checklist: ✅ PASSED
 Competency Gate Mapping:
@@ -830,6 +821,8 @@ header h1 { font-size:clamp(17px,5vw,24px);font-weight:800;line-height:1.3;color
 header p { margin-top:6px;color:#c0c0c0;font-size:13px; }
 
 </style>
+<!-- CUTOVER: server-side grading. Answer keys are not in this file. -->
+    <link rel="stylesheet" href="boss-challenge.css">
 </head>
 <body>
 
@@ -1224,7 +1217,7 @@ header p { margin-top:6px;color:#c0c0c0;font-size:13px; }
         <span class="callout-icon">📞</span>
         <span><strong>Communication Standards:</strong> Pre-lit clients contacted every 14 days, litigation clients every 30 days, all callbacks within 24 hours</span>
       </div>
-      <p>Research shows 84% of customer disloyalty comes from effort-related issues — having to contact a company multiple times. GLG calls clients before they call us.</p>
+      <p>evidence shows 84% of customer disloyalty comes from effort-related issues — having to contact a company multiple times. GLG calls clients before they call us.</p>
     </div>
 
     <div class="subsection">
@@ -1254,7 +1247,11 @@ header p { margin-top:6px;color:#c0c0c0;font-size:13px; }
       <span>You've mastered the basics! You understand PI law fundamentals, safety rule thinking, GLG practice areas, Georgia requirements, and client service standards. Ready for the knowledge check?</span>
     </div>
 
-    <div class="btn-row">
+        <div class="name-input-wrap" style="margin-bottom:1rem;">
+      <label for="trainee-name-input" style="display:block;font-family:var(--font-b,sans-serif);font-size:0.85rem;font-weight:600;color:var(--navy,#141c2c);margin-bottom:0.4rem;">Your Name — required to start</label>
+      <input type="text" id="trainee-name-input" class="name-input" placeholder="Enter your full name" autocomplete="name">
+    </div>
+<div class="btn-row">
       <button class="btn btn-secondary" onclick="go(4)">← Back</button>
       <button class="btn btn-primary" onclick="startQuiz()">Take the Quiz →</button>
     </div>
@@ -1267,16 +1264,8 @@ header p { margin-top:6px;color:#c0c0c0;font-size:13px; }
     <div class="section-label" id="quiz-section-label">Question 1 of 10</div>
     <div class="section-title">Knowledge Check</div>
   </div>
-  <div class="content-card">
-    <div class="quiz-progress" id="quizDots"></div>
-    <div class="question-num" id="qNum">Question 1 of 10</div>
-    <div class="question-text" id="qText"></div>
-    <div class="options" id="qOptions"></div>
-    <div class="feedback-box" id="qFeedback"></div>
-    <div class="btn-row">
-      <button class="btn btn-primary" id="qNextBtn" onclick="nextQuestion()" disabled>Next →</button>
-    </div>
-  </div>
+  <div id="questions"></div>
+</div>
 </div>
 
 <!-- ══════════ SCREEN 7: RESULTS ══════════ -->
@@ -1403,62 +1392,60 @@ var questions = [
   {
     q: "What are the four elements that must be proven in every negligence case?",
     options: ["Duty, Breach, Causation, Damages", "Intent, Action, Result, Harm", "Fault, Evidence, Witness, Jury", "Complaint, Discovery, Trial, Settlement"],
-    correct: 0,
-    explanation: "Every negligence case requires proving: (1) Duty - defendant owed a duty to be careful, (2) Breach - they violated that duty, (3) Causation - their violation caused the accident, (4) Damages - plaintiff suffered real harm."
+    canon_cite: "GLG-PROPRIETARY: basic tort elements (duty, breach, causation, damages) \u2014 reference: glg/books/GA_PI_Law_Reference_Guide.docx",
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "What makes a good safety rule?",
-    options: ["It applies only to this specific case — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken", "It's complex and technical", "It's simple, universal, and protects everyone including jurors", "It focuses on maximum damages"],
-    correct: 2,
-    explanation: "Safety rules must be simple and clear, applicable broadly to protect everyone (not just this plaintiff), and something jurors themselves rely on. This activates their protective instincts."
+    options: ["It applies only to this specific case", "It's complex and technical", "It's simple, universal, and protects everyone including jurors", "It focuses on maximum damages"],
+    canon_cite: "glg/canonical-sops/New_Case_Evaluation_SOP.md#29",
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "What is GLG's attorney fee for pre-litigation settlements?",
-    options: ["25%, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity", "33.3%", "40%", "50%"],
-    correct: 1,
-    explanation: "GLG charges 33.3% for pre-litigation settlements and 40% for cases that go to litigation/trial. This is clearly stated in our fee structure."
+    options: ["25%", "33.3%", "40%", "50%"],
+    canon_cite: "glg/canonical-sops/New_Case_Evaluation_SOP.md#104",
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "Under Georgia's comparative negligence law, what happens if the plaintiff is 50% or more at fault?",
-    options: ["They recover reduced damages", "They recover full damages", "They recover nothing", "The case goes to trial automatically"],
-    correct: 2,
-    explanation: "Georgia follows modified comparative negligence: 0-49% fault = recovery reduced by fault percentage, 50% or more fault = no recovery at all."
+    options: ["They recover reduced damages", "They recover full damages", "They recover nothing", "The case goes to arbitration"],
+    canon_cite: "glg/GA_PI_Law_Reference_Guide.md:40",
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "What does 'Inquiring Mode vs. Persuasion Mode' mean in client communication?",
-    options: ["Two different types of legal questions", "Inquiring is for learning, Persuasion is for guiding decisions", "Different fee structures", "Court procedures vs. settlement negotiations — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage"],
-    correct: 1,
-    explanation: "Inquiring Mode is open-ended curiosity aimed at learning about the client's situation. Persuasion Mode is strategic communication aimed at guiding decisions. Always start by inquiring, then shift to persuasion."
+    options: ["Two different types of legal questions", "Inquiring is for learning, Persuasion is for guiding decisions", "Different fee structures", "Court procedures vs. settlement negotiations"],
+    canon_cite: "glg/canonical-sops/Attorney_Lien_Quick_Reference.md:258",
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "What are Georgia's minimum liability insurance requirements?",
     options: ["15/30/10", "25/50/25", "50/100/50", "100/300/100"],
-    correct: 1,
-    explanation: "Georgia requires minimum liability insurance of $25,000 per person / $50,000 per accident for bodily injury, $25,000 for property damage (25/50/25)."
+    canon_cite: "glg/canonical-sops/UM_UIM_Coverage_Training_Guide.md:24",
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "What percentage of customer disloyalty comes from effort-related issues?",
-    options: ["45%, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle", "93%", "62%", "84%"],
-    correct: 3,
-    explanation: "Research shows 84% of customer disloyalty comes from effort-related issues, particularly having to contact a company multiple times. This is why GLG calls clients proactively."
+    options: ["45%", "93%", "62%", "84%"],
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "What is the safety rule for motor vehicle accidents?",
-    options: ["Cars must have insurance", "Drivers must maintain safe following distance — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value", "Vehicles must be properly maintained", "Every driver must follow traffic laws and drive with reasonable care"],
-    correct: 3,
-    explanation: "The universal safety rule for motor vehicle cases is that every driver must follow traffic laws and drive with reasonable care. This applies to all drivers and protects everyone on the road."
+    options: ["Cars must have insurance", "Drivers must maintain safe following distance", "Vehicles must be properly maintained", "Every driver must follow traffic laws and drive with reasonable care"],
+    canon_cite: "glg/canonical-sops/Adjuster_Negotiation_Framework.md:153",
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "What is the general statute of limitations for personal injury cases in Georgia?",
-    options: ["2 years", "1 year", "3 years — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken", "4 years"],
-    correct: 0,
-    explanation: "O.C.G.A. \u00a7 9-3-33 requires personal injury actions be brought within 2 years after the right of action accrues. In most auto cases, accrual is the date of injury \u2014 but exceptions exist (discovery rule, minors, incapacitated plaintiffs)."
+    options: ["2 years", "1 year", "3 years", "4 years"],
+    canon_cite: "glg/canonical-sops/Intake_SOP.md#77",
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "What is GLG's service guarantee to clients?",
     options: ["Never pay an out-of-pocket attorney fee until we deliver results", "We guarantee to win every case", "Free consultation only", "Lowest fees in Atlanta"],
-    correct: 0,
-    explanation: "GLG's service guarantee: 'NEVER PAY AN OUT OF POCKET ATTORNEY FEE \u2014 We guarantee you will never pay an out-of-pocket expense or attorney fee until we deliver a successful verdict or fair settlement.'"
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   }
 ];
 
@@ -1540,14 +1527,16 @@ function go(screen) {
   window.scrollTo(0, 0);
 }
 
-function startQuiz() {
-  if (!audioCtx) { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
-  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
-  currentQ = 0;
-  answers = new Array(questions.length).fill(null);
-  score = 0;
-  renderQuizDots();
-  renderQuestion();
+async function startQuiz() {
+  var _ni = document.getElementById('trainee-name-input');
+  var _name = (_ni && _ni.value.trim()) || '';
+  if (!_name) {
+    if (typeof showToast === 'function') showToast('\u26a0\ufe0f Please enter your name before starting the quiz', false);
+    else alert('Please enter your name before starting the quiz.');
+    return;
+  }
+  // Bug-1/2 fix (Sep 10 2026): learner name from cover screen; await before rendering quiz
+  await window.GLGQuiz.beginAttempt(_name);
   go('quiz');
 }
 
@@ -1574,17 +1563,17 @@ function renderQuestion() {
   document.getElementById('qNextBtn').textContent = currentQ < questions.length-1 ? 'Next →' : 'See Results';
 }
 
-function selectOption(idx) {
+window.selectOptionUI = function selectOptionUI(idx, isCorrect, __glgKey, __glgFbHtml) {
   if (answers[currentQ] !== null) return;
   answers[currentQ] = idx;
   var q = questions[currentQ];
-  var isCorrect = idx === q.correct;
+  /* CUTOVER: verdict is supplied by the engine, not computed here. */
   if (isCorrect) score++;
 
   var opts = document.querySelectorAll('.option-btn');
   opts.forEach(function(o,i) {
     o.disabled = true;
-    if (i === q.correct) o.classList.add('correct');
+    if (__glgKey >= 0 && i === __glgKey) o.classList.add('correct');
     else if (i === idx && !isCorrect) o.classList.add('wrong');
   });
 
@@ -1594,7 +1583,7 @@ function selectOption(idx) {
   var fb = document.getElementById('qFeedback');
   fb.style.display = 'block';
   fb.className = 'feedback-box ' + (isCorrect ? 'correct' : 'wrong');
-  fb.innerHTML = (isCorrect ? '✅ <strong>Correct!</strong> ' : '❌ <strong>Incorrect.</strong> ') + q.explanation;
+  fb.innerHTML = (isCorrect ? '✅ <strong>Correct!</strong> ' : '❌ <strong>Incorrect.</strong> ') + (__glgFbHtml || '');
 
   document.getElementById('qNextBtn').disabled = false;
 
@@ -1656,13 +1645,13 @@ function showResults() {
     renderBadges(badges, badgeContainer);
   }
   var reviewItems = questions.map(function(q, i) {
-    var correct = answers[i] === q.correct;
+    var correct = !!(window.__glgVerdicts || [])[i];
     return '<div class="review-item ' + (correct ? 'correct' : 'wrong') + '" style="opacity:0;transform:translateY(8px);transition:opacity 0.25s ease,transform 0.25s ease;" data-review-idx="' + i + '">'
       + '<div class="ri-q">' + (i+1) + '. ' + q.q + '</div>'
       + '<div class="ri-ans">'
       + (correct ? '✅' : '❌') + ' Your answer: <strong>' + letters[answers[i]] + '. ' + q.options[answers[i]] + '</strong>'
-      + (!correct ? '<br>✅ Correct: <strong>' + letters[q.correct] + '. ' + q.options[q.correct] + '</strong>' : '')
-      + (!correct ? '<br><em style="color:#666;font-size:0.8rem;">' + q.explanation + '</em>' : '')
+      + (!correct && (window.__glgKeyIdx || [])[i] >= 0 ? '<br>✅ Correct: <strong>' + letters[window.__glgKeyIdx[i]] + '. ' + q.options[window.__glgKeyIdx[i]] + '</strong>' : '')
+      + (!correct && (window.__glgFb || [])[i] ? '<br><em style="color:#666;font-size:0.8rem;">' + window.__glgFb[i] + '</em>' : '')
       + '</div></div>';
   }).join('');
   reviewList.innerHTML = reviewItems;
@@ -2181,3 +2170,115 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 </script>
+
+<script>
+/* CUTOVER SHIM (P2-A) — server-side grading. Injected by tools/cutover-shell.py.
+   No answer key in this file. selectOption() posts the choice; the ENGINE returns
+   the verdict and the feedback; the authored handler (renamed selectOptionUI) does
+   every bit of the UI it did before — streak, dots, mascot, score header, progress. */
+(function () {
+  var MODULE_ID = 'nh2';
+  var LETTERS = 'abcdefgh';
+  var attemptId = null;
+  var startPromise = null;
+
+  window.__glgVerdicts = window.__glgVerdicts || [];
+  window.__glgKeyIdx   = window.__glgKeyIdx   || [];   /* -1 = engine did not disclose */
+  window.__glgFb       = window.__glgFb       || [];
+
+  function api(path, body) {
+    return fetch('/api/quiz/' + path, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(body)
+    }).then(function (r) {
+      if (!r.ok) return r.text().then(function (t) { throw new Error(t || ('HTTP ' + r.status)); });
+      return r.json();
+    });
+  }
+
+  function learner() {
+    try { return localStorage.getItem('glg_learner') || 'anonymous'; }
+    catch (e) { return 'anonymous'; }
+  }
+
+  function ensureAttempt() {
+    if (attemptId) return Promise.resolve(attemptId);
+    if (!startPromise) {
+      startPromise = api('start', { module: MODULE_ID, learner: learner() })
+        .then(function (d) { attemptId = d.attempt_id; return attemptId; });
+    }
+    return startPromise;
+  }
+
+  function showError(msg) {
+    var fb = document.getElementById('qFeedback');
+    if (!fb) return;
+    fb.style.display = 'block';
+    fb.className = 'feedback-box wrong';
+    fb.innerHTML = '⚠️ <strong>Could not reach the grading server.</strong> Your answer was '
+                 + 'NOT recorded — check your connection and choose again. (' + msg + ')';
+  }
+
+  /* P2-A questions are positional: the Nth object in the array is bank id q(N+1),
+     and option index i is bank option LETTERS[i]. Proven against all 5 banks. */
+  window.selectOption = function (idx) {
+    if (typeof answers !== 'undefined' && answers[currentQ] !== null) return;   /* already scored */
+    if (currentQ === 0) { window.__glgVerdicts = []; window.__glgKeyIdx = []; window.__glgFb = []; }
+    var qi = currentQ;
+    return ensureAttempt().then(function (aid) {
+      return api('answer', { attempt_id: aid, qid: 'q' + (qi + 1), choice: LETTERS[idx] });
+    }).then(function (d) {
+      var keyIdx = (d.correct_id && LETTERS.indexOf(d.correct_id) >= 0)
+                 ? LETTERS.indexOf(d.correct_id) : -1;
+      window.__glgVerdicts[qi] = !!d.correct;
+      window.__glgKeyIdx[qi]   = keyIdx;
+      window.__glgFb[qi]       = d.feedback || '';
+      if (typeof window.selectOptionUI === 'function') {
+        window.selectOptionUI(idx, !!d.correct, keyIdx, d.feedback || '');
+      }
+      /* Authoritative completion once every question has been submitted. */
+      if (typeof answers !== 'undefined' && typeof questions !== 'undefined'
+          && answers.filter(function (a) { return a !== null; }).length === questions.length) {
+        api('complete', { attempt_id: attemptId })
+          .then(function (r) { window.__glgResult = r; })
+          .catch(function (e) { console.error('[glg-cutover] complete failed', e); });
+      }
+      return d;
+    }).catch(function (err) {
+      showError(err && err.message ? err.message : err);
+      console.error('[glg-cutover] grading failed', err);
+    });
+  };
+
+  document.addEventListener('DOMContentLoaded', function () { ensureAttempt().catch(function () {}); });
+})();
+</script>
+
+
+<script>
+/* GLGQuiz configuration — NH-2 PI Law Basics */
+window.GLG_MODULE_CONFIG = {
+  moduleId: 'nh2',
+  onBankLoaded: function(bank) {
+    var basemax = document.getElementById('basemax');
+    var gate    = document.getElementById('gate');
+    if (basemax) basemax.textContent = bank.base_max;
+    if (gate)    gate.textContent    = bank.pass_pct;
+  },
+  onStartQuiz: function() {
+    if (typeof audioCtx !== 'undefined' && audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume().catch(function(){});
+    }
+  },
+  onAnswered: function(r) {
+    var ts = document.getElementById('total-score');
+    if (ts) ts.textContent = r.base_score;
+    if (typeof updateStreak === 'function') updateStreak(r.correct);
+  }
+};
+</script>
+<script src="api-quiz-engine.js"></script>
+
+</body>
+</html>

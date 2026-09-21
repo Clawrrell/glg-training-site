@@ -367,6 +367,8 @@ button, .btn, .option-btn, [onclick] {
   user-select: none; -webkit-user-select: none;
 }
 </style>
+<!-- CUTOVER: server-side grading. Answer keys are not in this file. -->
+    <link rel="stylesheet" href="boss-challenge.css">
 </head>
 <body>
 
@@ -683,7 +685,11 @@ button, .btn, .option-btn, [onclick] {
       </div>
     </div>
 
-    <div class="btn-row">
+        <div class="name-input-wrap" style="margin-bottom:1rem;">
+      <label for="trainee-name-input" style="display:block;font-family:var(--font-b,sans-serif);font-size:0.85rem;font-weight:600;color:var(--navy,#141c2c);margin-bottom:0.4rem;">Your Name — required to start</label>
+      <input type="text" id="trainee-name-input" class="name-input" placeholder="Enter your full name" autocomplete="name">
+    </div>
+<div class="btn-row">
       <button class="btn btn-secondary" onclick="go(4)">← Back</button>
       <button class="btn btn-green" onclick="startQuiz()">📝 Take the Quiz →</button>
     </div>
@@ -695,16 +701,8 @@ button, .btn, .option-btn, [onclick] {
     <div class="section-label" id="quiz-section-label">Question 1 of 10</div>
     <div class="section-title">Knowledge Check — NH-3</div>
   </div>
-  <div class="content-card">
-    <div class="quiz-dots" id="quizDots"></div>
-    <div class="question-num" id="qNum"></div>
-    <div class="question-text" id="qText"></div>
-    <div class="options" id="qOptions"></div>
-    <div class="feedback-box" id="qFeedback"></div>
-    <div class="btn-row" style="margin-top: 1rem;">
-      <button class="btn btn-primary" id="qNextBtn" onclick="nextQuestion()" disabled>Next →</button>
-    </div>
-  </div>
+  <div id="questions"></div>
+</div>
 </div>
 
 <!-- ══════════ RESULTS SCREEN ══════════ -->
@@ -805,8 +803,8 @@ var questions = [
       "A government victim compensation fund that Georgia makes available to all auto accident victims statewide",
       "The at-fault driver's personal assets, pursued through a post-judgment collection action filed by the firm"
     ],
-    correct: 0,
-    explanation: "The at-fault driver's BI policy is the primary recovery source in most PI cases. The defendant rarely pays out of pocket — insurance policies are where the money comes from."
+    canon_cite: "glg/canonical-sops/Coverage_Maximization_Checklist.md#16",
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "A client says: 'I don't want to use my own insurance — won't my rates go up?' Which response correctly addresses this concern?",
@@ -816,8 +814,7 @@ var questions = [
       "Under O.C.G.A. § 33-9-40, Georgia law prohibits insurers from surcharging your premium or canceling your policy for not-at-fault accidents — UM claims are by definition not-at-fault, so this protection applies. This coverage is a forced investment you've been paying for, and now it's time to use it",
       "We should avoid using your own insurance entirely and focus exclusively on the at-fault driver's BI policy — that is the only coverage source we need to pursue in a standard personal injury case and filing a UM claim is unnecessary"
     ],
-    correct: 2,
-    explanation: "UM is a forced investment — Georgia law requires it. When the bad thing happens, you cash in. O.C.G.A. § 33-9-40 prohibits insurers from surcharging premiums or canceling policies for not-at-fault accidents. Since UM claims involve a not-at-fault scenario, this protection applies. Note: nonrenewal at term end is technically possible but uncommon for a single claim."
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "Georgia's minimum auto insurance requirements for Bodily Injury (BI) liability are:",
@@ -827,8 +824,8 @@ var questions = [
       "$50,000 per person / $100,000 per accident — Georgia's enhanced minimum requirements that took effect under the most recent statutory update in January 2024",
       "$100,000 combined single limit — Georgia switched to a single-limit structure in recent years"
     ],
-    correct: 1,
-    explanation: "Georgia requires minimum BI limits of $25,000/$50,000. Many drivers carry only the minimum — which is why UM/UIM on the client's own policy is critical for cases exceeding these limits."
+    canon_cite: "glg/canonical-sops/UM_UIM_Coverage_Training_Guide.md#24",
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "A client has a $100,000 BI policy limit. Their case has $140,000 in documented medical damages and clear liability. What does this mean?",
@@ -838,8 +835,8 @@ var questions = [
       "Pursue the full policy limit AND investigate additional coverage sources such as UM/UIM, umbrella policies, or commercial coverage",
       "Reduce the demand to $90,000 to stay within limits and ensure a faster settlement without the complexity of excess coverage"
     ],
-    correct: 2,
-    explanation: "When case value exceeds limits, pursue the full policy limit AND investigate additional sources. Limits ≠ case value — the house analogy: the lot (policy) sets the ceiling, but the case determines value."
+    canon_cite: "glg/canonical-sops/UM_UIM_Coverage_Training_Guide.md:16",
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "When multiple UM policies exist for the same client (e.g., client's auto + spouse's auto), what is the correct procedure?",
@@ -849,8 +846,8 @@ var questions = [
       "The client must choose which single policy to use at intake, and the unchosen policy is forfeited for the duration of the claim",
       "Both may apply, but primacy must be determined — and each policy must be entered separately in CasePeer with its own limits and details"
     ],
-    correct: 3,
-    explanation: "Multiple UM policies may both apply, but primacy (which pays first) depends on policy language and Georgia stacking rules. EACH policy gets its own CasePeer entry so the attorney can determine priority."
+    canon_cite: "glg/canonical-sops/UM_UIM_Coverage_Training_Guide.md#48",
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "A declarations page shows $25,000/$50,000 BI but lists NO UM/UIM coverage. The client never signed a UM rejection. What do you do?",
@@ -860,8 +857,8 @@ var questions = [
       "Flag for the attorney: Georgia requires UM equal to BI limits unless rejected in writing — no written rejection means coverage likely exists",
       "File a complaint with the Georgia Insurance Commissioner for a statutory violation — the insurer was required to include UM coverage on the policy and failed to do so under Georgia insurance regulations"
     ],
-    correct: 2,
-    explanation: "Georgia requires UM/UIM equal to BI limits unless rejected in writing. No written rejection = coverage exists at the full BI limit, even if the declarations page says otherwise."
+    canon_cite: "glg/canonical-sops/Coverage_Maximization_Checklist.md#44",
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "Property Damage (PD) coverage is relevant to GLG staff because:",
@@ -871,8 +868,8 @@ var questions = [
       "Staff must know what PD is because clients ask about vehicle damage — but GLG doesn't handle standalone PD claims",
       "PD claims must be filed and resolved completely before any BI claim can proceed to the demand stage or settlement"
     ],
-    correct: 2,
-    explanation: "GLG doesn't handle standalone PD, but you must know what it is. Clients ask about vehicle damage, and you need to explain PD (vehicle) is separate from BI (bodily injuries)."
+    canon_cite: "glg/canonical-sops/Case_Drop_Call_Script.md:78",
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "An adjuster calls and says: 'We can settle this today for $12,000 — let me get your client on the phone for a quick recorded statement.' What do you do?",
@@ -882,8 +879,8 @@ var questions = [
       "Counter with a higher number over the phone to begin negotiations, and schedule the recorded statement for a later date",
       "Decline both — no settlement without attorney review, no recorded statement because the LOR routes all contact through GLG"
     ],
-    correct: 3,
-    explanation: "Decline both. Quick settlement offers indicate the adjuster knows the case is worth more. The LOR means all contact goes through GLG. Document the call and $12,000 offer in CasePeer."
+    canon_cite: "glg/canonical-sops/Communication_Standards_SOP.md:63",
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "Where does each insurance type get entered in CasePeer?",
@@ -893,8 +890,8 @@ var questions = [
       "All insurance is recorded as a detailed note in the case file narrative — CasePeer doesn't have structured insurance entry fields",
       "Only the primary BI policy gets entered into CasePeer directly — secondary coverage sources are tracked in a separate spreadsheet"
     ],
-    correct: 0,
-    explanation: "BI under defendant's insurance, UM/UIM and MedPay under client's insurance. Each policy gets its own entry — not lumped together — so attorneys can determine primacy and pursue in order."
+    canon_cite: "glg/canonical-sops/UM_UIM_Coverage_Training_Guide.md#28",
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "What is the difference between Comprehensive and Collision coverage on an auto policy?",
@@ -904,8 +901,8 @@ var questions = [
       "Comprehensive is required by Georgia law for all registered vehicles; Collision is an optional add-on that most drivers choose to skip",
       "Comprehensive covers non-collision damage (theft, weather, vandalism, animals); Collision covers vehicle damage from a crash regardless of fault"
     ],
-    correct: 3,
-    explanation: "Comprehensive = non-collision damage (theft, weather, vandalism, animal strikes). Collision = vehicle damage from a collision, regardless of fault. Neither is a PI recovery source, but clients mention them."
+    canon_cite: "glg/canonical-sops/UM_UIM_Coverage_Training_Guide.md:26",
+    /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   }
 ];
 // ── NAV STATE ──
@@ -964,16 +961,16 @@ function go(screen) {
 }
 
 // ── QUIZ ENGINE ──
-function startQuiz() {
-  currentQ = 0;
-  answers = new Array(questions.length).fill(null);
-  score = 0;
-  streakCount = 0; maxStreak = 0;
-  questionsFirstTry = 0; incorrectCount = 0; totalQuestionsAnswered = 0;
-  milestonesTriggered = {};
-  moduleStartTime = Date.now();
-  renderQuizDots();
-  renderQuestion();
+async function startQuiz() {
+  var _ni = document.getElementById('trainee-name-input');
+  var _name = (_ni && _ni.value.trim()) || '';
+  if (!_name) {
+    if (typeof showToast === 'function') showToast('\u26a0\ufe0f Please enter your name before starting the quiz', false);
+    else alert('Please enter your name before starting the quiz.');
+    return;
+  }
+  // Bug-1/2 fix (Sep 10 2026): learner name from cover screen; await before rendering quiz
+  await window.GLGQuiz.beginAttempt(_name);
   go('quiz');
 }
 
@@ -1000,17 +997,17 @@ function renderQuestion() {
   nb.textContent = currentQ < questions.length - 1 ? 'Next →' : 'See Results';
 }
 
-function selectOption(idx) {
+window.selectOptionUI = function selectOptionUI(idx, isCorrect, __glgKey, __glgFbHtml) {
   if (answers[currentQ] !== null) return;
   answers[currentQ] = idx;
   var q = questions[currentQ];
-  var isCorrect = idx === q.correct;
+  /* CUTOVER: verdict is supplied by the engine, not computed here. */
   if (isCorrect) score++;
 
   var opts = document.querySelectorAll('.option-btn');
   opts.forEach(function(o, i){
     o.disabled = true;
-    if (i === q.correct) o.classList.add('correct');
+    if (__glgKey >= 0 && i === __glgKey) o.classList.add('correct');
     else if (i === idx && !isCorrect) o.classList.add('wrong');
   });
 
@@ -1020,7 +1017,7 @@ function selectOption(idx) {
   var fb = document.getElementById('qFeedback');
   fb.style.display = 'block';
   fb.className = 'feedback-box ' + (isCorrect ? 'correct' : 'wrong');
-  fb.innerHTML = (isCorrect ? '✅ <strong>Correct!</strong> ' : '❌ <strong>Incorrect.</strong> ') + q.explanation;
+  fb.innerHTML = (isCorrect ? '✅ <strong>Correct!</strong> ' : '❌ <strong>Incorrect.</strong> ') + (__glgFbHtml || '');
 
   document.getElementById('qNextBtn').disabled = false;
 
@@ -1079,13 +1076,13 @@ function showResults() {
   var letters = ['A','B','C','D'];
   var reviewList = document.getElementById('reviewList');
   reviewList.innerHTML = questions.map(function(q, i){
-    var correct = answers[i] === q.correct;
+    var correct = !!(window.__glgVerdicts || [])[i];
     return '<div class="review-item ' + (correct ? 'correct' : 'wrong') + '" style="opacity:0;transform:translateY(8px);transition:opacity 0.25s ease,transform 0.25s ease;" data-review-idx="' + i + '">'
       + '<div class="ri-q">' + (i+1) + '. ' + q.q + '</div>'
       + '<div class="ri-ans">'
       + (correct ? '✅' : '❌') + ' Your answer: <strong>' + letters[answers[i]] + '. ' + q.options[answers[i]] + '</strong>'
-      + (!correct ? '<br>✅ Correct: <strong>' + letters[q.correct] + '. ' + q.options[q.correct] + '</strong>' : '')
-      + (!correct ? '<br><em style="color:#666;font-size:0.8rem;">' + q.explanation + '</em>' : '')
+      + (!correct && (window.__glgKeyIdx || [])[i] >= 0 ? '<br>✅ Correct: <strong>' + letters[window.__glgKeyIdx[i]] + '. ' + q.options[window.__glgKeyIdx[i]] + '</strong>' : '')
+      + (!correct && (window.__glgFb || [])[i] ? '<br><em style="color:#666;font-size:0.8rem;">' + window.__glgFb[i] + '</em>' : '')
       + '</div></div>';
   }).join('');
 
@@ -1566,6 +1563,116 @@ document.addEventListener('DOMContentLoaded', function(){
   initMascot();
 });
 </script>
+
+
+<script>
+/* CUTOVER SHIM (P2-A) — server-side grading. Injected by tools/cutover-shell.py.
+   No answer key in this file. selectOption() posts the choice; the ENGINE returns
+   the verdict and the feedback; the authored handler (renamed selectOptionUI) does
+   every bit of the UI it did before — streak, dots, mascot, score header, progress. */
+(function () {
+  var MODULE_ID = 'day3';
+  var LETTERS = 'abcdefgh';
+  var attemptId = null;
+  var startPromise = null;
+
+  window.__glgVerdicts = window.__glgVerdicts || [];
+  window.__glgKeyIdx   = window.__glgKeyIdx   || [];   /* -1 = engine did not disclose */
+  window.__glgFb       = window.__glgFb       || [];
+
+  function api(path, body) {
+    return fetch('/api/quiz/' + path, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(body)
+    }).then(function (r) {
+      if (!r.ok) return r.text().then(function (t) { throw new Error(t || ('HTTP ' + r.status)); });
+      return r.json();
+    });
+  }
+
+  function learner() {
+    try { return localStorage.getItem('glg_learner') || 'anonymous'; }
+    catch (e) { return 'anonymous'; }
+  }
+
+  function ensureAttempt() {
+    if (attemptId) return Promise.resolve(attemptId);
+    if (!startPromise) {
+      startPromise = api('start', { module: MODULE_ID, learner: learner() })
+        .then(function (d) { attemptId = d.attempt_id; return attemptId; });
+    }
+    return startPromise;
+  }
+
+  function showError(msg) {
+    var fb = document.getElementById('qFeedback');
+    if (!fb) return;
+    fb.style.display = 'block';
+    fb.className = 'feedback-box wrong';
+    fb.innerHTML = '⚠️ <strong>Could not reach the grading server.</strong> Your answer was '
+                 + 'NOT recorded — check your connection and choose again. (' + msg + ')';
+  }
+
+  /* P2-A questions are positional: the Nth object in the array is bank id q(N+1),
+     and option index i is bank option LETTERS[i]. Proven against all 5 banks. */
+  window.selectOption = function (idx) {
+    if (typeof answers !== 'undefined' && answers[currentQ] !== null) return;   /* already scored */
+    if (currentQ === 0) { window.__glgVerdicts = []; window.__glgKeyIdx = []; window.__glgFb = []; }
+    var qi = currentQ;
+    return ensureAttempt().then(function (aid) {
+      return api('answer', { attempt_id: aid, qid: 'q' + (qi + 1), choice: LETTERS[idx] });
+    }).then(function (d) {
+      var keyIdx = (d.correct_id && LETTERS.indexOf(d.correct_id) >= 0)
+                 ? LETTERS.indexOf(d.correct_id) : -1;
+      window.__glgVerdicts[qi] = !!d.correct;
+      window.__glgKeyIdx[qi]   = keyIdx;
+      window.__glgFb[qi]       = d.feedback || '';
+      if (typeof window.selectOptionUI === 'function') {
+        window.selectOptionUI(idx, !!d.correct, keyIdx, d.feedback || '');
+      }
+      /* Authoritative completion once every question has been submitted. */
+      if (typeof answers !== 'undefined' && typeof questions !== 'undefined'
+          && answers.filter(function (a) { return a !== null; }).length === questions.length) {
+        api('complete', { attempt_id: attemptId })
+          .then(function (r) { window.__glgResult = r; })
+          .catch(function (e) { console.error('[glg-cutover] complete failed', e); });
+      }
+      return d;
+    }).catch(function (err) {
+      showError(err && err.message ? err.message : err);
+      console.error('[glg-cutover] grading failed', err);
+    });
+  };
+
+  document.addEventListener('DOMContentLoaded', function () { ensureAttempt().catch(function () {}); });
+})();
+</script>
+
+
+<script>
+/* GLGQuiz configuration — NH-3 Insurance in Personal Injury */
+window.GLG_MODULE_CONFIG = {
+  moduleId: 'day3',
+  onBankLoaded: function(bank) {
+    var basemax = document.getElementById('basemax');
+    var gate    = document.getElementById('gate');
+    if (basemax) basemax.textContent = bank.base_max;
+    if (gate)    gate.textContent    = bank.pass_pct;
+  },
+  onStartQuiz: function() {
+    if (typeof audioCtx !== 'undefined' && audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume().catch(function(){});
+    }
+  },
+  onAnswered: function(r) {
+    var ts = document.getElementById('total-score');
+    if (ts) ts.textContent = r.base_score;
+    if (typeof updateStreak === 'function') updateStreak(r.correct);
+  }
+};
+</script>
+<script src="api-quiz-engine.js"></script>
 
 </body>
 </html>

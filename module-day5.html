@@ -293,6 +293,159 @@ main, .main-wrap { width: 100%; max-width: 720px; margin: 0 auto; padding: 1.25r
 @media (min-width: 520px) { .match-row { flex-direction: row; align-items: center; } .match-label { min-width: 160px; flex-shrink: 0; } .match-drop { flex: 1; } }
 button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-highlight-color: rgba(0,0,0,0.07); touch-action: manipulation; -webkit-appearance: none; user-select: none; -webkit-user-select: none; }
 </style>
+
+<style>
+/* ── GLG QUIZ ENGINE — question type styles (2026-09-02) ──────────────────
+     All classes rendered by api-quiz-engine.js. Tokens: navy #141c2c, gold #C5975B.
+     Sourced from engine.html stylesheet + Harrell Part 8c spec. */
+
+  /* Question card */
+  .q { background:#fff; border:1px solid #e2e5ea; border-radius:10px;
+       padding:20px; margin:16px 0; box-shadow:0 1px 6px rgba(20,28,44,.06); }
+  .q-num { font-size:12px; letter-spacing:.06em; color:#C5975B; font-weight:700;
+            text-transform:uppercase; margin-bottom:8px; }
+  .q-text { font-weight:600; margin:8px 0 16px; font-size:1rem; line-height:1.55;
+             color:#141c2c; }
+
+  /* MC option buttons */
+  button.opt { display:block; width:100%; text-align:left; padding:13px 15px; margin:7px 0;
+    border:1px solid #d8dbe3; border-radius:8px; background:#fafbfd; cursor:pointer;
+    font-size:15px; font-family:var(--font-b); color:#222; line-height:1.45;
+    transition:background .12s, border-color .12s; }
+  button.opt:hover:not(.locked) { background:#eef4ff; border-color:#141c2c; }
+  button.opt.correct { background:#d4edda; border-color:#10774A; }
+  button.opt.incorrect { background:#f8d7da; border-color:#870101; }
+  button.opt.locked { cursor:default; opacity:.85; }
+
+  /* Fill-in-the-blank */
+  .fill-stem { font-weight:600; margin:8px 0 14px; line-height:2.2; }
+  input.blank { display:inline-block; min-height:44px; min-width:120px; padding:8px 10px;
+    margin:2px 4px; border:1px solid #ccd; border-radius:8px; background:#fafbfd;
+    font-size:16px; font-family:var(--font-b); vertical-align:middle;
+    box-sizing:border-box; max-width:100%; }
+  input.blank:focus { outline:2px solid #141c2c; background:#fff; }
+  input.blank.correct { background:#d4edda; border-color:#10774A; }
+  input.blank.incorrect { background:#f8d7da; border-color:#870101; }
+  input.blank.locked { opacity:.85; }
+  button.submit-fill { min-height:44px; padding:11px 20px; margin-top:12px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-fill.locked { opacity:.5; cursor:default; }
+
+  /* Markup */
+  .markup-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .markup-passage { margin:0 0 10px; border:1px solid #e2e5ea; border-radius:8px; overflow:hidden; }
+  button.span { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:11px 13px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:16px; font-family:var(--font-b);
+    color:#222; line-height:1.5; overflow-wrap:break-word; }
+  button.span:last-child { border-bottom:0; }
+  button.span:hover:not(.locked) { background:#eef4ff; }
+  button.span.selected { background:#fff3cd; box-shadow:inset 4px 0 0 #b8860b; font-weight:600; }
+  button.span.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.span.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.span.locked { cursor:default; opacity:.9; }
+  button.submit-markup { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-markup.locked { opacity:.5; cursor:default; }
+  .markup-count { font-size:13px; color:#555; margin-top:8px; }
+
+  /* Sort rows with up/down controls */
+  .sort-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .sort-list { margin:0 0 12px; border:1px solid #e2e5ea; border-radius:8px;
+               overflow:hidden; background:#fff; }
+  .sort-row { display:flex; align-items:stretch; border-bottom:1px solid #eef0f3;
+              background:#fff; }
+  .sort-row:last-child { border-bottom:0; }
+  .sort-pos { flex:0 0 34px; display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700; color:#C5975B; background:#f5f5f0; }
+  .sort-text { flex:1 1 auto; padding:11px 12px; font-size:15px; line-height:1.45;
+    display:flex; align-items:center; overflow-wrap:break-word; min-width:0; }
+  .sort-moves { flex:0 0 auto; display:flex; align-items:center; gap:4px; padding:4px 6px; }
+  button.sort-move { min-height:44px; min-width:44px; border:1px solid #ccd; border-radius:8px;
+    background:#fafbfd; cursor:pointer; font-size:15px; color:#141c2c;
+    font-family:var(--font-b); }
+  button.sort-move:hover:not(:disabled) { background:#eef4ff; }
+  button.sort-move:disabled { opacity:.35; cursor:default; }
+  .sort-row.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  .sort-row.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  .sort-row.locked .sort-text { opacity:.9; }
+  button.submit-sort { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-sort.locked { opacity:.5; cursor:default; }
+
+  /* Match chips + slot rows */
+  .match-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .match-tray { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px; padding:10px;
+    border:1px dashed #ccd; border-radius:8px; background:#fafbfd; }
+  button.chip { min-height:44px; padding:10px 16px; border:1px solid #ccd; border-radius:22px;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b); color:#222;
+    max-width:100%; overflow-wrap:break-word; text-align:left; }
+  button.chip:hover:not(.locked) { background:#eef4ff; }
+  button.chip.selected { background:#141c2c; color:#fff; border-color:#141c2c; font-weight:600; }
+  button.chip.placed { opacity:.35; }
+  button.chip.locked { cursor:default; }
+  .match-slots { border:1px solid #e2e5ea; border-radius:8px; overflow:hidden;
+                 background:#fff; margin-bottom:12px; }
+  button.slot { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:10px 14px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b);
+    color:#222; line-height:1.45; overflow-wrap:break-word; }
+  button.slot:last-child { border-bottom:0; }
+  button.slot:hover:not(.locked) { background:#eef4ff; }
+  button.slot.armed { box-shadow:inset 4px 0 0 #C5975B; background:#fffdf5; }
+  .slot-label { font-weight:600; display:block; }
+  .slot-fill { display:block; font-size:14px; margin-top:3px; color:#C5975B; font-weight:600; }
+  .slot-fill.empty { color:#8a8f98; font-weight:400; font-style:italic; }
+  button.slot.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.slot.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.slot.locked { cursor:default; opacity:.9; }
+  button.submit-match { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-match.locked { opacity:.5; cursor:default; }
+  .match-count { font-size:13px; color:#555; margin-top:8px; }
+  .match-credit { font-size:13px; font-weight:600; color:#8a6d1f; margin-top:6px; }
+
+  /* Feedback */
+  .fb { margin-top:12px; padding:12px 14px; border-radius:8px; font-size:14px; display:none; }
+  .fb.show { display:block; }
+  .fb.ok { background:#d4edda; border-left:4px solid #10774A; }
+  .fb.no { background:#f8d7da; border-left:4px solid #870101; }
+  .fb.neutral { background:#eef0f6; border-left:4px solid #6c757d; color:#333; } /* self_assessment: no verdict */
+
+  /* Branching nodes */
+  .branch-scenario { border-left:4px solid #C5975B; padding-left:12px; margin:14px 0; }
+  .branch-turn { font-size:12px; letter-spacing:.06em; color:#8a6d1f; font-weight:700;
+                 text-transform:uppercase; }
+  .branch-instruction { font-weight:600; margin:6px 0 10px; color:#141c2c; }
+  .branch-consequence { margin-top:10px; padding:10px 12px; border-left:4px solid #141c2c;
+    background:#eef2f7; border-radius:0 8px 8px 0; font-size:13px; color:#33415c; display:none; }
+  .branch-consequence.show { display:block; }
+
+  /* Pagination — one question at a time (Harrell Part 8b) */
+  .q-base { display: none !important; }
+  .q-base.q-active { display: block !important; }
+  .q-nav { display:flex; justify-content:space-between; align-items:center;
+            margin-top:20px; padding-top:16px; border-top:1px solid #e8e6e0; }
+  .q-nav-btn { min-height:44px; padding:10px 22px; border-radius:8px;
+                font-size:15px; cursor:pointer; font-family:var(--font-b);
+                font-weight:600; transition:background .12s; }
+  .q-nav-btn.next { background:#141c2c; color:#C5975B; border:2px solid #141c2c; }
+  .q-nav-btn.next:hover { background:#1e2a40; }
+  .q-nav-btn.back { background:#fff; color:#141c2c; border:2px solid #c8c5be; }
+  .q-nav-btn.back:hover { background:#f5f5f0; }
+  .q-pg-spacer { display:inline-block; min-width:40px; }
+  #q-progress { font-size:12px; color:#C5975B; font-weight:600;
+                letter-spacing:.5px; text-transform:uppercase; }
+
+
+</style>
+
+<!-- CUTOVER: server-side grading. Answer keys are not in this file. -->
+    <link rel="stylesheet" href="boss-challenge.css">
 </head>
 <body>
 
@@ -333,7 +486,7 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
 <!-- PROGRESS -->
 <div class="progress-wrap">
   <div class="progress-meta">
-    <span id="prog-label">Section 1 of 8</span>
+    <span id="prog-label">Section 1 of 9</span>
     <span id="prog-pct">0%</span>
   </div>
   <div class="progress-bg"><div class="progress-fill" id="prog-fill"></div></div>
@@ -347,8 +500,9 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
   <button class="nav-pill" id="nav-3" onclick="goToSection(3)" aria-label="Section 4: Work the Insurance">4. Insurance</button>
   <button class="nav-pill" id="nav-4" onclick="goToSection(4)" aria-label="Section 5: Send Documents">5. Documents</button>
   <button class="nav-pill" id="nav-5" onclick="goToSection(5)" aria-label="Section 6: Boss Challenge">6. Boss</button>
-  <button class="nav-pill" id="nav-6" onclick="goToSection(6)" aria-label="Section 7: Results">7. Results</button>
-  <button class="nav-pill" id="nav-7" onclick="goToSection(7)" aria-label="Section 8: Feedback">8. Feedback</button>
+  <button class="nav-pill" id="nav-6" onclick="startQuiz()">7. Quiz</button>
+  <button class="nav-pill" id="nav-7" onclick="goToSection(7)">8. Results</button>
+  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">9. Feedback</button>
 </nav>
 
 <main>
@@ -416,69 +570,14 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
   <div class="section-body">
 
     <!-- Q1 -->
-    <div class="question-block" id="q1-block">
-      <div class="q-num">Question 1 of 5</div>
-      <div class="q-text">It's Tuesday morning. A client signed retainer 15 days ago. Pre-litigation case. Your CM hasn't had contact since intake. According to GLG's communication standard — what's the problem?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q1','a')" id="q1-a"><span class="opt-letter">A</span><span class="opt-text">We missed the 14-day contact window — client should have been reached by yesterday</span></button>
-        <button class="option-btn" onclick="answer('q1','b')" id="q1-b"><span class="opt-letter">B</span><span class="opt-text">No problem — 15 days is fine for pre-litigation</span></button>
-        <button class="option-btn" onclick="answer('q1','c')" id="q1-c"><span class="opt-letter">C</span><span class="opt-text">The 30-day window applies to all clients — we're fine — the firm's SOP covers this in the employee handbook</span></button>
-        <button class="option-btn" onclick="answer('q1','d')" id="q1-d"><span class="opt-letter">D</span><span class="opt-text">Only attorneys need to follow contact schedules</span></button>
-      </div>
-      <div class="feedback-box" id="q1-feedback"></div>
-    </div>
 
     <!-- Q2 -->
-    <div class="question-block" id="q2-block">
-      <div class="q-num">Question 2 of 5</div>
-      <div class="q-text">You just finished a call with a client who gave you important new information about their case. You close the call. What happens next — before you do anything else?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q2','a')" id="q2-a"><span class="opt-letter">A</span><span class="opt-text">Document the call and update the case in CasePeer immediately</span></button>
-        <button class="option-btn" onclick="answer('q2','b')" id="q2-b"><span class="opt-letter">B</span><span class="opt-text">Email the client a summary of the call</span></button>
-        <button class="option-btn" onclick="answer('q2','c')" id="q2-c"><span class="opt-letter">C</span><span class="opt-text">Tell your CM at the next team meeting</span></button>
-        <button class="option-btn" onclick="answer('q2','d')" id="q2-d"><span class="opt-letter">D</span><span class="opt-text">Add it to your personal notes to handle later — ensure the client is aware of this approach as well</span></button>
-      </div>
-      <div class="feedback-box" id="q2-feedback"></div>
-    </div>
 
     <!-- Q3 -->
-    <div class="question-block" id="q3-block">
-      <div class="q-num">Question 3 of 5</div>
-      <div class="q-text">A client calls at 4:45 PM on Thursday. You're slammed and can't take the call. According to GLG's callback standard — what are you required to do?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q3','a')" id="q3-a"><span class="opt-letter">A</span><span class="opt-text">Return the call within 24 hours — which means before 4:45 PM Friday</span></button>
-        <button class="option-btn" onclick="answer('q3','b')" id="q3-b"><span class="opt-letter">B</span><span class="opt-text">Return the call by end of business Friday (24 business hours) — failure to follow this step can delay the entire case</span></button>
-        <button class="option-btn" onclick="answer('q3','c')" id="q3-c"><span class="opt-letter">C</span><span class="opt-text">Only urgent matters require same-day callbacks</span></button>
-        <button class="option-btn" onclick="answer('q3','d')" id="q3-d"><span class="opt-letter">D</span><span class="opt-text">Return the call Monday morning — weekends are excluded</span></button>
-      </div>
-      <div class="feedback-box" id="q3-feedback"></div>
-    </div>
 
     <!-- Q4 -->
-    <div class="question-block" id="q4-block">
-      <div class="q-num">Question 4 of 5</div>
-      <div class="q-text">Your CM's scorecard shows a red number next to "14-day contact rate." What does that tell you — and what should you do?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q4','a')" id="q4-a"><span class="opt-letter">A</span><span class="opt-text">Red means the metric is off-target — some clients may be going too long without contact. Flag it and audit the case load.</span></button>
-        <button class="option-btn" onclick="answer('q4','b')" id="q4-b"><span class="opt-letter">B</span><span class="opt-text">Red means excellent — the higher the number the better — the firm's SOP covers this in the employee handbook and follow up with the team lead if needed</span></button>
-        <button class="option-btn" onclick="answer('q4','c')" id="q4-c"><span class="opt-letter">C</span><span class="opt-text">Red is a system glitch — ignore it</span></button>
-        <button class="option-btn" onclick="answer('q4','d')" id="q4-d"><span class="opt-letter">D</span><span class="opt-text">Scorecards only apply to senior staff</span></button>
-      </div>
-      <div class="feedback-box" id="q4-feedback"></div>
-    </div>
 
     <!-- Q5 -->
-    <div class="question-block" id="q5-block">
-      <div class="q-num">Question 5 of 5</div>
-      <div class="q-text">You arrive 8 minutes late on a Wednesday and don't clock in or log it. Your CM notices at the end of the week. According to GLG's attendance policy — what's the correct procedure you should have followed?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q5','a')" id="q5-a"><span class="opt-letter">A</span><span class="opt-text">Clock in when you arrive regardless of time, and notify your CM proactively</span></button>
-        <button class="option-btn" onclick="answer('q5','b')" id="q5-b"><span class="opt-letter">B</span><span class="opt-text">Nothing — 8 minutes doesn't matter</span></button>
-        <button class="option-btn" onclick="answer('q5','c')" id="q5-c"><span class="opt-letter">C</span><span class="opt-text">Wait to see if anyone notices before doing anything — make sure this is noted in the case management system</span></button>
-        <button class="option-btn" onclick="answer('q5','d')" id="q5-d"><span class="opt-letter">D</span><span class="opt-text">Ask a coworker to cover for you</span></button>
-      </div>
-      <div class="feedback-box" id="q5-feedback"></div>
-    </div>
 
     <div class="section-score" id="s2-score" style="display:none;">
       <div class="score-display" id="s2-pts">0</div>
@@ -527,69 +626,14 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
     </div>
 
     <!-- Q6 -->
-    <div class="question-block" id="q6-block">
-      <div class="q-num">Question 1 of 5 — Case Type</div>
-      <div class="q-text">Marcus was rear-ended while stopped at a red light. What type of PI case is this, and what does that tell you about the initial liability picture?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q6','a')" id="q6-a"><span class="opt-letter">A</span><span class="opt-text">Motor vehicle accident — rear-end collision. Liability is presumptively clear — the driver who rear-ends a stopped vehicle is almost always at fault.</span></button>
-        <button class="option-btn" onclick="answer('q6','b')" id="q6-b"><span class="opt-letter">B</span><span class="opt-text">Slip and fall — liability is disputed until investigation — documentation should reflect this approach clearly so the client record remains current and follow up with the team lead if needed</span></button>
-        <button class="option-btn" onclick="answer('q6','c')" id="q6-c"><span class="opt-letter">C</span><span class="opt-text">Workers' compensation case</span></button>
-        <button class="option-btn" onclick="answer('q6','d')" id="q6-d"><span class="opt-letter">D</span><span class="opt-text">Product liability — the bus had defective brakes</span></button>
-      </div>
-      <div class="feedback-box" id="q6-feedback"></div>
-    </div>
 
     <!-- Q7 -->
-    <div class="question-block" id="q7-block">
-      <div class="q-num">Question 2 of 5 — Government Entity Flag</div>
-      <div class="q-text">You see that the at-fault vehicle is a MARTA bus. MARTA is the Metropolitan Atlanta Rapid Transit Authority — a government entity. Why does this matter RIGHT NOW, today?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q7','a')" id="q7-a"><span class="opt-letter">A</span><span class="opt-text">It doesn't — government cases work exactly like regular car accidents</span></button>
-        <button class="option-btn" onclick="answer('q7','b')" id="q7-b"><span class="opt-letter">B</span><span class="opt-text">Government cases require an Ante Litem Notice before you can sue. That notice has a strict deadline — missing it can kill the entire case.</span></button>
-        <button class="option-btn" onclick="answer('q7','c')" id="q7-c"><span class="opt-letter">C</span><span class="opt-text">We can't take government cases — refer Marcus to another firm</span></button>
-        <button class="option-btn" onclick="answer('q7','d')" id="q7-d"><span class="opt-letter">D</span><span class="opt-text">Government cases have longer statutes of limitations — we have more time — check with your CM or supervisor for guidance to ensure compliance with firm standards</span></button>
-      </div>
-      <div class="feedback-box" id="q7-feedback"></div>
-    </div>
 
     <!-- Q8 -->
-    <div class="question-block" id="q8-block">
-      <div class="q-num">Question 3 of 5 — Ante Litem Deadline</div>
-      <div class="q-text">For a claim against MARTA (a Georgia government entity), the Ante Litem Notice must be filed within how long — and when does that clock start?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q8','a')" id="q8-a"><span class="opt-letter">A</span><span class="opt-text">2 years from the accident date — same as all PI cases — the case file should already contain this information or making promises to the client about outcomes</span></button>
-        <button class="option-btn" onclick="answer('q8','b')" id="q8-b"><span class="opt-letter">B</span><span class="opt-text">6 months from the date of injury — the clock is already running. Marcus was hurt May 28. That's November 28, 2026.</span></button>
-        <button class="option-btn" onclick="answer('q8','c')" id="q8-c"><span class="opt-letter">C</span><span class="opt-text">90 days — we have less than 3 months to act</span></button>
-        <button class="option-btn" onclick="answer('q8','d')" id="q8-d"><span class="opt-letter">D</span><span class="opt-text">1 year from the date the client retained us</span></button>
-      </div>
-      <div class="feedback-box" id="q8-feedback"></div>
-    </div>
 
     <!-- Q9 -->
-    <div class="question-block" id="q9-block">
-      <div class="q-num">Question 4 of 5 — Statute of Limitations</div>
-      <div class="q-text">Separate from the Ante Litem, what is the standard statute of limitations for a Georgia personal injury claim — and what does that mean for Marcus's case?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q9','a')" id="q9-a"><span class="opt-letter">A</span><span class="opt-text">3 years — plenty of time, no urgency needed — ask the supervising attorney if you are unsure about this and should be handled with care</span></button>
-        <button class="option-btn" onclick="answer('q9','b')" id="q9-b"><span class="opt-letter">B</span><span class="opt-text">2 years from the date of injury — May 28, 2028. But the Ante Litem deadline comes FIRST and is harder to miss.</span></button>
-        <button class="option-btn" onclick="answer('q9','c')" id="q9-c"><span class="opt-letter">C</span><span class="opt-text">1 year — we need to file suit immediately</span></button>
-        <button class="option-btn" onclick="answer('q9','d')" id="q9-d"><span class="opt-letter">D</span><span class="opt-text">6 months — same as the Ante Litem deadline</span></button>
-      </div>
-      <div class="feedback-box" id="q9-feedback"></div>
-    </div>
 
     <!-- Q10 -->
-    <div class="question-block" id="q10-block">
-      <div class="q-num">Question 5 of 5 — What to Flag</div>
-      <div class="q-text">You've reviewed the case. You're about to bring it to your CM. What's the single most important flag you need to raise immediately — right now, on intake day?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q10','a')" id="q10-a"><span class="opt-letter">A</span><span class="opt-text">"The client's injuries sound serious — we should order all medical records."</span></button>
-        <button class="option-btn" onclick="answer('q10','b')" id="q10-b"><span class="opt-letter">B</span><span class="opt-text">"This is a MARTA case — government entity. The Ante Litem Notice has a 6-month deadline from the accident. That's November 28. The attorney needs to know today."</span></button>
-        <button class="option-btn" onclick="answer('q10','c')" id="q10-c"><span class="opt-letter">C</span><span class="opt-text">"The police report isn't in yet — we should wait for that before doing anything." — this applies to all case types across the board — always confirm this with your supervising attorney</span></button>
-        <button class="option-btn" onclick="answer('q10','d')" id="q10-d"><span class="opt-letter">D</span><span class="opt-text">"Marcus needs to call his health insurance provider before we proceed."</span></button>
-      </div>
-      <div class="feedback-box" id="q10-feedback"></div>
-    </div>
 
     <div class="section-score" id="s3-score" style="display:none;">
       <div class="score-display" id="s3-pts">0</div>
@@ -619,69 +663,14 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
     </div>
 
     <!-- Q11 -->
-    <div class="question-block" id="q11-block">
-      <div class="q-num">Question 1 of 5 — Claim Type</div>
-      <div class="q-text">Marcus was hit by a MARTA bus. He has injuries and vehicle damage. What type of insurance claim(s) are potentially in play here?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q11','a')" id="q11-a"><span class="opt-letter">A</span><span class="opt-text">Only PD (property damage) — vehicle repairs only — the firm's SOP covers this in the employee handbook and follow up with the team lead if needed</span></button>
-        <button class="option-btn" onclick="answer('q11','b')" id="q11-b"><span class="opt-letter">B</span><span class="opt-text">BI (bodily injury) against MARTA's coverage, PD for vehicle damage, and potentially UM/UIM if MARTA's coverage is insufficient</span></button>
-        <button class="option-btn" onclick="answer('q11','c')" id="q11-c"><span class="opt-letter">C</span><span class="opt-text">Only UM/UIM — government entities don't carry BI</span></button>
-        <button class="option-btn" onclick="answer('q11','d')" id="q11-d"><span class="opt-letter">D</span><span class="opt-text">Workers' comp only — MARTA is an employer</span></button>
-      </div>
-      <div class="feedback-box" id="q11-feedback"></div>
-    </div>
 
     <!-- Q12 -->
-    <div class="question-block" id="q12-block">
-      <div class="q-num">Question 2 of 5 — First Call</div>
-      <div class="q-text">You need to open the insurance claim. Which insurance do you contact FIRST — and why?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q12','a')" id="q12-a"><span class="opt-letter">A</span><span class="opt-text">Marcus's own State Farm policy — because it's easier to work with our own client's insurance — always log the outcome in CasePeer for the record</span></button>
-        <button class="option-btn" onclick="answer('q12','b')" id="q12-b"><span class="opt-letter">B</span><span class="opt-text">MARTA's liability insurer — because they are at fault. Open the BI claim first against the responsible party.</span></button>
-        <button class="option-btn" onclick="answer('q12','c')" id="q12-c"><span class="opt-letter">C</span><span class="opt-text">Grady Hospital — to get the bills paid quickly</span></button>
-        <button class="option-btn" onclick="answer('q12','d')" id="q12-d"><span class="opt-letter">D</span><span class="opt-text">It doesn't matter — open all claims simultaneously</span></button>
-      </div>
-      <div class="feedback-box" id="q12-feedback"></div>
-    </div>
 
     <!-- Q13 -->
-    <div class="question-block" id="q13-block">
-      <div class="q-num">Question 3 of 5 — Finding Insurance Info</div>
-      <div class="q-text">You need MARTA's insurance carrier and claim contact info. The police report hasn't arrived yet. Where do you look?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q13','a')" id="q13-a"><span class="opt-letter">A</span><span class="opt-text">Google "MARTA insurance" and call whatever number comes up</span></button>
-        <button class="option-btn" onclick="answer('q13','b')" id="q13-b"><span class="opt-letter">B</span><span class="opt-text">Wait for the police report — that's the only official source — be sure to check the case timeline first before taking any further action on the case or making promises to the client about outcomes</span></button>
-        <button class="option-btn" onclick="answer('q13','c')" id="q13-c"><span class="opt-letter">C</span><span class="opt-text">Contact MARTA's risk management / legal department directly — government entities self-insure or have known carriers. Check firm databases, ask your CM, or call MARTA's office.</span></button>
-        <button class="option-btn" onclick="answer('q13','d')" id="q13-d"><span class="opt-letter">D</span><span class="opt-text">Ask Marcus to call MARTA himself and get the info</span></button>
-      </div>
-      <div class="feedback-box" id="q13-feedback"></div>
-    </div>
 
     <!-- Q14 -->
-    <div class="question-block" id="q14-block">
-      <div class="q-num">Question 4 of 5 — Policy Limits</div>
-      <div class="q-text">Why do policy limits matter so much at the start of a case — before we even know how much Marcus's injuries are worth?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q14','a')" id="q14-a"><span class="opt-letter">A</span><span class="opt-text">They don't — we worry about limits at negotiation time — verify the case status before committing to this approach per GLG's quality assurance guidelines and update the case file accordingly</span></button>
-        <button class="option-btn" onclick="answer('q14','b')" id="q14-b"><span class="opt-letter">B</span><span class="opt-text">We need limits to calculate our fee percentage</span></button>
-        <button class="option-btn" onclick="answer('q14','c')" id="q14-c"><span class="opt-letter">C</span><span class="opt-text">Policy limits define the maximum recovery possible from that coverage. Knowing limits early lets us identify gaps, flag UM/UIM needs, and set realistic expectations with Marcus.</span></button>
-        <button class="option-btn" onclick="answer('q14','d')" id="q14-d"><span class="opt-letter">D</span><span class="opt-text">Limits only matter in litigation — not pre-litigation</span></button>
-      </div>
-      <div class="feedback-box" id="q14-feedback"></div>
-    </div>
 
     <!-- Q15 -->
-    <div class="question-block" id="q15-block">
-      <div class="q-num">Question 5 of 5 — Coverage Gaps</div>
-      <div class="q-text">Scenario: MARTA's BI coverage pays out $75,000, but Marcus's total damages are estimated at $180,000. What coverage should you check that might fill the gap?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q15','a')" id="q15-a"><span class="opt-letter">A</span><span class="opt-text">Nothing — if MARTA pays the max, the case is closed</span></button>
-        <button class="option-btn" onclick="answer('q15','b')" id="q15-b"><span class="opt-letter">B</span><span class="opt-text">PD coverage — property damage can be converted to bodily injury — the firm's SOP covers this in the employee handbook and follow up with the team lead if needed</span></button>
-        <button class="option-btn" onclick="answer('q15','c')" id="q15-c"><span class="opt-letter">C</span><span class="opt-text">Marcus's own UM/UIM coverage (State Farm, $50K) — it can kick in when the at-fault party's coverage falls short of actual damages</span></button>
-        <button class="option-btn" onclick="answer('q15','d')" id="q15-d"><span class="opt-letter">D</span><span class="opt-text">MedPay only covers medical bills, not the gap</span></button>
-      </div>
-      <div class="feedback-box" id="q15-feedback"></div>
-    </div>
 
     <div class="section-score" id="s4-score" style="display:none;">
       <div class="score-display" id="s4-pts">0</div>
@@ -711,87 +700,14 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
     </div>
 
     <!-- Q16 -->
-    <div class="question-block" id="q16-block">
-      <div class="q-num">Question 1 of 5 — First Document</div>
-      <div class="q-text">The retainer just got signed at 9:05 AM. You have a desk full of other tasks. What is the FIRST document that must go out — and when?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q16','a')" id="q16-a"><span class="opt-letter">A</span><span class="opt-text">Medical records request — get the Grady ER records right away — always log the outcome in CasePeer for the record as this is a common source of errors and should be handled with care</span></button>
-        <button class="option-btn" onclick="answer('q16','b')" id="q16-b"><span class="opt-letter">B</span><span class="opt-text">Demand letter — strike while the injury is fresh</span></button>
-        <button class="option-btn" onclick="answer('q16','c')" id="q16-c"><span class="opt-letter">C</span><span class="opt-text">Letter of Representation (LOR) — it goes out the same day the retainer is signed, before anything else. Every day without one is a day MARTA can contact Marcus directly.</span></button>
-        <button class="option-btn" onclick="answer('q16','d')" id="q16-d"><span class="opt-letter">D</span><span class="opt-text">Intake questionnaire — get more facts before acting</span></button>
-      </div>
-      <div class="feedback-box" id="q16-feedback"></div>
-    </div>
 
     <!-- Q17 -->
-    <div class="question-block" id="q17-block">
-      <div class="q-num">Question 2 of 5 — LOR Recipients</div>
-      <div class="q-text">You're sending the LOR. Who gets a copy? (Select the best answer.)</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q17','a')" id="q17-a"><span class="opt-letter">A</span><span class="opt-text">Only MARTA's insurance / risk management</span></button>
-        <button class="option-btn" onclick="answer('q17','b')" id="q17-b"><span class="opt-letter">B</span><span class="opt-text">Only Marcus's own insurance</span></button>
-        <button class="option-btn" onclick="answer('q17','c')" id="q17-c"><span class="opt-letter">C</span><span class="opt-text">MARTA's liability carrier AND Marcus's UM/UIM carrier (State Farm) — every insurer that might be involved in the claim gets notified</span></button>
-        <button class="option-btn" onclick="answer('q17','d')" id="q17-d"><span class="opt-letter">D</span><span class="opt-text">The LOR goes to the court first, then to insurers — this is outlined in the training manual per the procedures in the employee handbook so the client record remains current</span></button>
-      </div>
-      <div class="feedback-box" id="q17-feedback"></div>
-    </div>
 
     <!-- Q18 -->
-    <div class="question-block" id="q18-block">
-      <div class="q-num">Question 3 of 5 — Treatment Funding</div>
-      <div class="q-text">Marcus tells you he doesn't have health insurance and can't pay for follow-up treatment out of pocket. He needs to see a chiropractor but doesn't know how he'll afford it. What document solves this?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q18','a')" id="q18-a"><span class="opt-letter">A</span><span class="opt-text">A hardship waiver — ask the doctor to defer payment indefinitely — make sure this is noted in the case management system in accordance with state bar requirements</span></button>
-        <button class="option-btn" onclick="answer('q18','b')" id="q18-b"><span class="opt-letter">B</span><span class="opt-text">A demand letter to MARTA — get them to pay the bills directly</span></button>
-        <button class="option-btn" onclick="answer('q18','c')" id="q18-c"><span class="opt-letter">C</span><span class="opt-text">A Letter of Protection (LOP) — it guarantees the provider will be paid from settlement proceeds. Lets Marcus get treatment now, pay at resolution.</span></button>
-        <button class="option-btn" onclick="answer('q18','d')" id="q18-d"><span class="opt-letter">D</span><span class="opt-text">A MedPay claim — that's what it's for</span></button>
-      </div>
-      <div class="feedback-box" id="q18-feedback"></div>
-    </div>
 
     <!-- Q19 -->
-    <div class="question-block" id="q19-block">
-      <div class="q-num">Question 4 of 5 — Police Report</div>
-      <div class="q-text">The police report hasn't arrived yet. How do you get it — and how long do you wait before you start requesting it?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q19','a')" id="q19-a"><span class="opt-letter">A</span><span class="opt-text">Wait — it will arrive on its own eventually</span></button>
-        <button class="option-btn" onclick="answer('q19','b')" id="q19-b"><span class="opt-letter">B</span><span class="opt-text">Ask Marcus to get it himself from the police department</span></button>
-        <button class="option-btn" onclick="answer('q19','c')" id="q19-c"><span class="opt-letter">C</span><span class="opt-text">We can proceed without it — police reports aren't critical — this should be handled according to GLG procedures as this is a common source of errors and should be handled with care</span></button>
-        <button class="option-btn" onclick="answer('q19','d')" id="q19-d"><span class="opt-letter">D</span><span class="opt-text">Send a CasePeer records request template for the police report immediately. Don't wait. Then follow up if it hasn't arrived within the expected window.</span></button>
-      </div>
-      <div class="feedback-box" id="q19-feedback"></div>
-    </div>
 
     <!-- Q20 — Matching Exercise -->
-    <div class="question-block" id="q20-block">
-      <div class="q-num">Question 5 of 5 — Document Matching</div>
-      <div class="q-text">Tap the correct document for each situation in Marcus's case. Tap a chip, then tap the matching slot.</div>
-
-      <div class="drag-options" id="drag-pool">
-        <div class="drag-chip" id="chip-lor" onclick="selectChip('chip-lor','LOR')">📨 LOR</div>
-        <div class="drag-chip" id="chip-lop" onclick="selectChip('chip-lop','LOP')">🏥 LOP</div>
-        <div class="drag-chip" id="chip-police" onclick="selectChip('chip-police','Police Report Request')">🚔 Police Report Request</div>
-        <div class="drag-chip" id="chip-demand" onclick="selectChip('chip-demand','Demand Letter')">💼 Demand Letter</div>
-      </div>
-
-      <div class="match-container">
-        <div class="match-row">
-          <div class="match-label">Notify MARTA's insurer we represent Marcus</div>
-          <div class="match-drop" id="drop-1" onclick="placeChip('drop-1','LOR')" data-answer="LOR">Tap a chip, then tap here</div>
-        </div>
-        <div class="match-row">
-          <div class="match-label">Allow Marcus to see a chiropractor without upfront payment</div>
-          <div class="match-drop" id="drop-2" onclick="placeChip('drop-2','LOP')" data-answer="LOP">Tap a chip, then tap here</div>
-        </div>
-        <div class="match-row">
-          <div class="match-label">Get the official accident record from APD</div>
-          <div class="match-drop" id="drop-3" onclick="placeChip('drop-3','Police Report Request')" data-answer="Police Report Request">Tap a chip, then tap here</div>
-        </div>
-      </div>
-
-      <div class="feedback-box" id="q20-feedback"></div>
-      <button class="btn btn-primary btn-block" onclick="checkMatching()" style="margin-top:14px;" id="check-match-btn">Check Answers</button>
-    </div>
 
     <div class="section-score" id="s5-score" style="display:none;">
       <div class="score-display" id="s5-pts">0</div>
@@ -840,69 +756,14 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
     </div>
 
     <!-- Q21 -->
-    <div class="question-block" id="q21-block">
-      <div class="q-num">Question 1 of 5 — Government Flag & Deadline</div>
-      <div class="q-text">Fulton County School District is a government entity. The accident was February 10, 2026. Today is June 9, 2026 — 119 days later. What is the most urgent action required RIGHT NOW?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q21','a')" id="q21-a"><span class="opt-letter">A</span><span class="opt-text">Order all medical records before doing anything else</span></button>
-        <button class="option-btn" onclick="answer('q21','b')" id="q21-b"><span class="opt-letter">B</span><span class="opt-text">Send the LOR first — that's always step one</span></button>
-        <button class="option-btn" onclick="answer('q21','c')" id="q21-c"><span class="opt-letter">C</span><span class="opt-text">We have 2 years — take a few days to review thoroughly — ask the supervising attorney if you are unsure about this because delays can impact case value — always confirm this with your supervising attorney</span></button>
-        <button class="option-btn" onclick="answer('q21','d')" id="q21-d"><span class="opt-letter">D</span><span class="opt-text">Escalate to the attorney IMMEDIATELY — the Ante Litem deadline is August 10, 2026 (6 months from Feb 10). We have less than 63 days. This is a firm deadline.</span></button>
-      </div>
-      <div class="feedback-box" id="q21-feedback"></div>
-    </div>
 
     <!-- Q22 -->
-    <div class="question-block" id="q22-block">
-      <div class="q-num">Question 2 of 5 — All Coverage Sources</div>
-      <div class="q-text">Walk through every potential coverage source in Diane's case. What can we pursue?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q22','a')" id="q22-a"><span class="opt-letter">A</span><span class="opt-text">Only FCSD's liability coverage — it's their bus</span></button>
-        <button class="option-btn" onclick="answer('q22','b')" id="q22-b"><span class="opt-letter">B</span><span class="opt-text">Blue Cross already paid — the case is partially settled</span></button>
-        <button class="option-btn" onclick="answer('q22','c')" id="q22-c"><span class="opt-letter">C</span><span class="opt-text">Diane's State Farm auto policy only — she's the plaintiff — this is the standard practice in most firms regardless of the current case stage as outlined in the training materials</span></button>
-        <button class="option-btn" onclick="answer('q22','d')" id="q22-d"><span class="opt-letter">D</span><span class="opt-text">FCSD's liability coverage (BI) + Diane's UM/UIM if limits are short + potentially MedPay or PIP if available + Blue Cross subrogation must be managed</span></button>
-      </div>
-      <div class="feedback-box" id="q22-feedback"></div>
-    </div>
 
     <!-- Q23 -->
-    <div class="question-block" id="q23-block">
-      <div class="q-num">Question 3 of 5 — Health Insurance & Subrogation</div>
-      <div class="q-text">Blue Cross paid $14,200 of Diane's bills. When Diane settles her case, what happens to that $14,200?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q23','a')" id="q23-a"><span class="opt-letter">A</span><span class="opt-text">Diane keeps it — Blue Cross already paid so they have no claim on the settlement — documentation should reflect this approach clearly so the client record remains current</span></button>
-        <button class="option-btn" onclick="answer('q23','b')" id="q23-b"><span class="opt-letter">B</span><span class="opt-text">It goes to pay our legal fees first</span></button>
-        <button class="option-btn" onclick="answer('q23','c')" id="q23-c"><span class="opt-letter">C</span><span class="opt-text">It's returned to Diane as a bonus because she had health insurance</span></button>
-        <button class="option-btn" onclick="answer('q23','d')" id="q23-d"><span class="opt-letter">D</span><span class="opt-text">Blue Cross has a subrogation right — they may be entitled to reimbursement from settlement proceeds. We negotiate that amount as part of the distribution process.</span></button>
-      </div>
-      <div class="feedback-box" id="q23-feedback"></div>
-    </div>
 
     <!-- Q24 -->
-    <div class="question-block" id="q24-block">
-      <div class="q-num">Question 4 of 5 — Documents to Send</div>
-      <div class="q-text">Today is intake day for Diane's case. Retainer just signed. What documents go out — and to whom — in the next 24 hours?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q24','a')" id="q24-a"><span class="opt-letter">A</span><span class="opt-text">Only the LOR to FCSD's insurer — keep it simple</span></button>
-        <button class="option-btn" onclick="answer('q24','b')" id="q24-b"><span class="opt-letter">B</span><span class="opt-text">Wait for the Ante Litem to be filed before sending any other documents — this is the standard practice in most firms to maintain proper documentation in accordance with state bar requirements</span></button>
-        <button class="option-btn" onclick="answer('q24','c')" id="q24-c"><span class="opt-letter">C</span><span class="opt-text">Demand letter first — start aggressive</span></button>
-        <button class="option-btn" onclick="answer('q24','d')" id="q24-d"><span class="opt-letter">D</span><span class="opt-text">LOR to FCSD's liability insurer + LOR to Diane's UM/UIM carrier + LOP to chiropractor if still treating + Police report request (if not already obtained)</span></button>
-      </div>
-      <div class="feedback-box" id="q24-feedback"></div>
-    </div>
 
     <!-- Q25 -->
-    <div class="question-block" id="q25-block">
-      <div class="q-num">Question 5 of 5 — The Client Question</div>
-      <div class="q-text">Diane asks: <em>"I've been dealing with this for four months. My back still hurts. My bills are almost $30,000. How much money will I get?"</em> What is the correct response?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q25','a')" id="q25-a"><span class="opt-letter">A</span><span class="opt-text">"Based on your medical bills, you should get around $90,000."</span></button>
-        <button class="option-btn" onclick="answer('q25','b')" id="q25-b"><span class="opt-letter">B</span><span class="opt-text">"I don't know — you'll have to wait and see."</span></button>
-        <button class="option-btn" onclick="answer('q25','c')" id="q25-c"><span class="opt-letter">C</span><span class="opt-text">"At least three times your medical bills — that's the standard formula." — confirm with the team lead before proceeding further and update the case file accordingly to maintain proper documentation in accordance with state bar requirements as this is a common source of errors and should be handled with care</span></button>
-        <button class="option-btn" onclick="answer('q25','d')" id="q25-d"><span class="opt-letter">D</span><span class="opt-text">"Diane, I completely understand why you're asking — four months is a long time. I'm not able to give you a number yet because we're still gathering all the facts, but I'm going to make sure your attorney has everything needed to maximize your recovery. We'll keep you updated every step of the way."</span></button>
-      </div>
-      <div class="feedback-box" id="q25-feedback"></div>
-    </div>
 
     <div class="section-score" id="s6-score" style="display:none;">
       <div class="score-display" id="s6-pts">0</div>
@@ -910,16 +771,41 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
     </div>
 
     <div class="btn-group" id="s6-next">
-      <button class="btn btn-primary btn-block" onclick="buildResults(); goToSection(6)">See My Results →</button>
+      <div style="margin-bottom:1rem;">
+      <label for="trainee-name-input" style="display:block;font-size:0.85rem;font-weight:600;color:#141c2c;margin-bottom:0.4rem;">Your Name — required to start</label>
+      <input type="text" id="trainee-name-input" placeholder="Enter your full name" autocomplete="name" style="width:100%;padding:0.5rem 0.75rem;border:1.5px solid #cbd5e1;border-radius:6px;font-size:0.9rem;box-sizing:border-box;">
+    </div>
+    <button class="btn btn-primary btn-block" onclick="startQuiz()">Take the Quiz &rarr;</button>
     </div>
 
   </div>
 </div>
 
 <!-- ══════════════════════════════════════════
-     SECTION 7: RESULTS
+     SECTION 7 — QUIZ (api-quiz-engine.js)
 ════════════════════════════════════════════ -->
 <div class="section-card" id="section-6">
+  <div class="section-header">
+    <div class="section-num">Knowledge Check</div>
+    <h2>Module Assessment</h2>
+    <div class="section-subhead">Answer each question. One attempt — wrong answer reveals the correct answer and unlocks Next.</div>
+  </div>
+  <div class="section-body">
+    <div style="font-family:system-ui,sans-serif;font-size:13px;color:#33415c;padding:8px 0 12px;border-bottom:1px solid #e8eaf0;margin-bottom:16px;">
+      Base: <b id="base">0</b> / <b id="basemax">—</b>
+      &nbsp;·&nbsp; Bonus: <b id="bonus">0</b>
+      &nbsp;·&nbsp; Pass gate: <b id="gate">80</b>%
+      &nbsp;·&nbsp; <span id="q-progress" style="color:#dcb161;font-weight:700;"></span>
+    </div>
+    <div id="questions"></div>
+    <div id="result" style="background:#fff;border:2px solid #0b2545;border-radius:10px;padding:18px;margin:18px 0;display:none;"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 7: RESULTS
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-7">
   <div id="results-header-wrap"></div>
   <div class="section-body">
 
@@ -937,7 +823,7 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
     <div id="review-links"></div>
 
     <div class="btn-group">
-      <button class="btn btn-primary btn-block" onclick="goToSection(7)">Complete Feedback Form →</button>
+      <button class="btn btn-primary btn-block" onclick="goToSection(8)">Complete Feedback Form →</button>
       <button class="btn btn-secondary btn-block" onclick="retakeModule()">Retake Module</button>
     </div>
 
@@ -947,7 +833,7 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
 <!-- ══════════════════════════════════════════
      SECTION 8: FEEDBACK & SUBMISSION
 ════════════════════════════════════════════ -->
-<div class="section-card" id="section-7">
+<div class="section-card" id="section-8">
   <div class="section-header">
     <div class="section-num">Section 8 · Final Step</div>
     <h2>Feedback & Certificate</h2>
@@ -1054,7 +940,7 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
       <div class="cert-name" id="cert-name-display">Training Participant</div>
       <div class="cert-details">
         Date: <span id="cert-date"></span><br>
-        Score: <span id="cert-score"></span> / <span id="cert-max">249</span> base pts (<span id="cert-pct"></span>%)<br>
+        Score: <span id="cert-score"></span> / 249 base points (<span id="cert-pct"></span>%)<br>
         Status: <span id="cert-status"></span>
       </div>
       <div class="cert-achievements" id="cert-achievements"></div>
@@ -1117,13 +1003,7 @@ let state = {
 // ═══════════════════════════════════════════════
 // CORRECT ANSWERS
 // ═══════════════════════════════════════════════
-const correct = {
-  q1:'a', q2:'a', q3:'a', q4:'a', q5:'a',
-  q6:'a', q7:'b', q8:'b', q9:'b', q10:'b',
-  q11:'b', q12:'b', q13:'c', q14:'c', q15:'c',
-  q16:'c', q17:'c', q18:'c', q19:'d', q21:'d',
-  q22:'d', q23:'d', q24:'d', q25:'d',
-};
+const correct = {} /* CUTOVER: answer key removed — the engine grades */;
 
 // ═══════════════════════════════════════════════
 // FEEDBACK MESSAGES
@@ -1206,8 +1086,8 @@ const feedback = {
     wrong: "❌ Don't wait for police reports to arrive on their own. Use the CasePeer police report request template immediately. Then follow up. Reports are needed for liability documentation, and delays cost time."
   },
   q21: {
-    right: "✅ This is a CODE RED moment. Ante Litem for Fulton County School District = August 10, 2026 — 63 days away. The attorney needs to know this is a government case before they do anything else on intake.",
-    wrong: "❌ This case has a government entity with an Ante Litem deadline 63 days out. That's not 'soon' — that's urgent. Escalate to the attorney immediately. The LOR, records, and other tasks can follow. The deadline cannot be missed."
+    right: "✅ Correct — and note WHICH rule applies. A Georgia <strong>school district</strong> is covered by the Georgia Tort Claims Act, <strong>O.C.G.A. &sect; 50-21-26: 12 months</strong> from the date of injury — here <strong>February 10, 2027</strong> — served by certified mail return receipt on the <strong>school district AND DOAS, as two separate mailings</strong>, and the notice must state a specific dollar amount. Do not reach for &sect; 36-33-5 (the 6-month municipal rule) just because the district's name contains 'Fulton County': serving a Mayor/City Council President and omitting DOAS is a defective notice, and ante litem defects are <strong>jurisdictional — there is no fix, no excuse, no exception</strong>. The entity's NAME does not set the rule; the entity TYPE does. Escalate on intake day and calendar both mailings.",
+    wrong: "❌ Two different errors are being tested here. (1) <strong>Deadline/statute:</strong> a school district is NOT a municipality — it runs on the Georgia Tort Claims Act, <strong>O.C.G.A. &sect; 50-21-26, 12 months</strong> (Feb 10, 2027), not &sect; 36-33-5's 6 months. (2) <strong>Entity confusion:</strong> 'Fulton County School District' is a school district, not Fulton County — the county rule (&sect; 36-11-1, County Commission Chairperson) is a different entity type. The wrong statute is more dangerous than the wrong date, because it routes service to the wrong recipient and <strong>omits DOAS</strong> — both mailings are required, and a missed ante litem is jurisdictional: the claim is permanently barred. Escalate to the attorney immediately. The LOR, records, and other tasks can follow. The deadline cannot be missed."
   },
   q22: {
     right: "✅ Complete answer. (1) FCSD liability/BI coverage, (2) Diane's UM/UIM if FCSD coverage is short, (3) check for MedPay/PIP on her auto policy, (4) manage Blue Cross subrogation at settlement time.",
@@ -1242,6 +1122,7 @@ const sectionQuestions = {
 // NAVIGATE TO SECTION
 // ═══════════════════════════════════════════════
 function goToSection(n) {
+  if (idx === 8 && !window._day5Passed) { return; } // cert gate
   document.querySelectorAll('.section-card').forEach(c => c.classList.remove('active'));
   document.querySelectorAll('.nav-pill').forEach(p => p.classList.remove('active'));
   document.getElementById('section-' + n).classList.add('active');
@@ -1253,9 +1134,9 @@ function goToSection(n) {
 
 function updateProgress() {
   const n = state.currentSection;
-  const pct = Math.round((n / 7) * 100);
+  const pct = Math.round((n / 8) * 100);
   document.getElementById('prog-fill').style.width = pct + '%';
-  document.getElementById('prog-label').textContent = 'Section ' + (n+1) + ' of 8';
+  document.getElementById('prog-label').textContent = 'Section ' + (n+1) + ' of 9';
   document.getElementById('prog-pct').textContent = pct + '%';
   document.getElementById('total-score').textContent = state.totalScore;
   document.getElementById('bonus-score').textContent = state.bonusScore;
@@ -1264,7 +1145,7 @@ function updateProgress() {
 // ═══════════════════════════════════════════════
 // ANSWER A QUESTION
 // ═══════════════════════════════════════════════
-function answer(qid, choice) {
+window.answerUI = function answerUI(qid, choice) {
   if (state.answered[qid + '_done']) return; // already resolved
 
   const isCorrect = (choice === correct[qid]);
@@ -1276,7 +1157,12 @@ function answer(qid, choice) {
   block.querySelectorAll('.option-btn').forEach(b => b.classList.add('disabled'));
 
   // style correct answer always
-  document.getElementById(qid + '-' + correct[qid]).classList.add('correct');
+  // CUTOVER: reveal only what the engine discloses (window.__glgCorrectId,
+  // set by the shim on a locked/correct answer). No local key to read.
+  if (window.__glgCorrectId) {
+    var _ce = document.getElementById(qid + '-' + window.__glgCorrectId);
+    if (_ce) _ce.classList.add('correct');
+  }
 
   if (isCorrect) {
     btn.classList.add('correct');
@@ -1349,52 +1235,45 @@ function placeChip(dropId, expectedAnswer) {
 
 function checkMatching() {
   if (state.matchChecked) return;
+  const dropIds = ['drop-1','drop-2','drop-3'];
+  if (dropIds.some(d => !state.matchAnswers[d])) return;
   state.matchChecked = true;
+  document.getElementById('check-match-btn').style.display = 'none';
+  // NO ANSWER KEY IN THIS FILE. The engine grades q20 and tells us the verdict.
+  window.answer('q20', Object.assign({}, state.matchAnswers));
+}
 
-  const correct_map = {
-    'drop-1': 'LOR',
-    'drop-2': 'LOP',
-    'drop-3': 'Police Report Request',
-  };
-  let allCorrect = true;
-  let correct_count = 0;
-
-  Object.keys(correct_map).forEach(dropId => {
+/* Called by the cutover shim with the server's verdict for q20. */
+window.renderMatchVerdict = function (d) {
+  const fb = document.getElementById('q20-feedback');
+  const detail = (d && d.detail) || {};
+  ['drop-1','drop-2','drop-3'].forEach(function (dropId) {
     const drop = document.getElementById(dropId);
+    if (!drop) return;
     const placed = state.matchAnswers[dropId];
-    if (placed === correct_map[dropId]) {
-      drop.classList.remove('filled');
-      drop.classList.add('filled'); // keep green
-      correct_count++;
+    const ok = detail[dropId] && detail[dropId].correct;
+    drop.classList.remove('filled','wrong');
+    if (ok) {
+      drop.classList.add('filled');
     } else {
-      drop.classList.remove('filled');
       drop.classList.add('wrong');
-      drop.textContent = (placed || '(not answered)') + ' ← ✗  Correct: ' + correct_map[dropId];
-      allCorrect = false;
+      const corr = detail[dropId] && detail[dropId].correct_value;
+      drop.textContent = (placed || '(not answered)') + ' \u2190 \u2717' + (corr ? '  Correct: ' + corr : '');
     }
   });
-
-  const pts = correct_count * Math.round(10/3);
+  const pts = (d && typeof d.points_awarded === 'number') ? d.points_awarded : 0;
   state.totalScore += pts;
-  // q20 lives in section 4 ("Send the Documents"), verified by DOM offset. The hard-coded 5
-  // credited the Boss Challenge for a Documents question and left section 4 short.
-  state.sectionScores[4] = (state.sectionScores[4] || 0) + pts;
-
-  const fb = document.getElementById('q20-feedback');
-  if (allCorrect) {
-    fb.className = 'feedback-box correct show';
-    fb.innerHTML = '✅ Perfect! LOR notifies the insurer, LOP lets Marcus get treatment on credit, police report request starts the official record process. All three go out within 24 hours of retainer.';
-    showToast('+' + pts + ' pts ⭐', '#27ae60');
-  } else {
-    fb.className = 'feedback-box incorrect show';
-    fb.innerHTML = '❌ Some mismatches above. LOR = notify insurer. LOP = treatment without payment. Police Report Request = get the official accident record. Review and remember which tool does which job.';
+  state.sectionScores[5] = (state.sectionScores[5] || 0) + pts;
+  if (fb) {
+    const good = !!(d && d.correct);
+    fb.className = 'feedback-box ' + (good ? 'correct' : 'incorrect') + ' show';
+    if (d && d.feedback) fb.innerHTML = d.feedback;
   }
-
-  document.getElementById('check-match-btn').style.display = 'none';
+  if (d && d.correct) showToast('+' + pts + ' pts \u2b50', '#27ae60');
   state.answered['q20_done'] = true;
   updateProgress();
   checkSectionComplete(5);
-}
+};
 
 // ═══════════════════════════════════════════════
 // CHECK IF SECTION COMPLETE
@@ -1455,11 +1334,22 @@ function showToast(msg, color) {
 // BUILD RESULTS PAGE
 // ═══════════════════════════════════════════════
 function buildResults() {
-  // BASE-ONLY GRADING (Harrell ruling 2026-08-18). Bonus is recognition, not credit;
-  // it is reported alongside the score and never enters the numerator.
-  const total = state.totalScore;
-  const pct = Math.round((total / BASE_MAX) * 100);
-  const pass = total >= PASS_THRESHOLD;
+  // BASE_MAX raised 200 -> 249 (Harrell ruling Aug 19 msg 45593: RAISE).
+  // 249 is what the questions actually award: 24 MCQ x 10 + match 9.
+  const BASE_MAX = 249;
+  // BONUS IS DISPLAY-ONLY AND MUST STAY OUT OF THE PASS NUMERATOR.
+  // Was: total = totalScore + bonusScore; pct = total/200; pass = pct >= 80.
+  // That made the gate reachable WITHOUT 80% of base -- enough bonus could carry a
+  // failing base over the line. day6/day7 already gate on base only; day5 now matches.
+  // (Harrell ruling Aug 19 msg 45631 item 1.)
+  const baseTotal = state.totalScore;
+  const total = state.totalScore + state.bonusScore; // display only
+  const pct = Math.round((baseTotal / BASE_MAX) * 100); // DISPLAY only -- may round
+  const PASS_THRESHOLD = 80; // Harrell ruling Jul 6 -- percent of BASE
+  // GATE ON POINTS, NOT ON THE ROUNDED DISPLAY. Math.round(198/249*100) === 80, so
+  // gating on `pct` passed a 79.5% attempt. The display may round; the gate may not.
+  const PASS_POINTS = (PASS_THRESHOLD / 100) * BASE_MAX; // 199.2
+  const pass = baseTotal >= PASS_POINTS;
 
   // Header
   const hdr = document.getElementById('results-header-wrap');
@@ -1467,7 +1357,7 @@ function buildResults() {
     <div class="results-header ${pass ? 'pass' : 'fail'}">
       <div class="results-grade">${pct}%</div>
       <div class="results-label">${pass ? '🎉 Week 1 Complete!' : '📚 Keep Studying'}</div>
-      <div class="results-sub">${total} / ${BASE_MAX} base pts · ${state.bonusScore} bonus pts</div>
+      <div class="results-sub">${baseTotal} / ${BASE_MAX} base pts · ${state.bonusScore} bonus pts</div>
     </div>`;
 
   // Breakdown. Keys are the REAL section indices the scorer writes to (1-5), not 2-6.
@@ -1599,8 +1489,10 @@ function submitScoreAndBuildCert() {
 // SUBMIT RESULTS
 // ═══════════════════════════════════════════════
 function submitResults() {
-  const total = state.totalScore;                       // base only
-  const pct = Math.round((total / BASE_MAX) * 100);
+  const BASE_MAX = 249; // RAISE ruling Aug 19
+  const baseTotal = state.totalScore;
+  const total = state.totalScore + state.bonusScore; // display only
+  const pct = Math.round((baseTotal / BASE_MAX) * 100);
   const badges = [];
   const secPass = k => (state.sectionScores[k] || 0) >= Math.round(SECTION_MAX[k] * 0.6);
   if (secPass(2)) badges.push('PI Foundations');
@@ -1615,8 +1507,8 @@ function submitResults() {
     '─────────────────────────────────\n' +
     'Trainee: ' + (state.traineeFirstName || 'N/A') + '\n' +
     'Date: ' + new Date().toLocaleDateString() + '\n' +
-    'Score: ' + total + ' / ' + BASE_MAX + ' (' + pct + '%) — ' + (total >= PASS_THRESHOLD ? 'PASS' : 'NEEDS REVIEW') + '\n' +
-    'Bonus Points: ' + state.bonusScore + ' (recognition only, not graded)\n\n' +
+    'Score: ' + baseTotal + ' / 249 base (' + pct + '%)\n' +
+    'Bonus Points: ' + state.bonusScore + '\n\n' +
     'Section Breakdown:\n' +
     '  Know Your Firm: ' + (state.sectionScores[1]||0) + '/' + SECTION_MAX[1] + '\n' +
     '  Read the Case: ' + (state.sectionScores[2]||0) + '/' + SECTION_MAX[2] + '\n' +
@@ -1798,5 +1690,67 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 </script>
+
+
+
+<script>
+/* ── go() / startQuiz() — quiz entry point ── */
+async function go(screen) {
+  if (screen === 'quiz') {
+    var _ni = document.getElementById('trainee-name-input');
+    var _name = (_ni && _ni.value.trim()) || '';
+    if (!_name) {
+      if (typeof showToast === 'function') showToast('⚠️ Please enter your name before starting the quiz', false);
+      else alert('Please enter your name before starting the quiz.');
+      return;
+    }
+    // Bug-2 fix: await attempt start before making questions interactive
+    await window.GLGQuiz.beginAttempt(_name);
+    goToSection(6);
+  }
+}
+
+function startQuiz() { go('quiz'); }
+
+/* ── GLG MODULE CONFIG — wires api-quiz-engine.js to module-day5.html ── */
+window.GLG_MODULE_CONFIG = {
+  moduleId: 'day5',
+  onBankLoaded: function(bank) {
+    var basemax = document.getElementById('basemax');
+    var gate    = document.getElementById('gate');
+    if (basemax) basemax.textContent = bank.base_max;
+    if (gate)    gate.textContent    = bank.pass_pct;
+    for (var i = 1; i <= 6; i++) {
+      var nextEl = document.getElementById('s' + i + '-next');
+      if (nextEl) nextEl.style.display = 'flex';
+    }
+  },
+  onStartQuiz: function() {
+    if (typeof audioCtx !== 'undefined' && audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume().catch(function(){});
+    }
+  },
+  onAnswered: function(r) {
+    baseScore   = r.base_score;
+    bonusPoints = r.bonus_score;
+    streakCount = r.streak;
+    maxStreak   = Math.max(maxStreak || 0, r.maxStreak || 0);
+    var ts = document.getElementById('total-score');
+    if (ts) ts.textContent = r.base_score;
+    var bs = document.getElementById('bonus-score');
+    if (bs) bs.textContent = r.bonus_score;
+    if (typeof updateStreak  === 'function') updateStreak(r.correct);
+    if (typeof mascotReact   === 'function') mascotReact(r.correct ? 'correct' : 'incorrect');
+  },
+  onComplete: function(r) {
+    window._day5Passed = r.passed;
+    baseScore   = r.base_score;
+    bonusPoints = r.bonus_score;
+    goToSection(7);   // results is section-7 in day5/day6 variant
+    if (typeof buildResults === 'function') buildResults();
+  }
+};
+</script>
+<script src="api-quiz-engine.js"></script>
 </body>
 </html>

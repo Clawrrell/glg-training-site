@@ -296,6 +296,159 @@ main, .main-wrap { width: 100%; max-width: 720px; margin: 0 auto; padding: 1.25r
 @media (min-width: 520px) { .match-row { flex-direction: row; align-items: center; } .match-label { min-width: 160px; flex-shrink: 0; } .match-drop { flex: 1; } }
 button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-highlight-color: rgba(0,0,0,0.07); touch-action: manipulation; -webkit-appearance: none; user-select: none; -webkit-user-select: none; }
 </style>
+
+<style>
+/* ── GLG QUIZ ENGINE — question type styles (2026-09-02) ──────────────────
+     All classes rendered by api-quiz-engine.js. Tokens: navy #141c2c, gold #C5975B.
+     Sourced from engine.html stylesheet + Harrell Part 8c spec. */
+
+  /* Question card */
+  .q { background:#fff; border:1px solid #e2e5ea; border-radius:10px;
+       padding:20px; margin:16px 0; box-shadow:0 1px 6px rgba(20,28,44,.06); }
+  .q-num { font-size:12px; letter-spacing:.06em; color:#C5975B; font-weight:700;
+            text-transform:uppercase; margin-bottom:8px; }
+  .q-text { font-weight:600; margin:8px 0 16px; font-size:1rem; line-height:1.55;
+             color:#141c2c; }
+
+  /* MC option buttons */
+  button.opt { display:block; width:100%; text-align:left; padding:13px 15px; margin:7px 0;
+    border:1px solid #d8dbe3; border-radius:8px; background:#fafbfd; cursor:pointer;
+    font-size:15px; font-family:var(--font-b); color:#222; line-height:1.45;
+    transition:background .12s, border-color .12s; }
+  button.opt:hover:not(.locked) { background:#eef4ff; border-color:#141c2c; }
+  button.opt.correct { background:#d4edda; border-color:#10774A; }
+  button.opt.incorrect { background:#f8d7da; border-color:#870101; }
+  button.opt.locked { cursor:default; opacity:.85; }
+
+  /* Fill-in-the-blank */
+  .fill-stem { font-weight:600; margin:8px 0 14px; line-height:2.2; }
+  input.blank { display:inline-block; min-height:44px; min-width:120px; padding:8px 10px;
+    margin:2px 4px; border:1px solid #ccd; border-radius:8px; background:#fafbfd;
+    font-size:16px; font-family:var(--font-b); vertical-align:middle;
+    box-sizing:border-box; max-width:100%; }
+  input.blank:focus { outline:2px solid #141c2c; background:#fff; }
+  input.blank.correct { background:#d4edda; border-color:#10774A; }
+  input.blank.incorrect { background:#f8d7da; border-color:#870101; }
+  input.blank.locked { opacity:.85; }
+  button.submit-fill { min-height:44px; padding:11px 20px; margin-top:12px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-fill.locked { opacity:.5; cursor:default; }
+
+  /* Markup */
+  .markup-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .markup-passage { margin:0 0 10px; border:1px solid #e2e5ea; border-radius:8px; overflow:hidden; }
+  button.span { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:11px 13px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:16px; font-family:var(--font-b);
+    color:#222; line-height:1.5; overflow-wrap:break-word; }
+  button.span:last-child { border-bottom:0; }
+  button.span:hover:not(.locked) { background:#eef4ff; }
+  button.span.selected { background:#fff3cd; box-shadow:inset 4px 0 0 #b8860b; font-weight:600; }
+  button.span.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.span.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.span.locked { cursor:default; opacity:.9; }
+  button.submit-markup { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-markup.locked { opacity:.5; cursor:default; }
+  .markup-count { font-size:13px; color:#555; margin-top:8px; }
+
+  /* Sort rows with up/down controls */
+  .sort-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .sort-list { margin:0 0 12px; border:1px solid #e2e5ea; border-radius:8px;
+               overflow:hidden; background:#fff; }
+  .sort-row { display:flex; align-items:stretch; border-bottom:1px solid #eef0f3;
+              background:#fff; }
+  .sort-row:last-child { border-bottom:0; }
+  .sort-pos { flex:0 0 34px; display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700; color:#C5975B; background:#f5f5f0; }
+  .sort-text { flex:1 1 auto; padding:11px 12px; font-size:15px; line-height:1.45;
+    display:flex; align-items:center; overflow-wrap:break-word; min-width:0; }
+  .sort-moves { flex:0 0 auto; display:flex; align-items:center; gap:4px; padding:4px 6px; }
+  button.sort-move { min-height:44px; min-width:44px; border:1px solid #ccd; border-radius:8px;
+    background:#fafbfd; cursor:pointer; font-size:15px; color:#141c2c;
+    font-family:var(--font-b); }
+  button.sort-move:hover:not(:disabled) { background:#eef4ff; }
+  button.sort-move:disabled { opacity:.35; cursor:default; }
+  .sort-row.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  .sort-row.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  .sort-row.locked .sort-text { opacity:.9; }
+  button.submit-sort { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-sort.locked { opacity:.5; cursor:default; }
+
+  /* Match chips + slot rows */
+  .match-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .match-tray { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px; padding:10px;
+    border:1px dashed #ccd; border-radius:8px; background:#fafbfd; }
+  button.chip { min-height:44px; padding:10px 16px; border:1px solid #ccd; border-radius:22px;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b); color:#222;
+    max-width:100%; overflow-wrap:break-word; text-align:left; }
+  button.chip:hover:not(.locked) { background:#eef4ff; }
+  button.chip.selected { background:#141c2c; color:#fff; border-color:#141c2c; font-weight:600; }
+  button.chip.placed { opacity:.35; }
+  button.chip.locked { cursor:default; }
+  .match-slots { border:1px solid #e2e5ea; border-radius:8px; overflow:hidden;
+                 background:#fff; margin-bottom:12px; }
+  button.slot { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:10px 14px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b);
+    color:#222; line-height:1.45; overflow-wrap:break-word; }
+  button.slot:last-child { border-bottom:0; }
+  button.slot:hover:not(.locked) { background:#eef4ff; }
+  button.slot.armed { box-shadow:inset 4px 0 0 #C5975B; background:#fffdf5; }
+  .slot-label { font-weight:600; display:block; }
+  .slot-fill { display:block; font-size:14px; margin-top:3px; color:#C5975B; font-weight:600; }
+  .slot-fill.empty { color:#8a8f98; font-weight:400; font-style:italic; }
+  button.slot.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.slot.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.slot.locked { cursor:default; opacity:.9; }
+  button.submit-match { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-match.locked { opacity:.5; cursor:default; }
+  .match-count { font-size:13px; color:#555; margin-top:8px; }
+  .match-credit { font-size:13px; font-weight:600; color:#8a6d1f; margin-top:6px; }
+
+  /* Feedback */
+  .fb { margin-top:12px; padding:12px 14px; border-radius:8px; font-size:14px; display:none; }
+  .fb.show { display:block; }
+  .fb.ok { background:#d4edda; border-left:4px solid #10774A; }
+  .fb.no { background:#f8d7da; border-left:4px solid #870101; }
+  .fb.neutral { background:#eef0f6; border-left:4px solid #6c757d; color:#333; } /* self_assessment: no verdict */
+
+  /* Branching nodes */
+  .branch-scenario { border-left:4px solid #C5975B; padding-left:12px; margin:14px 0; }
+  .branch-turn { font-size:12px; letter-spacing:.06em; color:#8a6d1f; font-weight:700;
+                 text-transform:uppercase; }
+  .branch-instruction { font-weight:600; margin:6px 0 10px; color:#141c2c; }
+  .branch-consequence { margin-top:10px; padding:10px 12px; border-left:4px solid #141c2c;
+    background:#eef2f7; border-radius:0 8px 8px 0; font-size:13px; color:#33415c; display:none; }
+  .branch-consequence.show { display:block; }
+
+  /* Pagination — one question at a time (Harrell Part 8b) */
+  .q-base { display: none !important; }
+  .q-base.q-active { display: block !important; }
+  .q-nav { display:flex; justify-content:space-between; align-items:center;
+            margin-top:20px; padding-top:16px; border-top:1px solid #e8e6e0; }
+  .q-nav-btn { min-height:44px; padding:10px 22px; border-radius:8px;
+                font-size:15px; cursor:pointer; font-family:var(--font-b);
+                font-weight:600; transition:background .12s; }
+  .q-nav-btn.next { background:#141c2c; color:#C5975B; border:2px solid #141c2c; }
+  .q-nav-btn.next:hover { background:#1e2a40; }
+  .q-nav-btn.back { background:#fff; color:#141c2c; border:2px solid #c8c5be; }
+  .q-nav-btn.back:hover { background:#f5f5f0; }
+  .q-pg-spacer { display:inline-block; min-width:40px; }
+  #q-progress { font-size:12px; color:#C5975B; font-weight:600;
+                letter-spacing:.5px; text-transform:uppercase; }
+
+
+</style>
+
+<!-- CUTOVER: server-side grading. Answer keys are not in this file. -->
+    <link rel="stylesheet" href="boss-challenge.css">
 </head>
 <body>
 
@@ -336,7 +489,7 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
 <!-- PROGRESS -->
 <div class="progress-wrap">
   <div class="progress-meta">
-    <span id="prog-label">Section 1 of 8</span>
+    <span id="prog-label">Section 1 of 9</span>
     <span id="prog-pct">0%</span>
   </div>
   <div class="progress-bg"><div class="progress-fill" id="prog-fill"></div></div>
@@ -350,8 +503,9 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
   <button class="nav-pill" id="nav-3" onclick="goToSection(3)">4. Follow-Up</button>
   <button class="nav-pill" id="nav-4" onclick="goToSection(4)">5. Review & Red Flags</button>
   <button class="nav-pill" id="nav-5" onclick="goToSection(5)">6. Boss</button>
-  <button class="nav-pill" id="nav-6" onclick="goToSection(6)">7. Results</button>
-  <button class="nav-pill" id="nav-7" onclick="goToSection(7)">8. Feedback</button>
+  <button class="nav-pill" id="nav-6" onclick="startQuiz()">7. Quiz</button>
+  <button class="nav-pill" id="nav-7" onclick="goToSection(7)">8. Results</button>
+  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">9. Feedback</button>
 </nav>
 
 <div class="points-toast" id="points-toast"></div>
@@ -428,69 +582,14 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
     </div>
 
     <!-- Q1 -->
-    <div class="question-block" id="q1-block">
-      <div class="q-num">Question 1 of 5 · Easy</div>
-      <div class="q-text">An attorney is ready to draft a demand letter for a client who treated at three different providers over six months. What does she absolutely need before she can write the demand?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q1','a')" id="q1-a"><span class="opt-letter">A</span><span class="opt-text">The police report only — that proves the accident happened and establishes who was at fault, which is the critical first step in building the case file and determining liability before any other documentation is gathered</span></button>
-        <button class="option-btn" onclick="answer('q1','b')" id="q1-b"><span class="opt-letter">B</span><span class="opt-text">The medical records and billing from all three providers — she needs to document every injury, every treatment, and every dollar of medical expense</span></button>
-        <button class="option-btn" onclick="answer('q1','c')" id="q1-c"><span class="opt-letter">C</span><span class="opt-text">A summary from the client describing their injuries in their own words, supplemented by photos of visible bruising taken after the collision</span></button>
-        <button class="option-btn" onclick="answer('q1','d')" id="q1-d"><span class="opt-letter">D</span><span class="opt-text">The insurance policy limits — that's how the demand amount is calculated, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity</span></button>
-      </div>
-      <div class="feedback-box" id="q1-feedback"></div>
-    </div>
 
     <!-- Q2 -->
-    <div class="question-block" id="q2-block">
-      <div class="q-num">Question 2 of 5 · Easy</div>
-      <div class="q-text">Your CM says: "The adjuster is ready to evaluate the claim, but we haven't gotten records from Northside Hospital yet." What does this mean for the case right now?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q2','a')" id="q2-a"><span class="opt-letter">A</span><span class="opt-text">No problem — send the demand with what you have and add the Northside records later — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage</span></button>
-        <button class="option-btn" onclick="answer('q2','b')" id="q2-b"><span class="opt-letter">B</span><span class="opt-text">The demand cannot be sent. Missing records means the demand is incomplete — the adjuster will either reject it or undervalue the claim. Getting Northside's records is the priority.</span></button>
-        <button class="option-btn" onclick="answer('q2','c')" id="q2-c"><span class="opt-letter">C</span><span class="opt-text">The attorney can estimate Northside's bills and include a placeholder in the demand, using treatment duration and typical procedure costs to approximate the charges</span></button>
-        <button class="option-btn" onclick="answer('q2','d')" id="q2-d"><span class="opt-letter">D</span><span class="opt-text">Ask the client to get their own records from Northside — it's faster if the client handles retrieval directly, since patients can walk in and request copies</span></button>
-      </div>
-      <div class="feedback-box" id="q2-feedback"></div>
-    </div>
 
     <!-- Q3 -->
-    <div class="question-block" id="q3-block">
-      <div class="q-num">Question 3 of 5 · Medium</div>
-      <div class="q-text">A client calls angry: "It's been 8 months and I still haven't gotten paid. What's taking so long?" When you pull her case in CasePeer, you see that records from her physical therapist have never been requested. What went wrong — and what does that tell you about your job?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q3','a')" id="q3-a"><span class="opt-letter">A</span><span class="opt-text">The physical therapist is slow — this isn't your responsibility, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
-        <button class="option-btn" onclick="answer('q3','b')" id="q3-b"><span class="opt-letter">B</span><span class="opt-text">Records from every treating provider must be requested at intake and tracked to completion. Missing one provider blocks the entire demand. Your job is to never let a case sit without complete records.</span></button>
-        <button class="option-btn" onclick="answer('q3','c')" id="q3-c"><span class="opt-letter">C</span><span class="opt-text">The attorney should have caught this during demand drafting — it's ultimately the attorney's responsibility to verify that all treating providers are accounted for before beginning the demand letter, and the intake team cannot be expected to track every provider</span></button>
-        <button class="option-btn" onclick="answer('q3','d')" id="q3-d"><span class="opt-letter">D</span><span class="opt-text">PT records are optional — they don't affect the demand amount because physical therapy is considered routine follow-up care that adjusters don't weigh heavily in evaluations</span></button>
-      </div>
-      <div class="feedback-box" id="q3-feedback"></div>
-    </div>
 
     <!-- Q4 -->
-    <div class="question-block" id="q4-block">
-      <div class="q-num">Question 4 of 5 · Medium</div>
-      <div class="q-text">The adjuster tells your CM: "We're not going to pay much on this claim — the client didn't treat for very long and there's not much documentation." The client actually treated for 4 months. What's the most likely problem?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q4','a')" id="q4-a"><span class="opt-letter">A</span><span class="opt-text">The adjuster is lying to keep the offer low — insurance companies routinely undervalue claims by asserting documentation is insufficient, so the right response is to push back on the adjuster's assessment rather than reviewing the records you sent for completeness</span></button>
-        <button class="option-btn" onclick="answer('q4','b')" id="q4-b"><span class="opt-letter">B</span><span class="opt-text">Not all of the medical records were obtained or included in the demand. Incomplete records = incomplete picture = lowball offer. The adjuster can only evaluate what she was given.</span></button>
-        <button class="option-btn" onclick="answer('q4','c')" id="q4-c"><span class="opt-letter">C</span><span class="opt-text">4 months of treatment is not long enough — the client should have treated longer — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value</span></button>
-        <button class="option-btn" onclick="answer('q4','d')" id="q4-d"><span class="opt-letter">D</span><span class="opt-text">The demand letter was written incorrectly — it should list more injuries and present them with greater detail, because adjusters evaluate claims based on how persuasively each diagnosis and its impact on the client's daily life is described</span></button>
-      </div>
-      <div class="feedback-box" id="q4-feedback"></div>
-    </div>
 
     <!-- Q5 -->
-    <div class="question-block" id="q5-block">
-      <div class="q-num">Question 5 of 5 · Medium</div>
-      <div class="q-text">In CasePeer, you're looking at a case that's been open 5 months. There are no records logged, no requests documented, and the demand is due in 2 weeks. Which of the following best describes this situation?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q5','a')" id="q5-a"><span class="opt-letter">A</span><span class="opt-text">Normal — records usually come in just before the demand is due, and most cases are assembled in the final two weeks before the attorney drafts the demand package</span></button>
-        <button class="option-btn" onclick="answer('q5','b')" id="q5-b"><span class="opt-letter">B</span><span class="opt-text">A records crisis. Requests should have gone out at intake. With 2 weeks to the demand, getting complete records may be impossible. This is how cases get undervalued or delayed for months.</span></button>
-        <button class="option-btn" onclick="answer('q5','c')" id="q5-c"><span class="opt-letter">C</span><span class="opt-text">Ask the client to request her own records — it saves time because the client can go directly to each provider's office and bypass the formal third-party release process</span></button>
-        <button class="option-btn" onclick="answer('q5','d')" id="q5-d"><span class="opt-letter">D</span><span class="opt-text">Send the demand without records and request them separately afterward — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken</span></button>
-      </div>
-      <div class="feedback-box" id="q5-feedback"></div>
-    </div>
 
     <div class="section-score" id="s2-score" style="display:none;">
       <div class="score-display" id="s2-pts">0</div>
@@ -557,91 +656,14 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
     </div>
 
     <!-- Q6 -->
-    <div class="question-block" id="q6-block">
-      <div class="q-num">Question 1 of 5 — Record Types</div>
-      <div class="q-text">For Brianna's case, your CM asks you to request ALL relevant records. The ortho surgeon performed a consult and reviewed the MRI. The MRI was done at a separate imaging center. What types of records do you need from the ortho, and why?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q6','a')" id="q6-a"><span class="opt-letter">A</span><span class="opt-text">Billing records only — they show how much the consult cost, and the dollar amounts from each visit are the primary evidence the adjuster uses when calculating the total value of the claim in the demand package</span></button>
-        <button class="option-btn" onclick="answer('q6','b')" id="q6-b"><span class="opt-letter">B</span><span class="opt-text">Treatment/progress notes AND billing records — the notes document the consult findings and MRI interpretation; the billing records capture the charges for the demand</span></button>
-        <button class="option-btn" onclick="answer('q6','c')" id="q6-c"><span class="opt-letter">C</span><span class="opt-text">Treatment notes only — billing isn't needed until settlement, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity</span></button>
-        <button class="option-btn" onclick="answer('q6','d')" id="q6-d"><span class="opt-letter">D</span><span class="opt-text">A letter from the ortho summarizing the visit is sufficient — a physician summary covers the key findings and can substitute for detailed notes</span></button>
-      </div>
-      <div class="feedback-box" id="q6-feedback"></div>
-    </div>
 
     <!-- Q7 -->
-    <div class="question-block" id="q7-block">
-      <div class="q-num">Question 2 of 5 — Imaging Records</div>
-      <div class="q-text">You request records from Radiology Associates for Brianna's MRI. They send you the MRI images on a disc but no report. Your CM asks you to confirm records are complete. What do you tell her?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q7','a')" id="q7-a"><span class="opt-letter">A</span><span class="opt-text">Records are complete — the images are the MRI, and having the actual scan images provides more diagnostic information than any written summary because the attorney and medical experts can review the imaging directly to assess structural damage</span></button>
-        <button class="option-btn" onclick="answer('q7','b')" id="q7-b"><span class="opt-letter">B</span><span class="opt-text">Ask Brianna to describe what the MRI showed based on what her doctor explained at the follow-up appointment, then document her account in the case file as a client-reported summary of the imaging findings for the demand</span></button>
-        <button class="option-btn" onclick="answer('q7','c')" id="q7-c"><span class="opt-letter">C</span><span class="opt-text">Records are complete — the ortho will interpret the images anyway — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage</span></button>
-        <button class="option-btn" onclick="answer('q7','d')" id="q7-d"><span class="opt-letter">D</span><span class="opt-text">Records are NOT complete. We also need the radiologist's written report — that's the document that explains what the images show. Images without a report are not usable in a demand.</span></button>
-      </div>
-      <div class="feedback-box" id="q7-feedback"></div>
-    </div>
 
     <!-- Q8 -->
-    <div class="question-block" id="q8-block">
-      <div class="q-num">Question 3 of 5 — HIPAA Authorization</div>
-      <div class="q-text">You send records requests to all four of Brianna's providers. Two weeks later, Emory Midtown responds: "We cannot release records without a signed HIPAA authorization." You check the file — you sent the request but forgot to attach the authorization. What does this mean for the timeline?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q8','a')" id="q8-a"><span class="opt-letter">A</span><span class="opt-text">No big deal — providers can release records to attorneys without authorization, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
-        <button class="option-btn" onclick="answer('q8','b')" id="q8-b"><span class="opt-letter">B</span><span class="opt-text">Ask Brianna to go pick up her records in person from Emory Midtown's medical records department, since patients have the right to access their own files directly without a HIPAA authorization form and this would bypass the formal third-party release process</span></button>
-        <button class="option-btn" onclick="answer('q8','c')" id="q8-c"><span class="opt-letter">C</span><span class="opt-text">The attorney can call Emory to authorize the release verbally — a phone call from the representing attorney should be sufficient to confirm the legal relationship and authorize release</span></button>
-        <button class="option-btn" onclick="answer('q8','d')" id="q8-d"><span class="opt-letter">D</span><span class="opt-text">The two-week clock restarts now. Emory cannot legally release records without authorization. You need to send the signed HIPAA auth immediately and log this delay in CasePeer. This is a preventable mistake.</span></button>
-      </div>
-      <div class="feedback-box" id="q8-feedback"></div>
-    </div>
 
     <!-- Q9 -->
-    <div class="question-block" id="q9-block">
-      <div class="q-num">Question 4 of 5 — Request Methods</div>
-      <div class="q-text">Peak Performance PT has a provider portal for records requests. The ortho's office only accepts fax. Emory Midtown has both options. For each provider, what is generally the fastest and most trackable method?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q9','a')" id="q9-a"><span class="opt-letter">A</span><span class="opt-text">Always fax — it creates a paper trail with a transmission confirmation page that proves the request was sent and received, which is important documentation if you need to demonstrate that the records request was timely and the provider failed to respond within the required processing window</span></button>
-        <button class="option-btn" onclick="answer('q9','b')" id="q9-b"><span class="opt-letter">B</span><span class="opt-text">Send regular mail — it's the most formal method and providers respond faster — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value</span></button>
-        <button class="option-btn" onclick="answer('q9','c')" id="q9-c"><span class="opt-letter">C</span><span class="opt-text">Call the provider and have them email the records — it's the fastest method since you get an immediate response and the records arrive in your inbox within minutes, eliminating the processing delays associated with portal submissions and fax transmissions</span></button>
-        <button class="option-btn" onclick="answer('q9','d')" id="q9-d"><span class="opt-letter">D</span><span class="opt-text">Use the provider portal when available — it's faster, creates automatic timestamps, and reduces errors. Use fax when required. For Emory (both available), use the portal. Always log which method was used in CasePeer.</span></button>
-      </div>
-      <div class="feedback-box" id="q9-feedback"></div>
-    </div>
 
     <!-- Q10: MATCHING -->
-    <div class="question-block" id="q10-block">
-      <div class="q-num">Question 5 of 5 — Match the Record Type</div>
-      <div class="q-text">Tap the correct record type for each description, then tap "Check Answers."</div>
-
-      <div class="drag-options" id="chips-10">
-        <div class="drag-chip" id="chip-tn" onclick="selectChip('tn','Treatment Notes')">Treatment Notes</div>
-        <div class="drag-chip" id="chip-img" onclick="selectChip('img','Imaging Report')">Imaging Report</div>
-        <div class="drag-chip" id="chip-bill" onclick="selectChip('bill','Billing Records')">Billing Records</div>
-        <div class="drag-chip" id="chip-rx" onclick="selectChip('rx','Pharmacy Records')">Pharmacy Records</div>
-      </div>
-
-      <div class="match-container">
-        <div class="match-row">
-          <div class="match-label">Documents every prescription filled by the client after the accident</div>
-          <div class="match-drop" id="drop-m1" onclick="placeChip('drop-m1')">Tap to place answer</div>
-        </div>
-        <div class="match-row">
-          <div class="match-label">The radiologist's written interpretation of the MRI or X-ray</div>
-          <div class="match-drop" id="drop-m2" onclick="placeChip('drop-m2')">Tap to place answer</div>
-        </div>
-        <div class="match-row">
-          <div class="match-label">What the doctor actually found and did at each appointment</div>
-          <div class="match-drop" id="drop-m3" onclick="placeChip('drop-m3')">Tap to place answer</div>
-        </div>
-        <div class="match-row">
-          <div class="match-label">The itemized charges for every procedure — the financial basis of the demand</div>
-          <div class="match-drop" id="drop-m4" onclick="placeChip('drop-m4')">Tap to place answer</div>
-        </div>
-      </div>
-
-      <button class="btn btn-primary btn-block mt-4" id="check-match-btn" onclick="checkMatching()">Check Answers</button>
-      <div class="feedback-box" id="q10-feedback"></div>
-    </div>
 
     <div class="section-score" id="s3-score" style="display:none;">
       <div class="score-display" id="s3-pts">0</div>
@@ -735,69 +757,14 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
     </div>
 
     <!-- Q11 -->
-    <div class="question-block" id="q11-block">
-      <div class="q-num">Question 1 of 5 · Medium</div>
-      <div class="q-text">It's Day 55. Looking at Jasmine's case, what two things went wrong with the follow-up on Atlanta Spine and NextCare?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q11','a')" id="q11-a"><span class="opt-letter">A</span><span class="opt-text">Nothing went wrong — 55 days is normal for records retrieval — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken</span></button>
-        <button class="option-btn" onclick="answer('q11','b')" id="q11-b"><span class="opt-letter">B</span><span class="opt-text">The initial request should have been sent certified mail rather than fax or portal — certified mail creates a legal proof of delivery with return receipt, and providers are required to respond within 30 days of receiving a certified records request under applicable regulations</span></button>
-        <button class="option-btn" onclick="answer('q11','c')" id="q11-c"><span class="opt-letter">C</span><span class="opt-text">Only one thing went wrong — nobody called Atlanta Spine to follow up, but since Grady's records arrived by Day 18, the retrieval process was working and the other providers were just slower to respond</span></button>
-        <button class="option-btn" onclick="answer('q11','d')" id="q11-d"><span class="opt-letter">D</span><span class="opt-text">(1) No 7-day follow-up calls were made or logged for either provider. (2) Because the escalation ladder wasn't followed, the CM was never flagged at Day 21, and we've now blown past both Day 21 and Day 30 without escalation.</span></button>
-      </div>
-      <div class="feedback-box" id="q11-feedback"></div>
-    </div>
 
     <!-- Q12 -->
-    <div class="question-block" id="q12-block">
-      <div class="q-num">Question 2 of 5 · Medium</div>
-      <div class="q-text">Today is Day 55 — you've just discovered the gap. You need to escalate immediately. Based on the ladder, what should happen RIGHT NOW?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q12','a')" id="q12-a"><span class="opt-letter">A</span><span class="opt-text">Wait until Day 60 — that's when the next step starts on the escalation ladder, and jumping ahead of the scheduled timeline can create confusion in CasePeer tracking and may result in duplicate outreach that frustrates the provider's records department</span></button>
-        <button class="option-btn" onclick="answer('q12','b')" id="q12-b"><span class="opt-letter">B</span><span class="opt-text">Send a new records request — the original one probably expired or was lost by the provider, so starting fresh with a clean request and a new HIPAA authorization is more likely to produce results than following up on a stale submission</span></button>
-        <button class="option-btn" onclick="answer('q12','c')" id="q12-c"><span class="opt-letter">C</span><span class="opt-text">Call both providers and if they don't answer, the case is on hold, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity</span></button>
-        <button class="option-btn" onclick="answer('q12','d')" id="q12-d"><span class="opt-letter">D</span><span class="opt-text">Flag the CM immediately (the Day 21 escalation threshold was passed 34 days ago). Make follow-up calls to both providers today. Log everything in CasePeer. The CM needs to know and may need to call directly.</span></button>
-      </div>
-      <div class="feedback-box" id="q12-feedback"></div>
-    </div>
 
     <!-- Q13 -->
-    <div class="question-block" id="q13-block">
-      <div class="q-num">Question 3 of 5 · Medium</div>
-      <div class="q-text">You call Atlanta Spine today (Day 55). The receptionist says: "Those records will be ready in about 3 weeks." You need to log this in CasePeer. What do you document?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q13','a')" id="q13-a"><span class="opt-letter">A</span><span class="opt-text">"Called Atlanta Spine. Records coming soon." — a brief note confirming that contact was made is the standard CasePeer documentation format for follow-up calls, and adding unnecessary detail about the conversation creates cluttered case notes that are harder for the CM and attorney to review quickly</span></button>
-        <button class="option-btn" onclick="answer('q13','b')" id="q13-b"><span class="opt-letter">B</span><span class="opt-text">Only log it if records actually arrive — follow-up calls that don't result in records being delivered are routine and don't need documentation in CasePeer, since the relevant event for the case timeline is the actual receipt of records rather than each individual outreach attempt</span></button>
-        <button class="option-btn" onclick="answer('q13','c')" id="q13-c"><span class="opt-letter">C</span><span class="opt-text">Nothing — the call isn't useful since records aren't coming yet — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage</span></button>
-        <button class="option-btn" onclick="answer('q13','d')" id="q13-d"><span class="opt-letter">D</span><span class="opt-text">Date, time, name of person you spoke with, their exact ETA ("approximately 3 weeks"), next follow-up date, and that CM was notified of the delay. Specific details protect the case and hold providers accountable.</span></button>
-      </div>
-      <div class="feedback-box" id="q13-feedback"></div>
-    </div>
 
     <!-- Q14 -->
-    <div class="question-block" id="q14-block">
-      <div class="q-num">Question 4 of 5 · Hard</div>
-      <div class="q-text">NextCare says they can't find Jasmine's file. They're asking for a patient authorization number she doesn't have. They also want $35 to process the request. What do you do?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q14','a')" id="q14-a"><span class="opt-letter">A</span><span class="opt-text">Tell the client to deal with it — it's her records, and the provider's billing disputes or retrieval fees are between the patient and the facility, not something the legal team should resolve during case management</span></button>
-        <button class="option-btn" onclick="answer('q14','b')" id="q14-b"><span class="opt-letter">B</span><span class="opt-text">Pay the $35 out of pocket and deal with the reimbursement later, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
-        <button class="option-btn" onclick="answer('q14','c')" id="q14-c"><span class="opt-letter">C</span><span class="opt-text">Escalate to CM immediately — the $35 fee needs attorney/CM approval; the "can't find the file" issue needs escalation. Offer to provide all available identifying info (DOB, date of service, etc.) to help them locate the record. Log every detail.</span></button>
-        <button class="option-btn" onclick="answer('q14','d')" id="q14-d"><span class="opt-letter">D</span><span class="opt-text">NextCare can't find it — those records don't exist, so move on to the demand with the records from the other two providers and note that NextCare treatment was minimal and unlikely to significantly affect the overall damages calculation</span></button>
-      </div>
-      <div class="feedback-box" id="q14-feedback"></div>
-    </div>
 
     <!-- Q15 -->
-    <div class="question-block" id="q15-block">
-      <div class="q-num">Question 5 of 5 · Hard</div>
-      <div class="q-text">It's now Day 92 for Jasmine's case. Atlanta Spine and NextCare still haven't produced records despite multiple follow-up calls. The demand cannot go out without them. According to the escalation ladder — what happens now, and who takes the lead?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q15','a')" id="q15-a"><span class="opt-letter">A</span><span class="opt-text">Send the demand anyway and note the records are pending — the attorney can include a reservation of rights clause in the demand letter that allows supplemental documentation later, which adjusters in Georgia routinely accept when there are outstanding provider records still in processing</span></button>
-        <button class="option-btn" onclick="answer('q15','b')" id="q15-b"><span class="opt-letter">B</span><span class="opt-text">Close the records request — the providers are unresponsive and there's nothing more to do — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value</span></button>
-        <button class="option-btn" onclick="answer('q15','c')" id="q15-c"><span class="opt-letter">C</span><span class="opt-text">The attorney takes over. At Day 90+, we can issue a subpoena for records. A records retrieval service may also be engaged. The LA continues to document every contact attempt. This is no longer just a follow-up problem — it's a legal one.</span></button>
-        <button class="option-btn" onclick="answer('q15','d')" id="q15-d"><span class="opt-letter">D</span><span class="opt-text">Ask the client to pick up the records in person and bring them to the office, since the client can access their own files without a formal release and this avoids the multi-week delay of a standard third-party records request process</span></button>
-      </div>
-      <div class="feedback-box" id="q15-feedback"></div>
-    </div>
 
     <div class="section-score" id="s4-score" style="display:none;">
       <div class="score-display" id="s4-pts">0</div>
@@ -844,69 +811,14 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
     </div>
 
     <!-- Q16 -->
-    <div class="question-block" id="q16-block">
-      <div class="q-num">Question 1 of 5 · Medium</div>
-      <div class="q-text">The Atlanta Spine records only cover April 16 through May 10. But Jasmine says she treated there through June 5. What do you do before telling your CM records are complete?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q16','a')" id="q16-a"><span class="opt-letter">A</span><span class="opt-text">Records are complete — what arrived is what arrived, and the provider sent everything they have on file for this patient, so any additional treatment dates the client mentions may be from a different facility or may reflect appointments that were scheduled but never actually completed by the client</span></button>
-        <button class="option-btn" onclick="answer('q16','b')" id="q16-b"><span class="opt-letter">B</span><span class="opt-text">Ask the client to get those additional records herself by visiting the provider's office in person and requesting copies at the front desk, since patients can obtain their own records without a HIPAA authorization and this avoids the formal release process that adds weeks of delay</span></button>
-        <button class="option-btn" onclick="answer('q16','c')" id="q16-c"><span class="opt-letter">C</span><span class="opt-text">Records are NOT complete. The client says she treated through June 5 — that's 26 more days of treatment not covered. You need to request supplemental records from Atlanta Spine for May 11 – June 5 and document the gap in CasePeer.</span></button>
-        <button class="option-btn" onclick="answer('q16','d')" id="q16-d"><span class="opt-letter">D</span><span class="opt-text">Tell the attorney to draft the demand with what's available and we'll supplement later — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken</span></button>
-      </div>
-      <div class="feedback-box" id="q16-feedback"></div>
-    </div>
 
     <!-- Q17 -->
-    <div class="question-block" id="q17-block">
-      <div class="q-num">Question 2 of 5 · Medium</div>
-      <div class="q-text">The Grady ER notes mention Jasmine had "pre-existing L4-L5 degenerative disc disease" before the accident. The accident caused a cervical strain and shoulder injury. What is the correct way to handle this finding?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q17','a')" id="q17-a"><span class="opt-letter">A</span><span class="opt-text">Hide it — the adjuster doesn't need to know about pre-existing conditions, and disclosing prior spine treatment could give the adjuster leverage to argue the current injuries are unrelated to this accident, potentially reducing the settlement offer</span></button>
-        <button class="option-btn" onclick="answer('q17','b')" id="q17-b"><span class="opt-letter">B</span><span class="opt-text">Pre-existing conditions at a different spine location don't matter for this case, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity</span></button>
-        <button class="option-btn" onclick="answer('q17','c')" id="q17-c"><span class="opt-letter">C</span><span class="opt-text">Flag it to your CM immediately. Pre-existing conditions are not deal-breakers — we argue the accident aggravated the condition — but the attorney needs to know so the demand properly addresses it. Never withhold relevant medical findings from your CM.</span></button>
-        <button class="option-btn" onclick="answer('q17','d')" id="q17-d"><span class="opt-letter">D</span><span class="opt-text">Ask the client if she has a prior injury claim we should know about first, and wait for her response before taking any action on the records, since the client's answer about prior treatment history determines how to handle documentation</span></button>
-      </div>
-      <div class="feedback-box" id="q17-feedback"></div>
-    </div>
 
     <!-- Q18 -->
-    <div class="question-block" id="q18-block">
-      <div class="q-num">Question 3 of 5 · Hard</div>
-      <div class="q-text">You're reviewing Atlanta Spine's billing records. You see charges for 18 appointments. But the treatment notes only cover 16 appointments. Two billing dates have no corresponding treatment notes. What's the red flag — and what do you do?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q18','a')" id="q18-a"><span class="opt-letter">A</span><span class="opt-text">Billing and notes don't have to match — they're separate documents maintained by different departments within the provider's office, and it's common for billing records to include dates that don't appear in the clinical notes because billing captures administrative charges, scheduling fees, and other non-clinical line items that would not generate a treatment note in the medical records system</span></button>
-        <button class="option-btn" onclick="answer('q18','b')" id="q18-b"><span class="opt-letter">B</span><span class="opt-text">Include all 18 billing dates in the demand — more charges means a higher settlement, and the adjuster will only question billing entries if we specifically call attention to discrepancies, so it's better to present the full billing record and let the insurer's own review team identify any issues</span></button>
-        <button class="option-btn" onclick="answer('q18','c')" id="q18-c"><span class="opt-letter">C</span><span class="opt-text">This is a red flag — every billing date should have a corresponding treatment note. This could be missing records, a billing error, or a documentation issue at the provider. Flag it to CM immediately. Do NOT include unbacked billing dates in the demand. Request the missing notes from the provider.</span></button>
-        <button class="option-btn" onclick="answer('q18','d')" id="q18-d"><span class="opt-letter">D</span><span class="opt-text">Remove both billing dates — if there are no notes, the appointments didn't happen — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken</span></button>
-      </div>
-      <div class="feedback-box" id="q18-feedback"></div>
-    </div>
 
     <!-- Q19 -->
-    <div class="question-block" id="q19-block">
-      <div class="q-num">Question 4 of 5 · Hard</div>
-      <div class="q-text">Your CM is reviewing Jasmine's records before drafting the demand. She asks you: "Did treatment stop, or is she still treating?" Jasmine's chiro notes stop May 10. The client told you she's still treating as of June 9. What is the correct answer to your CM's question — and why does it matter?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q19','a')" id="q19-a"><span class="opt-letter">A</span><span class="opt-text">"Treatment stopped on May 10" — that's what the records show, and we should rely on the documented treatment dates rather than the client's verbal account, since adjusters and opposing counsel evaluate claims based on what's in the medical records and any assertions without written documentation to support them will be challenged during negotiations</span></button>
-        <button class="option-btn" onclick="answer('q19','b')" id="q19-b"><span class="opt-letter">B</span><span class="opt-text">"I don't know — you'd have to ask the client" — the records only show what the providers documented, and the CM should speak directly with the client to clarify her treatment status before making assumptions about the completeness of the file</span></button>
-        <button class="option-btn" onclick="answer('q19','c')" id="q19-c"><span class="opt-letter">C</span><span class="opt-text">"Records only go through May 10, but the client says she's still treating. We have a records gap and need supplemental records before drafting the demand." — The demand should reflect actual treatment, not just what records we have. Drafting prematurely could undervalue the case.</span></button>
-        <button class="option-btn" onclick="answer('q19','d')" id="q19-d"><span class="opt-letter">D</span><span class="opt-text">Go ahead with the demand — whatever the client is doing now doesn't affect what already happened, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
-      </div>
-      <div class="feedback-box" id="q19-feedback"></div>
-    </div>
 
     <!-- Q20 -->
-    <div class="question-block" id="q20-block">
-      <div class="q-num">Question 5 of 5 · Hard</div>
-      <div class="q-text">You've finished reviewing all three sets of records. You need to document your review in CasePeer before handing off to your CM. Which of the following best describes what belongs in your CasePeer note?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q20','a')" id="q20-a"><span class="opt-letter">A</span><span class="opt-text">Each provider with records received, date range covered, any gaps identified, any red flags (pre-existing condition noted, billing/notes mismatch), supplemental requests sent, and that CM was notified. Every record review needs a paper trail.</span></button>
-        <button class="option-btn" onclick="answer('q20','b')" id="q20-b"><span class="opt-letter">B</span><span class="opt-text">"Records received from all three providers." — this confirms that the records retrieval process is complete and allows the CM to move forward with drafting the demand letter, since the purpose of the CasePeer note is to mark the task as done and signal the case is ready for the next stage of pre-litigation processing</span></button>
-        <button class="option-btn" onclick="answer('q20','c')" id="q20-c"><span class="opt-letter">C</span><span class="opt-text">Leave it blank — the CM will document after reviewing — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value</span></button>
-        <button class="option-btn" onclick="answer('q20','d')" id="q20-d"><span class="opt-letter">D</span><span class="opt-text">Only note the total dollar amount of bills received — the CM and attorney primarily need the bottom-line damages number to calculate the demand amount, and the detailed breakdown of each provider's charges will be evident from the billing records themselves when the demand is drafted</span></button>
-      </div>
-      <div class="feedback-box" id="q20-feedback"></div>
-    </div>
 
     <div class="section-score" id="s5-score" style="display:none;">
       <div class="score-display" id="s5-pts">0</div>
@@ -964,89 +876,14 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
     </div>
 
     <!-- BOSS Q1 -->
-    <div class="question-block" id="qb1-block">
-      <div class="step-item">
-        <div class="step-num">1</div>
-        <div class="step-content">
-          <div class="step-q">ATL Chiropractic has records but is asking for a new HIPAA authorization. What went wrong, and what do you do right now?</div>
-          <div class="options">
-            <button class="option-btn" onclick="answer('qb1','a')" id="qb1-a"><span class="opt-letter">A</span><span class="opt-text">The original request went out without the signed HIPAA auth. The fix: get a fresh signed authorization from DeShawn today, send it to ATL Chiro immediately, mark it urgent, log the error and corrective action in CasePeer.</span></button>
-            <button class="option-btn" onclick="answer('qb1','b')" id="qb1-b"><span class="opt-letter">B</span><span class="opt-text">Tell ATL Chiro to release the records anyway — we have a retainer signed by the client — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken</span></button>
-            <button class="option-btn" onclick="answer('qb1','c')" id="qb1-c"><span class="opt-letter">C</span><span class="opt-text">This is the provider's fault for not catching it earlier — escalate to attorney and have them send a formal complaint about the missing authorization when the original request was received</span></button>
-            <button class="option-btn" onclick="answer('qb1','d')" id="qb1-d"><span class="opt-letter">D</span><span class="opt-text">Since records arrived from the other providers, we can use what we have and request authorization later when the demand is being assembled — the missing records may not change the damages picture</span></button>
-          </div>
-          <div class="feedback-box" id="qb1-feedback"></div>
-        </div>
-      </div>
-    </div>
 
     <!-- BOSS Q2 -->
-    <div class="question-block" id="qb2-block">
-      <div class="step-item">
-        <div class="step-num">2</div>
-        <div class="step-content">
-          <div class="step-q">Buckhead Spine was never requested — it was missed at intake. It's now Day 127. What's the priority and what's the risk?</div>
-          <div class="options">
-            <button class="option-btn" onclick="answer('qb2','a')" id="qb2-a"><span class="opt-letter">A</span><span class="opt-text">Send the request immediately with HIPAA auth and mark urgent. Risk: standard records retrieval takes 2–4 weeks minimum — this almost certainly blows the 2-week demand window. Flag to CM and attorney that the demand timeline may need to be adjusted. Missing Buckhead records could mean missing a significant portion of DeShawn's treatment and bills.</span></button>
-            <button class="option-btn" onclick="answer('qb2','b')" id="qb2-b"><span class="opt-letter">B</span><span class="opt-text">No big deal — send the request today and the records will arrive within 2 weeks since most providers process urgent requests quickly, and marking the request as urgent with a deadline note explaining the demand timeline should be enough to get Buckhead Orthopedics to prioritize DeShawn's file over their standard queue, allowing us to meet the two-week demand deadline without needing to alert the attorney about a potential delay in documentation</span></button>
-            <button class="option-btn" onclick="answer('qb2','c')" id="qb2-c"><span class="opt-letter">C</span><span class="opt-text">Skip Buckhead — if they weren't requested at intake, those records aren't important, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity</span></button>
-            <button class="option-btn" onclick="answer('qb2','d')" id="qb2-d"><span class="opt-letter">D</span><span class="opt-text">Ask DeShawn to pick up his Buckhead records and bring them in, since patients can always access their own medical files directly from the provider without needing a HIPAA authorization or formal third-party release, and having DeShawn handle the retrieval personally would be the fastest way to get the records into the case file before the demand deadline, avoiding the processing delays that come with standard records requests</span></button>
-          </div>
-          <div class="feedback-box" id="qb2-feedback"></div>
-        </div>
-      </div>
-    </div>
 
     <!-- BOSS Q3 -->
-    <div class="question-block" id="qb3-block">
-      <div class="step-item">
-        <div class="step-num">3</div>
-        <div class="step-content">
-          <div class="step-q">Atlanta Sports Medicine was requested at Day 10 but has never been followed up. It's Day 127. According to the escalation ladder — where should this case be right now, and what should have happened along the way?</div>
-          <div class="options">
-            <button class="option-btn" onclick="answer('qb3','a')" id="qb3-a"><span class="opt-letter">A</span><span class="opt-text">At Day 127 this should be past the attorney/subpoena stage (Day 90+). What should have happened: Day 14 follow-up (missed), Day 30 CM flag (missed), Day 60 CM calls (missed), Day 90 attorney escalation (missed). This is a complete breakdown of the escalation ladder. Today: escalate to attorney immediately, consider a records retrieval service or subpoena.</span></button>
-            <button class="option-btn" onclick="answer('qb3','b')" id="qb3-b"><span class="opt-letter">B</span><span class="opt-text">Just send one more follow-up call — that's all that's needed</span></button>
-            <button class="option-btn" onclick="answer('qb3','c')" id="qb3-c"><span class="opt-letter">C</span><span class="opt-text">At Day 127 there's nothing more to do — the provider has the right to refuse</span></button>
-            <button class="option-btn" onclick="answer('qb3','d')" id="qb3-d"><span class="opt-letter">D</span><span class="opt-text">Ask the client to sign a new request — the original one expired</span></button>
-          </div>
-          <div class="feedback-box" id="qb3-feedback"></div>
-        </div>
-      </div>
-    </div>
 
     <!-- BOSS Q4 -->
-    <div class="question-block" id="qb4-block">
-      <div class="step-item">
-        <div class="step-num">4</div>
-        <div class="step-content">
-          <div class="step-q">Total Body PT wants $45 to release the records. Nobody approved the payment. What is the correct process?</div>
-          <div class="options">
-            <button class="option-btn" onclick="answer('qb4','a')" id="qb4-a"><span class="opt-letter">A</span><span class="opt-text">Escalate the fee request to CM or supervising attorney for approval. Once approved, pay the fee (the firm typically advances these costs), document the payment, and confirm records will be released immediately. Then log everything in CasePeer. Never authorize payment on your own without approval.</span></button>
-            <button class="option-btn" onclick="answer('qb4','b')" id="qb4-b"><span class="opt-letter">B</span><span class="opt-text">Refuse the fee — providers can't charge for records under HIPAA</span></button>
-            <button class="option-btn" onclick="answer('qb4','c')" id="qb4-c"><span class="opt-letter">C</span><span class="opt-text">Pay it out of pocket since it's only $45 — get reimbursed later</span></button>
-            <button class="option-btn" onclick="answer('qb4','d')" id="qb4-d"><span class="opt-letter">D</span><span class="opt-text">Skip Total Body PT — a $45 fee means those records aren't worth getting</span></button>
-          </div>
-          <div class="feedback-box" id="qb4-feedback"></div>
-        </div>
-      </div>
-    </div>
 
     <!-- BOSS Q5 — HARDEST -->
-    <div class="question-block" id="qb5-block">
-      <div class="step-item">
-        <div class="step-num">5</div>
-        <div class="step-content">
-          <div class="step-q">The attorney says she needs the demand out in 2 weeks. Realistically — given everything wrong with this case — what do you tell her and what's your action plan?</div>
-          <div class="options">
-            <button class="option-btn" onclick="answer('qb5','a')" id="qb5-a"><span class="opt-letter">A</span><span class="opt-text">"The 2-week timeline is at risk. We're missing records from Buckhead (never requested), Sports Med (no follow-up for 117 days), Total Body PT (fee unpaid), and ATL Chiro needs re-auth. I've escalated Sports Med to attorney-level. I'm sending Buckhead and ATL Chiro requests today with HIPAA auth and flagging the PT fee for approval. We may need to discuss whether to request an extension or draft a partial demand now." — Telling the attorney the truth early is always correct. Surprises at deadline are not.</span></button>
-            <button class="option-btn" onclick="answer('qb5','b')" id="qb5-b"><span class="opt-letter">B</span><span class="opt-text">"We'll get it done in 2 weeks — no problem."</span></button>
-            <button class="option-btn" onclick="answer('qb5','c')" id="qb5-c"><span class="opt-letter">C</span><span class="opt-text">"Just write the demand with Emory and ATL Chiro — that's enough to get started."</span></button>
-            <button class="option-btn" onclick="answer('qb5','d')" id="qb5-d"><span class="opt-letter">D</span><span class="opt-text">"We should close the case — there are too many problems to fix in 2 weeks."</span></button>
-          </div>
-          <div class="feedback-box" id="qb5-feedback"></div>
-        </div>
-      </div>
-    </div>
 
     <div class="section-score" id="s6-score" style="display:none;">
       <div class="score-display" id="s6-pts">0</div>
@@ -1054,16 +891,41 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
     </div>
 
     <div class="btn-group" id="s6-next">
-      <button class="btn btn-warning btn-block" onclick="goToSection(6)">See Your Results →</button>
+      <div style="margin-bottom:1rem;">
+      <label for="trainee-name-input" style="display:block;font-size:0.85rem;font-weight:600;color:#141c2c;margin-bottom:0.4rem;">Your Name — required to start</label>
+      <input type="text" id="trainee-name-input" placeholder="Enter your full name" autocomplete="name" style="width:100%;padding:0.5rem 0.75rem;border:1.5px solid #cbd5e1;border-radius:6px;font-size:0.9rem;box-sizing:border-box;">
+    </div>
+    <button class="btn btn-warning btn-block" onclick="startQuiz()">Take the Quiz &rarr;</button>
     </div>
 
   </div>
 </div>
 
 <!-- ══════════════════════════════════════════
-     SECTION 7: RESULTS
+     SECTION 7 — QUIZ (api-quiz-engine.js)
 ════════════════════════════════════════════ -->
 <div class="section-card" id="section-6">
+  <div class="section-header">
+    <div class="section-num">Knowledge Check</div>
+    <h2>Module Assessment</h2>
+    <div class="section-subhead">Answer each question. One attempt — wrong answer reveals the correct answer and unlocks Next.</div>
+  </div>
+  <div class="section-body">
+    <div style="font-family:system-ui,sans-serif;font-size:13px;color:#33415c;padding:8px 0 12px;border-bottom:1px solid #e8eaf0;margin-bottom:16px;">
+      Base: <b id="base">0</b> / <b id="basemax">—</b>
+      &nbsp;·&nbsp; Bonus: <b id="bonus">0</b>
+      &nbsp;·&nbsp; Pass gate: <b id="gate">80</b>%
+      &nbsp;·&nbsp; <span id="q-progress" style="color:#dcb161;font-weight:700;"></span>
+    </div>
+    <div id="questions"></div>
+    <div id="result" style="background:#fff;border:2px solid #0b2545;border-radius:10px;padding:18px;margin:18px 0;display:none;"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 7: RESULTS
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-7">
   <div id="results-header-wrap"></div>
   <div class="section-body">
 
@@ -1117,7 +979,7 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
 <div class="btn-row" id="certActions" style="display:none;">
   <button class="btn btn-secondary" onclick="window.print()">🖨️ Print Certificate</button>
   <button class="btn btn-primary" onclick="location.reload()">🔄 Retake Module</button>
-  <button class="btn btn-secondary btn-block" onclick="goToSection(7)" style="margin-top:0.5rem;">📝 Provide Feedback (Optional)</button>
+  <button class="btn btn-secondary btn-block" onclick="goToSection(8)" style="margin-top:0.5rem;">📝 Provide Feedback (Optional)</button>
 </div>
 
 
@@ -1128,7 +990,7 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
 <!-- ══════════════════════════════════════════
      SECTION 8: FEEDBACK
 ════════════════════════════════════════════ -->
-<div class="section-card" id="section-7">
+<div class="section-card" id="section-8">
   <div class="section-header">
     <div class="section-num">Section 8 · Optional · 2 min</div>
     <h2>Your Feedback</h2>
@@ -1176,7 +1038,7 @@ button, .btn, .option-btn, [onclick] { cursor: pointer !important; -webkit-tap-h
 
     <div class="btn-group">
       <button class="btn btn-primary btn-block" onclick="submitResults()">📧 Email Results + Feedback</button>
-      <button class="btn btn-secondary btn-block" onclick="goToSection(6)">← Back to Results</button>
+      <button class="btn btn-secondary btn-block" onclick="goToSection(7)">← Back to Results</button>
     </div>
 
   </div>
@@ -1241,117 +1103,15 @@ var sectionQuestions = {
   5: ['qb1','qb2','qb3','qb4','qb5']
 };
 
-var correctAnswers = {
-  q1:'b', q2:'b', q3:'b', q4:'b', q5:'b',
-  q6:'b', q7:'d', q8:'d', q9:'d',
-  q11:'d', q12:'d', q13:'d', q14:'c', q15:'c',
-  q16:'c', q17:'c', q18:'c', q19:'c', q20:'a',
-  qb1:'a', qb2:'a', qb3:'a', qb4:'a', qb5:'a'
-};
+var correctAnswers = {} /* CUTOVER: answer key removed — the engine grades */;
 
-var feedbackText = {
-  q1: {
-    correct: '✅ Correct. The demand letter is built on medical records. They prove the nature and extent of injuries, document all treatment, and establish the economic damages (medical bills). Without them, there is no demand.',
-    incorrect: '❌ The police report proves the accident happened — not what injuries were caused. The attorney needs medical records AND billing from every treating provider.'
-  },
-  q2: {
-    correct: '✅ Right. An incomplete demand gets undervalued or rejected. Northside\'s records are part of the total picture. Getting them is the priority — full stop.',
-    incorrect: '❌ Sending a demand with missing records is a mistake. The adjuster evaluates what\'s in front of her. Gaps mean a lower offer or a flat rejection.'
-  },
-  q3: {
-    correct: '✅ Exactly. Your job is to track every treating provider from intake to completion. A missed provider = missed bills = incomplete demand = your client doesn\'t get what they\'re owed.',
-    incorrect: '❌ As the LA, you own records tracking. Every provider identified at intake needs a request logged. If PT records were missed, that\'s a failure in intake process — not someone else\'s problem.'
-  },
-  q4: {
-    correct: '✅ Correct. The adjuster can only evaluate what she receives. Incomplete records = incomplete story = low offer. Records completeness is everything.',
-    incorrect: '❌ Adjusters work from documentation, not accusations. If the adjuster thinks treatment was short, it\'s because the records you sent told that story.'
-  },
-  q5: {
-    correct: '✅ Exactly. Records must be requested at intake. Five months with no records is a crisis. With only 2 weeks to the demand, this case is almost certainly going to be delayed or undervalued.',
-    incorrect: '❌ Records don\'t "come in at the end." They need to be proactively requested, tracked, and followed up. This is a preventable failure.'
-  },
-  q6: {
-    correct: '✅ Right. You always need both: treatment notes (what the doctor found and did) AND billing records (how much it cost). Billing without notes lacks clinical support. Notes without billing miss the damages.',
-    incorrect: '❌ Billing alone doesn\'t tell the story of treatment — and notes alone don\'t document the financial damages. You need both from every provider.'
-  },
-  q7: {
-    correct: '✅ Correct. An MRI disc alone is not complete records. The radiologist\'s written report is the document that explains what the images show — that\'s what goes in the demand. Request the report immediately.',
-    incorrect: '❌ Images without an interpretation report are not usable. The radiologist\'s written report is required — it\'s the clinical documentation of what the MRI showed.'
-  },
-  q8: {
-    correct: '✅ Right. HIPAA requires patient authorization before records can be released to a third party. Forgetting to attach it means the clock restarts. Always include the signed HIPAA auth with every request.',
-    incorrect: '❌ Providers cannot legally release medical records without a signed HIPAA authorization. Forgetting it adds weeks to your timeline and is a completely preventable error.'
-  },
-  q9: {
-    correct: '✅ Correct. Provider portals create automatic confirmation of receipt, track status, and reduce fax errors. Use them whenever available. Document which method you used in CasePeer.',
-    incorrect: '❌ Provider portals are generally faster and more trackable than fax. Use the portal when available, fax when required. Always log your method in CasePeer.'
-  },
-  q11: {
-    correct: '✅ Exactly. Two failures: (1) no 7-day follow-up calls were made or logged — by Day 55 that is seven missed cycles, and (2) no CM escalation happened at Day 21. Both are required by GLG policy. Missing them allowed the case to slide to Day 55 without any intervention.',
-    incorrect: '❌ There were two distinct failures: the 7-day follow-ups were skipped AND the CM was never flagged at Day 21. Both failures compounded to create the current situation.'
-  },
-  q12: {
-    correct: '✅ Right. You\'re past the Day 21 escalation threshold by 34 days. Don\'t wait — flag the CM now, make calls today, and document everything. The escalation ladder doesn\'t reset; you step in at the current level.',
-    incorrect: '❌ The escalation steps are thresholds, not starting points. At Day 55 you\'ve passed the Day 21 escalation threshold — flag the CM immediately and start active follow-up today.'
-  },
-  q13: {
-    correct: '✅ Exactly. Vague notes like "called, records coming soon" are useless. Log: date, time, who you spoke with, their exact ETA, your next follow-up date, and CM notification. Details protect the case.',
-    incorrect: '❌ "Called, records coming soon" is not adequate documentation. You need date, time, contact name, their exact ETA, your next follow-up date, and that CM was notified.'
-  },
-  q14: {
-    correct: '✅ Right. Never authorize payment without CM/attorney approval. Escalate the fee immediately. Provide all available patient info (DOB, date of service, accident date) to help the provider locate the file. Log everything.',
-    incorrect: '❌ Any records fee requires CM or attorney approval before payment. Escalate it — don\'t pay independently and don\'t skip those records. Log every contact attempt.'
-  },
-  q15: {
-    correct: '✅ Correct. At Day 90+, the attorney takes over. A subpoena can be issued if the provider continues to withhold records. A records retrieval service may be used. The LA\'s job is to keep documenting every attempt.',
-    incorrect: '❌ The escalation ladder doesn\'t stop at the CM. At Day 90, the attorney gets involved and a subpoena is a real option. Records can be compelled legally.'
-  },
-  q16: {
-    correct: '✅ Right. Records are only complete when they cover all actual treatment dates. If the client says she treated through June 5 but records stop May 10, you have a gap. Request supplemental records before declaring complete.',
-    incorrect: '❌ "What arrived" is not the same as "complete records." The client\'s actual treatment dates define what complete means. You have a 26-day gap to fill.'
-  },
-  q17: {
-    correct: '✅ Correct. Pre-existing conditions are not deal-breakers, but they must be disclosed and addressed. The legal argument is that the accident aggravated the condition. Your CM needs to know immediately to frame the demand properly.',
-    incorrect: '❌ Pre-existing conditions must always be flagged to your CM. They affect how the demand is written and argued. Hiding them — even innocently — can blow up a case.'
-  },
-  q18: {
-    correct: '✅ Exactly. Billing and notes must match. Two billing dates without corresponding treatment notes is a significant red flag. It could be missing documentation, a billing error, or something worse. Flag it, request clarification, and don\'t include unsupported billing in the demand.',
-    incorrect: '❌ Billing and treatment notes must correspond. Two billing dates with no notes is a red flag — it needs to be investigated and resolved before the demand goes out.'
-  },
-  q19: {
-    correct: '✅ Right. You tell the CM exactly what you know: the records gap exists, the client says she\'s still treating, and supplemental records are needed. Drafting the demand before treatment ends undervalues the case.',
-    incorrect: '❌ You have conflicting information. Don\'t tell the CM treatment stopped — tell her exactly what the records show and what the client reported. Then fix the records gap.'
-  },
-  q20: {
-    correct: '✅ Exactly. Your CasePeer note is the paper trail. It should capture: what you reviewed, what\'s complete, what gaps you found, what red flags exist, what supplemental requests you sent, and that CM was notified. This is your work product.',
-    incorrect: '❌ "Records received" is not a records review note. Document what you found, what\'s missing, what you flagged, and what you did about it. That\'s the standard.'
-  },
-  qb1: {
-    correct: '✅ Right. The HIPAA auth was missing from the original request. Fix: get a fresh signed auth from DeShawn today, send immediately, mark urgent, log the error and corrective action. This is a process failure — learn from it.',
-    incorrect: '❌ Retainers don\'t substitute for HIPAA authorization. Providers are legally correct to require it. Get the signed auth from DeShawn today and send it immediately.'
-  },
-  qb2: {
-    correct: '✅ Correct. Send the request immediately — but be honest about the timeline risk. Buckhead was missed at intake, and with 2 weeks to the demand, records retrieval almost certainly won\'t complete in time. Flag to CM and attorney now.',
-    incorrect: '❌ Every treating provider must be identified and requested at intake. Buckhead was missed, and missing it could mean missing significant treatment and bills. Send the request and escalate the timeline risk.'
-  },
-  qb3: {
-    correct: '✅ Exactly. At Day 127, every escalation threshold was blown past without action. This requires immediate attorney escalation, and a subpoena is very likely necessary. This is what happens when the ladder isn\'t followed.',
-    incorrect: '❌ Four escalation thresholds passed without action (14, 30, 60, 90 days). At Day 127, this is an attorney-level issue and a subpoena may be the only option. Escalate immediately.'
-  },
-  qb4: {
-    correct: '✅ Right. Never authorize fees independently. Escalate to CM or attorney for approval, then pay promptly once approved. Document the approval and payment in CasePeer. Records with fees are still records you need.',
-    incorrect: '❌ Records fees need approval. Escalate to CM or attorney, get approval, pay it, confirm release, and document everything. Never skip records because of a fee — and never pay without authorization.'
-  },
-  qb5: {
-    correct: '✅ This is the right answer. Telling the truth early — even when the news is bad — is always the correct move. Your attorney needs accurate information to make decisions. Surprises at the deadline are far worse than early warnings.',
-    incorrect: '❌ "No problem" when there are clearly problems is not the right answer. Give your attorney the honest picture, your action plan, and your realistic timeline. That\'s how you build trust and how the firm makes good decisions.'
-  }
-};
+var feedbackText = {} /* CUTOVER: feedback served per-answer by the engine */;
 
 // ═══════════════════════════════════════════════
 // NAVIGATION
 // ═══════════════════════════════════════════════
 function goToSection(idx) {
+  if (idx === 8 && !window._day6Passed) { return; } // cert gate
   document.querySelectorAll('.section-card').forEach(function(c,i){
     c.classList.toggle('active', i === idx);
   });
@@ -1365,7 +1125,7 @@ function goToSection(idx) {
 }
 
 function updateProgress() {
-  var total = 8;
+  var total = 9;
   var pct = Math.round(((state.currentSection + 1) / total) * 100);
   document.getElementById('prog-fill').style.width = pct + '%';
   document.getElementById('prog-label').textContent = 'Section ' + (state.currentSection + 1) + ' of ' + total;
@@ -1377,7 +1137,7 @@ function updateProgress() {
 // ═══════════════════════════════════════════════
 // ANSWER HANDLER
 // ═══════════════════════════════════════════════
-function answer(qid, chosen) {
+window.answerUI = function answerUI(qid, chosen) {
   if (state.answered[qid + '_done']) return;
 
   var correct = correctAnswers[qid];
@@ -1617,8 +1377,13 @@ function showToast(msg, color) {
 // ═══════════════════════════════════════════════
 function buildResults() {
   var baseTotal = state.totalScore;
-  var pct = Math.round((baseTotal / BASE_MAX) * 100);
-  var pass = baseTotal >= PASS_THRESHOLD;
+  var BASE_MAX = 222; // RAISE ruling Aug 19 msg 45593
+  var pct = Math.round((baseTotal / BASE_MAX) * 100); // DISPLAY only -- may round
+  var PASS_THRESHOLD = 80; // Harrell ruling Jul 6 -- percent of BASE
+  // GATE ON POINTS, NOT THE ROUNDED DISPLAY (see day5 note): rounding can lift a
+  // sub-threshold attempt to exactly 80 and pass it.
+  var PASS_POINTS = (PASS_THRESHOLD / 100) * BASE_MAX; // 177.6
+  var pass = baseTotal >= PASS_POINTS;
 
   var hdr = document.getElementById('results-header-wrap');
   hdr.innerHTML = '<div class="results-header ' + (pass ? 'pass' : 'fail') + '"><div class="results-grade">' + pct + '%</div><div class="results-label">' + (pass ? '🎉 Medical Records Mastery Complete!' : '📚 Keep Studying') + '</div><div class="results-sub">' + baseTotal + ' / ' + BASE_MAX + ' points · ' + state.bonusScore + ' bonus pts</div></div>';
@@ -1747,7 +1512,7 @@ function submitScoreAndBuildCert() {
 // ═══════════════════════════════════════════════
 function submitResults() {
   var baseTotal = state.totalScore;
-  var pct = Math.round((baseTotal / BASE_MAX) * 100);
+  var pct = Math.round((baseTotal / 222) * 100);
   var badges = [];
   if ((state.sectionScores[1]||0)>=Math.round(SECTION_MAX[1]*0.6)) badges.push('Records Foundation');
   if ((state.sectionScores[2]||0)>=Math.round(SECTION_MAX[2]*0.6)) badges.push('Request Expert');
@@ -1762,7 +1527,7 @@ function submitResults() {
     '───────────────────────────────────────\n' +
     'Trainee: ' + (state.traineeFirstName || 'N/A') + '\n' +
     'Date: ' + new Date().toLocaleDateString() + '\n' +
-    'Score: ' + baseTotal + ' / ' + BASE_MAX + ' (' + pct + '%)\n' +
+    'Score: ' + total + ' / 222 base (' + pct + '%)\n' +
     'Bonus Points: ' + state.bonusScore + '\n\n' +
     'Section Breakdown:\n' +
     '  The Foundation: ' + (state.sectionScores[1]||0) + '/' + SECTION_MAX[1] + '\n' +
@@ -1937,5 +1702,67 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 </script>
+
+
+
+<script>
+/* ── go() / startQuiz() — quiz entry point ── */
+async function go(screen) {
+  if (screen === 'quiz') {
+    var _ni = document.getElementById('trainee-name-input');
+    var _name = (_ni && _ni.value.trim()) || '';
+    if (!_name) {
+      if (typeof showToast === 'function') showToast('⚠️ Please enter your name before starting the quiz', false);
+      else alert('Please enter your name before starting the quiz.');
+      return;
+    }
+    // Bug-2 fix: await attempt start before making questions interactive
+    await window.GLGQuiz.beginAttempt(_name);
+    goToSection(6);
+  }
+}
+
+function startQuiz() { go('quiz'); }
+
+/* ── GLG MODULE CONFIG — wires api-quiz-engine.js to module-day6.html ── */
+window.GLG_MODULE_CONFIG = {
+  moduleId: 'day6',
+  onBankLoaded: function(bank) {
+    var basemax = document.getElementById('basemax');
+    var gate    = document.getElementById('gate');
+    if (basemax) basemax.textContent = bank.base_max;
+    if (gate)    gate.textContent    = bank.pass_pct;
+    for (var i = 1; i <= 6; i++) {
+      var nextEl = document.getElementById('s' + i + '-next');
+      if (nextEl) nextEl.style.display = 'flex';
+    }
+  },
+  onStartQuiz: function() {
+    if (typeof audioCtx !== 'undefined' && audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume().catch(function(){});
+    }
+  },
+  onAnswered: function(r) {
+    baseScore   = r.base_score;
+    bonusPoints = r.bonus_score;
+    streakCount = r.streak;
+    maxStreak   = Math.max(maxStreak || 0, r.maxStreak || 0);
+    var ts = document.getElementById('total-score');
+    if (ts) ts.textContent = r.base_score;
+    var bs = document.getElementById('bonus-score');
+    if (bs) bs.textContent = r.bonus_score;
+    if (typeof updateStreak  === 'function') updateStreak(r.correct);
+    if (typeof mascotReact   === 'function') mascotReact(r.correct ? 'correct' : 'incorrect');
+  },
+  onComplete: function(r) {
+    window._day6Passed = r.passed;
+    baseScore   = r.base_score;
+    bonusPoints = r.bonus_score;
+    goToSection(7);   // results is section-7 in day5/day6 variant
+    if (typeof buildResults === 'function') buildResults();
+  }
+};
+</script>
+<script src="api-quiz-engine.js"></script>
 </body>
 </html>

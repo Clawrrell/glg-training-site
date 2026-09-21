@@ -5,7 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
   <title>LIT-1 — Litigation Fundamentals &amp; Filing | Gunn Law Group</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <style>
+:root {
+    --navy: #141c2c;
+    --gold: #dcb161;
+    --gold-lt: #f0d89a;
+}
+
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
     body{font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;color:#333;font-size:16px;line-height:1.6;-webkit-text-size-adjust:100%;overflow-x:hidden;}
@@ -101,11 +108,7 @@
     .case-val .flag-warn{display:inline-block;background:#f39c12;color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;margin-left:6px;}
     .case-val .flag-ok{display:inline-block;background:#10774A;color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;margin-left:6px;}
 
-    /* ── BOSS CHALLENGE ── */
-    .boss-header{background:linear-gradient(135deg,#870101 0%,#5a0000 100%);color:#fff;border-radius:12px;padding:24px;margin-bottom:20px;text-align:center;}
-    .boss-header .boss-icon{font-size:40px;margin-bottom:10px;}
-    .boss-header h3{font-size:clamp(17px,4.5vw,22px);font-weight:800;margin-bottom:8px;}
-    .boss-header p{font-size:14px;opacity:.9;line-height:1.5;}
+    
 
     /* ── RESULTS ── */
     .results-header{padding:28px 20px;text-align:center;color:#fff;}
@@ -225,6 +228,159 @@
     .option-btn.correct{animation:correctPulse 0.6s ease-out;}
     .option-btn.incorrect{animation:incorrectShake 0.4s ease-out;}
   </style>
+
+<style>
+/* ── GLG QUIZ ENGINE — question type styles (2026-09-02) ──────────────────
+     All classes rendered by api-quiz-engine.js. Tokens: navy #141c2c, gold #C5975B.
+     Sourced from engine.html stylesheet + Harrell Part 8c spec. */
+
+  /* Question card */
+  .q { background:#fff; border:1px solid #e2e5ea; border-radius:10px;
+       padding:20px; margin:16px 0; box-shadow:0 1px 6px rgba(20,28,44,.06); }
+  .q-num { font-size:12px; letter-spacing:.06em; color:#C5975B; font-weight:700;
+            text-transform:uppercase; margin-bottom:8px; }
+  .q-text { font-weight:600; margin:8px 0 16px; font-size:1rem; line-height:1.55;
+             color:#141c2c; }
+
+  /* MC option buttons */
+  button.opt { display:block; width:100%; text-align:left; padding:13px 15px; margin:7px 0;
+    border:1px solid #d8dbe3; border-radius:8px; background:#fafbfd; cursor:pointer;
+    font-size:15px; font-family:var(--font-b); color:#222; line-height:1.45;
+    transition:background .12s, border-color .12s; }
+  button.opt:hover:not(.locked) { background:#eef4ff; border-color:#141c2c; }
+  button.opt.correct { background:#d4edda; border-color:#10774A; }
+  button.opt.incorrect { background:#f8d7da; border-color:#870101; }
+  button.opt.locked { cursor:default; opacity:.85; }
+
+  /* Fill-in-the-blank */
+  .fill-stem { font-weight:600; margin:8px 0 14px; line-height:2.2; }
+  input.blank { display:inline-block; min-height:44px; min-width:120px; padding:8px 10px;
+    margin:2px 4px; border:1px solid #ccd; border-radius:8px; background:#fafbfd;
+    font-size:16px; font-family:var(--font-b); vertical-align:middle;
+    box-sizing:border-box; max-width:100%; }
+  input.blank:focus { outline:2px solid #141c2c; background:#fff; }
+  input.blank.correct { background:#d4edda; border-color:#10774A; }
+  input.blank.incorrect { background:#f8d7da; border-color:#870101; }
+  input.blank.locked { opacity:.85; }
+  button.submit-fill { min-height:44px; padding:11px 20px; margin-top:12px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-fill.locked { opacity:.5; cursor:default; }
+
+  /* Markup */
+  .markup-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .markup-passage { margin:0 0 10px; border:1px solid #e2e5ea; border-radius:8px; overflow:hidden; }
+  button.span { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:11px 13px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:16px; font-family:var(--font-b);
+    color:#222; line-height:1.5; overflow-wrap:break-word; }
+  button.span:last-child { border-bottom:0; }
+  button.span:hover:not(.locked) { background:#eef4ff; }
+  button.span.selected { background:#fff3cd; box-shadow:inset 4px 0 0 #b8860b; font-weight:600; }
+  button.span.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.span.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.span.locked { cursor:default; opacity:.9; }
+  button.submit-markup { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-markup.locked { opacity:.5; cursor:default; }
+  .markup-count { font-size:13px; color:#555; margin-top:8px; }
+
+  /* Sort rows with up/down controls */
+  .sort-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .sort-list { margin:0 0 12px; border:1px solid #e2e5ea; border-radius:8px;
+               overflow:hidden; background:#fff; }
+  .sort-row { display:flex; align-items:stretch; border-bottom:1px solid #eef0f3;
+              background:#fff; }
+  .sort-row:last-child { border-bottom:0; }
+  .sort-pos { flex:0 0 34px; display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700; color:#C5975B; background:#f5f5f0; }
+  .sort-text { flex:1 1 auto; padding:11px 12px; font-size:15px; line-height:1.45;
+    display:flex; align-items:center; overflow-wrap:break-word; min-width:0; }
+  .sort-moves { flex:0 0 auto; display:flex; align-items:center; gap:4px; padding:4px 6px; }
+  button.sort-move { min-height:44px; min-width:44px; border:1px solid #ccd; border-radius:8px;
+    background:#fafbfd; cursor:pointer; font-size:15px; color:#141c2c;
+    font-family:var(--font-b); }
+  button.sort-move:hover:not(:disabled) { background:#eef4ff; }
+  button.sort-move:disabled { opacity:.35; cursor:default; }
+  .sort-row.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  .sort-row.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  .sort-row.locked .sort-text { opacity:.9; }
+  button.submit-sort { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-sort.locked { opacity:.5; cursor:default; }
+
+  /* Match chips + slot rows */
+  .match-instruction { font-weight:600; margin:8px 0 10px; color:#141c2c; }
+  .match-tray { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px; padding:10px;
+    border:1px dashed #ccd; border-radius:8px; background:#fafbfd; }
+  button.chip { min-height:44px; padding:10px 16px; border:1px solid #ccd; border-radius:22px;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b); color:#222;
+    max-width:100%; overflow-wrap:break-word; text-align:left; }
+  button.chip:hover:not(.locked) { background:#eef4ff; }
+  button.chip.selected { background:#141c2c; color:#fff; border-color:#141c2c; font-weight:600; }
+  button.chip.placed { opacity:.35; }
+  button.chip.locked { cursor:default; }
+  .match-slots { border:1px solid #e2e5ea; border-radius:8px; overflow:hidden;
+                 background:#fff; margin-bottom:12px; }
+  button.slot { display:block; width:100%; text-align:left; box-sizing:border-box;
+    min-height:44px; padding:10px 14px; border:0; border-bottom:1px solid #eef0f3;
+    background:#fff; cursor:pointer; font-size:15px; font-family:var(--font-b);
+    color:#222; line-height:1.45; overflow-wrap:break-word; }
+  button.slot:last-child { border-bottom:0; }
+  button.slot:hover:not(.locked) { background:#eef4ff; }
+  button.slot.armed { box-shadow:inset 4px 0 0 #C5975B; background:#fffdf5; }
+  .slot-label { font-weight:600; display:block; }
+  .slot-fill { display:block; font-size:14px; margin-top:3px; color:#C5975B; font-weight:600; }
+  .slot-fill.empty { color:#8a8f98; font-weight:400; font-style:italic; }
+  button.slot.correct { background:#d4edda; box-shadow:inset 4px 0 0 #10774A; }
+  button.slot.incorrect { background:#f8d7da; box-shadow:inset 4px 0 0 #870101; }
+  button.slot.locked { cursor:default; opacity:.9; }
+  button.submit-match { min-height:44px; padding:11px 20px; margin-top:4px;
+    border:1px solid #141c2c; border-radius:8px; background:#141c2c; color:#fff;
+    font-size:15px; cursor:pointer; font-family:var(--font-b); font-weight:600; }
+  button.submit-match.locked { opacity:.5; cursor:default; }
+  .match-count { font-size:13px; color:#555; margin-top:8px; }
+  .match-credit { font-size:13px; font-weight:600; color:#8a6d1f; margin-top:6px; }
+
+  /* Feedback */
+  .fb { margin-top:12px; padding:12px 14px; border-radius:8px; font-size:14px; display:none; }
+  .fb.show { display:block; }
+  .fb.ok { background:#d4edda; border-left:4px solid #10774A; }
+  .fb.no { background:#f8d7da; border-left:4px solid #870101; }
+  .fb.neutral { background:#eef0f6; border-left:4px solid #6c757d; color:#333; } /* self_assessment: no verdict */
+
+  /* Branching nodes */
+  .branch-scenario { border-left:4px solid #C5975B; padding-left:12px; margin:14px 0; }
+  .branch-turn { font-size:12px; letter-spacing:.06em; color:#8a6d1f; font-weight:700;
+                 text-transform:uppercase; }
+  .branch-instruction { font-weight:600; margin:6px 0 10px; color:#141c2c; }
+  .branch-consequence { margin-top:10px; padding:10px 12px; border-left:4px solid #141c2c;
+    background:#eef2f7; border-radius:0 8px 8px 0; font-size:13px; color:#33415c; display:none; }
+  .branch-consequence.show { display:block; }
+
+  /* Pagination — one question at a time (Harrell Part 8b) */
+  .q-base { display: none !important; }
+  .q-base.q-active { display: block !important; }
+  .q-nav { display:flex; justify-content:space-between; align-items:center;
+            margin-top:20px; padding-top:16px; border-top:1px solid #e8e6e0; }
+  .q-nav-btn { min-height:44px; padding:10px 22px; border-radius:8px;
+                font-size:15px; cursor:pointer; font-family:var(--font-b);
+                font-weight:600; transition:background .12s; }
+  .q-nav-btn.next { background:#141c2c; color:#C5975B; border:2px solid #141c2c; }
+  .q-nav-btn.next:hover { background:#1e2a40; }
+  .q-nav-btn.back { background:#fff; color:#141c2c; border:2px solid #c8c5be; }
+  .q-nav-btn.back:hover { background:#f5f5f0; }
+  .q-pg-spacer { display:inline-block; min-width:40px; }
+  #q-progress { font-size:12px; color:#C5975B; font-weight:600;
+                letter-spacing:.5px; text-transform:uppercase; }
+
+
+</style>
+
+<!-- CUTOVER: server-side grading. Answer keys are not in this file. -->
+    <link rel="stylesheet" href="boss-challenge.css">
 </head>
 <body>
 
@@ -279,8 +435,9 @@
   <button class="nav-pill" id="nav-4" onclick="goToSection(4)">5. Deadlines</button>
   <button class="nav-pill" id="nav-5" onclick="goToSection(5)">6. Coord</button>
   <button class="nav-pill" id="nav-6" onclick="goToSection(6)">7. Boss</button>
-  <button class="nav-pill" id="nav-7" onclick="goToSection(7)">8. Results</button>
-  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">9. Feedback</button>
+  <button class="nav-pill" id="nav-7" onclick="startQuiz()">8. Quiz</button>
+  <button class="nav-pill" id="nav-8" onclick="goToSection(8)">9. Results</button>
+  <button class="nav-pill" id="nav-9" onclick="goToSection(9)">10. Feedback</button>
 </nav>
 
 <main>
@@ -352,53 +509,9 @@
     </div>
     <div class="callout callout-danger"><strong>Missing the SOL = malpractice.</strong> There is no court mechanism to extend the statute of limitations. If the complaint is not filed before the deadline, the client&rsquo;s claim is forever barred. Calendar this deadline at intake. Verify it regularly. Treat it as the single most important date in every case file.</div>
 
-    <div class="question-block" id="q1-block">
-      <div class="q-num">Question 1 of 20 &middot; 10 pts</div>
-      <div class="q-text">What are the THREE primary triggers that move a GLG case from pre-litigation to litigation?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q1','a',true)" id="q1-a"><span class="opt-letter">A</span><span class="opt-text">Settlement negotiations fail to produce a fair offer, the statute of limitations is approaching, and/or liability is disputed and requires discovery to prove</span></button>
-        <button class="option-btn" onclick="answer('q1','b',false)" id="q1-b"><span class="opt-letter">B</span><span class="opt-text">Client demands litigation, medical bills exceed $50,000, and the insurance company delays response, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
-        <button class="option-btn" onclick="answer('q1','c',false)" id="q1-c"><span class="opt-letter">C</span><span class="opt-text">Attorney preference, case complexity, and the presence of multiple defendants</span></button>
-        <button class="option-btn" onclick="answer('q1','d',false)" id="q1-d"><span class="opt-letter">D</span><span class="opt-text">Police report is disputed, witness statements conflict, and property damage exceeds $10,000</span></button>
-      </div>
-      <div class="feedback-box" id="q1-fb"></div>
-    </div>
 
-    <div class="question-block" id="q2-block">
-      <div class="q-num">Question 2 of 20 &middot; 10 pts</div>
-      <div class="q-text">Under O.C.G.A. § 9-3-33, what is the statute of limitations for a standard personal injury case in Georgia?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q2','a',false)" id="q2-a"><span class="opt-letter">A</span><span class="opt-text">One year from the date of injury</span></button>
-        <button class="option-btn" onclick="answer('q2','b',false)" id="q2-b"><span class="opt-letter">B</span><span class="opt-text">Three years from the date of injury</span></button>
-        <button class="option-btn" onclick="answer('q2','c',false)" id="q2-c"><span class="opt-letter">C</span><span class="opt-text">Six years from the date of the accident report</span></button>
-        <button class="option-btn" onclick="answer('q2','d',true)" id="q2-d"><span class="opt-letter">D</span><span class="opt-text">Two years from the date of injury</span></button>
-      </div>
-      <div class="feedback-box" id="q2-fb"></div>
-    </div>
 
-    <div class="question-block" id="q3-block">
-      <div class="q-num">Question 3 of 20 &middot; 10 pts &middot; Consequence Story</div>
-      <div class="q-text">A rear-end collision case has $85,000 in documented medical bills and clear liability (police report, witness statements, citation issued). The adjuster&rsquo;s &ldquo;best and final&rdquo; is $22,000 after a Holt demand and two rounds of negotiation. SOL is 5 months away. What is the correct next step?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q3','a',false)" id="q3-a"><span class="opt-letter">A</span><span class="opt-text">Accept the $22,000 &mdash; litigation costs will consume any additional recovery</span></button>
-        <button class="option-btn" onclick="answer('q3','b',true)" id="q3-b"><span class="opt-letter">B</span><span class="opt-text">Flag the case for immediate litigation review &mdash; 5 months is the minimum needed for complaint preparation, filing, and service</span></button>
-        <button class="option-btn" onclick="answer('q3','c',false)" id="q3-c"><span class="opt-letter">C</span><span class="opt-text">Send a third demand letter with additional medical documentation and wait for a counter-offer</span></button>
-        <button class="option-btn" onclick="answer('q3','d',false)" id="q3-d"><span class="opt-letter">D</span><span class="opt-text">Wait until 30 days before SOL to file the complaint &mdash; last-minute filing creates maximum settlement pressure — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value</span></button>
-      </div>
-      <div class="feedback-box" id="q3-fb"></div>
-    </div>
 
-    <div class="question-block" id="q4-block">
-      <div class="q-num">Question 4 of 20 &middot; 10 pts</div>
-      <div class="q-text">When a case enters the litigation pipeline at GLG, what is the FIRST CasePeer status change the litigation staff should make?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q4','a',false)" id="q4-a"><span class="opt-letter">A</span><span class="opt-text">Change to &ldquo;Filed&rdquo; &mdash; the complaint is the trigger for status change</span></button>
-        <button class="option-btn" onclick="answer('q4','b',false)" id="q4-b"><span class="opt-letter">B</span><span class="opt-text">Change to &ldquo;Discovery&rdquo; &mdash; discovery planning begins immediately</span></button>
-        <button class="option-btn" onclick="answer('q4','c',true)" id="q4-c"><span class="opt-letter">C</span><span class="opt-text">Change to &ldquo;Pending Litigation&rdquo; &mdash; this signals the case has left the pre-lit pipeline</span></button>
-        <button class="option-btn" onclick="answer('q4','d',false)" id="q4-d"><span class="opt-letter">D</span><span class="opt-text">Change to &ldquo;Service&rdquo; &mdash; service of process is the first litigation milestone — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken</span></button>
-      </div>
-      <div class="feedback-box" id="q4-fb"></div>
-    </div>
 
     <div class="section-score" id="s1-score" style="display:none;"><div class="score-display" id="s1-score-val"></div><div class="score-label">Section 2 Score</div></div>
     <div class="btn-group" id="s1-next"><button class="btn btn-primary btn-block" onclick="goToSection(2)">Next: Georgia Superior Court Filing &rarr;</button></div>
@@ -454,53 +567,9 @@
 <p><strong>Firm standard: no case goes 14 days without a documented service attempt or status update.</strong> Not &ldquo;no news&rdquo; &mdash; a documented attempt or a documented status. Every service action is logged in CasePeer the same day with date &middot; method &middot; result &middot; next step planned with a specific date &middot; server details. <em>A next step without a date is not a next step.</em></p>
 <p style="margin-top:10px;font-size:12px;opacity:.85;"><em>Unserved defendants = stalled case.</em></p></div>
 
-    <div class="question-block" id="q5-block">
-      <div class="q-num">Question 5 of 20 &middot; 10 pts</div>
-      <div class="q-text">Under Georgia venue rules (O.C.G.A. § 9-10-31), where must a personal injury complaint typically be filed against a Georgia-resident individual defendant?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q5','a',true)" id="q5-a"><span class="opt-letter">A</span><span class="opt-text">In the Superior Court of the county where the defendant resides</span></button>
-        <button class="option-btn" onclick="answer('q5','b',false)" id="q5-b"><span class="opt-letter">B</span><span class="opt-text">In the Superior Court of the county where the accident occurred</span></button>
-        <button class="option-btn" onclick="answer('q5','c',false)" id="q5-c"><span class="opt-letter">C</span><span class="opt-text">In the Superior Court of the county where the plaintiff resides</span></button>
-        <button class="option-btn" onclick="answer('q5','d',false)" id="q5-d"><span class="opt-letter">D</span><span class="opt-text">In any Superior Court within the same judicial circuit as the accident</span></button>
-      </div>
-      <div class="feedback-box" id="q5-fb"></div>
-    </div>
 
-    <div class="question-block" id="q6-block">
-      <div class="q-num">Question 6 of 20 &middot; 10 pts</div>
-      <div class="q-text">When filing a new civil complaint in Georgia Superior Court, which set of documents must be prepared and submitted together?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q6','a',false)" id="q6-a"><span class="opt-letter">A</span><span class="opt-text">The complaint only &mdash; the clerk generates the summons, filing form, and all other documents</span></button>
-        <button class="option-btn" onclick="answer('q6','b',false)" id="q6-b"><span class="opt-letter">B</span><span class="opt-text">The complaint and a motion for expedited discovery &mdash; discovery may begin before the defendant answers</span></button>
-        <button class="option-btn" onclick="answer('q6','c',false)" id="q6-c"><span class="opt-letter">C</span><span class="opt-text">The complaint, a settlement demand letter, and copies of all medical records</span></button>
-        <button class="option-btn" onclick="answer('q6','d',true)" id="q6-d"><span class="opt-letter">D</span><span class="opt-text">The complaint, a civil case filing form, a summons for each defendant, and the filing fee</span></button>
-      </div>
-      <div class="feedback-box" id="q6-fb"></div>
-    </div>
 
-    <div class="question-block" id="q7-block">
-      <div class="q-num">Question 7 of 20 &middot; 10 pts</div>
-      <div class="q-text">After the clerk files the complaint and issues a summons, how must the defendant be served in a standard Georgia personal injury case?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q7','a',false)" id="q7-a"><span class="opt-letter">A</span><span class="opt-text">By certified mail sent directly from the law firm to the defendant&rsquo;s last known address, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity</span></button>
-        <button class="option-btn" onclick="answer('q7','b',true)" id="q7-b"><span class="opt-letter">B</span><span class="opt-text">By the county sheriff or an appointed special process server personally delivering the summons and complaint to the defendant</span></button>
-        <button class="option-btn" onclick="answer('q7','c',false)" id="q7-c"><span class="opt-letter">C</span><span class="opt-text">By email with read receipt if the defendant&rsquo;s email address is known</span></button>
-        <button class="option-btn" onclick="answer('q7','d',false)" id="q7-d"><span class="opt-letter">D</span><span class="opt-text">By publication in the county legal organ &mdash; this is required for all new civil actions</span></button>
-      </div>
-      <div class="feedback-box" id="q7-fb"></div>
-    </div>
 
-    <div class="question-block" id="q8-block">
-      <div class="q-num">Question 8 of 20 &middot; 10 pts</div>
-      <div class="q-text">What CasePeer status change occurs once service of process has been successfully perfected on the defendant?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q8','a',false)" id="q8-a"><span class="opt-letter">A</span><span class="opt-text">&ldquo;Filed&rdquo; &rarr; &ldquo;Discovery&rdquo; &mdash; discovery begins immediately upon service</span></button>
-        <button class="option-btn" onclick="answer('q8','b',false)" id="q8-b"><span class="opt-letter">B</span><span class="opt-text">&ldquo;Pending Litigation&rdquo; &rarr; &ldquo;Filed&rdquo; &mdash; filing confirmation triggers the status update — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage</span></button>
-        <button class="option-btn" onclick="answer('q8','c',true)" id="q8-c"><span class="opt-letter">C</span><span class="opt-text">Update to &ldquo;Service&rdquo; status &mdash; confirming the defendant has been served and the answer period has begun</span></button>
-        <button class="option-btn" onclick="answer('q8','d',false)" id="q8-d"><span class="opt-letter">D</span><span class="opt-text">&ldquo;Service&rdquo; &rarr; &ldquo;Answer Period&rdquo; &mdash; a separate status tracks the 30-day answer window</span></button>
-      </div>
-      <div class="feedback-box" id="q8-fb"></div>
-    </div>
 
     <div class="section-score" id="s2-score" style="display:none;"><div class="score-display" id="s2-score-val"></div><div class="score-label">Section 3 Score</div></div>
     <div class="btn-group" id="s2-next"><button class="btn btn-primary btn-block" onclick="goToSection(3)">Next: Complaint Drafting Essentials &rarr;</button></div>
@@ -547,53 +616,9 @@
     </div>
     <div class="callout callout-warn"><strong>Do NOT include confidential settlement communications.</strong> The complaint is a public document. Prior settlement demands, offer amounts, and negotiation details should NEVER appear in the complaint. Keep settlement history separate from pleadings.</div>
 
-    <div class="question-block" id="q9-block">
-      <div class="q-num">Question 9 of 20 &middot; 10 pts</div>
-      <div class="q-text">Under O.C.G.A. § 9-11-8(a), what must every Georgia complaint contain at minimum?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q9','a',false)" id="q9-a"><span class="opt-letter">A</span><span class="opt-text">A detailed narrative of every medical treatment received and all supporting evidence</span></button>
-        <button class="option-btn" onclick="answer('q9','b',false)" id="q9-b"><span class="opt-letter">B</span><span class="opt-text">The exact dollar amount of damages claimed, itemized by category</span></button>
-        <button class="option-btn" onclick="answer('q9','c',false)" id="q9-c"><span class="opt-letter">C</span><span class="opt-text">Copies of all attached exhibits including medical records, police reports, and photographs, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
-        <button class="option-btn" onclick="answer('q9','d',true)" id="q9-d"><span class="opt-letter">D</span><span class="opt-text">A short and plain statement of the claims showing the pleader is entitled to relief, plus a demand for judgment</span></button>
-      </div>
-      <div class="feedback-box" id="q9-fb"></div>
-    </div>
 
-    <div class="question-block" id="q10-block">
-      <div class="q-num">Question 10 of 20 &middot; 10 pts</div>
-      <div class="q-text">In a negligence-based personal injury complaint, what four elements must be specifically alleged?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q10','a',true)" id="q10-a"><span class="opt-letter">A</span><span class="opt-text">Duty, breach of duty, causation, and damages</span></button>
-        <button class="option-btn" onclick="answer('q10','b',false)" id="q10-b"><span class="opt-letter">B</span><span class="opt-text">Intent, action, harm, and proximate cause</span></button>
-        <button class="option-btn" onclick="answer('q10','c',false)" id="q10-c"><span class="opt-letter">C</span><span class="opt-text">Contract, consideration, breach, and remedy</span></button>
-        <button class="option-btn" onclick="answer('q10','d',false)" id="q10-d"><span class="opt-letter">D</span><span class="opt-text">Strict liability, contributory negligence, assumption of risk, and last clear chance</span></button>
-      </div>
-      <div class="feedback-box" id="q10-fb"></div>
-    </div>
 
-    <div class="question-block" id="q11-block">
-      <div class="q-num">Question 11 of 20 &middot; 10 pts &middot; Application</div>
-      <div class="q-text">Your attorney asks you to prepare the complaint for a case where the defendant ran a red light and struck your client in an intersection. What additional legal theory should you flag for the attorney&rsquo;s consideration?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q11','a',false)" id="q11-a"><span class="opt-letter">A</span><span class="opt-text">Strict liability &mdash; operating a motor vehicle is an inherently dangerous activity — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value</span></button>
-        <button class="option-btn" onclick="answer('q11','b',true)" id="q11-b"><span class="opt-letter">B</span><span class="opt-text">Negligence per se &mdash; the defendant violated a traffic statute (O.C.G.A. § 40-6-20), which creates a presumption of negligence</span></button>
-        <button class="option-btn" onclick="answer('q11','c',false)" id="q11-c"><span class="opt-letter">C</span><span class="opt-text">Breach of contract &mdash; the defendant violated the social contract of safe driving</span></button>
-        <button class="option-btn" onclick="answer('q11','d',false)" id="q11-d"><span class="opt-letter">D</span><span class="opt-text">Intentional tort &mdash; running a red light demonstrates intent to cause harm</span></button>
-      </div>
-      <div class="feedback-box" id="q11-fb"></div>
-    </div>
 
-    <div class="question-block" id="q12-block">
-      <div class="q-num">Question 12 of 20 &middot; Unscored Calibration</div>
-      <div class="q-note" style="font-size:13px;opacity:.75;margin-bottom:8px">(This is a self-assessment — no points awarded or deducted. All answers reveal the same teaching content.)</div><div class="q-text">On a scale of 1&ndash;4, how confident are you that you could assist in preparing a complaint for filing in Georgia Superior Court &mdash; assembling the caption, jurisdiction statement, factual allegations, legal theories, and prayer for relief &mdash; with minimal guidance?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q12','a',true)" id="q12-a"><span class="opt-letter">A</span><span class="opt-text">1&ndash;2 &mdash; Not confident. I understand what a complaint is but have never helped prepare one.</span></button>
-        <button class="option-btn" onclick="answer('q12','b',true)" id="q12-b"><span class="opt-letter">B</span><span class="opt-text">3 &mdash; Somewhat confident. I&rsquo;ve seen complaints but would need to look up specific requirements.</span></button>
-        <button class="option-btn" onclick="answer('q12','c',true)" id="q12-c"><span class="opt-letter">C</span><span class="opt-text">4 &mdash; Fairly confident. I&rsquo;ve helped prepare complaints and understand the required elements.</span></button>
-        <button class="option-btn" onclick="answer('q12','d',true)" id="q12-d"><span class="opt-letter">D</span><span class="opt-text">5 &mdash; Fully confident. I can assemble a complete complaint draft from case file materials.</span></button>
-      </div>
-      <div class="feedback-box" id="q12-fb"></div>
-    </div>
 
     <div class="section-score" id="s3-score" style="display:none;"><div class="score-display" id="s3-score-val"></div><div class="score-label">Section 4 Score</div></div>
     <div class="btn-group" id="s3-next"><button class="btn btn-primary btn-block" onclick="goToSection(4)">Next: Court Deadlines &amp; Calendar Management &rarr;</button></div>
@@ -637,53 +662,9 @@
     </div>
     <div class="callout callout-danger"><strong>Single-point-of-failure prevention:</strong> If only one person tracks deadlines and they are sick, on vacation, or overwhelmed, the deadline is missed. Redundancy (staff + attorney + CasePeer alerts) prevents malpractice.</div>
 
-    <div class="question-block" id="q13-block">
-      <div class="q-num">Question 13 of 20 &middot; 10 pts</div>
-      <div class="q-text">Under O.C.G.A. § 9-11-12(a), how many days does a defendant have to file an answer after being served with a complaint in Georgia?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q13','a',false)" id="q13-a"><span class="opt-letter">A</span><span class="opt-text">14 days &mdash; the same as federal court</span></button>
-        <button class="option-btn" onclick="answer('q13','b',false)" id="q13-b"><span class="opt-letter">B</span><span class="opt-text">20 days &mdash; the standard state court response period</span></button>
-        <button class="option-btn" onclick="answer('q13','c',false)" id="q13-c"><span class="opt-letter">C</span><span class="opt-text">45 days &mdash; courts allow extended time for personal injury cases</span></button>
-        <button class="option-btn" onclick="answer('q13','d',true)" id="q13-d"><span class="opt-letter">D</span><span class="opt-text">30 days from the date of service</span></button>
-      </div>
-      <div class="feedback-box" id="q13-fb"></div>
-    </div>
 
-    <div class="question-block" id="q14-block">
-      <div class="q-num">Question 14 of 20 &middot; 10 pts</div>
-      <div class="q-text">If the defendant fails to file an answer within the required time period, what procedural step becomes available to the plaintiff?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q14','a',true)" id="q14-a"><span class="opt-letter">A</span><span class="opt-text">File a motion for default judgment under O.C.G.A. § 9-11-55</span></button>
-        <button class="option-btn" onclick="answer('q14','b',false)" id="q14-b"><span class="opt-letter">B</span><span class="opt-text">The case is automatically dismissed for lack of prosecution</span></button>
-        <button class="option-btn" onclick="answer('q14','c',false)" id="q14-c"><span class="opt-letter">C</span><span class="opt-text">The court schedules an immediate trial date</span></button>
-        <button class="option-btn" onclick="answer('q14','d',false)" id="q14-d"><span class="opt-letter">D</span><span class="opt-text">The plaintiff must re-serve the defendant and restart the answer period</span></button>
-      </div>
-      <div class="feedback-box" id="q14-fb"></div>
-    </div>
 
-    <div class="question-block" id="q15-block">
-      <div class="q-num">Question 15 of 20 &middot; 10 pts &middot; Application</div>
-      <div class="q-text">A complaint is filed on March 1. Service is perfected on March 10. The defendant&rsquo;s answer is due April 9. What is the MOST critical calendar management step the litigation staff must take?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q15','a',false)" id="q15-a"><span class="opt-letter">A</span><span class="opt-text">Calendar only the answer deadline &mdash; other deadlines are managed by the court</span></button>
-        <button class="option-btn" onclick="answer('q15','b',true)" id="q15-b"><span class="opt-letter">B</span><span class="opt-text">Calendar the answer deadline AND set a 7-day advance warning; also calendar the discovery deadline and any scheduling order dates &mdash; use CasePeer&rsquo;s task system to ensure nothing is missed</span></button>
-        <button class="option-btn" onclick="answer('q15','c',false)" id="q15-c"><span class="opt-letter">C</span><span class="opt-text">Send a reminder email to opposing counsel on April 1 asking them to file their answer on time — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken</span></button>
-        <button class="option-btn" onclick="answer('q15','d',false)" id="q15-d"><span class="opt-letter">D</span><span class="opt-text">Wait until April 9 and check the court docket to see if an answer was filed</span></button>
-      </div>
-      <div class="feedback-box" id="q15-fb"></div>
-    </div>
 
-    <div class="question-block" id="q16-block">
-      <div class="q-num">Question 16 of 20 &middot; 10 pts &middot; SOL Calculation</div>
-      <div class="q-text">A client&rsquo;s accident occurred on June 15, 2024. The firm signs the case on January 5, 2026. What is the SOL deadline, and what is the critical issue with this timeline?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q16','a',false)" id="q16-a"><span class="opt-letter">A</span><span class="opt-text">June 15, 2026 &mdash; plenty of time; proceed with normal pre-litigation</span></button>
-        <button class="option-btn" onclick="answer('q16','b',false)" id="q16-b"><span class="opt-letter">B</span><span class="opt-text">January 5, 2028 &mdash; the SOL runs from the date of signing, not the date of injury</span></button>
-        <button class="option-btn" onclick="answer('q16','c',true)" id="q16-c"><span class="opt-letter">C</span><span class="opt-text">June 15, 2026 &mdash; the firm has approximately 5 months, which is the absolute minimum for complaint preparation, filing, and service; this case should be fast-tracked to litigation immediately</span></button>
-        <button class="option-btn" onclick="answer('q16','d',false)" id="q16-d"><span class="opt-letter">D</span><span class="opt-text">December 15, 2026 &mdash; Georgia grants an automatic 6-month extension when a case is transferred between firms, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity</span></button>
-      </div>
-      <div class="feedback-box" id="q16-fb"></div>
-    </div>
 
     <div class="section-score" id="s4-score" style="display:none;"><div class="score-display" id="s4-score-val"></div><div class="score-label">Section 5 Score</div></div>
     <div class="btn-group" id="s4-next"><button class="btn btn-primary btn-block" onclick="goToSection(5)">Next: CasePeer, Documents &amp; Attorney Coordination &rarr;</button></div>
@@ -733,53 +714,9 @@
     <div class="callout callout-info"><strong>Discovery preparation is a team effort.</strong> Staff gathers and organizes documents. The attorney makes privilege calls, drafts objections, and finalizes responses. Never draft discovery responses independently or forward requests to clients without attorney guidance.</div>
     <div class="callout callout-warn"><strong>Document everything in CasePeer.</strong> Every phone call, email, filing, service attempt, and deadline should be logged with date, time, and details. If it is not in CasePeer, it did not happen. Complete documentation protects the firm, the attorney, and the client.</div>
 
-    <div class="question-block" id="q17-block">
-      <div class="q-num">Question 17 of 20 &middot; 10 pts</div>
-      <div class="q-text">When a case moves from pre-lit to litigation, what is the FIRST step in document management?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q17','a',false)" id="q17-a"><span class="opt-letter">A</span><span class="opt-text">Upload all documents to the court&rsquo;s e-filing system immediately</span></button>
-        <button class="option-btn" onclick="answer('q17','b',false)" id="q17-b"><span class="opt-letter">B</span><span class="opt-text">Shred all pre-litigation correspondence to prevent discovery issues</span></button>
-        <button class="option-btn" onclick="answer('q17','c',false)" id="q17-c"><span class="opt-letter">C</span><span class="opt-text">Move all case documents from the pre-lit folder to a new &ldquo;Litigation&rdquo; folder in CasePeer — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage</span></button>
-        <button class="option-btn" onclick="answer('q17','d',true)" id="q17-d"><span class="opt-letter">D</span><span class="opt-text">Conduct a complete file audit &mdash; verify all medical records, correspondence, evidence, and the police report are in CasePeer and properly organized before the complaint is drafted</span></button>
-      </div>
-      <div class="feedback-box" id="q17-fb"></div>
-    </div>
 
-    <div class="question-block" id="q18-block">
-      <div class="q-num">Question 18 of 20 &middot; 10 pts</div>
-      <div class="q-text">In litigation cases at GLG, what is the standard for attorney-staff coordination on court deadlines?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q18','a',true)" id="q18-a"><span class="opt-letter">A</span><span class="opt-text">Every court deadline is entered in CasePeer by the litigation staff, verified by the attorney, with advance warnings set &mdash; the staff member responsible for tracking is specifically assigned in the task system</span></button>
-        <button class="option-btn" onclick="answer('q18','b',false)" id="q18-b"><span class="opt-letter">B</span><span class="opt-text">The attorney manages all court deadlines personally &mdash; litigation staff only handle document preparation, but this reasoning does not account for the procedural safeguards GLG has established to protect client outcomes and maintain documentation integrity throughout the full case lifecycle</span></button>
-        <button class="option-btn" onclick="answer('q18','c',false)" id="q18-c"><span class="opt-letter">C</span><span class="opt-text">Court deadlines are tracked by the court clerk&rsquo;s office and the firm is notified automatically</span></button>
-        <button class="option-btn" onclick="answer('q18','d',false)" id="q18-d"><span class="opt-letter">D</span><span class="opt-text">Deadlines are tracked informally &mdash; whoever remembers the date is responsible for flagging it</span></button>
-      </div>
-      <div class="feedback-box" id="q18-fb"></div>
-    </div>
 
-    <div class="question-block" id="q19-block">
-      <div class="q-num">Question 19 of 20 &middot; 10 pts</div>
-      <div class="q-text">The attorney asks you to prepare the case file for a litigation review meeting. What materials should you assemble?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q19','a',false)" id="q19-a"><span class="opt-letter">A</span><span class="opt-text">Only the original demand letter and the insurance company&rsquo;s final offer</span></button>
-        <button class="option-btn" onclick="answer('q19','b',false)" id="q19-b"><span class="opt-letter">B</span><span class="opt-text">Only the complaint draft and filing fee check</span></button>
-        <button class="option-btn" onclick="answer('q19','c',true)" id="q19-c"><span class="opt-letter">C</span><span class="opt-text">The complete case file: all medical records, the demand letter, all settlement correspondence, the police report, photos, witness statements, insurance information, the complaint draft, and a timeline of key events</span></button>
-        <button class="option-btn" onclick="answer('q19','d',false)" id="q19-d"><span class="opt-letter">D</span><span class="opt-text">A one-page summary of the case &mdash; attorneys prefer brevity over completeness in litigation review — while superficially plausible, this misses a critical procedural element and would skip the multi-step approval process that exists precisely to prevent unsupervised decisions from undermining case value</span></button>
-      </div>
-      <div class="feedback-box" id="q19-fb"></div>
-    </div>
 
-    <div class="question-block" id="q20-block">
-      <div class="q-num">Question 20 of 20 &middot; 10 pts</div>
-      <div class="q-text">During litigation, the opposing counsel sends a discovery request. What is the litigation staff&rsquo;s role in responding?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q20','a',false)" id="q20-a"><span class="opt-letter">A</span><span class="opt-text">Draft the discovery responses independently and file them with the court</span></button>
-        <button class="option-btn" onclick="answer('q20','b',true)" id="q20-b"><span class="opt-letter">B</span><span class="opt-text">Gather all responsive documents from CasePeer, organize them by request number, prepare a draft index, and present the package to the attorney for review and response preparation</span></button>
-        <button class="option-btn" onclick="answer('q20','c',false)" id="q20-c"><span class="opt-letter">C</span><span class="opt-text">Forward the discovery request to the client and ask them to respond directly</span></button>
-        <button class="option-btn" onclick="answer('q20','d',false)" id="q20-d"><span class="opt-letter">D</span><span class="opt-text">Ignore it until the attorney specifically asks &mdash; discovery management is solely the attorney&rsquo;s responsibility — though this interpretation, while sometimes cited in general training contexts, does not reflect GLG's documented case management protocol and would require written CM authorization before any such action could be taken</span></button>
-      </div>
-      <div class="feedback-box" id="q20-fb"></div>
-    </div>
 
     <div class="section-score" id="s5-score" style="display:none;"><div class="score-display" id="s5-score-val"></div><div class="score-label">Section 6 Score</div></div>
     <div class="btn-group" id="s5-next"><button class="btn btn-primary btn-block" onclick="goToSection(6)">Next: Boss Challenge &mdash; The Keisha Williams Case &rarr;</button></div>
@@ -820,75 +757,45 @@
       <div class="case-detail"><div class="case-key">CasePeer Status</div><div class="case-val">Currently &ldquo;Demand&rdquo; &mdash; NOT yet changed to Pending Litigation <span class="flag">Status outdated</span></div></div>
     </div>
 
-    <div class="question-block" id="q21-block">
-      <div class="q-num">Boss Task 1 &middot; Question 21 &middot; Bonus 10 pts &middot; Venue &amp; Defendants</div>
-      <div class="q-text">Based on the Keisha Williams case file, how many defendants should be named in the complaint and in which county should the complaint be filed?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q21','a',false)" id="q21-a"><span class="opt-letter">A</span><span class="opt-text">One defendant (Marcus Johnson) in Fulton County where the accident occurred</span></button>
-        <button class="option-btn" onclick="answer('q21','b',false)" id="q21-b"><span class="opt-letter">B</span><span class="opt-text">One defendant (ABC Logistics LLC) in Gwinnett County where the company&rsquo;s registered agent is located</span></button>
-        <button class="option-btn" onclick="answer('q21','c',true)" id="q21-c"><span class="opt-letter">C</span><span class="opt-text">Two defendants (Marcus Johnson AND ABC Logistics LLC) in DeKalb County where the individual defendant resides &mdash; the corporate defendant can be served through its registered agent</span></button>
-        <button class="option-btn" onclick="answer('q21','d',false)" id="q21-d"><span class="opt-letter">D</span><span class="opt-text">Two defendants in Fulton County &mdash; the accident location determines venue when multiple defendants are in different counties, which might appear to address the immediate issue but overlooks the specific documentation and escalation requirements that GLG policy mandates in all such circumstances to protect case integrity</span></button>
-      </div>
-      <div class="feedback-box" id="q21-fb"></div>
-    </div>
 
-    <div class="question-block" id="q22-block">
-      <div class="q-num">Boss Task 2 &middot; Question 22 &middot; Bonus 10 pts &middot; SOL Urgency</div>
-      <div class="q-text">With the SOL at July 22, 2026 &mdash; only 15 days away &mdash; what is the MOST critical action that must happen in the next 48 hours?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q22','a',false)" id="q22-a"><span class="opt-letter">A</span><span class="opt-text">Send another demand letter to GEICO with a 10-day response deadline &mdash; the threat of filing is more powerful than actually filing — applying this approach would bypass the required verification steps and could create compliance gaps that expose the case to unnecessary risk without the supervisor review that policy requires at every stage</span></button>
-        <button class="option-btn" onclick="answer('q22','b',false)" id="q22-b"><span class="opt-letter">B</span><span class="opt-text">Request a 90-day extension of the statute of limitations from the court</span></button>
-        <button class="option-btn" onclick="answer('q22','c',true)" id="q22-c"><span class="opt-letter">C</span><span class="opt-text">File the complaint immediately &mdash; the complaint must be filed BEFORE the SOL expires; service can be perfected after filing, but the filing itself stops the SOL clock</span></button>
-        <button class="option-btn" onclick="answer('q22','d',false)" id="q22-d"><span class="opt-letter">D</span><span class="opt-text">Schedule a litigation review meeting for next week to discuss whether to file</span></button>
-      </div>
-      <div class="feedback-box" id="q22-fb"></div>
-    </div>
 
-    <div class="question-block" id="q23-block">
-      <div class="q-num">Boss Task 3 &middot; Question 23 &middot; Bonus 10 pts &middot; Service of Process</div>
-      <div class="q-text">The complaint is filed on July 8, 2026. Service must now be perfected on BOTH defendants. What is the correct service approach for Marcus Johnson (individual) and ABC Logistics LLC (corporation)?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q23','a',true)" id="q23-a"><span class="opt-letter">A</span><span class="opt-text">Marcus Johnson: personal service by the DeKalb County Sheriff at his residence; ABC Logistics LLC: service on the registered agent listed with the Georgia Secretary of State</span></button>
-        <button class="option-btn" onclick="answer('q23','b',false)" id="q23-b"><span class="opt-letter">B</span><span class="opt-text">Both defendants: certified mail from the law firm&rsquo;s office to their respective addresses</span></button>
-        <button class="option-btn" onclick="answer('q23','c',false)" id="q23-c"><span class="opt-letter">C</span><span class="opt-text">Both defendants: publication in the Fulton County legal organ since the accident occurred there</span></button>
-        <button class="option-btn" onclick="answer('q23','d',false)" id="q23-d"><span class="opt-letter">D</span><span class="opt-text">Marcus Johnson: personal service; ABC Logistics LLC: email to the company&rsquo;s legal department</span></button>
-      </div>
-      <div class="feedback-box" id="q23-fb"></div>
-    </div>
 
-    <div class="question-block" id="q24-block">
-      <div class="q-num">Boss Task 4 &middot; Question 24 &middot; Bonus 10 pts &middot; Deadline Tracking</div>
-      <div class="q-text">Service is perfected on Marcus Johnson on July 12 and on ABC Logistics LLC on July 15. What answer deadlines should be calendared, and what CasePeer status changes should be made?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q24','a',false)" id="q24-a"><span class="opt-letter">A</span><span class="opt-text">Both defendants&rsquo; answers are due August 11 (30 days from the first service date); CasePeer status: &ldquo;Service&rdquo;</span></button>
-        <button class="option-btn" onclick="answer('q24','b',true)" id="q24-b"><span class="opt-letter">B</span><span class="opt-text">Marcus Johnson&rsquo;s answer: August 11 (30 days from July 12); ABC Logistics LLC&rsquo;s answer: August 14 (30 days from July 15); CasePeer status: &ldquo;Service&rdquo; with separate deadline tasks for each defendant</span></button>
-        <button class="option-btn" onclick="answer('q24','c',false)" id="q24-c"><span class="opt-letter">C</span><span class="opt-text">Both defendants&rsquo; answers are due September 12 (60 days &mdash; the standard for commercial defendants); CasePeer status: &ldquo;Discovery&rdquo;</span></button>
-        <button class="option-btn" onclick="answer('q24','d',false)" id="q24-d"><span class="opt-letter">D</span><span class="opt-text">No deadline to calendar &mdash; the court will schedule all dates at the first hearing</span></button>
-      </div>
-      <div class="feedback-box" id="q24-fb"></div>
-    </div>
 
-    <div class="question-block" id="q25-block">
-      <div class="q-num">Boss Task 5 &middot; Question 25 &middot; Bonus 10 pts &middot; Default Judgment Protocol</div>
-      <div class="q-text">It is now August 12. Marcus Johnson&rsquo;s answer was due yesterday (August 11). No answer has been filed. ABC Logistics LLC&rsquo;s answer is due August 14. What is the correct course of action?</div>
-      <div class="options">
-        <button class="option-btn" onclick="answer('q25','a',false)" id="q25-a"><span class="opt-letter">A</span><span class="opt-text">Wait 30 more days &mdash; courts routinely grant extensions for late answers</span></button>
-        <button class="option-btn" onclick="answer('q25','b',false)" id="q25-b"><span class="opt-letter">B</span><span class="opt-text">File for default judgment against Marcus Johnson immediately and wait for ABC Logistics LLC&rsquo;s answer deadline</span></button>
-        <button class="option-btn" onclick="answer('q25','c',false)" id="q25-c"><span class="opt-letter">C</span><span class="opt-text">Contact Marcus Johnson&rsquo;s insurance company (GEICO) to ask why no answer was filed &mdash; the insurance company controls the defense</span></button>
-        <button class="option-btn" onclick="answer('q25','d',true)" id="q25-d"><span class="opt-letter">D</span><span class="opt-text">Alert the attorney immediately that Marcus Johnson&rsquo;s answer deadline has passed; prepare a motion for default judgment for attorney review; continue monitoring ABC Logistics LLC&rsquo;s August 14 deadline separately</span></button>
-      </div>
-      <div class="feedback-box" id="q25-fb"></div>
-    </div>
 
     <div class="section-score" id="s6-score" style="display:none;"><div class="score-display" id="s6-score-val"></div><div class="score-label">Boss Challenge Bonus Score</div></div>
-    <div class="btn-group" id="s6-next"><button class="btn btn-primary btn-block" onclick="showResults()">See Results &rarr;</button></div>
+    <div class="btn-group" id="s6-next"><div style="margin-bottom:1rem;">
+      <label for="trainee-name-input" style="display:block;font-size:0.85rem;font-weight:600;color:#141c2c;margin-bottom:0.4rem;">Your Name — required to start</label>
+      <input type="text" id="trainee-name-input" placeholder="Enter your full name" autocomplete="name" style="width:100%;padding:0.5rem 0.75rem;border:1.5px solid #cbd5e1;border-radius:6px;font-size:0.9rem;box-sizing:border-box;">
+    </div>
+    <button class="btn btn-primary btn-block" onclick="startQuiz()">Take the Quiz &rarr;</button></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 7 — QUIZ (api-quiz-engine.js)
+════════════════════════════════════════════ -->
+<div class="section-card" id="section-7">
+  <div class="section-header">
+    <div class="section-num">Knowledge Check</div>
+    <h2>Module Assessment</h2>
+    <div class="section-subhead">Answer each question. One attempt — wrong answer reveals the correct answer and unlocks Next.</div>
+  </div>
+  <div class="section-body">
+    <div style="font-family:system-ui,sans-serif;font-size:13px;color:#33415c;padding:8px 0 12px;border-bottom:1px solid #e8eaf0;margin-bottom:16px;">
+      Base: <b id="base">0</b> / <b id="basemax">—</b>
+      &nbsp;·&nbsp; Bonus: <b id="bonus">0</b>
+      &nbsp;·&nbsp; Pass gate: <b id="gate">80</b>%
+      &nbsp;·&nbsp; <span id="q-progress" style="color:#dcb161;font-weight:700;"></span>
+    </div>
+    <div id="questions"></div>
+    <div id="result" style="background:#fff;border:2px solid #0b2545;border-radius:10px;padding:18px;margin:18px 0;display:none;"></div>
   </div>
 </div>
 
 <!-- ══════════════════════════════════════════
      SECTION 7 — RESULTS
 ════════════════════════════════════════════ -->
-<div class="section-card" id="section-7">
+<div class="section-card" id="section-8">
   <div id="results-header-wrap"></div>
   <div class="section-body">
     <div id="results-body"></div>
@@ -902,7 +809,7 @@
 <!-- ══════════════════════════════════════════
      SECTION 8 — FEEDBACK + CERTIFICATE
 ════════════════════════════════════════════ -->
-<div class="section-card" id="section-8">
+<div class="section-card" id="section-9">
   <div class="section-header">
     <div class="section-num">Section 9 · Feedback &amp; Certificate</div>
     <h2>Certificate of Completion</h2>
@@ -1004,7 +911,7 @@
 // CONFIGURATION
 // ═══════════════════════════════════════════════
 var TRACKER_URL = 'https://script.google.com/macros/s/AKfycbzHJZ0C3BqnLatfq7RIiUP5KQdgYoXTJlozd8ZGZiwIf2bdVmvnPMo3JLm0dA5gQhJyxA/exec';
-var TOTAL_SECTIONS = 9;
+var TOTAL_SECTIONS = 10;
 var PASS_THRESHOLD = 152; // POINTS (was question-units 16). 80% of 190 true achievable base (q12 unscored calibration) — Harrell ruling Aug 17 2026 (Option C)
 var BASE_MAX = 190;
 
@@ -1035,31 +942,31 @@ var milestonesTriggered = {};
 // Sections 1-5 = base pts (10 each); Section 6 = boss bonus only
 // ═══════════════════════════════════════════════
 var Q_CONFIG = {
-  'q1':  {section:1, pts:10, isBonus:false, correct:'a'},
-  'q2':  {section:1, pts:10, isBonus:false, correct:'d'},
-  'q3':  {section:1, pts:10, isBonus:false, correct:'b'},
-  'q4':  {section:1, pts:10, isBonus:false, correct:'c'},
-  'q5':  {section:2, pts:10, isBonus:false, correct:'a'},
-  'q6':  {section:2, pts:10, isBonus:false, correct:'d'},
-  'q7':  {section:2, pts:10, isBonus:false, correct:'b'},
-  'q8':  {section:2, pts:10, isBonus:false, correct:'c'},
-  'q9':  {section:3, pts:10, isBonus:false, correct:'d'},
-  'q10': {section:3, pts:10, isBonus:false, correct:'a'},
-  'q11': {section:3, pts:10, isBonus:false, correct:'b'},
-  'q12': {section:3, pts:0, isBonus:false, correct:'a'},
-  'q13': {section:4, pts:10, isBonus:false, correct:'d'},
-  'q14': {section:4, pts:10, isBonus:false, correct:'a'},
-  'q15': {section:4, pts:10, isBonus:false, correct:'b'},
-  'q16': {section:4, pts:10, isBonus:false, correct:'c'},
-  'q17': {section:5, pts:10, isBonus:false, correct:'d'},
-  'q18': {section:5, pts:10, isBonus:false, correct:'a'},
-  'q19': {section:5, pts:10, isBonus:false, correct:'c'},
-  'q20': {section:5, pts:10, isBonus:false, correct:'b'},
-  'q21': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'c'},
-  'q22': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'c'},
-  'q23': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'a'},
-  'q24': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'b'},
-  'q25': {section:6, pts:0,  isBonus:true,  bonusPts:10, correct:'d'}
+  'q1':  {section:1, pts:10, isBonus:false},
+  'q2':  {section:1, pts:10, isBonus:false},
+  'q3':  {section:1, pts:10, isBonus:false},
+  'q4':  {section:1, pts:10, isBonus:false},
+  'q5':  {section:2, pts:10, isBonus:false},
+  'q6':  {section:2, pts:10, isBonus:false},
+  'q7':  {section:2, pts:10, isBonus:false},
+  'q8':  {section:2, pts:10, isBonus:false},
+  'q9':  {section:3, pts:10, isBonus:false},
+  'q10': {section:3, pts:10, isBonus:false},
+  'q11': {section:3, pts:10, isBonus:false},
+  'q12': {section:3, pts:0, isBonus:false},
+  'q13': {section:4, pts:10, isBonus:false},
+  'q14': {section:4, pts:10, isBonus:false},
+  'q15': {section:4, pts:10, isBonus:false},
+  'q16': {section:4, pts:10, isBonus:false},
+  'q17': {section:5, pts:10, isBonus:false},
+  'q18': {section:5, pts:10, isBonus:false},
+  'q19': {section:5, pts:10, isBonus:false},
+  'q20': {section:5, pts:10, isBonus:false},
+  'q21': {section:6, pts:0,  isBonus:true,  bonusPts:10},
+  'q22': {section:6, pts:0,  isBonus:true,  bonusPts:10},
+  'q23': {section:6, pts:0,  isBonus:true,  bonusPts:10},
+  'q24': {section:6, pts:0,  isBonus:true,  bonusPts:10},
+  'q25': {section:6, pts:0,  isBonus:true,  bonusPts:10}
 };
 
 // Section questions map (all questions including bonus, for completion detection)
@@ -1075,113 +982,12 @@ var SECTION_QUESTIONS = {
 // ═══════════════════════════════════════════════
 // FEEDBACK TEXT — ALL BACKTICK TEMPLATE LITERALS (E9)
 // ═══════════════════════════════════════════════
-var FEEDBACK = {
-  'q1': {
-    t: `✅ The three primary litigation triggers at GLG are: (1) settlement negotiations fail after Holt demand and reasonable negotiation — the adjuster's best offer is unreasonable, (2) the statute of limitations is approaching and time pressure requires filing to preserve the claim, and (3) disputed liability requires discovery tools (depositions, interrogatories, document requests) that are only available in litigation. All three can be present simultaneously. Recognizing these triggers early is what prevents cases from dying in pre-lit.`,
-    f: `❌ Client demands alone don't trigger litigation — the attorney makes the filing decision based on case evaluation. High bills and insurance delay are factors in the settlement failure analysis, but they are not the three recognized triggers. The three triggers are: settlement failure, approaching SOL, and disputed liability requiring discovery. Each represents a distinct strategic reason to move from negotiation to the courtroom.`
-  },
-  'q2': {
-    t: `✅ O.C.G.A. § 9-3-33 sets the statute of limitations for personal injury in Georgia at two years from the date of injury. This is one of the most critical deadlines in PI practice — missing it means the client's claim is forever barred. Calendar this deadline immediately at intake and verify it regularly. There are narrow exceptions (minors, discovery rule for latent injuries), but the standard rule is two years from the date of injury.`,
-    f: `❌ Georgia's personal injury statute of limitations is two years (O.C.G.A. § 9-3-33), not one, three, or six years. The SOL runs from the date of injury, not the date of the accident report. This is a non-negotiable deadline — there is no court mechanism to extend it. Every PI case file must have this date prominently calendared from the moment of intake.`
-  },
-  'q3': {
-    t: `✅ With $85,000 in bills, clear liability, and a "best and final" of $22,000, settlement negotiations have clearly failed. Five months until SOL is the minimum comfortable window — the complaint must be drafted, reviewed by the attorney, filed with the court, and the defendant served, all of which takes time. Flagging for immediate litigation review ensures the attorney can make the filing decision while time remains. Waiting until the last moment creates malpractice risk if any step encounters delay.`,
-    f: `❌ Accepting $22,000 on an $85,000+ case with clear liability is not a reasonable resolution — that's less than 26% of the medical bills alone. Waiting until 30 days before SOL is reckless — if any step in the filing or service process encounters delay, the claim is lost. Sending a third demand after two failed rounds is unlikely to produce a different result. Flag for litigation review NOW.`
-  },
-  'q4': {
-    t: `✅ "Pending Litigation" is the transitional status that signals the case has left the pre-litigation pipeline and entered the litigation workflow. This status change triggers a different set of responsibilities: file audit, complaint preparation, attorney review, and deadline tracking. "Filed" comes after the complaint is actually filed with the court. "Service" comes after the defendant is served. "Discovery" comes after the answer period. The sequence matters.`,
-    f: `❌ "Filed" status requires an actual court filing — you can't mark a case "Filed" before the complaint reaches the clerk. "Discovery" status comes much later in the process. "Service" status means the defendant has been served. The FIRST status change is "Pending Litigation" — it signals that the case is being prepared for filing, not that it has been filed.`
-  },
-  'q5': {
-    t: `✅ O.C.G.A. § 9-10-31 establishes the general venue rule: a suit against a Georgia-resident individual must be brought in the Superior Court of the county where the defendant resides. The accident location does NOT determine venue for individual defendants. This is the default rule for PI cases. There are exceptions for corporate defendants and joint tortfeasors, but for a standard case against a single individual, the county of residence controls.`,
-    f: `❌ The accident location does NOT determine venue in Georgia — venue is based on where the defendant resides (O.C.G.A. § 9-10-31). The plaintiff's residence is irrelevant for venue. "Same judicial circuit" is not a recognized venue basis for individual defendants. Memorize the rule: individual defendant → county of defendant's residence.`
-  },
-  'q6': {
-    t: `✅ Filing a new civil complaint in Georgia Superior Court requires: (1) the complaint itself, (2) a civil case filing form (case information statement), (3) a summons for each named defendant, and (4) the filing fee (typically $200–$300 depending on the county). Missing any of these will delay or prevent filing. The clerk does not generate the complaint, filing form, or summons — the filing party must prepare them.`,
-    f: `❌ The clerk does NOT generate all required documents — the filing party must prepare the complaint, civil case filing form, and summons. A motion for expedited discovery is not a filing requirement. Settlement demands and medical records are pre-litigation documents, not filing requirements. The four components are: complaint, filing form, summons (one per defendant), and filing fee.`
-  },
-  'q7': {
-    t: `✅ Under O.C.G.A. § 9-11-4, service of process in Georgia requires personal delivery of the summons and complaint to the defendant. This can be accomplished by the county sheriff or by a certified private process server appointed by the court. Certified mail from a law firm is NOT valid service for an original complaint in Georgia. Email and publication are only available in specific, limited circumstances.`,
-    f: `❌ Certified mail from the law firm is NOT valid service for an original Georgia complaint. Email is not an accepted service method for original complaints. Publication is a last resort — only available when the defendant cannot be found after diligent search, and requires a court order. Service must be by personal delivery through the county sheriff or an appointed process server.`
-  },
-  'q8': {
-    t: `✅ Once service has been perfected on the defendant, CasePeer status should be updated to "Service" — this confirms the defendant has received the complaint and the answer period has begun. This is a critical status change because it triggers deadline tracking: the 30-day answer period (O.C.G.A. § 9-11-12(a)) now starts running. Calendar the answer deadline immediately upon confirming service.`,
-    f: `❌ "Filed" → "Discovery" skips the service and answer steps entirely. "Pending Litigation" → "Filed" is a separate earlier transition. A separate "Answer Period" status is not part of GLG's CasePeer workflow — the "Service" status encompasses this. The update to "Service" specifically marks the moment the defendant has been served and the answer clock is running.`
-  },
-  'q9': {
-    t: `✅ O.C.G.A. § 9-11-8(a) requires a "short and plain statement of the claim showing that the pleader is entitled to relief" plus "a demand for judgment for the relief to which the pleader deems himself entitled." Georgia follows notice pleading — the complaint does not need to prove the case or include all evidence. Its job is to give the defendant fair notice of the claims and the grounds upon which they rest. Detailed evidence comes during discovery.`,
-    f: `❌ Georgia follows notice pleading under O.C.G.A. § 9-11-8(a) — the complaint does NOT need detailed treatment narratives, exact itemized damages, or copies of all evidence as exhibits. The standard is a "short and plain statement" plus a demand for judgment. The complaint's job is notice, not proof. Evidence and detailed documentation come during the discovery phase.`
-  },
-  'q10': {
-    t: `✅ Every negligence claim requires four elements: (1) Duty — the defendant owed a duty of care to the plaintiff; (2) Breach — the defendant violated that duty; (3) Causation — the breach caused the plaintiff's injuries (both actual cause and proximate cause); and (4) Damages — the plaintiff suffered actual, compensable harm. Missing any element is fatal to the claim. In a PI complaint, each element must be specifically alleged. This is the foundation of every personal injury case.`,
-    f: `❌ The four elements of negligence are duty, breach, causation, and damages. "Intent" is for intentional torts, not negligence. "Contract" and "consideration" are contract law elements. "Strict liability" and "assumption of risk" are separate legal theories, not elements of a negligence claim. A negligence complaint must allege all four elements — duty, breach, causation, damages.`
-  },
-  'q11': {
-    t: `✅ Negligence per se applies when the defendant violated a statute designed to protect people in the plaintiff's position. Running a red light violates O.C.G.A. § 40-6-20 (traffic signals). Under Georgia law, violation of a safety statute creates a presumption of negligence — the plaintiff doesn't need to independently prove the standard of care. Flag this for the attorney because it strengthens the complaint by adding a statutory basis beyond common-law negligence.`,
-    f: `❌ Strict liability doesn't apply to ordinary motor vehicle operation — driving is not an "inherently dangerous activity" in the legal sense. Breach of contract requires an actual contract. Running a red light does not demonstrate "intent to harm" (which would be battery or assault, not negligence). The correct theory is negligence per se — violation of a traffic statute (O.C.G.A. § 40-6-20) creates a presumption of negligence.`
-  },
-  'q12': {
-    t: `📋 Complete complaint preparation workflow — regardless of your confidence level: (1) Review the complete case file: medical records, police report, photos, witness statements, insurance information. (2) Draft the caption: court name, plaintiff name, defendant name(s). (3) Jurisdiction and venue allegations: cite O.C.G.A. § 9-10-31, identify the proper county. (4) Party allegations: full legal names, residences or registered agents. (5) Factual allegations: date, location, circumstances. (6) Legal theories: negligence (duty, breach, causation, damages) plus any additional theories (negligence per se, respondeat superior). (7) Damages allegations: physical injuries, pain and suffering, medical expenses, lost wages, future damages. (8) Prayer for relief. (9) Verification and attorney signature with bar number. Practice on the template before handling a live complaint.`,
-    f: `📋 Complete complaint preparation workflow: (1) Review complete case file. (2) Draft caption with court, plaintiff, defendant. (3) Jurisdiction and venue allegations. (4) Party allegations with full names. (5) Factual allegations. (6) Legal theories. (7) Damages allegations. (8) Prayer for relief. (9) Verification and signature. Every confidence level gets the same complete process — the point is to recognize the gap between understanding and execution.`
-  },
-  'q13': {
-    t: `✅ O.C.G.A. § 9-11-12(a) gives the defendant 30 days from the date of service to file an answer or responsive pleading. This is one of the most important deadlines in litigation — if the defendant fails to answer within 30 days, the plaintiff can move for default judgment under O.C.G.A. § 9-11-55. Calendar this deadline immediately upon confirmation of service. Do not confuse this with federal court's 21-day deadline.`,
-    f: `❌ Georgia gives 30 days to answer after service (O.C.G.A. § 9-11-12(a)), not 14, 20, or 45 days. Federal court uses 21 days — don't confuse state and federal timelines. There is no "extended time" for personal injury cases. This deadline is critical: missing it on the plaintiff's side means failing to pursue default; missing it on the defense side means potential default judgment.`
-  },
-  'q14': {
-    t: `✅ If the defendant fails to file an answer within 30 days of service, the plaintiff may file a motion for default judgment under O.C.G.A. § 9-11-55. Default judgment means the defendant loses by failing to respond — not because the case was decided on the merits. The litigation staff should monitor the answer deadline closely and alert the attorney immediately when it passes without an answer. The attorney decides when to file the motion.`,
-    f: `❌ When the defendant fails to answer, the case is NOT dismissed — that's the opposite of what happens. The court does NOT schedule an immediate trial. Re-service is not required when the defendant simply fails to respond. The correct procedure is to file a motion for default judgment under O.C.G.A. § 9-11-55. Failing to answer = potential loss for the defendant, not the plaintiff.`
-  },
-  'q15': {
-    t: `✅ Calendar management in litigation is a team responsibility, not a single-point-of-failure system. Best practice: calendar the answer deadline with a 7-day advance warning, AND calendar all subsequent deadlines (discovery cutoff, scheduling order dates, mediation, trial date). Use CasePeer's task system to assign responsibility for tracking each deadline to a specific person. Proactive monitoring — checking the docket BEFORE the deadline — prevents crises.`,
-    f: `❌ Calendaring only the answer deadline ignores all other litigation deadlines. Sending reminders to opposing counsel about their filing obligations is not your responsibility. Waiting until the deadline day to check the docket is reactive, not proactive — by then it may be too late to act. The standard: calendar ALL deadlines, set advance warnings, use CasePeer's task system, and assign tracking to a specific person.`
-  },
-  'q16': {
-    t: `✅ Accident date: June 15, 2024. SOL: June 15, 2026 (two years under O.C.G.A. § 9-3-33). The firm signed the case on January 5, 2026 — that's only approximately 5 months before SOL. Five months is the absolute minimum comfortable window for complaint preparation, attorney review, filing, and service. This case should be fast-tracked to litigation review immediately upon signing. Any pre-litigation negotiation must happen in parallel with complaint preparation — not instead of it.`,
-    f: `❌ SOL runs from the date of injury (June 15, 2024), NOT the date of signing (January 5, 2026). There is no automatic extension when a case is signed late or transferred between firms. June 15, 2026 is the hard deadline. With only ~5 months from signing to SOL, this case needs immediate litigation fast-tracking. Assuming there is "plenty of time" with 5 months ignores the reality of the preparation timeline.`
-  },
-  'q17': {
-    t: `✅ A complete file audit before complaint drafting is essential. Every document in the case file becomes potential evidence in litigation. Medical records gaps, missing correspondence, or an incomplete police report discovered after filing creates problems during discovery. The audit verifies: all medical records are current and complete, all correspondence is logged, the police report is in file, photos and witness statements are preserved, and insurance information is documented. This is the foundation upon which the complaint is built.`,
-    f: `❌ Uploading to e-filing before audit risks submitting an incomplete file. Shredding pre-lit correspondence destroys potential evidence — that's spoliation. Simply moving folders without verification misses gaps. The first step is always a complete file audit — verify that everything needed for litigation is present, organized, and accessible in CasePeer before drafting the complaint.`
-  },
-  'q18': {
-    t: `✅ Attorney-staff coordination on court deadlines requires redundancy: the staff member enters deadlines in CasePeer, the attorney verifies them, advance warnings are set, and a specific person is assigned tracking responsibility in the task system. This prevents single-point-of-failure — if one person is sick, traveling, or overwhelmed, the deadline is still visible and tracked. Redundancy is what prevents malpractice.`,
-    f: `❌ Attorney-only deadline management creates a dangerous single point of failure. Court clerk notifications cannot be relied upon — they are not guaranteed and may not arrive in time. Informal tracking ("whoever remembers") is a malpractice risk. The standard: staff enters, attorney verifies, advance warnings set, specific person assigned. Multiple layers of protection prevent missed deadlines.`
-  },
-  'q19': {
-    t: `✅ A complete case file for litigation review includes everything the attorney needs to make informed decisions: medical records, demand letter, settlement correspondence, police report, photos, witness statements, insurance information, complaint draft, and a timeline of key events. The attorney should never have to ask "where is the police report?" or "what did the adjuster say?" — everything should be assembled and organized before the meeting.`,
-    f: `❌ A one-page summary loses critical detail the attorney needs for litigation decisions. Only the demand letter misses the medical records, police report, and evidence. Only the complaint draft misses the full case context. The standard for litigation review: assemble the COMPLETE case file with every document, organized by category, with a timeline. Thoroughness saves the attorney time and prevents gaps.`
-  },
-  'q20': {
-    t: `✅ The litigation staff's role in discovery is preparation, not final decision-making. Gather all responsive documents from CasePeer, organize them by request number, prepare a draft index listing each document and its relevance, and present the complete package to the attorney. The attorney reviews, makes privilege determinations, drafts objections where appropriate, and finalizes the responses. Staff preparation saves the attorney hours and ensures nothing is missed.`,
-    f: `❌ Drafting discovery responses independently without attorney review risks privilege waiver and improper disclosures — this could be catastrophic. Forwarding requests directly to the client creates confusion and potential privilege issues. Ignoring discovery until the attorney asks creates deadline crises. The staff role: gather, organize by request number, prepare draft index, present to attorney for review and finalization.`
-  },
-  'q21': {
-    t: `✅ Two defendants should be named: (1) Marcus Johnson as the driver who ran the red light, and (2) ABC Logistics LLC as the employer under respondeat superior — Marcus Johnson was driving a company truck within the scope of his employment. Venue is proper in DeKalb County because Marcus Johnson resides there (O.C.G.A. § 9-10-31). When suing both an individual and a corporation, venue is proper where either defendant could be sued individually. ABC Logistics can be served through its registered agent in Gwinnett County regardless of where the case is filed.`,
-    f: `❌ Filing against only one defendant leaves recovery on the table — the employer (ABC Logistics) is liable under respondeat superior and likely has commercial insurance with higher policy limits. Fulton County (accident location) is not the correct venue basis for individual defendants in Georgia — venue follows the defendant's residence (O.C.G.A. § 9-10-31). File in DeKalb against both defendants; serve ABC's registered agent in Gwinnett.`
-  },
-  'q22': {
-    t: `✅ With only 15 days until SOL, filing the complaint is the single most urgent action. Filing the complaint with the court stops the SOL clock — the claim is preserved even if service hasn't been perfected yet. Georgia law requires diligent pursuit of service after filing, but the filing itself is what prevents the SOL from barring the claim. Sending another demand letter wastes the remaining time. There is NO mechanism to "request" an extension of the SOL — it is a statutory deadline. A meeting next week burns half the remaining days.`,
-    f: `❌ Another demand letter is a delay tactic, not a solution — the adjuster has already given their "best and final." There is NO mechanism to request a 90-day extension of the SOL — it is an absolute statutory deadline under O.C.G.A. § 9-3-33. Scheduling a meeting for next week wastes 7 of the remaining 15 days. File NOW. Filing preserves the claim. Everything else can be handled after the complaint is on file.`
-  },
-  'q23': {
-    t: `✅ Service must be proper for each defendant type: (1) Marcus Johnson is an individual — serve him personally through the DeKalb County Sheriff or an appointed process server at his residence (O.C.G.A. § 9-11-4). (2) ABC Logistics LLC is a Georgia corporation — serve the registered agent listed with the Georgia Secretary of State (O.C.G.A. § 9-11-4(d)). This ensures proper jurisdiction over both defendants. Log all service attempts in CasePeer.`,
-    f: `❌ Certified mail from the law firm is NOT valid service for an original Georgia complaint. Publication requires a court order and a showing of diligent search — it cannot be used as default service. Email to a legal department is not recognized service under Georgia law. The correct approach: personal service by sheriff or process server for individuals; registered agent service for corporations per Georgia Secretary of State records.`
-  },
-  'q24': {
-    t: `✅ Each defendant's 30-day answer period runs independently from their respective service dates (O.C.G.A. § 9-11-12(a)). Marcus Johnson served July 12 → answer due August 11. ABC Logistics LLC served July 15 → answer due August 14. CasePeer must have SEPARATE deadline tasks for each defendant with individual due dates and advance warnings. Using the first service date for both defendants would create an incorrect deadline for ABC Logistics. Track each independently.`,
-    f: `❌ Answer deadlines are NOT unified — each defendant's 30-day clock starts from their own service date. Using the earliest service date for both creates an incorrect deadline for the later-served defendant. There is no 60-day "commercial defendant" exception in Georgia. The court does NOT set answer deadlines — they run automatically from service under O.C.G.A. § 9-11-12(a). Track each defendant's deadline separately in CasePeer.`
-  },
-  'q25': {
-    t: `✅ When an answer deadline passes, the correct protocol is: (1) Alert the attorney immediately — this is a time-sensitive development that requires strategic decisions. (2) Prepare a motion for default judgment under O.C.G.A. § 9-11-55 for the attorney's review — the attorney decides when and whether to file it. (3) Continue monitoring ABC Logistics LLC's August 14 deadline separately — that defendant still has time. Do NOT file the default motion without attorney review, and do NOT wait 30 days hoping for a late answer.`,
-    f: `❌ Waiting 30 more days is not standard practice and wastes the strategic advantage of the missed deadline. Filing for default without attorney review exceeds staff authority — the attorney makes this decision. Contacting GEICO about the defense is not the litigation staff's role. The correct steps: alert attorney immediately, prepare the default motion for attorney review, and continue tracking ABC Logistics' separate deadline. The attorney decides the filing strategy.`
-  }
-};
+var FEEDBACK = {} /* CUTOVER: feedback text is served per-answer by the engine, never shipped to the client up front */;
 
 // ═══════════════════════════════════════════════
 // ANSWER HANDLER
 // ═══════════════════════════════════════════════
-function answer(qId, choice, isCorrect) {
+window.answerUI = function answerUI(qId, choice, isCorrect) {
   if (qDone[qId]) return;
 
   var cfg = Q_CONFIG[qId];
@@ -1192,7 +998,7 @@ function answer(qId, choice, isCorrect) {
   btns.forEach(function(b){ b.classList.add('disabled'); });
 
   var clickedBtn = document.getElementById(qId + '-' + choice);
-  var correctBtn = document.getElementById(qId + '-' + cfg.correct);
+  var correctBtn = document.getElementById(qId + '-' + (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || ''));
 
   if (isCorrect) {
     clickedBtn.classList.add('correct');
@@ -1288,7 +1094,7 @@ function checkSectionComplete(sectionIdx) {
 // NAVIGATION
 // ═══════════════════════════════════════════════
 function goToSection(idx) {
-  if (idx === 8 && !window._lit1Passed) {
+  if (idx === 9 && !window._lit1Passed) {
     showToast('⚠️ 80% required for certificate', false);
     return;
   }
@@ -1408,8 +1214,8 @@ function buildResults() {
     var questionText = qText ? qText.textContent : 'Question ' + (idx+1);
     var isAnswered = !!qDone[qId];
     var wasCorrect = isAnswered && block.classList.contains('answered');
-    var correctLetter = cfg.correct.toUpperCase();
-    var correctBtn = document.getElementById(qId + '-' + cfg.correct);
+    var correctLetter = (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || '').toUpperCase();
+    var correctBtn = document.getElementById(qId + '-' + (cfg.correct || (window.__glgCorrectIds && window.__glgCorrectIds[qId]) || ''));
     var correctText = correctBtn ? correctBtn.querySelector('.opt-text').textContent : '';
     var userAnswer = '(not answered)';
     var userLetter = '';
@@ -1931,5 +1737,67 @@ document.addEventListener('DOMContentLoaded', function() {
 // Init
 goToSection(0);
 </script>
+
+
+
+<script>
+/* ── go() / startQuiz() — quiz entry point (Harrell ruling 2026-09-03) ── */
+async function go(screen) {
+  if (screen === 'quiz') {
+    var _ni = document.getElementById('trainee-name-input');
+    var _name = (_ni && _ni.value.trim()) || '';
+    if (!_name) {
+      if (typeof showToast === 'function') showToast('⚠️ Please enter your name before starting the quiz', false);
+      else alert('Please enter your name before starting the quiz.');
+      return;
+    }
+    // Bug-2 fix: await attempt start before making questions interactive
+    await window.GLGQuiz.beginAttempt(_name);
+    goToSection(7);
+  }
+}
+
+function startQuiz() { go('quiz'); }
+
+/* ── GLG MODULE CONFIG — wires api-quiz-engine.js to module-lit1.html ── */
+window.GLG_MODULE_CONFIG = {
+  moduleId: 'lit1',
+  onBankLoaded: function(bank) {
+    var basemax = document.getElementById('basemax');
+    var gate    = document.getElementById('gate');
+    if (basemax) basemax.textContent = bank.base_max;
+    if (gate)    gate.textContent    = bank.pass_pct;
+    for (var i = 1; i <= 6; i++) {
+      var nextEl = document.getElementById('s' + i + '-next');
+      if (nextEl) nextEl.style.display = 'flex';
+    }
+  },
+  onStartQuiz: function() {
+    if (typeof audioCtx !== 'undefined' && audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume().catch(function(){});
+    }
+  },
+  onAnswered: function(r) {
+    baseScore   = r.base_score;
+    bonusPoints = r.bonus_score;
+    streakCount = r.streak;
+    maxStreak   = Math.max(maxStreak || 0, r.maxStreak || 0);
+    var ts = document.getElementById('total-score');
+    if (ts) ts.textContent = r.base_score;
+    var bs = document.getElementById('bonus-score');
+    if (bs) bs.textContent = r.bonus_score;
+    if (typeof updateStreak  === 'function') updateStreak(r.correct);
+    if (typeof mascotReact   === 'function') mascotReact(r.correct ? 'correct' : 'incorrect');
+  },
+  onComplete: function(r) {
+    window._lit1Passed = r.passed;
+    baseScore   = r.base_score;
+    bonusPoints = r.bonus_score;
+    goToSection(8);   // results is now section-8 after port
+    if (typeof buildResults === 'function') buildResults();
+  }
+};
+</script>
+<script src="api-quiz-engine.js"></script>
 </body>
 </html>

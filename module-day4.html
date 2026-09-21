@@ -23,7 +23,7 @@ QA Checklist:
      retained as build provenance only. CasePeer_Basics_Training.md:62 is itself a defect, reported separately.
   ✅ Sound engine: _audioKeepalive, playTone(), playWrongTone() 520/440Hz triangle, playDing() WebAudio scheduling
   ✅ Mascot: ⚖️ floating scales of justice
-  ✅ Certificate: pass gate (8/10 = 80%), confetti canvas, the Managing Attorney Gunn signature
+  ✅ Certificate: pass gate (8/10 = 80%), confetti canvas, the Managing Attorney signature
   ✅ Tracker URL: canonical Apps Script endpoint, condition fixed (was inverted !== bug)
   ✅ Module ID: 'nh4' (was 'day4')
   ✅ startQuiz() on fail path (matches NH-1 pattern)
@@ -920,7 +920,7 @@ button, .btn, .option-btn, [onclick] {
         <div class="cert-badges" id="certBadges"></div>
         <div class="cert-signature">
           <div class="cert-sig-line"></div>
-          <div class="cert-sig-name">the Managing Attorney Gunn</div>
+          <div class="cert-sig-name">the Managing Attorney</div>
           <div class="cert-sig-title">Managing Attorney · Gunn Law Group</div>
         </div>
       </div>
@@ -972,46 +972,51 @@ var questions = [
       "The severity of the accident",
       "The insurance company's goodwill"
     ],
+    canon_cite: "glg/canonical-sops/Demand_Update_Call_Script.md:59",
     /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "When must the Letter of Representation (LOR) be sent?",
     options: [
       "When the demand letter is ready",
-      "After medical records are obtained — this approach aligns with the standard practices used across Georgia personal injury firms",
+      "After medical records are obtained",
       "Within 24–48 hours of the client signing the retainer",
       "Only if the insurer requests it"
     ],
+    canon_cite: "glg/canonical-sops/Legal_Assistant_SOP_PreLit.md#43",
     /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "What does a Letter of Protection (LOP) create for the medical provider?",
     options: [
       "Guaranteed payment from insurance",
-      "Access to the client's insurance benefits — which represents the conventional method for handling these scenarios in PI case management",
+      "Access to the client's insurance benefits",
       "Protection from malpractice claims",
       "A medical lien on the settlement proceeds"
     ],
+    canon_cite: "glg/canonical-sops/CasePeer_Template_Quick_Reference.md#45",
     /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "According to the systems principle, the records retrieval process must:",
     options: [
       "Work consistently for any staff member",
-      "Be handled personally by the Managing Attorney — which represents the conventional method for handling these scenarios in PI case management",
+      "Be handled personally by the Managing Attorney",
       "Be customized for each client",
       "Focus on speed over thoroughness"
     ],
+    canon_cite: "glg/canonical-sops/Training_Module_Architecture_v3.md:303",
     /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "When requesting medical records, you must ALWAYS request both:",
     options: [
       "Original records and copies",
-      "Doctor's notes and nurse's notes — following the documented procedural framework and established expectations at GLG",
+      "Doctor's notes and nurse's notes",
       "Electronic and paper versions",
       "Medical records and itemized billing statements"
     ],
+    canon_cite: "glg/canonical-sops/Attorney_Supervision_Ethics_Guide.md:99",
     /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
@@ -1020,8 +1025,9 @@ var questions = [
       "Clients must be contacted every 14 days",
       "Cases are reviewed every 7 days",
       "Every outstanding records request gets a follow-up every 7 days",
-      "Demand letters are sent 7 days after treatment ends — following the documented procedural framework and established expectations at GLG"
+      "Demand letters are sent 7 days after treatment ends"
     ],
+    canon_cite: "glg/canonical-sops/LA_Task_List_SOP_PreLit.md#80",
     /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
@@ -1029,29 +1035,32 @@ var questions = [
     options: [
       "Court approval",
       "A signed HIPAA authorization from the client (Template 44)",
-      "The insurance adjuster's permission — consistent with industry-standard documentation and follow-up practices for legal teams",
+      "The insurance adjuster's permission",
       "The client's insurance card"
     ],
+    canon_cite: "glg/canonical-sops/Client_Welcome_Package_Guide.md:49",
     /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "According to the 'Never Miss Twice' rule:",
     options: [
       "Never follow up more than twice",
-      "Never make the same mistake twice in documentation — consistent with industry-standard documentation and follow-up practices for legal teams",
+      "Never make the same mistake twice in documentation",
       "Never request the same records twice",
       "One missed follow-up is a mistake; two in a row is a bad habit forming"
     ],
+    canon_cite: "glg/canonical-sops/Communication_Logging_Standards.md#142",
     /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
     q: "After three follow-ups with no response from a medical provider, you should:",
     options: [
       "Escalate to the Case Manager for more aggressive action",
-      "Wait another 30 days before following up again — consistent with industry-standard documentation and follow-up practices for legal teams",
+      "Wait another 30 days before following up again",
       "Give up on getting those records",
       "Ask the client to get the records themselves"
     ],
+    canon_cite: "glg/canonical-sops/LA_Task_List_SOP_PreLit.md#73",
     /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   },
   {
@@ -1059,9 +1068,10 @@ var questions = [
     options: [
       "All letters are exactly the same",
       "Professional, consistent communication that represents GLG's brand standard",
-      "Faster processing with less attention to detail — following the documented procedural framework and established expectations at GLG",
+      "Faster processing with less attention to detail",
       "Reduced need for staff training"
     ],
+    canon_cite: "glg/canonical-sops/Remote_Work_Policy.md:182",
     /* CUTOVER: answer key and explanation removed — the engine grades this question and returns the feedback. */
   }
 ];
